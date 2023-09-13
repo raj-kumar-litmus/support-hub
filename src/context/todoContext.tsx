@@ -7,6 +7,8 @@ interface BaseLayoutProps {
 
 export const TodoContext = createContext<TodoContextType | null>(null);
 
+const UN_USED_VAR = "hello";
+
 const TodoProvider: FC<BaseLayoutProps> = ({ children }) => {
   const [todos, setTodos] = useState<ITodo[]>([
     {
