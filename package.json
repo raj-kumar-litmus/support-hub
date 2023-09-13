@@ -30,9 +30,6 @@
   ],
   "jest": {
     "automock": false,
-    "setupFiles": [
-      "./setupJest.js"
-    ],
     "clearMocks": true,
     "collectCoverage": true,
     "coverageDirectory": "coverage",
@@ -45,7 +42,7 @@
       }
     },
     "transform": {
-      "^.+\\.(js|jsx)$": "babel-jest",
+      "^.+\\.(js|jsx|ts|tsx)$": "ts-jest",
       "^.+\\.svg$": "<rootDir>/svgTransform.cjs"
     },
     "testPathIgnorePatterns": [
@@ -57,17 +54,28 @@
     ]
   },
   "dependencies": {
+    "dotenv": "^16.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.22.15",
+    "@babel/core": "^7.22.17",
+    "@babel/preset-env": "^7.22.15",
+    "@babel/preset-typescript": "^7.22.15",
+    "@testing-library/dom": "^9.3.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/jest": "^29.5.1",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
     "@vitejs/plugin-react": "^4.0.3",
     "autoprefixer": "^10.4.14",
+    "babel-jest": "^29.5.0",
     "cssnano": "^6.0.0",
     "eslint": "^8.49.0",
     "eslint-config-prettier": "^9.0.0",
@@ -85,6 +93,7 @@
     "react-test-renderer": "^18.2.0",
     "react-testing-library": "^8.0.1",
     "tailwindcss": "^3.3.2",
+    "ts-jest": "^29.1.1",
     "typescript": "^5.2.2",
     "vite": "^4.4.5"
   },

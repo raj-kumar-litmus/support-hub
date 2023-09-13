@@ -10,6 +10,7 @@ type Blog = {
 };
 
 interface BlogProps {
+  blogData: Blog[];
   superProp: string;
   setVotes: Dispatch<SetStateAction<number>>;
   votes: number;
@@ -30,7 +31,7 @@ const Blog: React.FC<BlogProps> = ({ superProp, votes, setVotes }) => {
 
   return (
     <>
-      {blogData.map((blog: Blog) => (
+      {blogData?.map((blog: Blog) => (
         <div key={blog.id}>
           <img className="h-[200px] m-auto" src={blog.cover} alt="" />
           <div className="text-center">
@@ -40,6 +41,7 @@ const Blog: React.FC<BlogProps> = ({ superProp, votes, setVotes }) => {
             <p>votes: {votes}</p>
 
             <button
+              data-testid="upvote"
               className="border rounded w-[200px] bg-slate-700 text-white mt-[10px] mb-[10px]"
               onClick={() => setVotes(() => votes + 1)}
             >

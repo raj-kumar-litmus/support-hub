@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TodoProvider from "./context/todoContext";
 import Blog from "./components/Blog";
+import blogData from "./components/blog.json";
 
 function App() {
   const [votes, setVotes] = useState<number>(10);
@@ -18,7 +19,12 @@ function App() {
             Go to Todo Page
           </button>
         </div>
-        <Blog votes={votes} setVotes={setVotes} superProp="hola" />
+        <Blog
+          blogData={blogData}
+          votes={votes}
+          setVotes={setVotes}
+          superProp="hola"
+        />
       </div>
     </TodoProvider>
   );
