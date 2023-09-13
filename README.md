@@ -17,7 +17,7 @@ This branch (`reference`) contains template code with following features which w
 
 ##### Tech stack:
 
-Node version: 16+
+Node version: 18+
 Language: Javascript, React.js
 Bundler: Vite
 Test-cases: Jest
