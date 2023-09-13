@@ -17,13 +17,13 @@ This branch (`reference`) contains template code with following features which w
 
 ##### Tech stack:
 
-Node version: 18+
-Language: Javascript, React.js
-Bundler: Vite
-Test-cases: Jest
-CSS: tailwindcss
-CSS post-processor: postcss
-Linter : eslint
+- Node version: 18+
+- Language: Javascript, React.js
+- Bundler: Vite
+- Test-cases: Jest
+- CSS: tailwindcss
+- CSS post-processor: postcss
+- Linter : eslint
 
 ##### Steps to run the repository locally:
 
