@@ -6,7 +6,7 @@ This branch (`reference`) contains template code with following features which w
 - Usage of React Context with typescript
 - Usage of React Router dom for routing
 - Integration of tailwind, vite, eslint
-- React testing library + Jest (In Progress)
+- React testing library + Jest
 - Husky integration for pre-commit validation.
 
 ### Note:
