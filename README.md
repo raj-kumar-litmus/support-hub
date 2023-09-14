@@ -8,10 +8,10 @@ This branch (`reference`) contains template code with following features which w
 - Integration of tailwind, vite, eslint
 - React testing library + Jest
 - Husky integration for pre-commit validation.
+- Simple Bar chart integartion (chart.js)
 
 ### Note:
 
-- Libraries specific to the project (like chart.js) have not been integrated.
 - This branch is just a bare mininum template of React + typescript to get started with.
 - #### If you have any suggestions or best practises to be implemented in the project, kindly raise an MR against this branch and inform me of the same.
 

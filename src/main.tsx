@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import TodoProvider from "./context/todoContext";
 import Todos from "./containers/Todos";
 import AddTodo from "./components/AddTodo";
+import Chart from "./components/Chart";
 import App from "./App.tsx";
 import "./index.css";
 
@@ -15,6 +16,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/home" element={<App />} />
+          <Route path="/chart" element={<Chart />} />
           <Route
             path="/todo"
             element={
