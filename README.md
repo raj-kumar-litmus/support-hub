@@ -18,9 +18,9 @@ This branch (`reference`) contains template code with following features which w
 ##### Tech stack:
 
 - Node version: 18+
-- Language: Javascript, React.js
+- Language: Javascript, React.js, Typescript
 - Bundler: Vite
-- Test-cases: Jest
+- Test-cases: Jest, React Testing Library
 - CSS: tailwindcss
 - CSS post-processor: postcss
 - Linter : eslint

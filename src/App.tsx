@@ -13,7 +13,7 @@ function App() {
         <div className="w-[200px] m-auto">
           <p>You are in home page now</p>
           <button
-            className="border rounded border-solid border-black w-[200px] bg-black text-white mb-[10px]"
+            className="border rounded border-dotted border-black w-[200px] bg-black text-white mb-[10px]"
             onClick={() => navigate("/todo")}
           >
             Go to Todo Page
