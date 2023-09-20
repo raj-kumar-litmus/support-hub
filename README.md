@@ -38,3 +38,10 @@ This branch (`reference`) contains template code with following features which w
 ##### Reference for developers :
 
 - Before making any css changes, open a new terminal and run `npm run postcss:watch`
+
+#### StoryBook
+
+- Story Book has been integrated.
+- To see story book in action, run `npm run storybook`. The storybook will be shown in the browser with the various components for which stories have been created.
+- To run test cases in storybook, open a new terminal (storybook must be running in another terminal) and run `npm run test-storybook`. This will execute and show the results in the terminal.
+- Stories can be found in `src/stories`.
