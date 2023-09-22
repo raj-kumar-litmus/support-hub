@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import TodoProvider from './context/todoContext';
 import Todos from './containers/Todos';
+import { ChartProvider } from './context/chart';
 import AddTodo from './components/AddTodo';
-// import Chart from './components/Chart';
 import Chart from './components/ChartIndex.tsx';
 import App from './App.tsx';
 import './index.css';
@@ -17,8 +17,22 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/home" element={<App />} />
-          {/* <Route path="/chart" element={<Chart />} /> */}
-          <Route path="/lineChart" element={<Chart type="line" />} />
+          <Route
+            path="/opm"
+            element={
+              <ChartProvider>
+                <Chart type="opm" />
+              </ChartProvider>
+            }
+          />
+          <Route
+            path="/opmcomparison"
+            element={
+              <ChartProvider>
+                <Chart type="opmcomparison" />
+              </ChartProvider>
+            }
+          />
           <Route
             path="/todo"
             element={

@@ -22,7 +22,7 @@ type dataset = {
   label: string,
   backgroundColor: string,
   borderColor: string,
-  data: number[]
+  data: string[]
 }
 
 export interface WeatherData {
@@ -32,15 +32,20 @@ export interface WeatherData {
 
 export interface Options {
   responsive: boolean,
-  plugins: {
-    legend: {
+  plugins?: {
+    legend?: {
       position: any // eslint-disable-line @typescript-eslint/no-explicit-any
     },
-    title: {
+    title?: {
       display: boolean,
       text: string
     }
   }
+}
+
+export type ChartContextType = {
+  title: string,
+  setTitle: (title: string) => void
 }
 
 export type TodoContextType = {

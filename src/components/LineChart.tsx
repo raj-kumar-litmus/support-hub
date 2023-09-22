@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,8 +10,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { WeatherData, Options } from '../@types/todo';
-import { useState } from 'react';
+import { Options, WeatherData } from '../@types/todo';
 
 interface Props {
   options: Options;

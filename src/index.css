@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .search-tag {
+    @apply border border-solid border-slate-300 border-[1px] rounded rounded-3xl h-[30px] w-[150px] text-[12px] text-[#575353] px-[10px] py-[1px];
+  }
+}
