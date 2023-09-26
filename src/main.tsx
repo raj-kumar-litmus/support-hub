@@ -1,16 +1,17 @@
-import React, { Suspense, lazy } from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "primereact/resources/primereact.min.css";
-import "primereact/resources/themes/lara-light-indigo/theme.css";
-import DcOpenOrders from "./components/DcOpenOrders.tsx";
-import BarChart from "./components/charts/BarChart.tsx";
-import App from "./App.tsx";
-import "./index.css";
+import React, { Suspense, lazy } from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import 'primereact/resources/primereact.min.css';
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import DcOpenOrders from './components/DcOpenOrders.tsx';
+import BarChart from './components/charts/BarChart.tsx';
+import App from './App.tsx';
+import './index.css';
+import Chart from './components/ChartIndex.tsx';
 
-const Loader = lazy(() => import("./components/loader.tsx"));
+const Loader = lazy(() => import('./components/Loader.tsx'));
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Router>
       <Suspense fallback={<Loader />}>
@@ -52,6 +53,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             element={<App appContent={<DcOpenOrders />} />}
           />
           <Route path="/sessions" element={<App appContent={<BarChart />} />} />
+          <Route path="/opm" element={<Chart type="opm" />} />
+          <Route
+            path="/opmcomparison"
+            element={<Chart type="opmcomparison" />}
+          />
         </Routes>
       </Suspense>
     </Router>
