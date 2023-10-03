@@ -1,6 +1,11 @@
+import { FC } from "react";
 import AppContent from "./components/appcontent";
 
-function App ({ appContent }: { appContent: any }) {
+type Props = {
+  appContent: any;
+};
+
+const App: FC<Props> = ({ appContent }) => {
   return <div>
     <AppContent
       showSidePane
