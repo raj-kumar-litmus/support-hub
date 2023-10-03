@@ -3,57 +3,31 @@ import { DCOpenOrders } from "../utils/interfaces/dcOpenOrders";
 import Table from "./Common/Table/Table";
 import Card from "./Common/Card/Card";
 
-const tableDataResponse = [
-  {
-    country: "US",
-    shipNode: "0801",
-    dcName: "UDC",
-    workableOrders: 3562,
-  },
-  {
-    country: "US",
-    shipNode: "1001",
-    dcName: "SDC",
-    workableOrders: 18451,
-  },
-  {
-    country: "CA",
-    shipNode: "0750",
-    dcName: "UTI",
-    workableOrders: 6547,
-  },
-  {
-    country: "US",
-    shipNode: "1021",
-    dcName: "WDC",
-    workableOrders: 16620,
-  },
-  {
-    country: "CA",
-    shipNode: "1050",
-    dcName: "VDC",
-    workableOrders: 3560,
-  },
-  {
-    country: "US",
-    shipNode: "0701",
-    dcName: "PDC",
-    workableOrders: 29158,
-  },
-];
+interface orderData {
+  country: string;
+  shipNode: string;
+  dcName: string;
+  workableOrders: number;
+}
 
 const DcOpenOrders = () => {
   const [tableData, setTableData] = useState<DCOpenOrders[]>([]);
 
   useEffect(() => {
-    const response = tableDataResponse;
-    const modifiedArray = response.map((item) => ({
-      "DC Name": item.dcName,
-      Country: item.country,
-      "Shipment Node": item.shipNode,
-      "Workable Orders": item.workableOrders,
-    }));
-    setTableData(modifiedArray);
+    fetch("/mock/dcOpenOrders.json")
+      .then((res) => res.json())
+      .then((response) => {
+        const modifiedArray = response.map((item: orderData) => ({
+          "DC Name": item.dcName,
+          Country: item.country,
+          "Shipment Node": item.shipNode,
+          "Workable Orders": item.workableOrders,
+        }));
+        setTableData(modifiedArray);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   return (

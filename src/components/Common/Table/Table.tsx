@@ -3,7 +3,6 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 
 const Table = ({ tableData }: { tableData: DCOpenOrders[] }) => {
-  console.log("prop received: ", tableData);
   const keyArray = Object.keys(tableData[0])?.map((key) => key);
 
   return (

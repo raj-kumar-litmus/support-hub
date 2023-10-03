@@ -1,0 +1,38 @@
+[
+    {
+        "country": "US",
+        "shipNode": "0801",
+        "dcName": "UDC",
+        "workableOrders": 3562
+    },
+    {
+        "country": "US",
+        "shipNode": "1001",
+        "dcName": "SDC",
+        "workableOrders": 18451
+    },
+    {
+        "country": "CA",
+        "shipNode": "0750",
+        "dcName": "UTI",
+        "workableOrders": 6547
+    },
+    {
+        "country": "US",
+        "shipNode": "1021",
+        "dcName": "WDC",
+        "workableOrders": 16620
+    },
+    {
+        "country": "CA",
+        "shipNode": "1050",
+        "dcName": "VDC",
+        "workableOrders": 3560
+    },
+    {
+        "country": "US",
+        "shipNode": "0701",
+        "dcName": "PDC",
+        "workableOrders": 29158
+    }
+]

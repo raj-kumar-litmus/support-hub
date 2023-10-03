@@ -12,7 +12,7 @@
   @apply text-sm;
 }
 .ordersTable .p-datatable-thead tr th {
-  @apply !bg-[#BABABA] text-white font-bold p-3 border-0 w-1/4;
+  @apply !bg-[#BABABA] text-white font-bold p-3 border-0 w-1/4 border-[#D4D4D4];
 }
 .ordersTable .p-datatable-tbody tr {
   @apply !bg-[#F4F4F4] text-[#757575];
