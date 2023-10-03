@@ -18,7 +18,7 @@ const SearchBar: FC<Props> = ({ showSearchButton, setOpenSearchField, openSearch
             <div className='flex'>
                 <InputText type="text" name="q" className="w-full min-w-[400px] h-10 bg-gray-100  p-4 rounded-full hidden sm:block focus:outline-none placeholder:text-stone-500 placeholder:font-helvetica placeholder:font-medium" placeholder="Search Order #" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
                 {showSearchButton &&
-                    <button type="submit" className='-ml-8' onClick={() => setOpenSearchField(!openSearchField)}>
+                    <button type="submit" className='-ml-8 sm:hidden' onClick={() => setOpenSearchField(!openSearchField)}>
                         <Image className="h-[13px]" src={SearchIcon} alt="Search" />
                     </button>
                 }
