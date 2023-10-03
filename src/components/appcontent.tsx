@@ -39,13 +39,12 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
                     {showSidePane &&
                         <div className={`${showSidePaneGrid ? `bg-zinc-400` : ''} flex w-full block sm:hidden`} onClick={() => setShowSidePaneGrid(false)}>
                             {showSidePaneGrid &&
-                                <div>
-                                    <SidePaneGrid
-                                        menuList={MENU_LIST}
-                                        selectedMenu={selectedMenu}
-                                        setSelectedMenu={setSelectedMenu}
-                                    />
-                                </div>}
+                                <SidePaneGrid
+                                    menuList={MENU_LIST}
+                                    selectedMenu={selectedMenu}
+                                    setSelectedMenu={setSelectedMenu}
+                                />
+                            }
                             <div className='block w-full'>
                                 {openSearchField &&
                                     <SearchField searchValue={searchValue} setSearchValue={setSearchValue}
