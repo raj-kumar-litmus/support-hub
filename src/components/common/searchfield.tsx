@@ -2,7 +2,7 @@ import { FC } from "react";
 import RightArrowIcon from "../../assets/right_arrow.svg";
 import { InputText } from "primereact/inputtext";
 import { Button } from 'primereact/button';
-import { Image } from 'primereact/image';
+import CustomImage from "./customimage";
 
 type Props = {
     searchValue: string;
@@ -15,7 +15,7 @@ const SearchField: FC<Props> = ({ searchValue, setSearchValue }) => {
         <div className="flex sm:hidden px-6 py-3 border-slate-200  border-solid	 border-b justify-between">
             <InputText type="text" name="q" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} className="w-full focus:outline-none placeholder:text-stone-500 bg-transparent placeholder:font-helvetica placeholder:font-medium" placeholder="Search Order" />
             <Button type="submit" className='-ml-8'>
-                <Image className="arrow-icon" src={RightArrowIcon} alt="Search" />
+                <CustomImage className="arrow-icon" src={RightArrowIcon} alt="Search" />
             </Button>
         </div>
     );
