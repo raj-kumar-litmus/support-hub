@@ -2,17 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-.ordersTable {
-  @apply border border-[#D4D4D4] rounded-lg;
-}
-.ordersTable .p-datatable-wrapper {
-  @apply rounded-lg;
-}
 .ordersTable .p-datatable-table {
-  @apply text-sm;
+  @apply text-sm border-separate;
+}
+.ordersTable .p-datatable-tbody tr td {
+  @apply border-[#D4D4D4];
 }
 .ordersTable .p-datatable-thead tr th {
   @apply !bg-[#BABABA] text-white font-bold p-3 border-0 w-1/4 border-[#D4D4D4];
+}
+.ordersTable .p-datatable-thead tr th:first-child {
+  @apply rounded-tl-lg;
+}
+.ordersTable .p-datatable-thead tr th:last-child {
+  @apply rounded-tr-lg;
+}
+.ordersTable .p-datatable-tbody tr:last-child td:first-child {
+  @apply rounded-bl-lg;
+}
+.ordersTable .p-datatable-tbody tr:last-child td:last-child {
+  @apply rounded-br-lg;
 }
 .ordersTable .p-datatable-tbody tr {
   @apply !bg-[#F4F4F4] text-[#757575];

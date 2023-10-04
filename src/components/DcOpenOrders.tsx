@@ -33,7 +33,7 @@ const DcOpenOrders = () => {
   return (
     <div className="w-11/12 md:w-4/6 m-auto">
       <h3 className="text-[#757575] font-bold m-3 ml-0">DC Open Orders</h3>
-      <div className="hidden sm:block py-8 rounded-md">
+      <div className="hidden sm:block rounded-md">
         {tableData?.length > 0 && <Table tableData={tableData} />}
       </div>
       <div className="block sm:hidden">
