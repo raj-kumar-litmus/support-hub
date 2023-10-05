@@ -12,16 +12,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {
   args: {
-    menu: { id: 1, name: "Home", icon: DashboardIcon },
+    menu: { id: 1, name: 'Home', icon: DashboardIcon, link: '/home' },
     selectedMenu: 0,
-    setSelectedMenu: () => {},
   },
 };
 
 export const Selected: Story = {
   args: {
-    menu: { id: 1, name: "Home", icon: DashboardIcon },
+    menu: { id: 1, name: 'Home', icon: DashboardIcon, link: '/home' },
     selectedMenu: 1,
-    setSelectedMenu: () => {},
   },
 };
