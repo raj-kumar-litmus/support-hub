@@ -21,6 +21,7 @@ export const Basic: Story = {
   args: {
     menuList: MENU_LIST,
     selectedMenu: 0,
+    showSidePaneGrid: true
   },
 };
 
@@ -28,5 +29,6 @@ export const OnChange: Story = {
   args: {
     menuList: MENU_LIST,
     selectedMenu: 2,
+    showSidePaneGrid: true
   },
 };
