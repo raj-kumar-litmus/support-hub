@@ -24,7 +24,7 @@ const CustomDropdown: FC<CustomDropdownProps> = (props) => (
         placeholder={props.placeHolder}
         dropdownIcon={
           <CustomIcon
-            alt={""}
+            alt={"drop-down-arrow"}
             src={`src/assets/${!props.showIcon ? `filter` : `arrowdown`}.svg`}
             width="16px"
             height="16px"

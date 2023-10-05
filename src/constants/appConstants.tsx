@@ -39,3 +39,14 @@ export const DURATION_LIST: { label: string; value: number }[] = [
   { label: "30 Mins", value: 30 },
   { label: "60 Mins", value: 60 },
 ];
+
+// Chart Constants
+export const CHART_TITLE_FONT_SIZE: number = 10;
+export const CHART_DATALABEL_FONT_SIZE: number = 10;
+export const BAR_PERCENT: number = 0.7;
+export const MAX_BAR_THICKNESS: number = 40;
+export const BAR_BORDER_RADIUS: number = 6;
+export const ROTATION_0: number = 0;
+export const ROTATION_270: number = 270;
+export const STEP_SIZE: number = 5000;
+export const TICK_COUNT: number = 5;

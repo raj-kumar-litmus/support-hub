@@ -40,7 +40,6 @@ import FilterItem from "../common/FilterItem";
 import CustomIcon from "../common/CustomIcon";
 import { ChartData, SessionData } from "../../@types/BarChart";
 import { BAR_CHART_OPTIONS } from "../../config/chartConfig";
-// import sessionsJSON from './../../sampleJSON/sessions.json';
 
 const BarChart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -67,7 +66,6 @@ const BarChart = () => {
   useEffect(() => {
     setIsLoading(true);
     getSessionData();
-    // getHardCodedSessionData();
   }, [submitCounter]);
 
   useEffect(() => {
@@ -125,20 +123,13 @@ const BarChart = () => {
     setSessionData(data || []);
   };
 
-  // const getHardCodedSessionData = () => {
-  //   setIsLoading(false);
-  //   setSessionData(sessionsJSON);
-  // };
-
   const changeStartTime = (value: string) => {
     const formattedTime = formatTime(value);
     setStartTime(value);
     let defaultDate: string = "";
-
-    defaultDate = !startDate
-      ? `${new Date().toISOString().split("T")[0]}`
-      : formatDate(startDate, DATE_FORMAT_2);
-
+    defaultDate = startDate
+      ? formatDate(startDate, DATE_FORMAT_2)
+      : `${new Date().toISOString().split("T")[0]}`;
     setStartDateTime(`${defaultDate}T${formattedTime}`);
   };
 
@@ -146,7 +137,7 @@ const BarChart = () => {
     setStartDate(value);
     const selectedDate = new Date(value);
     let defaultTime: string = "";
-    defaultTime = !startTime ? formatTime(new Date()) : formatTime(startTime);
+    defaultTime = startTime ? formatTime(startTime) : formatTime(new Date());
     setStartDateTime(
       `${formatDate(selectedDate, DATE_FORMAT_2)}T${defaultTime}`,
     );
@@ -193,24 +184,19 @@ const BarChart = () => {
 
   const renderFooter = () => {
     return (
-      <div>
-        <Button
-          id="popup-btn-submit"
-          className="btn-submit p-button-rounded"
-          label={SUBMIT}
-          onClick={onSubmit}
-          autoFocus
-        />
-      </div>
+      <Button
+        id="popup-btn-submit"
+        className="p-button-rounded"
+        label={SUBMIT}
+        onClick={onSubmit}
+        autoFocus
+      />
     );
   };
 
   return (
     <div id="bar-chart" className="m-0 p-5">
-      <div
-        id="title-section"
-        className="flex basis-full justify-between pb-4 items-baseline"
-      >
+      <div className="flex basis-full justify-between pb-4 items-baseline">
         <div className="text-base text-gray-600 font-bold">{SESSIONS}</div>
         <div
           onClick={() => setShowFilterPopup(true)}
@@ -224,10 +210,7 @@ const BarChart = () => {
           />
         </div>
       </div>
-      <div
-        id="input-section"
-        className="basis-full justify-between pb-4 items-center hidden sm:flex"
-      >
+      <div className="basis-full justify-between pb-4 items-center hidden sm:flex">
         <div className="flex justify-start pb-4 items-baseline">
           <div className="flex-col mr-4">
             <CustomDropdown
@@ -285,16 +268,13 @@ const BarChart = () => {
           <Button
             label={SUBMIT}
             id="page-btn-submit"
-            className="btn-submit p-button-rounded"
+            className="p-button-rounded"
             onClick={incrementCounter}
           />
         </div>
       </div>
 
-      <div
-        id="filter-section"
-        className="flex basis-full flex-wrap text-xl justify-start pb-4 items-baseline"
-      >
+      <div className="flex basis-full flex-wrap text-xl justify-start pb-4 items-baseline">
         <FilterItem
           src="src/assets/hourglass.svg"
           value={`00:${duration.toString().padStart(2, "0")}`}
@@ -325,20 +305,14 @@ const BarChart = () => {
         </div>
       </div>
 
-      <div
-        id="primary-graph-section"
-        className="flex basis-full p-5 h-64 mb-4 bg-gray-100 drop-shadow-md rounded-xl"
-      >
+      <div className="flex basis-full p-5 h-64 mb-4 bg-gray-100 drop-shadow-md rounded-xl">
         {isLoading ? (
           <Loader />
         ) : (
           <Bar options={getChartConfig(PRIMARY)} data={primaryData} />
         )}
       </div>
-      <div
-        id="secondary-graph-section"
-        className="flex basis-full p-5 h-64 mb-4 bg-gray-100 drop-shadow-md rounded-xl"
-      >
+      <div className="flex basis-full p-5 h-64 mb-4 bg-gray-100 drop-shadow-md rounded-xl">
         {isLoading ? (
           <Loader />
         ) : (

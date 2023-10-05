@@ -8,7 +8,17 @@ import {
   Legend,
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import { TOTAL_SESSIONS_PER_MIN_PRIMARY } from "../constants/appConstants";
+import {
+  BAR_BORDER_RADIUS,
+  BAR_PERCENT,
+  CHART_DATALABEL_FONT_SIZE,
+  CHART_TITLE_FONT_SIZE,
+  MAX_BAR_THICKNESS,
+  ROTATION_0,
+  STEP_SIZE,
+  TICK_COUNT,
+  TOTAL_SESSIONS_PER_MIN_PRIMARY,
+} from "../constants/appConstants";
 
 Chart.register(
   CategoryScale,
@@ -33,15 +43,15 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = {
       align: "center",
       position: "bottom",
       font: {
-        size: 10,
+        size: CHART_TITLE_FONT_SIZE,
       },
     },
     datalabels: {
       align: "center",
       color: "white",
-      rotation: 0,
+      rotation: ROTATION_0,
       font: {
-        size: 10,
+        size: CHART_DATALABEL_FONT_SIZE,
       },
     },
   },
@@ -60,16 +70,16 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = {
       },
       ticks: {
         display: false,
-        // stepSize: 5000,
-        count: 5,
+        stepSize: STEP_SIZE,
+        count: TICK_COUNT,
       },
     },
   },
   datasets: {
     bar: {
-      barPercentage: 0.7,
-      maxBarThickness: 40,
-      borderRadius: 6,
+      barPercentage: BAR_PERCENT,
+      maxBarThickness: MAX_BAR_THICKNESS,
+      borderRadius: BAR_BORDER_RADIUS,
     },
   },
 };
