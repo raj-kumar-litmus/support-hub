@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
-import { DCOpenOrders } from "../utils/interfaces/dcOpenOrders";
-import Table from "./common/Table/Table";
-import Card from "./common/Card/Card";
+import { DCOpenOrders } from "../@types/dcOpenOrders";
+import Table from "./common/Table";
+import Card from "./common/Card";
 
 interface orderData {
   country: string;

@@ -1,4 +1,4 @@
-import { DCOpenOrders } from "../../../utils/interfaces/dcOpenOrders";
+import { DCOpenOrders } from "../../@types/dcOpenOrders";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 

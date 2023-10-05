@@ -1,4 +1,4 @@
-import { DCOpenOrders } from "../../../utils/interfaces/dcOpenOrders";
+import { DCOpenOrders } from "../../@types/dcOpenOrders";
 
 const Card = ({ cardData }: { cardData: DCOpenOrders }) => {
   return (
