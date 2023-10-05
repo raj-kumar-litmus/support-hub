@@ -19,48 +19,40 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
 
   return (
     <div>
-      <div className="h-screen">
-        {showNavbar && (
+      <div className='h-screen'>
+        {showNavbar &&
           <Navbar
             showSidePaneGrid={showSidePaneGrid}
             setShowSidePaneGrid={setShowSidePaneGrid}
             openSearchField={openSearchField}
             setOpenSearchField={setOpenSearchField}
           />
-        )}
-        <div className="flex">
-          {showSidePane && (
+        }
+        <div className='flex'>
+          {showSidePane &&
             <SidePaneList
               menuList={MENU_LIST}
               selectedMenu={selectedMenu}
               setSelectedMenu={setSelectedMenu}
             />
-          )}
-          {showSidePane && (
-            <div
-              className={`${
-                showSidePaneGrid ? `bg-zinc-400` : ""
-              } flex w-full block sm:hidden`}
-              onClick={() => setShowSidePaneGrid(false)}
-            >
-              {showSidePaneGrid && (
-                <SidePaneGrid
-                  menuList={MENU_LIST}
-                  selectedMenu={selectedMenu}
-                  setSelectedMenu={setSelectedMenu}
-                />
-              )}
-              <div className="block w-full">
-                {openSearchField && (
-                  <SearchField
-                    searchValue={searchValue}
-                    setSearchValue={setSearchValue}
+          }
+          {showSidePane &&
+            <div className={`${showSidePaneGrid ? `bg-zinc-400` : ''} flex w-full sm:hidden`} onClick={() => setShowSidePaneGrid(false)}>
+              <SidePaneGrid
+                menuList={MENU_LIST}
+                selectedMenu={selectedMenu}
+                setSelectedMenu={setSelectedMenu}
+                showSidePaneGrid={showSidePaneGrid}
+              />
+              <div className='block w-full'>
+                {!showSidePaneGrid && openSearchField &&
+                  <SearchField searchValue={searchValue} setSearchValue={setSearchValue}
                   />
-                )}
+                }
                 {appContent}
               </div>
             </div>
-          )}
+          }
 
           <div className="w-full hidden sm:block">{appContent}</div>
         </div>
