@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { DCOpenOrders } from "../utils/interfaces/dcOpenOrders";
-import Table from "./Common/Table/Table";
-import Card from "./Common/Card/Card";
+import Table from "./common/Table/Table";
+import Card from "./common/Card/Card";
 
 interface orderData {
   country: string;
@@ -10,7 +10,7 @@ interface orderData {
   workableOrders: number;
 }
 
-const DcOpenOrders = () => {
+const DcOpenOrders: FC = () => {
   const [tableData, setTableData] = useState<DCOpenOrders[]>([]);
 
   useEffect(() => {
@@ -31,8 +31,10 @@ const DcOpenOrders = () => {
   }, []);
 
   return (
-    <div className="w-11/12 md:w-4/6 m-auto">
-      <h3 className="text-[#757575] font-bold m-3 ml-0">DC Open Orders</h3>
+    <div className="w-11/12 m-auto mt-6">
+      <h3 className="text-[#757575] font-bold m-3 ml-0 font-helvetica">
+        DC Open Orders
+      </h3>
       <div className="hidden sm:block rounded-md">
         {tableData?.length > 0 && <Table tableData={tableData} />}
       </div>

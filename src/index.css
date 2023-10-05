@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .ordersTable .p-datatable-table {
-  @apply text-sm border-separate;
+  @apply text-sm border-separate font-helvetica;
 }
 .ordersTable .p-datatable-tbody tr td {
   @apply border-[#D4D4D4];
@@ -37,4 +37,10 @@
 }
 .ordersTable .p-datatable-tbody tr td:first-child {
   @apply font-bold;
+}
+.menu-icon img {
+    @apply !h-[24px] m-auto
+}
+.arrow-icon img {
+    @apply h-[13px] rotate-180
 }
