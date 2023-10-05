@@ -6,8 +6,10 @@ import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import DcOpenOrders from './components/DcOpenOrders.tsx';
 import BarChart from './components/charts/BarChart.tsx';
 import App from './App.tsx';
-import './index.css';
 import Chart from './components/ChartIndex.tsx';
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import 'primereact/resources/primereact.min.css';
+import './index.css';
 
 const Loader = lazy(() => import('./components/Loader.tsx'));
 

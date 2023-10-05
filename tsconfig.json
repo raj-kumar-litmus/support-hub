@@ -20,6 +20,8 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/**/*"],
+  "files": ["globals.d.ts"],
+  "types": ["vite-plugin-svgr/client"],
+  "include": ["src", "globals.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -7,8 +7,16 @@ const config: StorybookConfig = {
     "@storybook/addon-essentials",
     "@storybook/addon-onboarding",
     "@storybook/addon-interactions",
-    '@storybook/addon-viewport',
-    'storybook-addon-react-router-v6'
+    "storybook-addon-react-router-v6",
+    "@storybook/addon-viewport",
+    {
+      name: '@storybook/addon-styling',
+      options: {
+        postCss: {
+          implementation: require.resolve('postcss'),
+        },
+      },
+    },
   ],
   framework: {
     name: "@storybook/react-vite",
