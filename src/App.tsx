@@ -1,10 +1,15 @@
-import DcOpenOrders from "./components/DcOpenOrders";
+import { FC } from "react";
+import AppContent from "./components/appcontent";
 
-function App() {
+type Props = {
+  appContent: FC;
+};
+
+const App: FC<Props> = ({ appContent }) => {
   return (
     <div>
-      <DcOpenOrders />
+      <AppContent showSidePane showNavbar appContent={appContent} />
     </div>
   );
-}
+};
 export default App;
