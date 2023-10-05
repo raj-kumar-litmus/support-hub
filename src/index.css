@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.menu-icon img {
+    @apply !h-[24px] m-auto
+}
+.arrow-icon img {
+    @apply h-[13px] rotate-180
+}

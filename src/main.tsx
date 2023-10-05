@@ -11,7 +11,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <Router>
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route path="/home" element={<App />} />
+          <Route path="/home" element={<App appContent={<div className="p-4">Sephora support hub</div>} />} />
         </Routes>
       </Suspense>
     </Router>
