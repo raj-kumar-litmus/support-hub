@@ -1,9 +1,66 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 .menu-icon img {
     @apply !h-[24px] m-auto
 }
 .arrow-icon img {
     @apply h-[13px] rotate-180
+}
+
+#bar-chart .p-button, .p-dialog .p-button{
+    @apply bg-white border-none
+}
+
+#bar-chart .p-button:focus, .p-dialog .p-button:focus {
+    @apply shadow-none
+}
+
+#bar-chart .p-inputtext, .p-dialog .p-inputtext{
+    @apply p-2 border-none
+}
+
+#bar-chart .p-inputtext:enabled:focus, .p-dialog .p-inputtext:enabled:focus  {
+    @apply border-transparent shadow-none
+}
+
+#bar-chart .p-datepicker-trigger, .p-dialog .p-datepicker-trigger {
+    @apply border-none
+}
+
+#bar-chart .p-icon, #bar-chart .p-button-label, .p-dialog .p-icon,.p-dialog .p-button-label {
+    @apply text-[#979797]
+}
+
+#bar-chart .p-button.p-button-icon-only, .p-dialog .p-button.p-button-icon-only{
+    @apply p-0 w-8
+}
+
+#bar-chart .p-calendar,.p-dialog .p-calendar {
+    @apply border border-solid border-[#e7e7e7] rounded-md
+}
+
+#bar-chart .p-dropdown {
+    @apply border border-solid border-[#e7e7e7] 
+}
+
+#page-btn-submit.p-button, #popup-btn-submit.p-button{
+    @apply bg-[#8f8e8e] text-base px-7 py-2 transition-none
+}
+
+#page-btn-submit .p-button-label, #popup-btn-submit .p-button-label{
+    @apply !text-white
+}
+
+#modal-section .p-dialog-content{
+    @apply px-4 pt-6 pb-0
+}
+
+#modal-section .p-dialog-header{
+    @apply text-center p-4
+}
+
+#modal-section .p-dialog-footer{
+    @apply py-4 px-6 text-center
 }
