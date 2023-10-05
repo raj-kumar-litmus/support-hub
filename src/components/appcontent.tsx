@@ -54,9 +54,12 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
             </div>
           }
 
-          <div className="w-full hidden sm:block">{appContent}</div>
+          <div className='w-full hidden sm:block'>
+            {appContent}
+          </div>
         </div>
-      </div>
+
+      </div >
     </div>
   );
 };
