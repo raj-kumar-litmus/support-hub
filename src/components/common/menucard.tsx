@@ -2,31 +2,19 @@ import { FC } from "react";
 import { IMenu } from "../../@types/menu";
 import { Card } from "primereact/card";
 import CustomImage from "./customimage";
-import { useNavigate } from "react-router-dom";
 
 type Props = {
-  menu: IMenu;
+  menu: IMenu,
   selectedMenu: number;
-  setSelectedMenu: (a: number) => void;
-};
+  onClick: (a: IMenu) => void;
+}
 
-const MenuCard: FC<Props> = ({ menu, selectedMenu, setSelectedMenu }) => {
-  const navigate = useNavigate();
-
-  const onClickMenu = () => {
-    setSelectedMenu(menu.id);
-    navigate(menu.path);
-  };
+const MenuCard: FC<Props> = ({ menu, selectedMenu, onClick }) => {
 
   return (
-    <Card
-      className={`block bg-gray-100  p-4 rounded-xl h-24 w-36 m-3 cursor-pointer ${
-        selectedMenu === menu.id ? "font-semibold border-2" : "font-normal"
-      }`}
-      onClick={() => onClickMenu()}
-    >
+    <Card className={`block bg-gray-100 rounded-xl h-28 w-36 m-2 cursor-pointer text-center ${(selectedMenu === menu.id) ? 'font-semibold border-2' : 'font-normal'}`} onClick={() => onClick(menu)}>
       <CustomImage className="menu-icon" src={menu.icon} alt="menu.name" />
-      <span className="block pt-3 text-neutral-500 text-sm text-center">
+      <span className="text-neutral-500 text-sm ">
         {menu.name}
       </span>
     </Card>

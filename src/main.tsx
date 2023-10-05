@@ -5,6 +5,7 @@ import "primereact/resources/primereact.min.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import DcOpenOrders from "./components/DcOpenOrders.tsx";
 import BarChart from "./components/charts/BarChart.tsx";
+import "primereact/resources/themes/saga-blue/theme.css";
 import App from "./App.tsx";
 import "./index.css";
 
@@ -27,6 +28,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             path="/dc-open-orders"
             element={<App appContent={<DcOpenOrders />} />}
           />
+          <Route path="/home" element={<App appContent={<div className="p-4">Sephora support hub</div>} />} />
+          <Route path="/opm" element={<App appContent={<div className="p-4">Sephora support hub</div>} />} />
+          <Route path="/opm-comparison" element={<App appContent={<div className="p-4">Sephora support hub</div>} />} />
           <Route path="/sessions" element={<App appContent={<BarChart />} />} />
         </Routes>
       </Suspense>
