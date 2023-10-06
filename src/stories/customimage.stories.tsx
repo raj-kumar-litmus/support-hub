@@ -24,3 +24,11 @@ export const WithoutImage: Story = {
     alt: "dashboard",
   },
 };
+
+export const Preview: Story = {
+  args: {
+    src: DashboardIcon,
+    alt: 'dashboard',
+    preview: true
+  },
+};
