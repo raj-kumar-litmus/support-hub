@@ -6,6 +6,9 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 import DcOpenOrders from "./components/DcOpenOrders.tsx";
 import App from "./App.tsx";
 import "./index.css";
+import BarChart from "./components/charts/BarChart.tsx";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "primereact/resources/primereact.min.css";
 
 const Loader = lazy(() => import("./components/loader.tsx"));
 
@@ -26,6 +29,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             path="/dc-open-orders"
             element={<App appContent={<DcOpenOrders />} />}
           />
+          <Route path="/sessions" element={<App appContent={<BarChart />} />} />
         </Routes>
       </Suspense>
     </Router>

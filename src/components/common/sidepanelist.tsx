@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { IMenu } from "../../@types/menu";
 import CustomImage from "./customimage";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   menuList: Array<IMenu>;
@@ -13,6 +14,13 @@ const SidePaneList: FC<Props> = ({
   selectedMenu,
   setSelectedMenu,
 }) => {
+  const navigate = useNavigate();
+
+  const onClickMenu = (menu) => {
+    setSelectedMenu(menu.id);
+    navigate(menu.path);
+  };
+
   return (
     <div className="hidden sm:block w-80 border-slate-200 shadow-slate-200 border-solid border-r min-h-[calc(100vh-4.6rem)]  pt-2">
       {menuList.map((menu) => (
@@ -23,7 +31,7 @@ const SidePaneList: FC<Props> = ({
               ? "bg-gray-200 rounded-lg"
               : "bg-transparent"
           }`}
-          onClick={() => setSelectedMenu(menu.id)}
+          onClick={() => onClickMenu(menu)}
         >
           <CustomImage src={menu.icon} alt="menu.name" />
           <span
