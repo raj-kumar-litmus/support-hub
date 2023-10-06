@@ -9,15 +9,11 @@ import {
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import {
-  BAR_BORDER_RADIUS,
-  BAR_PERCENT,
   CHART_DATALABEL_FONT_SIZE,
   CHART_TITLE_FONT_SIZE,
-  MAX_BAR_THICKNESS,
   ROTATION_0,
-  STEP_SIZE,
-  TICK_COUNT,
   TOTAL_SESSIONS_PER_MIN_PRIMARY,
+  SESSIONS_CHART,
 } from "../constants/appConstants";
 
 Chart.register(
@@ -70,16 +66,16 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = {
       },
       ticks: {
         display: false,
-        stepSize: STEP_SIZE,
-        count: TICK_COUNT,
+        stepSize: SESSIONS_CHART.STEP_SIZE,
+        count: SESSIONS_CHART.TICK_COUNT,
       },
     },
   },
   datasets: {
     bar: {
-      barPercentage: BAR_PERCENT,
-      maxBarThickness: MAX_BAR_THICKNESS,
-      borderRadius: BAR_BORDER_RADIUS,
+      barPercentage: SESSIONS_CHART.BAR_PERCENT,
+      maxBarThickness: SESSIONS_CHART.MAX_BAR_THICKNESS,
+      borderRadius: SESSIONS_CHART.BAR_BORDER_RADIUS,
     },
   },
 };

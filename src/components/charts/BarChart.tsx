@@ -137,7 +137,7 @@ const BarChart = () => {
     setStartDate(value);
     const selectedDate = new Date(value);
     let defaultTime: string = "";
-    defaultTime = startTime ? formatTime(startTime) : formatTime(new Date());
+    defaultTime = formatTime(startTime ? startTime : new Date());
     setStartDateTime(
       `${formatDate(selectedDate, DATE_FORMAT_2)}T${defaultTime}`,
     );
