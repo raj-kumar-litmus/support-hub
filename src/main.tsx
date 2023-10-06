@@ -19,19 +19,16 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route
             path="/home"
             element={
-              <App
+              <App showNavbar showSidePane
                 appContent={<div className="p-4">Sephora support hub</div>}
               />
             }
           />
-          <Route
-            path="/dc-open-orders"
-            element={<App appContent={<DcOpenOrders />} />}
-          />
-          <Route path="/home" element={<App appContent={<div className="p-4">Sephora support hub</div>} />} />
-          <Route path="/opm" element={<App appContent={<div className="p-4">Sephora support hub</div>} />} />
-          <Route path="/opm-comparison" element={<App appContent={<div className="p-4">Sephora support hub</div>} />} />
-          <Route path="/sessions" element={<App appContent={<BarChart />} />} />
+          <Route path="/home" element={<App showNavbar showSidePane appContent={<div className="p-4">Sephora support hub</div>} />} />
+          <Route path="/opm" element={<App showNavbar showSidePane appContent={<div className="p-4">Sephora support hub</div>} />} />
+          <Route path="/opm-comparison" element={<App showNavbar showSidePane appContent={<div className="p-4">Sephora support hub</div>} />} />
+          <Route path="/dc-open-orders" element={<App showNavbar showSidePane appContent={<DcOpenOrders />} />} />
+          <Route path="/sessions" element={<App showNavbar showSidePane appContent={<BarChart />} />} />
         </Routes>
       </Suspense>
     </Router>
