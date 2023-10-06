@@ -41,6 +41,11 @@
 .menu-icon img {
   @apply !h-[24px] m-auto;
 }
+
+.menu-sm-icon img {
+  @apply min-w-[26px];
+}
+
 .arrow-icon img {
   @apply h-[13px] rotate-180;
 }

@@ -13,6 +13,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {
   args: {
+    showSidePane: true,
     showSidePaneGrid: false,
     openSearchField: false,
   },
@@ -20,6 +21,7 @@ export const Basic: Story = {
 
 export const Mobile: Story = {
   args: {
+    showSidePane: true,
     showSidePaneGrid: true,
     openSearchField: false,
   },
