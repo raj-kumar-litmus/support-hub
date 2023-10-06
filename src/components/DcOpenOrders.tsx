@@ -1,5 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { DCOpenOrders } from "../@types/dcOpenOrders";
+import { fetchData } from "../utils/fetchUtil";
+import { URL_DC_OPEN_ORDERS } from "../constants/apiConstants";
 import Table from "./common/Table";
 import Card from "./common/Card";
 
@@ -15,22 +17,14 @@ const DcOpenOrders: FC = () => {
 
   useEffect(() => {
     async function fetchOrdersData() {
-      try {
-        const res = await fetch("/mock/dcOpenOrders.json");
-        if (!res.ok) {
-          throw new Error("Error in Network Response");
-        }
-        const response = await res.json();
-        const modifiedArray = response.map((item: orderData) => ({
-          "DC Name": item.dcName,
-          Country: item.country,
-          "Shipment Node": item.shipNode,
-          "Workable Orders": item.workableOrders,
-        }));
-        setTableData(modifiedArray);
-      } catch (error) {
-        console.log("error while fetching orders data: ", error);
-      }
+      const data = await fetchData(URL_DC_OPEN_ORDERS, {});
+      const modifiedArray = data.map((item: orderData) => ({
+        "DC Name": item.dcName,
+        Country: item.country,
+        "Shipment Node": item.shipNode,
+        "Workable Orders": item.workableOrders,
+      }));
+      setTableData(modifiedArray);
     }
     fetchOrdersData();
   }, []);
