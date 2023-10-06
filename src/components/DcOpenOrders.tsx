@@ -14,9 +14,13 @@ const DcOpenOrders: FC = () => {
   const [tableData, setTableData] = useState<DCOpenOrders[]>([]);
 
   useEffect(() => {
-    fetch("/mock/dcOpenOrders.json")
-      .then((res) => res.json())
-      .then((response) => {
+    async function fetchOrdersData() {
+      try {
+        const res = await fetch("/mock/dcOpenOrders.json");
+        if (!res.ok) {
+          throw new Error("Error in Network Response");
+        }
+        const response = await res.json();
         const modifiedArray = response.map((item: orderData) => ({
           "DC Name": item.dcName,
           Country: item.country,
@@ -24,10 +28,11 @@ const DcOpenOrders: FC = () => {
           "Workable Orders": item.workableOrders,
         }));
         setTableData(modifiedArray);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      } catch (error) {
+        console.log("error while fetching orders data: ", error);
+      }
+    }
+    fetchOrdersData();
   }, []);
 
   return (
