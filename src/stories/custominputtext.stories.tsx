@@ -29,3 +29,40 @@ export const onChange: Story = {
     className: "w-full focus:outline-none",
   },
 };
+
+export const smallSize: Story = {
+  args: {
+    type: 'text',
+    placeholder: 'small',
+    value: '',
+    className: " p-inputtext-sm w-full focus:outline-none",
+  },
+};
+
+export const largeSize: Story = {
+  args: {
+    type: 'text',
+    placeholder: 'large',
+    value: '',
+    className: "p-inputtext-lg w-full focus:outline-none",
+  },
+};
+
+export const invalid: Story = {
+  args: {
+    type: 'text',
+    placeholder: 'invalid',
+    value: '',
+    className: "p-invalid w-full focus:outline-none",
+  },
+};
+
+export const disabled: Story = {
+  args: {
+    type: 'text',
+    placeholder: 'disabled',
+    value: '',
+    disabled: true,
+    className: "w-full focus:outline-none",
+  },
+};
