@@ -9,11 +9,9 @@ import {
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import {
-  CHART_DATALABEL_FONT_SIZE,
-  CHART_TITLE_FONT_SIZE,
-  ROTATION_0,
-  TOTAL_SESSIONS_PER_MIN_PRIMARY,
+  CHART,
   SESSIONS_CHART,
+  TOTAL_SESSIONS_PER_MIN_PRIMARY,
 } from "../constants/appConstants";
 
 Chart.register(
@@ -39,15 +37,15 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = {
       align: "center",
       position: "bottom",
       font: {
-        size: CHART_TITLE_FONT_SIZE,
+        size: CHART.TITLE_FONT_SIZE,
       },
     },
     datalabels: {
       align: "center",
       color: "white",
-      rotation: ROTATION_0,
+      rotation: CHART.ROTATION_0,
       font: {
-        size: CHART_DATALABEL_FONT_SIZE,
+        size: CHART.DATALABEL_FONT_SIZE,
       },
     },
   },

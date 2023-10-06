@@ -41,10 +41,12 @@ export const DURATION_LIST: { label: string; value: number }[] = [
 ];
 
 // Chart Constants
-export const CHART_TITLE_FONT_SIZE: number = 10;
-export const CHART_DATALABEL_FONT_SIZE: number = 10;
-export const ROTATION_0: number = 0;
-export const ROTATION_270: number = 270;
+export const CHART = {
+  TITLE_FONT_SIZE: 10,
+  DATALABEL_FONT_SIZE: 10,
+  ROTATION_0: 0,
+  ROTATION_270: 270,
+};
 
 export const SESSIONS_CHART = {
   BAR_PERCENT: 0.7,
