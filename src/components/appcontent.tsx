@@ -29,7 +29,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
             setOpenSearchField={setOpenSearchField}
           />
         }
-        <div className='flex'>
+        <div className='flex flex-col sm:flex-row'>
           {showSidePane &&
             <SidePaneList
               menuList={MENU_LIST}
@@ -45,12 +45,12 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
                 setSelectedMenu={setSelectedMenu}
                 showSidePaneGrid={showSidePaneGrid}
               />
-              <div className='block w-full'>
-                {!showSidePaneGrid && openSearchField &&
+              {openSearchField &&
+                <div className={`block w-full ${showSidePaneGrid ? 'hidden' : 'block'}`}>
                   <SearchField searchValue={searchValue} setSearchValue={setSearchValue}
                   />
-                }
               </div>
+              }
             </div>
           }
           <div className={`w-full ${showSidePaneGrid ? 'hidden' : 'block'}`}>
