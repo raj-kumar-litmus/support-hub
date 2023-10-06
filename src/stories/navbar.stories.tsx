@@ -32,3 +32,18 @@ export const Mobile: Story = {
     },
   },
 };
+
+export const MobileWithoutSideMenuIcon: Story = {
+  args: {
+    showSidePane: false,
+    showSidePaneGrid: true,
+    openSearchField: false,
+  },
+  parameters: {
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
+      defaultViewport: 'iphone6',
+    },
+  }
+};
+
