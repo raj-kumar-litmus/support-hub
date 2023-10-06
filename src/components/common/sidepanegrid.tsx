@@ -19,7 +19,7 @@ const SidePaneGrid: FC<Props> = ({ menuList, selectedMenu, setSelectedMenu, show
   }
 
   return (
-    <div className={` transition-all ease-in-out duration-300 !shadow-[0_10px_10px_#606264] ${showSidePaneGrid ? 'min-w-[22rem] !w-11/12 visible' : 'w-0 invisible'}  border-slate-200 border-solid border-r min-h-[calc(100vh-4rem)] z-10 bg-white`} >
+    <div className={`transition-all ease-in-out duration-600 !shadow-[0_10px_10px_#606264] ${showSidePaneGrid ? '!w-11/12 visible min-w-[22rem]' : 'w-0 invisible'}  border-slate-200 border-solid border-r min-h-[calc(100vh-4rem)] z-10 bg-white`} >
       {showSidePaneGrid &&
       <div className='flex flex-wrap p-1'>
         {menuList.map(menu =>
