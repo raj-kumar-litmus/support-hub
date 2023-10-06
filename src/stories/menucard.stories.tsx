@@ -5,6 +5,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 const meta = {
   title: "Stories/menucard",
   component: MenuCard,
+  tags: ['autodocs']
 } satisfies Meta<typeof MenuCard>;
 
 export default meta;

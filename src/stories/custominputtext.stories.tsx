@@ -4,6 +4,7 @@ import CustomInputText from "../components/common/custominputtext";
 const meta = {
   title: "Stories/custominputtext",
   component: CustomInputText,
+  tags: ['autodocs']
 } satisfies Meta<typeof CustomInputText>;
 
 export default meta;
