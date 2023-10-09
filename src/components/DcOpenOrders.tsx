@@ -19,7 +19,7 @@ const DcOpenOrders: FC = () => {
     async function fetchOrdersData() {
       try {
         const data = await fetchData(URL_DC_OPEN_ORDERS, {});
-        const modifiedArray = data.map((item: orderData) => ({
+        const modifiedArray = data?.map((item: orderData) => ({
           "DC Name": item.dcName,
           Country: item.country,
           "Shipment Node": item.shipNode,
