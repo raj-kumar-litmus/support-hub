@@ -19,9 +19,8 @@ const SidePaneGrid: FC<Props> = ({ menuList, selectedMenu, setSelectedMenu, show
   }
 
   return (
-    <div className={`transition-all ease-in-out duration-600 !shadow-[0_10px_10px_#606264] ${showSidePaneGrid ? '!w-11/12 visible min-w-[22rem] min-h-[calc(100vh-4rem)] ' : 'w-0 invisible'}  border-slate-200 border-solid border-r  z-10 bg-white`} >
-      {showSidePaneGrid &&
-      <div className='flex flex-wrap p-1'>
+    <div className={`transition-all ease-in-out !duration-600 !shadow-[0_10px_10px_#606264] min-h-[calc(100vh-4rem)]  ${showSidePaneGrid ? 'left-0 !w-11/12 min-w-[22rem] right-full' : '-left-96 w-0 opacity-0 right-0'} border-slate-200 border-solid border-r absolute z-10 bg-white`} >
+      <div className={` flex flex-wrap p-1`}>
         {menuList.map(menu =>
           <MenuCard
             menu={menu}
@@ -32,7 +31,6 @@ const SidePaneGrid: FC<Props> = ({ menuList, selectedMenu, setSelectedMenu, show
         )
         }
       </div>
-      }
     </div >
   );
 };

@@ -38,7 +38,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
             />
           }
           {showSidePane &&
-            <div className={`transition-all ease-in-out duration-600 ${showSidePaneGrid ? `bg-zinc-400` : ''} flex w-full sm:hidden`} onClick={() => setShowSidePaneGrid(false)}>
+            <div className={`${showSidePaneGrid ? `bg-zinc-400  min-h-[calc(100vh-4rem)]` : ''} flex w-full sm:hidden`} onClick={() => setShowSidePaneGrid(false)}>
               <SidePaneGrid
                 menuList={MENU_LIST}
                 selectedMenu={selectedMenu}
@@ -46,7 +46,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
                 showSidePaneGrid={showSidePaneGrid}
               />
               {openSearchField &&
-                <div className={`block w-full ${showSidePaneGrid ? 'hidden' : 'block'}`}>
+                <div className={`w-full ${showSidePaneGrid ? 'hidden' : 'block'}`}>
                   <SearchField searchValue={searchValue} setSearchValue={setSearchValue}
                   />
               </div>
