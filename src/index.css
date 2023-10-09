@@ -38,6 +38,10 @@
 .ordersTable .p-datatable-tbody tr td:first-child {
   @apply font-bold;
 }
+.menu-card .p-card-content {
+  @apply p-0;
+}
+
 .menu-icon img {
   @apply !h-[24px] m-auto;
 }

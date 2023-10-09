@@ -12,7 +12,7 @@ type Props = {
 const MenuCard: FC<Props> = ({ menu, selectedMenu, onClick }) => {
 
   return (
-    <Card className={`block bg-gray-100 rounded-xl h-28 w-36 m-2 cursor-pointer text-center ${(selectedMenu === menu.id) ? 'font-semibold border-2' : 'font-normal'}`} onClick={() => onClick(menu)}>
+    <Card className={`menu-card grid items-center bg-gray-100 rounded-xl h-28 w-36 m-2 cursor-pointer text-center ${(selectedMenu === menu.id) ? 'font-semibold border-2' : 'font-normal'}`} onClick={() => onClick(menu)}>
       <CustomImage className="menu-icon" src={menu.icon} alt="menu.name" />
       <span className="text-neutral-500 text-sm ">
         {menu.name}
