@@ -40,7 +40,9 @@ function LineChart({ options, data }: Props) {
   return (
     <div
       className={`${
-        rotate ? "rotate-90 mt-[200px]" : "relative h-screen w-screen"
+        rotate
+          ? "rotate-90 mt-[200px]"
+          : `relative h-screen ${width > 700 ? "w-[80vw]" : "w-[100vw]"}`
       }`}
     >
       {width < 700 && (

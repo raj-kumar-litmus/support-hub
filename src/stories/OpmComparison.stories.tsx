@@ -1,20 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
-import Test from "../components/Test";
+import OpmComparison from "../views/opmComparison";
 
 const meta = {
-  title: "Components/Test",
-  component: Test,
+  title: "Components/OpmComparison",
+  component: OpmComparison,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof Test>;
+} satisfies Meta<typeof OpmComparison>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const TestPage: Story = {
+export const OpmComparisonPage: Story = {
   args: {},
 };

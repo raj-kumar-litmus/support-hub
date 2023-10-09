@@ -33,6 +33,11 @@ import HourGlassIcon from "../assets/hourglass.svg";
 import SmallCalendar from "../assets/calendar_small.svg";
 import MobileIcon from "../assets/mobile.svg";
 import DropdownMobileIcon from "../assets/dropdown_mobile.svg";
+import ClockIcon from "../assets/clock.svg";
+import ChannelIcon from "../assets/channel.svg";
+import PromoCodeIcon from "../assets/promocode.svg";
+import LocaleIcon from "../assets/locale.svg";
+import PaymentIcon from "../assets/payment.svg";
 
 ChartJS.register(
   CategoryScale,
@@ -141,7 +146,7 @@ const OPM: React.FC = () => {
             data: apiRespnose.map((e) => Number(e.orderCount)),
             borderColor: "rgb(117, 117, 117)",
             backgroundColor: gradient,
-            pointStyle: false,
+            pointStyle: "circle",
             fill: true,
             borderWidth: 2,
           },
@@ -216,8 +221,8 @@ const OPM: React.FC = () => {
 
   return (
     <>
-      <div className={`flex ${width > 700 ? "gap-[90vw]" : "gap-[80vw]"}`}>
-        <p className="font-bold">OPM</p>
+      <div className={`flex ${width > 700 ? "gap-[65vw]" : "gap-[25vw]"}`}>
+        <p className="font-bold w-[200px] mt-[20px] ml-[20px]">OPM</p>
         <button onClick={onFilterClickHandler}>
           <img src={FilterIcon} />
         </button>
@@ -225,10 +230,10 @@ const OPM: React.FC = () => {
       {showFilters && (
         <>
           {width > 700 ? (
-            <div className="flex gap-5 opmFilters">
+            <div className="flex gap-5 opmFilters ml-[20px]">
               <div className="flex flex-col">
                 <label
-                  className="text-[12px] text-[#757575] mb-[8px] font-medium"
+                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
                   htmlFor="date"
                 >
                   From
@@ -249,13 +254,15 @@ const OPM: React.FC = () => {
               </div>
               <div className="flex flex-col">
                 <label
-                  className="text-[12px] text-[#757575] mb-[8px] font-medium"
+                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
                   htmlFor="duration"
                 >
                   Duration
                 </label>
                 <CustomInputText
                   placeholder="Select a Duration"
+                  imageClassName="relative left-[25px]"
+                  icon={ClockIcon}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setDuration(e.target.value)
                   }
@@ -263,9 +270,9 @@ const OPM: React.FC = () => {
                   id="promoCode"
                 />
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col channelInput dropdownWithIcon">
                 <label
-                  className="text-[12px] text-[#757575] mb-[8px] font-medium"
+                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
                   htmlFor="channel"
                 >
                   Channel
@@ -277,12 +284,14 @@ const OPM: React.FC = () => {
                   }
                   options={channels}
                   optionLabel="name"
-                  placeholder="Select a Channel"
+                  imageClassName="relative left-[25px]"
+                  icon={ChannelIcon}
+                  placeholder="Channel"
                 />
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col localeInput dropdownWithIcon">
                 <label
-                  className="text-[12px] text-[#757575] mb-[8px] font-medium"
+                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
                   htmlFor="locale"
                 >
                   Locale
@@ -293,13 +302,14 @@ const OPM: React.FC = () => {
                     setLocale(e.value.name)
                   }
                   options={localeList}
+                  icon={LocaleIcon}
                   optionLabel="name"
                   placeholder="Select a Locale"
                 />
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col paymentInput dropdownWithIcon">
                 <label
-                  className="text-[12px] text-[#757575] mb-[8px] font-medium"
+                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
                   htmlFor="payment"
                 >
                   Payment
@@ -310,13 +320,14 @@ const OPM: React.FC = () => {
                     setPaymentMode(e.value.name)
                   }
                   options={paymentList}
+                  icon={PaymentIcon}
                   optionLabel="name"
                   placeholder="Select a Payment Mode"
                 />
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col promoCodeInput">
                 <label
-                  className="text-[12px] text-[#757575] mb-[8px] font-medium"
+                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
                   htmlFor="promoCode"
                 >
                   Promocode
@@ -327,6 +338,9 @@ const OPM: React.FC = () => {
                   }
                   className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
                   id="promoCode"
+                  icon={PromoCodeIcon}
+                  placeholder="Promo Code"
+                  imageClassName="relative left-[25px]"
                 />
               </div>
               <CustomButton
@@ -340,7 +354,7 @@ const OPM: React.FC = () => {
                   !promoCode
                 }
                 isRounded={true}
-                className="submitBtnMobile"
+                className="submitBtnMobile self-end"
                 onClick={onSubmitHandler}
               />
             </div>
@@ -350,7 +364,7 @@ const OPM: React.FC = () => {
                 header="Filters"
                 visible={visible}
                 position={position}
-                className="filtersModal opmFilters h-[500px] left-[-9vw] w-[100vw]"
+                className="filtersModal opmFilters h-[500px] left-[-4vw] w-[100vw]"
                 onHide={onModalCloseHandler}
                 isDraggable={false}
                 isResizable={false}
@@ -359,7 +373,7 @@ const OPM: React.FC = () => {
                   <div className="flex flex-row gap-5">
                     <div className="flex flex-col w-[40vw]">
                       <label
-                        className="text-[12px] text-[#757575] mb-[8px] font-medium"
+                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
                         htmlFor="date"
                       >
                         From
@@ -383,7 +397,7 @@ const OPM: React.FC = () => {
                     </div>
                     <div className="flex flex-col w-[40vw]">
                       <label
-                        className="text-[12px] text-[#757575] mb-[8px] font-medium"
+                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
                         htmlFor="duration"
                       >
                         Duration
@@ -401,7 +415,7 @@ const OPM: React.FC = () => {
                   <div className="flex flex-row gap-5">
                     <div className="flex flex-col w-[40vw]">
                       <label
-                        className="text-[12px] text-[#757575] mb-[8px] font-medium"
+                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
                         htmlFor="channel"
                       >
                         Channel
@@ -419,7 +433,7 @@ const OPM: React.FC = () => {
                     </div>
                     <div className="flex flex-col w-[40vw]">
                       <label
-                        className="text-[12px] text-[#757575] mb-[8px] font-medium"
+                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
                         htmlFor="locale"
                       >
                         Locale
@@ -439,7 +453,7 @@ const OPM: React.FC = () => {
                   <div className="flex flex-row gap-5">
                     <div className="flex flex-col w-[40vw]">
                       <label
-                        className="text-[12px] text-[#757575] mb-[8px] font-medium"
+                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
                         htmlFor="payment"
                       >
                         Payment
@@ -457,7 +471,7 @@ const OPM: React.FC = () => {
                     </div>
                     <div className="flex flex-col w-[40vw]">
                       <label
-                        className="text-[12px] text-[#757575] mb-[8px] font-medium"
+                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
                         htmlFor="promoCode"
                       >
                         Promocode
@@ -484,7 +498,7 @@ const OPM: React.FC = () => {
           )}
         </>
       )}
-      <div className="flex items-center gap-4 mt-[10px] overflow-scroll">
+      <div className="flex items-center gap-4 mt-[10px] overflow-scroll ml-[20px]">
         {date && (
           <FilteredCard
             leftIcon={SmallCalendar}
@@ -540,7 +554,7 @@ const OPM: React.FC = () => {
         )}
       </div>
       {data && (
-        <div className="bg-[#F4F4F4] border-0 rounded-[10px]">
+        <div className="bg-[#F4F4F4] border-0 rounded-[10px] w-[95%] ml-[20px] h-[700px]">
           <LineChart options={options} data={data} />
         </div>
       )}

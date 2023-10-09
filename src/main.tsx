@@ -11,9 +11,9 @@ import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
 import './index.css';
 
-const Loader = lazy(() => import('./components/Loader.tsx'));
+const Loader = lazy(() => import("./components/Loader.tsx"));
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Router>
       <Suspense fallback={<Loader />}>
@@ -56,12 +56,18 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           />
           <Route path="/sessions" element={<App appContent={<BarChart />} />} />
           <Route path="/opm" element={<Chart type="opm" />} />
+            path="/opm"
+            element={<App appContent={<Chart type="opm" />} />}
+          />
           <Route
             path="/opmcomparison"
-            element={<Chart type="opmcomparison" />}
+            element={
+              <App appContent={<Chart type="opmcomparison" />} />
+              // element={<Chart type="opmcomparison" />
+            }
           />
         </Routes>
       </Suspense>
     </Router>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

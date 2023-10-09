@@ -126,7 +126,7 @@ button.p-button-secondary {
   @apply text-[12px] !text-[#757575]
 }
 .filtersModal .p-dialog-header {
-  @apply px-[8px] py-[10px] rounded-t-[20px] border-b border-b-[#F4F4F4] border-solid
+  @apply px-[8px] py-[10px] rounded-t-[10px] border-b border-b-[#F4F4F4] border-solid
 }
 .filtersModal .p-dialog-header .p-dialog-title{
   @apply font-normal text-center text-[16px]
@@ -162,7 +162,7 @@ button.p-button-secondary {
   @apply text-center mt-[20px]
 }
 .submitBtnMobile button, .submitBtnMobile button:hover, .submitBtnMobile button:enabled:active {
-  @apply w-[200px] h-[44px] text-[13px] !bg-[#757575] border border-solid !border-transparent items-center
+  @apply w-[120px] h-[44px] text-[13px] !bg-[#757575] border border-solid !border-transparent items-center
 }
 .submitBtnMobile button:focus {
   @apply !shadow-none
@@ -188,8 +188,30 @@ button.p-button-secondary {
 .filteredCard .p-button{
   @apply flex gap-[10px] px-[10px] items-center leading-none border border-solid border-[#c1bbbb] rounded rounded-[20px] h-[26px] text-[12px] text-[#322f2f] p-[5px] bg-transparent
 }
-.temp {
-  position: relative;
-  height:100vh;
-  width:100vw
+.filteredCard .p-button:hover {
+  @apply bg-transparent text-[#322f2f] border-[#c1bbbb]
+}
+.durationInput .p-inputtext {
+  @apply w-[150px] h-[37px];
+}
+.channelInput .p-dropdown {
+  @apply pl-[20px]
+}
+.calendarInput .p-calendar {
+  @apply w-[135px]
+}
+.promoCodeInput .p-inputtext {
+  @apply w-[150px]
+}
+.durationInput {
+  @apply relative left-[-10px];
+}
+.dropdownWithIcon .p-dropdown {
+  @apply border-l-transparent rounded-l-none w-[135px];
+}
+.dropdownWithIcon .p-dropdown:hover, .dropdownWithIcon .p-dropdown:not(.p-disabled).p-focus {
+  @apply !border-l-transparent;
+}
+.dropdownWithIcon img {
+  @apply border border-solid border-[#ced4da] border-r-transparent rounded-l-md rounded-tr-none left-[2px] pl-[5px];
 }
