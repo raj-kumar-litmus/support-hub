@@ -17,14 +17,18 @@ const DcOpenOrders: FC = () => {
 
   useEffect(() => {
     async function fetchOrdersData() {
-      const data = await fetchData(URL_DC_OPEN_ORDERS, {});
-      const modifiedArray = data.map((item: orderData) => ({
-        "DC Name": item.dcName,
-        Country: item.country,
-        "Shipment Node": item.shipNode,
-        "Workable Orders": item.workableOrders,
-      }));
-      setTableData(modifiedArray);
+      try {
+        const data = await fetchData(URL_DC_OPEN_ORDERS, {});
+        const modifiedArray = data.map((item: orderData) => ({
+          "DC Name": item.dcName,
+          Country: item.country,
+          "Shipment Node": item.shipNode,
+          "Workable Orders": item.workableOrders,
+        }));
+        setTableData(modifiedArray);
+      } catch (error) {
+        console.log("Error while fetching data: ", error);
+      }
     }
     fetchOrdersData();
   }, []);
