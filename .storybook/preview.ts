@@ -1,6 +1,8 @@
 import type { Preview } from "@storybook/react";
-import '../src/index.css';
-import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
+import "primereact/resources/primereact.min.css";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "../src/index.css";
+import { MINIMAL_VIEWPORTS } from "@storybook/addon-viewport";
 
 const preview: Preview = {
   parameters: {
@@ -13,10 +15,9 @@ const preview: Preview = {
     },
     viewport: {
       viewports: MINIMAL_VIEWPORTS,
-      defaultViewport: 'iphone6'
+      defaultViewport: "iphone6",
     },
   },
 };
-
 
 export default preview;

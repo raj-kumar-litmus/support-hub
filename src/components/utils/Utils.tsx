@@ -9,5 +9,10 @@ export const MENU_LIST = [
   { id: 2, name: "OPM", icon: LeaderboardIcon, path: "/home" },
   { id: 3, name: "OPM Comparison", icon: DataUsageIcon, path: "/home" },
   { id: 4, name: "Session", icon: LegendToggleIcon, path: "/sessions" },
-  { id: 5, name: "DC Open Orders", icon: DCOpenOrdersIcon, path: "/home" },
+  {
+    id: 5,
+    name: "DC Open Orders",
+    icon: DCOpenOrdersIcon,
+    path: "/dc-open-orders",
+  },
 ];

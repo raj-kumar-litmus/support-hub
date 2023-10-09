@@ -1,5 +1,5 @@
 export interface IMenu {
-    id: number;
-    name: string;
-    icon: string;
+  id: number;
+  name: string;
+  icon: string;
 }

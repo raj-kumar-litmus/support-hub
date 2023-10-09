@@ -1,4 +1,4 @@
-import { Image, ImageProps } from 'primereact/image';
+import { Image, ImageProps } from "primereact/image";
 
 const CustomImage = (props: ImageProps) => (
   <Image

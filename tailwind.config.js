@@ -16,8 +16,8 @@ export default {
       "2xl": "1536px",
     },
     fontFamily: {
-      'helvetica': 'Arial, sans-serif, Helvetica Neue',
-    }
+      helvetica: "Arial, sans-serif, Helvetica Neue",
+    },
   },
   plugins: [
     plugin(function ({ addUtilities }) {
