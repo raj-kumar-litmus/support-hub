@@ -4,7 +4,7 @@ import CustomInputText from "../components/common/custominputtext";
 const meta = {
   title: "Stories/custominputtext",
   component: CustomInputText,
-  tags: ['autodocs']
+  tags: ["autodocs"],
 } satisfies Meta<typeof CustomInputText>;
 
 export default meta;
@@ -30,38 +30,38 @@ export const onChange: Story = {
   },
 };
 
-export const smallSize: Story = {
+export const smallSizeInputText: Story = {
   args: {
-    type: 'text',
-    placeholder: 'small',
-    value: '',
+    type: "text",
+    placeholder: "small",
+    value: "",
     className: " p-inputtext-sm w-full focus:outline-none",
   },
 };
 
-export const largeSize: Story = {
+export const largeSizeInputText: Story = {
   args: {
-    type: 'text',
-    placeholder: 'large',
-    value: '',
+    type: "text",
+    placeholder: "large",
+    value: "",
     className: "p-inputtext-lg w-full focus:outline-none",
   },
 };
 
-export const invalid: Story = {
+export const invalidInput: Story = {
   args: {
-    type: 'text',
-    placeholder: 'invalid',
-    value: '',
+    type: "text",
+    placeholder: "invalid",
+    value: "",
     className: "p-invalid w-full focus:outline-none",
   },
 };
 
 export const disabled: Story = {
   args: {
-    type: 'text',
-    placeholder: 'disabled',
-    value: '',
+    type: "text",
+    placeholder: "disabled",
+    value: "",
     disabled: true,
     className: "w-full focus:outline-none",
   },
