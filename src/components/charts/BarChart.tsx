@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import { Dialog } from "primereact/dialog";
-import { fetchData } from "../../utils/fetchUtil";
-import { URL_SESSIONS } from "../../constants/apiConstants";
+// import { fetchData } from "../../utils/fetchUtil";
+// import { URL_SESSIONS } from "../../constants/apiConstants";
 import {
   DATE_FORMAT_1,
   DATE_FORMAT_2,
@@ -40,6 +40,7 @@ import FilterItem from "../common/FilterItem";
 import CustomIcon from "../common/CustomIcon";
 import { ChartData, SessionData } from "../../@types/BarChart";
 import { BAR_CHART_OPTIONS } from "../../config/chartConfig";
+import sessionDataJSON from "../../sampleJSON/sessions.json";
 
 const BarChart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -118,9 +119,11 @@ const BarChart = () => {
       starttime: startDateTime,
       channel: channel,
     };
-    const data = await fetchData(URL_SESSIONS, params);
+    console.log(params);
+    // const data = await fetchData(URL_SESSIONS, params);
     setIsLoading(false);
-    setSessionData(data || []);
+    // setSessionData(data || []);
+    setSessionData(sessionDataJSON);
   };
 
   const changeStartTime = (value: string) => {
