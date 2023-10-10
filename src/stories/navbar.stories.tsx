@@ -42,8 +42,7 @@ export const MobileWithoutSideMenuIcon: Story = {
   parameters: {
     viewport: {
       viewports: INITIAL_VIEWPORTS,
-      defaultViewport: 'iphone6',
+      defaultViewport: "iphone6",
     },
-  }
+  },
 };
-

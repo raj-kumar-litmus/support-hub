@@ -8,7 +8,7 @@ import { MENU_LIST } from "./utils/Utils";
 type Props = {
   showSidePane: boolean;
   showNavbar: boolean;
-  appContent: FC;
+  appContent: any;
 };
 
 const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
@@ -19,46 +19,54 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
 
   return (
     <div>
-      <div className='h-screen'>
-        {showNavbar &&
+      <div className="h-screen">
+        {showNavbar && (
           <Navbar
-          showSidePane={showSidePane}
+            showSidePane={showSidePane}
             showSidePaneGrid={showSidePaneGrid}
             setShowSidePaneGrid={setShowSidePaneGrid}
             openSearchField={openSearchField}
             setOpenSearchField={setOpenSearchField}
           />
-        }
-        <div className='flex flex-col sm:flex-row'>
-          {showSidePane &&
+        )}
+        <div className="flex flex-col sm:flex-row">
+          {showSidePane && (
             <SidePaneList
               menuList={MENU_LIST}
               selectedMenu={selectedMenu}
               setSelectedMenu={setSelectedMenu}
             />
-          }
-          {showSidePane &&
-            <div className={`${showSidePaneGrid ? `bg-zinc-400  min-h-[calc(100vh-4rem)]` : ''} flex w-full sm:hidden`} onClick={() => setShowSidePaneGrid(false)}>
+          )}
+          {showSidePane && (
+            <div
+              className={`${
+                showSidePaneGrid ? `bg-zinc-400  min-h-[calc(100vh-4rem)]` : ""
+              } flex w-full sm:hidden`}
+              onClick={() => setShowSidePaneGrid(false)}
+            >
               <SidePaneGrid
                 menuList={MENU_LIST}
                 selectedMenu={selectedMenu}
                 setSelectedMenu={setSelectedMenu}
                 showSidePaneGrid={showSidePaneGrid}
               />
-              {openSearchField &&
-                <div className={`w-full ${showSidePaneGrid ? 'hidden' : 'block'}`}>
-                  <SearchField searchValue={searchValue} setSearchValue={setSearchValue}
+              {openSearchField && (
+                <div
+                  className={`w-full ${showSidePaneGrid ? "hidden" : "block"}`}
+                >
+                  <SearchField
+                    searchValue={searchValue}
+                    setSearchValue={setSearchValue}
                   />
-              </div>
-              }
+                </div>
+              )}
             </div>
-          }
-          <div className={`w-full ${showSidePaneGrid ? 'hidden' : 'block'}`}>
+          )}
+          <div className={`w-full ${showSidePaneGrid ? "hidden" : "block"}`}>
             {appContent}
           </div>
         </div>
-
-      </div >
+      </div>
     </div>
   );
 };

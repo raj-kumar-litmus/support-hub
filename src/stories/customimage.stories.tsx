@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 const meta = {
   title: "Stories/customimage",
   component: CustomImage,
-  tags: ['autodocs']
+  tags: ["autodocs"],
 } satisfies Meta<typeof CustomImage>;
 
 export default meta;
@@ -28,7 +28,7 @@ export const WithoutImage: Story = {
 export const Preview: Story = {
   args: {
     src: DashboardIcon,
-    alt: 'dashboard',
-    preview: true
+    alt: "dashboard",
+    preview: true,
   },
 };

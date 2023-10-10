@@ -11,7 +11,7 @@ const meta = {
       defaultViewport: "iphone6",
     },
   },
-  tags: ['autodocs']
+  tags: ["autodocs"],
 } satisfies Meta<typeof SearchField>;
 
 export default meta;
