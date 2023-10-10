@@ -1,9 +1,10 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import Navbar from "./common/navbar";
 import SearchField from "./common/searchfield";
 import SidePaneGrid from "./common/sidepanegrid";
 import SidePaneList from "./common/sidepanelist";
 import { MENU_LIST } from "./utils/Utils";
+import { useLocation } from "react-router";
 
 type Props = {
   showSidePane: boolean;
@@ -16,6 +17,12 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
   const [openSearchField, setOpenSearchField] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>("");
   const [selectedMenu, setSelectedMenu] = useState<number>(0);
+  const location = useLocation();
+
+  useEffect(() => {
+    setOpenSearchField(false);
+    setSearchValue("");
+  }, [location?.pathname]);
 
   return (
     <div>
