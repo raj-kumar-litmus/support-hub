@@ -11,9 +11,9 @@ export const MENU_LIST = [
     id: 3,
     name: "OPM Comparison",
     icon: DataUsageIcon,
-    path: "/opm-comparison",
+    path: "/opmcomparison",
   },
-  { id: 4, name: "Sessions", icon: LegendToggleIcon, path: "/sessions" },
+  { id: 4, name: "Session", icon: LegendToggleIcon, path: "/sessions" },
   {
     id: 5,
     name: "DC Open Orders",

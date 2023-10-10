@@ -11,7 +11,7 @@ import {
   formatDate,
   formatTime,
 } from "../../utils/dateTimeUtil";
-import Loader from "../loader";
+import Loader from "../Loader";
 import {
   CHANNEL,
   CHANNEL_LIST,
