@@ -2,6 +2,7 @@ import SidePaneGrid from "../components/common/sidepanegrid";
 import type { Meta, StoryObj } from "@storybook/react";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import { MENU_LIST } from "../components/utils/Utils";
+import { withRouter } from "storybook-addon-react-router-v6";
 
 const meta = {
   title: "Stories/sidepane- mobile",
@@ -12,6 +13,8 @@ const meta = {
       defaultViewport: "iphone6",
     },
   },
+  decorators: [withRouter],
+  tags: ["autodocs"],
 } satisfies Meta<typeof SidePaneGrid>;
 
 export default meta;
@@ -21,6 +24,7 @@ export const Basic: Story = {
   args: {
     menuList: MENU_LIST,
     selectedMenu: 0,
+    showSidePaneGrid: true,
   },
 };
 
@@ -28,5 +32,6 @@ export const OnChange: Story = {
   args: {
     menuList: MENU_LIST,
     selectedMenu: 2,
+    showSidePaneGrid: true,
   },
 };

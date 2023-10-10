@@ -7,6 +7,8 @@ const CustomInputText = (props: InputTextProps) => (
     className={props.className}
     onChange={props.onChange}
     value={props.value}
+    keyfilter={props.keyfilter}
+    disabled={props.disabled}
   />
 );
 

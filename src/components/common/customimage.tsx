@@ -6,6 +6,7 @@ const CustomImage = (props: ImageProps) => (
     alt={props.alt}
     className={props.className}
     onClick={props.onClick}
+    preview={props.preview}
   />
 );
 

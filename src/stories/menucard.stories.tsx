@@ -5,6 +5,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 const meta = {
   title: "Stories/menucard",
   component: MenuCard,
+  tags: ["autodocs"],
 } satisfies Meta<typeof MenuCard>;
 
 export default meta;
@@ -12,16 +13,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {
   args: {
-    menu: { id: 1, name: "Home", icon: DashboardIcon },
+    menu: { id: 1, name: "Home", icon: DashboardIcon, path: "/home" },
     selectedMenu: 0,
-    setSelectedMenu: () => {},
   },
 };
 
 export const Selected: Story = {
   args: {
-    menu: { id: 1, name: "Home", icon: DashboardIcon },
+    menu: { id: 1, name: "Home", icon: DashboardIcon, path: "/home" },
     selectedMenu: 1,
-    setSelectedMenu: () => {},
   },
 };

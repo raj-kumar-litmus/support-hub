@@ -6,9 +6,14 @@ import LegendToggleIcon from "../../assets/legend_toggle.svg";
 
 export const MENU_LIST = [
   { id: 1, name: "Home", icon: DashboardIcon, path: "/home" },
-  { id: 2, name: "OPM", icon: LeaderboardIcon, path: "/home" },
-  { id: 3, name: "OPM Comparison", icon: DataUsageIcon, path: "/home" },
-  { id: 4, name: "Session", icon: LegendToggleIcon, path: "/sessions" },
+  { id: 2, name: "OPM", icon: LeaderboardIcon, path: "/opm" },
+  {
+    id: 3,
+    name: "OPM Comparison",
+    icon: DataUsageIcon,
+    path: "/opm-comparison",
+  },
+  { id: 4, name: "Sessions", icon: LegendToggleIcon, path: "/sessions" },
   {
     id: 5,
     name: "DC Open Orders",

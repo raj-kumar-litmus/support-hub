@@ -16,7 +16,7 @@ const SidePaneList: FC<Props> = ({
 }) => {
   const navigate = useNavigate();
 
-  const onClickMenu = (menu) => {
+  const navigateToMenu = (menu: IMenu) => {
     setSelectedMenu(menu.id);
     navigate(menu.path);
   };
@@ -26,14 +26,18 @@ const SidePaneList: FC<Props> = ({
       {menuList.map((menu) => (
         <div
           key={menu.id}
-          className={`flex pl-10 pr-2 py-4 mx-4 ${
+          className={`flex pl-10 pr-2 py-4 mx-4 items-center ${
             selectedMenu === menu.id
               ? "bg-gray-200 rounded-lg"
               : "bg-transparent"
           }`}
-          onClick={() => onClickMenu(menu)}
+          onClick={() => navigateToMenu(menu)}
         >
-          <CustomImage src={menu.icon} alt="menu.name" />
+          <CustomImage
+            src={menu.icon}
+            className="menu-sm-icon"
+            alt="menu.name"
+          />
           <span
             className={`block pl-6 text-neutral-500 text-sm  cursor-pointer ${
               selectedMenu === menu.id ? "font-semibold" : "font-normal"
