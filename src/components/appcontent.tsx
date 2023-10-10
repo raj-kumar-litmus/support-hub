@@ -24,6 +24,13 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
     setSearchValue("");
   }, [location?.pathname]);
 
+    useEffect(() => {
+      const _selectedMenu = MENU_LIST.filter(
+        (menu) => menu.path === location?.pathname
+      )[0].id;
+      setSelectedMenu(_selectedMenu);
+    }, []);
+
   return (
     <div>
       <div className="h-screen">
