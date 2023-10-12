@@ -27,30 +27,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             }
           />
           <Route
-            path="/home"
-            element={
-              <App
-                appContent={<div className="p-4">Sephora support hub</div>}
-              />
-            }
-          />
-          <Route
-            path="/opm"
-            element={
-              <App
-                appContent={<div className="p-4">Sephora support hub</div>}
-              />
-            }
-          />
-          <Route
-            path="/opm-comparison"
-            element={
-              <App
-                appContent={<div className="p-4">Sephora support hub</div>}
-              />
-            }
-          />
-          <Route
             path="/dc-open-orders"
             element={<App appContent={<DcOpenOrders />} />}
           />

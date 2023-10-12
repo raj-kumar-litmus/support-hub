@@ -194,6 +194,9 @@ const OPM: React.FC = () => {
           tooltip: {
             displayColors: false,
           },
+          datalabels: {
+            display: false,
+          },
         },
       });
       await getData();

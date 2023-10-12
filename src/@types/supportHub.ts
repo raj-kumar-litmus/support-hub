@@ -65,33 +65,8 @@ export interface OpmComparisonType {
 export interface ChartOptions {
   responsive: boolean;
   scales?: {
-    x?: {
-      grid?: {
-        display?: boolean;
-      };
-      title?: {
-        display?: boolean;
-        text?: string;
-      };
-    };
-    y?: {
-      border?: {
-        dash?: number[];
-      };
-    };
+    x?: any;
+    y?: any;
   };
-  plugins?: {
-    legend?: {
-      display?: boolean;
-      position?: positionEnums;
-      align?: alignEnums;
-      labels?: {
-        usePointStyle?: boolean;
-        generateLabels(): CustomLabel[];
-      };
-    };
-    tooltip?: {
-      displayColors?: boolean;
-    };
-  };
+  plugins?: any;
 }

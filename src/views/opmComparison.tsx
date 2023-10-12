@@ -157,6 +157,9 @@ const OpmComparison: React.FC = () => {
           },
         },
         plugins: {
+          datalabels: {
+            display: false,
+          },
           legend: {
             display: true,
             position: "bottom",
