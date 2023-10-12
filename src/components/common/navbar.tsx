@@ -22,7 +22,7 @@ const Navbar: FC<Props> = ({
   const [searchValue, setSearchValue] = useState<string>("");
 
   return (
-    <div className="py-4 pl-4 pr-1 sm:px-10 flex items-center border-slate-200  border-solid	 border-b justify-between h-16">
+    <div className="py-4 pl-4 pr-1 sm:px-10 flex items-center border-slate-200  border-solid	 border-b justify-between h-16 fixed top-0 left-0 w-full z-50 bg-white">
       <div className="flex">
         {showSidePane && (
           <CustomImage

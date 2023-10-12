@@ -24,12 +24,12 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
     setSearchValue("");
   }, [location?.pathname]);
 
-    useEffect(() => {
-      const _selectedMenu = MENU_LIST.filter(
-        (menu) => menu.path === location?.pathname
-      )[0].id;
-      setSelectedMenu(_selectedMenu);
-    }, []);
+  useEffect(() => {
+    const _selectedMenu = MENU_LIST.filter(
+      (menu) => menu.path === location?.pathname
+    )[0].id;
+    setSelectedMenu(_selectedMenu);
+  }, []);
 
   return (
     <div>
@@ -77,7 +77,9 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
             </div>
           )}
           <div
-            className={`w-[77.53vw] ${showSidePaneGrid ? "hidden" : "block"}`}
+            className={`w-full ${
+              showSidePaneGrid ? "hidden" : "block"
+            } sm:ml-64 sm:mt-16 h-[calc(100vh-4rem)] overflow-y-scroll`}
           >
             {appContent}
           </div>

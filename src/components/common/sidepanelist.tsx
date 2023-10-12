@@ -1,7 +1,7 @@
 import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 import { IMenu } from "../../@types/menu";
 import CustomImage from "./customimage";
-import { useNavigate } from "react-router-dom";
 
 type Props = {
   menuList: Array<IMenu>;
@@ -22,7 +22,7 @@ const SidePaneList: FC<Props> = ({
   };
 
   return (
-    <div className="hidden sm:block w-80 border-slate-200 shadow-slate-200 border-solid border-r min-h-[calc(100vh-4.6rem)]  pt-2">
+    <div className="fixed left-0 top-16 z-10 overflow-x-hidden hidden sm:block w-64 border-slate-200 shadow-slate-200 border-solid border-r min-h-[calc(100vh-4rem)]  pt-2">
       {menuList.map((menu) => (
         <div
           key={menu.id}
