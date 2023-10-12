@@ -15,14 +15,14 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => (
       value={props.value}
       onChange={(e) => props.onChange(e.value)}
       iconPos={props.iconPos}
-      icon={() => (
+      icon={
         <CustomIcon
           alt={props.imgalt}
           src={props.imgsrc}
           width="16px"
           height="16px"
         />
-      )}
+      }
     />
   </>
 );
