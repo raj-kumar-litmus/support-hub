@@ -34,6 +34,7 @@ import LineChart from "../components/LineChart";
 import FilteredCard from "../components/FilteredCard";
 // import Loader from "../components/Loader";
 import CustomImage from "../components/common/customimage";
+import CustomIcon from "../components/common/CustomIcon";
 
 import FilterIcon from "../assets/filter.svg";
 import HourGlassIcon from "../assets/hourglass.svg";
@@ -409,6 +410,14 @@ const OpmComparison: React.FC = () => {
                   value={startDate}
                   onChange={changeStartDate}
                   maxDate={new Date()}
+                  icon={
+                    <CustomIcon
+                      alt="date-icon"
+                      src="src/assets/calendar.svg"
+                      width="16px"
+                      height="16px"
+                    />
+                  }
                   dateFormat="dd/mm/yy"
                   iconPos={"left"}
                   imgalt="date-icon"

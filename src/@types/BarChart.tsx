@@ -28,6 +28,7 @@ export interface CustomCalendarProps {
   iconPos: string;
   imgalt: string;
   imgsrc: string;
+  icon?: any;
 }
 
 export interface CustomDropdownProps {
