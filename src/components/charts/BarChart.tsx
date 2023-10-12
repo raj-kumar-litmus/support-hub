@@ -314,15 +314,17 @@ const BarChart = () => {
 
       <div className="flex basis-full p-5 h-64 mb-4 bg-gray-100 drop-shadow-md rounded-xl">
         {isLoading ? (
-          // <Loader />
+          <div>Loading</div>
         ) : (
+          // <Loader />
           <Bar options={getChartConfig(PRIMARY)} data={primaryData} />
         )}
       </div>
       <div className="flex basis-full p-5 h-64 mb-4 bg-gray-100 drop-shadow-md rounded-xl">
         {isLoading ? (
-          // <Loader />
+          <div>Loading</div>
         ) : (
+          // <Loader />
           <Bar options={getChartConfig(SECONDARY)} data={secondaryData} />
         )}
       </div>
