@@ -171,19 +171,13 @@ button.p-button-secondary {
   @apply !bg-[#757575]
 }
 .p-dialog .p-dialog-header .p-dialog-header-icon:focus {
-  /* box-shadow: none; */
   @apply shadow-none;
 }
 .p-inputtext:enabled:focus, .p-inputtext:focus, .p-inputtext:enabled:hover, .p-dropdown:hover, .p-dropdown.p-focus {
   @apply !shadow-none !border-[#ced4da]
-  /* border-color: #ced4da; */
-  /* box-shadow: none; */
 }
 .p-calendar .p-datepicker-trigger, .p-calendar .p-datepicker-trigger:hover {
   @apply !border-[#ced4da] bg-transparent text-[#757575]
-  /* color: #757575; */
-  /* background: transparent; */
-  /* border-color: #ced4da !important; */
 }
 .filteredCard .p-button{
   @apply flex gap-[10px] px-[10px] items-center leading-none border border-solid border-[#c1bbbb] rounded rounded-[20px] h-[26px] text-[12px] text-[#322f2f] p-[5px] bg-transparent
