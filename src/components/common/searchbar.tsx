@@ -3,6 +3,7 @@ import SearchIcon from "../../assets/search.svg";
 import { Button } from "primereact/button";
 import CustomImage from "./customimage";
 import CustomInputText from "./custominputtext";
+import CustomButton from "../Button";
 
 type Props = {
   showSearchButton: boolean;
@@ -29,13 +30,13 @@ const SearchBar: FC<Props> = ({
         onChange={(e) => setSearchValue(e.target.value)}
       />
       {showSearchButton && (
-        <Button
-          text
-          className="-ml-8 sm:hidden !shadow-none !border-none"
+        <CustomButton
+          isTextButton
+          className="search-button"
           onClick={() => setOpenSearchField(!openSearchField)}
         >
           <CustomImage className="h-[13px]" src={SearchIcon} alt="Search" />
-        </Button>
+        </CustomButton>
       )}
     </div>
   );

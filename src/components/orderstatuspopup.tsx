@@ -4,6 +4,8 @@ import { Column } from "primereact/column";
 import CustomDialog from "./common/customdialog";
 import CustomTable from "./common/customtable";
 import { ORDER_STATUS_LIST } from "../constants/appConstants";
+import CustomButton from "./Button";
+
 interface OrderStatus {
   code: number;
   description: string;
@@ -26,11 +28,12 @@ const OrderStatusPopup = () => {
 
   return (
     <div>
-      <Button
+      <CustomButton
         label="open order status"
         onClick={() => setOpenDialog(true)}
-        link
+        isTextButton
         severity="secondary"
+        className="popup-button"
       />
       <CustomDialog
         header="Order Status"

@@ -4,6 +4,7 @@ import promotionsJSON from "../sampleJSON/promotions.json";
 import { IPromotion } from "../@types/promotion";
 import CustomDialog from "./common/customdialog";
 import PromotionCard from "./common/promotioncard";
+import CustomButton from "./Button";
 
 const PromotionsPopup = () => {
   const [promotions, setPromotions] = useState<Array<IPromotion>>([]);
@@ -25,11 +26,12 @@ const PromotionsPopup = () => {
 
   return (
     <div>
-      <Button
+      <CustomButton
         label="Promotions"
         onClick={() => setOpenDialog(true)}
-        link
+        isTextButton
         severity="secondary"
+        className="popup-button"
       />
       <CustomDialog
         header="Promotions"

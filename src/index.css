@@ -243,7 +243,7 @@ button.p-button-secondary {
   @apply w-full pl-[20px];
 }
 .custom-popup .p-dialog-header {
-  @apply border-solid border-b border-b-[#757575] sm:border-b-[#e7e7e7] py-4 text-[#757575];
+  @apply border-solid border-b border-b-[#e7e7e7] py-4 text-[#757575];
 }
 
 .custom-popup .p-dialog-content {
@@ -256,4 +256,12 @@ button.p-button-secondary {
 
 .promotion-card .p-card-content {
   padding: 0;
+}
+
+.search-button .p-button{
+  @apply -ml-8 sm:hidden !shadow-none !border-none
+}
+
+.popup-button .p-button{
+  @apply !shadow-none !border-none
 }
