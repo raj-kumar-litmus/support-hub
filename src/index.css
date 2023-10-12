@@ -122,74 +122,85 @@
   @apply py-4 px-6 text-center;
 }
 
+.custom-popup .p-dialog-title {
+  @apply text-center;
+}
+
 button.p-button-secondary {
-  @apply text-[12px] !text-[#757575]
+  @apply text-[12px] !text-[#757575];
 }
 .filtersModal .p-dialog-header {
-  @apply px-[8px] py-[10px] rounded-t-[10px] border-b border-b-[#F4F4F4] border-solid
+  @apply px-[8px] py-[10px] rounded-t-[10px] border-b border-b-[#F4F4F4] border-solid;
 }
-.filtersModal .p-dialog-header .p-dialog-title{
-  @apply font-normal text-center text-[16px]
+.filtersModal .p-dialog-header .p-dialog-title {
+  @apply font-normal text-center text-[16px];
 }
-.filtersModal .p-dialog-content{
-  @apply pt-[20px]
+.filtersModal .p-dialog-content {
+  @apply pt-[20px];
 }
 .opmFilters .p-dropdown-label {
-  @apply pt-[7px]
+  @apply pt-[7px];
 }
-.opmFilters .p-dropdown{
-  @apply h-[38px]
+.opmFilters .p-dropdown {
+  @apply h-[38px];
 }
-.opmFilters .p-calendar{
-  @apply h-[38px] w-[9vw]
+.opmFilters .p-calendar {
+  @apply h-[38px] w-[9vw];
 }
-.opmFilters .timeInput .p-calendar{
-  @apply w-[8vw]
+.opmFilters .timeInput .p-calendar {
+  @apply w-[8vw];
 }
 .p-datepicker-trigger {
-  @apply !p-0 border border-solid border-[#ced4da] border-r-0
+  @apply !p-0 border border-solid border-[#ced4da] border-r-0;
 }
 .p-datepicker-trigger img {
-  @apply w-[50%] h-[50%]
+  @apply w-[50%] h-[50%];
 }
 .p-calendar .p-inputtext {
-  @apply text-[13px] border-l-0 w-[110%]
+  @apply text-[13px] border-l-0 w-[110%];
 }
 .p-inputtext.p-placeholder {
-  @apply text-[13px] !text-[#B9B9B9]
+  @apply text-[13px] !text-[#B9B9B9];
 }
 .p-inputtext {
-  @apply text-[13px]
+  @apply text-[13px];
 }
 .submitBtnMobile {
-  @apply text-center mt-[20px]
+  @apply text-center mt-[20px];
 }
 .submitBtnMobile button span {
   @apply text-[14px] font-medium;
 }
-.submitBtnMobile button, .submitBtnMobile button:hover, .submitBtnMobile button:enabled:active {
-  @apply w-[10vw] h-[44px] text-[13px] !bg-[#757575] border border-solid !border-transparent items-center
+.submitBtnMobile button,
+.submitBtnMobile button:hover,
+.submitBtnMobile button:enabled:active {
+  @apply w-[10vw] h-[44px] text-[13px] !bg-[#757575] border border-solid !border-transparent items-center;
 }
 .submitBtnMobile button:focus {
-  @apply !shadow-none
+  @apply !shadow-none;
 }
 .submitBtnMobile button:active {
-  @apply !bg-[#757575]
+  @apply !bg-[#757575];
 }
 .p-dialog .p-dialog-header .p-dialog-header-icon:focus {
   @apply shadow-none;
 }
-.p-inputtext:enabled:focus, .p-inputtext:focus, .p-inputtext:enabled:hover, .p-dropdown:hover, .p-dropdown.p-focus {
-  @apply !shadow-none !border-[#ced4da]
+.p-inputtext:enabled:focus,
+.p-inputtext:focus,
+.p-inputtext:enabled:hover,
+.p-dropdown:hover,
+.p-dropdown.p-focus {
+  @apply !shadow-none !border-[#ced4da];
 }
-.p-calendar .p-datepicker-trigger, .p-calendar .p-datepicker-trigger:hover {
-  @apply !border-[#ced4da] bg-transparent text-[#757575]
+.p-calendar .p-datepicker-trigger,
+.p-calendar .p-datepicker-trigger:hover {
+  @apply !border-[#ced4da] bg-transparent text-[#757575];
 }
-.filteredCard .p-button{
-  @apply flex gap-[10px] px-[10px] items-center leading-none border border-solid border-[#c1bbbb] rounded rounded-[20px] h-[26px] text-[12px] text-[#322f2f] p-[5px] bg-transparent
+.filteredCard .p-button {
+  @apply flex gap-[10px] px-[10px] items-center leading-none border border-solid border-[#c1bbbb] rounded rounded-[20px] h-[26px] text-[12px] text-[#322f2f] p-[5px] bg-transparent;
 }
 .filteredCard .p-button:hover {
-  @apply bg-transparent text-[#322f2f] border-[#c1bbbb]
+  @apply bg-transparent text-[#322f2f] border-[#c1bbbb];
 }
 .durationInput .p-inputtext {
   @apply w-[150px] h-[37px];
@@ -204,10 +215,10 @@ button.p-button-secondary {
   @apply w-[1vw] relative right-[4px];
 }
 .calendarInput .p-calendar {
-  @apply w-[135px]
+  @apply w-[135px];
 }
 .promoCodeInput .p-inputtext {
-  @apply w-full
+  @apply w-full;
 }
 .durationInput {
   @apply relative left-[-10px];
@@ -215,18 +226,30 @@ button.p-button-secondary {
 .dropdownWithIcon .p-dropdown {
   @apply border-l-transparent rounded-l-none w-[135px];
 }
-.dropdownWithIcon .p-dropdown:hover, .dropdownWithIcon .p-dropdown:not(.p-disabled).p-focus {
+.dropdownWithIcon .p-dropdown:hover,
+.dropdownWithIcon .p-dropdown:not(.p-disabled).p-focus {
   @apply !border-l-transparent;
 }
 .dropdownWithIcon img {
   @apply border border-solid border-[#ced4da] border-r-transparent rounded-l-md rounded-tr-none left-[2px] pl-[5px];
 }
-.p-input-icon-left>.p-inputtext {
-  @apply !pl-[2rem]
+.p-input-icon-left > .p-inputtext {
+  @apply !pl-[2rem];
 }
 .p-calendar-w-btn-left .p-inputtext {
   @apply pl-0;
 }
 .opmFilters .durationInput .p-dropdown {
   @apply w-full pl-[20px];
+}
+.custom-popup .p-dialog-header {
+  @apply border-solid border-b border-b-[#757575] sm:border-b-[#e7e7e7] py-4 text-[#757575];
+}
+
+.custom-popup .p-dialog-content {
+  @apply pt-4;
+}
+
+.custom-popup .p-dialog-header-icon:focus {
+  @apply !shadow-none;
 }

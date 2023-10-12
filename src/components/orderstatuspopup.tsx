@@ -1,58 +1,53 @@
-import { useState, useEffect } from 'react';
-import CustomDialog from "./common/customdialog";
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
+import { useEffect, useState } from "react";
 import { Button } from "primereact/button";
+import { Column } from "primereact/column";
+import CustomDialog from "./common/customdialog";
+import CustomTable from "./common/customtable";
+import { ORDER_STATUS_LIST } from "../constants/appConstants";
+interface OrderStatus {
+  code: number;
+  description: string;
+}
 
 const OrderStatusPopup = () => {
-  const statusList = [
-    {
-      code: 1111,
-      description: "Created"
-    },
-    {
-      code: 1500,
-      description: "Scheduled"
-    },
-    {
-      code: 3200,
-      description: "Released"
-    },
-    {
-      code: 3350,
-      description: "Included in shipments"
-    },
-    {
-      code: 9000,
-      description: "Shipped"
-    },
-    {
-      code: 3700,
-      description: "Cancelled"
-    },
-    {
-      code: 3700.500,
-      description: "Shipped and invoiced"
-    }
-  ]
-  const [orderStatusList, setOrderStatusList] = useState<Array<any>>([]);
+  const HEADERS = [
+    { field: "code", header: "Code" },
+    { field: "description", header: "Description" },
+  ];
+
+  const [orderStatusList, setOrderStatusList] = useState<Array<OrderStatus>>(
+    []
+  );
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
   useEffect(() => {
-    setOrderStatusList(statusList);
+    setOrderStatusList(ORDER_STATUS_LIST);
   }, []);
 
   return (
     <div>
-      <Button label="open" onClick={() => setOpenDialog(true)} />
-      <CustomDialog header="Order Status" visible={openDialog} onHide={() => setOpenDialog(false)}>
-        <DataTable value={orderStatusList}>
-          <Column field="code" header="Code"></Column>
-          <Column field="description" header="Description"></Column>
-          {orderStatusList.map((col) => (
-            <Column key={col.code} field={col.field} header={col.header} />
+      <Button
+        label="open order status"
+        onClick={() => setOpenDialog(true)}
+        link
+        severity="secondary"
+      />
+      <CustomDialog
+        header="Order Status"
+        visible={openDialog}
+        onHide={() => setOpenDialog(false)}
+        className="custom-popup"
+      >
+        <CustomTable
+          resizableColumns
+          showGridlines
+          stripedRows
+          value={orderStatusList}
+          className="ordersTable w-[310px] sm:w-[390px]"
+          children={HEADERS.map((h) => (
+            <Column key={h.field} field={h.field} header={h.header}></Column>
           ))}
-        </DataTable>
+        />
       </CustomDialog>
     </div>
   );
