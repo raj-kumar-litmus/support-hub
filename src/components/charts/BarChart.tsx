@@ -11,7 +11,7 @@ import {
   formatDate,
   formatTime,
 } from "../../utils/dateTimeUtil";
-import Loader from "../loader";
+import Loader from "../Loader";
 import {
   CHANNEL,
   CHANNEL_LIST,
@@ -59,7 +59,7 @@ const BarChart = () => {
   const [duration, setDuration] = useState<number>(5);
   const [startTime, setStartTime] = useState<string>(null);
   const [startDate, setStartDate] = useState<string>(null);
-  const [startDateTime, setStartDateTime] = useState<string>("");
+  // const [startDateTime, setStartDateTime] = useState<string>("");
   const [channel, setChannel] = useState<string>("all");
   const [showFilterPopup, setShowFilterPopup] = useState<boolean>(false);
   const [submitCounter, setSubmitCounter] = useState<number>(0);
@@ -114,12 +114,11 @@ const BarChart = () => {
   }, [xAxisLabels, azureSecondaryData]);
 
   const getSessionData = async () => {
-    const params = {
-      period: duration,
-      starttime: startDateTime,
-      channel: channel,
-    };
-    console.log(params);
+    // const params = {
+    //   period: duration,
+    //   starttime: startDateTime,
+    //   channel: channel,
+    // };
     // const data = await fetchData(URL_SESSIONS, params);
     setIsLoading(false);
     // setSessionData(data || []);
