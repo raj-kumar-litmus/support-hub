@@ -247,7 +247,7 @@ button.p-button-secondary {
 }
 
 .custom-popup .p-dialog-content {
-  @apply pt-4;
+  @apply pt-4 overflow-auto;
 }
 
 .custom-popup .p-dialog-header-icon:focus {
@@ -264,4 +264,12 @@ button.p-button-secondary {
 
 .popup-button .p-button{
   @apply !shadow-none !border-none
+}
+
+.p-dialog .p-dialog-content::-webkit-scrollbar {
+  @apply w-1
+}
+
+.p-dialog .p-dialog-content::-webkit-scrollbar-thumb {
+  @apply bg-[#cbcbcb]
 }
