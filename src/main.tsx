@@ -11,12 +11,13 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import "./index.css";
 
-const Loader = lazy(() => import("./components/Loader.tsx"));
+// const Loader = lazy(() => import("./components/Loader.tsx"));
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Router>
-      <Suspense fallback={<Loader />}>
+      {/* <Suspense fallback={<Loader />}> */}
+      <Suspense>
         <Routes>
           <Route
             path="/home"
