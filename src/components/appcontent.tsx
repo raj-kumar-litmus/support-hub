@@ -33,7 +33,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
 
   return (
     <div>
-      <div className="h-screen">
+      <div className="h-screen overflow-y-hidden">
         {showNavbar && (
           <Navbar
             showSidePane={showSidePane}
@@ -43,7 +43,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
             setOpenSearchField={setOpenSearchField}
           />
         )}
-        <div className="flex flex-col sm:flex-row">
+        <div className="flex flex-col sm:flex-row mt-16">
           {showSidePane && (
             <SidePaneList
               menuList={MENU_LIST}
@@ -79,7 +79,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
           <div
             className={`w-full ${
               showSidePaneGrid ? "hidden" : "block"
-            } sm:ml-64 sm:mt-16 h-[calc(100vh-4rem)] overflow-y-scroll`}
+            } sm:ml-64  h-[calc(100vh-4rem)] overflow-y-auto`}
           >
             {appContent}
           </div>
