@@ -164,6 +164,9 @@ button.p-button-secondary {
 .submitBtnMobile {
   @apply text-center mt-[20px]
 }
+.submitBtnMobile button span {
+  @apply text-[14px] font-medium;
+}
 .submitBtnMobile button, .submitBtnMobile button:hover, .submitBtnMobile button:enabled:active {
   @apply w-[10vw] h-[44px] text-[13px] !bg-[#757575] border border-solid !border-transparent items-center
 }
@@ -219,5 +222,8 @@ button.p-button-secondary {
   @apply !pl-[2rem]
 }
 .p-calendar-w-btn-left .p-inputtext {
-  @apply pl-0
+  @apply pl-0;
+}
+.opmFilters .durationInput .p-dropdown {
+  @apply w-full pl-[20px];
 }
