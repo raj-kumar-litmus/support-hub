@@ -25,9 +25,9 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
   }, [location?.pathname]);
 
   useEffect(() => {
-    const _selectedMenu = MENU_LIST.filter(
-      (menu) => menu.path === location?.pathname
-    )[0].id;
+    const _selectedMenu = MENU_LIST.find(
+      (menu) => location?.pathname.startsWith(menu.path)
+    ).id;
     setSelectedMenu(_selectedMenu);
   }, []);
 
