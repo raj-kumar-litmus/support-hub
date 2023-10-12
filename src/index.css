@@ -253,3 +253,7 @@ button.p-button-secondary {
 .custom-popup .p-dialog-header-icon:focus {
   @apply !shadow-none;
 }
+
+.promotion-card .p-card-content {
+  padding: 0;
+}

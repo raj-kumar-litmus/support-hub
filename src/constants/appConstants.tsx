@@ -55,3 +55,34 @@ export const SESSIONS_CHART = {
   STEP_SIZE: 5000,
   TICK_COUNT: 5,
 };
+
+export const ORDER_STATUS_LIST = [
+  {
+    code: 1111,
+    description: "Created",
+  },
+  {
+    code: 1500,
+    description: "Scheduled",
+  },
+  {
+    code: 3200,
+    description: "Released",
+  },
+  {
+    code: 3350,
+    description: "Included in shipments",
+  },
+  {
+    code: 9000,
+    description: "Shipped",
+  },
+  {
+    code: 3700,
+    description: "Cancelled",
+  },
+  {
+    code: 3700.5,
+    description: "Shipped and invoiced",
+  },
+];
