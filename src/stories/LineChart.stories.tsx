@@ -45,6 +45,8 @@ export const SingleLineChart: Story = {
         },
       ],
     },
+    className:
+      "bg-[#F4F4F4] border-0 rounded-[10px] w-[71.7vw] ml-[2.85vw] h-[62.23vh] mt-[3vh]",
   },
 };
 
@@ -78,6 +80,8 @@ export const SingleLineChartWithFilledBackground: Story = {
         },
       ],
     },
+    className:
+      "bg-[#F4F4F4] border-0 rounded-[10px] w-[71.7vw] ml-[2.85vw] h-[62.23vh] mt-[3vh]",
   },
 };
 
@@ -120,6 +124,8 @@ export const MultiLineChart: Story = {
         },
       ],
     },
+    className:
+      "bg-[#F4F4F4] border-0 rounded-[10px] w-[71.7vw] ml-[2.85vw] h-[62.23vh] mt-[3vh]",
   },
 };
 
@@ -162,5 +168,7 @@ export const MultiLineChartWithFilledBackGround: Story = {
         },
       ],
     },
+    className:
+      "bg-[#F4F4F4] border-0 rounded-[10px] w-[71.7vw] ml-[2.85vw] h-[62.23vh] mt-[3vh]",
   },
 };

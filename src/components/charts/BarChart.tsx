@@ -59,7 +59,7 @@ const BarChart = () => {
   const [duration, setDuration] = useState<number>(5);
   const [startTime, setStartTime] = useState<string>(null);
   const [startDate, setStartDate] = useState<string>(null);
-  // const [startDateTime, setStartDateTime] = useState<string>("");
+  const [startDateTime, setStartDateTime] = useState<string>("");
   const [channel, setChannel] = useState<string>("all");
   const [showFilterPopup, setShowFilterPopup] = useState<boolean>(false);
   const [submitCounter, setSubmitCounter] = useState<number>(0);
@@ -159,6 +159,11 @@ const BarChart = () => {
     const filterApplied = CHANNEL_LIST.find((item) => item.value === channel);
     return filterApplied ? filterApplied.label : "all";
   };
+
+  useEffect(() => {
+    console.log(`startTime`);
+    console.log(startTime);
+  }, [startTime]);
 
   const resetFilters = () => {
     setStartDate("");

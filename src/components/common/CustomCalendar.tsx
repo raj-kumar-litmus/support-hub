@@ -5,7 +5,7 @@ import { CustomCalendarProps } from "../../@types/BarChart";
 
 const CustomCalendar: FC<CustomCalendarProps> = (props) => (
   <>
-    <div className="text-sm font-bold text-gray-500">{props.title}</div>
+    <div className="text-[12px] text-[#757575] font-medium">{props.title}</div>
     <Calendar
       {...props}
       className="mt-1"

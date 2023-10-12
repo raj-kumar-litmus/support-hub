@@ -3,11 +3,11 @@ import { InputText } from "primereact/inputtext";
 
 interface Props {
   onChange: any;
-  id: string;
+  id?: string;
   icon?: string;
   imageClassName?: string;
   placeholder?: string;
-  className: string;
+  className?: string;
 }
 
 const CustomInputText: React.FC<Props> = ({
