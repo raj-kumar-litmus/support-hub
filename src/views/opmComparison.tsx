@@ -371,7 +371,7 @@ const OpmComparison: React.FC = () => {
       {showFilters && (
         <>
           {width > 700 ? (
-            <div className="flex gap-[1.17vw] ml-[2.5vw] mt-[2.2vh] opmFilters">
+            <div className="flex gap-[1.17vw] ml-[2.5vw] opmFilters">
               <div className="flex flex-col w-[8vw] durationInput mr-[1.17vw]">
                 {/* <label className="text-[12px] text-[#757575] mb-[3px] font-medium mt-[11px] relative ml-[18px]">
                   Duration
