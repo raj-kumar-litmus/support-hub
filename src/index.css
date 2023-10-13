@@ -37,7 +37,7 @@
 }
 .ordersTable .p-datatable-tbody tr td:first-child {
   @apply font-bold;
-}
+} 
 .menu-card .p-card-content {
   @apply p-0;
 }
@@ -229,4 +229,38 @@ button.p-button-secondary {
 }
 .opmFilters .durationInput .p-dropdown {
   @apply w-full pl-[20px];
+}
+/* Order Details */
+.grid span {
+  @apply text-sm py-2 text-[#757575]
+}
+.orderItemInfoTable .p-datatable-table {
+  @apply text-sm border-[#f4f4f4] font-helvetica !pb-8;
+}
+.orderItemInfoTable .p-datatable-thead tr th {
+  @apply !bg-[#BABABA] font-bold border-0 border-[#D4D4D4];
+}
+.orderItemInfoTable .p-datatable-thead tr th span{
+  @apply text-white;
+}
+.orderItemInfoTable .p-datatable-thead tr th:first-child {
+  @apply rounded-tl-lg border-none;
+}
+.orderItemInfoTable .p-datatable-thead tr th:last-child {
+  @apply rounded-tr-lg border-none;
+}
+.orderItemInfoTable .p-datatable-tbody tr td:first-child {
+  @apply border-l border-solid; 
+}
+.orderItemInfoTable .p-datatable-tbody tr td:last-child {
+  @apply border-r border-solid; 
+}
+.orderItemInfoTable .p-datatable-tbody tr:last-child td:first-child {
+  @apply rounded-bl-lg;
+} 
+ .orderItemInfoTable .p-datatable-tbody tr:last-child td:last-child {
+  @apply rounded-br-lg;
+}
+.orderItemInfoTable .p-datatable-tbody tr {
+  @apply !bg-[#F4F4F4] text-[#757575];
 }

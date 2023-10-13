@@ -39,12 +39,20 @@ const DcOpenOrders: FC = () => {
         DC Open Orders
       </h3>
       <div className="hidden sm:block rounded-md">
-        {tableData?.length > 0 && <Table tableData={tableData} />}
+        {tableData?.length > 0 && (
+          <Table
+            tabledata={tableData}
+            showGridlines
+            stripedRows
+            size="normal"
+            className="ordersTable"
+          />
+        )}
       </div>
       <div className="block sm:hidden">
         {tableData?.length > 0 &&
           tableData?.map((dataObj, index) => (
-            <Card key={index} cardData={dataObj} />
+            <Card key={index} cardData={dataObj} type="DC_OPEN_ORDERS" />
           ))}
       </div>
     </div>

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import { Dialog } from "primereact/dialog";
-// import { fetchData } from "../../utils/fetchUtil";
-// import { URL_SESSIONS } from "../../constants/apiConstants";
+import { fetchData } from "../../utils/fetchUtil";
+import { URL_SESSIONS } from "../../constants/apiConstants";
 import {
   DATE_FORMAT_1,
   DATE_FORMAT_2,
@@ -40,7 +40,13 @@ import FilterItem from "../common/FilterItem";
 import CustomIcon from "../common/CustomIcon";
 import { ChartData, SessionData } from "../../@types/BarChart";
 import { BAR_CHART_OPTIONS } from "../../config/chartConfig";
-import sessionDataJSON from "../../sampleJSON/sessions.json";
+// import sessionDataJSON from "../../sampleJSON/sessions.json";
+
+import FilterIcon from "../../assets/filter.svg";
+import ClockIcon from "../../assets/clock.svg";
+import CalendarIcon from "../../assets/calendar.svg";
+import ChannelIcon from "../../assets/channel.svg";
+import DurationIcon from "../../assets/hourglass.svg";
 
 const BarChart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -114,15 +120,15 @@ const BarChart = () => {
   }, [xAxisLabels, azureSecondaryData]);
 
   const getSessionData = async () => {
-    // const params = {
-    //   period: duration,
-    //   starttime: startDateTime,
-    //   channel: channel,
-    // };
-    // const data = await fetchData(URL_SESSIONS, params);
+    const params = {
+      period: duration,
+      starttime: startDateTime,
+      channel: channel,
+    };
+    const data = await fetchData(URL_SESSIONS, params);
     setIsLoading(false);
-    // setSessionData(data || []);
-    setSessionData(sessionDataJSON);
+    setSessionData(data || []);
+    // setSessionData(sessionDataJSON);
   };
 
   const changeStartTime = (value: string) => {
@@ -211,7 +217,7 @@ const BarChart = () => {
         >
           <CustomIcon
             alt="show-filters"
-            src="src/assets/filter.svg"
+            src={FilterIcon}
             width="16px"
             height="16px"
           />
@@ -228,7 +234,7 @@ const BarChart = () => {
               optionLabel={"label"}
               placeholder={SELECT_DURATION}
               showIcon={true}
-              iconSrc={"src/assets/hourglass.svg"}
+              iconSrc={DurationIcon}
               iconAlt={"duration-icon"}
             />
           </div>
@@ -241,7 +247,7 @@ const BarChart = () => {
               timeOnly
               iconPos={"left"}
               imgalt="time-icon"
-              imgsrc="src/assets/clock.svg"
+              imgsrc={ClockIcon}
             />
           </div>
           <div className="flex-col mr-4">
@@ -254,7 +260,7 @@ const BarChart = () => {
               dateFormat={DATE_FORMAT_3}
               iconPos={"left"}
               imgalt="date-icon"
-              imgsrc="src/assets/calendar.svg"
+              imgsrc={CalendarIcon}
             />
           </div>
           <div className="flex-col mr-4">
@@ -266,7 +272,7 @@ const BarChart = () => {
               optionLabel={"label"}
               placeholder={SELECT_CHANNEL}
               showIcon={true}
-              iconSrc={"src/assets/channel.svg"}
+              iconSrc={ChannelIcon}
               iconAlt={"channel-icon"}
             />
           </div>
@@ -283,26 +289,23 @@ const BarChart = () => {
 
       <div className="flex basis-full flex-wrap text-xl justify-start pb-4 items-baseline">
         <FilterItem
-          src="src/assets/hourglass.svg"
+          src={DurationIcon}
           value={`00:${duration.toString().padStart(2, "0")}`}
         />
         {!!startTime && (
           <FilterItem
-            src="src/assets/clock.svg"
+            src={ClockIcon}
             value={convertTo12HourFormat(startTime)}
           />
         )}
         {!!startDate && (
           <FilterItem
-            src="src/assets/calendar.svg"
+            src={CalendarIcon}
             value={formatDate(startDate, DATE_FORMAT_1)}
           />
         )}
         {!!channel && (
-          <FilterItem
-            src="src/assets/channel.svg"
-            value={showFilteredChannel()}
-          />
+          <FilterItem src={ChannelIcon} value={showFilteredChannel()} />
         )}
         <div
           onClick={resetFilters}
@@ -353,7 +356,7 @@ const BarChart = () => {
                 dateFormat={DATE_FORMAT_3}
                 iconPos={"left"}
                 imgalt="date-icon"
-                imgsrc="src/assets/calendar.svg"
+                imgsrc={CalendarIcon}
               />
             </div>
             <div className="flex-col mr-4 w-3/6">
@@ -365,7 +368,7 @@ const BarChart = () => {
                 timeOnly
                 iconPos={"left"}
                 imgalt="time-icon"
-                imgsrc="src/assets/clock.svg"
+                imgsrc={ClockIcon}
               />
             </div>
           </div>

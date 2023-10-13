@@ -1,26 +1,80 @@
+import { useEffect, useState } from "react";
 import { DCOpenOrders } from "../../@types/dcOpenOrders";
 
-const Card = ({ cardData }: { cardData: DCOpenOrders }) => {
+type CardProps = {
+  cardData: DCOpenOrders | CommerceItemData;
+  type: string;
+  key: number;
+};
+
+const Card = (props: CardProps) => {
+  const [cardTitle, setCardTitle] = useState(null);
+  const [cardSubTitle, setSubTitle] = useState(null);
+  const [cardItems, setCardItems] = useState([]);
+
+  useEffect(() => {
+    const cards = [];
+    Object.entries(props.cardData).forEach(([key, value], ind) => {
+      if (ind === 0) {
+        setCardTitle({
+          key,
+          value,
+        });
+      } else if (ind === 1) {
+        props.type === "ORDER_DETAILS_ITEM"
+          ? setSubTitle({
+              key,
+              value,
+            })
+          : cards.push({
+              key,
+              value,
+            });
+      } else {
+        cards.push({
+          key,
+          value,
+        });
+      }
+    });
+    setCardItems(cards);
+  }, []);
+
   return (
     <div className="shadow-lg border border-gray-100 w-full flex m-auto text-neutral-500 pt-4 pb-4 pr-2 rounded-lg mb-3">
-      {Object.entries(cardData).map(([key, value], ind) => {
-        return ind === 0 ? (
-          <div
-            key={ind}
-            className="w-6/12 pl-4 pr-4 text-center items-center border-r flex flex-col justify-center"
-          >
-            <div className="text-xs mb-1">{key}</div>
-            <div className="font-medium">{value}</div>
-          </div>
-        ) : (
-          <div key={ind} className="w-6/12 pl-4 flex">
+      <div className="w-3/12 pl-4 pr-4 text-center items-center border-r flex flex-col justify-center">
+        <div className="text-xs mb-1">{cardTitle?.key}</div>
+        <div className="font-medium">{cardTitle?.value}</div>
+      </div>
+      <div
+        className={`w-9/12 ${
+          props.type === "ORDER_DETAILS_ITEM" ? `flex-col` : `flex`
+        }`}
+      >
+        {cardSubTitle && (
+          <div className="w-full pl-2 pb-2 mb-2 flex border-b border-solid border-[#E0E0E0]">
             <div className="pl-2 pr-2 flex flex-col flex-1 justify-between">
-              <div className="text-xs mb-2">{key}</div>
-              <div className="text-sm font-medium">{value}</div>
+              <div className="text-xs mb-2">{cardSubTitle?.key}</div>
+              <div className="text-sm font-medium">{cardSubTitle?.value}</div>
             </div>
           </div>
-        );
-      })}
+        )}
+        <div
+          className={`pl-2 flex ${
+            props.type === "ORDER_DETAILS_ITEM" ? `flex-row-reverse` : ``
+          }`}
+        >
+          {cardItems.map((item, ind) => (
+            <div
+              key={ind}
+              className="pl-2 pr-2 flex flex-col flex-1 justify-between"
+            >
+              <div className="text-xs mb-2">{item.key}</div>
+              <div className="text-[13px] font-medium">{item.value}</div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

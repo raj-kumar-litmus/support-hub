@@ -3,6 +3,7 @@ import RightArrowIcon from "../../assets/right_arrow.svg";
 import { Button } from "primereact/button";
 import CustomImage from "./customimage";
 import CustomInputText from "./custominputtext";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   searchValue: string;
@@ -10,6 +11,13 @@ type Props = {
 };
 
 const SearchField: FC<Props> = ({ searchValue, setSearchValue }) => {
+  const navigate = useNavigate();
+
+  const searchOrder = () => {
+    console.log(`Order ID: ${searchValue}`);
+    navigate(`/orderDetails/${searchValue}`);
+  };
+
   return (
     <div className="flex sm:hidden px-6 border-slate-200  border-solid	 border-b justify-between">
       <CustomInputText
@@ -19,7 +27,11 @@ const SearchField: FC<Props> = ({ searchValue, setSearchValue }) => {
         className="w-full focus:outline-none placeholder:text-stone-500 bg-transparent placeholder:font-helvetica placeholder:font-medium !shadow-none !border-none"
         placeholder="Search Order"
       />
-      <Button text className="-ml-8 button-focus !shadow-none">
+      <Button
+        text
+        className="-ml-8 button-focus !shadow-none"
+        onClick={searchOrder}
+      >
         <CustomImage className="arrow-icon" src={RightArrowIcon} alt="Search" />
       </Button>
     </div>

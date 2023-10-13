@@ -3,6 +3,7 @@ import SearchIcon from "../../assets/search.svg";
 import { Button } from "primereact/button";
 import CustomImage from "./customimage";
 import CustomInputText from "./custominputtext";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   showSearchButton: boolean;
@@ -19,6 +20,15 @@ const SearchBar: FC<Props> = ({
   searchValue,
   setSearchValue,
 }) => {
+  const navigate = useNavigate();
+
+  const handleEnterPress = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      navigate(`/orderDetails/${searchValue}`);
+    }
+  };
+
   return (
     <div className="block">
       <CustomInputText
@@ -27,6 +37,7 @@ const SearchBar: FC<Props> = ({
         placeholder="Search Order #"
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
+        onKeyDown={(e) => handleEnterPress(e)}
       />
       {showSearchButton && (
         <Button
