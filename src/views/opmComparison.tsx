@@ -403,7 +403,7 @@ const OpmComparison: React.FC = () => {
               <div className="flex flex-col calendarInput w-[8.78vw] relative top-[1.1vh] self-center">
                 <CustomCalendar
                   title="Date 1"
-                  placeholder="dd/mm/yy"
+                  placeholder="mm/dd/yy"
                   value={startDate}
                   onChange={changeStartDate}
                   maxDate={new Date()}
@@ -424,7 +424,7 @@ const OpmComparison: React.FC = () => {
               <div className="flex flex-col calendarInput w-[8.78vw] relative top-[1.1vh] self-center">
                 <CustomCalendar
                   title="Date 2"
-                  placeholder="dd/mm/yy"
+                  placeholder="mm/dd/yy"
                   value={endDate}
                   onChange={changeEndDate}
                   maxDate={new Date()}
@@ -554,7 +554,7 @@ const OpmComparison: React.FC = () => {
                         Date 1
                       </label>
                       <CustomCalendar
-                        dateFormat="dd/mm/yy"
+                        dateFormat="mm/dd/yy"
                         onChange={(
                           e: React.ChangeEvent<CalendarChangeEvent>,
                         ) => {
@@ -576,7 +576,7 @@ const OpmComparison: React.FC = () => {
                         Date 2
                       </label>
                       <CustomCalendar
-                        dateFormat="dd/mm/yy"
+                        dateFormat="mm/dd/yy"
                         onChange={(
                           e: React.ChangeEvent<CalendarChangeEvent>,
                         ) => {

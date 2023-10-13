@@ -23,7 +23,8 @@ import useScreenSize from "../hooks/useScreenSize";
 
 import CustomDropdown from "../components/DropDown";
 import CustomInputText from "../components/InputText";
-import CustomCalendar from "../components/Calendar";
+// import CustomCalendar from "../components/Calendar";
+import CustomCalendar from "../components/common/CustomCalendar";
 import CustomButton from "../components/Button";
 import CustomModal from "../components/Modal";
 import LineChart from "../components/LineChart";
@@ -40,6 +41,9 @@ import ChannelIcon from "../assets/channel.svg";
 import PromoCodeIcon from "../assets/promocode.svg";
 import LocaleIcon from "../assets/locale.svg";
 import PaymentIcon from "../assets/payment.svg";
+import SandGlassIcon from "../assets/sandglass.svg";
+
+import { formatTime, formatDate, DATE_FORMAT_2 } from "../utils/dateTimeUtil";
 
 ChartJS.register(
   CategoryScale,
@@ -64,8 +68,18 @@ const OPM: React.FC = () => {
   const [visible, setVisible] = useState<boolean>(false);
   const [position, setPosition] = useState<ModalEnums>("center");
 
+  const [startDate, setStartDate] = useState<Date | string | null>(null);
+  const [startDateTime, setStartDateTime] = useState<Date | string>("");
+  const [startTime, setStartTime] = useState<Date | string | null>(null);
+
   const { width } = useScreenSize();
 
+  const durations = [
+    { name: "15 mins", code: "15 mins" },
+    { name: "30 mins", code: "30 mins" },
+    { name: "45 mins", code: "45 mins" },
+    { name: "60 mins", code: "60 mins" },
+  ];
   const channels = [
     { name: "All", code: "All" },
     { name: "Mobile", code: "Mobile" },
@@ -158,6 +172,26 @@ const OPM: React.FC = () => {
     }
   };
 
+  const changeStartDate = (value: string) => {
+    setStartDate(value);
+    const selectedDate = new Date(value);
+    let defaultTime: string = "";
+    defaultTime = formatTime(startTime ? startTime : new Date());
+    setStartDateTime(
+      `${formatDate(selectedDate, DATE_FORMAT_2)}T${defaultTime}`,
+    );
+  };
+
+  const changeStartTime = (value: string) => {
+    const formattedTime = formatTime(value);
+    setStartTime(value);
+    let defaultDate: string = "";
+    defaultDate = startDate
+      ? formatDate(startDate, DATE_FORMAT_2)
+      : `${new Date().toISOString().split("T")[0]}`;
+    setStartDateTime(`${defaultDate}T${formattedTime}`);
+  };
+
   const clearAllHandler = () => {
     setDate(undefined);
     setDuration(null);
@@ -241,54 +275,44 @@ const OPM: React.FC = () => {
           {width > 700 ? (
             <div className="flex gap-[1vw] ml-[1.8vw] opmFilters">
               <div className="flex flex-col">
-                <label className="text-[12px] left-[15px] relative text-[#757575] mb-[5px] font-medium mt-[14px]">
+                <label className="text-[12px] text-[#757575] mb-[5px] font-medium pt-[2.5vh] relative ml-[18px]">
                   Duration
                 </label>
-                <CustomInputText
-                  placeholder=""
-                  imageClassName="relative left-[25px]"
-                  icon={ClockIcon}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setDuration(e.target.value)
+                <CustomDropdown
+                  value={durations.find((e) => e.name === duration)}
+                  onChange={(e: DropDownOnChangeEvent) =>
+                    setDuration(e.value.name)
                   }
-                  className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px] w-[7vw]"
+                  imageClassName="relative left-[25px] z-[1]"
+                  icon={SandGlassIcon}
+                  options={durations}
+                  optionLabel="name"
+                  placeholder=""
                 />
               </div>
-              <div className="flex flex-col">
-                <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]">
-                  Date
-                </label>
+              <div className="flex flex-col w-[8.78vw] self-end">
                 <CustomCalendar
-                  value={date ? new Date(date) : undefined}
-                  dateFormat="dd/mm/yy"
-                  onChange={(e: React.ChangeEvent<CalendarChangeEvent>) => {
-                    if (
-                      e.target.value &&
-                      typeof e.target.value === "object" &&
-                      "toLocaleDateString" in e.target.value
-                    ) {
-                      setDate(e.target.value?.toLocaleDateString());
-                    }
-                  }}
+                  title="Date"
+                  placeholder="mm/dd/yy"
+                  value={startDate}
+                  onChange={changeStartDate}
+                  maxDate={new Date()}
+                  dateFormat="mm/dd/yy"
+                  iconPos={"left"}
+                  imgalt="date-icon"
+                  imgsrc="src/assets/calendar.svg"
                 />
               </div>
-              <div className="flex flex-col timeInput">
-                <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]">
-                  Time
-                </label>
+              <div className="flex flex-col timeInput w-[7.91vw] self-end">
                 <CustomCalendar
-                  value={date ? new Date(date) : undefined}
-                  dateFormat="dd/mm/yy"
-                  timeOnly={true}
-                  onChange={(e: React.ChangeEvent<CalendarChangeEvent>) => {
-                    if (
-                      e.target.value &&
-                      typeof e.target.value === "object" &&
-                      "toLocaleDateString" in e.target.value
-                    ) {
-                      setDate(e.target.value?.toLocaleDateString());
-                    }
-                  }}
+                  title="Time"
+                  placeholder="HH:MM"
+                  value={startTime}
+                  onChange={changeStartTime}
+                  timeOnly
+                  iconPos={"left"}
+                  imgalt="time-icon"
+                  imgsrc="src/assets/clock.svg"
                 />
               </div>
               <div className="flex flex-col channelInput dropdownWithIcon w-[7vw]">
@@ -489,11 +513,26 @@ const OPM: React.FC = () => {
         </>
       )}
       <div className="flex items-center gap-4 mt-[10px] overflow-scroll ml-[3vw]">
-        {date && (
+        {startDate && (
           <FilteredCard
             leftIcon={SmallCalendar}
-            content={date}
-            onClickHandler={() => setDate(undefined)}
+            content={startDate.toLocaleString("en-US", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+            })}
+            onClickHandler={() => setStartDate(null)}
+          />
+        )}
+        {startTime && (
+          <FilteredCard
+            leftIcon={HourGlassIcon}
+            content={startTime.toLocaleString("en-US", {
+              hour12: false,
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+            onClickHandler={() => setStartTime(null)}
           />
         )}
         {duration && (
