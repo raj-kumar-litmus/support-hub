@@ -141,7 +141,10 @@ button.p-button-secondary {
   @apply h-[38px]
 }
 .opmFilters .p-calendar{
-  @apply h-[38px]
+  @apply h-[38px] w-[9vw]
+}
+.opmFilters .timeInput .p-calendar{
+  @apply w-[8vw]
 }
 .p-datepicker-trigger {
   @apply !p-0 border border-solid border-[#ced4da] border-r-0
@@ -161,8 +164,11 @@ button.p-button-secondary {
 .submitBtnMobile {
   @apply text-center mt-[20px]
 }
+.submitBtnMobile button span {
+  @apply text-[14px] font-medium;
+}
 .submitBtnMobile button, .submitBtnMobile button:hover, .submitBtnMobile button:enabled:active {
-  @apply w-[120px] h-[44px] text-[13px] !bg-[#757575] border border-solid !border-transparent items-center
+  @apply w-[10vw] h-[44px] text-[13px] !bg-[#757575] border border-solid !border-transparent items-center
 }
 .submitBtnMobile button:focus {
   @apply !shadow-none
@@ -188,14 +194,20 @@ button.p-button-secondary {
 .durationInput .p-inputtext {
   @apply w-[150px] h-[37px];
 }
-.channelInput .p-dropdown {
+.durationInput span.flex {
+  @apply mt-1;
+}
+/* .channelInput .p-dropdown {
   @apply pl-[20px]
+} */
+.p-dropdown .p-dropdown-trigger {
+  @apply w-[1vw] relative right-[4px];
 }
 .calendarInput .p-calendar {
   @apply w-[135px]
 }
 .promoCodeInput .p-inputtext {
-  @apply w-[150px]
+  @apply w-full
 }
 .durationInput {
   @apply relative left-[-10px];
@@ -208,4 +220,13 @@ button.p-button-secondary {
 }
 .dropdownWithIcon img {
   @apply border border-solid border-[#ced4da] border-r-transparent rounded-l-md rounded-tr-none left-[2px] pl-[5px];
+}
+.p-input-icon-left>.p-inputtext {
+  @apply !pl-[2rem]
+}
+.p-calendar-w-btn-left .p-inputtext {
+  @apply pl-0;
+}
+.opmFilters .durationInput .p-dropdown {
+  @apply w-full pl-[20px];
 }

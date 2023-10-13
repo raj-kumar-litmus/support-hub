@@ -10,6 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 import { CalendarChangeEvent } from "primereact/calendar";
 
 import {
@@ -22,11 +23,13 @@ import useScreenSize from "../hooks/useScreenSize";
 
 import CustomDropdown from "../components/DropDown";
 import CustomInputText from "../components/InputText";
-import CustomCalendar from "../components/Calendar";
+// import CustomCalendar from "../components/Calendar";
+import CustomCalendar from "../components/common/CustomCalendar";
 import CustomButton from "../components/Button";
 import CustomModal from "../components/Modal";
 import LineChart from "../components/LineChart";
 import FilteredCard from "../components/FilteredCard";
+import CustomImage from "../components/common/customimage";
 
 import FilterIcon from "../assets/filter.svg";
 import HourGlassIcon from "../assets/hourglass.svg";
@@ -38,6 +41,9 @@ import ChannelIcon from "../assets/channel.svg";
 import PromoCodeIcon from "../assets/promocode.svg";
 import LocaleIcon from "../assets/locale.svg";
 import PaymentIcon from "../assets/payment.svg";
+import SandGlassIcon from "../assets/sandglass.svg";
+
+import { formatTime, formatDate, DATE_FORMAT_2 } from "../utils/dateTimeUtil";
 
 ChartJS.register(
   CategoryScale,
@@ -48,6 +54,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
+  ChartDataLabels,
 );
 
 const OPM: React.FC = () => {
@@ -61,8 +68,18 @@ const OPM: React.FC = () => {
   const [visible, setVisible] = useState<boolean>(false);
   const [position, setPosition] = useState<ModalEnums>("center");
 
+  const [startDate, setStartDate] = useState<Date | string | null>(null);
+  const [startDateTime, setStartDateTime] = useState<Date | string>("");
+  const [startTime, setStartTime] = useState<Date | string | null>(null);
+
   const { width } = useScreenSize();
 
+  const durations = [
+    { name: "15 mins", code: "15 mins" },
+    { name: "30 mins", code: "30 mins" },
+    { name: "45 mins", code: "45 mins" },
+    { name: "60 mins", code: "60 mins" },
+  ];
   const channels = [
     { name: "All", code: "All" },
     { name: "Mobile", code: "Mobile" },
@@ -155,6 +172,26 @@ const OPM: React.FC = () => {
     }
   };
 
+  const changeStartDate = (value: string) => {
+    setStartDate(value);
+    const selectedDate = new Date(value);
+    let defaultTime: string = "";
+    defaultTime = formatTime(startTime ? startTime : new Date());
+    setStartDateTime(
+      `${formatDate(selectedDate, DATE_FORMAT_2)}T${defaultTime}`,
+    );
+  };
+
+  const changeStartTime = (value: string) => {
+    const formattedTime = formatTime(value);
+    setStartTime(value);
+    let defaultDate: string = "";
+    defaultDate = startDate
+      ? formatDate(startDate, DATE_FORMAT_2)
+      : `${new Date().toISOString().split("T")[0]}`;
+    setStartDateTime(`${defaultDate}T${formattedTime}`);
+  };
+
   const clearAllHandler = () => {
     setDate(undefined);
     setDuration(null);
@@ -224,60 +261,62 @@ const OPM: React.FC = () => {
 
   return (
     <>
-      <div className={`flex ${width > 700 ? "gap-[65vw]" : "gap-[25vw]"}`}>
-        <p className="font-bold w-[200px] mt-[20px] ml-[20px]">OPM</p>
-        <button onClick={onFilterClickHandler}>
-          <img src={FilterIcon} />
-        </button>
+      <div className={`flex gap-[66vw]`}>
+        <p className="font-bold w-[3vw] mt-[3.9vh] ml-[3vw]">OPM</p>
+        <CustomImage
+          src={FilterIcon}
+          className="w-[2.34vw] self-end"
+          alt="Filter Icon"
+          onClick={onFilterClickHandler}
+        />
       </div>
       {showFilters && (
         <>
           {width > 700 ? (
-            <div className="flex gap-5 opmFilters ml-[20px]">
-              <div className="flex flex-col">
-                <label
-                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                  htmlFor="date"
-                >
-                  From
-                </label>
-                <CustomCalendar
-                  value={date ? new Date(date) : undefined}
-                  dateFormat="dd/mm/yy"
-                  onChange={(e: React.ChangeEvent<CalendarChangeEvent>) => {
-                    if (
-                      e.target.value &&
-                      typeof e.target.value === "object" &&
-                      "toLocaleDateString" in e.target.value
-                    ) {
-                      setDate(e.target.value?.toLocaleDateString());
-                    }
-                  }}
-                />
-              </div>
-              <div className="flex flex-col">
-                <label
-                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                  htmlFor="duration"
-                >
+            <div className="flex gap-[1vw] ml-[2.4vw] opmFilters">
+              <div className="flex flex-col self-end durationInput w-[6.6vw]">
+                <label className="text-[12px] text-[#757575] font-medium relative ml-[18px]">
                   Duration
                 </label>
-                <CustomInputText
-                  placeholder="Select a Duration"
-                  imageClassName="relative left-[25px]"
-                  icon={ClockIcon}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setDuration(e.target.value)
+                <CustomDropdown
+                  value={durations.find((e) => e.name === duration)}
+                  onChange={(e: DropDownOnChangeEvent) =>
+                    setDuration(e.value.name)
                   }
-                  className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
-                  id="promoCode"
+                  imageClassName="relative left-[25px] z-[1]"
+                  icon={SandGlassIcon}
+                  options={durations}
+                  optionLabel="name"
+                  placeholder=""
                 />
               </div>
-              <div className="flex flex-col channelInput dropdownWithIcon">
-                <label
-                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                  htmlFor="channel"
-                >
+              <div className="flex flex-col w-[8.78vw] self-end">
+                <CustomCalendar
+                  title="Date"
+                  placeholder="mm/dd/yy"
+                  value={startDate}
+                  onChange={changeStartDate}
+                  maxDate={new Date()}
+                  dateFormat="mm/dd/yy"
+                  iconPos={"left"}
+                  imgalt="date-icon"
+                  imgsrc="src/assets/calendar.svg"
+                />
+              </div>
+              <div className="flex flex-col timeInput w-[7.91vw] self-end">
+                <CustomCalendar
+                  title="Time"
+                  placeholder="HH:MM"
+                  value={startTime}
+                  onChange={changeStartTime}
+                  timeOnly
+                  iconPos={"left"}
+                  imgalt="time-icon"
+                  imgsrc="src/assets/clock.svg"
+                />
+              </div>
+              <div className="flex flex-col channelInput dropdownWithIcon w-[7vw]">
+                <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]">
                   Channel
                 </label>
                 <CustomDropdown
@@ -289,14 +328,11 @@ const OPM: React.FC = () => {
                   optionLabel="name"
                   imageClassName="relative left-[25px]"
                   icon={ChannelIcon}
-                  placeholder="Channel"
+                  placeholder=""
                 />
               </div>
-              <div className="flex flex-col localeInput dropdownWithIcon">
-                <label
-                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                  htmlFor="locale"
-                >
+              <div className="flex flex-col localeInput dropdownWithIcon w-[7vw]">
+                <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]">
                   Locale
                 </label>
                 <CustomDropdown
@@ -307,14 +343,11 @@ const OPM: React.FC = () => {
                   options={localeList}
                   icon={LocaleIcon}
                   optionLabel="name"
-                  placeholder="Select a Locale"
+                  placeholder=""
                 />
               </div>
-              <div className="flex flex-col paymentInput dropdownWithIcon">
-                <label
-                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                  htmlFor="payment"
-                >
+              <div className="flex flex-col paymentInput dropdownWithIcon w-[9vw]">
+                <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]">
                   Payment
                 </label>
                 <CustomDropdown
@@ -325,25 +358,21 @@ const OPM: React.FC = () => {
                   options={paymentList}
                   icon={PaymentIcon}
                   optionLabel="name"
-                  placeholder="Select a Payment Mode"
+                  placeholder=""
                 />
               </div>
-              <div className="flex flex-col promoCodeInput">
-                <label
-                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                  htmlFor="promoCode"
-                >
+              <div className="flex flex-col promoCodeInput w-[9vw]">
+                <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]">
                   Promocode
                 </label>
                 <CustomInputText
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setPromoCode(e.target.value)
                   }
-                  className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
-                  id="promoCode"
+                  className="relative left-[-25px] border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
                   icon={PromoCodeIcon}
-                  placeholder="Promo Code"
-                  imageClassName="relative left-[25px]"
+                  placeholder=""
+                  imageClassName="z-[1]"
                 />
               </div>
               <CustomButton
@@ -357,7 +386,7 @@ const OPM: React.FC = () => {
                   !promoCode
                 }
                 isRounded={true}
-                className="submitBtnMobile self-end"
+                className="submitBtnMobile self-end relative left-[-2vw]"
                 onClick={onSubmitHandler}
               />
             </div>
@@ -375,10 +404,7 @@ const OPM: React.FC = () => {
                 <div className="flex flex-col">
                   <div className="flex flex-row gap-5">
                     <div className="flex flex-col w-[40vw]">
-                      <label
-                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                        htmlFor="date"
-                      >
+                      <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]">
                         From
                       </label>
                       <CustomCalendar
@@ -399,14 +425,11 @@ const OPM: React.FC = () => {
                       />
                     </div>
                     <div className="flex flex-col w-[40vw]">
-                      <label
-                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                        htmlFor="duration"
-                      >
+                      <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]">
                         Duration
                       </label>
                       <CustomInputText
-                        placeholder="Select a Duration"
+                        placeholder=""
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                           setDuration(e.target.value)
                         }
@@ -417,10 +440,7 @@ const OPM: React.FC = () => {
                   </div>
                   <div className="flex flex-row gap-5">
                     <div className="flex flex-col w-[40vw]">
-                      <label
-                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                        htmlFor="channel"
-                      >
+                      <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]">
                         Channel
                       </label>
                       <CustomDropdown
@@ -435,10 +455,7 @@ const OPM: React.FC = () => {
                       />
                     </div>
                     <div className="flex flex-col w-[40vw]">
-                      <label
-                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                        htmlFor="locale"
-                      >
+                      <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]">
                         Locale
                       </label>
                       <CustomDropdown
@@ -455,10 +472,7 @@ const OPM: React.FC = () => {
                   </div>
                   <div className="flex flex-row gap-5">
                     <div className="flex flex-col w-[40vw]">
-                      <label
-                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                        htmlFor="payment"
-                      >
+                      <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]">
                         Payment
                       </label>
                       <CustomDropdown
@@ -473,10 +487,7 @@ const OPM: React.FC = () => {
                       />
                     </div>
                     <div className="flex flex-col w-[40vw]">
-                      <label
-                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                        htmlFor="promoCode"
-                      >
+                      <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]">
                         Promocode
                       </label>
                       <CustomInputText
@@ -501,12 +512,27 @@ const OPM: React.FC = () => {
           )}
         </>
       )}
-      <div className="flex items-center gap-4 mt-[10px] overflow-scroll ml-[20px]">
-        {date && (
+      <div className="flex items-center gap-4 mt-[10px] overflow-scroll ml-[3vw]">
+        {startDate && (
           <FilteredCard
             leftIcon={SmallCalendar}
-            content={date}
-            onClickHandler={() => setDate(undefined)}
+            content={startDate.toLocaleString("en-US", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+            })}
+            onClickHandler={() => setStartDate(null)}
+          />
+        )}
+        {startTime && (
+          <FilteredCard
+            leftIcon={HourGlassIcon}
+            content={startTime.toLocaleString("en-US", {
+              hour12: false,
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+            onClickHandler={() => setStartTime(null)}
           />
         )}
         {duration && (
@@ -548,7 +574,7 @@ const OPM: React.FC = () => {
           locale ||
           promoCode) && (
           <CustomButton
-            label="Clear All"
+            label="Reset"
             severity="secondary"
             className="text-[12px] text-[#575353]"
             isTextButton={true}
@@ -557,7 +583,7 @@ const OPM: React.FC = () => {
         )}
       </div>
       {data && (
-        <div className="bg-[#F4F4F4] border-0 rounded-[10px] w-[95%] ml-[20px] h-[700px]">
+        <div className="bg-[#F4F4F4] border-0 rounded-[10px] w-[71.74vw] ml-[2.85vw] h-[62.23vh] mt-[3vh]">
           <LineChart options={options} data={data} />
         </div>
       )}

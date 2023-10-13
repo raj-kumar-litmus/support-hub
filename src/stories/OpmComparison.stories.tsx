@@ -4,7 +4,7 @@ import "primereact/resources/primereact.min.css";
 import OpmComparison from "../views/opmComparison";
 
 const meta = {
-  title: "Components/OpmComparison",
+  title: "Pages/OpmComparison",
   component: OpmComparison,
   parameters: {
     layout: "centered",

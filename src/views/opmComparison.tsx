@@ -10,6 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 import { CalendarChangeEvent } from "primereact/calendar";
 
 import {
@@ -21,25 +22,27 @@ import {
 } from "../@types/supportHub";
 import useScreenSize from "../hooks/useScreenSize";
 
+import { formatTime, formatDate, DATE_FORMAT_2 } from "../utils/dateTimeUtil";
+
 import CustomDropdown from "../components/DropDown";
 import CustomInputText from "../components/InputText";
-import CustomCalendar from "../components/Calendar";
+// import CustomCalendar from "../components/Calendar";
+import CustomCalendar from "../components/common/CustomCalendar";
 import CustomButton from "../components/Button";
 import CustomModal from "../components/Modal";
 import LineChart from "../components/LineChart";
 import FilteredCard from "../components/FilteredCard";
-import Loader from "../components/Loader";
+// import Loader from "../components/Loader";
+import CustomImage from "../components/common/customimage";
+import CustomIcon from "../components/common/CustomIcon";
 
 import FilterIcon from "../assets/filter.svg";
 import HourGlassIcon from "../assets/hourglass.svg";
 import SmallCalendar from "../assets/calendar_small.svg";
 import MobileIcon from "../assets/mobile.svg";
 import DropdownMobileIcon from "../assets/dropdown_mobile.svg";
-import ClockIcon from "../assets/clock.svg";
 import ChannelIcon from "../assets/channel.svg";
-import PromoCodeIcon from "../assets/promocode.svg";
-import LocaleIcon from "../assets/locale.svg";
-import PaymentIcon from "../assets/payment.svg";
+import SandGlassIcon from "../assets/sandglass.svg";
 
 ChartJS.register(
   CategoryScale,
@@ -50,6 +53,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
+  ChartDataLabels,
 );
 
 const OpmComparison: React.FC = () => {
@@ -66,11 +70,25 @@ const OpmComparison: React.FC = () => {
   const [apiResponse, setApiResponse] = useState<null | OpmComparisonType>(
     null,
   );
-  const [showPromoCodeLoader, setshowPromoCodeLoader] = useState<boolean>(true);
-  const [showDurationLoader, setshowDurationLoader] = useState<boolean>(true);
+  // const [showPromoCodeLoader, setshowPromoCodeLoader] = useState<boolean>(true);
+  // const [showDurationLoader, setshowDurationLoader] = useState<boolean>(true);
+
+  const [startTime, setStartTime] = useState<Date | string | null>(null);
+  const [startDate, setStartDate] = useState<Date | string | null>(null);
+  const [startDateTime, setStartDateTime] = useState<Date | string>("");
+  const [endDateTime, setEndDateTime] = useState<Date | string>("");
+
+  const [endTime, setEndTime] = useState<Date | string | null>(null);
+  const [endDate, setEndDate] = useState<Date | string | null>(null);
 
   const { width } = useScreenSize();
 
+  const durations = [
+    { name: "15 mins", code: "15 mins" },
+    { name: "30 mins", code: "30 mins" },
+    { name: "45 mins", code: "45 mins" },
+    { name: "60 mins", code: "60 mins" },
+  ];
   const channels = [
     { name: "All", code: "All" },
     { name: "Mobile", code: "Mobile" },
@@ -91,30 +109,33 @@ const OpmComparison: React.FC = () => {
 
   const [data, setData] = useState<ChartData | null>(null);
 
-  // const [options, setOptions] = useState<Options>({
-  //   responsive: true,
-  //   plugins: {
-  //     legend: {
-  //       position: 'top' as const,
-  //     },
-  //     title: {
-  //       display: true,
-  //       text: 'OPM Comparison',
-  //     },
-  //   },
-  // });
+  const changeStartTime = (value: string) => {
+    const formattedTime = formatTime(value);
+    setStartTime(value);
+    let defaultDate: string = "";
+    defaultDate = startDate
+      ? formatDate(startDate, DATE_FORMAT_2)
+      : `${new Date().toISOString().split("T")[0]}`;
+    setStartDateTime(`${defaultDate}T${formattedTime}`);
+  };
 
-  // const [data, setData] = useState<OpmData>({
-  //   labels: [],
-  //   datasets: [
-  //     {
-  //       label: '',
-  //       data: [],
-  //       borderColor: 'rgb(255, 99, 132)',
-  //       backgroundColor: 'rgba(255, 99, 132, 0.5)',
-  //     },
-  //   ],
-  // });
+  const changeStartDate = (value: string) => {
+    setStartDate(value);
+    const selectedDate = new Date(value);
+    let defaultTime: string = "";
+    defaultTime = formatTime(startTime ? startTime : new Date());
+    setStartDateTime(
+      `${formatDate(selectedDate, DATE_FORMAT_2)}T${defaultTime}`,
+    );
+  };
+
+  const changeEndDate = (value: string) => {
+    setEndDate(value);
+    const selectedDate = new Date(value);
+    let defaultTime: string = "";
+    defaultTime = formatTime(endTime ? endTime : new Date());
+    setEndDateTime(`${formatDate(selectedDate, DATE_FORMAT_2)}T${defaultTime}`);
+  };
 
   useEffect(() => {
     if (apiResponse) {
@@ -278,8 +299,11 @@ const OpmComparison: React.FC = () => {
 
   const clearAllHandler = () => {
     // setDate(null);
-    setFirstDate(null);
-    setSecondDate(null);
+    // setFirstDate(null);
+    // setSecondDate(null);
+    setStartTime(null);
+    setStartDate(null);
+    setEndDate(null);
     setDuration(null);
     setChannel(null);
     setLocale(null);
@@ -328,87 +352,103 @@ const OpmComparison: React.FC = () => {
     setShowFilters(!showFilters);
   };
 
+  useEffect(() => {
+    console.log(`duration`);
+    console.log(duration);
+  }, [duration]);
+
   return (
     <>
-      <div className={`flex ${width > 700 ? "gap-[65vw]" : "gap-[25vw]"}`}>
-        <p className="font-bold w-[200px] mt-[20px] ml-[20px]">
-          OPM Comparison
-        </p>
-        <button className="self-end" onClick={onFilterClickHandler}>
-          <img src={FilterIcon} />
-        </button>
+      <div className="flex gap-[59vw] mt-[3.9vh]">
+        <p className="font-bold self-center ml-[3vw]">OPM Comparison</p>
+        <CustomImage
+          src={FilterIcon}
+          className="w-[2.34vw] self-end"
+          alt="Filter Icon"
+          onClick={onFilterClickHandler}
+        />
       </div>
       {showFilters && (
         <>
           {width > 700 ? (
-            <div className="flex gap-5 opmFilters ml-[20px]">
-              <div className="flex flex-col calendarInput">
-                <label
-                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                  htmlFor="date"
-                >
-                  Date 1
-                </label>
-                <CustomCalendar
-                  // value={date}
-                  dateFormat="dd/mm/yy"
-                  onChange={(e: React.ChangeEvent<CalendarChangeEvent>) => {
-                    if (
-                      e.target.value &&
-                      typeof e.target.value === "object" &&
-                      "toLocaleDateString" in e.target.value
-                    ) {
-                      setFirstDate(e.target.value?.toLocaleDateString());
-                    }
-                  }}
-                />
-              </div>
-              <div className="flex flex-col calendarInput">
-                <label
-                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                  htmlFor="date"
-                >
-                  Date 2
-                </label>
-                <CustomCalendar
-                  // value={date}
-                  dateFormat="dd/mm/yy"
-                  onChange={(e: React.ChangeEvent<CalendarChangeEvent>) => {
-                    if (
-                      e.target.value &&
-                      typeof e.target.value === "object" &&
-                      "toLocaleDateString" in e.target.value
-                    ) {
-                      setSecondDate(e.target.value?.toLocaleDateString());
-                    }
-                  }}
-                />
-              </div>
-              <div className="flex flex-col durationInput">
-                <label
-                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px] relative ml-[18px]"
-                  htmlFor="duration"
-                >
+            <div className="flex gap-[1.17vw] ml-[2.5vw] opmFilters">
+              <div className="flex flex-col w-[8vw] durationInput mr-[1.17vw]">
+                {/* <label className="text-[12px] text-[#757575] mb-[3px] font-medium mt-[11px] relative ml-[18px]">
                   Duration
                 </label>
                 <CustomInputText
-                  placeholder="Duration"
                   imageClassName="relative left-[25px]"
                   icon={ClockIcon}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setshowDurationLoader(true);
-                    setTimeout(() => {
-                      setDuration(e.target.value);
-                      setshowDurationLoader(false);
-                    }, 1500);
+                    setDuration(e.target.value);
                   }}
-                  className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
+                  className="border rounded-[8px] border-solid border-slate-300 border-1 w-[6.58vw] h-[3.84vh]"
                   id="duration"
+                /> */}
+                <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[2vh] relative ml-[18px]">
+                  Duration
+                </label>
+                <CustomDropdown
+                  value={durations.find((e) => e.name === duration)}
+                  onChange={(e: DropDownOnChangeEvent) =>
+                    setDuration(e.value.name)
+                  }
+                  imageClassName="relative left-[25px] z-[1]"
+                  icon={SandGlassIcon}
+                  options={durations}
+                  optionLabel="name"
+                  placeholder=""
                 />
               </div>
-              <div className="flex flex-col channelInput dropdownWithIcon">
+              <div className="flex flex-col calendarInput w-[8.78vw] relative top-[1.1vh] self-center">
+                <CustomCalendar
+                  title="Date 1"
+                  placeholder="mm/dd/yy"
+                  value={startDate}
+                  onChange={changeStartDate}
+                  maxDate={new Date()}
+                  icon={
+                    <CustomIcon
+                      alt="date-icon"
+                      src="src/assets/calendar.svg"
+                      width="16px"
+                      height="16px"
+                    />
+                  }
+                  dateFormat="dd/mm/yy"
+                  iconPos={"left"}
+                  imgalt="date-icon"
+                  imgsrc="src/assets/calendar.svg"
+                />
+              </div>
+              <div className="flex flex-col calendarInput w-[8.78vw] relative top-[1.1vh] self-center">
+                <CustomCalendar
+                  title="Date 2"
+                  placeholder="mm/dd/yy"
+                  value={endDate}
+                  onChange={changeEndDate}
+                  maxDate={new Date()}
+                  dateFormat="dd/mm/yy"
+                  iconPos={"left"}
+                  imgalt="date-icon"
+                  imgsrc="src/assets/calendar.svg"
+                />
+              </div>
+              <div className="flex flex-col calendarInput w-[7.91vw] relative top-[1.1vh] self-center">
+                <CustomCalendar
+                  title="Time"
+                  placeholder="HH:MM"
+                  value={startTime}
+                  onChange={changeStartTime}
+                  timeOnly
+                  iconPos={"left"}
+                  imgalt="time-icon"
+                  imgsrc="src/assets/clock.svg"
+                />
+              </div>
+              <div className="flex flex-col channelInput dropdownWithIcon w-[9.88vw] relative top-[1vh] self-center">
                 <label
-                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px] ml-[18px]"
+                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[1px]"
                   htmlFor="channel"
                 >
                   Channel
@@ -425,7 +465,7 @@ const OpmComparison: React.FC = () => {
                   placeholder="Channel"
                 />
               </div>
-              <div className="flex flex-col localeInput dropdownWithIcon">
+              {/* <div className="flex flex-col localeInput dropdownWithIcon">
                 <label
                   className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
                   htmlFor="locale"
@@ -460,10 +500,10 @@ const OpmComparison: React.FC = () => {
                   optionLabel="name"
                   placeholder="Payment Mode"
                 />
-              </div>
-              <div className="flex flex-col promoCodeInput">
+              </div> */}
+              {/* <div className="flex flex-col promoCodeInput">
                 <label
-                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px] ml-[18px]"
+                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[7px] ml-[18px]"
                   htmlFor="promoCode"
                 >
                   Promocode
@@ -482,14 +522,14 @@ const OpmComparison: React.FC = () => {
                   icon={PromoCodeIcon}
                   placeholder="Promo Code"
                   imageClassName="relative left-[25px]"
-                  className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
+                  className="border rounded-[8px] border-solid border-slate-300 border-1 h-[4.35vh]"
                   id="promoCode"
                 />
-              </div>
+              </div> */}
               <CustomButton
                 label="Submit"
                 isRounded={true}
-                className="submitBtnMobile self-end"
+                className="submitBtnMobile self-end ml-[11.5vw]"
                 onClick={onSubmitHandler}
               />
             </div>
@@ -514,7 +554,7 @@ const OpmComparison: React.FC = () => {
                         Date 1
                       </label>
                       <CustomCalendar
-                        dateFormat="dd/mm/yy"
+                        dateFormat="mm/dd/yy"
                         onChange={(
                           e: React.ChangeEvent<CalendarChangeEvent>,
                         ) => {
@@ -536,7 +576,7 @@ const OpmComparison: React.FC = () => {
                         Date 2
                       </label>
                       <CustomCalendar
-                        dateFormat="dd/mm/yy"
+                        dateFormat="mm/dd/yy"
                         onChange={(
                           e: React.ChangeEvent<CalendarChangeEvent>,
                         ) => {
@@ -564,7 +604,7 @@ const OpmComparison: React.FC = () => {
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                           setTimeout(() => setDuration(e.target.value), 1500)
                         }
-                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
+                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[4.35vh]"
                         id="promoCode"
                       />
                     </div>
@@ -637,7 +677,7 @@ const OpmComparison: React.FC = () => {
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                           setTimeout(() => setPromoCode(e.target.value), 1500)
                         }
-                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
+                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[4.35vh]"
                         id="promoCode"
                         placeholder="Enter Code Here"
                       />
@@ -655,27 +695,46 @@ const OpmComparison: React.FC = () => {
           )}
         </>
       )}
-      <div className="flex items-center gap-4 mt-[10px] overflow-scroll ml-[20px]">
-        {firstDate && (
+      <div className="flex items-center gap-4 mt-[10px] overflow-scroll ml-[2.85vw]">
+        {startDate && (
           <FilteredCard
             leftIcon={SmallCalendar}
-            content={firstDate}
-            onClickHandler={() => setFirstDate(null)}
+            content={startDate.toLocaleString("en-US", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+            })}
+            onClickHandler={() => setStartDate(null)}
           />
         )}
-        {secondDate && (
+        {endDate && (
           <FilteredCard
             leftIcon={SmallCalendar}
-            content={secondDate}
+            content={endDate.toLocaleString("en-US", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+            })}
             onClickHandler={() => setSecondDate(null)}
           />
         )}
-        {duration && showDurationLoader && <Loader className="h-[25px]" />}
-        {duration && !showDurationLoader && (
+        {/* {duration && showDurationLoader && <Loader className="h-[25px]" />} */}
+        {duration && (
           <FilteredCard
             leftIcon={HourGlassIcon}
             content={duration}
             onClickHandler={() => setDuration(null)}
+          />
+        )}
+        {startTime && (
+          <FilteredCard
+            leftIcon={HourGlassIcon}
+            content={startTime.toLocaleString("en-US", {
+              hour12: false,
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+            onClickHandler={() => setStartTime(null)}
           />
         )}
         {channel && (
@@ -697,8 +756,8 @@ const OpmComparison: React.FC = () => {
             onClickHandler={() => setLocale(null)}
           />
         )}
-        {promoCode && showPromoCodeLoader && <Loader className="h-[25px]" />}
-        {promoCode && !showPromoCodeLoader && (
+        {/* {promoCode && showPromoCodeLoader && <Loader className="h-[25px]" />} */}
+        {promoCode && (
           <FilteredCard
             content={promoCode}
             onClickHandler={() => setPromoCode(null)}
@@ -710,9 +769,12 @@ const OpmComparison: React.FC = () => {
           channel ||
           paymentMode ||
           locale ||
+          startDate ||
+          startTime ||
+          endDate ||
           promoCode) && (
           <CustomButton
-            label="Clear All"
+            label="Reset"
             severity="secondary"
             className="text-[12px] text-[#575353]"
             isTextButton={true}
@@ -721,7 +783,7 @@ const OpmComparison: React.FC = () => {
         )}
       </div>
       {data && (
-        <div className="bg-[#F4F4F4] border-0 rounded-[10px] w-[95%] ml-[20px] h-[700px]">
+        <div className="bg-[#F4F4F4] border-0 rounded-[10px] w-[71.74vw] ml-[2.85vw] h-[63.36vh] mt-[3vh]">
           <LineChart options={options} data={data} />
         </div>
       )}

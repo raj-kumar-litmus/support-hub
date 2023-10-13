@@ -11,7 +11,7 @@ import {
   formatDate,
   formatTime,
 } from "../../utils/dateTimeUtil";
-import Loader from "../Loader";
+// import Loader from "../Loader";
 import {
   CHANNEL,
   CHANNEL_LIST,
@@ -59,7 +59,7 @@ const BarChart = () => {
   const [duration, setDuration] = useState<number>(5);
   const [startTime, setStartTime] = useState<string>(null);
   const [startDate, setStartDate] = useState<string>(null);
-  // const [startDateTime, setStartDateTime] = useState<string>("");
+  const [startDateTime, setStartDateTime] = useState<string>("");
   const [channel, setChannel] = useState<string>("all");
   const [showFilterPopup, setShowFilterPopup] = useState<boolean>(false);
   const [submitCounter, setSubmitCounter] = useState<number>(0);
@@ -159,6 +159,11 @@ const BarChart = () => {
     const filterApplied = CHANNEL_LIST.find((item) => item.value === channel);
     return filterApplied ? filterApplied.label : "all";
   };
+
+  useEffect(() => {
+    console.log(`startTime`);
+    console.log(startTime);
+  }, [startTime]);
 
   const resetFilters = () => {
     setStartDate("");
@@ -309,15 +314,17 @@ const BarChart = () => {
 
       <div className="flex basis-full p-5 h-64 mb-4 bg-gray-100 drop-shadow-md rounded-xl">
         {isLoading ? (
-          <Loader />
+          <div>Loading</div>
         ) : (
+          // <Loader />
           <Bar options={getChartConfig(PRIMARY)} data={primaryData} />
         )}
       </div>
       <div className="flex basis-full p-5 h-64 mb-4 bg-gray-100 drop-shadow-md rounded-xl">
         {isLoading ? (
-          <Loader />
+          <div>Loading</div>
         ) : (
+          // <Loader />
           <Bar options={getChartConfig(SECONDARY)} data={secondaryData} />
         )}
       </div>
