@@ -73,13 +73,13 @@ const OpmComparison: React.FC = () => {
   // const [showPromoCodeLoader, setshowPromoCodeLoader] = useState<boolean>(true);
   // const [showDurationLoader, setshowDurationLoader] = useState<boolean>(true);
 
-  const [startTime, setStartTime] = useState<string | null>(null);
-  const [startDate, setStartDate] = useState<string | null>(null);
-  const [startDateTime, setStartDateTime] = useState<string>("");
-  const [endDateTime, setEndDateTime] = useState<string>("");
+  const [startTime, setStartTime] = useState<Date | string | null>(null);
+  const [startDate, setStartDate] = useState<Date | string | null>(null);
+  const [startDateTime, setStartDateTime] = useState<Date | string>("");
+  const [endDateTime, setEndDateTime] = useState<Date | string>("");
 
-  const [endTime, setEndTime] = useState<string | null>(null);
-  const [endDate, setEndDate] = useState<string | null>(null);
+  const [endTime, setEndTime] = useState<Date | string | null>(null);
+  const [endDate, setEndDate] = useState<Date | string | null>(null);
 
   const { width } = useScreenSize();
 
@@ -198,9 +198,6 @@ const OpmComparison: React.FC = () => {
           },
           tooltip: {
             displayColors: false,
-          },
-          datalabels: {
-            display: false,
           },
         },
       });
@@ -388,7 +385,7 @@ const OpmComparison: React.FC = () => {
                   className="border rounded-[8px] border-solid border-slate-300 border-1 w-[6.58vw] h-[3.84vh]"
                   id="duration"
                 /> */}
-                <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[11px] relative ml-[18px]">
+                <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[2vh] relative ml-[18px]">
                   Duration
                 </label>
                 <CustomDropdown

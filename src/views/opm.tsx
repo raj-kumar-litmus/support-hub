@@ -228,7 +228,7 @@ const OPM: React.FC = () => {
   return (
     <>
       <div className={`flex gap-[66vw]`}>
-        <p className="font-bold w-[3vw] mt-[20px] ml-[3vw]">OPM</p>
+        <p className="font-bold w-[3vw] mt-[3.9vh] ml-[3vw]">OPM</p>
         <CustomImage
           src={FilterIcon}
           className="w-[2.34vw] self-end"

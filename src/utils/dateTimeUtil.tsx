@@ -12,7 +12,7 @@ export const convertTo12HourFormat = (time: string): string => {
   return convertedTime;
 };
 
-export const formatTime = (inputTime: string): string => {
+export const formatTime = (inputTime: string | Date): string => {
   const dateToBeFormatted: Date = new Date(inputTime);
   const hours: string = dateToBeFormatted
     .getHours()
@@ -25,7 +25,10 @@ export const formatTime = (inputTime: string): string => {
   return `${hours}:${minutes}`;
 };
 
-export const formatDate = (inputDate: string, format: string): string => {
+export const formatDate = (
+  inputDate: string | Date,
+  format: string,
+): string => {
   const dateToBeFormatted: Date = new Date(inputDate);
   const day: string = dateToBeFormatted.getDate().toString().padStart(2, "0");
   const month: string = (dateToBeFormatted.getMonth() + 1)
