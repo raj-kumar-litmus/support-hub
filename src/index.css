@@ -194,6 +194,9 @@ button.p-button-secondary {
 .durationInput .p-inputtext {
   @apply w-[150px] h-[37px];
 }
+.durationInput span.flex {
+  @apply mt-1;
+}
 /* .channelInput .p-dropdown {
   @apply pl-[20px]
 } */

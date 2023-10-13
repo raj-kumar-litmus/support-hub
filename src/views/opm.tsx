@@ -274,8 +274,8 @@ const OPM: React.FC = () => {
         <>
           {width > 700 ? (
             <div className="flex gap-[1vw] ml-[1.8vw] opmFilters">
-              <div className="flex flex-col">
-                <label className="text-[12px] text-[#757575] mb-[5px] font-medium pt-[2.5vh] relative ml-[18px]">
+              <div className="flex flex-col self-end durationInput w-[6.6vw]">
+                <label className="text-[12px] text-[#757575] font-medium relative ml-[18px]">
                   Duration
                 </label>
                 <CustomDropdown
