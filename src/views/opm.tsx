@@ -273,7 +273,7 @@ const OPM: React.FC = () => {
       {showFilters && (
         <>
           {width > 700 ? (
-            <div className="flex gap-[1vw] ml-[1.8vw] opmFilters">
+            <div className="flex gap-[1vw] ml-[2.4vw] opmFilters">
               <div className="flex flex-col self-end durationInput w-[6.6vw]">
                 <label className="text-[12px] text-[#757575] font-medium relative ml-[18px]">
                   Duration
