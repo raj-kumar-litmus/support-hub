@@ -48,8 +48,12 @@ import Loader from "../loader";
 
 const OrderDetails: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [orderData, setOrderData] = useState<OrderData>({});
-  const [omsOrderStatus, setOmsOrderStatus] = useState<OmsOrderStatus>({});
+  const [orderData, setOrderData] = useState<OrderData | Record<string, never>>(
+    {},
+  );
+  const [omsOrderStatus, setOmsOrderStatus] = useState<
+    OmsOrderStatus | Record<string, never>
+  >({});
   const [itemTableData, setItemTableData] = useState<CommerceItemData[]>([]);
 
   const { orderId } = useParams<{ orderId: string }>();
@@ -65,7 +69,6 @@ const OrderDetails: React.FC = () => {
     //   `${URL_ORDER_DETAILS}/${orderId}`,
     //   {},
     // );
-    console.log(orderId);
     const data: OrderData = orderId === "60577546279" ? orderDataJSON : {};
 
     setOrderData(data || {});
@@ -124,8 +127,8 @@ const OrderDetails: React.FC = () => {
               className="mr-1"
               alt="promotion-icon"
               src={PromotionsIcon}
-              width="12px"
-              height="12px"
+              width="0.75rem"
+              height="0.75rem"
             />
             {PROMOTIONS}
           </span>
@@ -138,8 +141,8 @@ const OrderDetails: React.FC = () => {
                 className="ml-2 cursor-pointer"
                 alt="order-clock-icon"
                 src={OrderClockIcon}
-                width="12px"
-                height="12px"
+                width="0.75rem"
+                height="0.75rem"
                 onClick={showOrderTimeline}
               />
             </span>
@@ -203,8 +206,8 @@ const OrderDetails: React.FC = () => {
                 className="ml-2 cursor-pointer"
                 alt="oms-info-icon"
                 src={OmsInfoIcon}
-                width="12px"
-                height="12px"
+                width="0.75rem"
+                height="0.75rem"
                 onClick={showOmsStatusInfo}
               />
             </span>
@@ -214,7 +217,7 @@ const OrderDetails: React.FC = () => {
           </div>
           <div className="flex justify-between w-full rounded-b-md border-t py-1 px-3 sm:p-0 border-solid border-[#D4D4D4] bg-[#f4f4f4]">
             <span className="w-auto sm:w-1/6">{WMS}</span>
-            <span className="w-auto sm:w-5/6 font-medium">{}</span>
+            <span className="w-auto sm:w-5/6 font-medium"></span>
           </div>
         </div>
         <div className="bg-[#ffffff] sm:bg-[#f4f4f4] p-0 sm:p-4 grid gap-y-0 grid-cols-1 rounded-md">
