@@ -30,6 +30,7 @@ import {
   SESSIONS,
   SUBMIT,
   TIME,
+  TOTAL_ORDERS_PER_MIN,
   TOTAL_SESSIONS_PER_MIN_PRIMARY,
   TOTAL_SESSIONS_PER_MIN_SECONDARY,
 } from "../../constants/appConstants";
@@ -41,6 +42,9 @@ import CustomIcon from "../common/CustomIcon";
 import { ChartData, SessionData } from "../../@types/BarChart";
 import { BAR_CHART_OPTIONS } from "../../config/chartConfig";
 import sessionDataJSON from "../../sampleJSON/sessions.json";
+import { useLocation, useNavigate } from "react-router-dom";
+import CustomImage from "../common/customimage";
+import expand from "../../assets/expand.svg";
 
 const BarChart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -48,6 +52,10 @@ const BarChart = () => {
   const [xAxisLabels, setXAxisLabels] = useState<string[]>([]);
   const [azurePrimaryData, setAzurePrimaryData] = useState<number[]>([]);
   const [azureSecondaryData, setAzureSecondaryData] = useState<number[]>([]);
+  const [chartData, setChartData] = useState<ChartData>({
+    labels: [],
+    datasets: [],
+  });
   const [primaryData, setPrimaryData] = useState<ChartData>({
     labels: [],
     datasets: [],
@@ -56,6 +64,11 @@ const BarChart = () => {
     labels: [],
     datasets: [],
   });
+  const [showChart, setShowChart] = useState({
+    primary: false,
+    secondary: false,
+    both: true,
+  });
   const [duration, setDuration] = useState<number>(5);
   const [startTime, setStartTime] = useState<string>(null);
   const [startDate, setStartDate] = useState<string>(null);
@@ -63,6 +76,9 @@ const BarChart = () => {
   const [channel, setChannel] = useState<string>("all");
   const [showFilterPopup, setShowFilterPopup] = useState<boolean>(false);
   const [submitCounter, setSubmitCounter] = useState<number>(0);
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);
@@ -113,6 +129,25 @@ const BarChart = () => {
     setSecondaryData({ ...chartData });
   }, [xAxisLabels, azureSecondaryData]);
 
+  useEffect(() => {
+    const chartData: ChartData = {
+      labels: xAxisLabels,
+      datasets: [
+        {
+          label: "Primary",
+          data: azurePrimaryData,
+          backgroundColor: "#757575",
+        },
+        {
+          label: "Secondary",
+          data: azureSecondaryData,
+          backgroundColor: "#BABABA",
+        },
+      ],
+    };
+    setChartData({ ...chartData });
+  }, [primaryData, secondaryData]);
+
   const getSessionData = async () => {
     // const params = {
     //   period: duration,
@@ -141,7 +176,7 @@ const BarChart = () => {
     let defaultTime: string = "";
     defaultTime = formatTime(startTime ? startTime : new Date());
     setStartDateTime(
-      `${formatDate(selectedDate, DATE_FORMAT_2)}T${defaultTime}`,
+      `${formatDate(selectedDate, DATE_FORMAT_2)}T${defaultTime}`
     );
   };
 
@@ -150,8 +185,14 @@ const BarChart = () => {
     chartOptions.plugins.title.text =
       type === PRIMARY
         ? `${TOTAL_SESSIONS_PER_MIN_PRIMARY}`
-        : `${TOTAL_SESSIONS_PER_MIN_SECONDARY}`;
+        : type === SECONDARY
+        ? `${TOTAL_SESSIONS_PER_MIN_SECONDARY}`
+        : `${TOTAL_ORDERS_PER_MIN}`;
     chartOptions.plugins.datalabels.rotation = duration > 15 ? 270 : 0;
+    if (type === "both") {
+      chartOptions.plugins.legend.display = true;
+      chartOptions.plugins.legend.position = "bottom";
+    }
     return chartOptions;
   };
 
@@ -196,198 +237,242 @@ const BarChart = () => {
     );
   };
 
+  const handleExpandClick = () => {
+    navigate("/sessions");
+  };
+
   return (
     <div id="bar-chart" className="m-0 p-5">
       <div className="flex basis-full justify-between pb-4 items-baseline">
         <div className="text-base text-gray-600 font-bold">{SESSIONS}</div>
-        <div
-          onClick={() => setShowFilterPopup(true)}
-          className="flex sm:hidden rounded-full border border-solid border-slate-300 p-2"
-        >
-          <CustomIcon
-            alt="show-filters"
-            src="src/assets/filter.svg"
-            width="16px"
-            height="16px"
-          />
-        </div>
-      </div>
-      <div className="basis-full justify-between pb-4 items-center hidden sm:flex">
-        <div className="flex justify-start pb-4 items-baseline">
-          <div className="flex-col mr-4">
-            <CustomDropdown
-              title={DURATION}
-              value={duration}
-              onChange={setDuration}
-              options={DURATION_LIST}
-              optionLabel={"label"}
-              placeholder={SELECT_DURATION}
-              showIcon={true}
-              iconSrc={"src/assets/hourglass.svg"}
-              iconAlt={"duration-icon"}
+        {location?.pathname?.includes("home") ? (
+          <div>
+            {/* <button onClick={(e) => handleSwitchCharts(e)}>Primary</button>
+        <button onClick={(e) => handleSwitchCharts(e)}>Secondary</button>
+        <button onClick={(e) => handleSwitchCharts(e)}>Both</button> */}
+            <button
+              className="rounded-full bg-[#E9E8E8] p-3"
+              onClick={handleExpandClick}
+            >
+              <CustomImage src={expand} />
+            </button>
+          </div>
+        ) : location?.pathname?.includes("sessions") ? (
+          <div
+            onClick={() => setShowFilterPopup(true)}
+            className="flex sm:hidden rounded-full border border-solid border-slate-300 p-2"
+          >
+            <CustomIcon
+              alt="show-filters"
+              src="src/assets/filter.svg"
+              width="16px"
+              height="16px"
             />
           </div>
-          <div className="flex-col mr-4">
-            <CustomCalendar
-              title={TIME}
-              placeholder={HH_MM}
-              value={startTime}
-              onChange={changeStartTime}
-              timeOnly
-              iconPos={"left"}
-              imgalt="time-icon"
-              imgsrc="src/assets/clock.svg"
+        ) : null}
+      </div>
+      {location?.pathname?.includes("home") ? (
+        <>
+          {showChart.both && (
+            <Bar
+              className="sessions"
+              options={getChartConfig("both")}
+              data={chartData}
             />
-          </div>
-          <div className="flex-col mr-4">
-            <CustomCalendar
-              title={DATE}
-              placeholder={DD_MM_YYYY}
-              value={startDate}
-              onChange={changeStartDate}
-              maxDate={new Date()}
-              dateFormat={DATE_FORMAT_3}
-              iconPos={"left"}
-              imgalt="date-icon"
-              imgsrc="src/assets/calendar.svg"
+          )}
+          {showChart.primary && (
+            <Bar
+              className="sessions"
+              options={getChartConfig(PRIMARY)}
+              data={primaryData}
             />
-          </div>
-          <div className="flex-col mr-4">
-            <CustomDropdown
-              title={CHANNEL}
-              value={channel}
-              onChange={setChannel}
-              options={CHANNEL_LIST}
-              optionLabel={"label"}
-              placeholder={SELECT_CHANNEL}
-              showIcon={true}
-              iconSrc={"src/assets/channel.svg"}
-              iconAlt={"channel-icon"}
+          )}
+          {showChart.secondary && (
+            <Bar
+              className="sessions"
+              options={getChartConfig(SECONDARY)}
+              data={secondaryData}
             />
-          </div>
-        </div>
-        <div className="">
-          <Button
-            label={SUBMIT}
-            id="page-btn-submit"
-            className="p-button-rounded"
-            onClick={incrementCounter}
-          />
-        </div>
-      </div>
-
-      <div className="flex basis-full flex-wrap text-xl justify-start pb-4 items-baseline">
-        <FilterItem
-          src="src/assets/hourglass.svg"
-          value={`00:${duration.toString().padStart(2, "0")}`}
-        />
-        {!!startTime && (
-          <FilterItem
-            src="src/assets/clock.svg"
-            value={convertTo12HourFormat(startTime)}
-          />
-        )}
-        {!!startDate && (
-          <FilterItem
-            src="src/assets/calendar.svg"
-            value={formatDate(startDate, DATE_FORMAT_1)}
-          />
-        )}
-        {!!channel && (
-          <FilterItem
-            src="src/assets/channel.svg"
-            value={showFilteredChannel()}
-          />
-        )}
-        <div
-          onClick={resetFilters}
-          className="text-gray-500 font-normal text-sm cursor-pointer font-semibold"
-        >
-          {RESET}
-        </div>
-      </div>
-
-      <div className="flex basis-full p-5 h-64 mb-4 bg-gray-100 drop-shadow-md rounded-xl">
-        {isLoading ? (
-          <Loader />
-        ) : (
-          <Bar options={getChartConfig(PRIMARY)} data={primaryData} />
-        )}
-      </div>
-      <div className="flex basis-full p-5 h-64 mb-4 bg-gray-100 drop-shadow-md rounded-xl">
-        {isLoading ? (
-          <Loader />
-        ) : (
-          <Bar options={getChartConfig(SECONDARY)} data={secondaryData} />
-        )}
-      </div>
-
-      <Dialog
-        id="modal-section"
-        header={FILTERS}
-        visible={showFilterPopup}
-        footer={renderFooter()}
-        onHide={() => onHide(false)}
-        blockScroll={true}
-        position="bottom"
-        draggable={false}
-        resizable={false}
-        style={{ width: "100vw", margin: 0 }}
-      >
-        <div className="filter-popup-content">
-          <div className="flex mb-8">
-            <div className="flex-col mr-4 w-3/6">
-              <CustomCalendar
-                title={FROM}
-                placeholder={DD_MM_YYYY}
-                value={startDate}
-                onChange={changeStartDate}
-                maxDate={new Date()}
-                dateFormat={DATE_FORMAT_3}
-                iconPos={"left"}
-                imgalt="date-icon"
-                imgsrc="src/assets/calendar.svg"
-              />
+          )}
+        </>
+      ) : null}
+      {location?.pathname?.includes("sessions") && (
+        <>
+          <div className="basis-full justify-between pb-4 items-center hidden sm:flex">
+            <div className="flex justify-start pb-4 items-baseline">
+              <div className="flex-col mr-4">
+                <CustomDropdown
+                  title={DURATION}
+                  value={duration}
+                  onChange={setDuration}
+                  options={DURATION_LIST}
+                  optionLabel={"label"}
+                  placeholder={SELECT_DURATION}
+                  showIcon={true}
+                  iconSrc={"src/assets/hourglass.svg"}
+                  iconAlt={"duration-icon"}
+                />
+              </div>
+              <div className="flex-col mr-4">
+                <CustomCalendar
+                  title={TIME}
+                  placeholder={HH_MM}
+                  value={startTime}
+                  onChange={changeStartTime}
+                  timeOnly
+                  iconPos={"left"}
+                  imgalt="time-icon"
+                  imgsrc="src/assets/clock.svg"
+                />
+              </div>
+              <div className="flex-col mr-4">
+                <CustomCalendar
+                  title={DATE}
+                  placeholder={DD_MM_YYYY}
+                  value={startDate}
+                  onChange={changeStartDate}
+                  maxDate={new Date()}
+                  dateFormat={DATE_FORMAT_3}
+                  iconPos={"left"}
+                  imgalt="date-icon"
+                  imgsrc="src/assets/calendar.svg"
+                />
+              </div>
+              <div className="flex-col mr-4">
+                <CustomDropdown
+                  title={CHANNEL}
+                  value={channel}
+                  onChange={setChannel}
+                  options={CHANNEL_LIST}
+                  optionLabel={"label"}
+                  placeholder={SELECT_CHANNEL}
+                  showIcon={true}
+                  iconSrc={"src/assets/channel.svg"}
+                  iconAlt={"channel-icon"}
+                />
+              </div>
             </div>
-            <div className="flex-col mr-4 w-3/6">
-              <CustomCalendar
-                title={TIME}
-                placeholder={HH_MM}
-                value={startTime}
-                onChange={changeStartTime}
-                timeOnly
-                iconPos={"left"}
-                imgalt="time-icon"
-                imgsrc="src/assets/clock.svg"
+            <div className="">
+              <Button
+                label={SUBMIT}
+                id="page-btn-submit"
+                className="p-button-rounded"
+                onClick={incrementCounter}
               />
             </div>
           </div>
-          <div className="flex mb-8">
-            <div className="flex-col mr-4 w-3/6">
-              <CustomDropdown
-                title={DURATION}
-                value={duration}
-                onChange={setDuration}
-                options={DURATION_LIST}
-                optionLabel={"label"}
-                placeholder={SELECT_DURATION}
-                showIcon={false}
+          <div className="flex basis-full flex-wrap text-xl justify-start pb-4 items-baseline">
+            <FilterItem
+              src="src/assets/hourglass.svg"
+              value={`00:${duration.toString().padStart(2, "0")}`}
+            />
+            {!!startTime && (
+              <FilterItem
+                src="src/assets/clock.svg"
+                value={convertTo12HourFormat(startTime)}
               />
-            </div>
-            <div className="flex-col mr-4 w-3/6">
-              <CustomDropdown
-                title={CHANNEL}
-                value={channel}
-                onChange={setChannel}
-                options={CHANNEL_LIST}
-                optionLabel={"label"}
-                placeholder={SELECT_CHANNEL}
-                showIcon={false}
+            )}
+            {!!startDate && (
+              <FilterItem
+                src="src/assets/calendar.svg"
+                value={formatDate(startDate, DATE_FORMAT_1)}
               />
+            )}
+            {!!channel && (
+              <FilterItem
+                src="src/assets/channel.svg"
+                value={showFilteredChannel()}
+              />
+            )}
+            <div
+              onClick={resetFilters}
+              className="text-gray-500 font-normal text-sm cursor-pointer font-semibold"
+            >
+              {RESET}
             </div>
           </div>
-        </div>
-      </Dialog>
+          <div className="flex basis-full p-5 h-64 mb-4 bg-gray-100 drop-shadow-md rounded-xl">
+            {isLoading ? (
+              <Loader />
+            ) : (
+              <Bar options={getChartConfig(PRIMARY)} data={primaryData} />
+            )}
+          </div>
+          <div className="flex basis-full p-5 h-64 mb-4 bg-gray-100 drop-shadow-md rounded-xl">
+            {isLoading ? (
+              <Loader />
+            ) : (
+              <Bar options={getChartConfig(SECONDARY)} data={secondaryData} />
+            )}
+          </div>
+          <Dialog
+            id="modal-section"
+            header={FILTERS}
+            visible={showFilterPopup}
+            footer={renderFooter()}
+            onHide={() => onHide(false)}
+            blockScroll={true}
+            position="bottom"
+            draggable={false}
+            resizable={false}
+            style={{ width: "100vw", margin: 0 }}
+          >
+            <div className="filter-popup-content">
+              <div className="flex mb-8">
+                <div className="flex-col mr-4 w-3/6">
+                  <CustomCalendar
+                    title={FROM}
+                    placeholder={DD_MM_YYYY}
+                    value={startDate}
+                    onChange={changeStartDate}
+                    maxDate={new Date()}
+                    dateFormat={DATE_FORMAT_3}
+                    iconPos={"left"}
+                    imgalt="date-icon"
+                    imgsrc="src/assets/calendar.svg"
+                  />
+                </div>
+                <div className="flex-col mr-4 w-3/6">
+                  <CustomCalendar
+                    title={TIME}
+                    placeholder={HH_MM}
+                    value={startTime}
+                    onChange={changeStartTime}
+                    timeOnly
+                    iconPos={"left"}
+                    imgalt="time-icon"
+                    imgsrc="src/assets/clock.svg"
+                  />
+                </div>
+              </div>
+              <div className="flex mb-8">
+                <div className="flex-col mr-4 w-3/6">
+                  <CustomDropdown
+                    title={DURATION}
+                    value={duration}
+                    onChange={setDuration}
+                    options={DURATION_LIST}
+                    optionLabel={"label"}
+                    placeholder={SELECT_DURATION}
+                    showIcon={false}
+                  />
+                </div>
+                <div className="flex-col mr-4 w-3/6">
+                  <CustomDropdown
+                    title={CHANNEL}
+                    value={channel}
+                    onChange={setChannel}
+                    options={CHANNEL_LIST}
+                    optionLabel={"label"}
+                    placeholder={SELECT_CHANNEL}
+                    showIcon={false}
+                  />
+                </div>
+              </div>
+            </div>
+          </Dialog>
+        </>
+      )}
     </div>
   );
 };

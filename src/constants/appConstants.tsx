@@ -16,6 +16,8 @@ export const FROM: string = "From";
 export const RESET: string = "Reset";
 
 //Graph Titles
+export const TOTAL_SESSIONS_PER_MIN: string = "Total Session per minute";
+export const TOTAL_ORDERS_PER_MIN: string = "Total Orders per minute";
 export const TOTAL_SESSIONS_PER_MIN_PRIMARY: string =
   "Azure Primary (Sessions/Min)";
 export const TOTAL_SESSIONS_PER_MIN_SECONDARY: string =

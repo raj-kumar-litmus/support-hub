@@ -3,13 +3,12 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "primereact/resources/primereact.min.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
+import App from "./App.tsx";
 import DcOpenOrders from "./components/DcOpenOrders.tsx";
 import BarChart from "./components/charts/BarChart.tsx";
-import App from "./App.tsx";
 import Chart from "./components/ChartIndex.tsx";
-import "primereact/resources/themes/lara-light-indigo/theme.css";
-import "primereact/resources/primereact.min.css";
 import "./index.css";
+import HomePage from "./components/homePage.tsx";
 
 const Loader = lazy(() => import("./components/Loader.tsx"));
 
@@ -18,14 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <Router>
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route
-            path="/home"
-            element={
-              <App
-                appContent={<div className="p-4">Sephora support hub</div>}
-              />
-            }
-          />
+          <Route path="/home" element={<App appContent={<HomePage />} />} />
           <Route
             path="/dc-open-orders"
             element={<App appContent={<DcOpenOrders />} />}

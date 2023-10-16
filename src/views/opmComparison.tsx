@@ -40,6 +40,9 @@ import ChannelIcon from "../assets/channel.svg";
 import PromoCodeIcon from "../assets/promocode.svg";
 import LocaleIcon from "../assets/locale.svg";
 import PaymentIcon from "../assets/payment.svg";
+import expand from "../assets/expand.svg";
+import CustomImage from "../components/common/customimage";
+import { useNavigate } from "react-router-dom";
 
 ChartJS.register(
   CategoryScale,
@@ -49,7 +52,7 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend,
+  Legend
 );
 
 const OpmComparison: React.FC = () => {
@@ -64,7 +67,7 @@ const OpmComparison: React.FC = () => {
   const [visible, setVisible] = useState<boolean>(false);
   const [position, setPosition] = useState<ModalEnums>("center");
   const [apiResponse, setApiResponse] = useState<null | OpmComparisonType>(
-    null,
+    null
   );
   const [showPromoCodeLoader, setshowPromoCodeLoader] = useState<boolean>(true);
   const [showDurationLoader, setshowDurationLoader] = useState<boolean>(true);
@@ -84,12 +87,14 @@ const OpmComparison: React.FC = () => {
     { name: "PayPal", code: "PayPal" },
   ];
   const [url, setUrl] = useState<string>(
-    `http://azruvuprep01:8080/supportdashboard/compareOPM?period=${duration}&startTimeOne=${firstDate}&startDateTwo=${secondDate}&channel=${channel}&promocode=${promoCode}&paymentType=${paymentMode}&country=${locale}`,
+    `http://azruvuprep01:8080/supportdashboard/compareOPM?period=${duration}&startTimeOne=${firstDate}&startDateTwo=${secondDate}&channel=${channel}&promocode=${promoCode}&paymentType=${paymentMode}&country=${locale}`
   );
 
   const [options, setOptions] = useState<null | ChartOptions>(null);
 
   const [data, setData] = useState<ChartData | null>(null);
+
+  const navigate = useNavigate();
 
   // const [options, setOptions] = useState<Options>({
   //   responsive: true,
@@ -319,7 +324,7 @@ const OpmComparison: React.FC = () => {
 
   const onSubmitHandler = () => {
     setUrl(
-      `http://azruvuprep01:8080/supportdashboard/compareOPM?period=${duration}&startTimeOne=${firstDate}&startDateTwo=${secondDate}&channel=${channel}&promocode=${promoCode}&paymentType=${paymentMode}&country=${locale}`,
+      `http://azruvuprep01:8080/supportdashboard/compareOPM?period=${duration}&startTimeOne=${firstDate}&startDateTwo=${secondDate}&channel=${channel}&promocode=${promoCode}&paymentType=${paymentMode}&country=${locale}`
     );
   };
 
@@ -328,402 +333,448 @@ const OpmComparison: React.FC = () => {
     setShowFilters(!showFilters);
   };
 
+  const handleOPMCompExpandClick = () => {
+    navigate("/opmcomparison");
+  };
+
   return (
     <>
-      <div className={`flex ${width > 700 ? "gap-[65vw]" : "gap-[25vw]"}`}>
-        <p className="font-bold w-[200px] mt-[20px] ml-[20px]">
-          OPM Comparison
-        </p>
-        <button className="self-end" onClick={onFilterClickHandler}>
-          <img src={FilterIcon} />
-        </button>
-      </div>
-      {showFilters && (
-        <>
-          {width > 700 ? (
-            <div className="flex gap-5 opmFilters ml-[20px]">
-              <div className="flex flex-col calendarInput">
-                <label
-                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                  htmlFor="date"
-                >
-                  Date 1
-                </label>
-                <CustomCalendar
-                  // value={date}
-                  dateFormat="dd/mm/yy"
-                  onChange={(e: React.ChangeEvent<CalendarChangeEvent>) => {
-                    if (
-                      e.target.value &&
-                      typeof e.target.value === "object" &&
-                      "toLocaleDateString" in e.target.value
-                    ) {
-                      setFirstDate(e.target.value?.toLocaleDateString());
-                    }
-                  }}
-                />
-              </div>
-              <div className="flex flex-col calendarInput">
-                <label
-                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                  htmlFor="date"
-                >
-                  Date 2
-                </label>
-                <CustomCalendar
-                  // value={date}
-                  dateFormat="dd/mm/yy"
-                  onChange={(e: React.ChangeEvent<CalendarChangeEvent>) => {
-                    if (
-                      e.target.value &&
-                      typeof e.target.value === "object" &&
-                      "toLocaleDateString" in e.target.value
-                    ) {
-                      setSecondDate(e.target.value?.toLocaleDateString());
-                    }
-                  }}
-                />
-              </div>
-              <div className="flex flex-col durationInput">
-                <label
-                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px] relative ml-[18px]"
-                  htmlFor="duration"
-                >
-                  Duration
-                </label>
-                <CustomInputText
-                  placeholder="Duration"
-                  imageClassName="relative left-[25px]"
-                  icon={ClockIcon}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setshowDurationLoader(true);
-                    setTimeout(() => {
-                      setDuration(e.target.value);
-                      setshowDurationLoader(false);
-                    }, 1500);
-                  }}
-                  className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
-                  id="duration"
-                />
-              </div>
-              <div className="flex flex-col channelInput dropdownWithIcon">
-                <label
-                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px] ml-[18px]"
-                  htmlFor="channel"
-                >
-                  Channel
-                </label>
-                <CustomDropdown
-                  value={channels.find((e) => e.name === channel)}
-                  onChange={(e: DropDownOnChangeEvent) =>
-                    setChannel(e.value.name)
-                  }
-                  imageClassName="relative left-[25px]"
-                  icon={ChannelIcon}
-                  options={channels}
-                  optionLabel="name"
-                  placeholder="Channel"
-                />
-              </div>
-              <div className="flex flex-col localeInput dropdownWithIcon">
-                <label
-                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                  htmlFor="locale"
-                >
-                  Locale
-                </label>
-                <CustomDropdown
-                  value={localeList.find((e) => e.name === locale)}
-                  onChange={(e: DropDownOnChangeEvent) =>
-                    setLocale(e.value.name)
-                  }
-                  options={localeList}
-                  icon={LocaleIcon}
-                  optionLabel="name"
-                  placeholder="Locale"
-                />
-              </div>
-              <div className="flex flex-col paymentInput dropdownWithIcon">
-                <label
-                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                  htmlFor="payment"
-                >
-                  Payment
-                </label>
-                <CustomDropdown
-                  value={paymentList.find((e) => e.name === paymentMode)}
-                  onChange={(e: DropDownOnChangeEvent) =>
-                    setPaymentMode(e.value.name)
-                  }
-                  options={paymentList}
-                  icon={PaymentIcon}
-                  optionLabel="name"
-                  placeholder="Payment Mode"
-                />
-              </div>
-              <div className="flex flex-col promoCodeInput">
-                <label
-                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px] ml-[18px]"
-                  htmlFor="promoCode"
-                >
-                  Promocode
-                </label>
-                <CustomInputText
-                  // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  //   setTimeout(() => setPromoCode(e.target.value), 1500)
-                  // }
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setshowPromoCodeLoader(true);
-                    setTimeout(() => {
-                      setPromoCode(e.target.value);
-                      setshowPromoCodeLoader(false);
-                    }, 1500);
-                  }}
-                  icon={PromoCodeIcon}
-                  placeholder="Promo Code"
-                  imageClassName="relative left-[25px]"
-                  className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
-                  id="promoCode"
-                />
-              </div>
-              <CustomButton
-                label="Submit"
-                isRounded={true}
-                className="submitBtnMobile self-end"
-                onClick={onSubmitHandler}
-              />
-            </div>
-          ) : (
-            <>
-              <CustomModal
-                header="Filters"
-                visible={visible}
-                position={position}
-                className="filtersModal opmFilters h-[500px] left-[-4vw] w-[100vw]"
-                onHide={onModalCloseHandler}
-                isDraggable={false}
-                isResizable={false}
+      {location.pathname.includes("home") && data && (
+        <div className="w-full sm:w-1/2 bg-[#F4F4F4] p-4 rounded-lg">
+          <div className="flex justify-between mb-3 items-baseline">
+            <span className="text-[#757575] font-bold text-lg font-helvetica">
+              OPM Comparison
+            </span>
+            <div>
+              <button
+                className="rounded-full bg-[#E9E8E8] p-3"
+                onClick={handleOPMCompExpandClick}
               >
-                <div className="flex flex-col">
-                  <div className="flex flex-row gap-5">
-                    <div className="flex flex-col">
-                      <label
-                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                        htmlFor="date"
-                      >
-                        Date 1
-                      </label>
-                      <CustomCalendar
-                        dateFormat="dd/mm/yy"
-                        onChange={(
-                          e: React.ChangeEvent<CalendarChangeEvent>,
-                        ) => {
-                          if (
-                            e.target.value &&
-                            typeof e.target.value === "object" &&
-                            "toLocaleDateString" in e.target.value
-                          ) {
-                            setFirstDate(e.target.value?.toLocaleDateString());
-                          }
-                        }}
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <label
-                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                        htmlFor="date"
-                      >
-                        Date 2
-                      </label>
-                      <CustomCalendar
-                        dateFormat="dd/mm/yy"
-                        onChange={(
-                          e: React.ChangeEvent<CalendarChangeEvent>,
-                        ) => {
-                          if (
-                            e.target.value &&
-                            typeof e.target.value === "object" &&
-                            "toLocaleDateString" in e.target.value
-                          ) {
-                            setSecondDate(e.target.value?.toLocaleDateString());
-                          }
-                        }}
-                      />
-                    </div>
+                <CustomImage src={expand} />
+              </button>
+            </div>
+          </div>
+          <LineChart options={options} data={data} />
+
+          {/* <Line options={HOME_OPM_COMP_CHART} data={data} /> */}
+        </div>
+      )}
+      {location.pathname.includes("opmcomparison") && (
+        <>
+          <div className={`flex ${width > 700 ? "gap-[65vw]" : "gap-[25vw]"}`}>
+            <p className="font-bold w-[200px] mt-[20px] ml-[20px]">
+              OPM Comparison
+            </p>
+            <button className="self-end" onClick={onFilterClickHandler}>
+              <img src={FilterIcon} />
+            </button>
+          </div>
+          {showFilters && (
+            <>
+              {width > 700 ? (
+                <div className="flex gap-5 opmFilters ml-[20px]">
+                  <div className="flex flex-col calendarInput">
+                    <label
+                      className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
+                      htmlFor="date"
+                    >
+                      Date 1
+                    </label>
+                    <CustomCalendar
+                      // value={date}
+                      dateFormat="dd/mm/yy"
+                      onChange={(e: React.ChangeEvent<CalendarChangeEvent>) => {
+                        if (
+                          e.target.value &&
+                          typeof e.target.value === "object" &&
+                          "toLocaleDateString" in e.target.value
+                        ) {
+                          setFirstDate(e.target.value?.toLocaleDateString());
+                        }
+                      }}
+                    />
                   </div>
-                  <div className="flex flex-row gap-5">
-                    <div className="flex flex-col w-[40vw]">
-                      <label
-                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                        htmlFor="duration"
-                      >
-                        Duration
-                      </label>
-                      <CustomInputText
-                        placeholder="Duration"
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                          setTimeout(() => setDuration(e.target.value), 1500)
+                  <div className="flex flex-col calendarInput">
+                    <label
+                      className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
+                      htmlFor="date"
+                    >
+                      Date 2
+                    </label>
+                    <CustomCalendar
+                      // value={date}
+                      dateFormat="dd/mm/yy"
+                      onChange={(e: React.ChangeEvent<CalendarChangeEvent>) => {
+                        if (
+                          e.target.value &&
+                          typeof e.target.value === "object" &&
+                          "toLocaleDateString" in e.target.value
+                        ) {
+                          setSecondDate(e.target.value?.toLocaleDateString());
                         }
-                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
-                        id="promoCode"
-                      />
-                    </div>
-                    <div className="flex flex-col w-[40vw]">
-                      <label
-                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                        htmlFor="channel"
-                      >
-                        Channel
-                      </label>
-                      <CustomDropdown
-                        dropdownIcon={<img src={DropdownMobileIcon} />}
-                        value={channels.find((e) => e.name === channel)}
-                        onChange={(e: DropDownOnChangeEvent) =>
-                          setChannel(e.value.name)
-                        }
-                        options={channels}
-                        optionLabel="name"
-                        placeholder="All"
-                      />
-                    </div>
+                      }}
+                    />
                   </div>
-                  <div className="flex flex-row gap-5">
-                    <div className="flex flex-col w-[40vw]">
-                      <label
-                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                        htmlFor="locale"
-                      >
-                        Locale
-                      </label>
-                      <CustomDropdown
-                        dropdownIcon={<img src={DropdownMobileIcon} />}
-                        value={localeList.find((e) => e.name === locale)}
-                        onChange={(e: DropDownOnChangeEvent) =>
-                          setLocale(e.value.name)
-                        }
-                        options={localeList}
-                        optionLabel="name"
-                        placeholder="US"
-                      />
-                    </div>
-                    <div className="flex flex-col w-[40vw]">
-                      <label
-                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                        htmlFor="payment"
-                      >
-                        Payment
-                      </label>
-                      <CustomDropdown
-                        dropdownIcon={<img src={DropdownMobileIcon} />}
-                        value={paymentList.find((e) => e.name === paymentMode)}
-                        onChange={(e: DropDownOnChangeEvent) =>
-                          setPaymentMode(e.value.name)
-                        }
-                        options={paymentList}
-                        optionLabel="name"
-                        placeholder="Klarna"
-                      />
-                    </div>
+                  <div className="flex flex-col durationInput">
+                    <label
+                      className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px] relative ml-[18px]"
+                      htmlFor="duration"
+                    >
+                      Duration
+                    </label>
+                    <CustomInputText
+                      placeholder="Duration"
+                      imageClassName="relative left-[25px]"
+                      icon={ClockIcon}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        setshowDurationLoader(true);
+                        setTimeout(() => {
+                          setDuration(e.target.value);
+                          setshowDurationLoader(false);
+                        }, 1500);
+                      }}
+                      className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
+                      id="duration"
+                    />
                   </div>
-                  <div className="flex flex-row gap-5">
-                    <div className="flex flex-col">
-                      <label
-                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                        htmlFor="promoCode"
-                      >
-                        Promocode
-                      </label>
-                      <CustomInputText
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                          setTimeout(() => setPromoCode(e.target.value), 1500)
-                        }
-                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
-                        id="promoCode"
-                        placeholder="Enter Code Here"
-                      />
-                    </div>
+                  <div className="flex flex-col channelInput dropdownWithIcon">
+                    <label
+                      className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px] ml-[18px]"
+                      htmlFor="channel"
+                    >
+                      Channel
+                    </label>
+                    <CustomDropdown
+                      value={channels.find((e) => e.name === channel)}
+                      onChange={(e: DropDownOnChangeEvent) =>
+                        setChannel(e.value.name)
+                      }
+                      imageClassName="relative left-[25px]"
+                      icon={ChannelIcon}
+                      options={channels}
+                      optionLabel="name"
+                      placeholder="Channel"
+                    />
+                  </div>
+                  <div className="flex flex-col localeInput dropdownWithIcon">
+                    <label
+                      className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
+                      htmlFor="locale"
+                    >
+                      Locale
+                    </label>
+                    <CustomDropdown
+                      value={localeList.find((e) => e.name === locale)}
+                      onChange={(e: DropDownOnChangeEvent) =>
+                        setLocale(e.value.name)
+                      }
+                      options={localeList}
+                      icon={LocaleIcon}
+                      optionLabel="name"
+                      placeholder="Locale"
+                    />
+                  </div>
+                  <div className="flex flex-col paymentInput dropdownWithIcon">
+                    <label
+                      className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
+                      htmlFor="payment"
+                    >
+                      Payment
+                    </label>
+                    <CustomDropdown
+                      value={paymentList.find((e) => e.name === paymentMode)}
+                      onChange={(e: DropDownOnChangeEvent) =>
+                        setPaymentMode(e.value.name)
+                      }
+                      options={paymentList}
+                      icon={PaymentIcon}
+                      optionLabel="name"
+                      placeholder="Payment Mode"
+                    />
+                  </div>
+                  <div className="flex flex-col promoCodeInput">
+                    <label
+                      className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px] ml-[18px]"
+                      htmlFor="promoCode"
+                    >
+                      Promocode
+                    </label>
+                    <CustomInputText
+                      // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      //   setTimeout(() => setPromoCode(e.target.value), 1500)
+                      // }
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        setshowPromoCodeLoader(true);
+                        setTimeout(() => {
+                          setPromoCode(e.target.value);
+                          setshowPromoCodeLoader(false);
+                        }, 1500);
+                      }}
+                      icon={PromoCodeIcon}
+                      placeholder="Promo Code"
+                      imageClassName="relative left-[25px]"
+                      className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
+                      id="promoCode"
+                    />
                   </div>
                   <CustomButton
                     label="Submit"
                     isRounded={true}
-                    className="submitBtnMobile"
+                    className="submitBtnMobile self-end"
                     onClick={onSubmitHandler}
                   />
                 </div>
-              </CustomModal>
+              ) : (
+                <>
+                  <CustomModal
+                    header="Filters"
+                    visible={visible}
+                    position={position}
+                    className="filtersModal opmFilters h-[500px] left-[-4vw] w-[100vw]"
+                    onHide={onModalCloseHandler}
+                    isDraggable={false}
+                    isResizable={false}
+                  >
+                    <div className="flex flex-col">
+                      <div className="flex flex-row gap-5">
+                        <div className="flex flex-col">
+                          <label
+                            className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
+                            htmlFor="date"
+                          >
+                            Date 1
+                          </label>
+                          <CustomCalendar
+                            dateFormat="dd/mm/yy"
+                            onChange={(
+                              e: React.ChangeEvent<CalendarChangeEvent>
+                            ) => {
+                              if (
+                                e.target.value &&
+                                typeof e.target.value === "object" &&
+                                "toLocaleDateString" in e.target.value
+                              ) {
+                                setFirstDate(
+                                  e.target.value?.toLocaleDateString()
+                                );
+                              }
+                            }}
+                          />
+                        </div>
+                        <div className="flex flex-col">
+                          <label
+                            className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
+                            htmlFor="date"
+                          >
+                            Date 2
+                          </label>
+                          <CustomCalendar
+                            dateFormat="dd/mm/yy"
+                            onChange={(
+                              e: React.ChangeEvent<CalendarChangeEvent>
+                            ) => {
+                              if (
+                                e.target.value &&
+                                typeof e.target.value === "object" &&
+                                "toLocaleDateString" in e.target.value
+                              ) {
+                                setSecondDate(
+                                  e.target.value?.toLocaleDateString()
+                                );
+                              }
+                            }}
+                          />
+                        </div>
+                      </div>
+                      <div className="flex flex-row gap-5">
+                        <div className="flex flex-col w-[40vw]">
+                          <label
+                            className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
+                            htmlFor="duration"
+                          >
+                            Duration
+                          </label>
+                          <CustomInputText
+                            placeholder="Duration"
+                            onChange={(
+                              e: React.ChangeEvent<HTMLInputElement>
+                            ) =>
+                              setTimeout(
+                                () => setDuration(e.target.value),
+                                1500
+                              )
+                            }
+                            className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
+                            id="promoCode"
+                          />
+                        </div>
+                        <div className="flex flex-col w-[40vw]">
+                          <label
+                            className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
+                            htmlFor="channel"
+                          >
+                            Channel
+                          </label>
+                          <CustomDropdown
+                            dropdownIcon={<img src={DropdownMobileIcon} />}
+                            value={channels.find((e) => e.name === channel)}
+                            onChange={(e: DropDownOnChangeEvent) =>
+                              setChannel(e.value.name)
+                            }
+                            options={channels}
+                            optionLabel="name"
+                            placeholder="All"
+                          />
+                        </div>
+                      </div>
+                      <div className="flex flex-row gap-5">
+                        <div className="flex flex-col w-[40vw]">
+                          <label
+                            className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
+                            htmlFor="locale"
+                          >
+                            Locale
+                          </label>
+                          <CustomDropdown
+                            dropdownIcon={<img src={DropdownMobileIcon} />}
+                            value={localeList.find((e) => e.name === locale)}
+                            onChange={(e: DropDownOnChangeEvent) =>
+                              setLocale(e.value.name)
+                            }
+                            options={localeList}
+                            optionLabel="name"
+                            placeholder="US"
+                          />
+                        </div>
+                        <div className="flex flex-col w-[40vw]">
+                          <label
+                            className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
+                            htmlFor="payment"
+                          >
+                            Payment
+                          </label>
+                          <CustomDropdown
+                            dropdownIcon={<img src={DropdownMobileIcon} />}
+                            value={paymentList.find(
+                              (e) => e.name === paymentMode
+                            )}
+                            onChange={(e: DropDownOnChangeEvent) =>
+                              setPaymentMode(e.value.name)
+                            }
+                            options={paymentList}
+                            optionLabel="name"
+                            placeholder="Klarna"
+                          />
+                        </div>
+                      </div>
+                      <div className="flex flex-row gap-5">
+                        <div className="flex flex-col">
+                          <label
+                            className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
+                            htmlFor="promoCode"
+                          >
+                            Promocode
+                          </label>
+                          <CustomInputText
+                            onChange={(
+                              e: React.ChangeEvent<HTMLInputElement>
+                            ) =>
+                              setTimeout(
+                                () => setPromoCode(e.target.value),
+                                1500
+                              )
+                            }
+                            className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
+                            id="promoCode"
+                            placeholder="Enter Code Here"
+                          />
+                        </div>
+                      </div>
+                      <CustomButton
+                        label="Submit"
+                        isRounded={true}
+                        className="submitBtnMobile"
+                        onClick={onSubmitHandler}
+                      />
+                    </div>
+                  </CustomModal>
+                </>
+              )}
             </>
           )}
+          <div className="flex items-center gap-4 mt-[10px] overflow-scroll ml-[20px]">
+            {firstDate && (
+              <FilteredCard
+                leftIcon={SmallCalendar}
+                content={firstDate}
+                onClickHandler={() => setFirstDate(null)}
+              />
+            )}
+            {secondDate && (
+              <FilteredCard
+                leftIcon={SmallCalendar}
+                content={secondDate}
+                onClickHandler={() => setSecondDate(null)}
+              />
+            )}
+            {duration && showDurationLoader && <Loader className="h-[25px]" />}
+            {duration && !showDurationLoader && (
+              <FilteredCard
+                leftIcon={HourGlassIcon}
+                content={duration}
+                onClickHandler={() => setDuration(null)}
+              />
+            )}
+            {channel && (
+              <FilteredCard
+                leftIcon={MobileIcon}
+                content={channel}
+                onClickHandler={() => setChannel(null)}
+              />
+            )}
+            {paymentMode && (
+              <FilteredCard
+                content={paymentMode}
+                onClickHandler={() => setPaymentMode(null)}
+              />
+            )}
+            {locale && (
+              <FilteredCard
+                content={locale}
+                onClickHandler={() => setLocale(null)}
+              />
+            )}
+            {promoCode && showPromoCodeLoader && (
+              <Loader className="h-[25px]" />
+            )}
+            {promoCode && !showPromoCodeLoader && (
+              <FilteredCard
+                content={promoCode}
+                onClickHandler={() => setPromoCode(null)}
+              />
+            )}
+            {(firstDate ||
+              secondDate ||
+              duration ||
+              channel ||
+              paymentMode ||
+              locale ||
+              promoCode) && (
+              <CustomButton
+                label="Clear All"
+                severity="secondary"
+                className="text-[12px] text-[#575353]"
+                isTextButton={true}
+                onClick={clearAllHandler}
+              />
+            )}
+          </div>
+          {data && (
+            <div className="bg-[#F4F4F4] border-0 rounded-[10px] w-[95%] ml-[20px] h-[700px]">
+              <LineChart options={options} data={data} />
+            </div>
+          )}
         </>
-      )}
-      <div className="flex items-center gap-4 mt-[10px] overflow-scroll ml-[20px]">
-        {firstDate && (
-          <FilteredCard
-            leftIcon={SmallCalendar}
-            content={firstDate}
-            onClickHandler={() => setFirstDate(null)}
-          />
-        )}
-        {secondDate && (
-          <FilteredCard
-            leftIcon={SmallCalendar}
-            content={secondDate}
-            onClickHandler={() => setSecondDate(null)}
-          />
-        )}
-        {duration && showDurationLoader && <Loader className="h-[25px]" />}
-        {duration && !showDurationLoader && (
-          <FilteredCard
-            leftIcon={HourGlassIcon}
-            content={duration}
-            onClickHandler={() => setDuration(null)}
-          />
-        )}
-        {channel && (
-          <FilteredCard
-            leftIcon={MobileIcon}
-            content={channel}
-            onClickHandler={() => setChannel(null)}
-          />
-        )}
-        {paymentMode && (
-          <FilteredCard
-            content={paymentMode}
-            onClickHandler={() => setPaymentMode(null)}
-          />
-        )}
-        {locale && (
-          <FilteredCard
-            content={locale}
-            onClickHandler={() => setLocale(null)}
-          />
-        )}
-        {promoCode && showPromoCodeLoader && <Loader className="h-[25px]" />}
-        {promoCode && !showPromoCodeLoader && (
-          <FilteredCard
-            content={promoCode}
-            onClickHandler={() => setPromoCode(null)}
-          />
-        )}
-        {(firstDate ||
-          secondDate ||
-          duration ||
-          channel ||
-          paymentMode ||
-          locale ||
-          promoCode) && (
-          <CustomButton
-            label="Clear All"
-            severity="secondary"
-            className="text-[12px] text-[#575353]"
-            isTextButton={true}
-            onClick={clearAllHandler}
-          />
-        )}
-      </div>
-      {data && (
-        <div className="bg-[#F4F4F4] border-0 rounded-[10px] w-[95%] ml-[20px] h-[700px]">
-          <LineChart options={options} data={data} />
-        </div>
       )}
     </>
   );
