@@ -70,7 +70,9 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
             </div>
           )}
           <div
-            className={`w-[77.53vw] ${showSidePaneGrid ? "hidden" : "block"}`}
+            className={`sm:w-[77.53vw] ${
+              showSidePaneGrid ? "hidden" : "block"
+            }`}
           >
             {appContent}
           </div>

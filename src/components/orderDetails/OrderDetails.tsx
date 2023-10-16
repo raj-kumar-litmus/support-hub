@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import {
-  URL_OMS_ORDER_STATUS,
-  URL_ORDER_DETAILS,
-} from "../../constants/apiConstants";
+// import {
+//   URL_OMS_ORDER_STATUS,
+//   URL_ORDER_DETAILS,
+// } from "../../constants/apiConstants";
+import omsOrderStatusJSON from "../../sampleJSON/OmsOrderStatus.json";
+import orderDataJSON from "../../sampleJSON/orderData.json";
+
 import {
   AMOUNT,
   ATG,
@@ -34,7 +37,7 @@ import {
   OmsOrderStatus,
   OrderData,
 } from "../../@types/OrderDetails";
-import { fetchData } from "../../utils/fetchUtil";
+// import { fetchData } from "../../utils/fetchUtil";
 import Table from "../common/Table";
 import CustomIcon from "../common/CustomIcon";
 import Card from "../common/Card";
@@ -57,11 +60,14 @@ const OrderDetails: React.FC = () => {
     getOmsOrderStatus();
   }, [orderId]);
 
-  const getOrderData = async () => {
-    const data: OrderData = await fetchData(
-      `${URL_ORDER_DETAILS}/${orderId}`,
-      {},
-    );
+  const getOrderData = () => {
+    // const data: OrderData = await fetchData(
+    //   `${URL_ORDER_DETAILS}/${orderId}`,
+    //   {},
+    // );
+    console.log(orderId);
+    const data: OrderData = orderId === "60577546279" ? orderDataJSON : {};
+
     setOrderData(data || {});
     if (data?.commerceItem?.length) {
       const convertedArray: CommerceItemData[] = data.commerceItem.map(
@@ -81,9 +87,11 @@ const OrderDetails: React.FC = () => {
   };
 
   const getOmsOrderStatus = async () => {
-    const data: OmsOrderStatus = await fetchData(
-      `${URL_OMS_ORDER_STATUS}/${orderId}`,
-    );
+    // const data: OmsOrderStatus = await fetchData(
+    //   `${URL_OMS_ORDER_STATUS}/${orderId}`,
+    // );
+    const data: OmsOrderStatus =
+      orderId === "60577546279" ? omsOrderStatusJSON : {};
     setOmsOrderStatus(data || {});
   };
 
@@ -233,10 +241,7 @@ const OrderDetails: React.FC = () => {
       </div>
 
       <div className="grid gap-y-0 grid-cols-1 m-4 bg-[#ffffff] sm:bg-[#f4f4f4] rounded-md p-0 sm:p-4">
-        <span className="text-base text-slate-600 font-bold">
-          {" "}
-          {ITEMS_INFO}
-        </span>
+        <span className="text-base text-slate-600 font-bold">{ITEMS_INFO}</span>
         <div className="hidden sm:block rounded-md">
           {itemTableData?.length > 0 && (
             <Table
