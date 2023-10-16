@@ -5,7 +5,7 @@ import { CustomCalendarProps } from "../../@types/BarChart";
 
 const CustomCalendar: FC<CustomCalendarProps> = (props) => (
   <>
-    <div className="text-[12px] text-[#757575] font-medium">{props.title}</div>
+    <div className="text-[12px] text-[#E8E8E8] font-medium">{props.title}</div>
     <Calendar
       {...props}
       className="mt-1"
@@ -13,6 +13,7 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => (
       showIcon
       placeholder={props.placeholder}
       value={props.value}
+      dateFormat="mm/dd/yy"
       onChange={(e) => props.onChange(e.value)}
       iconPos={props.iconPos}
       icon={

@@ -156,11 +156,9 @@ const OpmComparison: React.FC = () => {
             /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
             // @ts-ignore
             data: apiResponse?.[e].map((e) => Number(e.orderCount)),
-            backgroundColor: "transparent",
+            backgroundColor: "white",
             label: "No of orders",
-            borderColor: index === 0 ? "#BABABA" : "#707070",
-            pointStyle: "circle",
-            fill: true,
+            borderColor: index === 0 ? "#5A9EF5" : "#FDA44F",
             borderWidth: 2,
           })),
       });
@@ -174,6 +172,11 @@ const OpmComparison: React.FC = () => {
             title: {
               display: true,
               text: "Total Orders Per Minute",
+              color: "#E8E8E8",
+              position: "left",
+              padding: {
+                top: 50,
+              },
             },
           },
         },
@@ -186,12 +189,26 @@ const OpmComparison: React.FC = () => {
             position: "bottom",
             align: "start",
             labels: {
-              usePointStyle: true,
+              boxWidth: 30,
+              backgroundColor: "transparent",
               generateLabels: () => {
                 return Object.keys(apiResponse).map((_, index) => ({
-                  text: index === 0 ? firstDate : secondDate,
-                  fillStyle: index === 0 ? "#BABABA" : "#757575",
-                  strokeStyle: index === 0 ? "#BABABA" : "#757575",
+                  text:
+                    index === 0
+                      ? startDate?.toLocaleString("en-US", {
+                          year: "numeric",
+                          month: "2-digit",
+                          day: "2-digit",
+                        })
+                      : endDate?.toLocaleString("en-US", {
+                          year: "numeric",
+                          month: "2-digit",
+                          day: "2-digit",
+                        }),
+                  fillStyle: "transparent",
+                  lineWidth: 2,
+                  fontColor: "#E8E8E8",
+                  strokeStyle: index === 0 ? "#5A9EF5" : "#FDA44F",
                 }));
               },
             },
@@ -343,7 +360,7 @@ const OpmComparison: React.FC = () => {
 
   const onSubmitHandler = () => {
     setUrl(
-      `http://azruvuprep01:8080/supportdashboard/compareOPM?period=${duration}&startTimeOne=${firstDate}&startDateTwo=${secondDate}&channel=${channel}&promocode=${promoCode}&paymentType=${paymentMode}&country=${locale}`,
+      `http://azruvuprep01:8080/supportdashboard/compareOPM?period=${duration}&startTimeOne=${startDate}&startDateTwo=${endDate}&channel=${channel}&promocode=${promoCode}&paymentType=${paymentMode}&country=${locale}`,
     );
   };
 
@@ -360,7 +377,9 @@ const OpmComparison: React.FC = () => {
   return (
     <>
       <div className="flex gap-[59vw] mt-[3.9vh]">
-        <p className="font-bold self-center ml-[3vw]">OPM Comparison</p>
+        <p className="font-bold self-center ml-[3vw] text-[#F2F2F2]">
+          OPM Comparison
+        </p>
         <CustomImage
           src={FilterIcon}
           className="w-[2.34vw] self-end"
@@ -385,7 +404,7 @@ const OpmComparison: React.FC = () => {
                   className="border rounded-[8px] border-solid border-slate-300 border-1 w-[6.58vw] h-[3.84vh]"
                   id="duration"
                 /> */}
-                <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[2vh] relative ml-[18px]">
+                <label className="labelClass mb-[5px] mt-[2vh] relative ml-[18px]">
                   Duration
                 </label>
                 <CustomDropdown
@@ -407,14 +426,6 @@ const OpmComparison: React.FC = () => {
                   value={startDate}
                   onChange={changeStartDate}
                   maxDate={new Date()}
-                  icon={
-                    <CustomIcon
-                      alt="date-icon"
-                      src="src/assets/calendar.svg"
-                      width="16px"
-                      height="16px"
-                    />
-                  }
                   dateFormat="dd/mm/yy"
                   iconPos={"left"}
                   imgalt="date-icon"
@@ -448,7 +459,7 @@ const OpmComparison: React.FC = () => {
               </div>
               <div className="flex flex-col channelInput dropdownWithIcon w-[9.88vw] relative top-[1vh] self-center">
                 <label
-                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[1px]"
+                  className="labelClass mb-[5px] mt-[1px]"
                   htmlFor="channel"
                 >
                   Channel
@@ -465,67 +476,6 @@ const OpmComparison: React.FC = () => {
                   placeholder="Channel"
                 />
               </div>
-              {/* <div className="flex flex-col localeInput dropdownWithIcon">
-                <label
-                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                  htmlFor="locale"
-                >
-                  Locale
-                </label>
-                <CustomDropdown
-                  value={localeList.find((e) => e.name === locale)}
-                  onChange={(e: DropDownOnChangeEvent) =>
-                    setLocale(e.value.name)
-                  }
-                  options={localeList}
-                  icon={LocaleIcon}
-                  optionLabel="name"
-                  placeholder="Locale"
-                />
-              </div>
-              <div className="flex flex-col paymentInput dropdownWithIcon">
-                <label
-                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
-                  htmlFor="payment"
-                >
-                  Payment
-                </label>
-                <CustomDropdown
-                  value={paymentList.find((e) => e.name === paymentMode)}
-                  onChange={(e: DropDownOnChangeEvent) =>
-                    setPaymentMode(e.value.name)
-                  }
-                  options={paymentList}
-                  icon={PaymentIcon}
-                  optionLabel="name"
-                  placeholder="Payment Mode"
-                />
-              </div> */}
-              {/* <div className="flex flex-col promoCodeInput">
-                <label
-                  className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[7px] ml-[18px]"
-                  htmlFor="promoCode"
-                >
-                  Promocode
-                </label>
-                <CustomInputText
-                  // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  //   setTimeout(() => setPromoCode(e.target.value), 1500)
-                  // }
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setshowPromoCodeLoader(true);
-                    setTimeout(() => {
-                      setPromoCode(e.target.value);
-                      setshowPromoCodeLoader(false);
-                    }, 1500);
-                  }}
-                  icon={PromoCodeIcon}
-                  placeholder="Promo Code"
-                  imageClassName="relative left-[25px]"
-                  className="border rounded-[8px] border-solid border-slate-300 border-1 h-[4.35vh]"
-                  id="promoCode"
-                />
-              </div> */}
               <CustomButton
                 label="Submit"
                 isRounded={true}
@@ -548,7 +498,7 @@ const OpmComparison: React.FC = () => {
                   <div className="flex flex-row gap-5">
                     <div className="flex flex-col">
                       <label
-                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
+                        className="labelClass mb-[5px] mt-[14px]"
                         htmlFor="date"
                       >
                         Date 1
@@ -570,7 +520,7 @@ const OpmComparison: React.FC = () => {
                     </div>
                     <div className="flex flex-col">
                       <label
-                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
+                        className="labelClass mb-[5px] mt-[14px]"
                         htmlFor="date"
                       >
                         Date 2
@@ -594,7 +544,7 @@ const OpmComparison: React.FC = () => {
                   <div className="flex flex-row gap-5">
                     <div className="flex flex-col w-[40vw]">
                       <label
-                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
+                        className="labelClass mb-[5px] mt-[14px]"
                         htmlFor="duration"
                       >
                         Duration
@@ -610,7 +560,7 @@ const OpmComparison: React.FC = () => {
                     </div>
                     <div className="flex flex-col w-[40vw]">
                       <label
-                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
+                        className="labelClass mb-[5px] mt-[14px]"
                         htmlFor="channel"
                       >
                         Channel
@@ -630,7 +580,7 @@ const OpmComparison: React.FC = () => {
                   <div className="flex flex-row gap-5">
                     <div className="flex flex-col w-[40vw]">
                       <label
-                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
+                        className="labelClass mb-[5px] mt-[14px]"
                         htmlFor="locale"
                       >
                         Locale
@@ -648,7 +598,7 @@ const OpmComparison: React.FC = () => {
                     </div>
                     <div className="flex flex-col w-[40vw]">
                       <label
-                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
+                        className="labelClass mb-[5px] mt-[14px]"
                         htmlFor="payment"
                       >
                         Payment
@@ -668,7 +618,7 @@ const OpmComparison: React.FC = () => {
                   <div className="flex flex-row gap-5">
                     <div className="flex flex-col">
                       <label
-                        className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]"
+                        className="labelClass mb-[5px] mt-[14px]"
                         htmlFor="promoCode"
                       >
                         Promocode
@@ -677,7 +627,7 @@ const OpmComparison: React.FC = () => {
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                           setTimeout(() => setPromoCode(e.target.value), 1500)
                         }
-                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[4.35vh]"
+                        className="border rounded-[8px] border-solid h-[4.35vh] bg-[#30343B] border-[#30343B]"
                         id="promoCode"
                         placeholder="Enter Code Here"
                       />
@@ -776,14 +726,14 @@ const OpmComparison: React.FC = () => {
           <CustomButton
             label="Reset"
             severity="secondary"
-            className="text-[12px] text-[#575353]"
+            className="resetFilters text-[12px] text-[#575353]"
             isTextButton={true}
             onClick={clearAllHandler}
           />
         )}
       </div>
       {data && (
-        <div className="bg-[#F4F4F4] border-0 rounded-[10px] w-[71.74vw] ml-[2.85vw] h-[63.36vh] mt-[3vh]">
+        <div className="bg-[#30343B] border-0 rounded-[10px] w-[71.74vw] ml-[2.85vw] h-[63.36vh] mt-[3vh]">
           <LineChart options={options} data={data} />
         </div>
       )}

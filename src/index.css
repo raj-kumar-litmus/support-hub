@@ -202,8 +202,16 @@ button.p-button-secondary {
 .filteredCard .p-button:hover {
   @apply bg-transparent text-[#322f2f] border-[#c1bbbb];
 }
+.resetFilters span {
+  @apply text-[#E8E8E8] font-normal
+  /* color: #E8E8E8; */
+  /* font-weight: 500; */
+}
 .durationInput .p-inputtext {
   @apply w-[150px] h-[37px];
+}
+.opmFilters .p-inputtext {
+  @apply text-[#E8E8E8];
 }
 .durationInput span.flex {
   @apply mt-1;
@@ -226,12 +234,14 @@ button.p-button-secondary {
 .dropdownWithIcon .p-dropdown {
   @apply border-l-transparent rounded-l-none w-[135px];
 }
-.dropdownWithIcon .p-dropdown:hover,
-.dropdownWithIcon .p-dropdown:not(.p-disabled).p-focus {
-  @apply !border-l-transparent;
+.dropdownWithIcon .p-dropdown:hover, .dropdownWithIcon .p-dropdown:not(.p-disabled).p-focus {
+  @apply !border-transparent;
 }
 .dropdownWithIcon img {
-  @apply border border-solid border-[#ced4da] border-r-transparent rounded-l-md rounded-tr-none left-[2px] pl-[5px];
+  @apply border border-solid border-[#30343B] border-r-transparent border-[#30343B] rounded-l-md rounded-tr-none left-[2px] pl-[5px];
+}
+.dropdownWithIcon span.flex {
+  @apply bg-[#30343B];
 }
 .p-input-icon-left > .p-inputtext {
   @apply !pl-[2rem];
@@ -240,7 +250,7 @@ button.p-button-secondary {
   @apply !pl-14;
 }
 .p-calendar-w-btn-left .p-inputtext {
-  @apply pl-0;
+  @apply pl-0 bg-[#30343B] border-[#30343B];
 }
 .opmFilters .durationInput .p-dropdown {
   @apply w-full pl-[20px];
@@ -337,4 +347,10 @@ button.p-button-secondary {
 }
 .custom-table .p-datatable-tbody tr td:first-child {
   @apply font-bold;
+}
+.opmFilters .p-dropdown {
+  @apply bg-[#30343B] border border-solid border-[#30343B];
+}
+.labelClass {
+  @apply text-[12px] text-[#E8E8E8] font-medium
 }

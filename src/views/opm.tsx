@@ -100,6 +100,19 @@ const OPM: React.FC = () => {
 
   const [data, setData] = useState<ChartData | null>(null);
 
+  function getGradient(ctx, chartArea) {
+    let gradient = ctx.createLinearGradient(
+      0,
+      chartArea.bottom,
+      0,
+      chartArea.top,
+    );
+    gradient.addColorStop(0.9, "#5A9EF566");
+    gradient.addColorStop(0.4, "#5A9EF52F");
+    gradient.addColorStop(0, "#5A9EF500");
+    return gradient;
+  }
+
   const getData = async () => {
     try {
       await fetch(url);
@@ -146,25 +159,21 @@ const OPM: React.FC = () => {
           orderCount: "94",
         },
       ];
-      const canvas = document.getElementById("myChart");
-      const ctx = (canvas as HTMLCanvasElement)?.getContext("2d");
-      // const ctx = document.getElementById('myChart')?.getContext('2d');
-      let gradient;
-      if (ctx) {
-        gradient = ctx.createLinearGradient(0, 0, 0, 400);
-        gradient.addColorStop(0, "yellow");
-        gradient.addColorStop(1, "white");
-      }
       setData({
         labels: apiRespnose.map((e) => e.timestamp),
         datasets: [
           {
             label: "No of orders",
             data: apiRespnose.map((e) => Number(e.orderCount)),
-            borderColor: "rgb(117, 117, 117)",
-            backgroundColor: gradient,
+            borderColor: "#599DF5",
             pointStyle: "circle",
             fill: true,
+            backgroundColor: function (context) {
+              const chart = context.chart;
+              const { ctx, chartArea } = chart;
+              if (!chartArea) return;
+              return getGradient(ctx, chartArea);
+            },
             borderWidth: 2,
           },
         ],
@@ -230,9 +239,21 @@ const OPM: React.FC = () => {
           },
           tooltip: {
             displayColors: false,
+            backgroundColor: "#25292D",
+            yAlign: "bottom",
+            caretSize: 6,
+            titleMarginBottom: 15,
+            padding: 10,
           },
           datalabels: {
             display: false,
+          },
+        },
+        elements: {
+          point: {
+            radius: 6,
+            hoverRadius: 6,
+            backgroundColor: "white",
           },
         },
       });
@@ -262,7 +283,9 @@ const OPM: React.FC = () => {
   return (
     <>
       <div className={`flex gap-[66vw]`}>
-        <p className="font-bold w-[3vw] mt-[3.9vh] ml-[3vw]">OPM</p>
+        <p className="font-bold w-[3vw] mt-[3.9vh] ml-[3vw] text-[#F2F2F2]">
+          OPM
+        </p>
         <CustomImage
           src={FilterIcon}
           className="w-[2.34vw] self-end"
@@ -275,7 +298,7 @@ const OPM: React.FC = () => {
           {width > 700 ? (
             <div className="flex gap-[1vw] ml-[2.4vw] opmFilters">
               <div className="flex flex-col self-end durationInput w-[6.6vw]">
-                <label className="text-[12px] text-[#757575] font-medium relative ml-[18px]">
+                <label className="labelClass relative ml-[18px]">
                   Duration
                 </label>
                 <CustomDropdown
@@ -316,9 +339,7 @@ const OPM: React.FC = () => {
                 />
               </div>
               <div className="flex flex-col channelInput dropdownWithIcon w-[7vw]">
-                <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]">
-                  Channel
-                </label>
+                <label className="labelClass mb-[5px] mt-[14px]">Channel</label>
                 <CustomDropdown
                   value={channels.find((e) => e.name === channel)}
                   onChange={(e: DropDownOnChangeEvent) =>
@@ -332,9 +353,7 @@ const OPM: React.FC = () => {
                 />
               </div>
               <div className="flex flex-col localeInput dropdownWithIcon w-[7vw]">
-                <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]">
-                  Locale
-                </label>
+                <label className="labelClass mb-[5px] mt-[14px]">Locale</label>
                 <CustomDropdown
                   value={localeList.find((e) => e.name === locale)}
                   onChange={(e: DropDownOnChangeEvent) =>
@@ -347,9 +366,7 @@ const OPM: React.FC = () => {
                 />
               </div>
               <div className="flex flex-col paymentInput dropdownWithIcon w-[9vw]">
-                <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]">
-                  Payment
-                </label>
+                <label className="labelClass mb-[5px] mt-[14px]">Payment</label>
                 <CustomDropdown
                   value={paymentList.find((e) => e.name === paymentMode)}
                   onChange={(e: DropDownOnChangeEvent) =>
@@ -362,14 +379,14 @@ const OPM: React.FC = () => {
                 />
               </div>
               <div className="flex flex-col promoCodeInput w-[9vw]">
-                <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]">
+                <label className="labelClass mb-[5px] mt-[14px]">
                   Promocode
                 </label>
                 <CustomInputText
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setPromoCode(e.target.value)
                   }
-                  className="relative left-[-25px] border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
+                  className="relative left-[-25px] border rounded-[8px] border-solid border-1 h-[38px] bg-[#30343B] border-[#30343B]"
                   icon={PromoCodeIcon}
                   placeholder=""
                   imageClassName="z-[1]"
@@ -404,7 +421,7 @@ const OPM: React.FC = () => {
                 <div className="flex flex-col">
                   <div className="flex flex-row gap-5">
                     <div className="flex flex-col w-[40vw]">
-                      <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]">
+                      <label className="labelClass mb-[5px] mt-[14px]">
                         From
                       </label>
                       <CustomCalendar
@@ -425,7 +442,7 @@ const OPM: React.FC = () => {
                       />
                     </div>
                     <div className="flex flex-col w-[40vw]">
-                      <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]">
+                      <label className="labelClass mb-[5px] mt-[14px]">
                         Duration
                       </label>
                       <CustomInputText
@@ -440,7 +457,7 @@ const OPM: React.FC = () => {
                   </div>
                   <div className="flex flex-row gap-5">
                     <div className="flex flex-col w-[40vw]">
-                      <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]">
+                      <label className="labelClass mb-[5px] mt-[14px]">
                         Channel
                       </label>
                       <CustomDropdown
@@ -455,7 +472,7 @@ const OPM: React.FC = () => {
                       />
                     </div>
                     <div className="flex flex-col w-[40vw]">
-                      <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]">
+                      <label className="labelClass mb-[5px] mt-[14px]">
                         Locale
                       </label>
                       <CustomDropdown
@@ -472,7 +489,7 @@ const OPM: React.FC = () => {
                   </div>
                   <div className="flex flex-row gap-5">
                     <div className="flex flex-col w-[40vw]">
-                      <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]">
+                      <label className="labelClass mb-[5px] mt-[14px]">
                         Payment
                       </label>
                       <CustomDropdown
@@ -487,7 +504,7 @@ const OPM: React.FC = () => {
                       />
                     </div>
                     <div className="flex flex-col w-[40vw]">
-                      <label className="text-[12px] text-[#757575] mb-[5px] font-medium mt-[14px]">
+                      <label className="labelClass mb-[5px] mt-[14px]">
                         Promocode
                       </label>
                       <CustomInputText
@@ -576,14 +593,14 @@ const OPM: React.FC = () => {
           <CustomButton
             label="Reset"
             severity="secondary"
-            className="text-[12px] text-[#575353]"
+            className="resetFilters text-[12px] text-[#575353]"
             isTextButton={true}
             onClick={clearAllHandler}
           />
         )}
       </div>
       {data && (
-        <div className="bg-[#F4F4F4] border-0 rounded-[10px] w-[71.74vw] ml-[2.85vw] h-[62.23vh] mt-[3vh]">
+        <div className="bg-[#30343B] border-0 rounded-[10px] w-[71.74vw] ml-[2.85vw] h-[62.23vh] mt-[3vh]">
           <LineChart options={options} data={data} />
         </div>
       )}

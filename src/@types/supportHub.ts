@@ -32,7 +32,7 @@ interface Dataset {
   fill?: boolean;
   borderColor: string;
   borderWidth?: number;
-  backgroundColor?: CanvasGradient | string | undefined;
+  backgroundColor?: (context: any) => any;
 }
 
 interface CustomLabel {
