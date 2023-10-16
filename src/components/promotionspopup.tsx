@@ -37,7 +37,8 @@ const PromotionsPopup = () => {
         header="Promotions"
         visible={openDialog}
         onHide={() => setOpenDialog(false)}
-        className="custom-popup"
+        draggable={false}
+        className="custom-popup  max-[400px]:w-full max-[400px]:top-[200px]"
       >
         {promotions.map((p) => (
           <PromotionCard key={p.promotionId} promotion={p} />

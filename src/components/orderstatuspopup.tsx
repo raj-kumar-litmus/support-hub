@@ -13,7 +13,7 @@ interface OrderStatus {
 
 const OrderStatusPopup = () => {
   const HEADERS = [
-    { field: "code", header: "Code" },
+    { field: "code", header: "Status Code" },
     { field: "description", header: "Description" },
   ];
 
@@ -39,7 +39,8 @@ const OrderStatusPopup = () => {
         header="Order Status"
         visible={openDialog}
         onHide={() => setOpenDialog(false)}
-        className="custom-popup"
+        className="custom-popup max-[400px]:w-full max-[400px]:top-[100px]"
+        draggable={false}
       >
         <CustomTable
           resizableColumns
