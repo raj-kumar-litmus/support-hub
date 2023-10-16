@@ -255,21 +255,34 @@ button.p-button-secondary {
 }
 
 .promotion-card .p-card-content {
-  padding: 0;
+  @apply p-0;
 }
 
-.search-button .p-button{
-  @apply -ml-8 sm:hidden !shadow-none !border-none
+.search-button .p-button:focus {
+  @apply bg-transparent;
 }
 
-.popup-button .p-button{
-  @apply !shadow-none !border-none
+.search-button .p-button {
+  @apply -ml-8 sm:hidden !shadow-none !border-none;
+}
+
+.popup-button .p-button {
+  @apply !shadow-none !border-none;
 }
 
 .p-dialog .p-dialog-content::-webkit-scrollbar {
-  @apply w-1
+  @apply w-1;
 }
 
 .p-dialog .p-dialog-content::-webkit-scrollbar-thumb {
-  @apply bg-[#cbcbcb]
+  @apply bg-[#cbcbcb];
+}
+
+.p-button.p-button-text:enabled:active {
+  @apply bg-transparent;
+}
+
+.p-button.p-button-text:enabled:hover,
+.p-button.p-button-text:not(button):not(a):not(.p-disabled):hover {
+  @apply bg-transparent;
 }
