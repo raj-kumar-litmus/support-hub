@@ -243,15 +243,19 @@ button.p-button-secondary {
   @apply w-full pl-[20px];
 }
 .custom-popup .p-dialog-header {
-  @apply border-solid border-b border-b-[#e7e7e7] py-4 text-[#757575];
+  @apply py-4 text-[#757575] shadow-[0px_1px_1px_#dee2e6] z-10;
 }
 
 .custom-popup .p-dialog-content {
   @apply pt-4 overflow-auto;
 }
 
-.custom-popup .p-dialog-header-icon:focus {
-  @apply !shadow-none;
+.p-dialog-header-icon:enabled:hover {
+  @apply !bg-transparent;
+}
+
+.p-dialog-header .p-dialog-header-icon:enabled:active {
+  @apply !bg-transparent !shadow-none !border-none;
 }
 
 .promotion-card .p-card-content {
