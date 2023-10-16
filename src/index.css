@@ -122,10 +122,6 @@
   @apply py-4 px-6 text-center;
 }
 
-.custom-popup .p-dialog-title {
-  @apply text-center;
-}
-
 button.p-button-secondary {
   @apply text-[12px] !text-[#757575];
 }
@@ -243,12 +239,21 @@ button.p-button-secondary {
   @apply w-full pl-[20px];
 }
 .custom-popup .p-dialog-header {
-  @apply py-4 text-[#757575] shadow-[0px_1px_1px_#dee2e6] z-10;
+  @apply py-4 text-[#757575] shadow-[0px_1.5px_1px_#343a40] z-10  text-white bg-[#1C1C20] font-medium;
 }
 
 .custom-popup .p-dialog-content {
-  @apply pt-4 overflow-auto;
+  @apply pt-4 overflow-auto text-white bg-[#1C1C20];
 }
+
+.custom-popup .p-dialog-title {
+  @apply text-center text-base font-medium;
+}
+
+.custom-popup .p-dialog-header-icon {
+  @apply text-[#898A8D];
+}
+
 
 .p-dialog-header-icon:enabled:hover {
   @apply !bg-transparent;
@@ -275,11 +280,11 @@ button.p-button-secondary {
 }
 
 .p-dialog .p-dialog-content::-webkit-scrollbar {
-  @apply w-1;
+  @apply w-1 rounded-lg;
 }
 
 .p-dialog .p-dialog-content::-webkit-scrollbar-thumb {
-  @apply bg-[#cbcbcb];
+  @apply bg-[#30343B] mr-6;
 }
 
 .p-button.p-button-text:enabled:active {
@@ -289,4 +294,42 @@ button.p-button-secondary {
 .p-button.p-button-text:enabled:hover,
 .p-button.p-button-text:not(button):not(a):not(.p-disabled):hover {
   @apply bg-transparent;
+}
+
+.custom-table .p-datatable-table {
+  @apply text-sm border-separate font-helvetica;
+}
+.custom-table .p-datatable-tbody tr td {
+  @apply border-[#383f47];
+}
+.custom-table .p-datatable-thead tr th {
+  @apply !bg-[#30343B] text-white font-bold p-3 border-0 w-1/4 border-[#383f47];
+;
+}
+.custom-table .p-datatable-thead tr th:first-child {
+  @apply rounded-tl-md;
+}
+.custom-table .p-datatable-thead tr th:last-child {
+  @apply rounded-tr-md;
+}
+.custom-table .p-datatable-tbody tr:last-child td:first-child {
+  @apply rounded-bl-md;
+}
+.custom-table .p-datatable-tbody tr:last-child td:last-child {
+  @apply rounded-br-md;
+}
+.custom-table .p-datatable-tbody tr {
+  @apply !bg-[#26262B] text-[#FFFFFF];
+}
+.custom-table .p-datatable-tbody tr.p-row-odd {
+  @apply !bg-[#30343B] text-[#FFFFFF];
+}
+.custom-table .p-datatable-thead tr th .p-column-header-content {
+  @apply justify-center;
+}
+.custom-table .p-datatable-tbody tr td {
+  @apply text-center p-3 font-medium border-0;
+}
+.custom-table .p-datatable-tbody tr td:first-child {
+  @apply font-bold;
 }

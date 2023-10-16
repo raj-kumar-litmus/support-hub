@@ -47,7 +47,7 @@ const OrderStatusPopup = () => {
           showGridlines
           stripedRows
           value={orderStatusList}
-          className="ordersTable w-[310px] sm:w-[390px]"
+          className="custom-table w-[310px] sm:w-[390px]"
           children={HEADERS.map((h) => (
             <Column key={h.field} field={h.field} header={h.header}></Column>
           ))}

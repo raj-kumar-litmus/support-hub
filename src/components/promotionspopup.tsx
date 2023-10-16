@@ -1,10 +1,11 @@
-import { Button } from "primereact/button";
 import { useEffect, useState } from "react";
 import promotionsJSON from "../sampleJSON/promotions.json";
 import { IPromotion } from "../@types/promotion";
 import CustomDialog from "./common/customdialog";
 import PromotionCard from "./common/promotioncard";
 import CustomButton from "./Button";
+import { fetchData } from "../utils/fetchUtil";
+import { URL_PROMOTIONS } from "../constants/apiConstants";
 
 const PromotionsPopup = () => {
   const [promotions, setPromotions] = useState<Array<IPromotion>>([]);
@@ -12,12 +13,16 @@ const PromotionsPopup = () => {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
   const getPromotions = async () => {
-    // const params = {
-    //   orderId: orderId,
-    // };
-    // const data = await fetchData(URL_PROMOTIONS, params);
-    // setPromotions(data || []);
-    setPromotions(promotionsJSON);
+    const params = {
+      orderId: orderId,
+    };
+    try {
+      const data = await fetchData(URL_PROMOTIONS, params);
+      // setPromotions(data || []);
+      setPromotions(promotionsJSON);
+    } catch (err) {
+      console.error("Error while fetching data:", err);
+    }
   };
 
   useEffect(() => {
