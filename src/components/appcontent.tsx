@@ -29,7 +29,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
       (menu) => location?.pathname.startsWith(menu.path)
     ).id;
     setSelectedMenu(_selectedMenu);
-  }, []);
+  }, [location?.pathname]);
 
   return (
     <div>
