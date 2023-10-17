@@ -44,6 +44,7 @@ export const PAYMENT_TYPE: string = "Payment Type";
 export const STATUS: string = "Status";
 export const AMOUNT: string = "Amount";
 export const NO_MATCHING_ORDERS_FOUND: string = "No Matching Orders.";
+export const VIEW_ALL: string = "View All";
 
 //App Constants
 export const PRIMARY: string = "Primary";

@@ -40,7 +40,7 @@ import FilterItem from "../common/FilterItem";
 import CustomIcon from "../common/CustomIcon";
 import { ChartData, SessionData } from "../../@types/BarChart";
 import { BAR_CHART_OPTIONS } from "../../config/chartConfig";
-import sessionDataJSON from "../../sampleJSON/sessions.json";
+import { sessionDataJSON } from "../../sampleJSON/sessions";
 
 import FilterIcon from "../../assets/filter.svg";
 import ClockIcon from "../../assets/clock.svg";
