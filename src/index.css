@@ -234,8 +234,11 @@ button.p-button-secondary {
 #orderDetailsComp{
   @apply font-helvetica;
 }
-.grid span {
-  @apply text-sm py-2 text-[#FAF9F6] bg-[#30343B]
+#orderDetailsComp .grid span {
+  @apply text-sm py-2 text-[#FAF9F6] bg-[#30343B];
+}
+#orderDetailsComp .grid span.p-column-title {
+  @apply text-sm py-2 text-[#FAF9F6] bg-inherit;
 }
 .orderItemInfoTable .p-datatable-table {
   @apply text-sm border-[#f4f4f4] font-helvetica !pb-8;
