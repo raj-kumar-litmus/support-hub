@@ -47,7 +47,7 @@
 }
 
 .menu-sm-icon img {
-  @apply min-w-[26px];
+  @apply w-[20px] h-[20px];
 }
 
 .arrow-icon img {
@@ -231,6 +231,9 @@ button.p-button-secondary {
 }
 .p-input-icon-left > .p-inputtext {
   @apply !pl-[2rem];
+}
+.search-input .p-inputtext {
+  @apply  !pl-14;   
 }
 .p-calendar-w-btn-left .p-inputtext {
   @apply pl-0;

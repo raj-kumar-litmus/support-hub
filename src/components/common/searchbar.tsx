@@ -1,5 +1,6 @@
 import { FC } from "react";
 import SearchIcon from "../../assets/search.svg";
+import HeaderSearch from "../../assets/headersearch.svg";
 import { Button } from "primereact/button";
 import CustomImage from "./customimage";
 import CustomInputText from "./custominputtext";
@@ -22,13 +23,20 @@ const SearchBar: FC<Props> = ({
 }) => {
   return (
     <div className="block">
-      <CustomInputText
-        type="text"
-        className="w-full min-w-[400px] h-10 !bg-gray-100  p-4 !rounded-full hidden sm:block focus:outline-none placeholder:text-stone-500 placeholder:font-helvetica placeholder:font-medium !shadow-none !border-none"
-        placeholder="Search Order #"
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
-      />
+      <span className="search-input p-input-icon-left hidden sm:block">
+        <CustomImage
+          src={HeaderSearch}
+          alt="Search"
+          className="absolute left-5 bottom-3"
+        />
+        <CustomInputText
+          type="text"
+          className="w-full min-w-[400px] h-[40px] !rounded-full focus:outline-none placeholder:font-helvetica placeholder:font-medium !shadow-none !border-none"
+          placeholder="Search Order"
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+        />
+      </span>
       {showSearchButton && (
         <CustomButton
           isTextButton
