@@ -247,19 +247,46 @@ button.p-button-secondary {
   @apply text-[#F2F2F2];
 }
 .orderItemInfoTable .p-datatable-thead tr th:first-child {
-  @apply rounded-tl-lg border-none;
+  @apply rounded-tl-lg border-none pl-8 w-[20%];
+}
+.orderItemInfoTable .p-datatable-thead tr th:nth-child(2) {
+  @apply w-[29%];
+}
+.orderItemInfoTable .p-datatable-thead tr th:nth-child(3) div span{
+  @apply w-full text-center;
+}
+.orderItemInfoTable .p-datatable-thead tr th:nth-child(4) div span{
+  @apply w-full text-center;
+}
+.orderItemInfoTable .p-datatable-thead tr th:last-child div span{
+  @apply w-full text-end;
 }
 .orderItemInfoTable .p-datatable-thead tr th:last-child {
-  @apply rounded-tr-lg border-none;
+  @apply rounded-tr-lg border-none pr-8;
 }
 .orderItemInfoTable .p-datatable-tbody tr td {
-  @apply border-none; 
+  @apply border-none;
+}
+.orderItemInfoTable .p-datatable-tbody tr td:first-child {
+  @apply pl-8 w-[20%];
+}
+.orderItemInfoTable .p-datatable-tbody tr td:nth-child(2) {
+  @apply w-[29%];
+}
+.orderItemInfoTable .p-datatable-tbody tr td:nth-child(3) {
+  @apply text-center;
+}
+.orderItemInfoTable .p-datatable-tbody tr td:nth-child(4) {
+  @apply text-center;
+}
+.orderItemInfoTable .p-datatable-tbody tr td:last-child {
+  @apply text-end pr-8;
 }
 .orderItemInfoTable .p-datatable-tbody tr:last-child td:first-child {
   @apply rounded-bl-lg;
-} 
+}
  .orderItemInfoTable .p-datatable-tbody tr:last-child td:last-child {
-  @apply rounded-br-lg;
+  @apply rounded-br-lg pr-8;
 }
 .orderItemInfoTable .p-datatable-tbody tr {
   @apply !bg-[#30343B] text-[#FAF9F6];

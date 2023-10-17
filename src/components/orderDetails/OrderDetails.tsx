@@ -3,10 +3,11 @@ import { useParams } from "react-router-dom";
 // import {
 //   URL_OMS_ORDER_STATUS,
 //   URL_ORDER_DETAILS,
+//   URL_OMS_ORDER_FLOW
 // } from "../../constants/apiConstants";
 import { omsOrderStatusJSON } from "../../sampleJSON/omsOrderStatus";
 import { orderDataJSON } from "../../sampleJSON/orderData";
-
+import { omsOrderFlowJSON } from "../../sampleJSON/omsOrderFlow";
 import {
   AMOUNT,
   ATG,
@@ -49,12 +50,9 @@ import Loader from "../loader";
 
 const OrderDetails: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [orderData, setOrderData] = useState<OrderData | Record<string, never>>(
-    {},
-  );
-  const [omsOrderStatus, setOmsOrderStatus] = useState<
-    OmsOrderStatus | Record<string, never>
-  >({});
+  const [orderData, setOrderData] = useState<OrderData | Record<string, never>>({});
+  const [omsOrderStatus, setOmsOrderStatus] = useState<OmsOrderStatus | Record<string, never>>({});
+  const [omsOrderFlow, setOmsOrderFlow] = useState<Record<string, never>>({});
   const [itemTableData, setItemTableData] = useState<CommerceItemData[]>([]);
 
   const { orderId } = useParams<{ orderId: string }>();
@@ -63,6 +61,7 @@ const OrderDetails: React.FC = () => {
     setIsLoading(true);
     getOrderData();
     getOmsOrderStatus();
+    getOmsOrderFlow();
   }, [orderId]);
 
   const getOrderData = () => {
@@ -99,6 +98,22 @@ const OrderDetails: React.FC = () => {
     setOmsOrderStatus(data || {});
   };
 
+  const getOmsOrderFlow = async () => {
+    // const data: OmsOrderFlow = await fetchData(
+    //   `${URL_OMS_ORDER_FLOW}/${orderId}`,
+    // );
+    const data =
+      orderId === "60577546279" ? omsOrderFlowJSON : {};
+    setOmsOrderFlow(data || {});
+  };
+
+  const formatName = (fullName): string => {
+    return fullName
+      .split(' ')
+      .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+      .join(' ');
+  };
+
   const showPromotions = (): void => {
     //show promotion modal
   };
@@ -119,7 +134,7 @@ const OrderDetails: React.FC = () => {
     <Loader />
   ) : Object.keys(orderData).length > 0 ? (
     <div id="orderDetailsComp">
-      <div className="grid gap-y-0 grid-cols-1 m-4 p-0 sm:p-4 sm:bg-[#30343B] rounded-md">
+      <div className="grid gap-y-0 grid-cols-1 m-4 p-0 sm:py-4 sm:px-6 sm:bg-[#30343B] rounded-md">
         <div className="flex justify-between border-none !bg-[#1C1C20] sm:!bg-inherit">
           <span className="w-1/2 !text-lg !text-[#F2F2F2] font-bold !bg-[#1C1C20] sm:!bg-inherit">
             {ORDER_DETAILS}
@@ -139,15 +154,15 @@ const OrderDetails: React.FC = () => {
           </span>
         </div>
         <div className="flex flex-col border-t-0 sm:border-t border-solid border-[#383F47] sm:grid sm:gap-y-0 sm:grid-cols-2 ">
-          <div className="flex justify-between w-full py-1 px-3 sm:p-0 border-b border-solid border-[#383F47] sm:border-none justify-start bg-[#30343B] rounded-t-md">
+          <div className="flex justify-between w-full py-1 px-4 sm:p-0 border-b border-solid border-[#383F47] sm:border-none justify-start bg-[#30343B] rounded-t-md">
             <span className="w-auto sm:w-1/5 flex items-center">
               {ORDER}
               <CustomIcon
                 className="ml-2 cursor-pointer"
                 alt="order-clock-icon"
                 src={OrderClockIcon}
-                width="0.75rem"
-                height="0.75rem"
+                width="1rem"
+                height="1rem"
                 onClick={showOrderTimeline}
               />
             </span>
@@ -155,7 +170,7 @@ const OrderDetails: React.FC = () => {
               {orderData?.orderId}
             </span>
           </div>
-          <div className="flex justify-between w-full py-1 px-3 sm:p-0 border-b border-solid border-[#383F47] sm:border-none bg-[#30343B]">
+          <div className="flex justify-between w-full py-1 px-4 sm:p-0 border-b border-solid border-[#383F47] sm:border-none bg-[#30343B]">
             <span className="w-auto sm:w-1/5 font-light">{ORDER_TOTAL}</span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.orderTotal}
@@ -163,13 +178,13 @@ const OrderDetails: React.FC = () => {
           </div>
         </div>
         <div className="flex flex-col border-t-0 sm:border-t border-solid border-[#383F47] sm:grid sm:gap-y-0 sm:grid-cols-2 bg-[#30343B]">
-          <div className="flex justify-between w-full py-1 px-3 sm:p-0 border-b border-solid border-[#383F47] sm:border-none">
+          <div className="flex justify-between w-full py-1 px-4 sm:p-0 border-b border-solid border-[#383F47] sm:border-none">
             <span className="w-auto sm:w-1/5 font-light">{SUBMITTED}</span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.submittedDate}
             </span>
           </div>
-          <div className="flex justify-between w-full py-1 px-3 sm:p-0 border-b border-solid border-[#383F47] sm:border-none">
+          <div className="flex justify-between w-full py-1 px-4 sm:p-0 border-b border-solid border-[#383F47] sm:border-none">
             <span className="w-auto sm:w-1/5 font-light">{CHANNEL}</span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.originOfOrder}
@@ -177,13 +192,13 @@ const OrderDetails: React.FC = () => {
           </div>
         </div>
         <div className="flex flex-col border-t-0 sm:border-t border-solid border-[#383F47] sm:grid sm:gap-y-0 sm:grid-cols-2 bg-[#30343B] rounded-b-md">
-          <div className="flex justify-between w-full py-1 px-3 sm:p-0 border-b border-solid border-[#383F47] sm:border-none">
+          <div className="flex justify-between w-full py-1 px-4 sm:p-0 border-b border-solid border-[#383F47] sm:border-none">
             <span className="w-auto sm:w-1/5 font-light">{LOCALE}</span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.locale}
             </span>
           </div>
-          <div className="flex justify-between w-full py-1 px-3 sm:p-0 border-none">
+          <div className="flex justify-between w-full py-1 px-4 sm:p-0 border-none">
             <span className="w-auto sm:w-1/5">{ORDER_TYPE}</span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.customerInfo?.biTier}
@@ -193,25 +208,25 @@ const OrderDetails: React.FC = () => {
       </div>
 
       <div className="flex flex-col-reverse p-0 sm:grid gap-4 sm:grid-cols-2 m-4">
-        <div className="bg-[#1C1C20] sm:bg-[#30343B] p-0 sm:p-4 grid gap-y-0 grid-cols-1 rounded-md">
+        <div className="bg-[#1C1C20] sm:bg-[#30343B] p-0 sm:py-4 sm:px-6 grid gap-y-0 grid-cols-1 rounded-md">
           <span className="!text-lg font-bold !bg-[#1C1C20] sm:!bg-inherit">
             {STATUS_ACROSS}
           </span>
-          <div className="flex justify-between w-full rounded-t-md border-t-0 py-1 px-3 sm:p-0 sm:border-t border-solid border-[#383F47] bg-[#30343B]">
+          <div className="flex justify-between w-full rounded-t-md border-t-0 py-1 px-4 sm:p-0 sm:border-t border-solid border-[#383F47] bg-[#30343B]">
             <span className="w-auto sm:w-1/6">{ATG}</span>
             <span className="w-auto sm:w-5/6 font-medium">
               {`${orderData?.status} - ${orderData?.sephOrderStatus}`}
             </span>
           </div>
-          <div className="flex justify-between w-full border-t py-1 px-3 sm:p-0 border-solid border-[#383F47] bg-[#30343B]">
+          <div className="flex justify-between w-full border-t py-1 px-4 sm:p-0 border-solid border-[#383F47] bg-[#30343B]">
             <span className="w-auto sm:w-1/6 flex items-center">
               {OMS}
               <CustomIcon
                 className="ml-2 cursor-pointer"
                 alt="oms-info-icon"
                 src={OmsInfoIcon}
-                width="0.75rem"
-                height="0.75rem"
+                width="0.85rem"
+                height="0.85rem"
                 onClick={showOmsStatusInfo}
               />
             </span>
@@ -219,26 +234,26 @@ const OrderDetails: React.FC = () => {
               {omsOrderStatus?.orderNumStatus}
             </span>
           </div>
-          <div className="flex justify-between w-full rounded-b-md border-t py-1 px-3 sm:p-0 border-solid border-[#383F47] bg-[#30343B]">
+          <div className="flex justify-between w-full rounded-b-md border-t py-1 px-4 sm:p-0 border-solid border-[#383F47] bg-[#30343B]">
             <span className="w-auto sm:w-1/6">{WMS}</span>
             <span className="w-auto sm:w-5/6 font-medium"></span>
           </div>
         </div>
-        <div className="bg-[#1C1C20] sm:bg-[#30343B] p-0 sm:p-4 grid gap-y-0 grid-cols-1 rounded-md">
+        <div className="bg-[#1C1C20] sm:bg-[#30343B] p-0 sm:py-4 sm:px-6 grid gap-y-0 grid-cols-1 rounded-md">
           <span className="!text-lg font-bold !bg-[#1C1C20] sm:!bg-inherit">
             {CUSTOMER_INFO}
           </span>
-          <div className="flex justify-between w-full border-t-0 sm:border-t py-1 px-3 sm:p-0 border-solid border-[#383F47] bg-[#30343B] rounded-t-md">
+          <div className="flex justify-between w-full border-t-0 sm:border-t py-1 px-4 sm:p-0 border-solid border-[#383F47] bg-[#30343B] rounded-t-md">
             <span className="w-auto sm:w-1/6">{NAME}</span>
-            <span className="w-auto sm:w-5/6 font-medium">{`${orderData?.customerInfo?.firstName} ${orderData?.customerInfo?.lastName}`}</span>
+            <span className="w-auto sm:w-5/6 font-medium">{formatName(`${orderData?.customerInfo?.firstName} ${orderData?.customerInfo?.lastName}`)}</span>
           </div>
-          <div className="flex justify-between w-full border-t py-1 px-3 sm:p-0 border-solid border-[#383F47] bg-[#30343B]">
+          <div className="flex justify-between w-full border-t py-1 px-4 sm:p-0 border-solid border-[#383F47] bg-[#30343B]">
             <span className="w-auto sm:w-1/6">{EMAIL}</span>
             <span className="w-auto sm:w-5/6 font-medium">
               {orderData?.customerInfo?.email}
             </span>
           </div>
-          <div className="flex justify-between w-full border-t py-1 px-3 sm:p-0 border-solid border-[#383F47] bg-[#30343B] rounded-b-md">
+          <div className="flex justify-between w-full border-t py-1 px-4 sm:p-0 border-solid border-[#383F47] bg-[#30343B] rounded-b-md">
             <span className="w-auto sm:w-1/6">{BITIER}</span>
             <span className="w-auto sm:w-5/6 font-medium">
               {orderData?.customerInfo?.biTier}
@@ -247,18 +262,16 @@ const OrderDetails: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid gap-y-0 grid-cols-1 m-4 bg-[#1C1C20] sm:bg-[#30343B] rounded-md p-0 sm:p-4">
+      <div className="grid gap-y-0 grid-cols-1 m-4 bg-[#1C1C20] sm:bg-[#30343B] rounded-md p-0 sm:py-4 sm:px-6">
         <div className="flex justify-between border-none !bg-[#1C1C20] sm:!bg-inherit">
           <span className="w-3/4 sm:w-full !text-lg !text-[#F2F2F2] font-bold !bg-[#1C1C20] sm:!bg-inherit">
-            {" "}
-            {ITEMS_INFO}{" "}
+            {ITEMS_INFO}
           </span>
           <span
             className="w-1/4 sm:hidden justify-end flex items-center !text-[12px] font-normal cursor-pointer !bg-[#1C1C20] sm:!bg-inherit"
             onClick={viewAllItems}
           >
-            {" "}
-            {VIEW_ALL}{" "}
+            {VIEW_ALL}
           </span>
         </div>
         <div className="hidden sm:block rounded-md">
@@ -267,6 +280,8 @@ const OrderDetails: React.FC = () => {
               size="small"
               tabledata={itemTableData}
               className={"orderItemInfoTable"}
+              scrollable={true}
+              scrollHeight={"20rem"}
             />
           )}
         </div>
@@ -278,20 +293,20 @@ const OrderDetails: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid gap-y-0 m-4 p-0 sm:p-4 sm:bg-[#30343B] rounded-md">
+      <div className="grid gap-y-0 m-4 p-0 sm:p-4 sm:bg-[#30343B] rounded-md sm:py-4 sm:px-6">
         <div className="!bg-[#1C1C20] sm:!bg-inherit">
           <span className="block w-[100%] !text-lg font-bold !bg-[#1C1C20] sm:!bg-inherit">
             {PAYMENT_INFO}
           </span>
         </div>
         <div className="flex flex-col border-t-0 sm:border-t border-solid border-[#383F47] sm:grid gap-y-0 grid-cols-2">
-          <div className="flex justify-between w-full py-1 px-3 sm:p-0 border-b border-solid border-[#383F47] sm:border-none justify-start bg-[#30343B] rounded-t-md">
+          <div className="flex justify-between w-full py-1 px-4 sm:p-0 border-b border-solid border-[#383F47] sm:border-none justify-start bg-[#30343B] rounded-t-md">
             <span className="w-auto sm:w-1/5">{PAYMENT_TYPE}</span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.paymentInfo?.[0].paymentType}
             </span>
           </div>
-          <div className="flex justify-between w-full py-1 px-3 sm:p-0 border-b border-solid border-[#383F47] sm:border-none bg-[#30343B] ">
+          <div className="flex justify-between w-full py-1 px-4 sm:p-0 border-b border-solid border-[#383F47] sm:border-none bg-[#30343B] ">
             <span className="w-auto sm:w-1/5">{AMOUNT}</span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.paymentInfo?.[0].amount}
@@ -299,7 +314,7 @@ const OrderDetails: React.FC = () => {
           </div>
         </div>
         <div className="flex flex-col border-t-0 sm:border-t border-solid border-[#383F47] sm:grid gap-y-0 grid-cols-2">
-          <div className="flex justify-between w-full py-1 px-3 sm:p-0 border-b border-solid border-[#383F47] sm:border-none bg-[#30343B] rounded-b-md border-none">
+          <div className="flex justify-between w-full py-1 px-4 sm:p-0 border-b border-solid border-[#383F47] sm:border-none bg-[#30343B] rounded-b-md border-none">
             <span className="w-auto sm:w-1/5">{STATUS}</span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.paymentInfo?.[0].status}

@@ -4,3 +4,5 @@ export const URL_DC_OPEN_ORDERS: string =
 export const URL_ORDER_DETAILS: string = "/supportdashboard/v1/orders";
 export const URL_OMS_ORDER_STATUS: string =
   "/supportdashboard/v1/getOMSOrderStatus";
+export const URL_OMS_ORDER_FLOW: string =
+  "/orderflowApp/oms/orderflow/order";

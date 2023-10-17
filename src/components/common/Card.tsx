@@ -35,9 +35,8 @@ const Card = (props: CardProps) => {
         <div className="font-medium">{cardTitle?.value}</div>
       </div>
       <div
-        className={`w-9/12 ${
-          props.type === "ORDER_DETAILS_ITEM" ? `flex-col` : `flex`
-        }`}
+        className={`w-9/12 ${props.type === "ORDER_DETAILS_ITEM" ? `flex-col` : `flex`
+          }`}
       >
         {cardSubTitle && (
           <div className="w-full pl-2 pb-2 mb-2 flex border-b border-solid border-[#383F47]">
@@ -48,9 +47,8 @@ const Card = (props: CardProps) => {
           </div>
         )}
         <div
-          className={`pl-2 flex ${
-            props.type === "ORDER_DETAILS_ITEM" ? `flex-row-reverse` : ``
-          }`}
+          className={`pl-2 flex ${props.type === "ORDER_DETAILS_ITEM" ? `flex-row-reverse` : ``
+            }`}
         >
           {cardItems.map((item, ind) => (
             <div
