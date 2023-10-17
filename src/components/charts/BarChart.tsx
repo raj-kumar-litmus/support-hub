@@ -44,7 +44,7 @@ import { BAR_CHART_OPTIONS } from "../../config/chartConfig";
 import sessionDataJSON from "../../sampleJSON/sessions.json";
 import { useLocation, useNavigate } from "react-router-dom";
 import CustomImage from "../common/customimage";
-import expand from "../../assets/expand.svg";
+import Open_in_full_window from "../../assets/Open_in_full_window.svg";
 
 const BarChart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -108,7 +108,7 @@ const BarChart = () => {
         {
           label: "Azure Primary",
           data: azurePrimaryData,
-          backgroundColor: "#757575",
+          backgroundColor: "#0977FF",
         },
       ],
     };
@@ -122,7 +122,7 @@ const BarChart = () => {
         {
           label: "Azure Secondary",
           data: azureSecondaryData,
-          backgroundColor: "#BABABA",
+          backgroundColor: "#5BB1FE",
         },
       ],
     };
@@ -136,12 +136,12 @@ const BarChart = () => {
         {
           label: "Primary",
           data: azurePrimaryData,
-          backgroundColor: "#757575",
+          backgroundColor: "#0977FF",
         },
         {
           label: "Secondary",
           data: azureSecondaryData,
-          backgroundColor: "#BABABA",
+          backgroundColor: "#5BB1FE",
         },
       ],
     };
@@ -187,11 +187,12 @@ const BarChart = () => {
         ? `${TOTAL_SESSIONS_PER_MIN_PRIMARY}`
         : type === SECONDARY
         ? `${TOTAL_SESSIONS_PER_MIN_SECONDARY}`
-        : `${TOTAL_ORDERS_PER_MIN}`;
+        : `${SESSIONS}`;
     chartOptions.plugins.datalabels.rotation = duration > 15 ? 270 : 0;
     if (type === "both") {
       chartOptions.plugins.legend.display = true;
       chartOptions.plugins.legend.position = "bottom";
+      chartOptions.plugins.legend.align = "start";
     }
     return chartOptions;
   };
@@ -242,37 +243,19 @@ const BarChart = () => {
   };
 
   return (
-    <div id="bar-chart" className="m-0 p-5">
-      <div className="flex basis-full justify-between pb-4 items-baseline">
-        <div className="text-base text-gray-600 font-bold">{SESSIONS}</div>
-        {location?.pathname?.includes("home") ? (
-          <div>
+    <>
+      {location?.pathname?.includes("home") && (
+        <div className="bg-[#30343B] p-5 mb-4 rounded-lg relative">
+          <div className="absolute right-0 top-6 mr-6 pb-4">
             {/* <button onClick={(e) => handleSwitchCharts(e)}>Primary</button>
-        <button onClick={(e) => handleSwitchCharts(e)}>Secondary</button>
-        <button onClick={(e) => handleSwitchCharts(e)}>Both</button> */}
+          <button onClick={(e) => handleSwitchCharts(e)}>Secondary</button>
+          <button onClick={(e) => handleSwitchCharts(e)}>Both</button> */}
             <button
-              className="rounded-full bg-[#E9E8E8] p-3"
               onClick={handleExpandClick}
             >
-              <CustomImage src={expand} />
+              <CustomImage src={Open_in_full_window} />
             </button>
           </div>
-        ) : location?.pathname?.includes("sessions") ? (
-          <div
-            onClick={() => setShowFilterPopup(true)}
-            className="flex sm:hidden rounded-full border border-solid border-slate-300 p-2"
-          >
-            <CustomIcon
-              alt="show-filters"
-              src="src/assets/filter.svg"
-              width="16px"
-              height="16px"
-            />
-          </div>
-        ) : null}
-      </div>
-      {location?.pathname?.includes("home") ? (
-        <>
           {showChart.both && (
             <Bar
               className="sessions"
@@ -294,10 +277,25 @@ const BarChart = () => {
               data={secondaryData}
             />
           )}
-        </>
-      ) : null}
+        </div>
+      )}
       {location?.pathname?.includes("sessions") && (
-        <>
+        <div id="bar-chart" className="m-0 p-5">
+          <div className="flex basis-full justify-between pb-4 items-baseline">
+            <div className="text-base text-gray-600 font-bold">{SESSIONS}</div>
+            <div
+              onClick={() => setShowFilterPopup(true)}
+              className="flex sm:hidden rounded-full border border-solid border-slate-300 p-2"
+            >
+              <CustomIcon
+                alt="show-filters"
+                src="src/assets/filter.svg"
+                width="16px"
+                height="16px"
+              />
+            </div>
+          </div>
+
           <div className="basis-full justify-between pb-4 items-center hidden sm:flex">
             <div className="flex justify-start pb-4 items-baseline">
               <div className="flex-col mr-4">
@@ -471,9 +469,9 @@ const BarChart = () => {
               </div>
             </div>
           </Dialog>
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 };
 

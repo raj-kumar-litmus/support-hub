@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { Card } from "primereact/card";
-// import CustomImage from "./customimage";
 
 type Props = {
   title: string;
@@ -10,7 +9,6 @@ type Props = {
 interface HomeCardProps {
   title: FC<Props>;
   value: FC;
-  // icon: string;
   bgColor: string;
   textColor: string;
 }
@@ -18,15 +16,13 @@ interface HomeCardProps {
 const HomeCard: FC<HomeCardProps> = ({
   title,
   value,
-  // icon,
   bgColor,
   textColor,
 }) => {
   return (
-    <Card title={title} className={`bg-[${bgColor}] text-[${textColor}] `}>
+    <Card title={title} className="bg-[#30343B] text-[#898A8D]">
       <div className="flex justify-between">
         <>{value}</>
-        {/* <CustomImage src={icon} /> */}
       </div>
     </Card>
   );

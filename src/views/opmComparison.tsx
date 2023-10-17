@@ -43,6 +43,7 @@ import PaymentIcon from "../assets/payment.svg";
 import expand from "../assets/expand.svg";
 import CustomImage from "../components/common/customimage";
 import { useNavigate } from "react-router-dom";
+import { Line } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -354,9 +355,9 @@ const OpmComparison: React.FC = () => {
               </button>
             </div>
           </div>
-          <LineChart options={options} data={data} />
+          {/* <LineChart options={options} data={data} /> */}
 
-          {/* <Line options={HOME_OPM_COMP_CHART} data={data} /> */}
+          <Line options={options} data={data} />
         </div>
       )}
       {location.pathname.includes("opmcomparison") && (

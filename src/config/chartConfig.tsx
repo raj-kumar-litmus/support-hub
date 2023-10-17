@@ -6,8 +6,10 @@ import {
   PointElement,
   Filler,
   Title,
+  SubTitle,
   Tooltip,
   Legend,
+  Colors,
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import {
@@ -25,9 +27,11 @@ Chart.register(
   PointElement,
   Filler,
   Title,
+  SubTitle,
   Tooltip,
   Legend,
-  ChartDataLabels
+  ChartDataLabels,
+  Colors
 );
 
 export const BAR_CHART_OPTIONS: Chart.ChartOptions = {
@@ -39,11 +43,21 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = {
     },
     title: {
       display: true,
+      align: "start",
+      position: "top",
+      color: "#F2F2F2",
+      font: {
+        size: CHART.TITLE_FONT_SIZE,
+      },
+      padding: { top: 10, bottom: 15 },
+    },
+    subtitle: {
+      display: true,
       text: TOTAL_SESSIONS_PER_MIN,
       align: "center",
       position: "bottom",
       font: {
-        size: CHART.TITLE_FONT_SIZE,
+        size: CHART.SUBTITLE_FONT_SIZE,
       },
     },
     datalabels: {
@@ -58,6 +72,7 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = {
   },
   scales: {
     x: {
+      beginAtZero: true,
       grid: {
         display: false,
       },
@@ -65,6 +80,7 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = {
     y: {
       grid: {
         display: true,
+        color: "#383F47",
       },
       border: {
         display: false,
@@ -78,6 +94,7 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = {
   },
   datasets: {
     bar: {
+      categoryPercentage: SESSIONS_CHART.CATEGORY_PERCENT,
       barPercentage: SESSIONS_CHART.BAR_PERCENT,
       maxBarThickness: SESSIONS_CHART.MAX_BAR_THICKNESS,
       borderRadius: SESSIONS_CHART.BAR_BORDER_RADIUS,

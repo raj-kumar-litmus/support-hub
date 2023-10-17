@@ -8,7 +8,6 @@ const Table = ({ tableData }: { tableData: DCOpenOrders[] }) => {
   return (
     <DataTable
       value={tableData}
-      showGridlines
       stripedRows
       className="ordersTable"
     >

@@ -1,6 +1,6 @@
 import HomeCard from "./common/homeCard";
 import HomeSessionsChart from "./charts/homeSessionsChart";
-import graphIcon from "../assets/graph.svg";
+import avg_orders_per_min from "../assets/avg_orders_per_min.svg";
 import total_no_of_orders from "../assets/total_no_of_orders.svg";
 import total_order_comp from "../assets/total_order_comp.svg";
 import avg_opm_comp from "../assets/avg_opm_comp.svg";
@@ -22,16 +22,31 @@ const CardTitle = ({ title, icon }) => {
 const CardValue1 = ({ value, time }) => {
   return (
     <div className="flex items-end">
-      <span className="text-2xl">{value}</span>
-      <div className="border rounded-lg border-[#FFFFFF] text-[10px] h-fit p-1 ml-3">
+      <span className="text-2xl text-[#F2F2F2]">{value}</span>
+      <div className="border rounded-lg border-[#383F47] text-white text-[10px] h-fit p-1 ml-3">
         Last {time} min
       </div>
     </div>
   );
 };
 
-const CardValue2 = ({ title, icon }) => {
-  return <div className="flex"></div>;
+const CardValue2 = ({}) => {
+  return (
+    <div className="flex">
+      <div className="flex flex-col pr-4 border-r-1">
+        <span className="text-[10px]">Today</span>
+        <span className="text-[#F2F2F2]">38</span>
+      </div>
+      <div className="flex flex-col pr-4">
+        <span className="text-[10px]">Last Day</span>
+        <span className="text-[#F2F2F2]">38</span>
+      </div>
+      <div className="flex flex-col pr-4">
+        <span className="text-[10px]">Difference</span>
+        <span className="text-[#F2F2F2]">38</span>
+      </div>
+    </div>
+  );
 };
 
 const HomePage = () => {
@@ -40,7 +55,12 @@ const HomePage = () => {
       <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
         <div className="home-card flex space-x-4">
           <HomeCard
-            title={<CardTitle title={"Avg Orders Per Min"} icon={graphIcon} />}
+            title={
+              <CardTitle
+                title={"Avg Orders Per Min"}
+                icon={avg_orders_per_min}
+              />
+            }
             value={<CardValue1 value={35} time={"15"} />}
             bgColor="#8F8E8E"
             textColor="#FFFFFF"
@@ -62,7 +82,7 @@ const HomePage = () => {
             title={
               <CardTitle title={"Avg OPM Comparison"} icon={avg_opm_comp} />
             }
-            value={38}
+            value={<CardValue2 />}
             bgColor="#CCCBCB"
             textColor="#FFFFFF"
           />
@@ -73,7 +93,7 @@ const HomePage = () => {
                 icon={total_order_comp}
               />
             }
-            value={38}
+            value={<CardValue2 />}
             bgColor="#E9E8E8"
             textColor="#FFFFFF"
           />
