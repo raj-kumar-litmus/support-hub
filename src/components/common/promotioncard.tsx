@@ -20,16 +20,15 @@ const PromotionCard: FC<Props> = ({ promotion }) => {
           </span>
         </div>
       }
-      children={
-        <div className="flex p-0 justify-between">
-          <InfoField title="Promotion" data={promotion.promotionId} />
-          <InfoField
-            title="Discount Amount"
-            data={Number(promotion.discAmt).toFixed(2)}
-          />
-        </div>
-      }
-    />
+    >
+      <div className="flex p-0 justify-between">
+        <InfoField title="Promotion" data={promotion.promotionId} />
+        <InfoField
+          title="Discount Amount"
+          data={Number(promotion.discAmt).toFixed(2)}
+        />
+      </div>
+    </CustomCard>
   );
 };
 
