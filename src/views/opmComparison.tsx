@@ -44,6 +44,8 @@ import DropdownMobileIcon from "../assets/dropdown_mobile.svg";
 import ChannelIcon from "../assets/channel.svg";
 import SandGlassIcon from "../assets/sandglass.svg";
 
+import { OPM_COMPARISON_OPTIONS } from "../constants/appConstants";
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -158,66 +160,17 @@ const OpmComparison: React.FC = () => {
             data: apiResponse?.[e].map((e) => Number(e.orderCount)),
             backgroundColor: "white",
             label: "No of orders",
-            borderColor: index === 0 ? "#5A9EF5" : "#FDA44F",
+            borderColor: index === 0 ? "#6370FF" : "#FDA44F",
             borderWidth: 2,
           })),
       });
-      setOptions({
-        responsive: true,
-        scales: {
-          x: {
-            grid: {
-              display: false,
-            },
-            title: {
-              display: true,
-              text: "Total Orders Per Minute",
-              color: "#E8E8E8",
-              position: "left",
-              padding: {
-                top: 50,
-              },
-            },
-          },
-        },
-        plugins: {
-          datalabels: {
-            display: false,
-          },
-          legend: {
-            display: true,
-            position: "bottom",
-            align: "start",
-            labels: {
-              boxWidth: 30,
-              backgroundColor: "transparent",
-              generateLabels: () => {
-                return Object.keys(apiResponse).map((_, index) => ({
-                  text:
-                    index === 0
-                      ? startDate?.toLocaleString("en-US", {
-                          year: "numeric",
-                          month: "2-digit",
-                          day: "2-digit",
-                        })
-                      : endDate?.toLocaleString("en-US", {
-                          year: "numeric",
-                          month: "2-digit",
-                          day: "2-digit",
-                        }),
-                  fillStyle: "transparent",
-                  lineWidth: 2,
-                  fontColor: "#E8E8E8",
-                  strokeStyle: index === 0 ? "#5A9EF5" : "#FDA44F",
-                }));
-              },
-            },
-          },
-          tooltip: {
-            displayColors: false,
-          },
-        },
-      });
+      setOptions(
+        OPM_COMPARISON_OPTIONS({
+          apiResponse,
+          startDate,
+          endDate,
+        }),
+      );
     }
   }, [apiResponse]);
 

@@ -10,6 +10,7 @@ import Chart from "./components/ChartIndex.tsx";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import "./index.css";
+import Test from "./views/Test.js";
 
 // const Loader = lazy(() => import("./components/Loader.tsx"));
 
@@ -40,6 +41,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             path="/opmcomparison"
             element={<App appContent={<Chart type="opmcomparison" />} />}
           />
+          <Route path="/test" element={<App appContent={<Test />} />} />
         </Routes>
       </Suspense>
     </Router>

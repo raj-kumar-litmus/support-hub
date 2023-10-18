@@ -1,6 +1,7 @@
 import React from "react";
 import CrossIcon from "../assets/cross.svg";
 import CustomButton from "./Button";
+import CustomImage from "./common/customimage";
 
 interface Props {
   content: string;
@@ -15,7 +16,8 @@ const FilteredCard: React.FC<Props> = ({
 }) => {
   return (
     <CustomButton className="filteredCard" onClick={onClickHandler}>
-      <img src={leftIcon} />
+      <CustomImage src={leftIcon} />
+      {/* <img src={leftIcon} /> */}
       <span>{content}</span>
       <img className="ml-[10px]" src={CrossIcon} />
     </CustomButton>

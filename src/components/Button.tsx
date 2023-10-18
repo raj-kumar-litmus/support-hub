@@ -15,7 +15,7 @@ interface Props {
     | "danger"
     | "help"
     | undefined;
-  onClick(): void;
+  onClick?: () => void;
   label?: string;
 }
 

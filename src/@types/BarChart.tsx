@@ -25,7 +25,8 @@ export interface CustomCalendarProps {
   placeholder: string;
   value: Date;
   onChange: (value: Date) => void;
-  iconPos: string;
+  iconPos: "left" | "right";
+  containerClassName?: string;
   imgalt: string;
   imgsrc: string;
   icon?: any;
@@ -36,6 +37,9 @@ export interface CustomDropdownProps {
   value: number | string;
   onChange: (value: number | string) => void;
   options: DropDownOptions[];
+  showIcon?: boolean;
+  iconAlt?: string;
+  iconSrc?: string;
   optionLabel: string;
   placeHolder: string;
 }
@@ -45,6 +49,7 @@ export interface CustomIconProps {
   src: string;
   width: string;
   height: string;
+  className?: string;
 }
 
 export interface FilterItemProps {
