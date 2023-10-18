@@ -22,7 +22,7 @@ const OrderStatusPopup = () => {
 
   useEffect(() => {
     setOrderStatusList(ORDER_STATUS_LIST);
-  }, []);
+  }, [ORDER_STATUS_LIST]);
 
   return (
     <>
