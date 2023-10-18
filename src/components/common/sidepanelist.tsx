@@ -35,7 +35,9 @@ const SidePaneList: FC<Props> = ({
         >
           <CustomImage
             src={menu.icon}
-            className="menu-sm-icon"
+            className={`menu-sm-icon ${
+              selectedMenu === menu.id ? "selected-menu" : ""
+            }`}
             alt="menu.name"
           />
           <span

@@ -50,6 +50,10 @@
   @apply w-[20px] h-[20px];
 }
 
+.selected-menu img{
+  @apply filter invert-12 sepia-9 saturate-682 hue-rotate-201 brightness-88 contrast-88;
+}
+
 .arrow-icon img {
   @apply h-[13px] rotate-180;
 }
@@ -233,7 +237,7 @@ button.p-button-secondary {
   @apply !pl-[2rem];
 }
 .search-input .p-inputtext {
-  @apply  !pl-14;   
+  @apply !pl-14;
 }
 .p-calendar-w-btn-left .p-inputtext {
   @apply pl-0;
@@ -256,7 +260,6 @@ button.p-button-secondary {
 .custom-popup .p-dialog-header-icon {
   @apply text-[#898A8D];
 }
-
 
 .p-dialog-header-icon:enabled:hover {
   @apply !bg-transparent;
@@ -307,7 +310,6 @@ button.p-button-secondary {
 }
 .custom-table .p-datatable-thead tr th {
   @apply !bg-[#30343B] text-white font-bold p-3 border-0 w-1/4 border-[#383f47];
-;
 }
 .custom-table .p-datatable-thead tr th:first-child {
   @apply rounded-tl-md;
