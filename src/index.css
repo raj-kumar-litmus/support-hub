@@ -239,11 +239,11 @@ button.p-button-secondary {
   @apply w-full pl-[20px];
 }
 .orderStatus-dialog .p-dialog-content::-webkit-scrollbar {
-  @apply w-[5px];
+  @apply w-1.5  rounded-lg;
 }
 
 .orderStatus-dialog .p-dialog-content::-webkit-scrollbar-thumb {
-  @apply rounded-xl bg-[#30343B];
+  @apply bg-[#30343B] rounded-full;
 }
 
 .orderStatus-dialog .p-dialog-header {
@@ -253,7 +253,7 @@ button.p-button-secondary {
   @apply text-center text-base font-helvetica  ml-6;
 }
 .orderStatus-dialog .p-dialog-content {
-  @apply py-1  border-t-[1px] border-zinc-700  bg-[#1C1C20];
+  @apply border-slate-900 border-t bg-[#1C1C20];
 }
 
 .backButton .p-button {

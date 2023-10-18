@@ -1,9 +1,10 @@
 import React from "react";
 import TimelineCard from "./TimelineCard";
 import Stepper from "./TimelineStepper";
+import { orderTimeline } from "../../@types/ordertimeline";
 
 interface TimelineProps {
-  orderMap: Record<string, any>; 
+  orderMap: orderTimeline;
 }
 
 const Timeline: React.FC<TimelineProps> = ({ orderMap }) => {
