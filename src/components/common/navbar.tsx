@@ -29,7 +29,7 @@ const Navbar: FC<Props> = ({
   };
 
   return (
-    <div className="py-0 pl-4 pr-1 sm:px-10 flex items-center border-slate-200  border-solid	 border-b justify-between h-[56px] fixed top-0 left-0 w-full z-50 bg-white">
+    <div className="py-0 pl-4 pr-1 sm:px-10 flex items-center border-[#383f47]  border-solid	 border-b justify-between h-[56px] fixed top-0 left-0 w-full z-50 bg-[#26262B]">
       <div className="flex">
         {showSidePane && (
           <CustomImage

@@ -31,7 +31,7 @@ const SearchBar: FC<Props> = ({
         />
         <CustomInputText
           type="text"
-          className="w-full min-w-[400px] h-[40px] !rounded-full focus:outline-none placeholder:font-helvetica placeholder:font-medium !shadow-none !border-none"
+          className="w-full min-w-[400px] h-[40px] !rounded-full focus:outline-none  !bg-[#30343B] placeholder:text-[#FAF9F6]placeholder:font-helvetica placeholder:font-normal !shadow-none !border-none"
           placeholder="Search Order"
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
