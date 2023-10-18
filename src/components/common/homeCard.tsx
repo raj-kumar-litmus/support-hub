@@ -20,7 +20,7 @@ const HomeCard: FC<HomeCardProps> = ({
   textColor,
 }) => {
   return (
-    <Card title={title} className="bg-[#30343B] text-[#898A8D]">
+    <Card title={title} className="home-card bg-[#30343B] text-[#898A8D]">
       <div className="flex justify-between">
         <>{value}</>
       </div>

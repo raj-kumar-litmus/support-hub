@@ -157,7 +157,7 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = {
 //   },
 // };
 
-export const HOME_OPM_CHART: Chart.ChartOptions = {
+export const OPM_CHART: Chart.ChartOptions = {
   responsive: true,
   maintainAspectRatio: false,
   scales: {
@@ -192,7 +192,7 @@ export const HOME_OPM_CHART: Chart.ChartOptions = {
   },
 };
 
-export const HOME_OPM_COMP_CHART: Chart.ChartOptions = {
+export const OPM_COMP_CHART: Chart.ChartOptions = {
   responsive: true,
   maintainAspectRatio: false,
   scales: {

@@ -221,20 +221,24 @@ button.p-button-secondary {
   @apply !h-[250px] sm:!h-[300px];
 }
 
-.home-page .home-card {
+/* .home-page .home-card {
   @apply w-full sm:w-1/2;
-}
+} */
 
 .home-page .p-card {
-  @apply w-1/2 rounded-lg shadow-lg shadow-[#00000029];
+  @apply rounded-lg shadow-lg shadow-[#00000029] grow w-[16%];
 }
 
+/* .home-page .p-card:first-child {
+  @apply ml-0;
+} */
+
 .home-page .p-card .p-card-body {
-  @apply !p-4;
+  @apply !p-4 h-full flex flex-col justify-between;
 }
 
 .home-page .p-card .p-card-body .p-card-content {
-  @apply p-0 !pt-4;
+  @apply p-0 !pt-2;
 }
 
 .home-page .p-card .p-card-title h6 {

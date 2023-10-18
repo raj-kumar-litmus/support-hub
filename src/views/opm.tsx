@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Line } from "react-chartjs-2";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -25,6 +27,8 @@ import CustomButton from "../components/Button";
 import CustomModal from "../components/Modal";
 import LineChart from "../components/LineChart";
 import FilteredCard from "../components/FilteredCard";
+import CustomImage from "../components/common/customimage";
+import { OPM_CHART } from "../config/chartConfig";
 
 import FilterIcon from "../assets/filter.svg";
 import HourGlassIcon from "../assets/hourglass.svg";
@@ -37,9 +41,6 @@ import PromoCodeIcon from "../assets/promocode.svg";
 import LocaleIcon from "../assets/locale.svg";
 import PaymentIcon from "../assets/payment.svg";
 import expand from "../assets/expand.svg";
-import { useLocation, useNavigate } from "react-router-dom";
-import CustomImage from "../components/common/customimage";
-import { Line } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -248,9 +249,7 @@ const OPM: React.FC = () => {
               </button>
             </div>
           </div>
-          <LineChart options={options} data={data} />
-
-          {/* <Line options={options} data={data} /> */}
+          <Line options={OPM_CHART} data={data} />
         </div>
       )}
       {location.pathname.includes("opm") && (
@@ -591,7 +590,7 @@ const OPM: React.FC = () => {
           </div>
           {data && (
             <div className="bg-[#F4F4F4] border-0 rounded-[10px] w-[95%] ml-[20px] h-[700px]">
-              <LineChart options={options} data={data} />
+              <LineChart options={OPM_CHART} data={data} />
             </div>
           )}
         </>
