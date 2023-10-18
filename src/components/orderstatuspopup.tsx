@@ -17,9 +17,7 @@ const OrderStatusPopup = () => {
     { field: "description", header: "Description" },
   ];
 
-  const [orderStatusList, setOrderStatusList] = useState<Array<OrderStatus>>(
-    []
-  );
+  const [orderStatusList, setOrderStatusList] = useState<OrderStatus[]>([]);
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
   useEffect(() => {
@@ -27,7 +25,7 @@ const OrderStatusPopup = () => {
   }, []);
 
   return (
-    <div>
+    <>
       <CustomButton
         label="open order status"
         onClick={() => setOpenDialog(true)}
@@ -53,7 +51,7 @@ const OrderStatusPopup = () => {
           ))}
         />
       </CustomDialog>
-    </div>
+    </>
   );
 };
 

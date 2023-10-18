@@ -40,11 +40,9 @@ const InfoField = ({
   data: string | number;
 }) => {
   return (
-    <div className="block">
-      <div className="text-sm font-normal text-[#898A8D]">{title}</div>
-      <div className="text-sm font-normal text-[#faf9f6] text-right">
-        {data}
-      </div>
+    <div className="block text-sm font-normal ">
+      <div className="text-[#898A8D]">{title}</div>
+      <div className="text-[#faf9f6] text-right">{data}</div>
     </div>
   );
 };

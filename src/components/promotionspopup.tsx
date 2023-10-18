@@ -8,7 +8,7 @@ import { fetchData } from "../utils/fetchUtil";
 import { URL_PROMOTIONS } from "../constants/apiConstants";
 
 const PromotionsPopup = () => {
-  const [promotions, setPromotions] = useState<Array<IPromotion>>([]);
+  const [promotions, setPromotions] = useState<IPromotion[]>([]);
   const [orderId, setOrderId] = useState<string>("60577546279");
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
@@ -18,7 +18,6 @@ const PromotionsPopup = () => {
     };
     try {
       const data = await fetchData(URL_PROMOTIONS, params);
-      // setPromotions(data || []);
       setPromotions(promotionsJSON);
     } catch (err) {
       console.error("Error while fetching data:", err);
@@ -30,7 +29,7 @@ const PromotionsPopup = () => {
   }, []);
 
   return (
-    <div>
+    <>
       <CustomButton
         label="Promotions"
         onClick={() => setOpenDialog(true)}
@@ -49,7 +48,7 @@ const PromotionsPopup = () => {
           <PromotionCard key={p.promotionId} promotion={p} />
         ))}
       </CustomDialog>
-    </div>
+    </>
   );
 };
 
