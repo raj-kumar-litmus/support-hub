@@ -129,6 +129,9 @@
 button.p-button-secondary {
   @apply text-[12px] !text-[#757575];
 }
+.p-button.p-button-secondary:enabled:focus {
+  @apply shadow-none;
+}
 .filtersModal .p-dialog-header {
   @apply px-[8px] py-[10px] rounded-t-[10px] border-b border-b-[#F4F4F4] border-solid;
 }
@@ -144,8 +147,8 @@ button.p-button-secondary {
 .opmFilters .p-dropdown {
   @apply h-[38px];
 }
-.opmFilters .p-calendar {
-  @apply h-[38px] w-[9vw];
+.opmFilters .p-calendar{
+  @apply h-[38px]
 }
 .opmFilters .timeInput .p-calendar {
   @apply w-[8vw];
@@ -199,6 +202,9 @@ button.p-button-secondary {
 .filteredCard .p-button {
   @apply flex gap-[10px] px-[10px] items-center leading-none border border-solid border-[#c1bbbb] rounded rounded-[20px] h-[26px] text-[12px] text-[#322f2f] p-[5px] bg-transparent;
 }
+.filteredCard .p-button:focus {
+  @apply shadow-none;
+}
 .filteredCard .p-button:hover {
   @apply bg-transparent text-[#E8E8E8] border-[#30343B]
 }
@@ -208,13 +214,13 @@ button.p-button-secondary {
 .resetFilters span {
   @apply text-[#E8E8E8] font-normal
 }
-.durationInput .p-inputtext {
+.inputContainer .p-inputtext {
   @apply w-[150px] h-[37px];
 }
 .opmFilters .p-inputtext {
   @apply text-[#E8E8E8];
 }
-.durationInput span.flex {
+.inputContainer span.flex {
   @apply mt-1;
 }
 /* .channelInput .p-dropdown {
@@ -229,7 +235,7 @@ button.p-button-secondary {
 .promoCodeInput .p-inputtext {
   @apply w-full;
 }
-.durationInput {
+.inputContainer {
   @apply relative left-[-10px];
 }
 .dropdownWithIcon .p-dropdown {
@@ -250,7 +256,7 @@ button.p-button-secondary {
 .p-calendar-w-btn-left .p-inputtext {
   @apply pl-0 bg-[#30343B] border-[#30343B];
 }
-.opmFilters .durationInput .p-dropdown {
+.opmFilters .inputContainer .p-dropdown {
   @apply w-full pl-[20px];
 }
 .custom-popup .p-dialog-header {

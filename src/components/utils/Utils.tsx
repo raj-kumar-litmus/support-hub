@@ -44,12 +44,9 @@ const getOrCreateTooltip = (chart, type) => {
 };
 
 export const externalTooltipHandler = (context, type) => {
-  console.log(type);
   // Tooltip Element
   const { chart, tooltip } = context;
   const tooltipEl = getOrCreateTooltip(chart, type);
-  console.log(chart);
-  console.log(chart.config._config.options.scales.x.title.text);
   // Hide if no tooltip
   if (tooltip.opacity === 0) {
     tooltipEl.style.opacity = 0;
@@ -103,8 +100,6 @@ export const externalTooltipHandler = (context, type) => {
     tableRoot.appendChild(tableHead);
     tableRoot.appendChild(tableBody);
   }
-
-  console.log(tooltipEl);
 
   const { offsetLeft: positionX, offsetTop: positionY } = chart.canvas;
   // Display, position, and set styles for font

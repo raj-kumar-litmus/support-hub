@@ -1,17 +1,12 @@
 import React from "react";
 import { Dropdown } from "primereact/dropdown";
 
-interface value {
-  name: string;
-  code: string;
-}
-
 interface Props {
   onChange: any;
   options: any;
   icon?: string;
   dropdownIcon?: any;
-  value?: value | undefined;
+  value?: string;
   imageClassName?: string;
   optionLabel: string;
   label?: string;
@@ -35,7 +30,7 @@ const CustomDropdown: React.FC<Props> = ({
 }) => {
   return icon ? (
     <div
-      className={`flex flex-col self-end durationInput w-[6.6vw] ${containerClassName}`}
+      className={`flex flex-col self-end inputContainer w-[6.6vw] ${containerClassName}`}
     >
       <label className="labelClass relative ml-[18px]">{label}</label>
       <span className="flex">
@@ -52,7 +47,7 @@ const CustomDropdown: React.FC<Props> = ({
       </span>
     </div>
   ) : (
-    <div className="flex flex-col self-end durationInput w-[6.6vw]">
+    <div className="flex flex-col self-end inputContainer w-[6.6vw]">
       <label className="labelClass relative ml-[18px]">{label}</label>
       <Dropdown
         dropdownIcon={dropdownIcon}

@@ -3,6 +3,8 @@ import { InputText } from "primereact/inputtext";
 
 interface Props {
   onChange: any;
+  value?: string;
+  name?: string;
   id?: string;
   icon?: string;
   imageClassName?: string;

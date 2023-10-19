@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -23,7 +23,6 @@ import useScreenSize from "../hooks/useScreenSize";
 
 import CustomDropdown from "../components/DropDown";
 import CustomInputText from "../components/InputText";
-// import CustomCalendar from "../components/Calendar";
 import CustomCalendar from "../components/common/CustomCalendar";
 import CustomButton from "../components/Button";
 import CustomModal from "../components/Modal";
@@ -32,19 +31,17 @@ import FilteredCard from "../components/FilteredCard";
 import CustomImage from "../components/common/customimage";
 
 import FilterIcon from "../assets/filter.svg";
-import HourGlassIcon from "../assets/hourglass.svg";
 import SmallCalendar from "../assets/calendar_small.svg";
-import MobileIcon from "../assets/mobile.svg";
 import DropdownMobileIcon from "../assets/dropdown_mobile.svg";
-import ClockIcon from "../assets/clock.svg";
 import ChannelIcon from "../assets/channel.svg";
 import PromoCodeIcon from "../assets/promocode.svg";
 import LocaleIcon from "../assets/locale.svg";
 import PaymentIcon from "../assets/payment.svg";
 import SandGlassIcon from "../assets/sandglass.svg";
+import GreyChannelIcon from "../assets/channel-grey.svg";
+import GreyCalendarIcon from "../assets/calendar-grey.svg";
+import GreyHourGlassIcon from "../assets/hourglass-grey.svg";
 import { OPM_OPTIONS } from "../constants/appConstants";
-
-import { formatTime, formatDate, DATE_FORMAT_2 } from "../utils/dateTimeUtil";
 
 ChartJS.register(
   CategoryScale,
@@ -69,18 +66,8 @@ const OPM: React.FC = () => {
   const [visible, setVisible] = useState<boolean>(false);
   const [position, setPosition] = useState<ModalEnums>("center");
 
-  const [startDate, setStartDate] = useState<Date | string | null>(null);
-  const [startDateTime, setStartDateTime] = useState<Date | string>("");
-  const [startTime, setStartTime] = useState<Date | string | null>(null);
-
   const { width } = useScreenSize();
 
-  const durations = [
-    { name: "15 mins", code: "15 mins" },
-    { name: "30 mins", code: "30 mins" },
-    { name: "45 mins", code: "45 mins" },
-    { name: "60 mins", code: "60 mins" },
-  ];
   const channels = [
     { name: "All", code: "All" },
     { name: "Mobile", code: "Mobile" },
@@ -92,14 +79,6 @@ const OPM: React.FC = () => {
   const paymentList = [
     { name: "Klarna", code: "Klarna" },
     { name: "PayPal", code: "PayPal" },
-  ];
-  const promoCodeList = [
-    { name: "Promo123", code: "Promo123" },
-    { name: "Promo234", code: "Promo234" },
-    { name: "Promo456", code: "Promo456" },
-    { name: "Promo567", code: "Promo567" },
-    { name: "Promo678", code: "Promo678" },
-    { name: "Promo91011", code: "Promo91011" },
   ];
   const [url, setUrl] = useState<string>(
     `http://azruvuprep01:8080/supportdashboard/opm?period=${duration}&starttime=${date}&channel=${channel}&promocode=${promoCode}&paymentType=${paymentMode}&country=${locale}`,
@@ -124,7 +103,6 @@ const OPM: React.FC = () => {
 
   const getData = async () => {
     try {
-      console.log(`url to be fetched: ${url}`);
       await fetch(url);
     } catch (err) {
       const apiRespnose = [
@@ -191,33 +169,10 @@ const OPM: React.FC = () => {
     }
   };
 
-  const changeStartDate = (value: string) => {
-    setStartDate(value);
-    const selectedDate = new Date(value);
-    let defaultTime: string = "";
-    defaultTime = formatTime(startTime ? startTime : new Date());
-    setStartDateTime(
-      `${formatDate(selectedDate, DATE_FORMAT_2)}T${defaultTime}`,
-    );
-  };
-
-  const changeStartTime = (value: string) => {
-    const formattedTime = formatTime(value);
-    setStartTime(value);
-    let defaultDate: string = "";
-    defaultDate = startDate
-      ? formatDate(startDate, DATE_FORMAT_2)
-      : `${new Date().toISOString().split("T")[0]}`;
-    setStartDateTime(`${defaultDate}T${formattedTime}`);
-  };
-
   const clearAllHandler = () => {
-    setDate(undefined);
-    setDuration(null);
-    setChannel(null);
-    setLocale(null);
-    setPaymentMode(null);
-    setPromoCode(null);
+    let data = [...formFields];
+    data.forEach((e) => (e.value = ""));
+    setFormFields(data);
   };
 
   useEffect(() => {
@@ -235,16 +190,12 @@ const OPM: React.FC = () => {
     }
   };
 
-  const onSubmitHandler = () => {
-    setUrl(
-      `http://azruvuprep01:8080/supportdashboard/opm?period=${duration}&starttime=${date}&channel=${channel}&promocode=${promoCode}&paymentType=${paymentMode}&country=${locale}`,
-    );
-  };
-
   const onModalCloseHandler = () => {
     setVisible(false);
     setShowFilters(!showFilters);
   };
+
+  const [disabled, setDisabled] = useState(true);
 
   const [formFields, setFormFields] = useState([
     {
@@ -252,12 +203,13 @@ const OPM: React.FC = () => {
       name: "duration",
       label: "Duration",
       icon: SandGlassIcon,
+      cardIcon: GreyHourGlassIcon,
       value: "",
       options: [
-        { name: "15 mins", code: "15 mins" },
-        { name: "30 mins", code: "30 mins" },
-        { name: "45 mins", code: "45 mins" },
-        { name: "60 mins", code: "60 mins" },
+        { name: "15", code: "15" },
+        { name: "30", code: "30" },
+        { name: "45", code: "45" },
+        { name: "60", code: "60" },
       ],
     },
     {
@@ -265,21 +217,24 @@ const OPM: React.FC = () => {
       name: "date",
       label: "Date",
       value: "",
+      showTime: true,
+      cardIcon: GreyCalendarIcon,
       imgsrc: "src/assets/calendar.svg",
     },
-    {
-      type: "time",
-      name: "time",
-      label: "Time",
-      value: "",
-      timeOnly: true,
-      imgsrc: "src/assets/clock.svg",
-    },
+    // {
+    //   type: "time",
+    //   name: "time",
+    //   label: "Time",
+    //   value: "",
+    //   timeOnly: true,
+    //   imgsrc: "src/assets/clock.svg",
+    // },
     {
       type: "dropdown",
       name: "channel",
       label: "Channel",
       icon: ChannelIcon,
+      cardIcon: GreyChannelIcon,
       value: "",
       options: [
         { name: "All", code: "All" },
@@ -325,27 +280,33 @@ const OPM: React.FC = () => {
     },
   ]);
 
-  const handleFormChange = (event, index) => {
+  const handleFormChange = (event) => {
     let data = [...formFields];
     let val = event.target.name || event.value.name;
-    data.find((e) => e.name === (event.target.name || event.value.name)).value =
-      event.target.value;
+    if (val === "date") {
+      data.find((e) => e.name === val).value = event.value;
+    } else {
+      data.find((e) => e.name === val).value = event.target.value;
+    }
+    setFormFields(data);
+  };
+
+  const removeFormEntry = (event) => {
+    let data = [...formFields];
+    data.find((e) => e.name === event.target.id).value = null;
     setFormFields(data);
   };
 
   const submit = (e) => {
     e.preventDefault();
-    console.log(formFields);
     let str = ``;
     formFields.forEach((e: any) => {
       if (e.value) {
-        str += `${e.name}=${e.value.name}&`;
+        str += `${e.name}=${e.value.name || e.value}&`;
       }
     });
     setUrl(`http://azruvuprep01:8080/supportdashboard/opm?${str}`);
   };
-
-  const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
     setDisabled(formFields.map((e) => e.value).filter(Boolean).length === 0);
@@ -366,7 +327,7 @@ const OPM: React.FC = () => {
       </div>
       {showFilters && (
         <>
-          {
+          {width > 700 ? (
             <form
               className="flex gap-[1vw] ml-[2.4vw] opmFilters"
               onSubmit={submit}
@@ -379,19 +340,19 @@ const OPM: React.FC = () => {
                         value={form.value}
                         name={form.label}
                         placeholder={form.label}
-                        onChange={(event) => handleFormChange(event, index)}
+                        onChange={(event) => handleFormChange(event)}
                         className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
                         id="promoCode"
                       />
                     )}
                     {form.type === "time" && (
                       <CustomCalendar
-                        name={form.label}
+                        name={form.name}
                         title={form.label}
-                        timeOnly={form.timeOnly || false}
+                        showTime={form.showTime}
                         iconPos={form.iconPos || "left"}
                         imgsrc={form.imgsrc}
-                        onChange={(event) => handleFormChange(event, index)}
+                        onChange={(event) => handleFormChange(event)}
                         value={form.value}
                       />
                     )}
@@ -399,7 +360,7 @@ const OPM: React.FC = () => {
                       <CustomDropdown
                         value={form.value}
                         name={form.name}
-                        onChange={(e) => handleFormChange(e, index)}
+                        onChange={(e) => handleFormChange(e)}
                         imageClassName="relative left-[25px] z-[1]"
                         icon={form.icon}
                         options={form.options}
@@ -418,105 +379,6 @@ const OPM: React.FC = () => {
                 className="submitBtnMobile self-end relative"
               />
             </form>
-          }
-          {width > 700 ? (
-            <div className="flex gap-[1vw] ml-[2.4vw] opmFilters">
-              <CustomDropdown
-                value={durations.find((e) => e.name === duration)}
-                onChange={(e: DropDownOnChangeEvent) =>
-                  setDuration(e.value.name)
-                }
-                imageClassName="relative left-[25px] z-[1]"
-                icon={SandGlassIcon}
-                options={durations}
-                label="Duration"
-                optionLabel="name"
-                placeholder=""
-              />
-              <CustomCalendar
-                title="Date"
-                containerClassName="flex flex-col w-[8.78vw] self-end"
-                placeholder="mm/dd/yy"
-                value={startDate}
-                onChange={changeStartDate}
-                maxDate={new Date()}
-                dateFormat="mm/dd/yy"
-                iconPos={"left"}
-                imgalt="date-icon"
-                imgsrc="src/assets/calendar.svg"
-              />
-              <CustomCalendar
-                title="Time"
-                placeholder="HH:MM"
-                containerClassName="flex flex-col timeInput w-[7.91vw] self-end"
-                value={startTime}
-                onChange={changeStartTime}
-                timeOnly
-                iconPos={"left"}
-                imgalt="time-icon"
-                imgsrc="src/assets/clock.svg"
-              />
-              <CustomDropdown
-                value={channels.find((e) => e.name === channel)}
-                onChange={(e: DropDownOnChangeEvent) =>
-                  setChannel(e.value.name)
-                }
-                options={channels}
-                optionLabel="name"
-                label="Channel"
-                imageClassName="relative left-[25px] z-[1]"
-                icon={ChannelIcon}
-                placeholder=""
-              />
-              <CustomDropdown
-                value={localeList.find((e) => e.name === locale)}
-                onChange={(e: DropDownOnChangeEvent) => setLocale(e.value.name)}
-                label="Locale"
-                options={localeList}
-                icon={LocaleIcon}
-                imageClassName="relative left-[25px] z-[1]"
-                optionLabel="name"
-                placeholder=""
-              />
-              <CustomDropdown
-                value={paymentList.find((e) => e.name === paymentMode)}
-                onChange={(e: DropDownOnChangeEvent) =>
-                  setPaymentMode(e.value.name)
-                }
-                options={paymentList}
-                icon={PaymentIcon}
-                optionLabel="name"
-                imageClassName="relative left-[25px] z-[1]"
-                label="Payment"
-                placeholder=""
-              />
-              <CustomDropdown
-                value={promoCodeList.find((e) => e.name === paymentMode)}
-                onChange={(e: DropDownOnChangeEvent) =>
-                  setPromoCode(e.value.name)
-                }
-                options={promoCodeList}
-                icon={PromoCodeIcon}
-                optionLabel="name"
-                imageClassName="relative left-[25px] z-[1]"
-                label="Promo Code"
-                placeholder=""
-              />
-              <CustomButton
-                label="Submit"
-                isDisabled={
-                  !date &&
-                  !duration &&
-                  !channel &&
-                  !locale &&
-                  !paymentMode &&
-                  !promoCode
-                }
-                isRounded={true}
-                className="submitBtnMobile self-end relative"
-                onClick={onSubmitHandler}
-              />
-            </div>
           ) : (
             <>
               <CustomModal
@@ -629,9 +491,9 @@ const OPM: React.FC = () => {
                   </div>
                   <CustomButton
                     label="Submit"
+                    isDisabled={disabled}
                     isRounded={true}
-                    className="submitBtnMobile"
-                    onClick={onSubmitHandler}
+                    className="submitBtnMobile self-end relative"
                   />
                 </div>
               </CustomModal>
@@ -640,66 +502,23 @@ const OPM: React.FC = () => {
         </>
       )}
       <div className="flex items-center gap-4 mt-[10px] overflow-scroll ml-[3vw]">
-        {startDate && (
-          <FilteredCard
-            leftIcon={SmallCalendar}
-            content={startDate.toLocaleString("en-US", {
-              year: "numeric",
-              month: "2-digit",
-              day: "2-digit",
-            })}
-            onClickHandler={() => setStartDate(null)}
-          />
-        )}
-        {startTime && (
-          <FilteredCard
-            leftIcon={HourGlassIcon}
-            content={startTime.toLocaleString("en-US", {
-              hour12: false,
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
-            onClickHandler={() => setStartTime(null)}
-          />
-        )}
-        {duration && (
-          <FilteredCard
-            leftIcon={HourGlassIcon}
-            content={duration}
-            onClickHandler={() => setDuration(null)}
-          />
-        )}
-        {channel && (
-          <FilteredCard
-            leftIcon={MobileIcon}
-            content={channel}
-            onClickHandler={() => setChannel(null)}
-          />
-        )}
-        {paymentMode && (
-          <FilteredCard
-            content={paymentMode}
-            onClickHandler={() => setPaymentMode(null)}
-          />
-        )}
-        {locale && (
-          <FilteredCard
-            content={locale}
-            onClickHandler={() => setLocale(null)}
-          />
-        )}
-        {promoCode && (
-          <FilteredCard
-            content={promoCode}
-            onClickHandler={() => setPromoCode(null)}
-          />
-        )}
-        {(date ||
-          duration ||
-          channel ||
-          paymentMode ||
-          locale ||
-          promoCode) && (
+        {formFields
+          .filter((e) => e.value)
+          .map((e: any) => (
+            <Fragment key={e.name}>
+              <FilteredCard
+                label={e.name}
+                leftIcon={e.cardIcon}
+                onClickHandler={removeFormEntry}
+                content={
+                  e.type === "time"
+                    ? e.value.toLocaleString("en-US", { hour12: false })
+                    : e.value.name || e.value
+                }
+              />
+            </Fragment>
+          ))}
+        {!disabled && (
           <CustomButton
             label="Reset"
             severity="secondary"

@@ -21,14 +21,20 @@ export interface ChartDataset {
 }
 
 export interface CustomCalendarProps {
-  title: string;
-  placeholder: string;
-  value: Date;
+  title?: string;
+  placeholder?: string;
+  name?: string;
+  timeOnly?: boolean;
+  showTime?: boolean;
+  hideOnDateTimeSelect?: boolean;
+  hourFormat?: "24" | "12";
+  selectionMode?: "single" | "range" | "multiple";
+  value: string;
   onChange: (value: Date) => void;
   iconPos: "left" | "right";
   containerClassName?: string;
-  imgalt: string;
-  imgsrc: string;
+  imgalt?: string;
+  imgsrc?: string;
   icon?: any;
 }
 

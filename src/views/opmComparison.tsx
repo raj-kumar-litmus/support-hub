@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -22,24 +22,16 @@ import {
 } from "../@types/supportHub";
 import useScreenSize from "../hooks/useScreenSize";
 
-import { formatTime, formatDate, DATE_FORMAT_2 } from "../utils/dateTimeUtil";
-
 import CustomDropdown from "../components/DropDown";
 import CustomInputText from "../components/InputText";
-// import CustomCalendar from "../components/Calendar";
 import CustomCalendar from "../components/common/CustomCalendar";
 import CustomButton from "../components/Button";
 import CustomModal from "../components/Modal";
 import LineChart from "../components/LineChart";
 import FilteredCard from "../components/FilteredCard";
-// import Loader from "../components/Loader";
 import CustomImage from "../components/common/customimage";
-import CustomIcon from "../components/common/CustomIcon";
 
 import FilterIcon from "../assets/filter.svg";
-import HourGlassIcon from "../assets/hourglass.svg";
-import SmallCalendar from "../assets/calendar_small.svg";
-import MobileIcon from "../assets/mobile.svg";
 import DropdownMobileIcon from "../assets/dropdown_mobile.svg";
 import ChannelIcon from "../assets/channel.svg";
 import SandGlassIcon from "../assets/sandglass.svg";
@@ -72,25 +64,9 @@ const OpmComparison: React.FC = () => {
   const [apiResponse, setApiResponse] = useState<null | OpmComparisonType>(
     null,
   );
-  // const [showPromoCodeLoader, setshowPromoCodeLoader] = useState<boolean>(true);
-  // const [showDurationLoader, setshowDurationLoader] = useState<boolean>(true);
-
-  const [startTime, setStartTime] = useState<Date | string | null>(null);
-  const [startDate, setStartDate] = useState<Date | string | null>(null);
-  const [startDateTime, setStartDateTime] = useState<Date | string>("");
-  const [endDateTime, setEndDateTime] = useState<Date | string>("");
-
-  const [endTime, setEndTime] = useState<Date | string | null>(null);
-  const [endDate, setEndDate] = useState<Date | string | null>(null);
 
   const { width } = useScreenSize();
 
-  const durations = [
-    { name: "15 mins", code: "15 mins" },
-    { name: "30 mins", code: "30 mins" },
-    { name: "45 mins", code: "45 mins" },
-    { name: "60 mins", code: "60 mins" },
-  ];
   const channels = [
     { name: "All", code: "All" },
     { name: "Mobile", code: "Mobile" },
@@ -111,32 +87,91 @@ const OpmComparison: React.FC = () => {
 
   const [data, setData] = useState<ChartData | null>(null);
 
-  const changeStartTime = (value: string) => {
-    const formattedTime = formatTime(value);
-    setStartTime(value);
-    let defaultDate: string = "";
-    defaultDate = startDate
-      ? formatDate(startDate, DATE_FORMAT_2)
-      : `${new Date().toISOString().split("T")[0]}`;
-    setStartDateTime(`${defaultDate}T${formattedTime}`);
+  const [disabled, setDisabled] = useState(true);
+
+  const [formFields, setFormFields] = useState([
+    {
+      type: "dropdown",
+      name: "period",
+      label: "Duration",
+      icon: SandGlassIcon,
+      value: "",
+      options: [
+        { name: "15", code: "15 mins" },
+        { name: "30", code: "30 mins" },
+        { name: "45", code: "45 mins" },
+        { name: "60", code: "60 mins" },
+      ],
+    },
+    {
+      type: "time",
+      name: "startDate",
+      label: "Date 1",
+      value: "",
+      imgsrc: "src/assets/calendar.svg",
+    },
+    // {
+    //   type: "time",
+    //   name: "time",
+    //   label: "Time",
+    //   value: "",
+    //   timeOnly: true,
+    //   imgsrc: "src/assets/clock.svg",
+    // },
+    {
+      type: "time",
+      name: "endDate",
+      label: "Date 2",
+      value: "",
+      imgsrc: "src/assets/calendar.svg",
+    },
+    {
+      type: "dropdown",
+      name: "channel",
+      label: "Channel",
+      icon: ChannelIcon,
+      value: "",
+      options: [
+        { name: "All", code: "All" },
+        { name: "Mobile", code: "Mobile" },
+      ],
+    },
+  ]);
+
+  const handleFormChange = (event) => {
+    let data = [...formFields];
+    let val = event.target.name || event.value.name;
+    if (val === "date") {
+      data.find((e) => e.name === val).value = event.value;
+    } else {
+      data.find((e) => e.name === val).value = event.target.value;
+    }
+    setFormFields(data);
   };
 
-  const changeStartDate = (value: string) => {
-    setStartDate(value);
-    const selectedDate = new Date(value);
-    let defaultTime: string = "";
-    defaultTime = formatTime(startTime ? startTime : new Date());
-    setStartDateTime(
-      `${formatDate(selectedDate, DATE_FORMAT_2)}T${defaultTime}`,
-    );
+  const removeFormEntry = (event) => {
+    let data = [...formFields];
+    data.find((e) => e.name === event.target.id).value = null;
+    setFormFields(data);
   };
 
-  const changeEndDate = (value: string) => {
-    setEndDate(value);
-    const selectedDate = new Date(value);
-    let defaultTime: string = "";
-    defaultTime = formatTime(endTime ? endTime : new Date());
-    setEndDateTime(`${formatDate(selectedDate, DATE_FORMAT_2)}T${defaultTime}`);
+  const submit = (e) => {
+    e.preventDefault();
+    let str = ``;
+    formFields.forEach((e: any) => {
+      if (e.value) {
+        if (e.name === "startDate") {
+          str += `startTimeOne=${e.value.toISOString()}`;
+          return;
+        }
+        if (e.name === "endDate") {
+          str += `startDateTwo=${e.value.toLocaleDateString("en-US")}`;
+          return;
+        }
+        str += `${e.name}=${e.value.name || e.value}&`;
+      }
+    });
+    setUrl(`http://azruvuprep01:8080/supportdashboard/compareOPM?${str}`);
   };
 
   useEffect(() => {
@@ -167,8 +202,8 @@ const OpmComparison: React.FC = () => {
       setOptions(
         OPM_COMPARISON_OPTIONS({
           apiResponse,
-          startDate,
-          endDate,
+          startDate: formFields.find((e) => e.name === "startDate").value,
+          endDate: formFields.find((e) => e.name === "endDate").value,
         }),
       );
     }
@@ -268,40 +303,20 @@ const OpmComparison: React.FC = () => {
   };
 
   const clearAllHandler = () => {
-    // setDate(null);
-    // setFirstDate(null);
-    // setSecondDate(null);
-    setStartTime(null);
-    setStartDate(null);
-    setEndDate(null);
-    setDuration(null);
-    setChannel(null);
-    setLocale(null);
-    setPaymentMode(null);
-    setPromoCode(null);
+    let data = [...formFields];
+    data.forEach((e) => (e.value = ""));
+    setFormFields(data);
   };
-
-  // useEffect(() => {
-  //   if (width > 700) {
-  //     setUrl(
-  //       `http://azruvuprep01:8080/supportdashboard/compareOPM?period=${duration}&startTimeOne=${firstDate}&startDateTwo=${secondDate}&channel=${channel}&promocode=${promoCode}&paymentType=${paymentMode}&country=${locale}`
-  //     );
-  //   }
-  // }, [
-  //   firstDate,
-  //   secondDate,
-  //   duration,
-  //   channel,
-  //   locale,
-  //   paymentMode,
-  //   promoCode,
-  // ]);
 
   useEffect(() => {
     (async () => {
       await getData();
     })();
   }, [url]);
+
+  useEffect(() => {
+    setDisabled(formFields.map((e) => e.value).filter(Boolean).length === 0);
+  }, [formFields]);
 
   const onFilterClickHandler = () => {
     setShowFilters(!showFilters);
@@ -322,11 +337,6 @@ const OpmComparison: React.FC = () => {
     setShowFilters(!showFilters);
   };
 
-  useEffect(() => {
-    console.log(`duration`);
-    console.log(duration);
-  }, [duration]);
-
   return (
     <>
       <div className="flex gap-[59vw] mt-[3.9vh]">
@@ -343,99 +353,58 @@ const OpmComparison: React.FC = () => {
       {showFilters && (
         <>
           {width > 700 ? (
-            <div className="flex gap-[1.17vw] ml-[2.5vw] opmFilters">
-              <div className="flex flex-col w-[8vw] durationInput mr-[1.17vw]">
-                {/* <label className="text-[12px] text-[#757575] mb-[3px] font-medium mt-[11px] relative ml-[18px]">
-                  Duration
-                </label>
-                <CustomInputText
-                  imageClassName="relative left-[25px]"
-                  icon={ClockIcon}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setDuration(e.target.value);
-                  }}
-                  className="border rounded-[8px] border-solid border-slate-300 border-1 w-[6.58vw] h-[3.84vh]"
-                  id="duration"
-                /> */}
-                <label className="labelClass mb-[5px] mt-[2vh] relative ml-[18px]">
-                  Duration
-                </label>
-                <CustomDropdown
-                  value={durations.find((e) => e.name === duration)}
-                  onChange={(e: DropDownOnChangeEvent) =>
-                    setDuration(e.value.name)
-                  }
-                  imageClassName="relative left-[25px] z-[1]"
-                  icon={SandGlassIcon}
-                  options={durations}
-                  optionLabel="name"
-                  placeholder=""
-                />
-              </div>
-              <div className="flex flex-col calendarInput w-[8.78vw] relative top-[1.1vh] self-center">
-                <CustomCalendar
-                  title="Date 1"
-                  placeholder="mm/dd/yy"
-                  value={startDate}
-                  onChange={changeStartDate}
-                  maxDate={new Date()}
-                  dateFormat="dd/mm/yy"
-                  iconPos={"left"}
-                  imgalt="date-icon"
-                  imgsrc="src/assets/calendar.svg"
-                />
-              </div>
-              <div className="flex flex-col calendarInput w-[8.78vw] relative top-[1.1vh] self-center">
-                <CustomCalendar
-                  title="Date 2"
-                  placeholder="mm/dd/yy"
-                  value={endDate}
-                  onChange={changeEndDate}
-                  maxDate={new Date()}
-                  dateFormat="dd/mm/yy"
-                  iconPos={"left"}
-                  imgalt="date-icon"
-                  imgsrc="src/assets/calendar.svg"
-                />
-              </div>
-              <div className="flex flex-col calendarInput w-[7.91vw] relative top-[1.1vh] self-center">
-                <CustomCalendar
-                  title="Time"
-                  placeholder="HH:MM"
-                  value={startTime}
-                  onChange={changeStartTime}
-                  timeOnly
-                  iconPos={"left"}
-                  imgalt="time-icon"
-                  imgsrc="src/assets/clock.svg"
-                />
-              </div>
-              <div className="flex flex-col channelInput dropdownWithIcon w-[9.88vw] relative top-[1vh] self-center">
-                <label
-                  className="labelClass mb-[5px] mt-[1px]"
-                  htmlFor="channel"
-                >
-                  Channel
-                </label>
-                <CustomDropdown
-                  value={channels.find((e) => e.name === channel)}
-                  onChange={(e: DropDownOnChangeEvent) =>
-                    setChannel(e.value.name)
-                  }
-                  imageClassName="relative left-[25px]"
-                  icon={ChannelIcon}
-                  options={channels}
-                  optionLabel="name"
-                  placeholder="Channel"
-                />
-              </div>
+            <form
+              className="flex gap-[1vw] ml-[2.4vw] opmFilters"
+              onSubmit={submit}
+            >
+              {formFields.map((form, index) => {
+                return (
+                  <Fragment key={index}>
+                    {form.type === "text" && (
+                      <CustomInputText
+                        value={form.value}
+                        name={form.label}
+                        placeholder={form.label}
+                        onChange={(event) => handleFormChange(event)}
+                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
+                        id="promoCode"
+                      />
+                    )}
+                    {form.type === "time" && (
+                      <CustomCalendar
+                        name={form.name}
+                        title={form.label}
+                        showTime={form.name === "startDate"}
+                        timeOnly={form.timeOnly || false}
+                        iconPos={form.iconPos || "left"}
+                        imgsrc={form.imgsrc}
+                        onChange={(event) => handleFormChange(event)}
+                        value={form.value}
+                      />
+                    )}
+                    {form.type === "dropdown" && (
+                      <CustomDropdown
+                        value={form.value}
+                        name={form.name}
+                        onChange={(e) => handleFormChange(e)}
+                        imageClassName="relative left-[25px] z-[1]"
+                        icon={form.icon}
+                        options={form.options}
+                        label={form.label}
+                        optionLabel="name"
+                        placeholder=""
+                      />
+                    )}
+                  </Fragment>
+                );
+              })}
               <CustomButton
                 label="Submit"
+                isDisabled={disabled}
                 isRounded={true}
                 className="submitBtnMobile self-end ml-[11.5vw]"
-                onClick={onSubmitHandler}
               />
-            </div>
+            </form>
           ) : (
             <>
               <CustomModal
@@ -599,83 +568,25 @@ const OpmComparison: React.FC = () => {
         </>
       )}
       <div className="flex items-center gap-4 mt-[10px] overflow-scroll ml-[2.85vw]">
-        {startDate && (
-          <FilteredCard
-            leftIcon={SmallCalendar}
-            content={startDate.toLocaleString("en-US", {
-              year: "numeric",
-              month: "2-digit",
-              day: "2-digit",
-            })}
-            onClickHandler={() => setStartDate(null)}
-          />
-        )}
-        {endDate && (
-          <FilteredCard
-            leftIcon={SmallCalendar}
-            content={endDate.toLocaleString("en-US", {
-              year: "numeric",
-              month: "2-digit",
-              day: "2-digit",
-            })}
-            onClickHandler={() => setSecondDate(null)}
-          />
-        )}
-        {/* {duration && showDurationLoader && <Loader className="h-[25px]" />} */}
-        {duration && (
-          <FilteredCard
-            leftIcon={HourGlassIcon}
-            content={duration}
-            onClickHandler={() => setDuration(null)}
-          />
-        )}
-        {startTime && (
-          <FilteredCard
-            leftIcon={HourGlassIcon}
-            content={startTime.toLocaleString("en-US", {
-              hour12: false,
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
-            onClickHandler={() => setStartTime(null)}
-          />
-        )}
-        {channel && (
-          <FilteredCard
-            leftIcon={MobileIcon}
-            content={channel}
-            onClickHandler={() => setChannel(null)}
-          />
-        )}
-        {paymentMode && (
-          <FilteredCard
-            content={paymentMode}
-            onClickHandler={() => setPaymentMode(null)}
-          />
-        )}
-        {locale && (
-          <FilteredCard
-            content={locale}
-            onClickHandler={() => setLocale(null)}
-          />
-        )}
-        {/* {promoCode && showPromoCodeLoader && <Loader className="h-[25px]" />} */}
-        {promoCode && (
-          <FilteredCard
-            content={promoCode}
-            onClickHandler={() => setPromoCode(null)}
-          />
-        )}
-        {(firstDate ||
-          secondDate ||
-          duration ||
-          channel ||
-          paymentMode ||
-          locale ||
-          startDate ||
-          startTime ||
-          endDate ||
-          promoCode) && (
+        {formFields
+          .filter((e) => e.value)
+          .map((e: any) => (
+            <Fragment key={e.name}>
+              <FilteredCard
+                label={e.name}
+                leftIcon={e.cardIcon}
+                onClickHandler={removeFormEntry}
+                content={
+                  e.type === "time"
+                    ? e.name === "startDate"
+                      ? e.value.toLocaleString("en-US")
+                      : e.value.toLocaleDateString("en-US")
+                    : e.value.name || e.value
+                }
+              />
+            </Fragment>
+          ))}
+        {!disabled && (
           <CustomButton
             label="Reset"
             severity="secondary"
