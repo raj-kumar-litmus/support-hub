@@ -129,6 +129,9 @@
 button.p-button-secondary {
   @apply text-[12px] !text-[#757575];
 }
+.p-button.p-button-secondary:enabled:focus {
+  @apply shadow-none;
+}
 .filtersModal .p-dialog-header {
   @apply px-[8px] py-[10px] rounded-t-[10px] border-b border-b-[#F4F4F4] border-solid;
 }
@@ -144,8 +147,8 @@ button.p-button-secondary {
 .opmFilters .p-dropdown {
   @apply h-[38px];
 }
-.opmFilters .p-calendar {
-  @apply h-[38px] w-[9vw];
+.opmFilters .p-calendar{
+  @apply h-[38px]
 }
 .opmFilters .timeInput .p-calendar {
   @apply w-[8vw];
@@ -199,13 +202,25 @@ button.p-button-secondary {
 .filteredCard .p-button {
   @apply flex gap-[10px] px-[10px] items-center leading-none border border-solid border-[#c1bbbb] rounded rounded-[20px] h-[26px] text-[12px] text-[#322f2f] p-[5px] bg-transparent;
 }
-.filteredCard .p-button:hover {
-  @apply bg-transparent text-[#322f2f] border-[#c1bbbb];
+.filteredCard .p-button:focus {
+  @apply shadow-none;
 }
-.durationInput .p-inputtext {
+.filteredCard .p-button:hover {
+  @apply bg-transparent text-[#E8E8E8] border-[#30343B]
+}
+.resetFilters .p-button {
+  @apply !bg-transparent;
+}
+.resetFilters span {
+  @apply text-[#E8E8E8] font-normal
+}
+.inputContainer .p-inputtext {
   @apply w-[150px] h-[37px];
 }
-.durationInput span.flex {
+.opmFilters .p-inputtext {
+  @apply text-[#E8E8E8];
+}
+.inputContainer span.flex {
   @apply mt-1;
 }
 /* .channelInput .p-dropdown {
@@ -220,18 +235,17 @@ button.p-button-secondary {
 .promoCodeInput .p-inputtext {
   @apply w-full;
 }
-.durationInput {
+.inputContainer {
   @apply relative left-[-10px];
 }
 .dropdownWithIcon .p-dropdown {
   @apply border-l-transparent rounded-l-none w-[135px];
 }
-.dropdownWithIcon .p-dropdown:hover,
-.dropdownWithIcon .p-dropdown:not(.p-disabled).p-focus {
-  @apply !border-l-transparent;
+.dropdownWithIcon .p-dropdown:hover, .dropdownWithIcon .p-dropdown:not(.p-disabled).p-focus {
+  @apply !border-transparent;
 }
 .dropdownWithIcon img {
-  @apply border border-solid border-[#ced4da] border-r-transparent rounded-l-md rounded-tr-none left-[2px] pl-[5px];
+  @apply border border-solid border-[#30343B] border-r-transparent rounded-l-md rounded-tr-none left-[2px] pl-[5px] bg-[#30343B];
 }
 .p-input-icon-left > .p-inputtext {
   @apply !pl-[2rem];
@@ -239,10 +253,13 @@ button.p-button-secondary {
 .search-input .p-inputtext {
   @apply !pl-14;
 }
-.p-calendar-w-btn-left .p-inputtext {
-  @apply pl-0;
+.p-calendar-w-btn-left button.p-button {
+  @apply !bg-[#30343B] !border-[#30343B];
 }
-.opmFilters .durationInput .p-dropdown {
+.p-calendar-w-btn-left .p-inputtext {
+  @apply pl-0 bg-[#30343B] border-[#30343B];
+}
+.opmFilters .inputContainer .p-dropdown {
   @apply w-full pl-[20px];
 }
 .custom-popup .p-dialog-header {
@@ -337,4 +354,57 @@ button.p-button-secondary {
 }
 .custom-table .p-datatable-tbody tr td:first-child {
   @apply font-bold;
+}
+.opmFilters .p-dropdown {
+  @apply bg-[#30343B] border border-solid border-[#30343B];
+}
+.opmFilters .p-dropdown:not(.p-disabled).p-focus {
+  @apply border-[#30343B];
+}
+.opmFilters .p-dropdown:hover {
+  @apply border-[#40444B];
+}
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  @apply bg-[#30343B] text-[white];
+}
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+  @apply bg-[#30343B] text-[white];
+}
+.p-dropdown-panel .p-dropdown-items {
+  @apply p-0;
+}
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
+  @apply bg-[#40444B] text-[white];
+}
+.labelClass {
+  @apply text-[12px] text-[#E8E8E8] font-medium
+}
+.tableToolTip {
+  @apply w-[140px] mr-[0];
+}
+.tableToolTip thead tr th {
+  @apply border border-solid border-t-0 border-l-0 border-r-0 border-[#383F47] pb-[10px];
+}
+.tableToolTip tbody {
+  @apply flex justify-between	pt-[5px] pb-[5px];
+}
+.tableToolTip:after{
+  @apply content-[""] mt-0 mb-0 ml-[0.5rem] mr-[0.5rem] inline-block border-[7px] border-solid border-transparent border-t-[8px] border-t-[#25292D] border-b-0 absolute left-[65px] top-[70px];
+}
+.toolTipEl {
+  @apply bg-[#25292D] text-[12px] text-white opacity-100 pointer-events-none absolute -translate-x-[50%] -translate-y-[120%] text-left rounded-md px-[10px] py-[6px]; 
+}
+hr.horizontalLine {
+  @apply border-0 rotate-90 relative h-0.5 top-[100px]
+  /* border: 0; */
+  /* rotate: 90deg; */
+  /* height: 2px; */
+  /* position: relative; */
+  /* top:100px; */
+}
+hr.horizontalLine.opm {
+  background: linear-gradient(to right, #5A9EF5, #5A9EF500);
+}
+hr.horizontalLine.opmComparison {
+  background: linear-gradient(to right, #6370FF, #5A9EF500);
 }

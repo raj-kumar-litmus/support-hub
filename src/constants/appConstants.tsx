@@ -1,3 +1,5 @@
+import { externalTooltipHandler } from "../components/utils/Utils";
+
 //Titles
 export const SESSIONS: string = "Sessions";
 
@@ -86,3 +88,121 @@ export const ORDER_STATUS_LIST = [
     description: "Shipped and invoiced",
   },
 ];
+export const OPM_OPTIONS = {
+  responsive: true,
+  layout: {
+    padding: {
+      left: 30,
+      right: 50,
+      top: 50,
+      bottom: 20,
+    },
+  },
+  scales: {
+    x: {
+      grid: {
+        display: false,
+      },
+      title: {
+        display: true,
+        color: "#FAF9F6",
+        text: "Total Orders Per Minute",
+        padding: { top: 30 },
+      },
+    },
+  },
+  plugins: {
+    legend: {
+      display: false,
+    },
+    tooltip: {
+      enabled: false,
+      external: (_) => externalTooltipHandler(_, "opm"),
+    },
+    datalabels: {
+      display: false,
+    },
+  },
+  elements: {
+    point: {
+      radius: 4,
+      backgroundColor: "white",
+    },
+  },
+};
+
+export const OPM_COMPARISON_OPTIONS = ({
+  apiResponse,
+  startDate,
+  endDate,
+}) => ({
+  responsive: true,
+  layout: {
+    padding: {
+      left: 30,
+      right: 50,
+      top: 50,
+      bottom: 20,
+    },
+  },
+  scales: {
+    x: {
+      grid: {
+        display: false,
+      },
+      title: {
+        display: true,
+        text: "Total Orders Per Minute",
+        color: "#E8E8E8",
+        position: "left",
+        padding: {
+          top: 50,
+        },
+      },
+    },
+  },
+  elements: {
+    point: {
+      radius: 4,
+      backgroundColor: "white",
+    },
+  },
+  plugins: {
+    datalabels: {
+      display: false,
+    },
+    legend: {
+      display: true,
+      position: "bottom",
+      align: "start",
+      labels: {
+        boxWidth: 30,
+        backgroundColor: "transparent",
+        generateLabels: () => {
+          return Object.keys(apiResponse).map((_, index) => ({
+            text:
+              index === 0
+                ? startDate?.toLocaleString("en-US", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                  })
+                : endDate?.toLocaleString("en-US", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                  }),
+            fillStyle: "transparent",
+            lineWidth: 2,
+            fontColor: index === 0 ? "#6370FF" : "#FDA44F",
+            strokeStyle: index === 0 ? "#6370FF" : "#FDA44F",
+          }));
+        },
+      },
+    },
+    tooltip: {
+      enabled: false,
+      external: (_) => externalTooltipHandler(_, "opmComparison"),
+    },
+  },
+});

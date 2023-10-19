@@ -160,11 +160,6 @@ const BarChart = () => {
     return filterApplied ? filterApplied.label : "all";
   };
 
-  useEffect(() => {
-    console.log(`startTime`);
-    console.log(startTime);
-  }, [startTime]);
-
   const resetFilters = () => {
     setStartDate("");
     setStartTime("");

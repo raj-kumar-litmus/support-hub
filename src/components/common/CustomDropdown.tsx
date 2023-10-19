@@ -1,5 +1,5 @@
-import React, { FC } from "react";
-import { Dropdown, DropdownChangeParams } from "primereact/dropdown";
+import { FC } from "react";
+import { Dropdown } from "primereact/dropdown";
 import { CustomDropdownProps } from "../../@types/BarChart";
 import CustomIcon from "./CustomIcon";
 
@@ -18,7 +18,8 @@ const CustomDropdown: FC<CustomDropdownProps> = (props) => (
       )}
       <Dropdown
         value={props.value}
-        onChange={(e: DropdownChangeParams) => props.onChange(e.value)}
+        name={props.name}
+        onChange={(e: any) => props.onChange(e)}
         options={props.options}
         optionLabel={props.optionLabel}
         placeholder={props.placeHolder}

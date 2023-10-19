@@ -32,7 +32,7 @@ interface Dataset {
   fill?: boolean;
   borderColor: string;
   borderWidth?: number;
-  backgroundColor?: CanvasGradient | string | undefined;
+  backgroundColor?: any;
 }
 
 interface CustomLabel {
@@ -63,10 +63,15 @@ export interface OpmComparisonType {
 }
 
 export interface ChartOptions {
-  responsive: boolean;
+  responsive?: boolean;
   scales?: {
     x?: any;
     y?: any;
   };
   plugins?: any;
+  apiResponse?: any;
+  startDate?: any;
+  elements?: any;
+  endDate?: any;
+  layout?: any;
 }
