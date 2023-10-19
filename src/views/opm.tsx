@@ -28,7 +28,6 @@ import CustomModal from "../components/Modal";
 import LineChart from "../components/LineChart";
 import FilteredCard from "../components/FilteredCard";
 import CustomImage from "../components/common/customimage";
-import { OPM_CHART } from "../config/chartConfig";
 
 import FilterIcon from "../assets/filter.svg";
 import HourGlassIcon from "../assets/hourglass.svg";
@@ -249,7 +248,7 @@ const OPM: React.FC = () => {
               </button>
             </div>
           </div>
-          <Line options={OPM_CHART} data={data} />
+          <Line options={options} data={data} />
         </div>
       )}
       {location.pathname.includes("opm") && (
@@ -590,7 +589,7 @@ const OPM: React.FC = () => {
           </div>
           {data && (
             <div className="bg-[#F4F4F4] border-0 rounded-[10px] w-[95%] ml-[20px] h-[700px]">
-              <LineChart options={OPM_CHART} data={data} />
+              <LineChart options={options} data={data} />
             </div>
           )}
         </>

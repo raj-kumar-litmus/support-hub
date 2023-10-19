@@ -32,7 +32,6 @@ import LineChart from "../components/LineChart";
 import FilteredCard from "../components/FilteredCard";
 import Loader from "../components/Loader";
 import CustomImage from "../components/common/customimage";
-import { OPM_COMP_CHART } from "../config/chartConfig";
 
 import FilterIcon from "../assets/filter.svg";
 import HourGlassIcon from "../assets/hourglass.svg";
@@ -356,7 +355,7 @@ const OpmComparison: React.FC = () => {
               </button>
             </div>
           </div>
-          <Line options={OPM_COMP_CHART} data={data} />
+          <Line options={options} data={data} />
         </div>
       )}
       {location.pathname.includes("opmcomparison") && (
@@ -771,7 +770,7 @@ const OpmComparison: React.FC = () => {
           </div>
           {data && (
             <div className="bg-[#F4F4F4] border-0 rounded-[10px] w-[95%] ml-[20px] h-[700px]">
-              <LineChart options={OPM_COMP_CHART} data={data} />
+              <LineChart options={options} data={data} />
             </div>
           )}
         </>

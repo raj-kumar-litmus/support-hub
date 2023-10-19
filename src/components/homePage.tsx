@@ -1,6 +1,4 @@
 import HomeCard from "./common/homeCard";
-import HomeSessionsChart from "./charts/homeSessionsChart";
-import HomePageOPMCharts from "./homePageOPMCharts";
 import CustomImage from "./common/customimage";
 import BarChart from "./charts/BarChart";
 import OPM from "../views/opm";
@@ -94,8 +92,6 @@ const HomePage = () => {
           textColor="#FFFFFF"
         />
       </div>
-      {/* <HomePageOPMCharts /> */}
-      {/* <HomeSessionsChart /> */}
       <div className="home-opm-charts flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-6 mb-6">
         <OPM />
         <OpmComparison />

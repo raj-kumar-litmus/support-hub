@@ -45,7 +45,7 @@ export const DURATION_LIST: { label: string; value: number }[] = [
 // Chart Constants
 export const CHART = {
   TITLE_FONT_SIZE: 18,
-  SUBTITLE_FONT_SIZE: 10,
+  SUBTITLE_FONT_SIZE: 12,
   DATALABEL_FONT_SIZE: 10,
   ROTATION_0: 0,
   ROTATION_270: 270,

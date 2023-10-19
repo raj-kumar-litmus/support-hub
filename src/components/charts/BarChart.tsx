@@ -189,11 +189,6 @@ const BarChart = () => {
         ? `${TOTAL_SESSIONS_PER_MIN_SECONDARY}`
         : `${SESSIONS}`;
     chartOptions.plugins.datalabels.rotation = duration > 15 ? 270 : 0;
-    if (type === "both") {
-      chartOptions.plugins.legend.display = true;
-      chartOptions.plugins.legend.position = "bottom";
-      chartOptions.plugins.legend.align = "start";
-    }
     return chartOptions;
   };
 

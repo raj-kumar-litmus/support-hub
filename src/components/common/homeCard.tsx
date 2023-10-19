@@ -9,16 +9,9 @@ type Props = {
 interface HomeCardProps {
   title: FC<Props>;
   value: FC;
-  bgColor: string;
-  textColor: string;
 }
 
-const HomeCard: FC<HomeCardProps> = ({
-  title,
-  value,
-  bgColor,
-  textColor,
-}) => {
+const HomeCard: FC<HomeCardProps> = ({ title, value }) => {
   return (
     <Card title={title} className="home-card bg-[#30343B] text-[#898A8D]">
       <div className="flex justify-between">

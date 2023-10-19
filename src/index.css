@@ -221,17 +221,9 @@ button.p-button-secondary {
   @apply !h-[250px] sm:!h-[300px];
 }
 
-/* .home-page .home-card {
-  @apply w-full sm:w-1/2;
-} */
-
 .home-page .p-card {
-  @apply rounded-lg shadow-lg shadow-[#00000029] grow w-[16%];
+  @apply rounded-lg shadow-lg shadow-[#00000029] grow w-[35%] sm:w-[19%];
 }
-
-/* .home-page .p-card:first-child {
-  @apply ml-0;
-} */
 
 .home-page .p-card .p-card-body {
   @apply !p-4 h-full flex flex-col justify-between;
