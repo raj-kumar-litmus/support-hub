@@ -43,7 +43,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
             setOpenSearchField={setOpenSearchField}
           />
         )}
-        <div className="flex flex-col sm:flex-row mt-16">
+        <div className="flex flex-col sm:flex-row mt-[3.5rem] ml-[0] bg-[#1C1C20]">
           {showSidePane && (
             <SidePaneList
               menuList={MENU_LIST}

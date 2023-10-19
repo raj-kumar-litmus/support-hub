@@ -253,6 +253,9 @@ button.p-button-secondary {
 .search-input .p-inputtext {
   @apply !pl-14;
 }
+.p-calendar-w-btn-left button.p-button {
+  @apply !bg-[#30343B] !border-[#30343B];
+}
 .p-calendar-w-btn-left .p-inputtext {
   @apply pl-0 bg-[#30343B] border-[#30343B];
 }
@@ -392,11 +395,12 @@ button.p-button-secondary {
   @apply bg-[#25292D] text-[12px] text-white opacity-100 pointer-events-none absolute -translate-x-[50%] -translate-y-[120%] text-left rounded-md px-[10px] py-[6px]; 
 }
 hr.horizontalLine {
-  border: 0;
-  rotate: 90deg;
-  height: 2px;
-  position: relative;
-  top:100px;
+  @apply border-0 rotate-90 relative h-0.5 top-[100px]
+  /* border: 0; */
+  /* rotate: 90deg; */
+  /* height: 2px; */
+  /* position: relative; */
+  /* top:100px; */
 }
 hr.horizontalLine.opm {
   background: linear-gradient(to right, #5A9EF5, #5A9EF500);

@@ -4,7 +4,7 @@ import CustomIcon from "./CustomIcon";
 import { CustomCalendarProps } from "../../@types/BarChart";
 
 const CustomCalendar: FC<CustomCalendarProps> = (props) => (
-  <div className={props.containerClassName}>
+  <div className={`flex flex-col self-end ${props.containerClassName}`}>
     <div className="text-[12px] text-[#E8E8E8] font-medium">{props.title}</div>
     <Calendar
       {...props}
