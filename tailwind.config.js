@@ -20,8 +20,33 @@ export default {
     },
   },
   plugins: [
-    plugin(function ({ addUtilities }) {
-      addUtilities({});
+    plugin(function ({addUtilities}) {
+      const filterUtilities = {
+        '.filter': {
+          'filter': 'var(--filter)',
+        },
+        '.invert-12': {
+          '--filter': 'invert(12%)',
+        },
+        '.sepia-9': {
+          '--filter': 'sepia(9%)',
+        },
+        '.saturate-682': {
+          '--filter': 'saturate(682%)',
+        },
+        '.hue-rotate-201': {
+          '--filter': 'hue-rotate(201deg)',
+        },
+        '.brightness-88': {
+          '--filter': 'brightness(88%)',
+        },
+        '.contrast-88': {
+          '--filter': 'contrast(88%)',
+        },
+      };
+
+      addUtilities(filterUtilities, ['responsive', 'hover']);
+
     }),
   ],
 };
