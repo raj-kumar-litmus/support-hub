@@ -21,13 +21,20 @@ export interface ChartDataset {
 }
 
 export interface CustomCalendarProps {
-  title: string;
-  placeholder: string;
-  value: Date;
+  title?: string;
+  placeholder?: string;
+  name?: string;
+  timeOnly?: boolean;
+  showTime?: boolean;
+  hideOnDateTimeSelect?: boolean;
+  hourFormat?: "24" | "12";
+  selectionMode?: "single" | "range" | "multiple";
+  value: string;
   onChange: (value: Date) => void;
-  iconPos: string;
-  imgalt: string;
-  imgsrc: string;
+  iconPos: "left" | "right";
+  containerClassName?: string;
+  imgalt?: string;
+  imgsrc?: string;
   icon?: any;
 }
 
@@ -36,6 +43,9 @@ export interface CustomDropdownProps {
   value: number | string;
   onChange: (value: number | string) => void;
   options: DropDownOptions[];
+  showIcon?: boolean;
+  iconAlt?: string;
+  iconSrc?: string;
   optionLabel: string;
   placeHolder: string;
 }
@@ -45,6 +55,7 @@ export interface CustomIconProps {
   src: string;
   width: string;
   height: string;
+  className?: string;
 }
 
 export interface FilterItemProps {
