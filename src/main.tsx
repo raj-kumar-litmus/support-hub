@@ -12,6 +12,7 @@ import "primereact/resources/primereact.min.css";
 import "./index.css";
 
 // const Loader = lazy(() => import("./components/Loader.tsx"));
+// vercel comment
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
