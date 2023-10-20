@@ -238,39 +238,34 @@ button.p-button-secondary {
 .opmFilters .durationInput .p-dropdown {
   @apply w-full pl-[20px];
 }
-.orderStatus-dialog .p-dialog-content::-webkit-scrollbar {
-  @apply w-1.5  rounded-lg;
+
+.p-dialog-content::-webkit-scrollbar {
+ @apply w-1;
+}
+.p-dialog{
+  @apply  bg-[#1C1C20]
+ 
+}
+.p-dialog-content::-webkit-scrollbar-thumb {
+ @apply bg-[#30343B] rounded-full
+}
+.p-dialog .p-dialog-content{
+  @apply mr-2 ml-0.5  bg-[#1C1C20];
+
 }
 
-.orderStatus-dialog .p-dialog-content::-webkit-scrollbar-thumb {
-  @apply bg-[#30343B] rounded-full;
-}
 
 .orderStatus-dialog .p-dialog-header {
   @apply flex items-center p-1.5 bg-[#1C1C20]  border-b  border-slate-600 text-[#F2F2F2];
 }
 .orderStatus-dialog .p-dialog-header .p-dialog-title {
-  @apply text-center text-base font-helvetica  ml-6;
+  @apply text-center  text-base font-helvetica  ml-6;
 }
 .orderStatus-dialog .p-dialog-content {
-  @apply border-slate-900 border-t bg-[#1C1C20];
+  @apply border-gray-700  border-t ;
 }
 
-.backButton .p-button {
-  @apply !shadow-none !border-none bg-transparent;
-}
-.backButton .p-button:focus {
-  @apply bg-transparent !shadow-none;
-}
-.backButton .p-button {
-  @apply bg-[#898A8D];
-}
-.backButton .p-button:hover {
-  @apply bg-transparent !shadow-none;
-}
-.backButton .p-button {
-  @apply bg-transparent !shadow-none;
-}
+
 .orderStatus-dialog .p-dialog-header-icon:enabled:hover {
   @apply !bg-transparent;
 }
