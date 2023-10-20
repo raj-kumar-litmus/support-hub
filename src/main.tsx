@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "primereact/resources/primereact.min.css";
@@ -10,6 +10,7 @@ import Chart from "./components/ChartIndex.tsx";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import "./index.css";
+import OrderDetails from "./components/orderDetails/OrderDetails.js";
 
 // const Loader = lazy(() => import("./components/Loader.tsx"));
 
@@ -39,6 +40,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route
             path="/opmcomparison"
             element={<App appContent={<Chart type="opmcomparison" />} />}
+          />
+          <Route
+            path="/orderDetails/:orderId"
+            element={<App appContent={<OrderDetails />} />}
           />
         </Routes>
       </Suspense>

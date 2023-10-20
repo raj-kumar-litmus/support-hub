@@ -25,10 +25,12 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
   }, [location?.pathname]);
 
   useEffect(() => {
-    const _selectedMenu = MENU_LIST.find(
-      (menu) => location?.pathname.split("/")[1] == menu.path.split("/")[1],
-    ).id;
-    setSelectedMenu(_selectedMenu);
+    if (location?.pathname.split("/")[1] !== "orderDetails") {
+      const _selectedMenu = MENU_LIST.find(
+        (menu) => location?.pathname.split("/")[1] == menu.path.split("/")[1],
+      ).id;
+      setSelectedMenu(_selectedMenu);
+    }
   }, [location?.pathname]);
 
   return (
@@ -77,7 +79,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
             </div>
           )}
           <div
-            className={`w-full ${
+            className={`sm:w-full ${
               showSidePaneGrid ? "hidden" : "block"
             } sm:ml-[308px]  h-[calc(100vh-56px)] overflow-y-auto`}
           >

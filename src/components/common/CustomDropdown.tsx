@@ -2,6 +2,8 @@ import { FC } from "react";
 import { Dropdown } from "primereact/dropdown";
 import { CustomDropdownProps } from "../../@types/BarChart";
 import CustomIcon from "./CustomIcon";
+import FilterIcon from "../../assets/filter.svg";
+import ArrowDownIcon from "../../assets/arrowdown.svg";
 
 const CustomDropdown: FC<CustomDropdownProps> = (props) => (
   <>
@@ -26,12 +28,12 @@ const CustomDropdown: FC<CustomDropdownProps> = (props) => (
         dropdownIcon={
           <CustomIcon
             alt={"drop-down-arrow"}
-            src={`src/assets/${!props.showIcon ? `filter` : `arrowdown`}.svg`}
+            src={props.showIcon ? ArrowDownIcon : FilterIcon}
             width="16px"
             height="16px"
           />
         }
-        className={`w-full md:w-14rem mt-1 min-w-full ${
+        className={`w - full md: w - 14rem mt - 1 min - w - full ${
           props.showIcon ? `pl-6` : ``
         } `}
       />
