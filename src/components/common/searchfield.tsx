@@ -1,9 +1,6 @@
-import { FC } from "react";
-import RightArrowIcon from "../../assets/right_arrow.svg";
-import { Button } from "primereact/button";
-import CustomImage from "./customimage";
-import CustomInputText from "./custominputtext";
+import { FC, KeyboardEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import CustomInputText from "./custominputtext";
 
 type Props = {
   searchValue: string;
@@ -13,8 +10,11 @@ type Props = {
 const SearchField: FC<Props> = ({ searchValue, setSearchValue }) => {
   const navigate = useNavigate();
 
-  const searchOrder = () => {
-    navigate(`/orderDetails/${searchValue}`);
+  const searchOrder = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      navigate(`/orderDetails/${searchValue}`);
+    }
   };
 
   return (
@@ -23,7 +23,8 @@ const SearchField: FC<Props> = ({ searchValue, setSearchValue }) => {
         type="text"
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
-        className="w-full focus:outline-none text-[#898A8D]  placeholder:text-[#898A8D] bg-[#30343B] placeholder:font-helvetica placeholder:font-normal placeholder:border placeholder:border-solid placeholder:border-[#30343B] !shadow-none !border-none"
+        onKeyDown={(e) => searchOrder(e)}
+        className="w-full focus:outline-none text-[#FAF9F6]  placeholder:text-[#898A8D] bg-[#30343B] placeholder:font-helvetica placeholder:font-normal placeholder:border placeholder:border-solid placeholder:border-[#30343B] !shadow-none !border-none"
         placeholder="Search Orders"
       />
     </div>

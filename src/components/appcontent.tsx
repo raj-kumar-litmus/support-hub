@@ -41,6 +41,8 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
             setShowSidePaneGrid={setShowSidePaneGrid}
             openSearchField={openSearchField}
             setOpenSearchField={setOpenSearchField}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
           />
         )}
         <div
