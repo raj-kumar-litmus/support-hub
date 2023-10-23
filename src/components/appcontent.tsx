@@ -25,12 +25,10 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
   }, [location?.pathname]);
 
   useEffect(() => {
-    if (location?.pathname.split("/")[1] !== "orderDetails") {
-      const _selectedMenu = MENU_LIST.find(
-        (menu) => location?.pathname.split("/")[1] == menu.path.split("/")[1]
-      ).id;
-      setSelectedMenu(_selectedMenu);
-    }
+    const _selectedMenu = MENU_LIST.find(
+      (menu) => location?.pathname.split("/")[1] == menu.path.split("/")[1]
+    )?.id;
+    setSelectedMenu(_selectedMenu);
   }, [location?.pathname]);
 
   return (
