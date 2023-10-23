@@ -286,7 +286,7 @@ button.p-button-secondary {
   @apply text-center text-base font-helvetica  ml-6;
 }
 .orderStatus-dialog .p-dialog-content {
-  @apply py-1  border-t-[1px] border-zinc-700  bg-[#1C1C20];
+  @apply border-slate-900 border-t bg-[#1C1C20];
 }
 
 .backButton .p-button {
