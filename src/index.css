@@ -153,6 +153,9 @@ button.p-button-secondary {
 .opmFilters .timeInput .p-calendar {
   @apply w-[8vw];
 }
+.opmFilters .timeInput .p-calendar {
+  @apply w-[8vw];
+}
 .p-datepicker-trigger {
   @apply !p-0 border border-solid border-[#ced4da] border-r-0;
 }
