@@ -283,6 +283,26 @@ button.p-button-secondary {
 }
 .orderStatus-dialog .p-dialog-content {
   @apply border-[#30343B]  border-t;
+  @apply text-center text-base font-helvetica  ml-6;
+}
+.orderStatus-dialog .p-dialog-content {
+  @apply py-1  border-t-[1px] border-zinc-700  bg-[#1C1C20];
+}
+
+.backButton .p-button {
+  @apply !shadow-none !border-none bg-transparent;
+}
+.backButton .p-button:focus {
+  @apply bg-transparent !shadow-none;
+}
+.backButton .p-button {
+  @apply bg-[#898A8D];
+}
+.backButton .p-button:hover {
+  @apply bg-transparent !shadow-none;
+}
+.backButton .p-button {
+  @apply bg-transparent !shadow-none;
 }
 .orderStatus-dialog .p-dialog-header-icon:enabled:hover {
   @apply !bg-transparent;
