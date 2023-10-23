@@ -479,6 +479,19 @@ hr.horizontalLine.opmComparison {
 .orderItemInfoTable span.p-column-title{
   @apply bg-inherit;
 }
-.flexWrapper {
-  @apply flex justify-between w-full py-1 px-4 sm:p-0 border-b border-solid border-[#383F47] sm:border-none
+.flexBlockWrapper{
+  @apply flex justify-between w-full;
 }
+.flexWrapper {
+  @apply flexBlockWrapper py-1 px-4 sm:p-0 border-b border-solid border-[#383F47] sm:border-none;
+}
+.flexColWrapper{
+  @apply flex flex-col border-t-0 sm:border-t border-solid border-[#383F47] sm:grid;
+}
+.gridNoGapRounded{
+  @apply grid gap-y-0 rounded-md;
+}
+.filterCardWrapper{
+  @apply py-1 px-4 sm:p-0 border-solid border-[#383F47] bg-[#30343B]
+}
+
