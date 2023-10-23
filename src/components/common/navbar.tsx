@@ -12,6 +12,8 @@ type Props = {
   setShowSidePaneGrid: (a: boolean) => void;
   openSearchField: boolean;
   setOpenSearchField: (a: boolean) => void;
+  searchValue: string;
+  setSearchValue: (a: string) => void;
 };
 
 const Navbar: FC<Props> = ({
@@ -20,8 +22,9 @@ const Navbar: FC<Props> = ({
   setShowSidePaneGrid,
   openSearchField,
   setOpenSearchField,
+  searchValue,
+  setSearchValue,
 }) => {
-  const [searchValue, setSearchValue] = useState<string>("");
   const navigate = useNavigate();
 
   const navigateToHome = () => {

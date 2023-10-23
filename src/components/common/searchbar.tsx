@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, KeyboardEvent } from "react";
 import HeaderSearch from "../../assets/headersearch.svg";
 import CustomButton from "../Button";
 import CustomImage from "./customimage";
@@ -22,7 +22,7 @@ const SearchBar: FC<Props> = ({
 }) => {
   const navigate = useNavigate();
 
-  const handleEnterPress = (event) => {
+  const handleEnterPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       event.preventDefault();
       navigate(`/orderDetails/${searchValue}`);
