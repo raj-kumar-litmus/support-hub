@@ -11,17 +11,14 @@ type Props = {
 
 const SearchField: FC<Props> = ({ searchValue, setSearchValue }) => {
   return (
-    <div className="flex sm:hidden px-6 border-slate-200  border-solid	 border-b justify-between">
+    <div className="flex sm:hidden h-[56px] bg-[#1C1C20] border-solid border-b border-[#30343B] border-1 px-5 py-[9px] absolute top-[56px] w-full z-50">
       <CustomInputText
         type="text"
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
-        className="w-full focus:outline-none placeholder:text-stone-500 bg-transparent placeholder:font-helvetica placeholder:font-medium !shadow-none !border-none"
-        placeholder="Search Order"
+        className="w-full focus:outline-none text-[#898A8D]  placeholder:text-[#898A8D] bg-[#30343B] placeholder:font-helvetica placeholder:font-normal placeholder:border placeholder:border-solid placeholder:border-[#30343B] !shadow-none !border-none"
+        placeholder="Search Orders"
       />
-      <Button text className="-ml-8 button-focus !shadow-none">
-        <CustomImage className="arrow-icon" src={RightArrowIcon} alt="Search" />
-      </Button>
     </div>
   );
 };

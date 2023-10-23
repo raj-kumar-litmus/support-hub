@@ -39,7 +39,7 @@ const SearchBar: FC<Props> = ({
         <CustomButton
           isTextButton
           className="search-button"
-          onClick={() => setOpenSearchField(!openSearchField)}
+          onClick={() => setOpenSearchField(true)}
         >
           <CustomImage className="h-[13px]" src={HeaderSearch} alt="Search" />
         </CustomButton>

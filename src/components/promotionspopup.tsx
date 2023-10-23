@@ -42,11 +42,15 @@ const PromotionsPopup = () => {
         visible={openDialog}
         onHide={() => setOpenDialog(false)}
         draggable={false}
-        className="custom-popup  max-[400px]:w-full top-[200px] sm:top-[137px]"
+        className="absolute custom-popup max-h-[calc(100vh-204px)] sm:max-h-[calc(100vh-141px)]  max-[400px]:w-full top-[200px] sm:top-[137px]"
       >
-        {promotions.map((p) => (
-          <PromotionCard key={p.promotionId} promotion={p} />
-        ))}
+        {promotions.length > 0 ? (
+          promotions.map((p) => (
+            <PromotionCard key={p.promotionId} promotion={p} />
+          ))
+        ) : (
+          <div className="text-center">No Data</div>
+        )}
       </CustomDialog>
     </>
   );
