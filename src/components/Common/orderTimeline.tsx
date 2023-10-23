@@ -23,12 +23,12 @@ const Timeline: React.FC<TimelineProps> = ({ orderMap }) => {
             />
 
             {!isLast && (
-              <div className="relative ml-[32%] bottom-12">
+              <div className="relative ml-[32%]  bottom-[52%]">
                 <Stepper />
               </div>
             )}
             {isLast && (
-              <div className="relative left-[32%] bottom-12 w-3.5 h-3.5 border-2 border-[#898A8D] rounded-full"></div>
+              <div className="relative left-[32%] bottom-[46%] w-3.5 h-3.5 border-2 border-[#898A8D] rounded-full"></div>
             )}
           </div>
         );
