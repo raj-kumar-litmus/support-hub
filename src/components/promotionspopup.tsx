@@ -1,58 +1,35 @@
-import { useEffect, useState } from "react";
-import promotionsJSON from "../sampleJSON/promotions.json";
+import { FC } from "react";
 import { IPromotion } from "../@types/promotion";
 import CustomDialog from "./common/customdialog";
 import PromotionCard from "./common/promotioncard";
-import CustomButton from "./Button";
-import { fetchData } from "../utils/fetchUtil";
-import { URL_PROMOTIONS } from "../constants/apiConstants";
 
-const PromotionsPopup = () => {
-  const [promotions, setPromotions] = useState<IPromotion[]>([]);
-  const [orderId, setOrderId] = useState<string>("60577546279");
-  const [openDialog, setOpenDialog] = useState<boolean>(false);
+type Props = {
+  promotions: IPromotion[];
+  openPromotionsPopup: boolean;
+  setOpenPromotionsPopup: (a: boolean) => void;
+};
 
-  const getPromotions = async () => {
-    const params = {
-      orderId: orderId,
-    };
-    try {
-      const data = await fetchData(URL_PROMOTIONS, params);
-      setPromotions(promotionsJSON);
-    } catch (err) {
-      console.error("Error while fetching data:", err);
-    }
-  };
-
-  useEffect(() => {
-    getPromotions();
-  }, []);
-
+const PromotionsPopup: FC<Props> = ({
+  promotions,
+  openPromotionsPopup,
+  setOpenPromotionsPopup,
+}) => {
   return (
-    <>
-      <CustomButton
-        label="Promotions"
-        onClick={() => setOpenDialog(true)}
-        isTextButton
-        severity="secondary"
-        className="popup-button"
-      />
-      <CustomDialog
-        header="Promotions"
-        visible={openDialog}
-        onHide={() => setOpenDialog(false)}
-        draggable={false}
-        className="absolute custom-popup max-h-[calc(100vh-204px)] sm:max-h-[calc(100vh-141px)]  max-[400px]:w-full top-[200px] sm:top-[137px]"
-      >
-        {promotions.length > 0 ? (
-          promotions.map((p) => (
-            <PromotionCard key={p.promotionId} promotion={p} />
-          ))
-        ) : (
-          <div className="text-center">No Data</div>
-        )}
-      </CustomDialog>
-    </>
+    <CustomDialog
+      header="Promotions"
+      visible={openPromotionsPopup}
+      onHide={() => setOpenPromotionsPopup(false)}
+      draggable={false}
+      className="absolute custom-popup max-h-[calc(100vh-204px)] sm:max-h-[calc(100vh-141px)]  max-[400px]:w-full top-[200px] sm:top-[137px]"
+    >
+      {promotions.length > 0 ? (
+        promotions.map((p) => (
+          <PromotionCard key={p.promotionId} promotion={p} />
+        ))
+      ) : (
+        <div className="text-center">No Data</div>
+      )}
+    </CustomDialog>
   );
 };
 
