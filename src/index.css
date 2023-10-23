@@ -479,3 +479,6 @@ hr.horizontalLine.opmComparison {
 .orderItemInfoTable span.p-column-title{
   @apply bg-inherit;
 }
+.flexWrapper {
+  @apply flex justify-between w-full py-1 px-4 sm:p-0 border-b border-solid border-[#383F47] sm:border-none
+}

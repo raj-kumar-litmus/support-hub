@@ -162,7 +162,7 @@ const OrderDetails: React.FC = () => {
           </span>
         </div>
         <div className="flex flex-col border-t-0 sm:border-t border-solid border-[#383F47] sm:grid sm:gap-y-0 sm:grid-cols-2 ">
-          <div className="flex justify-between w-full py-1 px-4 sm:p-0 border-b border-solid border-[#383F47] sm:border-none justify-start bg-[#30343B] rounded-t-md">
+          <div className="flexWrapper justify-start bg-[#30343B] rounded-t-md">
             <span className="w-auto sm:w-1/5 flex items-center">
               {ORDER}
               <CustomIcon
@@ -178,7 +178,7 @@ const OrderDetails: React.FC = () => {
               {orderData?.orderId}
             </span>
           </div>
-          <div className="flex justify-between w-full py-1 px-4 sm:p-0 border-b border-solid border-[#383F47] sm:border-none bg-[#30343B]">
+          <div className="flexWrapper bg-[#30343B]">
             <span className="w-auto sm:w-1/5 font-light">{ORDER_TOTAL}</span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.orderTotal}
@@ -186,13 +186,13 @@ const OrderDetails: React.FC = () => {
           </div>
         </div>
         <div className="flex flex-col border-t-0 sm:border-t border-solid border-[#383F47] sm:grid sm:gap-y-0 sm:grid-cols-2 bg-[#30343B]">
-          <div className="flex justify-between w-full py-1 px-4 sm:p-0 border-b border-solid border-[#383F47] sm:border-none">
+          <div className="flexWrapper">
             <span className="w-auto sm:w-1/5 font-light">{SUBMITTED}</span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.submittedDate}
             </span>
           </div>
-          <div className="flex justify-between w-full py-1 px-4 sm:p-0 border-b border-solid border-[#383F47] sm:border-none">
+          <div className="flexWrapper">
             <span className="w-auto sm:w-1/5 font-light">{CHANNEL}</span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.originOfOrder}
@@ -200,7 +200,7 @@ const OrderDetails: React.FC = () => {
           </div>
         </div>
         <div className="flex flex-col border-t-0 sm:border-t border-solid border-[#383F47] sm:grid sm:gap-y-0 sm:grid-cols-2 bg-[#30343B] rounded-b-md">
-          <div className="flex justify-between w-full py-1 px-4 sm:p-0 border-b border-solid border-[#383F47] sm:border-none">
+          <div className="flexWrapper">
             <span className="w-auto sm:w-1/5 font-light">{LOCALE}</span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.locale}
@@ -312,13 +312,13 @@ const OrderDetails: React.FC = () => {
           </span>
         </div>
         <div className="flex flex-col border-t-0 sm:border-t border-solid border-[#383F47] sm:grid gap-y-0 grid-cols-2">
-          <div className="flex justify-between w-full py-1 px-4 sm:p-0 border-b border-solid border-[#383F47] sm:border-none justify-start bg-[#30343B] rounded-t-md">
+          <div className="flexWrapper justify-start bg-[#30343B] rounded-t-md">
             <span className="w-auto sm:w-1/5">{PAYMENT_TYPE}</span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.paymentInfo?.[0].paymentType}
             </span>
           </div>
-          <div className="flex justify-between w-full py-1 px-4 sm:p-0 border-b border-solid border-[#383F47] sm:border-none bg-[#30343B] ">
+          <div className="flexWrapper bg-[#30343B] ">
             <span className="w-auto sm:w-1/5">{AMOUNT}</span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.paymentInfo?.[0].amount}
@@ -326,7 +326,7 @@ const OrderDetails: React.FC = () => {
           </div>
         </div>
         <div className="flex flex-col border-t-0 sm:border-t border-solid border-[#383F47] sm:grid gap-y-0 grid-cols-2">
-          <div className="flex justify-between w-full py-1 px-4 sm:p-0 border-b border-solid border-[#383F47] sm:border-none bg-[#30343B] rounded-b-md border-none">
+          <div className="flexWrapper bg-[#30343B] rounded-b-md border-none">
             <span className="w-auto sm:w-1/5">{STATUS}</span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.paymentInfo?.[0].status}
