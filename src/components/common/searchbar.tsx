@@ -3,6 +3,7 @@ import HeaderSearch from "../../assets/headersearch.svg";
 import CustomButton from "../Button";
 import CustomImage from "./customimage";
 import CustomInputText from "./custominputtext";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   showSearchButton: boolean;
@@ -19,6 +20,15 @@ const SearchBar: FC<Props> = ({
   searchValue,
   setSearchValue,
 }) => {
+  const navigate = useNavigate();
+
+  const handleEnterPress = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      navigate(`/orderDetails/${searchValue}`);
+    }
+  };
+
   return (
     <div className="block">
       <span className="search-input p-input-icon-left hidden sm:block">
@@ -33,6 +43,7 @@ const SearchBar: FC<Props> = ({
           placeholder="Search Order"
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
+          onKeyDown={(e) => handleEnterPress(e)}
         />
       </span>
       {showSearchButton && (
