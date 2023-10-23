@@ -22,7 +22,9 @@ const SidePaneList: FC<Props> = ({
   };
 
   return (
-    <div className="fixed left-0 top-[56px] z-10 overflow-x-hidden hidden sm:block w-[308px] border-slate-200 shadow-slate-200 border-solid min-h-[calc(100vh-56px)] bg-[#26262B] pt-8">
+    <div
+      className={`fixed left-0 top-[56px] z-10 overflow-x-hidden hidden sm:block w-[308px] border-slate-200 shadow-slate-200 border-solid border-r min-h-[calc(100vh-56px)] bg-[#26262B] pt-2 pt-8`}
+    >
       {menuList.map((menu) => (
         <div
           key={menu.id}

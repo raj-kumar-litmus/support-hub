@@ -28,15 +28,28 @@ const Navbar: FC<Props> = ({
     navigate(MENU_LIST[0].path);
   };
 
+  const toggleShowSidePane = () => {
+    setShowSidePaneGrid(!showSidePaneGrid);
+    setOpenSearchField(false);
+  };
+
   return (
-    <div className="py-0 pl-4 pr-1 sm:px-10 flex items-center border-[#383f47]  border-solid	 border-b justify-between h-[56px] fixed top-0 left-0 w-full z-50 bg-[#26262B]">
-      <div className="flex">
+    <div
+      className={`py-0 pr-1 sm:px-10 flex items-center border-[#30343B]  border-solid	 border-b justify-between h-[56px] absolute top-0 left-0 w-full z-50 bg-[#1C1C20] sm:bg-[#26262B]`}
+    >
+      <div
+        className={`flex pl-4 ${
+          showSidePaneGrid
+            ? "w-[367px] bg-[#26262B] h-[56px] items-center border-[#30343B] border-solid border-b"
+            : "w-auto"
+        }`}
+      >
         {showSidePane && (
           <CustomImage
             className="h-[13px] sm:hidden pr-4 cursor-pointer"
             src={MenuIcon}
             alt="Menu"
-            onClick={() => setShowSidePaneGrid(!showSidePaneGrid)}
+            onClick={toggleShowSidePane}
           />
         )}
         <CustomImage
