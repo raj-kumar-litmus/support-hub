@@ -35,11 +35,17 @@ const DcOpenOrders: FC = () => {
 
   return (
     <div className="w-11/12 m-auto mt-6">
-      <h3 className="text-[#757575] font-bold m-3 ml-0 font-helvetica">
+      <h3 className="text-[#F2F2F2] font-bold m-3 ml-0 font-helvetica">
         DC Open Orders
       </h3>
       <div className="hidden sm:block rounded-md">
-        {tableData?.length > 0 && <Table tableData={tableData} />}
+        {tableData?.length > 0 && (
+          <Table
+            tableData={tableData}
+            stripedRows={true}
+            className={"ordersTable"}
+          />
+        )}
       </div>
       <div className="block sm:hidden">
         {tableData?.length > 0 &&
