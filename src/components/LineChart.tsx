@@ -21,6 +21,7 @@ import React, { useState } from "react";
 interface Props {
   options: ChartOptions<"line"> | any;
   data: ChartData<"line">;
+  className?: string;
 }
 
 ChartJS.register(
@@ -33,16 +34,14 @@ ChartJS.register(
   Legend,
 );
 
-function LineChart({ options, data }: Props) {
+function LineChart({ options, data, className }: Props) {
   const [rotate, setRotate] = useState<boolean>(false);
   const { width } = useScreenSize();
 
   return (
     <div
-      className={`${
-        rotate
-          ? "rotate-90 mt-[200px]"
-          : `relative h-screen ${width > 700 ? "w-[80vw]" : "w-[100vw]"}`
+      className={`${className} ${
+        rotate ? "rotate-90 mt-[200px]" : `relative w-full`
       }`}
     >
       {width < 700 && (

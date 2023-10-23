@@ -9,11 +9,13 @@ interface Props {
   icon?: any;
   iconPos?: "left" | "right" | undefined;
   dateFormat: string;
+  timeOnly?: boolean;
 }
 
 const CustomCalendar: React.FC<Props> = ({
   onChange,
   dateFormat,
+  timeOnly = false,
   value,
   icon,
   showIcon = true,
@@ -23,6 +25,7 @@ const CustomCalendar: React.FC<Props> = ({
   return (
     <Calendar
       showIcon={showIcon}
+      timeOnly={timeOnly}
       value={value}
       icon={icon}
       iconPos={iconPos}

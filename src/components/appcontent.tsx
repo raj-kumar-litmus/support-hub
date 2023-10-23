@@ -24,9 +24,16 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
     setSearchValue("");
   }, [location?.pathname]);
 
+  useEffect(() => {
+    const _selectedMenu = MENU_LIST.find(
+      (menu) => location?.pathname.split("/")[1] == menu.path.split("/")[1],
+    ).id;
+    setSelectedMenu(_selectedMenu);
+  }, [location?.pathname]);
+
   return (
     <div>
-      <div className="h-screen">
+      <div className="h-screen overflow-y-hidden">
         {showNavbar && (
           <Navbar
             showSidePane={showSidePane}
@@ -36,7 +43,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
             setOpenSearchField={setOpenSearchField}
           />
         )}
-        <div className="flex flex-col sm:flex-row">
+        <div className="flex flex-col sm:flex-row mt-[3.5rem] ml-[0] bg-[#1C1C20]">
           {showSidePane && (
             <SidePaneList
               menuList={MENU_LIST}
@@ -69,7 +76,11 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
               )}
             </div>
           )}
-          <div className={`w-full ${showSidePaneGrid ? "hidden" : "block"}`}>
+          <div
+            className={`w-full ${
+              showSidePaneGrid ? "hidden" : "block"
+            } sm:ml-[308px]  h-[calc(100vh-56px)] overflow-y-auto`}
+          >
             {appContent}
           </div>
         </div>

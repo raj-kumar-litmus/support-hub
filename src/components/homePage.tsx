@@ -8,6 +8,7 @@ import total_no_of_orders from "../assets/total_no_of_orders.svg";
 import total_order_comp from "../assets/total_order_comp.svg";
 import avg_opm_comp from "../assets/avg_opm_comp.svg";
 import trending_down from "../assets/trending_down.svg";
+import Sessions from "./charts/Sessions";
 
 const CardTitle = ({ title, icon }) => {
   return (
@@ -96,7 +97,8 @@ const HomePage = () => {
         <OPM />
         <OpmComparison />
       </div>
-      <BarChart />
+      {/* <BarChart /> */}
+      {/* <Sessions /> */}
     </div>
   );
 };

@@ -4,3 +4,5 @@ export const URL_DC_OPEN_ORDERS: string =
   "omsApiApp/oms/supportstats/api/dcCurrentWorkableOrders";
 // export const URL_OPM: string = "/supportdashboard/opm";
 // export const URL_OPM_COMPARISON: string = "/supportdashboard/compareOPM";
+export const URL_PROMOTIONS: string =
+  "/supportdashboard/v1/orders/:orderId/promo";

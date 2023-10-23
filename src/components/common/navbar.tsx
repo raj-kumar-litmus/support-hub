@@ -3,6 +3,8 @@ import SephoraLogo from "../../assets/logo.svg";
 import MenuIcon from "../../assets/menu.svg";
 import SearchBar from "./searchbar";
 import CustomImage from "./customimage";
+import { useNavigate } from "react-router-dom";
+import { MENU_LIST } from "../utils/Utils";
 
 type Props = {
   showSidePane: boolean;
@@ -20,9 +22,14 @@ const Navbar: FC<Props> = ({
   setOpenSearchField,
 }) => {
   const [searchValue, setSearchValue] = useState<string>("");
+  const navigate = useNavigate();
+
+  const navigateToHome = () => {
+    navigate(MENU_LIST[0].path);
+  };
 
   return (
-    <div className="py-4 pl-4 pr-1 sm:px-10 flex items-center border-slate-200  border-solid	 border-b justify-between h-16">
+    <div className="py-0 pl-4 pr-1 sm:px-10 flex items-center border-[#383f47]  border-solid	 border-b justify-between h-[56px] fixed top-0 left-0 w-full z-50 bg-[#26262B]">
       <div className="flex">
         {showSidePane && (
           <CustomImage
@@ -36,6 +43,7 @@ const Navbar: FC<Props> = ({
           className="h-[13px] cursor-pointer"
           src={SephoraLogo}
           alt="SEPHORA"
+          onClick={navigateToHome}
         />
       </div>
       <div className="sm:m-auto">

@@ -1,7 +1,7 @@
 import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 import { IMenu } from "../../@types/menu";
 import CustomImage from "./customimage";
-import { useNavigate } from "react-router-dom";
 
 type Props = {
   menuList: Array<IMenu>;
@@ -22,25 +22,27 @@ const SidePaneList: FC<Props> = ({
   };
 
   return (
-    <div className="hidden sm:block w-80 border-slate-200 shadow-slate-200 border-solid border-r min-h-[calc(100vh-4.6rem)]  pt-2">
+    <div className="fixed left-0 top-[56px] z-10 overflow-x-hidden hidden sm:block w-[308px] border-slate-200 shadow-slate-200 border-solid min-h-[calc(100vh-56px)] bg-[#26262B] pt-8">
       {menuList.map((menu) => (
         <div
           key={menu.id}
-          className={`flex pl-10 pr-2 py-4 mx-4 items-center ${
+          className={`flex pl-4 pr-2 py-4 items-center  cursor-pointer w-[259px] h-[44px] mx-auto ${
             selectedMenu === menu.id
-              ? "bg-gray-200 rounded-lg"
+              ? "bg-[#30343B] rounded-lg"
               : "bg-transparent"
           }`}
           onClick={() => navigateToMenu(menu)}
         >
           <CustomImage
             src={menu.icon}
-            className="menu-sm-icon"
+            className={`menu-sm-icon ${
+              selectedMenu === menu.id ? "selected-menu" : ""
+            }`}
             alt="menu.name"
           />
           <span
-            className={`block pl-6 text-neutral-500 text-sm  cursor-pointer ${
-              selectedMenu === menu.id ? "font-semibold" : "font-normal"
+            className={`block pl-6  text-sm font-normal  ${
+              selectedMenu === menu.id ? "text-[#F2F2F2]" : "text-[#FAF9F6]"
             }`}
           >
             {menu.name}

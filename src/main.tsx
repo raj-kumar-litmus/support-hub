@@ -10,19 +10,20 @@ import Chart from "./components/ChartIndex.tsx";
 import "./index.css";
 import HomePage from "./components/homePage.tsx";
 
-const Loader = lazy(() => import("./components/Loader.tsx"));
+// const Loader = lazy(() => import("./components/Loader.tsx"));
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Router>
-      <Suspense fallback={<Loader />}>
+      {/* <Suspense fallback={<Loader />}> */}
+      <Suspense>
         <Routes>
           <Route path="/home" element={<App appContent={<HomePage />} />} />
           <Route
             path="/dc-open-orders"
             element={<App appContent={<DcOpenOrders />} />}
           />
-          <Route path="/sessions" element={<App appContent={<BarChart />} />} />
+          {/* <Route path="/sessions" element={<App appContent={<BarChart />} />} /> */}
           <Route
             path="/opm"
             element={<App appContent={<Chart type="opm" />} />}
