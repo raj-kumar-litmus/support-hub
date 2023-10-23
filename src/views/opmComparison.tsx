@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -30,13 +31,14 @@ import CustomModal from "../components/Modal";
 import LineChart from "../components/LineChart";
 import FilteredCard from "../components/FilteredCard";
 import CustomImage from "../components/common/customimage";
+import { OPM_COMPARISON_OPTIONS } from "../constants/appConstants";
 
 import FilterIcon from "../assets/filter.svg";
 import DropdownMobileIcon from "../assets/dropdown_mobile.svg";
 import ChannelIcon from "../assets/channel.svg";
 import SandGlassIcon from "../assets/sandglass.svg";
-
-import { OPM_COMPARISON_OPTIONS } from "../constants/appConstants";
+import open_in_full_window from "../assets/open_in_full_window.svg";
+import OPM from "./opm";
 
 ChartJS.register(
   CategoryScale,
@@ -47,7 +49,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ChartDataLabels,
+  ChartDataLabels
 );
 
 const OpmComparison: React.FC = () => {
@@ -62,10 +64,11 @@ const OpmComparison: React.FC = () => {
   const [visible, setVisible] = useState<boolean>(false);
   const [position, setPosition] = useState<ModalEnums>("center");
   const [apiResponse, setApiResponse] = useState<null | OpmComparisonType>(
-    null,
+    null
   );
 
   const { width } = useScreenSize();
+  const navigate = useNavigate();
 
   const channels = [
     { name: "All", code: "All" },
@@ -80,7 +83,7 @@ const OpmComparison: React.FC = () => {
     { name: "PayPal", code: "PayPal" },
   ];
   const [url, setUrl] = useState<string>(
-    `http://azruvuprep01:8080/supportdashboard/compareOPM?period=${duration}&startTimeOne=${firstDate}&startDateTwo=${secondDate}&channel=${channel}&promocode=${promoCode}&paymentType=${paymentMode}&country=${locale}`,
+    `http://azruvuprep01:8080/supportdashboard/compareOPM?period=${duration}&startTimeOne=${firstDate}&startDateTwo=${secondDate}&channel=${channel}&promocode=${promoCode}&paymentType=${paymentMode}&country=${locale}`
   );
 
   const [options, setOptions] = useState<null | ChartOptions>(null);
@@ -204,7 +207,7 @@ const OpmComparison: React.FC = () => {
           apiResponse,
           startDate: formFields.find((e) => e.name === "startDate").value,
           endDate: formFields.find((e) => e.name === "endDate").value,
-        }),
+        })
       );
     }
   }, [apiResponse]);
@@ -328,7 +331,7 @@ const OpmComparison: React.FC = () => {
 
   const onSubmitHandler = () => {
     setUrl(
-      `http://azruvuprep01:8080/supportdashboard/compareOPM?period=${duration}&startTimeOne=${startDate}&startDateTwo=${endDate}&channel=${channel}&promocode=${promoCode}&paymentType=${paymentMode}&country=${locale}`,
+      `http://azruvuprep01:8080/supportdashboard/compareOPM?period=${duration}&startTimeOne=${startDate}&startDateTwo=${endDate}&channel=${channel}&promocode=${promoCode}&paymentType=${paymentMode}&country=${locale}`
     );
   };
 
@@ -337,269 +340,321 @@ const OpmComparison: React.FC = () => {
     setShowFilters(!showFilters);
   };
 
+  const handleOPMCompExpandClick = () => {
+    navigate("/opmcomparison");
+  };
+
+  const getConfigOptions = () => {
+    const chartOptions = JSON.parse(JSON.stringify(options));
+    chartOptions.layout.padding = 0;
+    chartOptions.scales.x.title.padding.top = 10;
+    chartOptions.plugins.legend.position = 'top';
+    // chartOptions.plugins.legend.padding = 20;
+
+    return chartOptions;
+  };
+
   return (
     <>
-      <div className="flex gap-[59vw] mt-[3.9vh]">
-        <p className="font-bold self-center ml-[3vw] text-[#F2F2F2]">
-          OPM Comparison
-        </p>
-        <CustomImage
-          src={FilterIcon}
-          className="w-[2.34vw] self-end"
-          alt="Filter Icon"
-          onClick={onFilterClickHandler}
-        />
-      </div>
-      {showFilters && (
-        <>
-          {width > 700 ? (
-            <form
-              className="flex gap-[1vw] ml-[2.4vw] opmFilters"
-              onSubmit={submit}
-            >
-              {formFields.map((form, index) => {
-                return (
-                  <Fragment key={index}>
-                    {form.type === "text" && (
-                      <CustomInputText
-                        value={form.value}
-                        name={form.label}
-                        placeholder={form.label}
-                        onChange={(event) => handleFormChange(event)}
-                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
-                        id="promoCode"
-                      />
-                    )}
-                    {form.type === "time" && (
-                      <CustomCalendar
-                        name={form.name}
-                        title={form.label}
-                        showTime={form.name === "startDate"}
-                        timeOnly={form.timeOnly || false}
-                        iconPos={form.iconPos || "left"}
-                        imgsrc={form.imgsrc}
-                        onChange={(event) => handleFormChange(event)}
-                        value={form.value}
-                      />
-                    )}
-                    {form.type === "dropdown" && (
-                      <CustomDropdown
-                        value={form.value}
-                        name={form.name}
-                        onChange={(e) => handleFormChange(e)}
-                        imageClassName="relative left-[25px] z-[1]"
-                        icon={form.icon}
-                        options={form.options}
-                        label={form.label}
-                        optionLabel="name"
-                        placeholder=""
-                      />
-                    )}
-                  </Fragment>
-                );
-              })}
-              <CustomButton
-                label="Submit"
-                isDisabled={disabled}
-                isRounded={true}
-                className="submitBtnMobile self-end ml-[11.5vw]"
-              />
-            </form>
-          ) : (
-            <>
-              <CustomModal
-                header="Filters"
-                visible={visible}
-                position={position}
-                className="filtersModal opmFilters h-[500px] left-[-4vw] w-[100vw]"
-                onHide={onModalCloseHandler}
-                isDraggable={false}
-                isResizable={false}
+      {location.pathname.includes("home") && data && (
+        <div className="w-full sm:w-1/2 bg-[#30343B] p-4 rounded-lg">
+          <div className="flex justify-between items-center">
+            <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
+              OPM Comparison
+            </span>
+            <div>
+              <button
+                className="rounded-full pr-2"
+                onClick={handleOPMCompExpandClick}
               >
-                <div className="flex flex-col">
-                  <div className="flex flex-row gap-5">
-                    <div className="flex flex-col">
-                      <label
-                        className="labelClass mb-[5px] mt-[14px]"
-                        htmlFor="date"
-                      >
-                        Date 1
-                      </label>
-                      <CustomCalendar
-                        dateFormat="mm/dd/yy"
-                        onChange={(
-                          e: React.ChangeEvent<CalendarChangeEvent>,
-                        ) => {
-                          if (
-                            e.target.value &&
-                            typeof e.target.value === "object" &&
-                            "toLocaleDateString" in e.target.value
-                          ) {
-                            setFirstDate(e.target.value?.toLocaleDateString());
-                          }
-                        }}
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <label
-                        className="labelClass mb-[5px] mt-[14px]"
-                        htmlFor="date"
-                      >
-                        Date 2
-                      </label>
-                      <CustomCalendar
-                        dateFormat="mm/dd/yy"
-                        onChange={(
-                          e: React.ChangeEvent<CalendarChangeEvent>,
-                        ) => {
-                          if (
-                            e.target.value &&
-                            typeof e.target.value === "object" &&
-                            "toLocaleDateString" in e.target.value
-                          ) {
-                            setSecondDate(e.target.value?.toLocaleDateString());
-                          }
-                        }}
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-row gap-5">
-                    <div className="flex flex-col w-[40vw]">
-                      <label
-                        className="labelClass mb-[5px] mt-[14px]"
-                        htmlFor="duration"
-                      >
-                        Duration
-                      </label>
-                      <CustomInputText
-                        placeholder="Duration"
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                          setTimeout(() => setDuration(e.target.value), 1500)
-                        }
-                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[4.35vh]"
-                        id="promoCode"
-                      />
-                    </div>
-                    <div className="flex flex-col w-[40vw]">
-                      <label
-                        className="labelClass mb-[5px] mt-[14px]"
-                        htmlFor="channel"
-                      >
-                        Channel
-                      </label>
-                      <CustomDropdown
-                        dropdownIcon={<img src={DropdownMobileIcon} />}
-                        value={channels.find((e) => e.name === channel)}
-                        onChange={(e: DropDownOnChangeEvent) =>
-                          setChannel(e.value.name)
-                        }
-                        options={channels}
-                        optionLabel="name"
-                        placeholder="All"
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-row gap-5">
-                    <div className="flex flex-col w-[40vw]">
-                      <label
-                        className="labelClass mb-[5px] mt-[14px]"
-                        htmlFor="locale"
-                      >
-                        Locale
-                      </label>
-                      <CustomDropdown
-                        dropdownIcon={<img src={DropdownMobileIcon} />}
-                        value={localeList.find((e) => e.name === locale)}
-                        onChange={(e: DropDownOnChangeEvent) =>
-                          setLocale(e.value.name)
-                        }
-                        options={localeList}
-                        optionLabel="name"
-                        placeholder="US"
-                      />
-                    </div>
-                    <div className="flex flex-col w-[40vw]">
-                      <label
-                        className="labelClass mb-[5px] mt-[14px]"
-                        htmlFor="payment"
-                      >
-                        Payment
-                      </label>
-                      <CustomDropdown
-                        dropdownIcon={<img src={DropdownMobileIcon} />}
-                        value={paymentList.find((e) => e.name === paymentMode)}
-                        onChange={(e: DropDownOnChangeEvent) =>
-                          setPaymentMode(e.value.name)
-                        }
-                        options={paymentList}
-                        optionLabel="name"
-                        placeholder="Klarna"
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-row gap-5">
-                    <div className="flex flex-col">
-                      <label
-                        className="labelClass mb-[5px] mt-[14px]"
-                        htmlFor="promoCode"
-                      >
-                        Promocode
-                      </label>
-                      <CustomInputText
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                          setTimeout(() => setPromoCode(e.target.value), 1500)
-                        }
-                        className="border rounded-[8px] border-solid h-[4.35vh] bg-[#30343B] border-[#30343B]"
-                        id="promoCode"
-                        placeholder="Enter Code Here"
-                      />
-                    </div>
-                  </div>
+                <CustomImage src={open_in_full_window} />
+              </button>
+            </div>
+          </div>
+          <LineChart options={getConfigOptions()} data={data} />
+        </div>
+      )}
+      {location.pathname.includes("opmcomparison") && (
+        <>
+          <div className="flex gap-[59vw] mt-[3.9vh]">
+            <p className="font-bold self-center ml-[3vw] text-[#F2F2F2]">
+              OPM Comparison
+            </p>
+            <CustomImage
+              src={FilterIcon}
+              className="w-[2.34vw] self-end"
+              alt="Filter Icon"
+              onClick={onFilterClickHandler}
+            />
+          </div>
+          {showFilters && (
+            <>
+              {width > 700 ? (
+                <form
+                  className="flex gap-[1vw] ml-[2.4vw] opmFilters"
+                  onSubmit={submit}
+                >
+                  {formFields.map((form, index) => {
+                    return (
+                      <Fragment key={index}>
+                        {form.type === "text" && (
+                          <CustomInputText
+                            value={form.value}
+                            name={form.label}
+                            placeholder={form.label}
+                            onChange={(event) => handleFormChange(event)}
+                            className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
+                            id="promoCode"
+                          />
+                        )}
+                        {form.type === "time" && (
+                          <CustomCalendar
+                            name={form.name}
+                            title={form.label}
+                            showTime={form.name === "startDate"}
+                            timeOnly={form.timeOnly || false}
+                            iconPos={form.iconPos || "left"}
+                            imgsrc={form.imgsrc}
+                            onChange={(event) => handleFormChange(event)}
+                            value={form.value}
+                          />
+                        )}
+                        {form.type === "dropdown" && (
+                          <CustomDropdown
+                            value={form.value}
+                            name={form.name}
+                            onChange={(e) => handleFormChange(e)}
+                            imageClassName="relative left-[25px] z-[1]"
+                            icon={form.icon}
+                            options={form.options}
+                            label={form.label}
+                            optionLabel="name"
+                            placeholder=""
+                          />
+                        )}
+                      </Fragment>
+                    );
+                  })}
                   <CustomButton
                     label="Submit"
+                    isDisabled={disabled}
                     isRounded={true}
-                    className="submitBtnMobile"
-                    onClick={onSubmitHandler}
+                    className="submitBtnMobile self-end ml-[11.5vw]"
                   />
-                </div>
-              </CustomModal>
+                </form>
+              ) : (
+                <>
+                  <CustomModal
+                    header="Filters"
+                    visible={visible}
+                    position={position}
+                    className="filtersModal opmFilters h-[500px] left-[-4vw] w-[100vw]"
+                    onHide={onModalCloseHandler}
+                    isDraggable={false}
+                    isResizable={false}
+                  >
+                    <div className="flex flex-col">
+                      <div className="flex flex-row gap-5">
+                        <div className="flex flex-col">
+                          <label
+                            className="labelClass mb-[5px] mt-[14px]"
+                            htmlFor="date"
+                          >
+                            Date 1
+                          </label>
+                          <CustomCalendar
+                            dateFormat="mm/dd/yy"
+                            onChange={(
+                              e: React.ChangeEvent<CalendarChangeEvent>
+                            ) => {
+                              if (
+                                e.target.value &&
+                                typeof e.target.value === "object" &&
+                                "toLocaleDateString" in e.target.value
+                              ) {
+                                setFirstDate(
+                                  e.target.value?.toLocaleDateString()
+                                );
+                              }
+                            }}
+                          />
+                        </div>
+                        <div className="flex flex-col">
+                          <label
+                            className="labelClass mb-[5px] mt-[14px]"
+                            htmlFor="date"
+                          >
+                            Date 2
+                          </label>
+                          <CustomCalendar
+                            dateFormat="mm/dd/yy"
+                            onChange={(
+                              e: React.ChangeEvent<CalendarChangeEvent>
+                            ) => {
+                              if (
+                                e.target.value &&
+                                typeof e.target.value === "object" &&
+                                "toLocaleDateString" in e.target.value
+                              ) {
+                                setSecondDate(
+                                  e.target.value?.toLocaleDateString()
+                                );
+                              }
+                            }}
+                          />
+                        </div>
+                      </div>
+                      <div className="flex flex-row gap-5">
+                        <div className="flex flex-col w-[40vw]">
+                          <label
+                            className="labelClass mb-[5px] mt-[14px]"
+                            htmlFor="duration"
+                          >
+                            Duration
+                          </label>
+                          <CustomInputText
+                            placeholder="Duration"
+                            onChange={(
+                              e: React.ChangeEvent<HTMLInputElement>
+                            ) =>
+                              setTimeout(
+                                () => setDuration(e.target.value),
+                                1500
+                              )
+                            }
+                            className="border rounded-[8px] border-solid border-slate-300 border-1 h-[4.35vh]"
+                            id="promoCode"
+                          />
+                        </div>
+                        <div className="flex flex-col w-[40vw]">
+                          <label
+                            className="labelClass mb-[5px] mt-[14px]"
+                            htmlFor="channel"
+                          >
+                            Channel
+                          </label>
+                          <CustomDropdown
+                            dropdownIcon={<img src={DropdownMobileIcon} />}
+                            value={channels.find((e) => e.name === channel)}
+                            onChange={(e: DropDownOnChangeEvent) =>
+                              setChannel(e.value.name)
+                            }
+                            options={channels}
+                            optionLabel="name"
+                            placeholder="All"
+                          />
+                        </div>
+                      </div>
+                      <div className="flex flex-row gap-5">
+                        <div className="flex flex-col w-[40vw]">
+                          <label
+                            className="labelClass mb-[5px] mt-[14px]"
+                            htmlFor="locale"
+                          >
+                            Locale
+                          </label>
+                          <CustomDropdown
+                            dropdownIcon={<img src={DropdownMobileIcon} />}
+                            value={localeList.find((e) => e.name === locale)}
+                            onChange={(e: DropDownOnChangeEvent) =>
+                              setLocale(e.value.name)
+                            }
+                            options={localeList}
+                            optionLabel="name"
+                            placeholder="US"
+                          />
+                        </div>
+                        <div className="flex flex-col w-[40vw]">
+                          <label
+                            className="labelClass mb-[5px] mt-[14px]"
+                            htmlFor="payment"
+                          >
+                            Payment
+                          </label>
+                          <CustomDropdown
+                            dropdownIcon={<img src={DropdownMobileIcon} />}
+                            value={paymentList.find(
+                              (e) => e.name === paymentMode
+                            )}
+                            onChange={(e: DropDownOnChangeEvent) =>
+                              setPaymentMode(e.value.name)
+                            }
+                            options={paymentList}
+                            optionLabel="name"
+                            placeholder="Klarna"
+                          />
+                        </div>
+                      </div>
+                      <div className="flex flex-row gap-5">
+                        <div className="flex flex-col">
+                          <label
+                            className="labelClass mb-[5px] mt-[14px]"
+                            htmlFor="promoCode"
+                          >
+                            Promocode
+                          </label>
+                          <CustomInputText
+                            onChange={(
+                              e: React.ChangeEvent<HTMLInputElement>
+                            ) =>
+                              setTimeout(
+                                () => setPromoCode(e.target.value),
+                                1500
+                              )
+                            }
+                            className="border rounded-[8px] border-solid h-[4.35vh] bg-[#30343B] border-[#30343B]"
+                            id="promoCode"
+                            placeholder="Enter Code Here"
+                          />
+                        </div>
+                      </div>
+                      <CustomButton
+                        label="Submit"
+                        isRounded={true}
+                        className="submitBtnMobile"
+                        onClick={onSubmitHandler}
+                      />
+                    </div>
+                  </CustomModal>
+                </>
+              )}
             </>
           )}
-        </>
-      )}
-      <div className="flex items-center gap-4 mt-[10px] overflow-scroll ml-[2.85vw]">
-        {formFields
-          .filter((e) => e.value)
-          .map((e: any) => (
-            <Fragment key={e.name}>
-              <FilteredCard
-                label={e.name}
-                leftIcon={e.cardIcon}
-                onClickHandler={removeFormEntry}
-                content={
-                  e.type === "time"
-                    ? e.name === "startDate"
-                      ? e.value.toLocaleString("en-US")
-                      : e.value.toLocaleDateString("en-US")
-                    : e.value.name || e.value
-                }
+          <div className="flex items-center gap-4 mt-[10px] overflow-scroll ml-[2.85vw]">
+            {formFields
+              .filter((e) => e.value)
+              .map((e: any) => (
+                <Fragment key={e.name}>
+                  <FilteredCard
+                    label={e.name}
+                    leftIcon={e.cardIcon}
+                    onClickHandler={removeFormEntry}
+                    content={
+                      e.type === "time"
+                        ? e.name === "startDate"
+                          ? e.value.toLocaleString("en-US")
+                          : e.value.toLocaleDateString("en-US")
+                        : e.value.name || e.value
+                    }
+                  />
+                </Fragment>
+              ))}
+            {!disabled && (
+              <CustomButton
+                label="Reset"
+                severity="secondary"
+                className="resetFilters text-[12px] text-[#575353]"
+                isTextButton={true}
+                onClick={clearAllHandler}
               />
-            </Fragment>
-          ))}
-        {!disabled && (
-          <CustomButton
-            label="Reset"
-            severity="secondary"
-            className="resetFilters text-[12px] text-[#575353]"
-            isTextButton={true}
-            onClick={clearAllHandler}
-          />
-        )}
-      </div>
-      {data && (
-        <div className="bg-[#30343B] border-0 rounded-[10px] w-[71.74vw] ml-[2.85vw] h-[63.36vh] mt-[3vh]">
-          <LineChart options={options} data={data} />
-        </div>
+            )}
+          </div>
+          {data && (
+            <div className="bg-[#30343B] border-0 rounded-[10px] w-[71.74vw] ml-[2.85vw] h-[63.36vh] mt-[3vh]">
+              <LineChart options={options} data={data} />
+            </div>
+          )}
+        </>
       )}
     </>
   );

@@ -495,3 +495,18 @@ hr.horizontalLine.opmComparison {
   @apply py-1 px-4 sm:p-0 border-solid border-[#383F47] bg-[#30343B]
 }
 
+.home-page .p-card {
+  @apply rounded-lg shadow-lg shadow-[#00000029] grow w-[35%] sm:w-[25%] md:w-[19%];
+}
+
+.home-page .p-card .p-card-body {
+  @apply !p-4 h-full flex flex-col justify-between;
+}
+
+.home-page .p-card .p-card-body .p-card-content {
+  @apply p-0 !pt-2;
+}
+
+.home-page .p-card .p-card-title h6 {
+  @apply text-sm font-bold w-3/4 sm:w-1/2 font-helvetica;
+}
