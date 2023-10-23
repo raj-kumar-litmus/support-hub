@@ -50,7 +50,7 @@ const InfoField = ({
   className: string;
 }) => {
   return (
-    <div className="block text-sm font-normal min-w-[7rem]">
+    <div className="block text-sm font-normal max-w-[10rem] min-w-[7rem]">
       <div className={`text-[#898A8D] ${className}`}>{title}</div>
       <div
         className={`text-[#faf9f6] whitespace-nowrap text-ellipsis overflow-hidden ${className}`}
