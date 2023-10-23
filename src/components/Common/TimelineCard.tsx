@@ -5,14 +5,12 @@ interface CardProps {
   statusName: string;
   statusDescription: string;
 }
-
 const TimelineCard: React.FC<CardProps> = ({
   date,
   statusName,
   statusDescription,
 }) => {
   const [orderDate, orderTime] = date.split(" ");
-
   return (
     <div className="flex flex-row  h-[75px] w-[342px] font-helvetica bg-[#30343B] rounded-lg mt-3">
       <div className=" !w-28 flex justify-center items-center flex-col">
