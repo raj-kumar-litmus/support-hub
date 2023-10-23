@@ -17,12 +17,7 @@ const OrderStatusPopup = () => {
     { field: "description", header: "Description" },
   ];
 
-  const [orderStatusList, setOrderStatusList] = useState<OrderStatus[]>([]);
   const [openDialog, setOpenDialog] = useState<boolean>(false);
-
-  useEffect(() => {
-    setOrderStatusList(ORDER_STATUS_LIST);
-  }, [ORDER_STATUS_LIST]);
 
   return (
     <>
@@ -37,14 +32,14 @@ const OrderStatusPopup = () => {
         header="Order Status"
         visible={openDialog}
         onHide={() => setOpenDialog(false)}
-        className="custom-popup max-[400px]:w-full max-[400px]:top-[100px]"
+        className="custom-popup absolute max-h-[calc(100vh-204px)] sm:max-h-[calc(100vh-141px)] max-[400px]:w-full top-[200px] sm:top-[137px]"
         draggable={false}
       >
         <CustomTable
           resizableColumns
           showGridlines
           stripedRows
-          value={orderStatusList}
+          value={ORDER_STATUS_LIST}
           className="custom-table w-[310px] sm:w-[390px]"
           children={HEADERS.map((h) => (
             <Column key={h.field} field={h.field} header={h.header}></Column>
