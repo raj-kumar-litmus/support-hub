@@ -54,6 +54,7 @@ export const VIEW_ALL: string = "View All";
 export const PRIMARY: string = "Primary";
 export const SECONDARY: string = "Secondary";
 export const BOTH: string = "Both";
+export const DEFAULT_PERIOD: number = 10;
 export const CHANNEL_LIST: { label: string; value: string }[] = [
   { label: "All", value: "all" },
   { label: "Desktop", value: "web" },

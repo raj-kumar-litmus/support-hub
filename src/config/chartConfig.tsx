@@ -8,11 +8,7 @@ import {
   Legend,
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import {
-  CHART,
-  SESSIONS_CHART,
-  TOTAL_SESSIONS_PER_MIN_PRIMARY,
-} from "../constants/appConstants";
+import { CHART, SESSIONS, SESSIONS_CHART } from "../constants/appConstants";
 
 Chart.register(
   CategoryScale,
@@ -28,25 +24,43 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
-    legend: {
-      display: false,
-    },
     title: {
       display: true,
-      text: TOTAL_SESSIONS_PER_MIN_PRIMARY,
-      align: "center",
-      position: "bottom",
+      text: SESSIONS,
+      align: "start",
+      position: "top",
       font: {
         size: CHART.TITLE_FONT_SIZE,
       },
+      color: "#F2F2F2",
+    },
+    legend: {
+      display: true,
+      position: "bottom",
+      align: "start",
+      maxWidth: 100,
+      labels: {
+        padding: 16,
+        boxWidth: 32,
+        generateLabels: (chart) => {
+          const data = chart.data;
+          if (data.datasets.length) {
+            return data.datasets.map(function (dataset, i) {
+              return {
+                text: dataset.label,
+                fillStyle: "#30343B",
+                fontColor: dataset.backgroundColor,
+                lineWidth: SESSIONS_CHART.LEGEND_LINE_WIDTH,
+                strokeStyle: dataset.backgroundColor,
+                index: i,
+              };
+            });
+          }
+        },
+      },
     },
     datalabels: {
-      align: "center",
-      color: "white",
-      rotation: CHART.ROTATION_0,
-      font: {
-        size: CHART.DATALABEL_FONT_SIZE,
-      },
+      display: false,
     },
   },
   scales: {
@@ -74,6 +88,7 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = {
       barPercentage: SESSIONS_CHART.BAR_PERCENT,
       maxBarThickness: SESSIONS_CHART.MAX_BAR_THICKNESS,
       borderRadius: SESSIONS_CHART.BAR_BORDER_RADIUS,
+      categoryPercentage: SESSIONS_CHART.CATEGORY_PERCENT,
     },
   },
 };
