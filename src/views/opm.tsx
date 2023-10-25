@@ -352,7 +352,6 @@ const OPM: React.FC = () => {
       )}
       {location.pathname.includes("opm") && (
         <>
-          {" "}
           <div className={`flex gap-[66vw]`}>
             <p className="font-bold w-[3vw] mt-[3.9vh] ml-[3vw] text-[#F2F2F2]">
               OPM
