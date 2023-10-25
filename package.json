@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "set NODE_ENV=development && vite",
+    "dev": "NODE_ENV=development vite",
     "staging": "NODE_ENV=staging vite",
     "prod": "NODE_ENV=production vite",
     "build": "tsc --jsx react && vite build",
