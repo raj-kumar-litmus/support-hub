@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   URL_OMS_ORDER_STATUS,
   URL_ORDER_DETAILS,
@@ -43,11 +43,14 @@ import CustomIcon from "../common/CustomIcon";
 import Card from "../common/Card";
 import PromotionsIcon from "../../assets/promotions_white.svg";
 import OrderClockIcon from "../../assets/order_clock_white.svg";
+import RightArrowIcon from "../../assets/right_arrow.svg";
 import OmsInfoIcon from "../../assets/oms_info_white.svg";
 import Loader from "../loader";
 import PromotionsPopup from "../promotionspopup";
 import { IPromotion } from "../../@types/promotion";
 import OrderStatusPopup from "../orderstatuspopup";
+import { promotionsJSON } from "../../sampleJSON/promotions";
+import CustomImage from "../common/customimage";
 
 const OrderDetails: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -64,6 +67,7 @@ const OrderDetails: React.FC = () => {
     useState<boolean>(false);
   const [openOrderStatusPopup, setOpenOrderStatusPopup] =
     useState<boolean>(false);
+  const navigate = useNavigate();
 
   const { orderId } = useParams<{ orderId: string }>();
 
@@ -149,6 +153,17 @@ const OrderDetails: React.FC = () => {
     <Loader />
   ) : Object.keys(orderData).length > 0 ? (
     <div id="orderDetailsComp">
+      <div className="flex sm:hidden border-b border-solid border-[#30343B] h-[44px] items-center px-[14px] py-[24px]">
+        <CustomImage
+          className="h-[13px]"
+          src={RightArrowIcon}
+          alt="Search"
+          onClick={() => navigate(-1)}
+        />
+        <span className="text-[#FAF9F6] text-center mx-auto text-[14px]">
+          Order #{orderId}
+        </span>
+      </div>
       <div className="gridNoGapRounded grid-cols-1 m-4 p-0 sm:py-4 sm:px-6 sm:bg-[#30343B] ">
         <div className="flex justify-between border-none !bg-[#1C1C20] sm:!bg-inherit">
           <span className="w-1/2 !text-lg !text-[#F2F2F2] font-bold !bg-[#1C1C20] sm:!bg-inherit">
