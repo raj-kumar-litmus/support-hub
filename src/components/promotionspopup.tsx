@@ -22,7 +22,7 @@ const PromotionsPopup: FC<Props> = ({
       onHide={() => setOpenPromotionsPopup(false)}
       draggable={false}
       resizable={false}
-      className="absolute custom-popup max-h-[calc(100vh-204px)] sm:max-h-[calc(100vh-141px)]  max-[400px]:w-full top-[200px] sm:top-[137px]"
+      className="custom-popup"
     >
       {promotions.length > 0 ? (
         promotions.map((p) => (

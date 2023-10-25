@@ -20,7 +20,7 @@ const OrderStatusPopup: FC<Props> = ({ openDialog, setOpenDialog }) => {
       header={ORDER_STATUS}
       visible={openDialog}
       onHide={() => setOpenDialog(false)}
-      className="custom-popup absolute max-h-[calc(100vh-204px)] sm:max-h-[calc(100vh-141px)] max-[400px]:w-full top-[200px] sm:top-[137px]"
+      className="custom-popup"
       draggable={false}
       resizable={false}
     >
@@ -29,7 +29,7 @@ const OrderStatusPopup: FC<Props> = ({ openDialog, setOpenDialog }) => {
         showGridlines
         stripedRows
         value={ORDER_STATUS_LIST}
-        className="custom-table w-[310px] sm:w-[390px]"
+        className="custom-table"
         children={HEADERS.map((h) => (
           <Column key={h.field} field={h.field} header={h.header}></Column>
         ))}

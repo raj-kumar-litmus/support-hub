@@ -11,12 +11,12 @@ type Props = {
 const PromotionCard: FC<Props> = ({ promotion }) => {
   return (
     <CustomCard
-      className="my-2 promotion-card w-[310px] sm:w-[390px] text-white bg-[#30343B] shadow-[0px_2px_6px_#00000033] rounded-lg"
+      className="my-2 promotion-card text-white bg-[#30343B] shadow-[0px_2px_6px_#00000033] rounded-lg"
       header={
         <div className="flex items-center px-4 pt-4 pb-2 border-solid border-b border-b-[#383F47]">
           <CustomImage src={CheckCircle} alt="promotion" />
           <span
-            className="text-[#faf9f6] text-sm pl-4 uppercase font-bold text-base whitespace-nowrap text-ellipsis overflow-hidden w-[15rem] sm:w-[20rem]"
+            className="text-[#faf9f6] text-[14px] leading-[17px] pl-4 uppercase font-medium whitespace-nowrap text-ellipsis overflow-hidden w-[15rem] sm:w-[20rem]"
             title={promotion.claimableId}
           >
             {promotion.claimableId}
