@@ -347,7 +347,7 @@ const OPM: React.FC = () => {
             <LineChart options={options} data={data} />
           </div> */}
           {/* <LineChart options={options} data={data} /> */}
-          <LineChart options={getConfigOptions()} data={data} />
+          <LineChart className={"home-opm"} options={getConfigOptions()} data={data} />
         </div>
       )}
       {location.pathname.includes("opm") && (

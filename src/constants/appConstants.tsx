@@ -213,9 +213,6 @@ export const OPM_COMPARISON_OPTIONS = ({
       display: true,
       position: "bottom",
       align: "start",
-      padding: {
-        bottom: 50,
-      },
       labels: {
         boxWidth: 30,
         backgroundColor: "transparent",

@@ -348,8 +348,7 @@ const OpmComparison: React.FC = () => {
     const chartOptions = JSON.parse(JSON.stringify(options));
     chartOptions.layout.padding = 0;
     chartOptions.scales.x.title.padding.top = 10;
-    chartOptions.plugins.legend.position = 'top';
-    // chartOptions.plugins.legend.padding = 20;
+    chartOptions.plugins.legend.position = "top";
 
     return chartOptions;
   };
@@ -357,7 +356,7 @@ const OpmComparison: React.FC = () => {
   return (
     <>
       {location.pathname.includes("home") && data && (
-        <div className="w-full sm:w-1/2 bg-[#30343B] p-4 rounded-lg">
+        <div className="w-full sm:w-1/2 bg-[#30343B] p-4 rounded-lg flex flex-col justify-between">
           <div className="flex justify-between items-center">
             <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
               OPM Comparison
