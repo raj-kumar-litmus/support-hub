@@ -38,7 +38,9 @@ const Navbar: FC<Props> = ({
 
   return (
     <div
-      className={`py-0 pr-1 sm:px-10 flex items-center border-[#30343B] border-solid border-b justify-between h-[56px] absolute top-0 left-0 w-full z-50 bg-[#1C1C20] sm:bg-[#26262B]`}
+      className={
+        "py-0 pr-1 sm:px-10 flex items-center border-[#30343B] border-solid border-b justify-between h-[56px] absolute top-0 left-0 w-full z-50 bg-[#1C1C20] sm:bg-[#26262B]"
+      }
     >
       <div
         className={`flex pl-4 ${

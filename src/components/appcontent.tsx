@@ -46,7 +46,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
           />
         )}
         <div
-          className={`flex flex-col sm:flex-row mt-[56px] bg-[#1C1C20] ml-0`}
+          className={"flex flex-col sm:flex-row mt-[56px] bg-[#1C1C20] ml-0"}
         >
           {showSidePane && (
             <SidePaneList
@@ -58,7 +58,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
           {showSidePane && (
             <div
               className={`${
-                showSidePaneGrid ? `bg-[#1C1C20]  min-h-[calc(100vh-56px)]` : ""
+                showSidePaneGrid ? "bg-[#1C1C20]  min-h-[calc(100vh-56px)]" : ""
               } flex w-full sm:hidden`}
               onClick={() => setShowSidePaneGrid(false)}
             >

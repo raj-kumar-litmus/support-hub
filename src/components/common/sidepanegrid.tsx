@@ -29,7 +29,7 @@ const SidePaneGrid: FC<Props> = ({
         showSidePaneGrid ? "left-0  right-full" : "-left-[367px] right-0"
       } drop-shadow absolute z-10 bg-[#26262B]`}
     >
-      <div className={` flex flex-wrap p-1 `}>
+      <div className={"flex flex-wrap p-1"}>
         {menuList.map((menu) => (
           <MenuCard
             menu={menu}
