@@ -25,11 +25,7 @@ const PromotionCard: FC<Props> = ({ promotion }) => {
       }
     >
       <div className="flex p-0 justify-between">
-        <InfoField
-          title="Promotion"
-          data={promotion.promotionId}
-          className=""
-        />
+        <InfoField title="Promotion" data={promotion.promotionId} />
         <InfoField
           title="Discount Amount"
           data={Number(promotion.discAmt).toFixed(2)}
@@ -47,7 +43,7 @@ const InfoField = ({
 }: {
   title: string;
   data: string | number;
-  className: string;
+  className?: string;
 }) => {
   return (
     <div className="block text-sm font-normal max-w-[10rem] min-w-[7rem]">
