@@ -302,12 +302,20 @@ button.p-button-secondary {
   @apply !shadow-none !border-none;
 }
 
-.p-dialog .p-dialog-content::-webkit-scrollbar {
-  @apply w-1 rounded-lg;
+.p-dialog-content::-webkit-scrollbar-thumb {
+  @apply bg-[#30343B] rounded-full;
 }
 
-.p-dialog .p-dialog-content::-webkit-scrollbar-thumb {
-  @apply bg-[#30343B] mr-6;
+.custom-popup .p-dialog-content {
+  @apply pl-[24px] mr-[10px] pr-[14px] bg-[#1C1C20];
+}
+
+.p-dialog {
+  @apply bg-[#1C1C20];
+}
+
+.p-dialog-content::-webkit-scrollbar {
+  @apply w-1;
 }
 
 .p-button.p-button-text:enabled:active {
