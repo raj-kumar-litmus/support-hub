@@ -31,8 +31,8 @@ const Card = (props: CardProps) => {
   return (
     <div className="shadow-lg border bg-[#30343B] border-[#383F47] w-full flex m-auto text-[#FAF9F6] pt-4 pb-4 pr-2 rounded-lg mb-3">
       <div className="w-3/12 pl-4 pr-4 text-center items-center border-r border-[#383F47] flex flex-col justify-center">
-        <div className="text-xs mb-1">{cardTitle?.key}</div>
-        <div className="font-medium">{cardTitle?.value}</div>
+        <div className="text-xs mb-1 text-[#898A8D]">{cardTitle?.key}</div>
+        <div className="font-medium text-[#FAF9F6]">{cardTitle?.value}</div>
       </div>
       <div
         className={`w-9/12 ${
@@ -42,8 +42,12 @@ const Card = (props: CardProps) => {
         {cardSubTitle && (
           <div className="w-full pl-2 pb-2 mb-2 flex border-b border-solid border-[#383F47]">
             <div className="pl-2 pr-2 flex flex-col flex-1 justify-between">
-              <div className="text-xs mb-2">{cardSubTitle?.key}</div>
-              <div className="text-sm font-medium">{cardSubTitle?.value}</div>
+              <div className="text-xs mb-2 text-[#898A8D]">
+                {cardSubTitle?.key}
+              </div>
+              <div className="text-sm font-medium text-[#FAF9F6]">
+                {cardSubTitle?.value}
+              </div>
             </div>
           </div>
         )}
@@ -57,8 +61,10 @@ const Card = (props: CardProps) => {
               key={ind}
               className="pl-2 pr-2 flex flex-col flex-1 justify-between"
             >
-              <div className="text-xs mb-2">{item.key}</div>
-              <div className="text-[13px] font-medium">{item.value}</div>
+              <div className="text-xs mb-2 text-[#898A8D]">{item.key}</div>
+              <div className="text-[13px] font-medium text-[#FAF9F6]">
+                {item.value}
+              </div>
             </div>
           ))}
         </div>
