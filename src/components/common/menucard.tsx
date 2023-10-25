@@ -12,7 +12,7 @@ type Props = {
 const MenuCard: FC<Props> = ({ menu, selectedMenu, onClick }) => {
   return (
     <Card
-      className={`menu-card grid items-center rounded-xl h-[90px] w-[158px] m-2 cursor-pointer text-center border-solid border-[#30343B] border-2	${
+      className={`menu-card grid items-center rounded-xl h-[90px] w-[158px] m-2 cursor-pointer text-center border-solid border-[#30343B] border-2 ${
         selectedMenu === menu.id ? "selected-menu bg-[#30343B]" : "bg-[#26262B]"
       }`}
       onClick={() => onClick(menu)}
