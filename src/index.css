@@ -9,7 +9,7 @@
   @apply border-[#D4D4D4];
 }
 .ordersTable .p-datatable-thead tr th {
-  @apply !bg-[#30343B] text-[#F2F2F2] font-bold p-3 border-0 w-1/4 border-[#30343B];
+  @apply !bg-[#292E36] text-[#F2F2F2] font-bold p-3 border-0 w-1/4 border-[#292E36];
 }
 .ordersTable .p-datatable-thead tr th:first-child {
   @apply rounded-tl-lg;
@@ -24,10 +24,10 @@
   @apply rounded-br-lg;
 }
 .ordersTable .p-datatable-tbody tr {
-  @apply !bg-[#26262B] text-[#FAF9F6];
+  @apply !bg-[#22262C] text-[#FAF9F6];
 }
 .ordersTable .p-datatable-tbody tr.p-row-odd {
-  @apply !bg-[#30343B] text-[#FAF9F6];
+  @apply !bg-[#292E36] text-[#FAF9F6];
 }
 .ordersTable .p-datatable-thead tr th .p-column-header-content {
   @apply justify-center;
@@ -37,7 +37,7 @@
 }
 .ordersTable .p-datatable-tbody tr td:first-child {
   @apply font-bold;
-} 
+}
 .menu-card .p-card-content {
   @apply p-0;
 }
@@ -50,7 +50,7 @@
   @apply w-[20px] h-[20px];
 }
 
-.selected-menu img{
+.selected-menu img {
   @apply filter invert-12 sepia-9 saturate-682 hue-rotate-201 brightness-88 contrast-88;
 }
 
@@ -97,7 +97,7 @@
 
 #bar-chart .p-calendar,
 .p-dialog .p-calendar {
-  @apply border-none rounded-lg ;
+  @apply border-none rounded-lg;
 }
 
 #bar-chart .p-dropdown {
@@ -147,8 +147,8 @@ button.p-button-secondary {
 .opmFilters .p-dropdown {
   @apply h-[38px];
 }
-.opmFilters .p-calendar{
-  @apply h-[38px]
+.opmFilters .p-calendar {
+  @apply h-[38px];
 }
 .opmFilters .timeInput .p-calendar {
   @apply w-[8vw];
@@ -206,13 +206,13 @@ button.p-button-secondary {
   @apply shadow-none;
 }
 .filteredCard .p-button:hover {
-  @apply bg-transparent text-[#E8E8E8] border-[#30343B]
+  @apply bg-transparent text-[#E8E8E8] border-[#30343B];
 }
 .resetFilters .p-button {
   @apply !bg-transparent;
 }
 .resetFilters span {
-  @apply text-[#E8E8E8] font-normal
+  @apply text-[#E8E8E8] font-normal;
 }
 .inputContainer .p-inputtext {
   @apply w-[150px] h-[37px];
@@ -241,7 +241,8 @@ button.p-button-secondary {
 .dropdownWithIcon .p-dropdown {
   @apply border-l-transparent rounded-l-none w-[135px];
 }
-.dropdownWithIcon .p-dropdown:hover, .dropdownWithIcon .p-dropdown:not(.p-disabled).p-focus {
+.dropdownWithIcon .p-dropdown:hover,
+.dropdownWithIcon .p-dropdown:not(.p-disabled).p-focus {
   @apply !border-transparent;
 }
 .dropdownWithIcon img {
@@ -389,11 +390,13 @@ button.p-button-secondary {
 .p-dropdown-panel .p-dropdown-items {
   @apply p-0;
 }
-.p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
+.p-dropdown-panel
+  .p-dropdown-items
+  .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
   @apply bg-[#40444B] text-[white];
 }
 .labelClass {
-  @apply text-[12px] text-[#E8E8E8] font-medium
+  @apply text-[12px] text-[#E8E8E8] font-medium;
 }
 .tableToolTip {
   @apply w-[140px] mr-[0];
@@ -404,11 +407,11 @@ button.p-button-secondary {
 .tableToolTip tbody {
   @apply flex justify-between	pt-[5px] pb-[5px];
 }
-.tableToolTip:after{
+.tableToolTip:after {
   @apply content-[""] mt-0 mb-0 ml-[0.5rem] mr-[0.5rem] inline-block border-[7px] border-solid border-transparent border-t-[8px] border-t-[#25292D] border-b-0 absolute left-[65px] top-[70px];
 }
 .toolTipEl {
-  @apply bg-[#25292D] text-[12px] text-white opacity-100 pointer-events-none absolute -translate-x-[50%] -translate-y-[120%] text-left rounded-md px-[10px] py-[6px]; 
+  @apply bg-[#25292D] text-[12px] text-white opacity-100 pointer-events-none absolute -translate-x-[50%] -translate-y-[120%] text-left rounded-md px-[10px] py-[6px];
 }
 hr.horizontalLine {
   @apply border-0 rotate-90 relative h-0.5 top-[100px]
@@ -416,17 +419,17 @@ hr.horizontalLine {
   /* rotate: 90deg; */
   /* height: 2px; */
   /* position: relative; */
-  /* top:100px; */
+  /* top:100px; */;
 }
 hr.horizontalLine.opm {
-  background: linear-gradient(to right, #5A9EF5, #5A9EF500);
+  background: linear-gradient(to right, #5a9ef5, #5a9ef500);
 }
 hr.horizontalLine.opmComparison {
-  background: linear-gradient(to right, #6370FF, #5A9EF500);
+  background: linear-gradient(to right, #6370ff, #5a9ef500);
 }
 
 /* Order Details */
-#orderDetailsComp{
+#orderDetailsComp {
   @apply font-helvetica;
 }
 #orderDetailsComp .grid span {
@@ -441,7 +444,7 @@ hr.horizontalLine.opmComparison {
 .orderItemInfoTable .p-datatable-thead tr th {
   @apply !bg-[#26262B] font-bold border-0 border-none;
 }
-.orderItemInfoTable .p-datatable-thead tr th span{
+.orderItemInfoTable .p-datatable-thead tr th span {
   @apply text-[#F2F2F2];
 }
 .orderItemInfoTable .p-datatable-thead tr th:first-child {
@@ -450,13 +453,13 @@ hr.horizontalLine.opmComparison {
 .orderItemInfoTable .p-datatable-thead tr th:nth-child(2) {
   @apply w-[29%];
 }
-.orderItemInfoTable .p-datatable-thead tr th:nth-child(3) div span{
+.orderItemInfoTable .p-datatable-thead tr th:nth-child(3) div span {
   @apply w-full text-center;
 }
-.orderItemInfoTable .p-datatable-thead tr th:nth-child(4) div span{
+.orderItemInfoTable .p-datatable-thead tr th:nth-child(4) div span {
   @apply w-full text-center;
 }
-.orderItemInfoTable .p-datatable-thead tr th:last-child div span{
+.orderItemInfoTable .p-datatable-thead tr th:last-child div span {
   @apply w-full text-end;
 }
 .orderItemInfoTable .p-datatable-thead tr th:last-child {
@@ -483,7 +486,7 @@ hr.horizontalLine.opmComparison {
 .orderItemInfoTable .p-datatable-tbody tr:last-child td:first-child {
   @apply rounded-bl-lg;
 }
- .orderItemInfoTable .p-datatable-tbody tr:last-child td:last-child {
+.orderItemInfoTable .p-datatable-tbody tr:last-child td:last-child {
   @apply rounded-br-lg pr-8;
 }
 .orderItemInfoTable .p-datatable-tbody tr {
@@ -492,22 +495,45 @@ hr.horizontalLine.opmComparison {
 .orderItemInfoTable .p-datatable-tbody tr.p-row-odd {
   @apply !bg-[#26262B] text-[#FAF9F6];
 }
-.orderItemInfoTable span.p-column-title{
+.orderItemInfoTable span.p-column-title {
   @apply bg-inherit;
 }
-.flexBlockWrapper{
+.flexBlockWrapper {
   @apply flex justify-between w-full;
 }
 .flexWrapper {
   @apply flexBlockWrapper py-1 px-4 sm:p-0 border-b border-solid border-[#383F47] sm:border-none;
 }
-.flexColWrapper{
+.flexColWrapper {
   @apply flex flex-col border-t-0 sm:border-t border-solid border-[#383F47] sm:grid;
 }
-.gridNoGapRounded{
+.gridNoGapRounded {
   @apply grid gap-y-0 rounded-md;
 }
-.filterCardWrapper{
-  @apply py-1 px-4 sm:p-0 border-solid border-[#383F47] bg-[#30343B]
+.filterCardWrapper {
+  @apply py-1 px-4 sm:p-0 border-solid border-[#383F47] bg-[#30343B];
 }
 
+.home-page .p-card {
+  @apply rounded-lg shadow-lg shadow-[#00000029] grow w-[35%] sm:w-[25%] md:w-[19%];
+}
+
+.home-page .p-card .p-card-body {
+  @apply p-3 sm:!p-4 h-full flex flex-col justify-between;
+}
+
+.home-page .p-card .p-card-body .p-card-content {
+  @apply p-0 !pt-2;
+}
+
+.home-page .p-card .p-card-title h6 {
+  @apply text-sm font-bold w-3/4 sm:w-1/2 font-helvetica;
+}
+
+.home-opm {
+  @apply mt-6;
+}
+
+.home-refresh-btn {
+  @apply bg-[#22262C] border-[#22262C] rounded-full text-white text-xs px-5 py-3;
+}

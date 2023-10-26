@@ -138,6 +138,11 @@ export const OPM_OPTIONS = {
         padding: { top: 30 },
       },
     },
+    y: {
+      border: {
+        display: false,
+      },
+    },
   },
   plugins: {
     legend: {
@@ -186,6 +191,11 @@ export const OPM_COMPARISON_OPTIONS = ({
         padding: {
           top: 50,
         },
+      },
+    },
+    y: {
+      border: {
+        display: false,
       },
     },
   },
