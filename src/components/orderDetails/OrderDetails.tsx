@@ -152,7 +152,7 @@ const OrderDetails: React.FC = () => {
   return isLoading ? (
     <Loader />
   ) : Object.keys(orderData).length > 0 ? (
-    <div id="orderDetailsComp">
+    <div id="orderDetailsComp" className="sm:my-8 mx-4">
       <div className="flex sm:hidden border-b border-solid border-[#30343B] h-[44px] items-center px-[14px] py-[24px]">
         <CustomImage
           className="h-[13px]"

@@ -263,14 +263,19 @@ button.p-button-secondary {
   @apply w-full pl-[20px];
 }
 .custom-popup.p-dialog {
-  @apply absolute max-[639px]:max-h-[calc(100vh-154px)] max-[390px]:w-full w-[390px] max-[639px]:!bottom-0 sm:max-h-[528px] ;
+  @apply absolute max-[639px]:max-h-[calc(100vh-154px)] max-[390px]:w-full w-[390px] max-[390px]:!bottom-0 sm:max-h-[528px] ;
 }
+
+.p-dialog-mask.p-component-overlay{
+    @apply backdrop-brightness-50;
+}
+
 .custom-popup .p-dialog-header {
-  @apply py-4 text-[#757575] shadow-[0px_1.5px_1px_#343a40] z-10 bg-[#1C1C20] font-medium;
+  @apply py-4 text-[#757575] z-10 font-medium bg-[#22262C] border-[#383F47] border-solid border-b;
 }
 
 .custom-popup .p-dialog-content {
-  @apply pt-4 overflow-auto text-white bg-[#1C1C20];
+  @apply pt-4 overflow-auto text-[#FFFFFF00] bg-[#22262C] pl-[24px] mr-[10px] pr-[14px];
 }
 
 .custom-popup .p-dialog-title {
@@ -310,11 +315,11 @@ button.p-button-secondary {
 }
 
 .custom-popup .p-dialog-content {
-  @apply pl-[24px] mr-[10px] pr-[14px] bg-[#1C1C20];
+  @apply pl-[24px] mr-[10px] pr-[14px] bg-[#22262C];
 }
 
 .p-dialog {
-  @apply bg-[#1C1C20];
+  @apply bg-[#22262C];
 }
 
 .p-dialog-content::-webkit-scrollbar {

@@ -11,7 +11,7 @@ type Props = {
 const PromotionCard: FC<Props> = ({ promotion }) => {
   return (
     <CustomCard
-      className="my-2 promotion-card text-white bg-[#30343B] shadow-[0px_2px_6px_#00000033] rounded-lg"
+      className="my-2 promotion-card text-[#FAF9F6] bg-[#292E36] shadow-[0px_2px_6px_#00000033] rounded-lg"
       header={
         <div className="flex items-center px-4 pt-4 pb-2 border-solid border-b border-b-[#383F47]">
           <CustomImage src={CheckCircle} alt="promotion" />
@@ -46,8 +46,8 @@ const InfoField = ({
   className?: string;
 }) => {
   return (
-    <div className="block text-sm font-normal max-w-[10rem] min-w-[7rem]">
-      <div className={`text-[#898A8D] ${className}`}>{title}</div>
+    <div className="block text-[12px] font-normal max-w-[10rem] min-w-[7rem]">
+      <div className={`text-[#8B8C8F] ${className}`}>{title}</div>
       <div
         className={`text-[#faf9f6] whitespace-nowrap text-ellipsis overflow-hidden ${className}`}
         title={data.toString()}
