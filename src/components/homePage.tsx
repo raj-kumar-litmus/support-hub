@@ -17,7 +17,7 @@ const CardTitle = ({ title, icon }) => {
   );
 };
 
-const CardValue1 = ({ value, time }) => {
+const OPMCards = ({ value, time }) => {
   return (
     <div className="flex items-end">
       <span className="text-2xl text-[#F2F2F2]">{value}</span>
@@ -28,7 +28,7 @@ const CardValue1 = ({ value, time }) => {
   );
 };
 
-const CardValue2 = ({}) => {
+const ComparisonCards = ({}) => {
   return (
     <div className="flex">
       <div className="flex flex-col pr-4 justify-between">
@@ -58,7 +58,7 @@ const HomePage = () => {
           title={
             <CardTitle title={"Avg Orders Per Min"} icon={avg_orders_per_min} />
           }
-          value={<CardValue1 value={35} time={"15"} />}
+          value={<OPMCards value={35} time={"15"} />}
           bgColor="#8F8E8E"
           textColor="#FFFFFF"
         />
@@ -69,13 +69,24 @@ const HomePage = () => {
               icon={total_no_of_orders}
             />
           }
-          value={<CardValue1 value={38} time={"15"} />}
+          value={<OPMCards value={38} time={"15"} />}
           bgColor="#BCBBBB"
+          textColor="#FFFFFF"
+        />
+           <HomeCard
+          title={
+            <CardTitle
+              title={"Last min OPM"}
+              icon={total_order_comp}   //change icon as per new design
+            />
+          }
+          value={<OPMCards value={42} time={"15"} />}
+          bgColor="#E9E8E8"
           textColor="#FFFFFF"
         />
         <HomeCard
           title={<CardTitle title={"Avg OPM Comparison"} icon={avg_opm_comp} />}
-          value={<CardValue2 />}
+          value={<ComparisonCards />}
           bgColor="#CCCBCB"
           textColor="#FFFFFF"
         />
@@ -86,7 +97,7 @@ const HomePage = () => {
               icon={total_order_comp}
             />
           }
-          value={<CardValue2 />}
+          value={<ComparisonCards />}
           bgColor="#E9E8E8"
           textColor="#FFFFFF"
         />

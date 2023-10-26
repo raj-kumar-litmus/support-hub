@@ -343,10 +343,6 @@ const OPM: React.FC = () => {
               </button>
             </div>
           </div>
-          {/* <div className="bg-[#30343B] border-0 rounded-[10px] w-[71.74vw] ml-[2.85vw] h-[62.23vh] mt-[3vh]">
-            <LineChart options={options} data={data} />
-          </div> */}
-          {/* <LineChart options={options} data={data} /> */}
           <LineChart className={"home-opm"} options={getConfigOptions()} data={data} />
         </div>
       )}
