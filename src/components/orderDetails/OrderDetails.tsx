@@ -56,6 +56,7 @@ const OrderDetails: React.FC = () => {
   const [omsOrderStatus, setOmsOrderStatus] = useState<
     OmsOrderStatus | Record<string, never>
   >({});
+  const [omsOrderFlow, setOmsOrderFlow] = useState<orderStatus>();
   const [isOrderStatusVisible, setIsOrderStatusVisible] =
     useState<boolean>(false);
   const [promotions, setPromotions] = useState<Record<string, never>>({});

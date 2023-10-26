@@ -273,7 +273,7 @@ button.p-button-secondary {
   @apply w-1;
 }
 .orderStatus-dialog.p-dialog {
-  @apply absolute max-[639px]:max-h-[calc(100vh-154px)] min-[390px]:w-[390px] w-full max-[390px]:!bottom-0 min-[390px]:h-[490px];
+  @apply absolute max-[639px]:max-h-[calc(100vh-154px)] min-[390px]:w-[390px] w-max max-[390px]:!bottom-0 min-[390px]:max-h-[490px];
 }
 .p-dialog-mask.p-component-overlay {
   @apply backdrop-brightness-50;

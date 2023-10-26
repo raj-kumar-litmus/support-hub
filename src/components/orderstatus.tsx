@@ -14,7 +14,7 @@ const OrderStatus: React.FC<OrderStatusProps> = ({orderStatus,isOrderStatusVisib
       <Dialog
         header="Order Timeline"
         visible={isOrderStatusVisible}
-        className="orderStatus-dialog bg-[#1C1C20] w-full top-[21%] h-[60%] sm:w-96 sm:h-[490px] sm:border sm:flex sm:top-0"
+        className="orderStatus-dialog bg-[#22262C] flex "
         onHide={() =>{setIsOrderStatusVisible(false)}}
         draggable={false}
         resizable={false}
