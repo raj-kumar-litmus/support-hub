@@ -46,6 +46,8 @@ import OrderClockIcon from "../../assets/order_clock_white.svg";
 import RightArrowIcon from "../../assets/right_arrow.svg";
 import OmsInfoIcon from "../../assets/oms_info_white.svg";
 import Loader from "../loader";
+import OrderStatus from "../orderstatus";
+import { orderStatus, orderTimeline } from "../../@types/ordertimeline";
 import PromotionsPopup from "../promotionspopup";
 import { IPromotion } from "../../@types/promotion";
 import OrderStatusPopup from "../orderstatuspopup";
@@ -60,8 +62,10 @@ const OrderDetails: React.FC = () => {
   const [omsOrderStatus, setOmsOrderStatus] = useState<
     OmsOrderStatus | Record<string, never>
   >({});
-  const [omsOrderFlow, setOmsOrderFlow] = useState<Record<string, never>>({});
-  const [promotions, setPromotions] = useState<IPromotion[]>([]);
+  const [omsOrderFlow, setOmsOrderFlow] = useState<orderStatus>();
+  const [isOrderStatusVisible, setIsOrderStatusVisible] =
+    useState<boolean>(false);
+    const [promotions, setPromotions] = useState<IPromotion[]>([]);
   const [itemTableData, setItemTableData] = useState<CommerceItemData[]>([]);
   const [openPromotionsPopup, setOpenPromotionsPopup] =
     useState<boolean>(false);
@@ -142,7 +146,7 @@ const OrderDetails: React.FC = () => {
   };
 
   const showOrderTimeline = (): void => {
-    //show order timeline modal
+    setIsOrderStatusVisible(true);
   };
 
   const viewAllItems = (): void => {
@@ -373,7 +377,14 @@ const OrderDetails: React.FC = () => {
         openDialog={openOrderStatusPopup}
         setOpenDialog={setOpenOrderStatusPopup}
       />
+       <OrderStatus
+        orderStatus={omsOrderFlow}
+        isOrderStatusVisible={isOrderStatusVisible}
+        setIsOrderStatusVisible={setIsOrderStatusVisible}
+      />
     </div>
+     
+    
   ) : (
     <div className="text-md pt-48 text-center text-gray-400 font-semibold">
       {NO_MATCHING_ORDERS_FOUND}
