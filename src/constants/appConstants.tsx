@@ -244,3 +244,5 @@ export const OPM_COMPARISON_OPTIONS = ({
     },
   },
 });
+
+export const ORDER_STATUS: string = "Order Status";

@@ -7,8 +7,6 @@ import DcOpenOrders from "./components/DcOpenOrders.tsx";
 import BarChart from "./components/charts/BarChart.tsx";
 import App from "./App.tsx";
 import Chart from "./components/ChartIndex.tsx";
-import "primereact/resources/themes/lara-light-indigo/theme.css";
-import "primereact/resources/primereact.min.css";
 import "./index.css";
 import OrderDetails from "./components/orderDetails/OrderDetails.js";
 import HomePage from "./components/homePage.js";

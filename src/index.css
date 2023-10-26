@@ -263,16 +263,24 @@ button.p-button-secondary {
 .opmFilters .inputContainer .p-dropdown {
   @apply w-full pl-[20px];
 }
+.custom-popup.p-dialog {
+  @apply absolute max-[639px]:max-h-[calc(100vh-154px)] max-[390px]:w-full w-[390px] max-[390px]:!bottom-0 sm:max-h-[528px] ;
+}
+
+.p-dialog-mask.p-component-overlay{
+    @apply backdrop-brightness-50;
+}
+
 .custom-popup .p-dialog-header {
-  @apply py-4 text-[#757575] shadow-[0px_1.5px_1px_#343a40] z-10  text-white bg-[#1C1C20] font-medium;
+  @apply py-4 text-[#757575] z-10 font-medium bg-[#22262C] border-[#383F47] border-solid border-b;
 }
 
 .custom-popup .p-dialog-content {
-  @apply pt-4 overflow-auto text-white bg-[#1C1C20];
+  @apply pt-4 overflow-auto text-[#FFFFFF00] bg-[#22262C] pl-[24px] mr-[10px] pr-[14px];
 }
 
 .custom-popup .p-dialog-title {
-  @apply text-center text-base font-medium;
+  @apply text-center !text-[16px] !font-medium leading-[19px] text-[#F2F2F2];
 }
 
 .custom-popup .p-dialog-header-icon {
@@ -303,12 +311,20 @@ button.p-button-secondary {
   @apply !shadow-none !border-none;
 }
 
-.p-dialog .p-dialog-content::-webkit-scrollbar {
-  @apply w-1 rounded-lg;
+.p-dialog-content::-webkit-scrollbar-thumb {
+  @apply bg-[#30343B] rounded-full;
 }
 
-.p-dialog .p-dialog-content::-webkit-scrollbar-thumb {
-  @apply bg-[#30343B] mr-6;
+.custom-popup .p-dialog-content {
+  @apply pl-[24px] mr-[10px] pr-[14px] bg-[#22262C];
+}
+
+.p-dialog {
+  @apply bg-[#22262C];
+}
+
+.p-dialog-content::-webkit-scrollbar {
+  @apply w-1;
 }
 
 .p-button.p-button-text:enabled:active {
@@ -354,7 +370,7 @@ button.p-button-secondary {
   @apply text-center p-3 font-medium border-0;
 }
 .custom-table .p-datatable-tbody tr td:first-child {
-  @apply font-bold;
+  @apply font-medium;
 }
 .opmFilters .p-dropdown {
   @apply bg-[#30343B] border border-solid border-[#30343B];
