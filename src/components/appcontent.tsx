@@ -25,12 +25,10 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
   }, [location?.pathname]);
 
   useEffect(() => {
-    if (location?.pathname.split("/")[1] !== "orderDetails") {
-      const _selectedMenu = MENU_LIST.find(
-        (menu) => location?.pathname.split("/")[1] == menu.path.split("/")[1],
-      ).id;
-      setSelectedMenu(_selectedMenu);
-    }
+    const _selectedMenu = MENU_LIST.find(
+      (menu) => location?.pathname.split("/")[1] == menu.path.split("/")[1]
+    )?.id;
+    setSelectedMenu(_selectedMenu);
   }, [location?.pathname]);
 
   return (
@@ -43,9 +41,11 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
             setShowSidePaneGrid={setShowSidePaneGrid}
             openSearchField={openSearchField}
             setOpenSearchField={setOpenSearchField}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
           />
         )}
-        <div className="flex flex-col sm:flex-row mt-[3.5rem] ml-[0] bg-[#1C1C20]">
+        <div className="flex flex-col sm:flex-row mt-[56px] bg-[#1C1C20] ml-0">
           {showSidePane && (
             <SidePaneList
               menuList={MENU_LIST}
@@ -56,7 +56,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
           {showSidePane && (
             <div
               className={`${
-                showSidePaneGrid ? `bg-zinc-400  min-h-[calc(100vh-4rem)]` : ""
+                showSidePaneGrid ? "bg-[#1C1C20]  min-h-[calc(100vh-56px)]" : ""
               } flex w-full sm:hidden`}
               onClick={() => setShowSidePaneGrid(false)}
             >
@@ -81,7 +81,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
           <div
             className={`w-full ${
               showSidePaneGrid ? "hidden" : "block"
-            } sm:ml-[308px]  h-[calc(100vh-56px)] overflow-y-auto`}
+            } sm:ml-[240px] md:ml-[19.25rem]  h-[calc(100vh-56px)] overflow-y-auto`}
           >
             {appContent}
           </div>
