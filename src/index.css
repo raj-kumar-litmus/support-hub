@@ -9,7 +9,7 @@
   @apply border-[#D4D4D4];
 }
 .ordersTable .p-datatable-thead tr th {
-  @apply !bg-[#BABABA] text-white font-bold p-3 border-0 w-1/4 border-[#D4D4D4];
+  @apply !bg-[#30343B] text-[#F2F2F2] font-bold p-3 border-0 w-1/4 border-[#30343B];
 }
 .ordersTable .p-datatable-thead tr th:first-child {
   @apply rounded-tl-lg;
@@ -24,10 +24,10 @@
   @apply rounded-br-lg;
 }
 .ordersTable .p-datatable-tbody tr {
-  @apply !bg-[#F4F4F4] text-[#757575];
+  @apply !bg-[#26262B] text-[#FAF9F6];
 }
 .ordersTable .p-datatable-tbody tr.p-row-odd {
-  @apply !bg-white text-[#757575];
+  @apply !bg-[#30343B] text-[#FAF9F6];
 }
 .ordersTable .p-datatable-thead tr th .p-column-header-content {
   @apply justify-center;
