@@ -9,7 +9,7 @@
   @apply border-[#D4D4D4];
 }
 .ordersTable .p-datatable-thead tr th {
-  @apply !bg-[#30343B] text-[#F2F2F2] font-bold p-3 border-0 w-1/4 border-[#30343B];
+  @apply !bg-[#292E36] text-[#F2F2F2] font-bold p-3 border-0 w-1/4 border-[#292E36];
 }
 .ordersTable .p-datatable-thead tr th:first-child {
   @apply rounded-tl-lg;
@@ -24,10 +24,10 @@
   @apply rounded-br-lg;
 }
 .ordersTable .p-datatable-tbody tr {
-  @apply !bg-[#26262B] text-[#FAF9F6];
+  @apply !bg-[#22262C] text-[#FAF9F6];
 }
 .ordersTable .p-datatable-tbody tr.p-row-odd {
-  @apply !bg-[#30343B] text-[#FAF9F6];
+  @apply !bg-[#292E36] text-[#FAF9F6];
 }
 .ordersTable .p-datatable-thead tr th .p-column-header-content {
   @apply justify-center;
@@ -503,7 +503,7 @@ hr.horizontalLine.opmComparison {
 }
 
 .home-page .p-card .p-card-body {
-  @apply !p-4 h-full flex flex-col justify-between;
+  @apply p-3 sm:!p-4 h-full flex flex-col justify-between;
 }
 
 .home-page .p-card .p-card-body .p-card-content {
@@ -516,4 +516,8 @@ hr.horizontalLine.opmComparison {
 
 .home-opm {
   @apply mt-6;
+}
+
+.home-refresh-btn {
+  @apply bg-[#22262C] border-[#22262C] rounded-full text-white text-xs px-5 py-3;
 }

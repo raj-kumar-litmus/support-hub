@@ -329,7 +329,7 @@ const OPM: React.FC = () => {
   return (
     <>
       {location.pathname.includes("home") && data && (
-        <div className="w-full sm:w-1/2 bg-[#30343B] p-4 rounded-lg">
+        <div className="w-full sm:w-1/2 bg-[#22262C] p-4 rounded-lg">
           <div className="flex justify-between mb-3 items-center">
             <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
               OPM
