@@ -37,7 +37,7 @@
 }
 .ordersTable .p-datatable-tbody tr td:first-child {
   @apply font-bold;
-} 
+}
 .menu-card .p-card-content {
   @apply p-0;
 }
@@ -97,7 +97,7 @@
 
 #bar-chart .p-calendar,
 .p-dialog .p-calendar {
-  @apply border-none rounded-lg ;
+  @apply border-none rounded-lg;
 }
 
 #bar-chart .p-dropdown {
@@ -263,32 +263,33 @@ button.p-button-secondary {
 .opmFilters .inputContainer .p-dropdown {
   @apply w-full pl-[20px];
 }
-.p-dialog-content::-webkit-scrollbar {
-  @apply w-1;
-}
-.p-dialog {
-  @apply bg-[#1C1C20];
-}
 .p-dialog-content::-webkit-scrollbar-thumb {
   @apply bg-[#30343B] rounded-full;
 }
-.p-dialog .p-dialog-content {
-  @apply mr-2 ml-0.5  bg-[#1C1C20];
+.orderStatus-dialog .p-dialog-content {
+  @apply pl-[22px] mr-[9px] pr-[15px] bg-[#22262C];
+}
+.p-dialog-content::-webkit-scrollbar {
+  @apply w-1;
+}
+/* orderStatus-dialog .p-dialog{
+@apply absolute max-[639px]:max-h-[calc(100vh-154px)]  min-[390px]:w-full w-full  max-[639px]:!bottom-0 bg-[#22262C];
+} */
+.orderStatus-dialog.p-dialog {
+  @apply absolute max-[639px]:max-h-[calc(100vh-154px)] min-[390px]:w-[390px] w-full max-[390px]:!bottom-0 min-[390px]:h-[490px];
+}
+.p-dialog-mask.p-component-overlay {
+  @apply backdrop-brightness-50;
 }
 .orderStatus-dialog .p-dialog-header {
-  @apply flex items-center p-1.5 bg-[#1C1C20]  border-b  border-slate-600 text-[#F2F2F2];
+  @apply flex items-center p-1.5 bg-[#22262C]  border-b  border-slate-600 text-[#F2F2F2];
 }
 .orderStatus-dialog .p-dialog-header .p-dialog-title {
   @apply text-center  text-base font-helvetica  ml-6;
 }
 .orderStatus-dialog .p-dialog-content {
-  @apply border-[#30343B]  border-t;
-  @apply text-center text-base font-helvetica  ml-6;
+  @apply border-[#30343B] border-t text-center text-base font-helvetica;
 }
-.orderStatus-dialog .p-dialog-content {
-  @apply border-slate-900 border-t bg-[#1C1C20];
-}
-
 .backButton .p-button {
   @apply !shadow-none !border-none bg-transparent;
 }
@@ -443,7 +444,7 @@ hr.horizontalLine.opmComparison {
 }
 
 /* Order Details */
-#orderDetailsComp{
+#orderDetailsComp {
   @apply font-helvetica;
 }
 #orderDetailsComp .grid span {
@@ -458,7 +459,7 @@ hr.horizontalLine.opmComparison {
 .orderItemInfoTable .p-datatable-thead tr th {
   @apply !bg-[#26262B] font-bold border-0 border-none;
 }
-.orderItemInfoTable .p-datatable-thead tr th span{
+.orderItemInfoTable .p-datatable-thead tr th span {
   @apply text-[#F2F2F2];
 }
 .orderItemInfoTable .p-datatable-thead tr th:first-child {
@@ -467,13 +468,13 @@ hr.horizontalLine.opmComparison {
 .orderItemInfoTable .p-datatable-thead tr th:nth-child(2) {
   @apply w-[29%];
 }
-.orderItemInfoTable .p-datatable-thead tr th:nth-child(3) div span{
+.orderItemInfoTable .p-datatable-thead tr th:nth-child(3) div span {
   @apply w-full text-center;
 }
-.orderItemInfoTable .p-datatable-thead tr th:nth-child(4) div span{
+.orderItemInfoTable .p-datatable-thead tr th:nth-child(4) div span {
   @apply w-full text-center;
 }
-.orderItemInfoTable .p-datatable-thead tr th:last-child div span{
+.orderItemInfoTable .p-datatable-thead tr th:last-child div span {
   @apply w-full text-end;
 }
 .orderItemInfoTable .p-datatable-thead tr th:last-child {
@@ -500,7 +501,7 @@ hr.horizontalLine.opmComparison {
 .orderItemInfoTable .p-datatable-tbody tr:last-child td:first-child {
   @apply rounded-bl-lg;
 }
- .orderItemInfoTable .p-datatable-tbody tr:last-child td:last-child {
+.orderItemInfoTable .p-datatable-tbody tr:last-child td:last-child {
   @apply rounded-br-lg pr-8;
 }
 .orderItemInfoTable .p-datatable-tbody tr {
@@ -509,22 +510,21 @@ hr.horizontalLine.opmComparison {
 .orderItemInfoTable .p-datatable-tbody tr.p-row-odd {
   @apply !bg-[#26262B] text-[#FAF9F6];
 }
-.orderItemInfoTable span.p-column-title{
+.orderItemInfoTable span.p-column-title {
   @apply bg-inherit;
 }
-.flexBlockWrapper{
+.flexBlockWrapper {
   @apply flex justify-between w-full;
 }
 .flexWrapper {
   @apply flexBlockWrapper py-1 px-4 sm:p-0 border-b border-solid border-[#383F47] sm:border-none;
 }
-.flexColWrapper{
+.flexColWrapper {
   @apply flex flex-col border-t-0 sm:border-t border-solid border-[#383F47] sm:grid;
 }
-.gridNoGapRounded{
+.gridNoGapRounded {
   @apply grid gap-y-0 rounded-md;
 }
-.filterCardWrapper{
-  @apply py-1 px-4 sm:p-0 border-solid border-[#383F47] bg-[#30343B]
+.filterCardWrapper {
+  @apply py-1 px-4 sm:p-0 border-solid border-[#383F47] bg-[#30343B];
 }
-

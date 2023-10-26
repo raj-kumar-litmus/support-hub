@@ -45,16 +45,19 @@ import PromotionsIcon from "../../assets/promotions_white.svg";
 import OrderClockIcon from "../../assets/order_clock_white.svg";
 import OmsInfoIcon from "../../assets/oms_info_white.svg";
 import Loader from "../loader";
+import OrderStatus from "../orderstatus";
+import { orderStatus, orderTimeline } from "../../@types/ordertimeline";
 
 const OrderDetails: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [orderData, setOrderData] = useState<OrderData | Record<string, never>>(
-    {},
+    {}
   );
   const [omsOrderStatus, setOmsOrderStatus] = useState<
     OmsOrderStatus | Record<string, never>
   >({});
-  const [omsOrderFlow, setOmsOrderFlow] = useState<Record<string, never>>({});
+  const [isOrderStatusVisible, setIsOrderStatusVisible] =
+    useState<boolean>(false);
   const [promotions, setPromotions] = useState<Record<string, never>>({});
   const [itemTableData, setItemTableData] = useState<CommerceItemData[]>([]);
 
@@ -131,7 +134,7 @@ const OrderDetails: React.FC = () => {
   };
 
   const showOrderTimeline = (): void => {
-    //show order timeline modal
+    setIsOrderStatusVisible(true);
   };
 
   const viewAllItems = (): void => {
@@ -141,6 +144,7 @@ const OrderDetails: React.FC = () => {
   return isLoading ? (
     <Loader />
   ) : Object.keys(orderData).length > 0 ? (
+    <>
     <div id="orderDetailsComp">
       <div className="gridNoGapRounded grid-cols-1 m-4 p-0 sm:py-4 sm:px-6 sm:bg-[#30343B] ">
         <div className="flex justify-between border-none !bg-[#1C1C20] sm:!bg-inherit">
@@ -335,6 +339,12 @@ const OrderDetails: React.FC = () => {
         </div>
       </div>
     </div>
+      <OrderStatus
+        orderStatus={omsOrderFlow}
+        isOrderStatusVisible={isOrderStatusVisible}
+        setIsOrderStatusVisible={setIsOrderStatusVisible}
+      />
+    </>
   ) : (
     <div className="text-md pt-48 text-center text-gray-400 font-semibold">
       {NO_MATCHING_ORDERS_FOUND}

@@ -12,7 +12,7 @@ const TimelineCard: React.FC<CardProps> = ({
 }) => {
   const [orderDate, orderTime] = date.split(" ");
   return (
-    <div className="flex flex-row  h-[75px] w-[342px] font-helvetica bg-[#30343B] rounded-lg mt-3">
+    <div className="flex flex-row  h-[75px] w-[342px] font-helvetica bg-[#292E36] rounded-lg mt-3">
       <div className=" !w-28 flex justify-center items-center flex-col">
         <span className="text-[rgb(250,249,246)] font-normal text-right leading-[12px] text-xs">
           {orderDate}

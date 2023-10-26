@@ -9,7 +9,7 @@ interface TimelineProps {
 
 const Timeline: React.FC<TimelineProps> = ({ orderMap }) => {
   return (
-    <div className="sm:flex sm:flex-col sm:items-center">
+    <div className="  flex flex-col items-center">
       {Object.keys(orderMap).map((timestamp, index) => {
         const orderDetails = orderMap[timestamp][0];
         const isLast = index === Object.keys(orderMap).length - 1;
@@ -23,12 +23,12 @@ const Timeline: React.FC<TimelineProps> = ({ orderMap }) => {
             />
 
             {!isLast && (
-              <div className="relative ml-[32%]  bottom-[52%]">
+              <div className="relative ml-[32%] bottom-[52%] sm:bottom-[51%]">
                 <Stepper />
               </div>
             )}
             {isLast && (
-              <div className="relative left-[32%] bottom-[46%] w-3.5 h-3.5 border-2 border-[#898A8D] rounded-full"></div>
+              <div className="relative left-[32%] bottom-[45%] w-3.5 h-3.5 border-2 border-[#898A8D] rounded-full"></div>
             )}
           </div>
         );
