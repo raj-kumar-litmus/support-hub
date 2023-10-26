@@ -12,14 +12,8 @@ import {
   Legend,
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import { CalendarChangeEvent } from "primereact/calendar";
 
-import {
-  ModalEnums,
-  ChartData,
-  ChartOptions,
-  DropDownOnChangeEvent,
-} from "../@types/supportHub";
+import { ModalEnums, ChartData, ChartOptions } from "../@types/supportHub";
 import useScreenSize from "../hooks/useScreenSize";
 
 import CustomDropdown from "../components/DropDown";
@@ -31,10 +25,12 @@ import LineChart from "../components/LineChart";
 import FilteredCard from "../components/FilteredCard";
 import CustomImage from "../components/common/customimage";
 import { OPM_OPTIONS } from "../constants/appConstants";
+import Loader from "../components/loader";
 
+import WhiteCrossIcon from "../assets/white_cross.svg";
+import DropDownIcon from "../assets/dropdownIcon.svg";
+import ArrowDownIcon from "../assets/arrown_down_white.svg";
 import FilterIcon from "../assets/filter.svg";
-import SmallCalendar from "../assets/calendar_small.svg";
-import DropdownMobileIcon from "../assets/dropdown_mobile.svg";
 import ChannelIcon from "../assets/channel.svg";
 import PromoCodeIcon from "../assets/promocode.svg";
 import LocaleIcon from "../assets/locale.svg";
@@ -42,8 +38,12 @@ import PaymentIcon from "../assets/payment.svg";
 import SandGlassIcon from "../assets/sandglass.svg";
 import GreyChannelIcon from "../assets/channel-grey.svg";
 import GreyCalendarIcon from "../assets/calendar-grey.svg";
+import GreyGlobeIcon from "../assets/grey_globe.svg";
+import GreyCardIcon from "../assets/grey_card.svg";
+import GreyPromoIcon from "../assets/grey_promo.svg";
 import GreyHourGlassIcon from "../assets/hourglass-grey.svg";
 import open_in_full_window from "../assets/open_in_full_window.svg";
+import { fetchData } from "../utils/fetchUtil";
 
 ChartJS.register(
   CategoryScale,
@@ -54,49 +54,40 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ChartDataLabels
+  ChartDataLabels,
 );
 
 const OPM: React.FC = () => {
-  const [date, setDate] = useState<undefined | string>();
-  const [duration, setDuration] = useState<null | string>(null);
-  const [channel, setChannel] = useState<null | string>(null);
-  const [locale, setLocale] = useState<null | string>(null);
-  const [paymentMode, setPaymentMode] = useState<null | string>(null);
-  const [promoCode, setPromoCode] = useState<null | string>(null);
-  const [showFilters, setShowFilters] = useState<boolean>(false);
+  const [showFilters, setShowFilters] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
   const [position, setPosition] = useState<ModalEnums>("center");
 
   const { width } = useScreenSize();
-  const navigate = useNavigate();
+  const IS_FULLSCREEN = location?.pathname.includes("fullscreen");
 
-  const channels = [
-    { name: "All", code: "All" },
-    { name: "Mobile", code: "Mobile" },
-  ];
-  const localeList = [
-    { name: "US", code: "US" },
-    { name: "CA", code: "CA" },
-  ];
-  const paymentList = [
-    { name: "Klarna", code: "Klarna" },
-    { name: "PayPal", code: "PayPal" },
-  ];
+  const DEFAULT = {
+    duration: 10,
+    starttime: new Date(),
+    channel: "",
+    promocode: "",
+    paymentType: "",
+    country: "US",
+  };
+
   const [url, setUrl] = useState<string>(
-    `http://azruvuprep01:8080/supportdashboard/opm?period=${duration}&starttime=${date}&channel=${channel}&promocode=${promoCode}&paymentType=${paymentMode}&country=${locale}`
+    `/opm?period=${DEFAULT.duration}&starttime=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${DEFAULT.promocode}&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`,
   );
 
   const [options, setOptions] = useState<null | ChartOptions>(null);
-
   const [data, setData] = useState<ChartData | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   function getGradient(ctx, chartArea) {
-    let gradient = ctx.createLinearGradient(
+    const gradient = ctx.createLinearGradient(
       0,
       chartArea.bottom,
       0,
-      chartArea.top
+      chartArea.top,
     );
     gradient.addColorStop(0.9, "#5A9EF566");
     gradient.addColorStop(0.4, "#5A9EF52F");
@@ -106,56 +97,15 @@ const OPM: React.FC = () => {
 
   const getData = async () => {
     try {
-      await fetch(url);
-    } catch (err) {
-      const apiRespnose = [
-        {
-          timestamp: "08:24",
-          orderCount: "95",
-        },
-        {
-          timestamp: "08:25",
-          orderCount: "107",
-        },
-        {
-          timestamp: "08:26",
-          orderCount: "105",
-        },
-        {
-          timestamp: "08:27",
-          orderCount: "111",
-        },
-        {
-          timestamp: "08:28",
-          orderCount: "108",
-        },
-        {
-          timestamp: "08:29",
-          orderCount: "122",
-        },
-        {
-          timestamp: "08:30",
-          orderCount: "107",
-        },
-        {
-          timestamp: "08:31",
-          orderCount: "108",
-        },
-        {
-          timestamp: "08:32",
-          orderCount: "112",
-        },
-        {
-          timestamp: "08:33",
-          orderCount: "94",
-        },
-      ];
+      setIsLoading(true);
+      const data = await fetchData(url, {});
+      setIsLoading(false);
       setData({
-        labels: apiRespnose.map((e) => e.timestamp),
+        labels: data.map((e) => e.timestamp),
         datasets: [
           {
             label: "No of orders",
-            data: apiRespnose.map((e) => Number(e.orderCount)),
+            data: data.map((e) => Number(e.orderCount)),
             borderColor: "#599DF5",
             pointStyle: "circle",
             fill: true,
@@ -169,18 +119,20 @@ const OPM: React.FC = () => {
           },
         ],
       });
+    } catch (err) {
+      console.log(`Error occured while fetching ${url}`);
     }
   };
 
   const clearAllHandler = () => {
-    let data = [...formFields];
+    const data = [...formFields];
     data.forEach((e) => (e.value = ""));
     setFormFields(data);
   };
 
   useEffect(() => {
     (async () => {
-      setOptions(OPM_OPTIONS);
+      setOptions(OPM_OPTIONS(width < 700));
       await getData();
     })();
   }, [url]);
@@ -203,7 +155,7 @@ const OPM: React.FC = () => {
   const [formFields, setFormFields] = useState([
     {
       type: "dropdown",
-      name: "duration",
+      name: "period",
       label: "Duration",
       icon: SandGlassIcon,
       cardIcon: GreyHourGlassIcon,
@@ -222,16 +174,8 @@ const OPM: React.FC = () => {
       value: "",
       showTime: true,
       cardIcon: GreyCalendarIcon,
-      imgsrc: "src/assets/calendar.svg",
+      imgsrc: "src/assets/white_calendar.svg",
     },
-    // {
-    //   type: "time",
-    //   name: "time",
-    //   label: "Time",
-    //   value: "",
-    //   timeOnly: true,
-    //   imgsrc: "src/assets/clock.svg",
-    // },
     {
       type: "dropdown",
       name: "channel",
@@ -249,6 +193,7 @@ const OPM: React.FC = () => {
       name: "locale",
       label: "Locale",
       icon: LocaleIcon,
+      cardIcon: GreyGlobeIcon,
       value: "",
       options: [
         { name: "US", code: "US" },
@@ -260,6 +205,7 @@ const OPM: React.FC = () => {
       name: "payment",
       label: "Payment",
       icon: PaymentIcon,
+      cardIcon: GreyCardIcon,
       value: "",
       options: [
         { name: "Klarna", code: "Klarna" },
@@ -271,6 +217,7 @@ const OPM: React.FC = () => {
       name: "promocode",
       label: "Promo Code",
       icon: PromoCodeIcon,
+      cardIcon: GreyPromoIcon,
       value: "",
       options: [
         { name: "Promo123", code: "Promo123" },
@@ -284,8 +231,8 @@ const OPM: React.FC = () => {
   ]);
 
   const handleFormChange = (event) => {
-    let data = [...formFields];
-    let val = event.target.name || event.value.name;
+    const data = [...formFields];
+    const val = event.target.name || event.value.name;
     if (val === "date") {
       data.find((e) => e.name === val).value = event.value;
     } else {
@@ -295,7 +242,7 @@ const OPM: React.FC = () => {
   };
 
   const removeFormEntry = (event) => {
-    let data = [...formFields];
+    const data = [...formFields];
     data.find((e) => e.name === event.target.id).value = null;
     setFormFields(data);
   };
@@ -308,22 +255,42 @@ const OPM: React.FC = () => {
         str += `${e.name}=${e.value.name || e.value}&`;
       }
     });
-    setUrl(`http://azruvuprep01:8080/supportdashboard/opm?${str}`);
+    setUrl(`/opm?${str}`);
+    if (showFilters) setShowFilters(false);
   };
 
   useEffect(() => {
+    console.log(formFields);
     setDisabled(formFields.map((e) => e.value).filter(Boolean).length === 0);
   }, [formFields]);
 
-  const handleOPMExpandClick = () => {
-    navigate("/opm");
-  };
+  useEffect(() => {
+    // on page load, we compare yesterday with today;
+    handleFormChange({
+      target: {
+        name: "date",
+        value: new Date(Date.now() - 86400000),
+      },
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
+  useEffect(() => {
+    console.log(options);
+  }, [options]);
 
   const getConfigOptions = () => {
     const chartOptions = JSON.parse(JSON.stringify(options));
     chartOptions.layout.padding = 0;
     chartOptions.scales.x.title.padding.top = 10;
     return chartOptions;
+  };
+
+  const handleOPMExpandClick = () => {
+    navigate("/opm");
   };
 
   return (
@@ -343,32 +310,101 @@ const OPM: React.FC = () => {
               </button>
             </div>
           </div>
-          <LineChart className={"home-opm"} options={getConfigOptions()} data={data} />
+          <LineChart
+            className={"home-opm"}
+            options={getConfigOptions()}
+            data={data}
+          />
         </div>
       )}
-      {location.pathname.includes("opm") && (
+      {!IS_FULLSCREEN && location.pathname.includes("opm") && (
+        <div className="flex justify-between items-start lg:mb-[2vh] lg:mt-[4vh] ml-[5vw] lg:ml-[3vw] mr-[5vw] lg:mr-[3vw] mt-[3vh]">
+          <p className="font-bold w-[50vw] text-[#F2F2F2] w-[50vw] lg:w-[30vw]">
+            OPM
+          </p>
+          <CustomImage
+            src={FilterIcon}
+            className="lg:w-[2.34vw] self-end"
+            alt="Filter Icon"
+            onClick={onFilterClickHandler}
+          />
+        </div>
+      )}
+      {showFilters && (
         <>
-          <div className={`flex gap-[66vw]`}>
-            <p className="font-bold w-[3vw] mt-[3.9vh] ml-[3vw] text-[#F2F2F2]">
-              OPM
-            </p>
-            <CustomImage
-              src={FilterIcon}
-              className="w-[2.34vw] self-end"
-              alt="Filter Icon"
-              onClick={onFilterClickHandler}
-            />
-          </div>
-          {showFilters && (
+          {width > 700 ? (
+            <form
+              className="flex gap-[1vw] ml-[2.4vw] opmFilters"
+              onSubmit={submit}
+            >
+              {formFields.map((form, index) => {
+                return (
+                  <React.Fragment key={index}>
+                    {form.type === "text" && (
+                      <CustomInputText
+                        value={form.value}
+                        name={form.label}
+                        placeholder={form.label}
+                        onChange={(event) => handleFormChange(event)}
+                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
+                        id="promoCode"
+                      />
+                    )}
+                    {form.type === "time" && (
+                      <CustomCalendar
+                        name={form.name}
+                        containerClassName="ml-[10px]"
+                        title={form.label}
+                        showTime={form.showTime}
+                        iconPos={form.iconPos || "left"}
+                        imgsrc={form.imgsrc}
+                        onChange={(event) => handleFormChange(event)}
+                        value={form.value}
+                      />
+                    )}
+                    {form.type === "dropdown" && (
+                      <CustomDropdown
+                        value={form.value}
+                        name={form.name}
+                        onChange={(e) => handleFormChange(e)}
+                        imageClassName="relative left-[25px] z-[1]"
+                        dropdownIcon={<CustomImage src={ArrowDownIcon} />}
+                        icon={form.icon}
+                        options={form.options}
+                        label={form.label}
+                        optionLabel="name"
+                        placeholder=""
+                      />
+                    )}
+                  </React.Fragment>
+                );
+              })}
+              <CustomButton
+                label="Submit"
+                isDisabled={disabled}
+                isRounded={true}
+                className="submitBtnMobile self-end relative"
+              />
+            </form>
+          ) : (
             <>
-              {width > 700 ? (
+              <CustomModal
+                header="Filters"
+                visible={visible}
+                position={position}
+                className="!bg-slate-900 filtersModal opmFiltersMobile h-[450px] w-[100vw]"
+                onHide={onModalCloseHandler}
+                isDraggable={false}
+                closeIcon={<CustomImage src={WhiteCrossIcon} />}
+                isResizable={false}
+              >
                 <form
-                  className="flex gap-[1vw] ml-[2.4vw] opmFilters"
+                  className="grid grid-cols-2 grid-rows-3 gap-x-5 gap-y-5"
                   onSubmit={submit}
                 >
-                  {formFields.map((form, index) => {
+                  {formFields.map((form) => {
                     return (
-                      <div key={index}>
+                      <>
                         {form.type === "text" && (
                           <CustomInputText
                             value={form.value}
@@ -382,6 +418,7 @@ const OPM: React.FC = () => {
                         {form.type === "time" && (
                           <CustomCalendar
                             name={form.name}
+                            containerClassName="opmFiltersMobileCalendar"
                             title={form.label}
                             showTime={form.showTime}
                             iconPos={form.iconPos || "left"}
@@ -394,7 +431,9 @@ const OPM: React.FC = () => {
                           <CustomDropdown
                             value={form.value}
                             name={form.name}
+                            dropdownIcon={<CustomImage src={DropDownIcon} />}
                             onChange={(e) => handleFormChange(e)}
+                            containerClassName="w-[41vw]"
                             imageClassName="relative left-[25px] z-[1]"
                             icon={form.icon}
                             options={form.options}
@@ -403,174 +442,64 @@ const OPM: React.FC = () => {
                             placeholder=""
                           />
                         )}
-                      </div>
+                      </>
                     );
                   })}
                   <CustomButton
                     label="Submit"
                     isDisabled={disabled}
                     isRounded={true}
-                    className="submitBtnMobile self-end relative"
+                    className="submitBtnMobile opmPopUp col-span-full"
                   />
                 </form>
-              ) : (
-                <>
-                  <CustomModal
-                    header="Filters"
-                    visible={visible}
-                    position={position}
-                    className="filtersModal opmFilters h-[500px] left-[-4vw] w-[100vw]"
-                    onHide={onModalCloseHandler}
-                    isDraggable={false}
-                    isResizable={false}
-                  >
-                    <div className="flex flex-col">
-                      <div className="flex flex-row gap-5">
-                        <div className="flex flex-col w-[40vw]">
-                          <label className="labelClass mb-[5px] mt-[14px]">
-                            From
-                          </label>
-                          <CustomCalendar
-                            placeholder={"mm/dd/yyyy"}
-                            icon={<img src={SmallCalendar} />}
-                            dateFormat="mm/dd/yy"
-                            onChange={(
-                              e: React.ChangeEvent<CalendarChangeEvent>
-                            ) => {
-                              if (
-                                e.target.value &&
-                                typeof e.target.value === "object" &&
-                                "toLocaleDateString" in e.target.value
-                              ) {
-                                setDate(e.target.value?.toLocaleDateString());
-                              }
-                            }}
-                          />
-                        </div>
-                        <div className="flex flex-col w-[40vw]">
-                          <label className="labelClass mb-[5px] mt-[14px]">
-                            Duration
-                          </label>
-                          <CustomInputText
-                            placeholder=""
-                            onChange={(
-                              e: React.ChangeEvent<HTMLInputElement>
-                            ) => setDuration(e.target.value)}
-                            className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
-                            id="promoCode"
-                          />
-                        </div>
-                      </div>
-                      <div className="flex flex-row gap-5">
-                        <div className="flex flex-col w-[40vw]">
-                          <label className="labelClass mb-[5px] mt-[14px]">
-                            Channel
-                          </label>
-                          <CustomDropdown
-                            dropdownIcon={<img src={DropdownMobileIcon} />}
-                            value={channels.find((e) => e.name === channel)}
-                            onChange={(e: DropDownOnChangeEvent) =>
-                              setChannel(e.value.name)
-                            }
-                            options={channels}
-                            optionLabel="name"
-                            placeholder="All"
-                          />
-                        </div>
-                        <div className="flex flex-col w-[40vw]">
-                          <label className="labelClass mb-[5px] mt-[14px]">
-                            Locale
-                          </label>
-                          <CustomDropdown
-                            dropdownIcon={<img src={DropdownMobileIcon} />}
-                            value={localeList.find((e) => e.name === locale)}
-                            onChange={(e: DropDownOnChangeEvent) =>
-                              setLocale(e.value.name)
-                            }
-                            options={localeList}
-                            optionLabel="name"
-                            placeholder="US"
-                          />
-                        </div>
-                      </div>
-                      <div className="flex flex-row gap-5">
-                        <div className="flex flex-col w-[40vw]">
-                          <label className="labelClass mb-[5px] mt-[14px]">
-                            Payment
-                          </label>
-                          <CustomDropdown
-                            dropdownIcon={<img src={DropdownMobileIcon} />}
-                            value={paymentList.find(
-                              (e) => e.name === paymentMode
-                            )}
-                            onChange={(e: DropDownOnChangeEvent) =>
-                              setPaymentMode(e.value.name)
-                            }
-                            options={paymentList}
-                            optionLabel="name"
-                            placeholder="Klarna"
-                          />
-                        </div>
-                        <div className="flex flex-col w-[40vw]">
-                          <label className="labelClass mb-[5px] mt-[14px]">
-                            Promocode
-                          </label>
-                          <CustomInputText
-                            onChange={(
-                              e: React.ChangeEvent<HTMLInputElement>
-                            ) => setPromoCode(e.target.value)}
-                            className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
-                            id="promoCode"
-                            placeholder="Enter Code Here"
-                          />
-                        </div>
-                      </div>
-                      <CustomButton
-                        label="Submit"
-                        isDisabled={disabled}
-                        isRounded={true}
-                        className="submitBtnMobile self-end relative"
-                      />
-                    </div>
-                  </CustomModal>
-                </>
-              )}
+              </CustomModal>
             </>
-          )}
-          <div className="flex items-center gap-4 mt-[10px] overflow-scroll ml-[3vw]">
-            {formFields
-              .filter((e) => e.value)
-              .map((e: any) => (
-                <Fragment key={e.name}>
-                  <FilteredCard
-                    label={e.name}
-                    leftIcon={e.cardIcon}
-                    onClickHandler={removeFormEntry}
-                    content={
-                      e.type === "time"
-                        ? e.value.toLocaleString("en-US", { hour12: false })
-                        : e.value.name || e.value
-                    }
-                  />
-                </Fragment>
-              ))}
-            {!disabled && (
-              <CustomButton
-                label="Reset"
-                severity="secondary"
-                className="resetFilters text-[12px] text-[#575353]"
-                isTextButton={true}
-                onClick={clearAllHandler}
-              />
-            )}
-          </div>
-          {data && (
-            <div className="bg-[#30343B] border-0 rounded-[10px] w-[71.74vw] ml-[2.85vw] h-[62.23vh] mt-[3vh]">
-              <LineChart options={options} data={data} />
-            </div>
           )}
         </>
       )}
+      <div
+        className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[3vw] w-[90vw] ${
+          IS_FULLSCREEN ? "rotate-90 absolute left-[40vw] top-[45vh]" : ""
+        }`}
+      >
+        {formFields
+          .filter((e) => e.value)
+          .map((e: any) => (
+            <Fragment key={e.name}>
+              <FilteredCard
+                label={e.name}
+                leftIcon={e.cardIcon}
+                onClickHandler={removeFormEntry}
+                content={
+                  e.type === "time"
+                    ? e.value.toLocaleString("en-US", { hour12: false })
+                    : e.value.name || e.value
+                }
+              />
+            </Fragment>
+          ))}
+        {!disabled && !IS_FULLSCREEN && (
+          <CustomButton
+            label="Reset"
+            severity="secondary"
+            className="resetFilters text-[12px] text-[#575353]"
+            isTextButton={true}
+            onClick={clearAllHandler}
+          />
+        )}
+      </div>
+      {data && !isLoading && (
+        <div className="">
+          <LineChart
+            title="OPM"
+            isFullScreen={IS_FULLSCREEN}
+            className="border-0 rounded-[10px] lg:w-[71.74vw] lg:ml-[2.85vw] h-[340px] lg:h-[62.23vh] lg:mt-[3vh] "
+            options={options}
+            data={data}
+          />
+        </div>
+      )}
+      {isLoading && <Loader />}
     </>
   );
 };

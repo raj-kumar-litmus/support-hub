@@ -4,6 +4,7 @@ export const fetchData = async (
   url: string,
   params: Record<string, string>,
 ) => {
+  console.log(`Fetching ${url}`);
   const queryString: string = params
     ? Object.keys(params)
         .map(
