@@ -9,7 +9,7 @@
   @apply border-[#D4D4D4];
 }
 .ordersTable .p-datatable-thead tr th {
-  @apply !bg-[#30343B] text-[#F2F2F2] font-bold p-3 border-0 w-1/4 border-[#30343B];
+  @apply !bg-[#292E36] text-[#F2F2F2] font-bold p-3 border-0 w-1/4 border-[#292E36];
 }
 .ordersTable .p-datatable-thead tr th:first-child {
   @apply rounded-tl-lg;
@@ -24,10 +24,10 @@
   @apply rounded-br-lg;
 }
 .ordersTable .p-datatable-tbody tr {
-  @apply !bg-[#26262B] text-[#FAF9F6];
+  @apply !bg-[#22262C] text-[#FAF9F6];
 }
 .ordersTable .p-datatable-tbody tr.p-row-odd {
-  @apply !bg-[#30343B] text-[#FAF9F6];
+  @apply !bg-[#292E36] text-[#FAF9F6];
 }
 .ordersTable .p-datatable-thead tr th .p-column-header-content {
   @apply justify-center;
@@ -305,14 +305,22 @@ button.p-button-secondary {
 .orderStatus-dialog .p-dialog-header-icon:enabled:hover {
   @apply !bg-transparent;
 }
+.custom-popup.p-dialog {
+  @apply absolute max-[639px]:max-h-[calc(100vh-154px)] max-[390px]:w-full w-[390px] max-[390px]:!bottom-0 sm:max-h-[528px] ;
+}
+
+.p-dialog-mask.p-component-overlay{
+    @apply backdrop-brightness-50;
+}
+
 .custom-popup .p-dialog-header {
-  @apply py-4 text-[#757575] shadow-[0px_1.5px_1px_#343a40] z-10  text-white bg-[#1C1C20] font-medium;
+  @apply py-4 text-[#757575] z-10 font-medium bg-[#22262C] border-[#383F47] border-solid border-b;
 }
 .custom-popup .p-dialog-content {
-  @apply pt-4 overflow-auto text-white bg-[#1C1C20];
+  @apply pt-4 overflow-auto text-[#FFFFFF00] bg-[#22262C] pl-[24px] mr-[10px] pr-[14px];
 }
 .custom-popup .p-dialog-title {
-  @apply text-center text-base font-medium;
+  @apply text-center !text-[16px] !font-medium leading-[19px] text-[#F2F2F2];
 }
 .custom-popup .p-dialog-header-icon {
   @apply text-[#898A8D];
@@ -335,11 +343,21 @@ button.p-button-secondary {
 .popup-button .p-button {
   @apply !shadow-none !border-none;
 }
-.p-dialog .p-dialog-content::-webkit-scrollbar {
-  @apply w-1 rounded-lg;
+
+.p-dialog-content::-webkit-scrollbar-thumb {
+  @apply bg-[#30343B] rounded-full;
 }
-.p-dialog .p-dialog-content::-webkit-scrollbar-thumb {
-  @apply bg-[#30343B] mr-6;
+
+.custom-popup .p-dialog-content {
+  @apply pl-[24px] mr-[10px] pr-[14px] bg-[#22262C];
+}
+
+.p-dialog {
+  @apply bg-[#22262C];
+}
+
+.p-dialog-content::-webkit-scrollbar {
+  @apply w-1;
 }
 .p-button.p-button-text:enabled:active {
   @apply bg-transparent;
@@ -382,7 +400,7 @@ button.p-button-secondary {
   @apply text-center p-3 font-medium border-0;
 }
 .custom-table .p-datatable-tbody tr td:first-child {
-  @apply font-bold;
+  @apply font-medium;
 }
 .opmFilters .p-dropdown {
   @apply bg-[#30343B] border border-solid border-[#30343B];
@@ -524,4 +542,28 @@ hr.horizontalLine.opmComparison {
 }
 .filterCardWrapper {
   @apply py-1 px-4 sm:p-0 border-solid border-[#383F47] bg-[#30343B];
+}
+
+.home-page .p-card {
+  @apply rounded-lg shadow-lg shadow-[#00000029] grow w-[35%] sm:w-[25%] md:w-[19%];
+}
+
+.home-page .p-card .p-card-body {
+  @apply p-3 sm:!p-4 h-full flex flex-col justify-between;
+}
+
+.home-page .p-card .p-card-body .p-card-content {
+  @apply p-0 !pt-2;
+}
+
+.home-page .p-card .p-card-title h6 {
+  @apply text-sm font-bold w-3/4 sm:w-1/2 font-helvetica;
+}
+
+.home-opm {
+  @apply mt-6;
+}
+
+.home-refresh-btn {
+  @apply bg-[#22262C] border-[#22262C] rounded-full text-white text-xs px-5 py-3;
 }

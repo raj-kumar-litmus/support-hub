@@ -138,6 +138,11 @@ export const OPM_OPTIONS = {
         padding: { top: 30 },
       },
     },
+    y: {
+      border: {
+        display: false,
+      },
+    },
   },
   plugins: {
     legend: {
@@ -188,6 +193,11 @@ export const OPM_COMPARISON_OPTIONS = ({
         },
       },
     },
+    y: {
+      border: {
+        display: false,
+      },
+    },
   },
   elements: {
     point: {
@@ -234,3 +244,5 @@ export const OPM_COMPARISON_OPTIONS = ({
     },
   },
 });
+
+export const ORDER_STATUS: string = "Order Status";
