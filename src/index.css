@@ -272,9 +272,6 @@ button.p-button-secondary {
 .p-dialog-content::-webkit-scrollbar {
   @apply w-1;
 }
-/* orderStatus-dialog .p-dialog{
-@apply absolute max-[639px]:max-h-[calc(100vh-154px)]  min-[390px]:w-full w-full  max-[639px]:!bottom-0 bg-[#22262C];
-} */
 .orderStatus-dialog.p-dialog {
   @apply absolute max-[639px]:max-h-[calc(100vh-154px)] min-[390px]:w-[390px] w-full max-[390px]:!bottom-0 min-[390px]:h-[490px];
 }
