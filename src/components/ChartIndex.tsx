@@ -4,16 +4,13 @@ import OpmComparison from "../views/opmComparison";
 
 interface Props {
   type: string;
-  isFullScreen?: boolean;
 }
 
-const Chart: React.FC<Props> = ({ type, isFullScreen }) => {
+const Chart: React.FC<Props> = ({ type }) => {
   return (
     <>
-      {type === "opm" && <OPM isFullScreen={isFullScreen} />}
-      {type === "opmcomparison" && (
-        <OpmComparison isFullScreen={isFullScreen} />
-      )}
+      {type === "opm" && <OPM />}
+      {type === "opmcomparison" && <OpmComparison />}
     </>
   );
 };

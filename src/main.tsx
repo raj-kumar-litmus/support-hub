@@ -32,10 +32,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route
             path="/opm/fullscreen"
             element={
-              <App
-                showNavbar={false}
-                appContent={<Chart isFullScreen={true} type="opm" />}
-              />
+              <App showNavbar={false} appContent={<Chart type="opm" />} />
             }
           />
           <Route
@@ -58,5 +55,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         </Routes>
       </Suspense>
     </Router>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

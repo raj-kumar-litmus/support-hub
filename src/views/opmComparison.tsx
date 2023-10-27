@@ -471,15 +471,13 @@ const OpmComparison: React.FC = () => {
         )}
       </div>
       {data && !isLoading && (
-        <div className="">
-          <LineChart
-            title="OPM Comparison"
-            isFullScreen={IS_FULLSCREEN}
-            className="border-0 rounded-[10px] lg:w-[71.74vw] lg:ml-[2.85vw] h-[340px] lg:h-[62.23vh] lg:mt-[3vh] "
-            options={options}
-            data={data}
-          />
-        </div>
+        <LineChart
+          title="OPM Comparison"
+          isFullScreen={IS_FULLSCREEN}
+          className="border-0 rounded-[10px] lg:w-[71.74vw] lg:ml-[2.85vw] h-[340px] lg:h-[62.23vh] lg:mt-[3vh] "
+          options={options}
+          data={data}
+        />
       )}
       {isLoading && <Loader />}
     </>
