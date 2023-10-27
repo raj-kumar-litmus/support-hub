@@ -438,14 +438,17 @@ button.p-button-secondary {
 .custom-table .p-datatable-tbody tr td:first-child {
   @apply font-medium;
 }
-.opmFilters .p-dropdown {
+.opmFilters .p-dropdown, .opmFilters .p-inputtext {
   @apply bg-[#30343B] border border-solid border-[#30343B];
 }
 .opmFilters .p-dropdown:not(.p-disabled).p-focus {
   @apply !border-[#30343B];
 }
-.opmFilters .p-dropdown:hover {
+.opmFilters .p-dropdown:hover, .opmFilters .p-inputtext:hover {
   @apply !border-[#40444B];
+}
+.p-datepicker table td>span.p-highlight {
+  @apply text-inherit;
 }
 .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
   @apply bg-[#30343B] text-[white];

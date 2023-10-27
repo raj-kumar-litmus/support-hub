@@ -32,7 +32,6 @@ import DropDownIcon from "../assets/dropdownIcon.svg";
 import ArrowDownIcon from "../assets/arrown_down_white.svg";
 import FilterIcon from "../assets/filter.svg";
 import ChannelIcon from "../assets/channel.svg";
-import PromoCodeIcon from "../assets/promocode.svg";
 import LocaleIcon from "../assets/locale.svg";
 import PaymentIcon from "../assets/payment.svg";
 import SandGlassIcon from "../assets/sandglass.svg";
@@ -44,6 +43,7 @@ import GreyPromoIcon from "../assets/grey_promo.svg";
 import GreyHourGlassIcon from "../assets/hourglass-grey.svg";
 import open_in_full_window from "../assets/open_in_full_window.svg";
 import { fetchData } from "../utils/fetchUtil";
+import { CHANNELS, DURATIONS, PAYMENT_TYPES } from "../constants/appConstants";
 
 ChartJS.register(
   CategoryScale,
@@ -63,19 +63,20 @@ const OPM: React.FC = () => {
   const [position, setPosition] = useState<ModalEnums>("center");
 
   const { width } = useScreenSize();
+  const navigate = useNavigate();
   const IS_FULLSCREEN = location?.pathname.includes("fullscreen");
 
   const DEFAULT = {
     duration: 10,
     starttime: new Date(),
-    channel: "",
+    channel: CHANNELS.DESKTOP,
     promocode: "",
     paymentType: "",
     country: "US",
   };
 
   const [url, setUrl] = useState<string>(
-    `/opm?period=${DEFAULT.duration}&starttime=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${DEFAULT.promocode}&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`,
+    `/opm?period=${DEFAULT.duration}&date=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${DEFAULT.promocode}&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`,
   );
 
   const [options, setOptions] = useState<null | ChartOptions>(null);
@@ -160,12 +161,10 @@ const OPM: React.FC = () => {
       icon: SandGlassIcon,
       cardIcon: GreyHourGlassIcon,
       value: "",
-      options: [
-        { name: "15", code: "15" },
-        { name: "30", code: "30" },
-        { name: "45", code: "45" },
-        { name: "60", code: "60" },
-      ],
+      options: Object.keys(DURATIONS).map((e) => ({
+        name: e,
+        code: DURATIONS[e],
+      })),
     },
     {
       type: "time",
@@ -183,10 +182,10 @@ const OPM: React.FC = () => {
       icon: ChannelIcon,
       cardIcon: GreyChannelIcon,
       value: "",
-      options: [
-        { name: "All", code: "All" },
-        { name: "Mobile", code: "Mobile" },
-      ],
+      options: Object.keys(CHANNELS).map((e) => ({
+        name: e,
+        code: CHANNELS[e],
+      })),
     },
     {
       type: "dropdown",
@@ -207,26 +206,18 @@ const OPM: React.FC = () => {
       icon: PaymentIcon,
       cardIcon: GreyCardIcon,
       value: "",
-      options: [
-        { name: "Klarna", code: "Klarna" },
-        { name: "PayPal", code: "PayPal" },
-      ],
+      options: Object.keys(PAYMENT_TYPES).map((e) => ({
+        name: e,
+        code: PAYMENT_TYPES[e],
+      })),
     },
     {
-      type: "dropdown",
+      type: "text",
       name: "promocode",
       label: "Promo Code",
-      icon: PromoCodeIcon,
+      imgsrc: "src/assets/promocode.svg",
       cardIcon: GreyPromoIcon,
       value: "",
-      options: [
-        { name: "Promo123", code: "Promo123" },
-        { name: "Promo234", code: "Promo234" },
-        { name: "Promo456", code: "Promo456" },
-        { name: "Promo567", code: "Promo567" },
-        { name: "Promo678", code: "Promo678" },
-        { name: "Promo91011", code: "Promo91011" },
-      ],
     },
   ]);
 
@@ -252,15 +243,20 @@ const OPM: React.FC = () => {
     let str = ``;
     formFields.forEach((e: any) => {
       if (e.value) {
-        str += `${e.name}=${e.value.name || e.value}&`;
+        if (typeof e.value.code === "string" && e.value.code.length === 0) {
+          str += `${e.name}=&`;
+          return;
+        }
+        str += `${e.name}=${
+          (e.value.code && String(e.value.code)) || e.value
+        }&`;
       }
     });
     setUrl(`/opm?${str}`);
-    if (showFilters) setShowFilters(false);
+    // if (showFilters) setShowFilters(false);
   };
 
   useEffect(() => {
-    console.log(formFields);
     setDisabled(formFields.map((e) => e.value).filter(Boolean).length === 0);
   }, [formFields]);
 
@@ -273,14 +269,6 @@ const OPM: React.FC = () => {
       },
     });
   }, []);
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
-  useEffect(() => {
-    console.log(options);
-  }, [options]);
 
   const getConfigOptions = () => {
     const chartOptions = JSON.parse(JSON.stringify(options));
@@ -311,6 +299,7 @@ const OPM: React.FC = () => {
             </div>
           </div>
           <LineChart
+            title="OPM"
             className={"home-opm"}
             options={getConfigOptions()}
             data={data}
@@ -342,9 +331,13 @@ const OPM: React.FC = () => {
                   <React.Fragment key={index}>
                     {form.type === "text" && (
                       <CustomInputText
+                        containerClassName="lg:w-[10vw]"
                         value={form.value}
-                        name={form.label}
+                        name={form.name}
+                        label={form.label}
+                        icon={form.imgsrc}
                         placeholder={form.label}
+                        imageClassName="relative left-[25px] z-[1]"
                         onChange={(event) => handleFormChange(event)}
                         className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
                         id="promoCode"
@@ -353,7 +346,7 @@ const OPM: React.FC = () => {
                     {form.type === "time" && (
                       <CustomCalendar
                         name={form.name}
-                        containerClassName="ml-[10px]"
+                        containerClassName="ml-[10px] md:w-[14vw]"
                         title={form.label}
                         showTime={form.showTime}
                         iconPos={form.iconPos || "left"}
@@ -407,8 +400,12 @@ const OPM: React.FC = () => {
                       <>
                         {form.type === "text" && (
                           <CustomInputText
+                            containerClassName="w-[41vw]"
                             value={form.value}
-                            name={form.label}
+                            name={form.name}
+                            label={form.label}
+                            icon={form.imgsrc}
+                            imageClassName="relative left-[25px] z-[1]"
                             placeholder={form.label}
                             onChange={(event) => handleFormChange(event)}
                             className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"

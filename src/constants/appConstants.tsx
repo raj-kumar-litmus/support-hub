@@ -86,6 +86,36 @@ export const SESSIONS_CHART = {
   CATEGORY_PERCENT: 0.6,
 };
 
+export const DURATIONS = {
+  "10 mins": 10,
+  "15 mins": 15,
+  "30 mins": 30,
+  "45 mins": 45,
+  "60 mins": 60,
+};
+
+export const CHANNELS = {
+  ALL: "",
+  DESKTOP: 0,
+  MOBILE_WEB: 5,
+  IPHONE_APP: 4,
+  ANDROID_APP: 9,
+  CSC: 2,
+  MPLUS: 6,
+  INSTAGRAM: 11,
+};
+
+export const PAYMENT_TYPES = {
+  ALL: "",
+  "CREDIT CARD": "creditCard",
+  KLARNA: "Klarna",
+  "STORE CREDIT": "storeCredit",
+  "GIFT CARD": "giftCard",
+  PayPal: "payPal",
+  JCPenny: "JCPenny",
+  "Apple Pay": "Applepay",
+};
+
 export const ORDER_STATUS_LIST = [
   {
     code: 1111,

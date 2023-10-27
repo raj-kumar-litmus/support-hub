@@ -33,14 +33,18 @@ import Loader from "../components/loader";
 
 import WhiteCrossIcon from "../assets/white_cross.svg";
 import DropDownIcon from "../assets/dropdownIcon.svg";
+import ArrowDownIcon from "../assets/arrown_down_white.svg";
 
 import FilterIcon from "../assets/filter.svg";
 import ChannelIcon from "../assets/channel.svg";
 import SandGlassIcon from "../assets/sandglass.svg";
 import open_in_full_window from "../assets/open_in_full_window.svg";
-import OPM from "./opm";
 
-import { OPM_COMPARISON_OPTIONS } from "../constants/appConstants";
+import {
+  OPM_COMPARISON_OPTIONS,
+  CHANNELS,
+  DURATIONS,
+} from "../constants/appConstants";
 import { fetchData } from "../utils/fetchUtil";
 
 ChartJS.register(
@@ -91,12 +95,10 @@ const OpmComparison: React.FC = () => {
       label: "Duration",
       icon: SandGlassIcon,
       value: "",
-      options: [
-        { name: "15", code: "15 mins" },
-        { name: "30", code: "30 mins" },
-        { name: "45", code: "45 mins" },
-        { name: "60", code: "60 mins" },
-      ],
+      options: Object.keys(DURATIONS).map((e) => ({
+        name: e,
+        code: DURATIONS[e],
+      })),
     },
     {
       type: "time",
@@ -118,10 +120,10 @@ const OpmComparison: React.FC = () => {
       label: "Channel",
       icon: ChannelIcon,
       value: "",
-      options: [
-        { name: "All", code: "All" },
-        { name: "Mobile", code: "Mobile" },
-      ],
+      options: Object.keys(CHANNELS).map((e) => ({
+        name: e,
+        code: CHANNELS[e],
+      })),
     },
   ]);
 
@@ -155,11 +157,13 @@ const OpmComparison: React.FC = () => {
           str += `startDateTwo=${e.value.toLocaleDateString("en-US")}&`;
           return;
         }
-        str += `${e.name}=${e.value.name || e.value}&`;
+        str += `${e.name}=${
+          (e.value.code && String(e.value.code)) || e.value
+        }&`;
       }
     });
     setUrl(`/compareOPM?${str}`);
-    if (showFilters) setShowFilters(false);
+    // if (showFilters) setShowFilters(false);
   };
 
   useEffect(() => {
@@ -221,92 +225,7 @@ const OpmComparison: React.FC = () => {
       setIsLoading(false);
       setApiResponse(data);
     } catch (err) {
-      setApiResponse({
-        opmOne: [
-          {
-            timestamp: "12:57",
-            orderCount: "111",
-          },
-          {
-            timestamp: "12:58",
-            orderCount: "143",
-          },
-          {
-            timestamp: "12:59",
-            orderCount: "116",
-          },
-          {
-            timestamp: "13:00",
-            orderCount: "138",
-          },
-          {
-            timestamp: "13:01",
-            orderCount: "119",
-          },
-          {
-            timestamp: "13:02",
-            orderCount: "130",
-          },
-          {
-            timestamp: "13:03",
-            orderCount: "112",
-          },
-          {
-            timestamp: "13:04",
-            orderCount: "120",
-          },
-          {
-            timestamp: "13:05",
-            orderCount: "108",
-          },
-          {
-            timestamp: "13:06",
-            orderCount: "132",
-          },
-        ],
-        opmTwo: [
-          {
-            timestamp: "12:57",
-            orderCount: "94",
-          },
-          {
-            timestamp: "12:58",
-            orderCount: "105",
-          },
-          {
-            timestamp: "12:59",
-            orderCount: "114",
-          },
-          {
-            timestamp: "13:00",
-            orderCount: "142",
-          },
-          {
-            timestamp: "13:01",
-            orderCount: "113",
-          },
-          {
-            timestamp: "13:02",
-            orderCount: "103",
-          },
-          {
-            timestamp: "13:03",
-            orderCount: "106",
-          },
-          {
-            timestamp: "13:04",
-            orderCount: "122",
-          },
-          {
-            timestamp: "13:05",
-            orderCount: "127",
-          },
-          {
-            timestamp: "13:06",
-            orderCount: "113",
-          },
-        ],
-      });
+      console.log(`Error occured while fetching ${url}`);
     }
   };
 
@@ -369,36 +288,96 @@ const OpmComparison: React.FC = () => {
               </button>
             </div>
           </div>
-          <LineChart options={getConfigOptions()} data={data} />
+          <LineChart
+            title="OPM Comparison"
+            options={getConfigOptions()}
+            data={data}
+          />
         </div>
       )}
-      {location.pathname.includes("opmcomparison") && (
+      {!IS_FULLSCREEN && location.pathname.includes("opmcomparison") && (
+        <div className="flex justify-between items-start lg:mb-[2vh] lg:mt-[4vh] ml-[5vw] lg:ml-[3vw] mr-[5vw] lg:mr-[3vw] mt-[3vh]">
+          <p className="font-bold w-[50vw] text-[#F2F2F2] w-[50vw] lg:w-[30vw]">
+            OPM Comparison
+          </p>
+          <CustomImage
+            src={FilterIcon}
+            className="lg:w-[2.34vw] self-end"
+            alt="Filter Icon"
+            onClick={onFilterClickHandler}
+          />
+        </div>
+      )}
+      {showFilters && (
         <>
-          <div className="flex gap-[59vw] mt-[3.9vh]">
-            <p className="font-bold self-center ml-[3vw] text-[#F2F2F2]">
-              OPM Comparison
-            </p>
-            <CustomImage
-              src={FilterIcon}
-              className="w-[2.34vw] self-end"
-              alt="Filter Icon"
-              onClick={onFilterClickHandler}
-            />
-          </div>
-          {showFilters && (
+          {width > 700 ? (
+            <form
+              className="flex gap-[1vw] ml-[2.4vw] opmFilters"
+              onSubmit={submit}
+            >
+              {formFields.map((form, index) => {
+                return (
+                  <React.Fragment key={index}>
+                    {form.type === "text" && (
+                      <CustomInputText
+                        value={form.value}
+                        name={form.label}
+                        placeholder={form.label}
+                        onChange={(event) => handleFormChange(event)}
+                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
+                        id="promoCode"
+                      />
+                    )}
+                    {form.type === "time" && (
+                      <CustomCalendar
+                        name={form.name}
+                        containerClassName="ml-[10px]"
+                        title={form.label}
+                        showTime={form.showTime}
+                        iconPos={form.iconPos || "left"}
+                        imgsrc={form.imgsrc}
+                        onChange={(event) => handleFormChange(event)}
+                        value={form.value}
+                      />
+                    )}
+                    {form.type === "dropdown" && (
+                      <CustomDropdown
+                        value={form.value}
+                        name={form.name}
+                        onChange={(e) => handleFormChange(e)}
+                        imageClassName="relative left-[25px] z-[1]"
+                        dropdownIcon={<CustomImage src={ArrowDownIcon} />}
+                        icon={form.icon}
+                        options={form.options}
+                        label={form.label}
+                        optionLabel="name"
+                        placeholder=""
+                      />
+                    )}
+                  </React.Fragment>
+                );
+              })}
+              <CustomButton
+                label="Submit"
+                isDisabled={disabled}
+                isRounded={true}
+                className="submitBtnMobile self-end relative"
+              />
+            </form>
+          ) : (
             <>
               <CustomModal
                 header="Filters"
                 visible={visible}
                 position={position}
-                className="!bg-slate-900 filtersModal opmFiltersMobile h-[350px] w-[100vw]"
+                className="!bg-slate-900 filtersModal opmFiltersMobile h-[450px] w-[100vw]"
                 onHide={onModalCloseHandler}
                 isDraggable={false}
                 closeIcon={<CustomImage src={WhiteCrossIcon} />}
                 isResizable={false}
               >
                 <form
-                  className="grid grid-cols-2 grid-rows-2 gap-x-5 gap-y-5"
+                  className="grid grid-cols-2 grid-rows-3 gap-x-5 gap-y-5"
                   onSubmit={submit}
                 >
                   {formFields.map((form) => {
@@ -417,12 +396,9 @@ const OpmComparison: React.FC = () => {
                         {form.type === "time" && (
                           <CustomCalendar
                             name={form.name}
-                            title={form.label}
-                            showTime={form.name === "startDate"}
-                            timeOnly={form.timeOnly || false}
                             containerClassName="opmFiltersMobileCalendar"
                             title={form.label}
-                            // showTime={form.showTime}
+                            showTime={form.showTime}
                             iconPos={form.iconPos || "left"}
                             imgsrc={form.imgsrc}
                             onChange={(event) => handleFormChange(event)}
