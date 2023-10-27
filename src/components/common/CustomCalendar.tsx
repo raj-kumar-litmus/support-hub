@@ -4,15 +4,17 @@ import CustomIcon from "./CustomIcon";
 import { CustomCalendarProps } from "../../@types/BarChart";
 
 const CustomCalendar: FC<CustomCalendarProps> = (props) => (
-  <div className={`flex flex-col self-end ${props.containerClassName}`}>
-    <div className="text-[12px] text-[#E8E8E8] font-medium">{props.title}</div>
+  <div className={`flex flex-col md:self-end ${props.containerClassName}`}>
+    <div className="text-[12px] text-[#898A8D] font-medium title">
+      {props.title}
+    </div>
     <Calendar
       {...props}
       className="mt-1"
       readOnlyInput
       showIcon
       showTime={props.showTime || false}
-      hourFormat={props.hourFormat || "24"}
+      hourFormat={props.hourFormat || "12"}
       placeholder={props.placeholder}
       value={props.value}
       dateFormat="mm/dd/yy"

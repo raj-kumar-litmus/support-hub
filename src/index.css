@@ -153,6 +153,36 @@ button.p-button-secondary {
 .opmFilters .timeInput .p-calendar {
   @apply w-[8vw];
 }
+.opmFiltersMobile.p-dialog .p-dialog-header, .opmFiltersMobile.p-dialog .p-dialog-content {
+  @apply bg-[#1C1C20] border border-solid border-[#30343B] pl-[3vw];
+}
+.opmFiltersMobile.p-dialog {
+  @apply m-0;
+}
+.opmFiltersMobile .p-dialog-header .p-dialog-title {
+  @apply ml-[10vw] text-white;
+}
+.opmFiltersMobile .labelClass {
+  @apply w-[100px];
+}
+.opmFiltersMobile .p-dropdown {
+  @apply bg-[#30343B] border-[#30343B]
+}
+.opmFiltersMobile .p-inputtext {
+  @apply text-white;
+}
+.opmFiltersMobile .p-dropdown-label {
+  @apply pl-[30px];
+}
+.opmFiltersMobileCalendar .title {
+  @apply relative left-[10px];
+}
+.opmFiltersMobileCalendar span.p-calendar {
+  @apply relative left-[8px];
+}
+.opmFiltersMobile .p-dropdown .p-dropdown-trigger {
+  @apply w-[4vw] relative right-[14px];
+}
 .p-datepicker-trigger {
   @apply !p-0 border border-solid border-[#ced4da] border-r-0;
 }
@@ -172,18 +202,24 @@ button.p-button-secondary {
   @apply text-center mt-[20px];
 }
 .submitBtnMobile button span {
-  @apply text-[14px] font-medium;
+  @apply text-[14px] font-normal;
 }
 .submitBtnMobile button,
 .submitBtnMobile button:hover,
 .submitBtnMobile button:enabled:active {
-  @apply w-[10vw] h-[44px] text-[13px] !bg-[#757575] border border-solid !border-transparent items-center;
+  @apply w-[10vw] h-[44px] text-[13px] text-white !bg-transparent border border-solid !border-[#30343B] items-center;
 }
 .submitBtnMobile button:focus {
   @apply !shadow-none;
 }
 .submitBtnMobile button:active {
   @apply !bg-[#757575];
+}
+.submitBtnMobile.opmPopUp button {
+  @apply w-[160px] !bg-transparent border border-solid !border-[#30343B] rounded-3xl;
+}
+.submitBtnMobile.opmPopUp button span {
+  @apply text-white;
 }
 .p-dialog .p-dialog-header .p-dialog-header-icon:focus {
   @apply shadow-none;
@@ -193,14 +229,14 @@ button.p-button-secondary {
 .p-inputtext:enabled:hover,
 .p-dropdown:hover,
 .p-dropdown.p-focus {
-  @apply !shadow-none !border-[#ced4da];
+  @apply !shadow-none !border-none;
 }
 .p-calendar .p-datepicker-trigger,
 .p-calendar .p-datepicker-trigger:hover {
-  @apply !border-[#ced4da] bg-transparent text-[#757575];
+  @apply !border-transparent bg-transparent text-[#757575];
 }
 .filteredCard .p-button {
-  @apply flex gap-[10px] px-[10px] items-center leading-none border border-solid border-[#c1bbbb] rounded rounded-[20px] h-[26px] text-[12px] text-[#322f2f] p-[5px] bg-transparent;
+  @apply flex gap-[10px] px-[10px] items-center leading-none border border-solid border-[#30343B] rounded rounded-[20px] h-[26px] text-[12px] text-[#898A8D] p-[5px] bg-transparent;
 }
 .filteredCard .p-button:focus {
   @apply shadow-none;
@@ -402,14 +438,17 @@ button.p-button-secondary {
 .custom-table .p-datatable-tbody tr td:first-child {
   @apply font-medium;
 }
-.opmFilters .p-dropdown {
+.opmFilters .p-dropdown, .opmFilters .p-inputtext {
   @apply bg-[#30343B] border border-solid border-[#30343B];
 }
 .opmFilters .p-dropdown:not(.p-disabled).p-focus {
-  @apply border-[#30343B];
+  @apply !border-[#30343B];
 }
-.opmFilters .p-dropdown:hover {
-  @apply border-[#40444B];
+.opmFilters .p-dropdown:hover, .opmFilters .p-inputtext:hover {
+  @apply !border-[#40444B];
+}
+.p-datepicker table td>span.p-highlight {
+  @apply text-inherit;
 }
 .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
   @apply bg-[#30343B] text-[white];
@@ -426,7 +465,7 @@ button.p-button-secondary {
   @apply bg-[#40444B] text-[white];
 }
 .labelClass {
-  @apply text-[12px] text-[#E8E8E8] font-medium;
+  @apply text-[12px] text-[#898A8D] font-medium
 }
 .tableToolTip {
   @apply w-[140px] mr-[0];

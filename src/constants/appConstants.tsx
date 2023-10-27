@@ -86,6 +86,36 @@ export const SESSIONS_CHART = {
   CATEGORY_PERCENT: 0.6,
 };
 
+export const DURATIONS = {
+  "10 mins": 10,
+  "15 mins": 15,
+  "30 mins": 30,
+  "45 mins": 45,
+  "60 mins": 60,
+};
+
+export const CHANNELS = {
+  ALL: "",
+  DESKTOP: 0,
+  MOBILE_WEB: 5,
+  IPHONE_APP: 4,
+  ANDROID_APP: 9,
+  CSC: 2,
+  MPLUS: 6,
+  INSTAGRAM: 11,
+};
+
+export const PAYMENT_TYPES = {
+  ALL: "",
+  "CREDIT CARD": "creditCard",
+  KLARNA: "Klarna",
+  "STORE CREDIT": "storeCredit",
+  "GIFT CARD": "giftCard",
+  PayPal: "payPal",
+  JCPenny: "JCPenny",
+  "Apple Pay": "Applepay",
+};
+
 export const ORDER_STATUS_LIST = [
   {
     code: 1111,
@@ -116,17 +146,30 @@ export const ORDER_STATUS_LIST = [
     description: "Shipped and invoiced",
   },
 ];
-export const OPM_OPTIONS = {
+export const OPM_OPTIONS = (isMobile: boolean) => ({
   responsive: true,
+  maintainAspectRatio: false,
   layout: {
-    padding: {
-      left: 30,
-      right: 50,
-      top: 50,
-      bottom: 20,
-    },
+    padding: isMobile
+      ? {
+          left: 20,
+          right: 20,
+          top: 10,
+          bottom: 40,
+        }
+      : {
+          left: 30,
+          right: 50,
+          top: 50,
+          bottom: 20,
+        },
   },
   scales: {
+    y: {
+      grid: {
+        color: "#00000033",
+      },
+    },
     x: {
       grid: {
         display: false,
@@ -135,7 +178,7 @@ export const OPM_OPTIONS = {
         display: true,
         color: "#FAF9F6",
         text: "Total Orders Per Minute",
-        padding: { top: 30 },
+        padding: isMobile ? { top: 35, bottom: 35 } : { top: 35 },
       },
     },
     y: {
@@ -162,21 +205,30 @@ export const OPM_OPTIONS = {
       backgroundColor: "white",
     },
   },
-};
+});
 
 export const OPM_COMPARISON_OPTIONS = ({
   apiResponse,
   startDate,
   endDate,
+  isMobile,
 }) => ({
   responsive: true,
+  maintainAspectRatio: false,
   layout: {
-    padding: {
-      left: 30,
-      right: 50,
-      top: 50,
-      bottom: 20,
-    },
+    padding: isMobile
+      ? {
+          left: 20,
+          right: 20,
+          top: 10,
+          bottom: 40,
+        }
+      : {
+          left: 30,
+          right: 50,
+          top: 50,
+          bottom: 20,
+        },
   },
   scales: {
     x: {
@@ -188,9 +240,7 @@ export const OPM_COMPARISON_OPTIONS = ({
         text: "Total Orders Per Minute",
         color: "#E8E8E8",
         position: "left",
-        padding: {
-          top: 50,
-        },
+        padding: isMobile ? { top: 20, bottom: 20 } : { top: 50 },
       },
     },
     y: {
@@ -211,7 +261,7 @@ export const OPM_COMPARISON_OPTIONS = ({
     },
     legend: {
       display: true,
-      position: "bottom",
+      position: isMobile ? "top" : "bottom",
       align: "start",
       labels: {
         boxWidth: 30,

@@ -5,6 +5,7 @@ import { ModalEnums } from "../@types/supportHub";
 interface Props {
   children?: React.ReactNode;
   onHide(): void;
+  closeIcon?: any;
   className?: string;
   header: string;
   isTextButton?: boolean;
@@ -22,6 +23,7 @@ const CustomModal: React.FC<Props> = ({
   isResizable = false,
   visible,
   onHide,
+  closeIcon,
   position,
 }) => {
   return (
@@ -30,6 +32,7 @@ const CustomModal: React.FC<Props> = ({
       visible={visible}
       position={position}
       className={className}
+      closeIcon={closeIcon}
       onHide={onHide}
       draggable={isDraggable}
       resizable={isResizable}
