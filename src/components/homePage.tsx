@@ -8,7 +8,7 @@ import total_order_comp from "../assets/total_order_comp.svg";
 import avg_opm_comp from "../assets/avg_opm_comp.svg";
 import trending_down from "../assets/trending_down.svg";
 
-const CardTitle = ({ title, icon }) => {
+const CardTitle = ({ title, icon }: { title: string; icon: any }) => {
   return (
     <div className="flex justify-between">
       <h6>{title}</h6>
@@ -17,7 +17,7 @@ const CardTitle = ({ title, icon }) => {
   );
 };
 
-const OPMCards = ({ value, time }) => {
+const OPMCards = ({ value, time }: { value: string; time: string }) => {
   return (
     <div className="flex items-end">
       <span className="text-2xl text-[#F2F2F2]">{value}</span>
@@ -28,7 +28,7 @@ const OPMCards = ({ value, time }) => {
   );
 };
 
-const ComparisonCards = ({}) => {
+const ComparisonCards = () => {
   return (
     <div className="flex">
       <div className="flex flex-col pr-1 sm:pr-2 justify-between">
@@ -127,7 +127,7 @@ const HomePage = () => {
           textColor="#FFFFFF"
         />
       </div>
-      <div className="home-opm-charts flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-6 mb-6">
+      <div className="home-opm-charts flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-6">
         <OPM />
         <OpmComparison />
       </div>

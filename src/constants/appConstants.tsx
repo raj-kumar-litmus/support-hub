@@ -295,4 +295,37 @@ export const OPM_COMPARISON_OPTIONS = ({
   },
 });
 
+export const OPM_COMPARISON_OPTIONS_HOME = ({
+  apiResponse,
+  startDate,
+  endDate,
+  isMobile,
+}) => {
+  const options = OPM_COMPARISON_OPTIONS({
+    apiResponse,
+    startDate,
+    endDate,
+    isMobile,
+  });
+  return {
+    ...options,
+    layout: {
+      ...options.layout,
+      padding: {
+        left: 30,
+        right: 50,
+        top: 35,
+        bottom: 20,
+      },
+    },
+    plugins: {
+      ...options.plugins,
+      legend: {
+        ...options.plugins.legend,
+        position: "top",
+      },
+    },
+  };
+};
+
 export const ORDER_STATUS: string = "Order Status";

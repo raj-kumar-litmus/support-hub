@@ -272,7 +272,12 @@ const OPM: React.FC = () => {
 
   const getConfigOptions = () => {
     const chartOptions = JSON.parse(JSON.stringify(options));
-    chartOptions.layout.padding = 0;
+    chartOptions.layout.padding = {
+      left: 30,
+      right: 50,
+      top: 75,
+      bottom: 20,
+    };
     chartOptions.scales.x.title.padding.top = 10;
     return chartOptions;
   };
@@ -284,8 +289,8 @@ const OPM: React.FC = () => {
   return (
     <>
       {location.pathname.includes("home") && data && (
-        <div className="w-full sm:w-1/2 bg-[#22262C] p-4 rounded-lg">
-          <div className="flex justify-between mb-3 items-center">
+        <div className="w-full sm:w-1/2 bg-[#22262C] p-0 bg-transparent rounded-lg">
+          <div className="flex justify-between mb-3 items-center relative top-[2vh] z-[1] ml-[2vw] mr-[1vw]">
             <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
               OPM
             </span>
@@ -300,7 +305,7 @@ const OPM: React.FC = () => {
           </div>
           <LineChart
             title="OPM"
-            className={"home-opm"}
+            className="home-opm border-0 rounded-[10px] w-[89vw] lg:w-full lg:ml-[0] h-[380px] lg:h-[380px] lg:mt-[3vh] top-[-5vh]"
             options={getConfigOptions()}
             data={data}
           />
@@ -319,7 +324,7 @@ const OPM: React.FC = () => {
           />
         </div>
       )}
-      {showFilters && (
+      {showFilters && location.pathname.includes("opm") && (
         <>
           {width > 700 ? (
             <form
@@ -454,38 +459,40 @@ const OPM: React.FC = () => {
           )}
         </>
       )}
-      <div
-        className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[3vw] w-[90vw] ${
-          IS_FULLSCREEN ? "rotate-90 absolute left-[40vw] top-[45vh]" : ""
-        }`}
-      >
-        {formFields
-          .filter((e) => e.value)
-          .map((e: any) => (
-            <Fragment key={e.name}>
-              <FilteredCard
-                label={e.name}
-                leftIcon={e.cardIcon}
-                onClickHandler={removeFormEntry}
-                content={
-                  e.type === "time"
-                    ? e.value.toLocaleString("en-US", { hour12: false })
-                    : e.value.name || e.value
-                }
-              />
-            </Fragment>
-          ))}
-        {!disabled && !IS_FULLSCREEN && (
-          <CustomButton
-            label="Reset"
-            severity="secondary"
-            className="resetFilters text-[12px] text-[#575353]"
-            isTextButton={true}
-            onClick={clearAllHandler}
-          />
-        )}
-      </div>
-      {data && !isLoading && (
+      {location.pathname.includes("opm") && (
+        <div
+          className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[3vw] w-[90vw] ${
+            IS_FULLSCREEN ? "rotate-90 absolute left-[40vw] top-[45vh]" : ""
+          }`}
+        >
+          {formFields
+            .filter((e) => e.value)
+            .map((e: any) => (
+              <Fragment key={e.name}>
+                <FilteredCard
+                  label={e.name}
+                  leftIcon={e.cardIcon}
+                  onClickHandler={removeFormEntry}
+                  content={
+                    e.type === "time"
+                      ? e.value.toLocaleString("en-US", { hour12: false })
+                      : e.value.name || e.value
+                  }
+                />
+              </Fragment>
+            ))}
+          {!disabled && !IS_FULLSCREEN && (
+            <CustomButton
+              label="Reset"
+              severity="secondary"
+              className="resetFilters text-[12px] text-[#575353]"
+              isTextButton={true}
+              onClick={clearAllHandler}
+            />
+          )}
+        </div>
+      )}
+      {data && !isLoading && location.pathname.includes("opm") && (
         <LineChart
           title="OPM"
           isFullScreen={IS_FULLSCREEN}
