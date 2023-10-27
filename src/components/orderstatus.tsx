@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import { orderStatus } from "../@types/ordertimeline";
 import { Dialog } from "primereact/dialog";
-import Timeline from "./Common/orderTimeline";
+import Timeline from "./common/orderTimeline";
 interface OrderStatusProps {
   orderStatus: orderStatus;
   isOrderStatusVisible:boolean;
