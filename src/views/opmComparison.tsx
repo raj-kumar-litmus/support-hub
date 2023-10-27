@@ -42,6 +42,7 @@ import open_in_full_window from "../assets/open_in_full_window.svg";
 
 import {
   OPM_COMPARISON_OPTIONS,
+  OPM_COMPARISON_OPTIONS_HOME,
   CHANNELS,
   DURATIONS,
 } from "../constants/appConstants";
@@ -208,12 +209,19 @@ const OpmComparison: React.FC = () => {
           })),
       });
       setOptions(
-        OPM_COMPARISON_OPTIONS({
-          apiResponse,
-          startDate: formFields.find((e) => e.name === "startDate").value,
-          endDate: formFields.find((e) => e.name === "endDate").value,
-          isMobile: width < 700,
-        }),
+        location.pathname.includes("home")
+          ? OPM_COMPARISON_OPTIONS_HOME({
+              apiResponse,
+              startDate: formFields.find((e) => e.name === "startDate").value,
+              endDate: formFields.find((e) => e.name === "endDate").value,
+              isMobile: width < 700,
+            })
+          : OPM_COMPARISON_OPTIONS({
+              apiResponse,
+              startDate: formFields.find((e) => e.name === "startDate").value,
+              endDate: formFields.find((e) => e.name === "endDate").value,
+              isMobile: width < 700,
+            }),
       );
     }
   }, [apiResponse]);
@@ -262,20 +270,11 @@ const OpmComparison: React.FC = () => {
     navigate("/opmcomparison");
   };
 
-  const getConfigOptions = () => {
-    const chartOptions = JSON.parse(JSON.stringify(options));
-    chartOptions.layout.padding = 0;
-    chartOptions.scales.x.title.padding.top = 10;
-    chartOptions.plugins.legend.position = "top";
-
-    return chartOptions;
-  };
-
   return (
     <>
       {location.pathname.includes("home") && data && (
-        <div className="w-full sm:w-1/2 bg-[#22262C] p-4 rounded-lg flex flex-col justify-between">
-          <div className="flex justify-between items-center">
+        <div className="w-full sm:w-1/2 bg-[#22262C] p-0 bg-transparent rounded-lg flex flex-col justify-between">
+          <div className="flex justify-between mb-3 items-center relative top-[2vh] z-[1] ml-[2vw] mr-[1vw]">
             <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
               OPM Comparison
             </span>
@@ -290,7 +289,8 @@ const OpmComparison: React.FC = () => {
           </div>
           <LineChart
             title="OPM Comparison"
-            options={getConfigOptions()}
+            className="border-0 rounded-[10px] w-[89vw] lg:w-full lg:ml-[0] h-[340px] lg:h-[380px] top-[-5vh]"
+            options={options}
             data={data}
           />
         </div>
@@ -308,7 +308,7 @@ const OpmComparison: React.FC = () => {
           />
         </div>
       )}
-      {showFilters && (
+      {showFilters && location.pathname.includes("opmcomparison") && (
         <>
           {width > 700 ? (
             <form
@@ -435,42 +435,44 @@ const OpmComparison: React.FC = () => {
           )}
         </>
       )}
-      <div
-        className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[3vw] w-[90vw] ${
-          IS_FULLSCREEN ? "rotate-90 absolute left-[40vw] top-[45vh]" : ""
-        }`}
-      >
-        {formFields
-          .filter((e) => e.value)
-          .map((e: any) => (
-            <Fragment key={e.name}>
-              <FilteredCard
-                label={e.name}
-                leftIcon={e.cardIcon}
-                onClickHandler={removeFormEntry}
-                content={
-                  e.type === "time"
-                    ? e.name === "startDate"
-                      ? e.value.toLocaleString("en-US", {
-                          hour12: false,
-                        })
-                      : e.value.toLocaleDateString("en-US")
-                    : e.value.name || e.value
-                }
-              />
-            </Fragment>
-          ))}
-        {!disabled && !IS_FULLSCREEN && (
-          <CustomButton
-            label="Reset"
-            severity="secondary"
-            className="resetFilters text-[12px] text-[#575353]"
-            isTextButton={true}
-            onClick={clearAllHandler}
-          />
-        )}
-      </div>
-      {data && !isLoading && (
+      {location.pathname.includes("opmcomparison") && (
+        <div
+          className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[3vw] w-[90vw] ${
+            IS_FULLSCREEN ? "rotate-90 absolute left-[40vw] top-[45vh]" : ""
+          }`}
+        >
+          {formFields
+            .filter((e) => e.value)
+            .map((e: any) => (
+              <Fragment key={e.name}>
+                <FilteredCard
+                  label={e.name}
+                  leftIcon={e.cardIcon}
+                  onClickHandler={removeFormEntry}
+                  content={
+                    e.type === "time"
+                      ? e.name === "startDate"
+                        ? e.value.toLocaleString("en-US", {
+                            hour12: false,
+                          })
+                        : e.value.toLocaleDateString("en-US")
+                      : e.value.name || e.value
+                  }
+                />
+              </Fragment>
+            ))}
+          {!disabled && !IS_FULLSCREEN && (
+            <CustomButton
+              label="Reset"
+              severity="secondary"
+              className="resetFilters text-[12px] text-[#575353]"
+              isTextButton={true}
+              onClick={clearAllHandler}
+            />
+          )}
+        </div>
+      )}
+      {data && !isLoading && location.pathname.includes("opmcomparison") && (
         <LineChart
           title="OPM Comparison"
           isFullScreen={IS_FULLSCREEN}
