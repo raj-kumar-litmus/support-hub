@@ -473,7 +473,7 @@ button.p-button-secondary {
   @apply !border-[#40444B];
 }
 .p-datepicker {
-  @apply rounded-[6px] p-0;
+  @apply rounded-[6px];
 }
 .p-datepicker thead {
   @apply bg-[#292E36];
@@ -510,8 +510,11 @@ button.p-button-secondary {
   td
   span:not(.p-highlight):not(.p-disabled):hover,
 .p-datepicker .p-datepicker-header .p-datepicker-next:enabled:hover,
-.p-datepicker .p-datepicker-header .p-datepicker-prev:enabled:hover {
+.p-datepicker .p-datepicker-header .p-datepicker-prev:enabled:hover, .p-datepicker:not(.p-disabled) .p-yearpicker .p-yearpicker-year:not(.p-disabled):not(.p-highlight):hover, .p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-disabled):not(.p-highlight):hover, .p-datepicker .p-yearpicker .p-yearpicker-year.p-highlight {
   @apply bg-[#292E36] text-[#F2F2F2];
+}
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month:enabled:hover, .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year:enabled:hover {
+  @apply text-[#F2F2F2]
 }
 .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month,
 .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year {
