@@ -30,8 +30,23 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             element={<App appContent={<Chart type="opm" />} />}
           />
           <Route
+            path="/opm/fullscreen"
+            element={
+              <App showNavbar={false} appContent={<Chart type="opm" />} />
+            }
+          />
+          <Route
             path="/opmcomparison"
             element={<App appContent={<Chart type="opmcomparison" />} />}
+          />
+          <Route
+            path="/opmcomparison/fullscreen"
+            element={
+              <App
+                showNavbar={false}
+                appContent={<Chart type="opmcomparison" />}
+              />
+            }
           />
           <Route
             path="/orderDetails/:orderId"

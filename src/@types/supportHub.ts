@@ -22,8 +22,8 @@ type pointStyleEnums =
   | "rectRot"
   | "star"
   | "triangle";
-type positionEnums = "top" | "left" | "bottom" | "right" | "chartArea";
-type alignEnums = "start" | "center" | "end";
+// type positionEnums = "top" | "left" | "bottom" | "right" | "chartArea";
+// type alignEnums = "start" | "center" | "end";
 
 interface Dataset {
   label: string;
@@ -35,11 +35,11 @@ interface Dataset {
   backgroundColor?: any;
 }
 
-interface CustomLabel {
-  text?: string | null;
-  fillStyle?: string;
-  strokeStyle?: string;
-}
+// interface CustomLabel {
+//   text?: string | null;
+//   fillStyle?: string;
+//   strokeStyle?: string;
+// }
 
 interface DataPoint {
   timestamp: string;

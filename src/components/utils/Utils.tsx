@@ -23,7 +23,7 @@ export const MENU_LIST = [
 ];
 
 const getOrCreateTooltip = (chart, type) => {
-  let tooltipEl = chart.canvas.parentNode.querySelector("div");
+  let tooltipEl = chart.canvas.parentNode.querySelector("div.toolTipEl");
 
   if (!tooltipEl) {
     tooltipEl = document.createElement("div");

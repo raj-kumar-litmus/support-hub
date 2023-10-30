@@ -18,6 +18,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [selectedMenu, setSelectedMenu] = useState<number>(0);
   const location = useLocation();
+  const IS_FULLSCREEN = location?.pathname.includes("fullscreen");
 
   useEffect(() => {
     setOpenSearchField(false);
@@ -26,7 +27,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
 
   useEffect(() => {
     const _selectedMenu = MENU_LIST.find(
-      (menu) => location?.pathname.split("/")[1] == menu.path.split("/")[1]
+      (menu) => location?.pathname.split("/")[1] == menu.path.split("/")[1],
     )?.id;
     setSelectedMenu(_selectedMenu);
   }, [location?.pathname]);
@@ -45,7 +46,11 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
             setSearchValue={setSearchValue}
           />
         )}
-        <div className="flex flex-col sm:flex-row mt-[56px] bg-[#1C1C20] ml-0">
+        <div
+          className={`flex flex-col sm:flex-row ${
+            IS_FULLSCREEN ? "" : "mt-[3.5rem]"
+          } ml-[0] bg-[#1C1C20]`}
+        >
           {showSidePane && (
             <SidePaneList
               menuList={MENU_LIST}
@@ -81,7 +86,9 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
           <div
             className={`w-full ${
               showSidePaneGrid ? "hidden" : "block"
-            } sm:ml-[240px] md:ml-[19.25rem]  h-[calc(100vh-56px)] overflow-y-auto`}
+            } sm:ml-[308px]  ${
+              IS_FULLSCREEN ? "h-[100vh]" : "h-[calc(100vh-56px)]"
+            } overflow-y-auto`}
           >
             {appContent}
           </div>
