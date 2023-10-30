@@ -72,13 +72,13 @@ const BarChart = () => {
       value: "",
       imgsrc: CalendarIcon,
     },
-    {
-      type: "calendar",
-      name: "time",
-      title: TIME,
-      value: "",
-      imgsrc: ClockIcon,
-    },
+    // {
+    //   type: "calendar",
+    //   name: "time",
+    //   title: TIME,
+    //   value: "",
+    //   imgsrc: ClockIcon,
+    // },
     {
       type: "dropdown",
       name: "channel",
@@ -286,7 +286,8 @@ const BarChart = () => {
                     <CustomCalendar
                       name={form.name}
                       title={form.title}
-                      showTime={false}
+                      // showTime={false}
+                      showTime
                       timeOnly={form.name === "time"}
                       placeholder={form.name === "date" ? DD_MM_YYYY : HH_MM}
                       value={form.value}
@@ -296,8 +297,9 @@ const BarChart = () => {
                       iconPos={"left"}
                       imgalt={`${form.name}-icon`}
                       imgsrc={form.imgsrc}
-                      hourFormat="12"
-                      className={form.name === "time" ? "w-24" : "w-32"}
+                      // hourFormat="12"
+                      // className={form.name === "time" ? "w-24" : "w-32"}
+                      className="w-[190px]"
                     />
                   )}
                   {form.type === "dropdown" && (
