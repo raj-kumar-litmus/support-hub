@@ -5,7 +5,9 @@ import { CustomCalendarProps } from "../../@types/BarChart";
 
 const CustomCalendar: FC<CustomCalendarProps> = (props) => (
   <div className={`flex flex-col self-end ${props.containerClassName}`}>
-    <div className="text-xs font-medium pb-1 text-[#898A8D]">{props.title}</div>
+    <div className="text-xs font-medium pb-1 text-[#898A8D] relative left-[2vw] md:left-[0]">
+      {props.title}
+    </div>
     <Calendar
       {...props}
       readOnlyInput

@@ -26,7 +26,7 @@ const CustomInputText: React.FC<Props> = ({
   placeholder,
 }) => {
   return icon ? (
-    <div className={`flex flex-col promoCodeInput ${containerClassName}`}>
+    <div className={`flex flex-col ${containerClassName}`}>
       <label className="labelClass relative mb-[5px] mt-[14px] ml-[18px]">
         {label}
       </label>
@@ -43,9 +43,7 @@ const CustomInputText: React.FC<Props> = ({
       </span>
     </div>
   ) : (
-    <div
-      className={`flex flex-col promoCodeInput md:w-[8vw] ${containerClassName}`}
-    >
+    <div className={`flex flex-col md:w-[8vw] ${containerClassName}`}>
       <label className="labelClass relative mb-[5px] mt-[14px] ml-[18px]">
         {label}
       </label>
