@@ -253,7 +253,7 @@ button.p-button-secondary {
   @apply !border-transparent bg-transparent text-[#757575];
 }
 .filteredCard .p-button.p-component {
-  @apply !bg-[#1C1C20] !border-[#30343B] text-[#F4F4F400] px-2 py-4 flex justify-evenly items-center;
+  @apply !bg-[#F4F4F400] !border-[#22262C] border rounded-[100px] text-[#8B8C8F] px-2 py-4 flex justify-evenly items-center;
 }
 .filteredCard .p-button {
   @apply flex gap-[10px] px-[10px] items-center leading-none border border-solid border-[#30343B] rounded rounded-[20px] h-[26px] text-[12px] text-[#898A8D] p-[5px] bg-transparent;
