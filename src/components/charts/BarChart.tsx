@@ -39,6 +39,7 @@ import ChannelIcon from "../../assets/channel.svg";
 import SandGlassIcon from "../../assets/hourglass.svg";
 import FilteredCard from "../FilteredCard";
 import useScreenSize from "../../hooks/useScreenSize";
+import Loader from "../loader";
 
 const BarChart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -353,7 +354,7 @@ const BarChart = () => {
 
       <div className="flex justify-center basis-full relative px-3 py-5 sm:px-5 h-64 mb-4 bg-[#30343B] w-[full] h-[18rem] sm:h-[24rem] drop-shadow-md rounded-xl">
         {isLoading ? (
-          <div>Loading</div>
+          <Loader />
         ) : (
           <>
             <Bar ref={chartRef} options={getChartConfig()} data={allData} />
