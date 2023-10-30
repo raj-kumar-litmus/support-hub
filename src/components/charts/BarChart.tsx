@@ -14,7 +14,6 @@ import {
   CHANNEL_LIST,
   DATE,
   DD_MM_YYYY,
-  DD_MM_YYYY_HH_MM,
   DEFAULT_PERIOD,
   DURATION,
   DURATION_LIST,
@@ -290,7 +289,7 @@ const BarChart = () => {
                       // showTime={false}
                       showTime
                       timeOnly={form.name === "time"}
-                      placeholder={DD_MM_YYYY_HH_MM}
+                      placeholder={DD_MM_YYYY}
                       value={form.value}
                       onChange={(event) => handleFormChange(event)}
                       maxDate={form.name === "date" ? new Date() : null}
@@ -392,7 +391,7 @@ const BarChart = () => {
                       title={form.title}
                       showTime
                       // timeOnly={form.name === "time"}
-                      placeholder={DD_MM_YYYY_HH_MM}
+                      placeholder={DD_MM_YYYY}
                       value={form.value}
                       onChange={(event) => handleFormChange(event)}
                       maxDate={form.name === "date" ? new Date() : null}
