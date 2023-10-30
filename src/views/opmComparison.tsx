@@ -80,7 +80,7 @@ const OpmComparison: React.FC = () => {
   };
 
   const [url, setUrl] = useState<string>(
-    `/compareOPM?period=${DEFAULT.duration}&startTimeOne=${DEFAULT.startTimeOne}&startDateTwo=${DEFAULT.startDateTwo}&channel=${DEFAULT.channel}`,
+    `/supportdashboard/compareOPM?period=${DEFAULT.duration}&startTimeOne=${DEFAULT.startTimeOne}&startDateTwo=${DEFAULT.startDateTwo}&channel=${DEFAULT.channel}`,
   );
 
   const [options, setOptions] = useState<null | ChartOptions>(null);
@@ -163,7 +163,7 @@ const OpmComparison: React.FC = () => {
         }&`;
       }
     });
-    setUrl(`/compareOPM?${str}`);
+    setUrl(`/supportdashboard/compareOPM?${str}`);
     // if (showFilters) setShowFilters(false);
   };
 

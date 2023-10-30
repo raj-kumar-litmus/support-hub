@@ -106,12 +106,12 @@
 
 #page-btn-submit.p-button,
 #popup-btn-submit.p-button {
-  @apply bg-[#1C1C20] border border-solid border-[#30343B] text-sm px-8 py-2 transition-none;
+  @apply bg-[#1C1C20] text-sm px-8 py-2 transition-none border-2 border-[#FAF9F6] rounded-[22px];
 }
 
 #page-btn-submit .p-button-label,
 #popup-btn-submit .p-button-label {
-  @apply !text-white;
+  @apply !text-white text-[14px] font-medium;
 }
 
 #modal-section .filter-popup-content .p-dropdown {
@@ -253,7 +253,7 @@ button.p-button-secondary {
   @apply !border-transparent bg-transparent text-[#757575];
 }
 .filteredCard .p-button.p-component {
-  @apply !bg-[#1C1C20] !border-[#30343B] text-[#F4F4F400] px-2 py-4 flex justify-evenly items-center;
+  @apply !bg-[#F4F4F400] !border-[#22262C] border rounded-[100px] text-[#8B8C8F] px-2 py-4 flex justify-evenly items-center;
 }
 .filteredCard .p-button {
   @apply flex gap-[10px] px-[10px] items-center leading-none border border-solid border-[#30343B] rounded rounded-[20px] h-[26px] text-[12px] text-[#898A8D] p-[5px] bg-transparent;
@@ -426,13 +426,13 @@ button.p-button-secondary {
   @apply bg-transparent;
 }
 .custom-table .p-datatable-table {
-  @apply text-sm border-separate font-helvetica;
+  @apply text-[14px] leading-[17px] border-separate font-helvetica;
 }
 .custom-table .p-datatable-tbody tr td {
-  @apply border-[#383f47];
+  @apply border-[#292E36];
 }
 .custom-table .p-datatable-thead tr th {
-  @apply !bg-[#30343B] text-white font-bold p-3 border-0 w-1/4 border-[#383f47];
+  @apply !bg-[#292E36] text-white font-bold p-3 border-0 w-1/4 border-[#292E36];
 }
 .custom-table .p-datatable-thead tr th:first-child {
   @apply rounded-tl-md;
@@ -447,10 +447,10 @@ button.p-button-secondary {
   @apply rounded-br-md;
 }
 .custom-table .p-datatable-tbody tr {
-  @apply !bg-[#26262B] text-[#FFFFFF];
+  @apply !bg-[#22262C] text-[#FFFFFF];
 }
 .custom-table .p-datatable-tbody tr.p-row-odd {
-  @apply !bg-[#30343B] text-[#FFFFFF];
+  @apply !bg-[#292E36] text-[#FFFFFF];
 }
 .custom-table .p-datatable-thead tr th .p-column-header-content {
   @apply justify-center;
@@ -472,8 +472,67 @@ button.p-button-secondary {
 .opmFilters .p-inputtext:hover {
   @apply !border-[#40444B];
 }
+.p-datepicker {
+  @apply rounded-[6px];
+}
+.p-datepicker thead {
+  @apply bg-[#292E36];
+}
+.p-datepicker .p-datepicker-header {
+  @apply border-none pb-0 max-h-[40px];
+}
+.p-datepicker:not(.p-datepicker-inline),
+.p-datepicker:not(.p-datepicker-inline) .p-datepicker-header {
+  @apply !bg-[#22262C];
+}
+.p-datepicker .p-datepicker-header .p-datepicker-next,
+.p-datepicker .p-datepicker-header .p-datepicker-prev {
+  @apply text-[#FAF9F6];
+}
+.p-datepicker .p-datepicker-header .p-datepicker-next:focus,
+.p-datepicker .p-datepicker-header .p-datepicker-prev:focus {
+  @apply shadow-none;
+}
 .p-datepicker table td > span.p-highlight {
   @apply text-inherit;
+}
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
+  @apply text-[#F2F2F2];
+}
+.p-datepicker table td > span.p-highlight {
+  @apply !bg-[#292E36] !text-[#F2F2F2];
+}
+.p-datepicker table td.p-datepicker-today > span {
+  @apply bg-inherit text-inherit;
+}
+.p-datepicker:not(.p-disabled)
+  table
+  td
+  span:not(.p-highlight):not(.p-disabled):hover,
+.p-datepicker .p-datepicker-header .p-datepicker-next:enabled:hover,
+.p-datepicker .p-datepicker-header .p-datepicker-prev:enabled:hover,
+.p-datepicker:not(.p-disabled)
+  .p-yearpicker
+  .p-yearpicker-year:not(.p-disabled):not(.p-highlight):hover,
+.p-datepicker:not(.p-disabled)
+  .p-monthpicker
+  .p-monthpicker-month:not(.p-disabled):not(.p-highlight):hover,
+.p-datepicker .p-yearpicker .p-yearpicker-year.p-highlight {
+  @apply bg-[#292E36] text-[#F2F2F2];
+}
+.p-datepicker
+  .p-datepicker-header
+  .p-datepicker-title
+  .p-datepicker-month:enabled:hover,
+.p-datepicker
+  .p-datepicker-header
+  .p-datepicker-title
+  .p-datepicker-year:enabled:hover {
+  @apply text-[#F2F2F2];
+}
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month,
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year {
+  @apply text-[#F2F2F2];
 }
 .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
   @apply bg-[#30343B] text-[white];

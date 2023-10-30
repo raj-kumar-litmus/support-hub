@@ -76,7 +76,7 @@ const OPM: React.FC = () => {
   };
 
   const [url, setUrl] = useState<string>(
-    `/opm?period=${DEFAULT.duration}&date=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${DEFAULT.promocode}&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`,
+    `/supportdashboard/opm?period=${DEFAULT.duration}&date=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${DEFAULT.promocode}&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`,
   );
 
   const [options, setOptions] = useState<null | ChartOptions>(null);
@@ -252,7 +252,7 @@ const OPM: React.FC = () => {
         }&`;
       }
     });
-    setUrl(`/opm?${str}`);
+    setUrl(`/supportdashboard/opm?${str}`);
     // if (showFilters) setShowFilters(false);
   };
 

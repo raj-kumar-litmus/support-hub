@@ -34,11 +34,12 @@ import { BAR_CHART_OPTIONS } from "../../config/chartConfig";
 // import { sessionDataJSON } from "../../sampleJSON/sessions";
 import FilterIcon from "../../assets/filter-dark.svg";
 import ClockIcon from "../../assets/clock.svg";
-import CalendarIcon from "../../assets/calendar.svg";
+import CalendarIcon from "../../assets/white_calendar.svg";
 import ChannelIcon from "../../assets/channel.svg";
-import SandGlassIcon from "../../assets/hourglass.svg";
+import SandGlassIcon from "../../assets/sandglass.svg";
 import FilteredCard from "../FilteredCard";
 import useScreenSize from "../../hooks/useScreenSize";
+import Loader from "../loader";
 
 const BarChart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -71,13 +72,13 @@ const BarChart = () => {
       value: "",
       imgsrc: CalendarIcon,
     },
-    {
-      type: "calendar",
-      name: "time",
-      title: TIME,
-      value: "",
-      imgsrc: ClockIcon,
-    },
+    // {
+    //   type: "calendar",
+    //   name: "time",
+    //   title: TIME,
+    //   value: "",
+    //   imgsrc: ClockIcon,
+    // },
     {
       type: "dropdown",
       name: "channel",
@@ -285,9 +286,10 @@ const BarChart = () => {
                     <CustomCalendar
                       name={form.name}
                       title={form.title}
-                      showTime={false}
+                      // showTime={false}
+                      showTime
                       timeOnly={form.name === "time"}
-                      placeholder={form.name === "date" ? DD_MM_YYYY : HH_MM}
+                      placeholder={DD_MM_YYYY}
                       value={form.value}
                       onChange={(event) => handleFormChange(event)}
                       maxDate={form.name === "date" ? new Date() : null}
@@ -295,8 +297,9 @@ const BarChart = () => {
                       iconPos={"left"}
                       imgalt={`${form.name}-icon`}
                       imgsrc={form.imgsrc}
-                      hourFormat="12"
-                      className={form.name === "time" ? "w-24" : "w-32"}
+                      // hourFormat="12"
+                      // className={form.name === "time" ? "w-24" : "w-32"}
+                      className="w-[190px]"
                     />
                   )}
                   {form.type === "dropdown" && (
@@ -353,7 +356,7 @@ const BarChart = () => {
 
       <div className="flex justify-center basis-full relative px-3 py-5 sm:px-5 h-64 mb-4 bg-[#30343B] w-[full] h-[18rem] sm:h-[24rem] drop-shadow-md rounded-xl">
         {isLoading ? (
-          <div>Loading</div>
+          <Loader className="!p-0 m-auto" />
         ) : (
           <>
             <Bar ref={chartRef} options={getChartConfig()} data={allData} />
@@ -377,18 +380,18 @@ const BarChart = () => {
         style={{ width: "100vw", margin: 0 }}
       >
         <div className="filter-popup-content">
-          <div className="flex mb-4 gap-4">
+          <div className="flex gap-4 mb-4 w-full">
             {formFields
               .filter((item) => item.type === "calendar")
               .map((form, index) => {
                 return (
-                  <div className="flex-col w-3/6" key={index}>
+                  <div className="flex-col w-full" key={index}>
                     <CustomCalendar
                       name={form.name}
                       title={form.title}
-                      showTime={false}
-                      timeOnly={form.name === "time"}
-                      placeholder={form.name === "date" ? DD_MM_YYYY : HH_MM}
+                      showTime
+                      // timeOnly={form.name === "time"}
+                      placeholder={DD_MM_YYYY}
                       value={form.value}
                       onChange={(event) => handleFormChange(event)}
                       maxDate={form.name === "date" ? new Date() : null}
@@ -396,7 +399,7 @@ const BarChart = () => {
                       iconPos={"left"}
                       imgalt={`${form.name}-icon`}
                       imgsrc={form.imgsrc}
-                      hourFormat="12"
+                      // hourFormat="12"
                       className="w-full"
                     />
                   </div>
