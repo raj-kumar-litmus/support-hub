@@ -106,12 +106,12 @@
 
 #page-btn-submit.p-button,
 #popup-btn-submit.p-button {
-  @apply bg-[#1C1C20] border border-solid border-[#30343B] text-sm px-8 py-2 transition-none;
+  @apply bg-[#1C1C20] text-sm px-8 py-2 transition-none border-2 border-[#FAF9F6] rounded-[22px];
 }
 
 #page-btn-submit .p-button-label,
 #popup-btn-submit .p-button-label {
-  @apply !text-white;
+  @apply !text-white text-[14px] font-medium;
 }
 
 #modal-section .filter-popup-content .p-dropdown {
@@ -510,11 +510,25 @@ button.p-button-secondary {
   td
   span:not(.p-highlight):not(.p-disabled):hover,
 .p-datepicker .p-datepicker-header .p-datepicker-next:enabled:hover,
-.p-datepicker .p-datepicker-header .p-datepicker-prev:enabled:hover, .p-datepicker:not(.p-disabled) .p-yearpicker .p-yearpicker-year:not(.p-disabled):not(.p-highlight):hover, .p-datepicker:not(.p-disabled) .p-monthpicker .p-monthpicker-month:not(.p-disabled):not(.p-highlight):hover, .p-datepicker .p-yearpicker .p-yearpicker-year.p-highlight {
+.p-datepicker .p-datepicker-header .p-datepicker-prev:enabled:hover,
+.p-datepicker:not(.p-disabled)
+  .p-yearpicker
+  .p-yearpicker-year:not(.p-disabled):not(.p-highlight):hover,
+.p-datepicker:not(.p-disabled)
+  .p-monthpicker
+  .p-monthpicker-month:not(.p-disabled):not(.p-highlight):hover,
+.p-datepicker .p-yearpicker .p-yearpicker-year.p-highlight {
   @apply bg-[#292E36] text-[#F2F2F2];
 }
-.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month:enabled:hover, .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year:enabled:hover {
-  @apply text-[#F2F2F2]
+.p-datepicker
+  .p-datepicker-header
+  .p-datepicker-title
+  .p-datepicker-month:enabled:hover,
+.p-datepicker
+  .p-datepicker-header
+  .p-datepicker-title
+  .p-datepicker-year:enabled:hover {
+  @apply text-[#F2F2F2];
 }
 .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month,
 .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year {
