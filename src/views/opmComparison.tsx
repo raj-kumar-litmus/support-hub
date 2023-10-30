@@ -47,6 +47,7 @@ import {
   DURATIONS,
   LABELS,
   TITLE,
+  INPUT_TYPES,
 } from "../constants/appConstants";
 import { fetchData } from "../utils/fetchUtil";
 
@@ -93,7 +94,7 @@ const OpmComparison: React.FC = () => {
 
   const [formFields, setFormFields] = useState([
     {
-      type: "dropdown",
+      type: INPUT_TYPES.dropdown,
       name: "period",
       label: LABELS.duration,
       icon: SandGlassIcon,
@@ -104,7 +105,7 @@ const OpmComparison: React.FC = () => {
       })),
     },
     {
-      type: "time",
+      type: INPUT_TYPES.time,
       name: "startDate",
       label: LABELS.startDate,
       showTime: true,
@@ -112,7 +113,7 @@ const OpmComparison: React.FC = () => {
       imgsrc: "src/assets/white_calendar.svg",
     },
     {
-      type: "time",
+      type: INPUT_TYPES.time,
       name: "endDate",
       label: LABELS.endDate,
       showTime: true,
@@ -120,7 +121,7 @@ const OpmComparison: React.FC = () => {
       imgsrc: "src/assets/white_calendar.svg",
     },
     {
-      type: "dropdown",
+      type: INPUT_TYPES.dropdown,
       name: "channel",
       label: LABELS.channel,
       icon: ChannelIcon,
@@ -386,7 +387,7 @@ const OpmComparison: React.FC = () => {
                   {formFields.map((form) => {
                     return (
                       <>
-                        {form.type === "text" && (
+                        {form.type === INPUT_TYPES.text && (
                           <CustomInputText
                             value={form.value}
                             name={form.label}
@@ -395,7 +396,7 @@ const OpmComparison: React.FC = () => {
                             className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
                           />
                         )}
-                        {form.type === "time" && (
+                        {form.type === INPUT_TYPES.time && (
                           <CustomCalendar
                             name={form.name}
                             containerClassName="opmFiltersMobileCalendar"
@@ -407,7 +408,7 @@ const OpmComparison: React.FC = () => {
                             value={form.value}
                           />
                         )}
-                        {form.type === "dropdown" && (
+                        {form.type === INPUT_TYPES.dropdown && (
                           <CustomDropdown
                             value={form.value}
                             name={form.name}
