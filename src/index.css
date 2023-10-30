@@ -186,7 +186,7 @@ button.p-button-secondary {
   @apply relative left-[10px];
 }
 .opmFiltersMobileCalendar span.p-calendar {
-  @apply relative left-[8px];
+  @apply relative left-[8px] h-[39px];
 }
 .opmFiltersMobile .p-dropdown .p-dropdown-trigger {
   @apply w-[4vw] relative right-[14px];
@@ -288,8 +288,11 @@ button.p-button-secondary {
 .calendarInput .p-calendar {
   @apply w-[135px];
 }
-.promoCodeInput .p-inputtext {
-  @apply w-full;
+.mobileInput .labelClass {
+  @apply ml-[2vw];
+}
+.mobileInput .p-inputtext {
+  @apply relative w-[43vw] left-[-12px];
 }
 .inputContainer {
   @apply relative left-[-10px];
@@ -568,11 +571,6 @@ button.p-button-secondary {
 }
 hr.horizontalLine {
   @apply border-0 rotate-90 relative h-0.5 top-[100px]
-  /* border: 0; */
-  /* rotate: 90deg; */
-  /* height: 2px; */
-  /* position: relative; */
-  /* top:100px; */;
 }
 hr.horizontalLine.opm {
   background: linear-gradient(to right, #5a9ef5, #5a9ef500);

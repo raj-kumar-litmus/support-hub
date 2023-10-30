@@ -18,11 +18,9 @@ import {
   DURATION,
   DURATION_LIST,
   FILTERS,
-  HH_MM,
   RESET,
   SESSIONS,
   SUBMIT,
-  TIME,
   TOTAL_SESSIONS_PER_MINUTE,
 } from "../../constants/appConstants";
 import { Button } from "primereact/button";
@@ -31,9 +29,7 @@ import CustomDropdown from "../common/CustomDropdown";
 import CustomIcon from "../common/CustomIcon";
 import { ChartData, SessionData } from "../../@types/BarChart";
 import { BAR_CHART_OPTIONS } from "../../config/chartConfig";
-// import { sessionDataJSON } from "../../sampleJSON/sessions";
 import FilterIcon from "../../assets/filter-dark.svg";
-import ClockIcon from "../../assets/clock.svg";
 import CalendarIcon from "../../assets/white_calendar.svg";
 import ChannelIcon from "../../assets/channel.svg";
 import SandGlassIcon from "../../assets/sandglass.svg";
@@ -54,8 +50,6 @@ const BarChart = () => {
   const [showFilterPopup, setShowFilterPopup] = useState<boolean>(false);
   const [showFilters, setShowFilters] = useState<boolean>(true);
   const [submitCounter, setSubmitCounter] = useState<number>(0);
-  // const [chartSwitchChecked, setChartSwitchChecked] = useState<boolean>(false);
-  // const [displayBar, setDisplayBar] = useState<string>(SECONDARY);
   const [formFields, setFormFields] = useState([
     {
       type: "dropdown",
@@ -72,13 +66,6 @@ const BarChart = () => {
       value: "",
       imgsrc: CalendarIcon,
     },
-    // {
-    //   type: "calendar",
-    //   name: "time",
-    //   title: TIME,
-    //   value: "",
-    //   imgsrc: ClockIcon,
-    // },
     {
       type: "dropdown",
       name: "channel",
@@ -297,8 +284,6 @@ const BarChart = () => {
                       iconPos={"left"}
                       imgalt={`${form.name}-icon`}
                       imgsrc={form.imgsrc}
-                      // hourFormat="12"
-                      // className={form.name === "time" ? "w-24" : "w-32"}
                       className="w-[190px]"
                     />
                   )}
@@ -399,7 +384,6 @@ const BarChart = () => {
                       iconPos={"left"}
                       imgalt={`${form.name}-icon`}
                       imgsrc={form.imgsrc}
-                      // hourFormat="12"
                       className="w-full"
                     />
                   </div>
