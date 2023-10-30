@@ -426,13 +426,13 @@ button.p-button-secondary {
   @apply bg-transparent;
 }
 .custom-table .p-datatable-table {
-  @apply text-sm border-separate font-helvetica;
+  @apply text-[14px] leading-[17px] border-separate font-helvetica;
 }
 .custom-table .p-datatable-tbody tr td {
-  @apply border-[#383f47];
+  @apply border-[#292E36];
 }
 .custom-table .p-datatable-thead tr th {
-  @apply !bg-[#30343B] text-white font-bold p-3 border-0 w-1/4 border-[#383f47];
+  @apply !bg-[#292E36] text-white font-bold p-3 border-0 w-1/4 border-[#292E36];
 }
 .custom-table .p-datatable-thead tr th:first-child {
   @apply rounded-tl-md;
@@ -447,10 +447,10 @@ button.p-button-secondary {
   @apply rounded-br-md;
 }
 .custom-table .p-datatable-tbody tr {
-  @apply !bg-[#26262B] text-[#FFFFFF];
+  @apply !bg-[#22262C] text-[#FFFFFF];
 }
 .custom-table .p-datatable-tbody tr.p-row-odd {
-  @apply !bg-[#30343B] text-[#FFFFFF];
+  @apply !bg-[#292E36] text-[#FFFFFF];
 }
 .custom-table .p-datatable-thead tr th .p-column-header-content {
   @apply justify-center;
