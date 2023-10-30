@@ -18,13 +18,13 @@ const FilteredCard: React.FC<Props> = ({
 }) => {
   return (
     <CustomButton id={label} className="filteredCard" onClick={onClickHandler}>
-      <CustomImage id={label} src={leftIcon} />
-      {/* <img src={leftIcon} /> */}
+      <CustomImage id={label} src={leftIcon} width="12" height="12" />
       <span id={label}>{content}</span>
-      <img
-        className="ml-[10px] relative right-[10px] md:right-[0px]"
-        id={label}
+      <CustomImage
+        className="border border-solid border-[#898A8D] p-1 rounded-3xl"
         src={CrossIcon}
+        width="6"
+        height="6"
       />
     </CustomButton>
   );
