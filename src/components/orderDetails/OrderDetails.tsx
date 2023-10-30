@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   URL_OMS_ORDER_STATUS,
   URL_ORDER_DETAILS,
@@ -43,20 +43,35 @@ import CustomIcon from "../common/CustomIcon";
 import Card from "../common/Card";
 import PromotionsIcon from "../../assets/promotions_white.svg";
 import OrderClockIcon from "../../assets/order_clock_white.svg";
+import RightArrowIcon from "../../assets/right_arrow.svg";
 import OmsInfoIcon from "../../assets/oms_info_white.svg";
 import Loader from "../loader";
+import OrderStatus from "../orderstatus";
+import { orderStatus, orderTimeline } from "../../@types/ordertimeline";
+import PromotionsPopup from "../promotionspopup";
+import { IPromotion } from "../../@types/promotion";
+import OrderStatusPopup from "../orderstatuspopup";
+import { promotionsJSON } from "../../sampleJSON/promotions";
+import CustomImage from "../common/customimage";
 
 const OrderDetails: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [orderData, setOrderData] = useState<OrderData | Record<string, never>>(
-    {},
+    {}
   );
   const [omsOrderStatus, setOmsOrderStatus] = useState<
     OmsOrderStatus | Record<string, never>
   >({});
-  const [omsOrderFlow, setOmsOrderFlow] = useState<Record<string, never>>({});
-  const [promotions, setPromotions] = useState<Record<string, never>>({});
+  const [omsOrderFlow, setOmsOrderFlow] = useState<orderStatus>();
+  const [isOrderStatusVisible, setIsOrderStatusVisible] =
+    useState<boolean>(false);
+    const [promotions, setPromotions] = useState<IPromotion[]>([]);
   const [itemTableData, setItemTableData] = useState<CommerceItemData[]>([]);
+  const [openPromotionsPopup, setOpenPromotionsPopup] =
+    useState<boolean>(false);
+  const [openOrderStatusPopup, setOpenOrderStatusPopup] =
+    useState<boolean>(false);
+  const navigate = useNavigate();
 
   const { orderId } = useParams<{ orderId: string }>();
 
@@ -71,7 +86,7 @@ const OrderDetails: React.FC = () => {
   const getOrderData = async () => {
     const data: OrderData = await fetchData(
       `${URL_ORDER_DETAILS}/${orderId}`,
-      {},
+      {}
     );
     setOrderData(data || {});
     if (data?.commerceItem?.length) {
@@ -84,7 +99,7 @@ const OrderDetails: React.FC = () => {
             "Unit Price": item.priceInfo.listPrice,
             "Total Price": item.priceInfo.rawTotalPrice,
           };
-        },
+        }
       );
       setItemTableData(convertedArray);
     }
@@ -94,7 +109,7 @@ const OrderDetails: React.FC = () => {
   const getOmsOrderStatus = async () => {
     const data: OmsOrderStatus = await fetchData(
       `${URL_OMS_ORDER_STATUS}/${orderId}`,
-      {},
+      {}
     );
     setOmsOrderStatus(data || {});
   };
@@ -102,7 +117,7 @@ const OrderDetails: React.FC = () => {
   const getOmsOrderFlow = async () => {
     const data: OmsOrderFlow = await fetchData(
       `${URL_OMS_ORDER_FLOW}/${orderId}`,
-      {},
+      {}
     );
     console.log(omsOrderFlow);
     setOmsOrderFlow(data || {});
@@ -123,15 +138,15 @@ const OrderDetails: React.FC = () => {
   };
 
   const showPromotions = (): void => {
-    //show promotion modal
+    setOpenPromotionsPopup(true);
   };
 
   const showOmsStatusInfo = (): void => {
-    //show oms modal
+    setOpenOrderStatusPopup(true);
   };
 
   const showOrderTimeline = (): void => {
-    //show order timeline modal
+    setIsOrderStatusVisible(true);
   };
 
   const viewAllItems = (): void => {
@@ -141,7 +156,18 @@ const OrderDetails: React.FC = () => {
   return isLoading ? (
     <Loader />
   ) : Object.keys(orderData).length > 0 ? (
-    <div id="orderDetailsComp">
+    <div id="orderDetailsComp" className="sm:my-8 mx-4">
+      <div className="flex sm:hidden border-b border-solid border-[#30343B] h-[44px] items-center px-[14px] py-[24px]">
+        <CustomImage
+          className="h-[13px]"
+          src={RightArrowIcon}
+          alt="Search"
+          onClick={() => navigate(-1)}
+        />
+        <span className="text-[#FAF9F6] text-center mx-auto text-[14px]">
+          Order #{orderId}
+        </span>
+      </div>
       <div className="gridNoGapRounded grid-cols-1 m-4 p-0 sm:py-4 sm:px-6 sm:bg-[#30343B] ">
         <div className="flex justify-between border-none !bg-[#1C1C20] sm:!bg-inherit">
           <span className="w-1/2 !text-lg !text-[#F2F2F2] font-bold !bg-[#1C1C20] sm:!bg-inherit">
@@ -163,7 +189,7 @@ const OrderDetails: React.FC = () => {
         </div>
         <div className="flexColWrapper sm:gap-y-0 sm:grid-cols-2 ">
           <div className="flexWrapper justify-start bg-[#30343B] rounded-t-md">
-            <span className="w-auto sm:w-1/5 flex items-center">
+            <span className="w-auto sm:w-1/5 flex items-center min-w-[4.5rem]">
               {ORDER}
               <CustomIcon
                 className="ml-2 cursor-pointer"
@@ -174,12 +200,14 @@ const OrderDetails: React.FC = () => {
                 onClick={showOrderTimeline}
               />
             </span>
-            <span className="w-auto sm:w-4/5 font-medium">
+            <span className="w-auto sm:w-4/5 font-medium self-center">
               {orderData?.orderId}
             </span>
           </div>
           <div className="flexWrapper bg-[#30343B]">
-            <span className="w-auto sm:w-1/5 font-light">{ORDER_TOTAL}</span>
+            <span className="w-auto sm:w-1/5 font-light min-w-[4.5rem]">
+              {ORDER_TOTAL}
+            </span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.orderTotal}
             </span>
@@ -187,13 +215,17 @@ const OrderDetails: React.FC = () => {
         </div>
         <div className="flexColWrapper sm:gap-y-0 sm:grid-cols-2 bg-[#30343B]">
           <div className="flexWrapper">
-            <span className="w-auto sm:w-1/5 font-light">{SUBMITTED}</span>
+            <span className="w-auto sm:w-1/5 font-light min-w-[4.5rem]">
+              {SUBMITTED}
+            </span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.submittedDate}
             </span>
           </div>
           <div className="flexWrapper">
-            <span className="w-auto sm:w-1/5 font-light">{CHANNEL}</span>
+            <span className="w-auto sm:w-1/5 font-light min-w-[4.5rem]">
+              {CHANNEL}
+            </span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.originOfOrder}
             </span>
@@ -201,13 +233,15 @@ const OrderDetails: React.FC = () => {
         </div>
         <div className="flexColWrapper sm:gap-y-0 sm:grid-cols-2 bg-[#30343B] rounded-b-md">
           <div className="flexWrapper">
-            <span className="w-auto sm:w-1/5 font-light">{LOCALE}</span>
+            <span className="w-auto sm:w-1/5 font-light min-w-[4.5rem]">
+              {LOCALE}
+            </span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.locale}
             </span>
           </div>
           <div className="flexBlockWrapper py-1 px-4 sm:p-0 border-none">
-            <span className="w-auto sm:w-1/5">{ORDER_TYPE}</span>
+            <span className="w-auto sm:w-1/5 min-w-[4.5rem]">{ORDER_TYPE}</span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.customerInfo?.biTier}
             </span>
@@ -221,13 +255,13 @@ const OrderDetails: React.FC = () => {
             {STATUS_ACROSS}
           </span>
           <div className="flexBlockWrapper rounded-t-md border-t-0 py-1 px-4 sm:p-0 sm:border-t border-solid border-[#383F47] bg-[#30343B]">
-            <span className="w-auto sm:w-1/6">{ATG}</span>
+            <span className="w-auto sm:w-1/6 min-w-[4.5rem]">{ATG}</span>
             <span className="w-auto sm:w-5/6 font-medium">
               {`${orderData?.status} - ${orderData?.sephOrderStatus}`}
             </span>
           </div>
           <div className="flexBlockWrapper border-t filterCardWrapper">
-            <span className="w-auto sm:w-1/6 flex items-center">
+            <span className="w-auto sm:w-1/6 flex items-center min-w-[4.5rem]">
               {OMS}
               <CustomIcon
                 className="ml-2 cursor-pointer"
@@ -243,7 +277,7 @@ const OrderDetails: React.FC = () => {
             </span>
           </div>
           <div className="flexBlockWrapper rounded-b-md border-t filterCardWrapper">
-            <span className="w-auto sm:w-1/6">{WMS}</span>
+            <span className="w-auto sm:w-1/6 min-w-[4.5rem]">{WMS}</span>
             <span className="w-auto sm:w-5/6 font-medium"></span>
           </div>
         </div>
@@ -252,21 +286,21 @@ const OrderDetails: React.FC = () => {
             {CUSTOMER_INFO}
           </span>
           <div className="flexBlockWrapper border-t-0 sm:border-t filterCardWrapper rounded-t-md">
-            <span className="w-auto sm:w-1/6">{NAME}</span>
+            <span className="w-auto sm:w-1/6 min-w-[4.5rem]">{NAME}</span>
             <span className="w-auto sm:w-5/6 font-medium">
               {formatName(
-                `${orderData?.customerInfo?.firstName} ${orderData?.customerInfo?.lastName}`,
+                `${orderData?.customerInfo?.firstName} ${orderData?.customerInfo?.lastName}`
               )}
             </span>
           </div>
           <div className="flexBlockWrapper border-t filterCardWrapper">
-            <span className="w-auto sm:w-1/6">{EMAIL}</span>
+            <span className="w-auto sm:w-1/6 min-w-[4.5rem]">{EMAIL}</span>
             <span className="w-auto sm:w-5/6 font-medium">
               {orderData?.customerInfo?.email}
             </span>
           </div>
           <div className="flexBlockWrapper border-t filterCardWrapper rounded-b-md">
-            <span className="w-auto sm:w-1/6">{BITIER}</span>
+            <span className="w-auto sm:w-1/6 min-w-[4.5rem]">{BITIER}</span>
             <span className="w-auto sm:w-5/6 font-medium">
               {orderData?.customerInfo?.biTier}
             </span>
@@ -334,7 +368,23 @@ const OrderDetails: React.FC = () => {
           </div>
         </div>
       </div>
+      <PromotionsPopup
+        openPromotionsPopup={openPromotionsPopup}
+        setOpenPromotionsPopup={setOpenPromotionsPopup}
+        promotions={promotions}
+      />
+      <OrderStatusPopup
+        openDialog={openOrderStatusPopup}
+        setOpenDialog={setOpenOrderStatusPopup}
+      />
+       <OrderStatus
+        orderStatus={omsOrderFlow}
+        isOrderStatusVisible={isOrderStatusVisible}
+        setIsOrderStatusVisible={setIsOrderStatusVisible}
+      />
     </div>
+     
+    
   ) : (
     <div className="text-md pt-48 text-center text-gray-400 font-semibold">
       {NO_MATCHING_ORDERS_FOUND}

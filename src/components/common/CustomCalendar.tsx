@@ -11,7 +11,7 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => (
       readOnlyInput
       showIcon
       showTime={props.showTime || false}
-      hourFormat={props.hourFormat || "24"}
+      hourFormat={props.hourFormat || "12"}
       placeholder={props.placeholder}
       value={props.value}
       dateFormat="mm/dd/yy"

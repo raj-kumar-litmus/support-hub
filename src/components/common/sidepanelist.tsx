@@ -22,13 +22,17 @@ const SidePaneList: FC<Props> = ({
   };
 
   return (
-    <div className="fixed left-0 top-[56px] z-10 overflow-x-hidden hidden sm:block w-[308px] border-slate-200 shadow-slate-200 border-solid min-h-[calc(100vh-56px)] bg-[#26262B] pt-8">
+    <div
+      className={
+        "fixed left-0 top-[56px] z-10 overflow-x-hidden hidden sm:block sm:w-[240px] md:w-[19.25rem] shadow-slate-200 min-h-[calc(100vh-56px)] bg-[#22262C] px-2 md:px-6 pt-8"
+      }
+    >
       {menuList.map((menu) => (
         <div
           key={menu.id}
-          className={`flex pl-4 pr-2 py-4 items-center  cursor-pointer w-[259px] h-[44px] mx-auto ${
+          className={`flex pl-4 pr-2 py-4 items-center  cursor-pointer h-[44px] mx-auto ${
             selectedMenu === menu.id
-              ? "bg-[#30343B] rounded-lg"
+              ? "bg-[#292E36] rounded-lg"
               : "bg-transparent"
           }`}
           onClick={() => navigateToMenu(menu)}

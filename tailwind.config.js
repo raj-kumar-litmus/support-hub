@@ -43,6 +43,9 @@ export default {
         '.contrast-88': {
           '--filter': 'contrast(88%)',
         },
+        '.drop-shadow': {
+          'filter': 'drop-shadow(0px 3px 16px #00000029)',
+        },
       };
 
       addUtilities(filterUtilities, ['responsive', 'hover']);
