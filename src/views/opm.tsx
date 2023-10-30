@@ -252,7 +252,7 @@ const OPM: React.FC = () => {
         }&`;
       }
     });
-    setUrl(`/opm?${str}`);
+    setUrl(`/supportdashboard/opm?${str}`);
     // if (showFilters) setShowFilters(false);
   };
 

@@ -163,7 +163,7 @@ const OpmComparison: React.FC = () => {
         }&`;
       }
     });
-    setUrl(`/compareOPM?${str}`);
+    setUrl(`/supportdashboard/compareOPM?${str}`);
     // if (showFilters) setShowFilters(false);
   };
 
