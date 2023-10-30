@@ -14,6 +14,7 @@ import {
   CHANNEL_LIST,
   DATE,
   DD_MM_YYYY,
+  DD_MM_YYYY_HH_MM,
   DEFAULT_PERIOD,
   DURATION,
   DURATION_LIST,
@@ -289,7 +290,7 @@ const BarChart = () => {
                       // showTime={false}
                       showTime
                       timeOnly={form.name === "time"}
-                      placeholder={form.name === "date" ? DD_MM_YYYY : HH_MM}
+                      placeholder={DD_MM_YYYY_HH_MM}
                       value={form.value}
                       onChange={(event) => handleFormChange(event)}
                       maxDate={form.name === "date" ? new Date() : null}
@@ -380,18 +381,18 @@ const BarChart = () => {
         style={{ width: "100vw", margin: 0 }}
       >
         <div className="filter-popup-content">
-          <div className="flex mb-4 gap-4">
+          <div className="flex gap-4 mb-4 w-full">
             {formFields
               .filter((item) => item.type === "calendar")
               .map((form, index) => {
                 return (
-                  <div className="flex-col w-3/6" key={index}>
+                  <div className="flex-col w-full" key={index}>
                     <CustomCalendar
                       name={form.name}
                       title={form.title}
-                      showTime={false}
-                      timeOnly={form.name === "time"}
-                      placeholder={form.name === "date" ? DD_MM_YYYY : HH_MM}
+                      showTime
+                      // timeOnly={form.name === "time"}
+                      placeholder={DD_MM_YYYY_HH_MM}
                       value={form.value}
                       onChange={(event) => handleFormChange(event)}
                       maxDate={form.name === "date" ? new Date() : null}
@@ -399,7 +400,7 @@ const BarChart = () => {
                       iconPos={"left"}
                       imgalt={`${form.name}-icon`}
                       imgsrc={form.imgsrc}
-                      hourFormat="12"
+                      // hourFormat="12"
                       className="w-full"
                     />
                   </div>
