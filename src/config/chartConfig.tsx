@@ -45,14 +45,13 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = {
         generateLabels: (chart) => {
           const data = chart.data;
           if (data.datasets.length) {
-            return data.datasets.map(function (dataset, i) {
+            return data.datasets.map((dataset, i) => {
               return {
                 text: dataset.label,
                 fillStyle: "#30343B",
                 fontColor: dataset.backgroundColor,
                 lineWidth: SESSIONS_CHART.LEGEND_LINE_WIDTH,
                 strokeStyle: dataset.backgroundColor,
-                index: i,
               };
             });
           }

@@ -317,15 +317,13 @@ const BarChart = () => {
               );
             })}
           </div>
-          <div className="">
-            <Button
-              disabled={disabled}
-              label={SUBMIT}
-              id="page-btn-submit"
-              className="p-button-rounded"
-              onClick={incrementCounter}
-            />
-          </div>
+          <Button
+            disabled={disabled}
+            label={SUBMIT}
+            id="page-btn-submit"
+            className="p-button-rounded min-w-[118px]"
+            onClick={incrementCounter}
+          />
         </div>
       )}
 
