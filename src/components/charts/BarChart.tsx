@@ -354,7 +354,7 @@ const BarChart = () => {
 
       <div className="flex justify-center basis-full relative px-3 py-5 sm:px-5 h-64 mb-4 bg-[#30343B] w-[full] h-[18rem] sm:h-[24rem] drop-shadow-md rounded-xl">
         {isLoading ? (
-          <Loader />
+          <Loader className="!p-0 m-auto" />
         ) : (
           <>
             <Bar ref={chartRef} options={getChartConfig()} data={allData} />
