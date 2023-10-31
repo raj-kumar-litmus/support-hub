@@ -475,7 +475,7 @@ const OPM: React.FC = () => {
           className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[3vw] ${
             IS_FULLSCREEN
               ? "landScape rotate-90 absolute left-[40vw] top-[45vh] ml-[25vw] w-[22vh]"
-              : "portrait"
+              : `${width < 700 ? "portrait" : ""}`
           }`}
         >
           {formFields

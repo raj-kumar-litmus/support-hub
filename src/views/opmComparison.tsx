@@ -122,7 +122,7 @@ const OpmComparison: React.FC = () => {
       name: "endDate",
       label: LABELS.endDate,
       cardIcon: GreyCalendarIcon,
-      showTime: true,
+      showTime: false,
       value: "",
       imgsrc: "src/assets/white_calendar.svg",
     },
@@ -454,7 +454,7 @@ const OpmComparison: React.FC = () => {
           className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[3vw] w-[90vw] ${
             IS_FULLSCREEN
               ? "landScape opmComparison rotate-90 absolute left-[40vw] top-[45vh]"
-              : "portrait"
+              : `${width < 700 ? "portrait" : ""}`
           }`}
         >
           {formFields
