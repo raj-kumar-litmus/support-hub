@@ -20,7 +20,7 @@ const Card = (props: CardProps) => {
       } else if (ind === 1) {
         props.type === "ORDER_DETAILS_ITEM"
           ? setSubTitle({ key, value })
-          : cards.push(key, value);
+          : cards.push({ key, value });
       } else {
         cards.push({ key, value });
       }

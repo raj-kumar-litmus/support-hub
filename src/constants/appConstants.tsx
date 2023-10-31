@@ -11,6 +11,7 @@ export const SELECT_DURATION: string = "Select Duration";
 export const SELECT_CHANNEL: string = "Select Channel";
 export const DD_MM_YYYY: string = "dd/mm/yyyy";
 export const HH_MM: string = "hh:mm";
+export const DD_MM_YYYY_HH_MM: string = "dd/mm/yyyy hh:mm";
 export const FROM: string = "From";
 export const RESET: string = "Reset";
 export const TOTAL_SESSIONS_PER_MIN_PRIMARY: string =
@@ -50,10 +51,35 @@ export const AMOUNT: string = "Amount";
 export const NO_MATCHING_ORDERS_FOUND: string = "No Matching Orders.";
 export const VIEW_ALL: string = "View All";
 
+export const LABELS = {
+  duration: "Duration",
+  date: "Date",
+  channel: "Channel",
+  locale: "Locale",
+  payment: "Payment",
+  promoCode: "Promo Code",
+  startDate: "Date 1",
+  endDate: "Date 2",
+  submit: "Submit",
+  reset: "Reset",
+};
+
+export const TITLE = {
+  OPM: "OPM",
+  OPM_COMPARISON: "OPM Comparison",
+};
+
+export const INPUT_TYPES = {
+  dropdown: "dropdown",
+  time: "time",
+  text: "text",
+};
+
 //App Constants
 export const PRIMARY: string = "Primary";
 export const SECONDARY: string = "Secondary";
 export const BOTH: string = "Both";
+export const DEFAULT_PERIOD: number = 10;
 export const CHANNEL_LIST: { label: string; value: string }[] = [
   { label: "All", value: "all" },
   { label: "Desktop", value: "web" },
@@ -103,6 +129,11 @@ export const CHANNELS = {
   CSC: 2,
   MPLUS: 6,
   INSTAGRAM: 11,
+};
+
+export const LOCALE_OPTIONS = {
+  US: "US",
+  CA: "CA",
 };
 
 export const PAYMENT_TYPES = {
@@ -294,5 +325,38 @@ export const OPM_COMPARISON_OPTIONS = ({
     },
   },
 });
+
+export const OPM_COMPARISON_OPTIONS_HOME = ({
+  apiResponse,
+  startDate,
+  endDate,
+  isMobile,
+}) => {
+  const options = OPM_COMPARISON_OPTIONS({
+    apiResponse,
+    startDate,
+    endDate,
+    isMobile,
+  });
+  return {
+    ...options,
+    layout: {
+      ...options.layout,
+      padding: {
+        left: 30,
+        right: 50,
+        top: 35,
+        bottom: 20,
+      },
+    },
+    plugins: {
+      ...options.plugins,
+      legend: {
+        ...options.plugins.legend,
+        position: "top",
+      },
+    },
+  };
+};
 
 export const ORDER_STATUS: string = "Order Status";

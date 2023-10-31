@@ -24,7 +24,6 @@ import CustomModal from "../components/Modal";
 import LineChart from "../components/LineChart";
 import FilteredCard from "../components/FilteredCard";
 import CustomImage from "../components/common/customimage";
-import { OPM_OPTIONS } from "../constants/appConstants";
 import Loader from "../components/loader";
 
 import WhiteCrossIcon from "../assets/white_cross.svg";
@@ -43,7 +42,16 @@ import GreyPromoIcon from "../assets/grey_promo.svg";
 import GreyHourGlassIcon from "../assets/hourglass-grey.svg";
 import open_in_full_window from "../assets/open_in_full_window.svg";
 import { fetchData } from "../utils/fetchUtil";
-import { CHANNELS, DURATIONS, PAYMENT_TYPES } from "../constants/appConstants";
+import {
+  CHANNELS,
+  OPM_OPTIONS,
+  DURATIONS,
+  PAYMENT_TYPES,
+  LABELS,
+  INPUT_TYPES,
+  TITLE,
+  LOCALE_OPTIONS,
+} from "../constants/appConstants";
 
 ChartJS.register(
   CategoryScale,
@@ -76,7 +84,7 @@ const OPM: React.FC = () => {
   };
 
   const [url, setUrl] = useState<string>(
-    `/opm?period=${DEFAULT.duration}&date=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${DEFAULT.promocode}&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`,
+    `/supportdashboard/opm?period=${DEFAULT.duration}&date=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${DEFAULT.promocode}&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`,
   );
 
   const [options, setOptions] = useState<null | ChartOptions>(null);
@@ -155,9 +163,9 @@ const OPM: React.FC = () => {
 
   const [formFields, setFormFields] = useState([
     {
-      type: "dropdown",
+      type: INPUT_TYPES.dropdown,
       name: "period",
-      label: "Duration",
+      label: LABELS.duration,
       icon: SandGlassIcon,
       cardIcon: GreyHourGlassIcon,
       value: "",
@@ -167,18 +175,18 @@ const OPM: React.FC = () => {
       })),
     },
     {
-      type: "time",
+      type: INPUT_TYPES.time,
       name: "date",
-      label: "Date",
+      label: LABELS.date,
       value: "",
       showTime: true,
       cardIcon: GreyCalendarIcon,
       imgsrc: "src/assets/white_calendar.svg",
     },
     {
-      type: "dropdown",
+      type: INPUT_TYPES.dropdown,
       name: "channel",
-      label: "Channel",
+      label: LABELS.channel,
       icon: ChannelIcon,
       cardIcon: GreyChannelIcon,
       value: "",
@@ -188,21 +196,21 @@ const OPM: React.FC = () => {
       })),
     },
     {
-      type: "dropdown",
+      type: INPUT_TYPES.dropdown,
       name: "locale",
-      label: "Locale",
+      label: LABELS.locale,
       icon: LocaleIcon,
       cardIcon: GreyGlobeIcon,
       value: "",
-      options: [
-        { name: "US", code: "US" },
-        { name: "CA", code: "CA" },
-      ],
+      options: Object.keys(LOCALE_OPTIONS).map((e) => ({
+        name: e,
+        code: LOCALE_OPTIONS[e],
+      })),
     },
     {
-      type: "dropdown",
+      type: INPUT_TYPES.dropdown,
       name: "payment",
-      label: "Payment",
+      label: LABELS.payment,
       icon: PaymentIcon,
       cardIcon: GreyCardIcon,
       value: "",
@@ -212,9 +220,9 @@ const OPM: React.FC = () => {
       })),
     },
     {
-      type: "text",
+      type: INPUT_TYPES.text,
       name: "promocode",
-      label: "Promo Code",
+      label: LABELS.promoCode,
       imgsrc: "src/assets/promocode.svg",
       cardIcon: GreyPromoIcon,
       value: "",
@@ -252,8 +260,8 @@ const OPM: React.FC = () => {
         }&`;
       }
     });
-    setUrl(`/opm?${str}`);
-    // if (showFilters) setShowFilters(false);
+    setUrl(`/supportdashboard/opm?${str}`);
+    if (showFilters && width < 700) setShowFilters(false);
   };
 
   useEffect(() => {
@@ -272,7 +280,12 @@ const OPM: React.FC = () => {
 
   const getConfigOptions = () => {
     const chartOptions = JSON.parse(JSON.stringify(options));
-    chartOptions.layout.padding = 0;
+    chartOptions.layout.padding = {
+      left: 30,
+      right: 50,
+      top: 75,
+      bottom: 20,
+    };
     chartOptions.scales.x.title.padding.top = 10;
     return chartOptions;
   };
@@ -284,10 +297,10 @@ const OPM: React.FC = () => {
   return (
     <>
       {location.pathname.includes("home") && data && (
-        <div className="w-full sm:w-1/2 bg-[#22262C] p-4 rounded-lg">
-          <div className="flex justify-between mb-3 items-center">
+        <div className="w-full sm:w-1/2 bg-[#22262C] p-0 bg-transparent rounded-lg">
+          <div className="flex justify-between mb-3 items-center relative top-[2vh] z-[1] ml-[2vw] mr-[1vw]">
             <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
-              OPM
+              {TITLE.OPM}
             </span>
             <div>
               <button
@@ -300,7 +313,7 @@ const OPM: React.FC = () => {
           </div>
           <LineChart
             title="OPM"
-            className={"home-opm"}
+            className="home-opm border-0 rounded-[10px] w-[89vw] lg:w-full lg:ml-[0] h-[380px] lg:h-[380px] lg:mt-[3vh] top-[-5vh]"
             options={getConfigOptions()}
             data={data}
           />
@@ -309,7 +322,7 @@ const OPM: React.FC = () => {
       {!IS_FULLSCREEN && location.pathname.includes("opm") && (
         <div className="flex justify-between items-start lg:mb-[2vh] lg:mt-[4vh] ml-[5vw] lg:ml-[3vw] mr-[5vw] lg:mr-[3vw] mt-[3vh]">
           <p className="font-bold w-[50vw] text-[#F2F2F2] w-[50vw] lg:w-[30vw]">
-            OPM
+            {TITLE.OPM}
           </p>
           <CustomImage
             src={FilterIcon}
@@ -319,7 +332,7 @@ const OPM: React.FC = () => {
           />
         </div>
       )}
-      {showFilters && (
+      {showFilters && location.pathname.includes("opm") && (
         <>
           {width > 700 ? (
             <form
@@ -329,7 +342,7 @@ const OPM: React.FC = () => {
               {formFields.map((form, index) => {
                 return (
                   <React.Fragment key={index}>
-                    {form.type === "text" && (
+                    {form.type === INPUT_TYPES.text && (
                       <CustomInputText
                         containerClassName="lg:w-[10vw]"
                         value={form.value}
@@ -339,11 +352,10 @@ const OPM: React.FC = () => {
                         placeholder={form.label}
                         imageClassName="relative left-[25px] z-[1]"
                         onChange={(event) => handleFormChange(event)}
-                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
-                        id="promoCode"
+                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px] w-[9vw]"
                       />
                     )}
-                    {form.type === "time" && (
+                    {form.type === INPUT_TYPES.time && (
                       <CustomCalendar
                         name={form.name}
                         containerClassName="ml-[10px] md:w-[14vw]"
@@ -355,7 +367,7 @@ const OPM: React.FC = () => {
                         value={form.value}
                       />
                     )}
-                    {form.type === "dropdown" && (
+                    {form.type === INPUT_TYPES.dropdown && (
                       <CustomDropdown
                         value={form.value}
                         name={form.name}
@@ -373,7 +385,7 @@ const OPM: React.FC = () => {
                 );
               })}
               <CustomButton
-                label="Submit"
+                label={LABELS.submit}
                 isDisabled={disabled}
                 isRounded={true}
                 className="submitBtnMobile self-end relative"
@@ -398,21 +410,20 @@ const OPM: React.FC = () => {
                   {formFields.map((form) => {
                     return (
                       <>
-                        {form.type === "text" && (
+                        {form.type === INPUT_TYPES.text && (
                           <CustomInputText
-                            containerClassName="w-[41vw]"
+                            containerClassName="w-[41vw] mobileInput"
                             value={form.value}
                             name={form.name}
                             label={form.label}
                             icon={form.imgsrc}
-                            imageClassName="relative left-[25px] z-[1]"
+                            imageClassName="relative left-[12px] md:left-[25px] z-[1]"
                             placeholder={form.label}
                             onChange={(event) => handleFormChange(event)}
                             className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
-                            id="promoCode"
                           />
                         )}
-                        {form.type === "time" && (
+                        {form.type === INPUT_TYPES.time && (
                           <CustomCalendar
                             name={form.name}
                             containerClassName="opmFiltersMobileCalendar"
@@ -424,7 +435,7 @@ const OPM: React.FC = () => {
                             value={form.value}
                           />
                         )}
-                        {form.type === "dropdown" && (
+                        {form.type === INPUT_TYPES.dropdown && (
                           <CustomDropdown
                             value={form.value}
                             name={form.name}
@@ -443,7 +454,7 @@ const OPM: React.FC = () => {
                     );
                   })}
                   <CustomButton
-                    label="Submit"
+                    label={LABELS.submit}
                     isDisabled={disabled}
                     isRounded={true}
                     className="submitBtnMobile opmPopUp col-span-full"
@@ -454,40 +465,42 @@ const OPM: React.FC = () => {
           )}
         </>
       )}
-      <div
-        className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[3vw] w-[90vw] ${
-          IS_FULLSCREEN ? "rotate-90 absolute left-[40vw] top-[45vh]" : ""
-        }`}
-      >
-        {formFields
-          .filter((e) => e.value)
-          .map((e: any) => (
-            <Fragment key={e.name}>
-              <FilteredCard
-                label={e.name}
-                leftIcon={e.cardIcon}
-                onClickHandler={removeFormEntry}
-                content={
-                  e.type === "time"
-                    ? e.value.toLocaleString("en-US", { hour12: false })
-                    : e.value.name || e.value
-                }
-              />
-            </Fragment>
-          ))}
-        {!disabled && !IS_FULLSCREEN && (
-          <CustomButton
-            label="Reset"
-            severity="secondary"
-            className="resetFilters text-[12px] text-[#575353]"
-            isTextButton={true}
-            onClick={clearAllHandler}
-          />
-        )}
-      </div>
-      {data && !isLoading && (
+      {location.pathname.includes("opm") && (
+        <div
+          className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[3vw] w-[90vw] ${
+            IS_FULLSCREEN ? "rotate-90 absolute left-[40vw] top-[45vh]" : ""
+          }`}
+        >
+          {formFields
+            .filter((e) => e.value)
+            .map((e: any) => (
+              <Fragment key={e.name}>
+                <FilteredCard
+                  label={e.name}
+                  leftIcon={e.cardIcon}
+                  onClickHandler={removeFormEntry}
+                  content={
+                    e.type === "time"
+                      ? e.value.toLocaleString("en-US", { hour12: false })
+                      : e.value.name || e.value
+                  }
+                />
+              </Fragment>
+            ))}
+          {!disabled && !IS_FULLSCREEN && (
+            <CustomButton
+              label={LABELS.reset}
+              severity="secondary"
+              className="resetFilters text-[12px] text-[#575353]"
+              isTextButton={true}
+              onClick={clearAllHandler}
+            />
+          )}
+        </div>
+      )}
+      {data && !isLoading && location.pathname.includes("opm") && (
         <LineChart
-          title="OPM"
+          title={TITLE.OPM}
           isFullScreen={IS_FULLSCREEN}
           className="border-0 rounded-[10px] lg:w-[71.74vw] lg:ml-[2.85vw] h-[340px] lg:h-[62.23vh] lg:mt-[3vh] "
           options={options}

@@ -2,20 +2,20 @@ import { FC } from "react";
 import { Dropdown } from "primereact/dropdown";
 import { CustomDropdownProps } from "../../@types/BarChart";
 import CustomIcon from "./CustomIcon";
-import FilterIcon from "../../assets/filter.svg";
+import FilterIcon from "../../assets/arrow_filter.svg";
 import ArrowDownIcon from "../../assets/arrowdown.svg";
 
 const CustomDropdown: FC<CustomDropdownProps> = (props) => (
   <>
-    <div className="text-sm font-bold text-gray-500">{props.title}</div>
+    <div className="text-xs font-medium pb-1 text-[#898A8D]">{props.title}</div>
     <div className="flex relative">
       {props.showIcon && (
         <CustomIcon
           alt={props.iconAlt}
           src={props.iconSrc}
-          width="16px"
-          height="16px"
-          className="absolute top-4 left-2 z-10"
+          width="1rem"
+          height="1rem"
+          className="absolute top-[0.65rem] left-2 mr-1 z-10"
         />
       )}
       <Dropdown
@@ -29,12 +29,12 @@ const CustomDropdown: FC<CustomDropdownProps> = (props) => (
           <CustomIcon
             alt={"drop-down-arrow"}
             src={props.showIcon ? ArrowDownIcon : FilterIcon}
-            width="16px"
-            height="16px"
+            width="1rem"
+            height="1rem"
           />
         }
-        className={`w - full md: w - 14rem mt - 1 min - w - full ${
-          props.showIcon ? `pl-6` : ``
+        className={`w-full md:w-36 min-w-full ${
+          props.showIcon ? `pl-8` : `pl-4`
         } `}
       />
     </div>
