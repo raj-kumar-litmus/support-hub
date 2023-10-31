@@ -570,7 +570,7 @@ button.p-button-secondary {
   @apply bg-[#25292D] text-[12px] text-white opacity-100 pointer-events-none absolute -translate-x-[50%] -translate-y-[120%] text-left rounded-md px-[10px] py-[6px];
 }
 hr.horizontalLine {
-  @apply border-0 rotate-90 relative h-0.5 top-[100px]
+  @apply border-0 rotate-90 relative h-0.5 top-[100px];
 }
 hr.horizontalLine.opm {
   background: linear-gradient(to right, #5a9ef5, #5a9ef500);
@@ -687,4 +687,40 @@ hr.horizontalLine.opmComparison {
 
 .home-refresh-btn {
   @apply bg-[#22262C] border-[#22262C] rounded-full text-white text-xs px-5 py-3;
+}
+.sessions-tabs.p-tabview .p-tabview-panels {
+  @apply hidden;
+}
+.sessions-tabs.p-tabview {
+  @apply w-[245px] h-[36px] self-end;
+}
+.sessions-tabs.p-tabview .p-tabview-nav {
+  @apply border-none h-[32px] bg-[#292E36];
+}
+.sessions-tabs.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  @apply bg-[#292E36] text-[#8B8C8F] h-[30px] rounded-none border-none text-[12px] font-medium;
+}
+.sessions-tabs .p-tabview-nav-content {
+  @apply rounded-[8px];
+}
+.sessions-tabs.p-tabview .p-tabview-nav li {
+  @apply bg-[#292E36];
+}
+.sessions-tabs.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  @apply bg-[#F2F2F2] text-[#22262C] rounded-[8px] text-[12px] font-medium;
+}
+.sessions-tabs.p-tabview
+  .p-tabview-nav
+  li
+  .p-tabview-nav-link:not(.p-disabled):focus {
+  @apply shadow-none;
+}
+.sessions-tabs.p-tabview
+  .p-tabview-nav
+  li:not(.p-highlight):not(.p-disabled):hover
+  .p-tabview-nav-link {
+  @apply bg-[#292E36] text-[#8B8C8F];
+}
+.sessions-tabs.p-accordion .p-accordion-header .p-accordion-header-link, .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  @apply transition-none border-none py-0;
 }
