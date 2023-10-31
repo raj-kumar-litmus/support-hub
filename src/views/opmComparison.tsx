@@ -39,6 +39,7 @@ import FilterIcon from "../assets/filter.svg";
 import ChannelIcon from "../assets/channel.svg";
 import SandGlassIcon from "../assets/sandglass.svg";
 import GreyHourGlassIcon from "../assets/hourglass-grey.svg";
+import WhiteCalendarIcon from "../assets/white_calendar.svg";
 import GreyCalendarIcon from "../assets/calendar-grey.svg";
 import GreyChannelIcon from "../assets/channel-grey.svg";
 import open_in_full_window from "../assets/open_in_full_window.svg";
@@ -115,7 +116,7 @@ const OpmComparison: React.FC = () => {
       showTime: true,
       cardIcon: GreyCalendarIcon,
       value: "",
-      imgsrc: "src/assets/white_calendar.svg",
+      imgsrc: WhiteCalendarIcon,
     },
     {
       type: INPUT_TYPES.time,
@@ -124,7 +125,7 @@ const OpmComparison: React.FC = () => {
       cardIcon: GreyCalendarIcon,
       showTime: false,
       value: "",
-      imgsrc: "src/assets/white_calendar.svg",
+      imgsrc: WhiteCalendarIcon,
     },
     {
       type: INPUT_TYPES.dropdown,

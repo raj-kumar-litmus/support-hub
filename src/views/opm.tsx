@@ -36,6 +36,7 @@ import PaymentIcon from "../assets/payment.svg";
 import SandGlassIcon from "../assets/sandglass.svg";
 import GreyChannelIcon from "../assets/channel-grey.svg";
 import GreyCalendarIcon from "../assets/calendar-grey.svg";
+import WhiteCalendarIcon from "../assets/white_calendar.svg";
 import GreyGlobeIcon from "../assets/grey_globe.svg";
 import GreyCardIcon from "../assets/grey_card.svg";
 import GreyPromoIcon from "../assets/grey_promo.svg";
@@ -182,7 +183,7 @@ const OPM: React.FC = () => {
       value: "",
       showTime: true,
       cardIcon: GreyCalendarIcon,
-      imgsrc: "src/assets/white_calendar.svg",
+      imgsrc: WhiteCalendarIcon,
     },
     {
       type: INPUT_TYPES.dropdown,
