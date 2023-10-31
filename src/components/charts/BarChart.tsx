@@ -223,7 +223,7 @@ const BarChart = () => {
   };
 
   const getChartConfig = () => {
-    const customChartConfig = JSON.parse(JSON.stringify(BAR_CHART_OPTIONS));
+    const customChartConfig = { ...BAR_CHART_OPTIONS }
     if (width > 700) {
       customChartConfig.plugins.legend.position = "bottom";
       customChartConfig.plugins.legend.align = "start";
