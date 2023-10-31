@@ -26,7 +26,7 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = {
   maintainAspectRatio: false,
   plugins: {
     title: {
-      display: true,
+      display: false,
       text: SESSIONS,
       align: "start",
       position: "top",
