@@ -9,6 +9,7 @@ import {
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { CHART, SESSIONS, SESSIONS_CHART } from "../constants/appConstants";
+import { externalTooltipHandler } from "../components/utils/Utils";
 
 Chart.register(
   CategoryScale,
@@ -24,16 +25,16 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
-    title: {
-      display: true,
-      text: SESSIONS,
-      align: "start",
-      position: "top",
-      font: {
-        size: CHART.TITLE_FONT_SIZE,
-      },
-      color: "#F2F2F2",
-    },
+    // title: {
+    //   display: true,
+    //   text: SESSIONS,
+    //   align: "start",
+    //   position: "top",
+    //   font: {
+    //     size: CHART.TITLE_FONT_SIZE,
+    //   },
+    //   color: "#F2F2F2",
+    // },
     legend: {
       display: true,
       position: "bottom",
@@ -58,6 +59,10 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = {
     },
     datalabels: {
       display: false,
+    },
+    tooltip: {
+      enabled: false,
+      external: (_) => externalTooltipHandler(_, "sessions"),
     },
   },
   scales: {

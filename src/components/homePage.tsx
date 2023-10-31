@@ -6,13 +6,17 @@ import OpmComparison from "../views/opmComparison";
 import { URL_OPM } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
 import { ORDERS_DURATION } from "../constants/appConstants";
+import useScreenSize from "../hooks/useScreenSize";
+import TimeTracker from "./timeTracker";
 import avg_orders_per_min from "../assets/avg_orders_per_min.svg";
 import total_no_of_orders from "../assets/total_no_of_orders.svg";
 import total_order_comp from "../assets/total_order_comp.svg";
 import avg_opm_comp from "../assets/avg_opm_comp.svg";
 import last_min_opm from "../assets/last_min_opm.svg";
 import trending_down from "../assets/trending_down.svg";
-import TimeTracker from "./timeTracker";
+import refresh_icon from "../assets/refresh_icon.svg";
+import info_icon from "../assets/info_icon.svg";
+import BarChart from "./charts/BarChart";
 
 const CardTitle = ({ title, icon }: { title: string; icon: any }) => {
   return (
@@ -95,6 +99,8 @@ const HomePage = () => {
   const [lastDaytotalOPM, setLastDayTotalOPM] = useState<number>(0);
   const [refreshTime, setRefreshTime] = useState<number>(0);
 
+  const { width } = useScreenSize();
+
   const fetchOPMData = async (url) => {
     const opmData = await fetchData(
       `${url}?period=${ORDERS_DURATION}&starttime=&channel=&promocode=&paymentType=&country=`,
@@ -150,18 +156,13 @@ const HomePage = () => {
           <span className="text-lg text-[#F2F2F2] font-bold mr-4">
             Dashboard
           </span>
-          {/* integrate icon */}
-          <span className="text-xs text-[#8B8C8F]">
-            Showing Last 60 min data
-          </span>
+          <CustomImage src={info_icon} />
+          <span className="text-xs text-[#8B8C8F] ml-2">Last 60 min data</span>
         </div>
         <div className="flex items-center font-helvetica">
-          {/* <span className="text-xs text-[#8B8C8F] mr-3">
-            Last Refreshed 2 min ago
-          </span> */}
-          {<TimeTracker timeStamp={refreshTime} />}
+          {width > 700 && <TimeTracker timeStamp={refreshTime} />}
           <button className="home-refresh-btn" onClick={handleRefreshBtnClick}>
-            Refresh
+            <CustomImage src={refresh_icon} />
           </button>
         </div>
       </div>
@@ -209,10 +210,11 @@ const HomePage = () => {
           textColor="#FFFFFF"
         />
       </div>
-      <div className="home-opm-charts flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-6 mb-6">
+      <div className="home-opm-charts flex flex-col sm:flex-row sm:space-y-0 sm:space-x-4">
         <OPM />
         <OpmComparison />
       </div>
+      <BarChart />
     </div>
   );
 };

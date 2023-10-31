@@ -1,10 +1,18 @@
 import Navbar from "../components/common/navbar";
 import type { Meta, StoryObj } from "@storybook/react";
+import { BrowserRouter as Router } from "react-router-dom";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 
 const meta = {
   title: "Stories/navbar",
   component: Navbar,
+  decorators: [
+    () => (
+      <Router>
+        <Navbar />
+      </Router>
+    ),
+  ],
   tags: ["autodocs"],
 } satisfies Meta<typeof Navbar>;
 

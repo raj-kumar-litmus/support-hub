@@ -1,9 +1,17 @@
 import SearchBar from "../components/common/searchbar";
+import { BrowserRouter as Router } from "react-router-dom";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
   title: "Stories/search-web",
   component: SearchBar,
+  decorators: [
+    () => (
+      <Router>
+        <SearchBar />
+      </Router>
+    ),
+  ],
   tags: ["autodocs"],
 } satisfies Meta<typeof SearchBar>;
 

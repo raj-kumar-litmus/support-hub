@@ -40,7 +40,8 @@ import GreyGlobeIcon from "../assets/grey_globe.svg";
 import GreyCardIcon from "../assets/grey_card.svg";
 import GreyPromoIcon from "../assets/grey_promo.svg";
 import GreyHourGlassIcon from "../assets/hourglass-grey.svg";
-import open_in_full_window from "../assets/open_in_full_window.svg";
+import PromoCodeIcon from "../assets/promocode.svg";
+import open_in_new from "../assets/open_in_new.svg";
 import { fetchData } from "../utils/fetchUtil";
 import {
   CHANNELS,
@@ -224,7 +225,7 @@ const OPM: React.FC = () => {
       type: INPUT_TYPES.text,
       name: "promocode",
       label: LABELS.promoCode,
-      imgsrc: "src/assets/promocode.svg",
+      imgsrc: PromoCodeIcon,
       cardIcon: GreyPromoIcon,
       value: "",
     },
@@ -279,6 +280,17 @@ const OPM: React.FC = () => {
     });
   }, []);
 
+  const getChartConfig = () => {
+    const customChartConfig = { ...options };
+    if (width < 700) {
+      customChartConfig.layout.padding.top = 70;
+      customChartConfig.layout.padding.bottom = 0;
+    } else {
+      customChartConfig.layout.padding.top = 100;
+    }
+    return customChartConfig;
+  };
+
   const handleOPMExpandClick = () => {
     navigate("/opm");
   };
@@ -287,7 +299,7 @@ const OPM: React.FC = () => {
     <>
       {location.pathname.includes("home") && data && (
         <div className="w-full sm:w-1/2 bg-[#22262C] p-0 bg-transparent rounded-lg">
-          <div className="flex justify-between mb-3 items-center relative top-[6vh] z-[1] ml-[2vw] mr-[1vw]">
+          <div className="flex justify-between mb-3 items-center relative top-[3vh] sm:top-[6vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
             <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
               {TITLE.OPM}
             </span>
@@ -296,14 +308,14 @@ const OPM: React.FC = () => {
                 className="rounded-full pr-2"
                 onClick={handleOPMExpandClick}
               >
-                <CustomImage src={open_in_full_window} />
+                <CustomImage src={open_in_new} />
               </button>
             </div>
           </div>
           <LineChart
             title="OPM"
             className="home-opm border-0 rounded-[10px] w-[89vw] lg:w-full lg:ml-[0] h-[380px] lg:h-[380px] lg:mt-[3vh] top-[-5vh]"
-            options={options}
+            options={getChartConfig()}
             data={data}
           />
         </div>
@@ -348,6 +360,8 @@ const OPM: React.FC = () => {
                       <CustomCalendar
                         name={form.name}
                         containerClassName="ml-[10px] md:w-[14vw]"
+                        titleClassName="top-[2vh]"
+                        imageClassName="h-[20px] w-[20px] relative top-[3vh] left-[0.5vw] z-[1]"
                         title={form.label}
                         showTime={form.showTime}
                         iconPos={form.iconPos || "left"}
@@ -409,13 +423,15 @@ const OPM: React.FC = () => {
                             imageClassName="relative left-[12px] md:left-[25px] z-[1]"
                             placeholder={form.label}
                             onChange={(event) => handleFormChange(event)}
-                            className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
+                            className="border rounded-[8px] border-solid border-slate-300 border-1 h-[40px]"
                           />
                         )}
                         {form.type === INPUT_TYPES.time && (
                           <CustomCalendar
                             name={form.name}
                             containerClassName="opmFiltersMobileCalendar"
+                            titleClassName="top-[2.2vh]"
+                            imageClassName="h-[20px] w-[20px] relative top-[3.5vh] left-[3.5vw] z-[1]"
                             title={form.label}
                             showTime={form.showTime}
                             iconPos={form.iconPos || "left"}
@@ -456,8 +472,10 @@ const OPM: React.FC = () => {
       )}
       {location.pathname.includes("opm") && (
         <div
-          className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[3vw] w-[90vw] ${
-            IS_FULLSCREEN ? "rotate-90 absolute left-[40vw] top-[45vh]" : ""
+          className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[3vw] ${
+            IS_FULLSCREEN
+              ? "landScape rotate-90 absolute left-[40vw] top-[45vh] ml-[25vw] w-[22vh]"
+              : "portrait"
           }`}
         >
           {formFields
