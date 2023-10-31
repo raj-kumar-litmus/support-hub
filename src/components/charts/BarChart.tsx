@@ -351,7 +351,7 @@ const BarChart = () => {
         )}
       </div>
 
-      <div className="flex justify-center basis-full relative px-3 py-[22px] sm:px-5 h-64 mb-4 bg-[#30343B] w-[full] h-[18rem] sm:h-[24rem] drop-shadow-md rounded-xl flex-col">
+      <div className="flex justify-center basis-full relative px-3 py-8 sm:px-5 h-64 mb-4 bg-[#30343B] w-[full] h-[22rem] sm:h-[24rem] drop-shadow-md rounded-xl flex-col">
         {isLoading ? (
           <Loader className="!p-0 m-auto" />
         ) : (
