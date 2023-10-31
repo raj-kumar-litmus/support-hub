@@ -593,8 +593,11 @@ hr.horizontalLine.opm {
 hr.horizontalLine.opmComparison {
   background: linear-gradient(to right, #6370ff, #5a9ef500);
 }
-.calendarOpmComparison span input{
+.calendarOpmComparison span input {
   @apply pl-[2.5vw];
+}
+.calendarSessions span input {
+  @apply !pl-[6.5vw] md:!pl-[2.5vw];
 }
 .opmFiltersMobileCalendar span input {
   @apply !pl-[7vw];

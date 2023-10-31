@@ -104,16 +104,16 @@ const BarChart = () => {
   }, [sessionData]);
 
   useEffect(() => {
-    let primaryDataset = {
+    const primaryDataset = {
       label: "Primary",
       data: azurePrimaryData,
       backgroundColor: "#0977FF",
-    }
-    let secondaryDataset = {
+    };
+    const secondaryDataset = {
       label: "Secondary",
       data: azureSecondaryData,
       backgroundColor: "#41E2D8",
-    }
+    };
     let chartData: ChartData = {
       labels: xAxisLabels,
     };
@@ -125,7 +125,10 @@ const BarChart = () => {
         chartData = { ...chartData, datasets: [secondaryDataset] };
         break;
       case 2:
-        chartData = { ...chartData, datasets: [primaryDataset, secondaryDataset] };
+        chartData = {
+          ...chartData,
+          datasets: [primaryDataset, secondaryDataset],
+        };
         break;
     }
     setAllData({ ...chartData });
@@ -235,7 +238,7 @@ const BarChart = () => {
   };
 
   const getChartConfig = () => {
-    const customChartConfig = { ...BAR_CHART_OPTIONS }
+    const customChartConfig = { ...BAR_CHART_OPTIONS };
     if (width > 700) {
       customChartConfig.plugins.legend.position = "bottom";
       customChartConfig.plugins.legend.align = "start";
@@ -285,6 +288,8 @@ const BarChart = () => {
                     <CustomCalendar
                       name={form.name}
                       title={form.title}
+                      containerClassName="calendarSessions"
+                      imageClassName="h-[20px] w-[20px] relative top-[2.8vh] left-[0.5vw] z-[1]"
                       // showTime={false}
                       showTime
                       timeOnly={form.name === "time"}
@@ -356,14 +361,14 @@ const BarChart = () => {
           <Loader className="!p-0 m-auto" />
         ) : (
           <>
-              <CustomTab
-                className="sessions-tabs"
-                tabData={SESSIONS_TABS}
-                tabValue={tabValue}
-                setTabValue={setTabValue}
-              />
+            <CustomTab
+              className="sessions-tabs"
+              tabData={SESSIONS_TABS}
+              tabValue={tabValue}
+              setTabValue={setTabValue}
+            />
             <Bar ref={chartRef} options={getChartConfig()} data={allData} />
-              <div className="text-center text-xs text-[#FAF9F6] -mt-[2px] sm:-mt-[28px]">
+            <div className="text-center text-xs text-[#FAF9F6] -mt-[2px] sm:-mt-[28px]">
               {TOTAL_SESSIONS_PER_MINUTE}
             </div>
           </>
@@ -393,6 +398,8 @@ const BarChart = () => {
                       name={form.name}
                       title={form.title}
                       showTime
+                      containerClassName="calendarSessions"
+                      imageClassName="h-[20px] w-[20px] relative top-[3vh] left-[0.5vw] z-[1]"
                       // timeOnly={form.name === "time"}
                       placeholder={DD_MM_YYYY}
                       value={form.value}
