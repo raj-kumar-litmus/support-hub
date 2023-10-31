@@ -41,6 +41,7 @@ import GreyCardIcon from "../assets/grey_card.svg";
 import GreyPromoIcon from "../assets/grey_promo.svg";
 import GreyHourGlassIcon from "../assets/hourglass-grey.svg";
 import open_in_full_window from "../assets/open_in_full_window.svg";
+import PromoCodeIcon from "../assets/promocode.svg";
 import { fetchData } from "../utils/fetchUtil";
 import {
   CHANNELS,
@@ -223,7 +224,7 @@ const OPM: React.FC = () => {
       type: INPUT_TYPES.text,
       name: "promocode",
       label: LABELS.promoCode,
-      imgsrc: "src/assets/promocode.svg",
+      imgsrc: PromoCodeIcon,
       cardIcon: GreyPromoIcon,
       value: "",
     },
@@ -359,6 +360,8 @@ const OPM: React.FC = () => {
                       <CustomCalendar
                         name={form.name}
                         containerClassName="ml-[10px] md:w-[14vw]"
+                        titleClassName="top-[2vh]"
+                        imageClassName="h-[20px] w-[20px] relative top-[3vh] left-[0.5vw] z-[1]"
                         title={form.label}
                         showTime={form.showTime}
                         iconPos={form.iconPos || "left"}
@@ -420,13 +423,15 @@ const OPM: React.FC = () => {
                             imageClassName="relative left-[12px] md:left-[25px] z-[1]"
                             placeholder={form.label}
                             onChange={(event) => handleFormChange(event)}
-                            className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
+                            className="border rounded-[8px] border-solid border-slate-300 border-1 h-[40px]"
                           />
                         )}
                         {form.type === INPUT_TYPES.time && (
                           <CustomCalendar
                             name={form.name}
                             containerClassName="opmFiltersMobileCalendar"
+                            titleClassName="top-[2.2vh]"
+                            imageClassName="h-[20px] w-[20px] relative top-[3.5vh] left-[3.5vw] z-[1]"
                             title={form.label}
                             showTime={form.showTime}
                             iconPos={form.iconPos || "left"}
@@ -467,8 +472,10 @@ const OPM: React.FC = () => {
       )}
       {location.pathname.includes("opm") && (
         <div
-          className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[3vw] w-[90vw] ${
-            IS_FULLSCREEN ? "rotate-90 absolute left-[40vw] top-[45vh]" : ""
+          className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[3vw] ${
+            IS_FULLSCREEN
+              ? "landScape rotate-90 absolute left-[40vw] top-[45vh] ml-[25vw] w-[22vh]"
+              : "portrait"
           }`}
         >
           {formFields
