@@ -78,7 +78,7 @@ const BarChart = () => {
     },
   ]);
   const [disabled, setDisabled] = useState(true);
-  const [tabValue, setTabValue] = useState<number>(0);
+  const [tabValue, setTabValue] = useState<number>(2);
   const { width } = useScreenSize();
   const chartRef = useRef(null);
 
