@@ -110,6 +110,7 @@ export const SESSIONS_CHART = {
   STEP_SIZE: 5000,
   TICK_COUNT: 5,
   CATEGORY_PERCENT: 0.6,
+  LEGEND_LINE_WIDTH: 2
 };
 
 export const DURATIONS = {
