@@ -39,9 +39,10 @@ import FilterIcon from "../assets/filter.svg";
 import ChannelIcon from "../assets/channel.svg";
 import SandGlassIcon from "../assets/sandglass.svg";
 import GreyHourGlassIcon from "../assets/hourglass-grey.svg";
+import open_in_new from "../assets/open_in_new.svg";
+import WhiteCalendarIcon from "../assets/white_calendar.svg";
 import GreyCalendarIcon from "../assets/calendar-grey.svg";
 import GreyChannelIcon from "../assets/channel-grey.svg";
-import open_in_new from "../assets/open_in_new.svg";
 
 import {
   OPM_COMPARISON_OPTIONS,
@@ -116,16 +117,16 @@ const OpmComparison: React.FC = () => {
       showTime: true,
       cardIcon: GreyCalendarIcon,
       value: "",
-      imgsrc: "src/assets/white_calendar.svg",
+      imgsrc: WhiteCalendarIcon,
     },
     {
       type: INPUT_TYPES.time,
       name: "endDate",
       label: LABELS.endDate,
       cardIcon: GreyCalendarIcon,
-      showTime: true,
+      showTime: false,
       value: "",
-      imgsrc: "src/assets/white_calendar.svg",
+      imgsrc: WhiteCalendarIcon,
     },
     {
       type: INPUT_TYPES.dropdown,
@@ -298,7 +299,7 @@ const OpmComparison: React.FC = () => {
     <>
       {location.pathname.includes("home") && data && (
         <div className="w-full sm:w-1/2 bg-[#22262C] p-0 bg-transparent rounded-lg flex flex-col justify-between">
-          <div className="flex justify-between mb-3 items-center relative top-[3vh] sm:top-[6vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
+          <div className="flex justify-between sm:mb-3 items-center relative top-[3vh] sm:top-[6vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
             <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
               {TITLE.OPM_COMPARISON}
             </span>
@@ -466,7 +467,7 @@ const OpmComparison: React.FC = () => {
           className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[3vw] w-[90vw] ${
             IS_FULLSCREEN
               ? "landScape opmComparison rotate-90 absolute left-[40vw] top-[45vh]"
-              : "portrait"
+              : `${width < 700 ? "portrait" : ""}`
           }`}
         >
           {formFields

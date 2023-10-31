@@ -1,8 +1,15 @@
+import { useNavigate } from "react-router";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router";
 import { Bar } from "react-chartjs-2";
+import { ChartData, SessionData } from "../../@types/BarChart";
+import ChannelIcon from "../../assets/channel.svg";
+import FilterIcon from "../../assets/filter-dark.svg";
+import SandGlassIcon from "../../assets/sandglass.svg";
+import open_in_new from "../../assets/open_in_new.svg";
+import CalendarIcon from "../../assets/white_calendar.svg";
+import { BAR_CHART_OPTIONS } from "../../config/chartConfig";
 import { URL_SESSIONS } from "../../constants/apiConstants";
 import {
   CHANNEL,
@@ -19,6 +26,7 @@ import {
   SUBMIT,
   TOTAL_SESSIONS_PER_MINUTE,
 } from "../../constants/appConstants";
+import useScreenSize from "../../hooks/useScreenSize";
 import {
   DATE_FORMAT_2,
   DATE_FORMAT_3,
@@ -31,14 +39,6 @@ import CustomCalendar from "../common/CustomCalendar";
 import CustomDropdown from "../common/CustomDropdown";
 import CustomIcon from "../common/CustomIcon";
 import CustomTab from "../common/customtab";
-import { ChartData, SessionData } from "../../@types/BarChart";
-import { BAR_CHART_OPTIONS } from "../../config/chartConfig";
-import FilterIcon from "../../assets/filter-dark.svg";
-import CalendarIcon from "../../assets/white_calendar.svg";
-import ChannelIcon from "../../assets/channel.svg";
-import SandGlassIcon from "../../assets/sandglass.svg";
-import open_in_new from "../../assets/open_in_new.svg";
-import useScreenSize from "../../hooks/useScreenSize";
 import Loader from "../loader";
 import CustomImage from "../common/customimage";
 
@@ -109,12 +109,12 @@ const BarChart = () => {
   }, [sessionData]);
 
   useEffect(() => {
-    let primaryDataset = {
+    const primaryDataset = {
       label: "Primary",
       data: azurePrimaryData,
       backgroundColor: "#0977FF",
     };
-    let secondaryDataset = {
+    const secondaryDataset = {
       label: "Secondary",
       data: azureSecondaryData,
       backgroundColor: "#41E2D8",
@@ -250,7 +250,6 @@ const BarChart = () => {
     } else {
       customChartConfig.plugins.legend.position = "top";
       customChartConfig.plugins.legend.align = "start";
-      // customChartConfig.plugins.title.padding = 0;
     }
     return customChartConfig;
   };
@@ -280,8 +279,8 @@ const BarChart = () => {
   }, []);
 
   return (
-    <div id={"bar-chart"}>
-      {location?.pathname?.includes("sessions") ? (
+    <div id={id}>
+      {location.pathname.includes("sessions") && (
         <>
           <div className="flex basis-full justify-between pb-2 items-baseline">
             <div className="text-lg text-[#F2F2F2] font-bold">{SESSIONS}</div>
@@ -307,6 +306,8 @@ const BarChart = () => {
                         <CustomCalendar
                           name={form.name}
                           title={form.title}
+                          containerClassName="calendarSessions"
+                          imageClassName="h-[20px] w-[20px] relative top-[2.8vh] left-[0.5vw] z-[1]"
                           // showTime={false}
                           showTime
                           timeOnly={form.name === "time"}
@@ -372,32 +373,32 @@ const BarChart = () => {
             )}
           </div>
         </>
-      ) : null}
+      )}
 
-      <div className="flex justify-center basis-full relative px-3 py-8 sm:px-5 h-64 mb-4 bg-[#30343B] w-[full] h-[22rem] sm:h-[24rem] drop-shadow-md rounded-xl flex-col">
+      <div className="home-sessions flex justify-center basis-full relative px-3 py-8 sm:px-5 h-64 mb-4 bg-[#22262C] w-[full] h-[22rem] sm:h-[24rem] drop-shadow-md rounded-xl flex-col">
         {isLoading ? (
           <Loader className="!p-0 m-auto" />
         ) : (
           <>
-            {location?.pathname?.includes("home") && (
-              <div className="flex flex-row">
-                <div className="text-[#F2F2F2] text-base sm:text-lg font-bold">
-                  Sessions
-                </div>
-                <div className="flex flex-row absolute right-0 top-6 mr-6 pb-4">
-                  <CustomTab
-                    className="sessions-tabs"
-                    tabData={SESSIONS_TABS}
-                    tabValue={tabValue}
-                    setTabValue={setTabValue}
-                  />
+            {location.pathname.includes("home") && (
+              <>
+                <div className="flex flex-row justify-between">
+                  <div className="text-[#F2F2F2] text-base sm:text-lg font-bold">
+                    Sessions
+                  </div>
                   <button className="ml-5 pb-[4px]" onClick={handleExpandClick}>
                     <CustomImage src={open_in_new} />
                   </button>
                 </div>
-              </div>
+                <CustomTab
+                  className="sessions-tabs sm:absolute sm:top-[1.25rem] sm:right-[4rem]"
+                  tabData={SESSIONS_TABS}
+                  tabValue={tabValue}
+                  setTabValue={setTabValue}
+                />
+              </>
             )}
-            {location?.pathname?.includes("sessions") && (
+            {location.pathname.includes("sessions") && (
               <CustomTab
                 className="sessions-tabs"
                 tabData={SESSIONS_TABS}
@@ -436,6 +437,8 @@ const BarChart = () => {
                       name={form.name}
                       title={form.title}
                       showTime
+                      containerClassName="calendarSessions"
+                      imageClassName="h-[20px] w-[20px] relative top-[3vh] left-[0.5vw] z-[1]"
                       // timeOnly={form.name === "time"}
                       placeholder={DD_MM_YYYY}
                       value={form.value}

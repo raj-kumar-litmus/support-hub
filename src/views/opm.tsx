@@ -36,6 +36,7 @@ import PaymentIcon from "../assets/payment.svg";
 import SandGlassIcon from "../assets/sandglass.svg";
 import GreyChannelIcon from "../assets/channel-grey.svg";
 import GreyCalendarIcon from "../assets/calendar-grey.svg";
+import WhiteCalendarIcon from "../assets/white_calendar.svg";
 import GreyGlobeIcon from "../assets/grey_globe.svg";
 import GreyCardIcon from "../assets/grey_card.svg";
 import GreyPromoIcon from "../assets/grey_promo.svg";
@@ -183,7 +184,7 @@ const OPM: React.FC = () => {
       value: "",
       showTime: true,
       cardIcon: GreyCalendarIcon,
-      imgsrc: "src/assets/white_calendar.svg",
+      imgsrc: WhiteCalendarIcon,
     },
     {
       type: INPUT_TYPES.dropdown,
@@ -299,7 +300,7 @@ const OPM: React.FC = () => {
     <>
       {location.pathname.includes("home") && data && (
         <div className="w-full sm:w-1/2 bg-[#22262C] p-0 bg-transparent rounded-lg">
-          <div className="flex justify-between mb-3 items-center relative top-[3vh] sm:top-[6vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
+          <div className="flex justify-between sm:mb-3 items-center relative top-[3vh] sm:top-[6vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
             <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
               {TITLE.OPM}
             </span>
@@ -475,7 +476,7 @@ const OPM: React.FC = () => {
           className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[3vw] ${
             IS_FULLSCREEN
               ? "landScape rotate-90 absolute left-[40vw] top-[45vh] ml-[25vw] w-[22vh]"
-              : "portrait"
+              : `${width < 700 ? "portrait" : ""}`
           }`}
         >
           {formFields

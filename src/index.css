@@ -62,6 +62,10 @@
   @apply m-0 p-5 sm:p-10 sm:pt-7 bg-[#1C1C20];
 }
 
+.home-sessions {
+  @apply pt-[3rem] pb-[4rem] sm:py-8;
+}
+
 #bar-chart .p-button,
 .p-dialog .p-button {
   @apply bg-[#30343B] border-[#898A8D] text-[#898A8D];
@@ -260,7 +264,7 @@ button.p-button-secondary {
   @apply w-[90vh] relative top-[50vh] left-[-13vw];
 }
 .landScape.opmComparison {
-  @apply top-[65vh]
+  @apply top-[65vh];
 }
 .landScape .filteredCard .p-button.p-component {
   @apply w-[12vh];
@@ -597,8 +601,11 @@ hr.horizontalLine.opm {
 hr.horizontalLine.opmComparison {
   background: linear-gradient(to right, #6370ff, #5a9ef500);
 }
-.calendarOpmComparison span input{
+.calendarOpmComparison span input {
   @apply pl-[2.5vw];
+}
+.calendarSessions span input {
+  @apply !pl-[6.5vw] md:!pl-[2.5vw];
 }
 .opmFiltersMobileCalendar span input {
   @apply !pl-[7vw];
@@ -748,6 +755,44 @@ hr.horizontalLine.opmComparison {
   .p-tabview-nav-link {
   @apply bg-[#292E36] text-[#8B8C8F];
 }
-.sessions-tabs.p-accordion .p-accordion-header .p-accordion-header-link, .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+.sessions-tabs.p-accordion .p-accordion-header .p-accordion-header-link,
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  @apply transition-none border-none py-0;
+}
+.sessions-tabs.p-tabview .p-tabview-panels {
+  @apply hidden;
+}
+.sessions-tabs.p-tabview {
+  @apply w-[245px] h-[36px] self-end;
+}
+.sessions-tabs.p-tabview .p-tabview-nav {
+  @apply border-none h-[32px] bg-[#292E36];
+}
+.sessions-tabs.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  @apply bg-[#292E36] text-[#8B8C8F] h-[30px] rounded-none border-none text-[12px] font-medium;
+}
+.sessions-tabs .p-tabview-nav-content {
+  @apply rounded-[8px];
+}
+.sessions-tabs.p-tabview .p-tabview-nav li {
+  @apply bg-[#292E36];
+}
+.sessions-tabs.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  @apply bg-[#F2F2F2] text-[#22262C] rounded-[8px] text-[12px] font-medium;
+}
+.sessions-tabs.p-tabview
+  .p-tabview-nav
+  li
+  .p-tabview-nav-link:not(.p-disabled):focus {
+  @apply shadow-none;
+}
+.sessions-tabs.p-tabview
+  .p-tabview-nav
+  li:not(.p-highlight):not(.p-disabled):hover
+  .p-tabview-nav-link {
+  @apply bg-[#292E36] text-[#8B8C8F];
+}
+.sessions-tabs.p-accordion .p-accordion-header .p-accordion-header-link,
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
   @apply transition-none border-none py-0;
 }
