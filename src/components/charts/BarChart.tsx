@@ -112,7 +112,7 @@ const BarChart = () => {
         {
           label: "Secondary",
           data: azureSecondaryData,
-          backgroundColor: "#5BB1FE",
+          backgroundColor: "#41E2D8",
         },
       ],
     };
