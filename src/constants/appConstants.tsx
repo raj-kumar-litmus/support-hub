@@ -303,15 +303,15 @@ export const OPM_COMPARISON_OPTIONS = ({
             text:
               index === 0
                 ? startDate?.toLocaleString("en-US", {
-                    year: "numeric",
-                    month: "2-digit",
-                    day: "2-digit",
-                  })
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                })
                 : endDate?.toLocaleString("en-US", {
-                    year: "numeric",
-                    month: "2-digit",
-                    day: "2-digit",
-                  }),
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                }),
             fillStyle: "transparent",
             lineWidth: 2,
             fontColor: index === 0 ? "#6370FF" : "#FDA44F",
@@ -361,3 +361,4 @@ export const OPM_COMPARISON_OPTIONS_HOME = ({
 };
 
 export const ORDER_STATUS: string = "Order Status";
+export const SESSIONS_TABS = [{ header: PRIMARY }, { header: SECONDARY }, { header: BOTH }]
