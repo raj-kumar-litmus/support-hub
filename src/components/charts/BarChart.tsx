@@ -1,14 +1,14 @@
+import { Button } from "primereact/button";
+import { Dialog } from "primereact/dialog";
 import React, { useEffect, useRef, useState } from "react";
 import { Bar } from "react-chartjs-2";
-import { Dialog } from "primereact/dialog";
-import { fetchData } from "../../utils/fetchUtil";
+import { ChartData, SessionData } from "../../@types/BarChart";
+import ChannelIcon from "../../assets/channel.svg";
+import FilterIcon from "../../assets/filter-dark.svg";
+import SandGlassIcon from "../../assets/sandglass.svg";
+import CalendarIcon from "../../assets/white_calendar.svg";
+import { BAR_CHART_OPTIONS } from "../../config/chartConfig";
 import { URL_SESSIONS } from "../../constants/apiConstants";
-import {
-  DATE_FORMAT_2,
-  DATE_FORMAT_3,
-  formatDate,
-  getLocaleTime,
-} from "../../utils/dateTimeUtil";
 import {
   CHANNEL,
   CHANNEL_LIST,
@@ -20,21 +20,23 @@ import {
   FILTERS,
   RESET,
   SESSIONS,
+  SESSIONS_TABS,
   SUBMIT,
   TOTAL_SESSIONS_PER_MINUTE,
 } from "../../constants/appConstants";
-import { Button } from "primereact/button";
+import useScreenSize from "../../hooks/useScreenSize";
+import {
+  DATE_FORMAT_2,
+  DATE_FORMAT_3,
+  formatDate,
+  getLocaleTime,
+} from "../../utils/dateTimeUtil";
+import { fetchData } from "../../utils/fetchUtil";
+import FilteredCard from "../FilteredCard";
 import CustomCalendar from "../common/CustomCalendar";
 import CustomDropdown from "../common/CustomDropdown";
 import CustomIcon from "../common/CustomIcon";
-import { ChartData, SessionData } from "../../@types/BarChart";
-import { BAR_CHART_OPTIONS } from "../../config/chartConfig";
-import FilterIcon from "../../assets/filter-dark.svg";
-import CalendarIcon from "../../assets/white_calendar.svg";
-import ChannelIcon from "../../assets/channel.svg";
-import SandGlassIcon from "../../assets/sandglass.svg";
-import FilteredCard from "../FilteredCard";
-import useScreenSize from "../../hooks/useScreenSize";
+import CustomTab from "../common/customtab";
 import Loader from "../loader";
 
 const BarChart = () => {
@@ -76,6 +78,7 @@ const BarChart = () => {
     },
   ]);
   const [disabled, setDisabled] = useState(true);
+  const [tabValue, setTabValue] = useState<number>(2);
   const { width } = useScreenSize();
   const chartRef = useRef(null);
 
@@ -101,23 +104,32 @@ const BarChart = () => {
   }, [sessionData]);
 
   useEffect(() => {
-    const chartData: ChartData = {
+    let primaryDataset = {
+      label: "Primary",
+      data: azurePrimaryData,
+      backgroundColor: "#0977FF",
+    }
+    let secondaryDataset = {
+      label: "Secondary",
+      data: azureSecondaryData,
+      backgroundColor: "#41E2D8",
+    }
+    let chartData: ChartData = {
       labels: xAxisLabels,
-      datasets: [
-        {
-          label: "Primary",
-          data: azurePrimaryData,
-          backgroundColor: "#0977FF",
-        },
-        {
-          label: "Secondary",
-          data: azureSecondaryData,
-          backgroundColor: "#5BB1FE",
-        },
-      ],
     };
+    switch (tabValue) {
+      case 0:
+        chartData = { ...chartData, datasets: [primaryDataset] };
+        break;
+      case 1:
+        chartData = { ...chartData, datasets: [secondaryDataset] };
+        break;
+      case 2:
+        chartData = { ...chartData, datasets: [primaryDataset, secondaryDataset] };
+        break;
+    }
     setAllData({ ...chartData });
-  }, [xAxisLabels]);
+  }, [xAxisLabels, tabValue]);
 
   useEffect(() => {
     setDisabled(formFields.map((e) => e.value).filter(Boolean).length === 0);
@@ -223,7 +235,7 @@ const BarChart = () => {
   };
 
   const getChartConfig = () => {
-    const customChartConfig = JSON.parse(JSON.stringify(BAR_CHART_OPTIONS));
+    const customChartConfig = { ...BAR_CHART_OPTIONS }
     if (width > 700) {
       customChartConfig.plugins.legend.position = "bottom";
       customChartConfig.plugins.legend.align = "start";
@@ -339,13 +351,19 @@ const BarChart = () => {
         )}
       </div>
 
-      <div className="flex justify-center basis-full relative px-3 py-5 sm:px-5 h-64 mb-4 bg-[#30343B] w-[full] h-[18rem] sm:h-[24rem] drop-shadow-md rounded-xl">
+      <div className="flex justify-center basis-full relative px-3 py-8 sm:px-5 h-64 mb-4 bg-[#30343B] w-[full] h-[22rem] sm:h-[24rem] drop-shadow-md rounded-xl flex-col">
         {isLoading ? (
           <Loader className="!p-0 m-auto" />
         ) : (
           <>
+              <CustomTab
+                className="sessions-tabs"
+                tabData={SESSIONS_TABS}
+                tabValue={tabValue}
+                setTabValue={setTabValue}
+              />
             <Bar ref={chartRef} options={getChartConfig()} data={allData} />
-            <div className="absolute bottom-1 sm:bottom-7 text-center w-auto text-xs text-[#FAF9F6]">
+              <div className="text-center text-xs text-[#FAF9F6] -mt-[2px] sm:-mt-[28px]">
               {TOTAL_SESSIONS_PER_MINUTE}
             </div>
           </>
