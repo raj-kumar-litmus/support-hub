@@ -252,6 +252,21 @@ button.p-button-secondary {
 .p-calendar .p-datepicker-trigger:hover {
   @apply !border-transparent bg-transparent text-[#757575];
 }
+.landScape {
+  @apply w-[90vh] relative top-[50vh] left-[-13vw];
+}
+.landScape.OpmComparison {
+  @apply top-[65vh]
+}
+.landScape .filteredCard .p-button.p-component {
+  @apply w-[12vh];
+}
+.landScape.OpmComparison .filteredCard .p-button.p-component {
+  @apply w-[15vh];
+}
+.portrait .filteredCard .p-button.p-component {
+  @apply w-[40vw];
+}
 .filteredCard .p-button.p-component {
   @apply !bg-[#F4F4F400] !border-[#22262C] border rounded-[100px] text-[#8B8C8F] px-2 py-4 flex justify-evenly items-center;
 }
@@ -577,6 +592,12 @@ hr.horizontalLine.opm {
 }
 hr.horizontalLine.opmComparison {
   background: linear-gradient(to right, #6370ff, #5a9ef500);
+}
+.calendarOpmComparison span input{
+  @apply pl-[2.5vw];
+}
+.opmFiltersMobileCalendar span input {
+  @apply !pl-[7vw];
 }
 
 /* Order Details */

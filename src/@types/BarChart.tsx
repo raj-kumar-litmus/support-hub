@@ -25,6 +25,8 @@ export interface CustomCalendarProps {
   placeholder?: string;
   name?: string;
   timeOnly?: boolean;
+  imageClassName?: string;
+  titleClassName?: string;
   showTime?: boolean;
   hideOnDateTimeSelect?: boolean;
   hourFormat?: "24" | "12";

@@ -38,6 +38,9 @@ import ArrowDownIcon from "../assets/arrown_down_white.svg";
 import FilterIcon from "../assets/filter.svg";
 import ChannelIcon from "../assets/channel.svg";
 import SandGlassIcon from "../assets/sandglass.svg";
+import GreyHourGlassIcon from "../assets/hourglass-grey.svg";
+import GreyCalendarIcon from "../assets/calendar-grey.svg";
+import GreyChannelIcon from "../assets/channel-grey.svg";
 import open_in_full_window from "../assets/open_in_full_window.svg";
 
 import {
@@ -98,6 +101,7 @@ const OpmComparison: React.FC = () => {
       name: "period",
       label: LABELS.duration,
       icon: SandGlassIcon,
+      cardIcon: GreyHourGlassIcon,
       value: "",
       options: Object.keys(DURATIONS).map((e) => ({
         name: e,
@@ -109,6 +113,7 @@ const OpmComparison: React.FC = () => {
       name: "startDate",
       label: LABELS.startDate,
       showTime: true,
+      cardIcon: GreyCalendarIcon,
       value: "",
       imgsrc: "src/assets/white_calendar.svg",
     },
@@ -116,6 +121,7 @@ const OpmComparison: React.FC = () => {
       type: INPUT_TYPES.time,
       name: "endDate",
       label: LABELS.endDate,
+      cardIcon: GreyCalendarIcon,
       showTime: true,
       value: "",
       imgsrc: "src/assets/white_calendar.svg",
@@ -125,6 +131,7 @@ const OpmComparison: React.FC = () => {
       name: "channel",
       label: LABELS.channel,
       icon: ChannelIcon,
+      cardIcon: GreyChannelIcon,
       value: "",
       options: Object.keys(CHANNELS).map((e) => ({
         name: e,
@@ -335,7 +342,9 @@ const OpmComparison: React.FC = () => {
                     {form.type === "time" && (
                       <CustomCalendar
                         name={form.name}
-                        containerClassName="ml-[10px]"
+                        containerClassName="calendarOpmComparison"
+                        titleClassName="top-[2vh]"
+                        imageClassName="h-[20px] w-[20px] relative top-[3vh] left-[0.5vw] z-[1]"
                         title={form.label}
                         showTime={form.showTime}
                         iconPos={form.iconPos || "left"}
@@ -400,6 +409,8 @@ const OpmComparison: React.FC = () => {
                           <CustomCalendar
                             name={form.name}
                             containerClassName="opmFiltersMobileCalendar"
+                            imageClassName="h-[20px] w-[20px] relative top-[3.5vh] left-[3.5vw] z-[1]"
+                            titleClassName="top-[2.2vh]"
                             title={form.label}
                             showTime={form.showTime}
                             iconPos={form.iconPos || "left"}
@@ -441,7 +452,9 @@ const OpmComparison: React.FC = () => {
       {location.pathname.includes("opmcomparison") && (
         <div
           className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[3vw] w-[90vw] ${
-            IS_FULLSCREEN ? "rotate-90 absolute left-[40vw] top-[45vh]" : ""
+            IS_FULLSCREEN
+              ? "landScape OpmComparison rotate-90 absolute left-[40vw] top-[45vh]"
+              : "portrait"
           }`}
         >
           {formFields
