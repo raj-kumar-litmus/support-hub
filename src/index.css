@@ -255,13 +255,13 @@ button.p-button-secondary {
 .landScape {
   @apply w-[90vh] relative top-[50vh] left-[-13vw];
 }
-.landScape.OpmComparison {
+.landScape.opmComparison {
   @apply top-[65vh]
 }
 .landScape .filteredCard .p-button.p-component {
   @apply w-[12vh];
 }
-.landScape.OpmComparison .filteredCard .p-button.p-component {
+.landScape.opmComparison .filteredCard .p-button.p-component {
   @apply w-[15vh];
 }
 .portrait .filteredCard .p-button.p-component {

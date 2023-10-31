@@ -453,7 +453,7 @@ const OpmComparison: React.FC = () => {
         <div
           className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[3vw] w-[90vw] ${
             IS_FULLSCREEN
-              ? "landScape OpmComparison rotate-90 absolute left-[40vw] top-[45vh]"
+              ? "landScape opmComparison rotate-90 absolute left-[40vw] top-[45vh]"
               : "portrait"
           }`}
         >
