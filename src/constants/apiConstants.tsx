@@ -8,3 +8,5 @@ export const URL_PROMOTIONS: string =
   "/supportdashboard/v1/orders/:orderId/promo";
 export const URL_OMS_ORDER_FLOW: string = "/orderflowApp/oms/orderflow/order";
 export const URL_OPM: string = "/supportdashboard/opm";
+export const URL_OPM_COMPARISON: string = "/supportdashboard/compareOPM";
+

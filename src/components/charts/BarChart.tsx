@@ -1,51 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import { Dialog } from "primereact/dialog";
 import { fetchData } from "../../utils/fetchUtil";
 import { URL_SESSIONS } from "../../constants/apiConstants";
 import {
-  DATE_FORMAT_1,
   DATE_FORMAT_2,
   DATE_FORMAT_3,
-  convertTo12HourFormat,
   formatDate,
-  formatTime,
+  getLocaleTime,
 } from "../../utils/dateTimeUtil";
-// import Loader from "../Loader";
 import {
   CHANNEL,
   CHANNEL_LIST,
   DATE,
   DD_MM_YYYY,
+  DEFAULT_PERIOD,
   DURATION,
   DURATION_LIST,
   FILTERS,
-  FROM,
-  HH_MM,
-  PRIMARY,
   RESET,
-  SECONDARY,
-  SELECT_CHANNEL,
-  SELECT_DURATION,
   SESSIONS,
   SUBMIT,
-  TIME,
-  TOTAL_SESSIONS_PER_MIN_PRIMARY,
-  TOTAL_SESSIONS_PER_MIN_SECONDARY,
+  TOTAL_SESSIONS_PER_MINUTE,
 } from "../../constants/appConstants";
 import { Button } from "primereact/button";
 import CustomCalendar from "../common/CustomCalendar";
 import CustomDropdown from "../common/CustomDropdown";
-import FilterItem from "../common/FilterItem";
 import CustomIcon from "../common/CustomIcon";
 import { ChartData, SessionData } from "../../@types/BarChart";
 import { BAR_CHART_OPTIONS } from "../../config/chartConfig";
-// import { sessionDataJSON } from "../../sampleJSON/sessions";
-import FilterIcon from "../../assets/filter.svg";
-import SandGlassIcon from "../../assets/hourglass.svg";
-import ClockIcon from "../../assets/clock.svg";
-import CalendarIcon from "../../assets/calendar.svg";
+import FilterIcon from "../../assets/filter-dark.svg";
+import CalendarIcon from "../../assets/white_calendar.svg";
 import ChannelIcon from "../../assets/channel.svg";
+import SandGlassIcon from "../../assets/sandglass.svg";
+import FilteredCard from "../FilteredCard";
+import useScreenSize from "../../hooks/useScreenSize";
+import Loader from "../loader";
 
 const BarChart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -53,21 +43,41 @@ const BarChart = () => {
   const [xAxisLabels, setXAxisLabels] = useState<string[]>([]);
   const [azurePrimaryData, setAzurePrimaryData] = useState<number[]>([]);
   const [azureSecondaryData, setAzureSecondaryData] = useState<number[]>([]);
-  const [primaryData, setPrimaryData] = useState<ChartData>({
+  const [allData, setAllData] = useState<ChartData>({
     labels: [],
     datasets: [],
   });
-  const [secondaryData, setSecondaryData] = useState<ChartData>({
-    labels: [],
-    datasets: [],
-  });
-  const [duration, setDuration] = useState<number>(5);
-  const [startTime, setStartTime] = useState<string>(null);
-  const [startDate, setStartDate] = useState<string>(null);
-  const [startDateTime, setStartDateTime] = useState<string>("");
-  const [channel, setChannel] = useState<string>("all");
   const [showFilterPopup, setShowFilterPopup] = useState<boolean>(false);
+  const [showFilters, setShowFilters] = useState<boolean>(true);
   const [submitCounter, setSubmitCounter] = useState<number>(0);
+  const [formFields, setFormFields] = useState([
+    {
+      type: "dropdown",
+      name: "period",
+      title: DURATION,
+      value: "",
+      iconSrc: SandGlassIcon,
+      options: DURATION_LIST,
+    },
+    {
+      type: "calendar",
+      name: "date",
+      title: DATE,
+      value: "",
+      imgsrc: CalendarIcon,
+    },
+    {
+      type: "dropdown",
+      name: "channel",
+      title: CHANNEL,
+      value: "",
+      iconSrc: ChannelIcon,
+      options: CHANNEL_LIST,
+    },
+  ]);
+  const [disabled, setDisabled] = useState(true);
+  const { width } = useScreenSize();
+  const chartRef = useRef(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -95,82 +105,84 @@ const BarChart = () => {
       labels: xAxisLabels,
       datasets: [
         {
-          label: "Azure Primary",
+          label: "Primary",
           data: azurePrimaryData,
-          backgroundColor: "#757575",
+          backgroundColor: "#0977FF",
+        },
+        {
+          label: "Secondary",
+          data: azureSecondaryData,
+          backgroundColor: "#5BB1FE",
         },
       ],
     };
-    setPrimaryData({ ...chartData });
-  }, [xAxisLabels, azurePrimaryData]);
+    setAllData({ ...chartData });
+  }, [xAxisLabels]);
 
   useEffect(() => {
-    const chartData: ChartData = {
-      labels: xAxisLabels,
-      datasets: [
-        {
-          label: "Azure Secondary",
-          data: azureSecondaryData,
-          backgroundColor: "#BABABA",
-        },
-      ],
-    };
-    setSecondaryData({ ...chartData });
-  }, [xAxisLabels, azureSecondaryData]);
+    setDisabled(formFields.map((e) => e.value).filter(Boolean).length === 0);
+  }, [formFields]);
 
   const getSessionData = async () => {
     const params = {
-      period: duration,
-      starttime: startDateTime,
-      channel: channel,
+      period: DEFAULT_PERIOD,
+      starttime: "",
+      channel: "",
     };
+    if (!disabled) {
+      let dateString: string = "";
+      let timeString: string = "";
+      formFields.forEach((e: any) => {
+        if (e.value) {
+          switch (e.name) {
+            case "period":
+            case "channel":
+              params[e.name] = e.value;
+              break;
+            case "date":
+              dateString = formatDate(e.value, DATE_FORMAT_2);
+              break;
+            case "time":
+              timeString = getLocaleTime(e.value, false);
+              break;
+            default:
+              break;
+          }
+        }
+      });
+      let startTimeStr: string = "";
+      if (dateString === "" && timeString === "") {
+        startTimeStr = "";
+      } else {
+        if (dateString === "")
+          dateString = formatDate(new Date(), DATE_FORMAT_2);
+        if (timeString === "") timeString = getLocaleTime(new Date(), false);
+        startTimeStr = `${dateString}T${timeString}`;
+      }
+      params["starttime"] = startTimeStr;
+    }
     const data = await fetchData(URL_SESSIONS, params);
-    setIsLoading(false);
     setSessionData(data || []);
-    // setSessionData(sessionDataJSON);
+    setIsLoading(false);
   };
 
-  const changeStartTime = (value: string) => {
-    const formattedTime = formatTime(value);
-    setStartTime(value);
-    let defaultDate: string = "";
-    defaultDate = startDate
-      ? formatDate(startDate, DATE_FORMAT_2)
-      : `${new Date().toISOString().split("T")[0]}`;
-    setStartDateTime(`${defaultDate}T${formattedTime}`);
+  const handleFormChange = (event) => {
+    const data = [...formFields];
+    const val = event.target.name || event.value.name;
+    if (val === "date" || val === "time") {
+      const dataItem = data.find((e) => e.name === val);
+      dataItem.value = event.value;
+    } else {
+      const dataItem = data.find((e) => e.name === val);
+      dataItem.value = event.target.value;
+    }
+    setFormFields(data);
   };
 
-  const changeStartDate = (value: string) => {
-    setStartDate(value);
-    const selectedDate = new Date(value);
-    let defaultTime: string = "";
-    defaultTime = formatTime(startTime ? startTime : new Date());
-    setStartDateTime(
-      `${formatDate(selectedDate, DATE_FORMAT_2)}T${defaultTime}`,
-    );
-  };
-
-  const getChartConfig = (type: string) => {
-    const chartOptions = JSON.parse(JSON.stringify(BAR_CHART_OPTIONS));
-    chartOptions.plugins.title.text =
-      type === PRIMARY
-        ? `${TOTAL_SESSIONS_PER_MIN_PRIMARY}`
-        : `${TOTAL_SESSIONS_PER_MIN_SECONDARY}`;
-    chartOptions.plugins.datalabels.rotation = duration > 15 ? 270 : 0;
-    return chartOptions;
-  };
-
-  const showFilteredChannel = () => {
-    const filterApplied = CHANNEL_LIST.find((item) => item.value === channel);
-    return filterApplied ? filterApplied.label : "all";
-  };
-
-  const resetFilters = () => {
-    setStartDate("");
-    setStartTime("");
-    setDuration(5);
-    setChannel("all");
-    setSubmitCounter(0);
+  const removeFormEntry = (event) => {
+    const data = [...formFields];
+    data.find((e) => e.name === event.target.id).value = null;
+    setFormFields(data);
   };
 
   const incrementCounter = () => {
@@ -180,13 +192,47 @@ const BarChart = () => {
   const onSubmit = () => {
     incrementCounter();
     if (showFilterPopup) {
-      onHide(true);
+      onHide();
     }
   };
 
-  const onHide = (submitClicked: boolean) => {
-    if (!submitClicked) resetFilters();
+  const onHide = () => {
     setShowFilterPopup(false);
+  };
+
+  const clearAllHandler = () => {
+    const data = [...formFields];
+    data.forEach((e) => (e.value = ""));
+    setFormFields(data);
+  };
+
+  const getFilterCardContent = (e) => {
+    if (e.type === "calendar") {
+      return e.name === "time"
+        ? getLocaleTime(e.value, true)
+        : e.value.toLocaleDateString("en-US");
+    } else {
+      return e.options.find((option) => option.value === e.value).label;
+    }
+  };
+
+  const toggleFilterVisibility = () => {
+    width > 700
+      ? setShowFilters(!showFilters)
+      : setShowFilterPopup(!showFilterPopup);
+  };
+
+  const getChartConfig = () => {
+    const customChartConfig = JSON.parse(JSON.stringify(BAR_CHART_OPTIONS));
+    if (width > 700) {
+      customChartConfig.plugins.legend.position = "bottom";
+      customChartConfig.plugins.legend.align = "start";
+    } else {
+      customChartConfig.plugins.legend.position = "top";
+      customChartConfig.plugins.legend.align = "start";
+      customChartConfig.plugins.title.padding = 0;
+    }
+    return customChartConfig;
   };
 
   const renderFooter = () => {
@@ -202,127 +248,107 @@ const BarChart = () => {
   };
 
   return (
-    <div id="bar-chart" className="m-0 p-5">
-      <div className="flex basis-full justify-between pb-4 items-baseline">
-        <div className="text-base text-gray-600 font-bold">{SESSIONS}</div>
+    <div id="bar-chart" className="m-0 p-5 sm:p-10 sm:pt-7 bg-[#1C1C20]">
+      <div className="flex basis-full justify-between pb-2 items-baseline">
+        <div className="text-lg text-[#F2F2F2] font-bold">{SESSIONS}</div>
         <div
-          onClick={() => setShowFilterPopup(true)}
-          className="flex sm:hidden rounded-full border border-solid border-slate-300 p-2"
+          className="cursor-pointer"
+          onClick={() => toggleFilterVisibility()}
         >
           <CustomIcon
             alt="show-filters"
             src={FilterIcon}
-            width="16px"
-            height="16px"
+            width="2rem"
+            height="2rem"
           />
         </div>
       </div>
-      <div className="basis-full justify-between pb-4 items-center hidden sm:flex">
-        <div className="flex justify-start pb-4 items-baseline">
-          <div className="flex-col mr-4">
-            <CustomDropdown
-              title={DURATION}
-              value={duration}
-              onChange={setDuration}
-              options={DURATION_LIST}
-              optionLabel={"label"}
-              placeholder={SELECT_DURATION}
-              showIcon={true}
-              iconSrc={SandGlassIcon}
-              iconAlt={"duration-icon"}
-            />
+      {showFilters && (
+        <div className="basis-full justify-between pb-0 items-center hidden sm:flex">
+          <div className="flex justify-start pb-4 items-end">
+            {formFields.map((form, index) => {
+              return (
+                <div className="flex-col mr-4" key={index}>
+                  {form.type === "calendar" && (
+                    <CustomCalendar
+                      name={form.name}
+                      title={form.title}
+                      // showTime={false}
+                      showTime
+                      timeOnly={form.name === "time"}
+                      placeholder={DD_MM_YYYY}
+                      value={form.value}
+                      onChange={(event) => handleFormChange(event)}
+                      maxDate={form.name === "date" ? new Date() : null}
+                      dateFormat={DATE_FORMAT_3}
+                      iconPos={"left"}
+                      imgalt={`${form.name}-icon`}
+                      imgsrc={form.imgsrc}
+                      className="w-[190px]"
+                    />
+                  )}
+                  {form.type === "dropdown" && (
+                    <CustomDropdown
+                      name={form.name}
+                      title={form.title}
+                      value={form.value}
+                      onChange={(event) => handleFormChange(event)}
+                      options={form.options}
+                      optionLabel={"label"}
+                      placeholder={""}
+                      showIcon={true}
+                      iconSrc={form.iconSrc}
+                      iconAlt={`${form.name}-icon`}
+                    />
+                  )}
+                </div>
+              );
+            })}
           </div>
-          <div className="flex-col mr-4">
-            <CustomCalendar
-              title={TIME}
-              placeholder={HH_MM}
-              value={startTime}
-              onChange={changeStartTime}
-              timeOnly
-              iconPos={"left"}
-              imgalt="time-icon"
-              imgsrc={ClockIcon}
-            />
-          </div>
-          <div className="flex-col mr-4">
-            <CustomCalendar
-              title={DATE}
-              placeholder={DD_MM_YYYY}
-              value={startDate}
-              onChange={changeStartDate}
-              maxDate={new Date()}
-              dateFormat={DATE_FORMAT_3}
-              iconPos={"left"}
-              imgalt="date-icon"
-              imgsrc={CalendarIcon}
-            />
-          </div>
-          <div className="flex-col mr-4">
-            <CustomDropdown
-              title={CHANNEL}
-              value={channel}
-              onChange={setChannel}
-              options={CHANNEL_LIST}
-              optionLabel={"label"}
-              placeholder={SELECT_CHANNEL}
-              showIcon={true}
-              iconSrc={ChannelIcon}
-              iconAlt={"channel-icon"}
-            />
-          </div>
-        </div>
-        <div className="">
           <Button
+            disabled={disabled}
             label={SUBMIT}
             id="page-btn-submit"
-            className="p-button-rounded"
+            className="p-button-rounded min-w-[118px]"
             onClick={incrementCounter}
           />
         </div>
+      )}
+
+      <div className="flex gap-2 justify-start flex-wrap pb-6 items-center">
+        {formFields
+          .filter((e) => e.value)
+          .map((e: any) => (
+            <React.Fragment key={e.name}>
+              <FilteredCard
+                label={e.name}
+                leftIcon={e.iconSrc || e.imgsrc}
+                onClickHandler={removeFormEntry}
+                content={getFilterCardContent(e)}
+              />
+            </React.Fragment>
+          ))}
+
+        {!disabled && (
+          <div
+            onClick={clearAllHandler}
+            className="text-[#FAF9F6] font-normal text-xs ml-2 cursor-pointer"
+          >
+            {RESET}
+          </div>
+        )}
       </div>
 
-      <div className="flex basis-full flex-wrap text-xl justify-start pb-4 items-baseline">
-        <FilterItem
-          src={SandGlassIcon}
-          value={`00:${duration.toString().padStart(2, "0")}`}
-        />
-        {!!startTime && (
-          <FilterItem
-            src={ClockIcon}
-            value={convertTo12HourFormat(startTime)}
-          />
-        )}
-        {!!startDate && (
-          <FilterItem
-            src={CalendarIcon}
-            value={formatDate(startDate, DATE_FORMAT_1)}
-          />
-        )}
-        {!!channel && (
-          <FilterItem src={ChannelIcon} value={showFilteredChannel()} />
-        )}
-        <div
-          onClick={resetFilters}
-          className="text-gray-500 font-normal text-sm cursor-pointer font-semibold"
-        >
-          {RESET}
-        </div>
-      </div>
-
-      <div className="flex basis-full p-5 h-64 mb-4 bg-gray-100 drop-shadow-md rounded-xl">
+      <div className="flex justify-center basis-full relative px-3 py-5 sm:px-5 h-64 mb-4 bg-[#30343B] w-[full] h-[18rem] sm:h-[24rem] drop-shadow-md rounded-xl">
         {isLoading ? (
-          <div>Loading</div>
+          <Loader className="!p-0 m-auto" />
         ) : (
-          // <Loader />
-          <Bar options={getChartConfig(PRIMARY)} data={primaryData} />
-        )}
-      </div>
-      <div className="flex basis-full p-5 h-64 mb-4 bg-gray-100 drop-shadow-md rounded-xl">
-        {isLoading ? (
-          <div>Loading</div>
-        ) : (
-          // <Loader />
-          <Bar options={getChartConfig(SECONDARY)} data={secondaryData} />
+          <>
+            <Bar ref={chartRef} options={getChartConfig()} data={allData} />
+            <div className="absolute bottom-1 sm:bottom-7 text-center w-auto text-xs text-[#FAF9F6]">
+              {TOTAL_SESSIONS_PER_MINUTE}
+            </div>
+          </>
         )}
       </div>
 
@@ -331,7 +357,7 @@ const BarChart = () => {
         header={FILTERS}
         visible={showFilterPopup}
         footer={renderFooter()}
-        onHide={() => onHide(false)}
+        onHide={onHide}
         blockScroll={true}
         position="bottom"
         draggable={false}
@@ -339,56 +365,53 @@ const BarChart = () => {
         style={{ width: "100vw", margin: 0 }}
       >
         <div className="filter-popup-content">
-          <div className="flex mb-8">
-            <div className="flex-col mr-4 w-3/6">
-              <CustomCalendar
-                title={FROM}
-                placeholder={DD_MM_YYYY}
-                value={startDate}
-                onChange={changeStartDate}
-                maxDate={new Date()}
-                dateFormat={DATE_FORMAT_3}
-                iconPos={"left"}
-                imgalt="date-icon"
-                imgsrc={CalendarIcon}
-              />
-            </div>
-            <div className="flex-col mr-4 w-3/6">
-              <CustomCalendar
-                title={TIME}
-                placeholder={HH_MM}
-                value={startTime}
-                onChange={changeStartTime}
-                timeOnly
-                iconPos={"left"}
-                imgalt="time-icon"
-                imgsrc={ClockIcon}
-              />
-            </div>
+          <div className="flex gap-4 mb-4 w-full">
+            {formFields
+              .filter((item) => item.type === "calendar")
+              .map((form, index) => {
+                return (
+                  <div className="flex-col w-full" key={index}>
+                    <CustomCalendar
+                      name={form.name}
+                      title={form.title}
+                      showTime
+                      // timeOnly={form.name === "time"}
+                      placeholder={DD_MM_YYYY}
+                      value={form.value}
+                      onChange={(event) => handleFormChange(event)}
+                      maxDate={form.name === "date" ? new Date() : null}
+                      dateFormat={DATE_FORMAT_3}
+                      iconPos={"left"}
+                      imgalt={`${form.name}-icon`}
+                      imgsrc={form.imgsrc}
+                      className="w-full"
+                    />
+                  </div>
+                );
+              })}
           </div>
-          <div className="flex mb-8">
-            <div className="flex-col mr-4 w-3/6">
-              <CustomDropdown
-                title={DURATION}
-                value={duration}
-                onChange={setDuration}
-                options={DURATION_LIST}
-                optionLabel={"label"}
-                placeholder={SELECT_DURATION}
-                showIcon={false}
-              />
-            </div>
-            <div className="flex-col mr-4 w-3/6">
-              <CustomDropdown
-                title={CHANNEL}
-                value={channel}
-                onChange={setChannel}
-                options={CHANNEL_LIST}
-                optionLabel={"label"}
-                placeholder={SELECT_CHANNEL}
-                showIcon={false}
-              />
-            </div>
+          <div className="flex mb-4 gap-4">
+            {formFields
+              .filter((item) => item.type === "dropdown")
+              .map((form, index) => {
+                return (
+                  <div className="flex-col w-3/6" key={index}>
+                    <CustomDropdown
+                      name={form.name}
+                      title={form.title}
+                      value={form.value}
+                      onChange={(event) => handleFormChange(event)}
+                      options={form.options}
+                      optionLabel={"label"}
+                      placeholder={""}
+                      showIcon={false}
+                      iconSrc={form.iconSrc}
+                      iconAlt={`${form.name}-icon`}
+                      className="w-full"
+                    />
+                  </div>
+                );
+              })}
           </div>
         </div>
       </Dialog>

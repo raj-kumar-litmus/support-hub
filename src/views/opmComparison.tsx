@@ -45,7 +45,11 @@ import {
   OPM_COMPARISON_OPTIONS_HOME,
   CHANNELS,
   DURATIONS,
+  LABELS,
+  TITLE,
+  INPUT_TYPES,
 } from "../constants/appConstants";
+import { URL_OPM_COMPARISON } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
 
 ChartJS.register(
@@ -80,7 +84,7 @@ const OpmComparison: React.FC = () => {
   };
 
   const [url, setUrl] = useState<string>(
-    `/compareOPM?period=${DEFAULT.duration}&startTimeOne=${DEFAULT.startTimeOne}&startDateTwo=${DEFAULT.startDateTwo}&channel=${DEFAULT.channel}`,
+    `${URL_OPM_COMPARISON}?period=${DEFAULT.duration}&startTimeOne=${DEFAULT.startTimeOne}&startDateTwo=${DEFAULT.startDateTwo}&channel=${DEFAULT.channel}`
   );
 
   const [options, setOptions] = useState<null | ChartOptions>(null);
@@ -91,9 +95,9 @@ const OpmComparison: React.FC = () => {
 
   const [formFields, setFormFields] = useState([
     {
-      type: "dropdown",
+      type: INPUT_TYPES.dropdown,
       name: "period",
-      label: "Duration",
+      label: LABELS.duration,
       icon: SandGlassIcon,
       value: "",
       options: Object.keys(DURATIONS).map((e) => ({
@@ -102,23 +106,25 @@ const OpmComparison: React.FC = () => {
       })),
     },
     {
-      type: "time",
+      type: INPUT_TYPES.time,
       name: "startDate",
-      label: "Date 1",
+      label: LABELS.startDate,
+      showTime: true,
       value: "",
       imgsrc: "src/assets/white_calendar.svg",
     },
     {
-      type: "time",
+      type: INPUT_TYPES.time,
       name: "endDate",
-      label: "Date 2",
+      label: LABELS.endDate,
+      showTime: true,
       value: "",
       imgsrc: "src/assets/white_calendar.svg",
     },
     {
-      type: "dropdown",
+      type: INPUT_TYPES.dropdown,
       name: "channel",
-      label: "Channel",
+      label: LABELS.channel,
       icon: ChannelIcon,
       value: "",
       options: Object.keys(CHANNELS).map((e) => ({
@@ -163,8 +169,8 @@ const OpmComparison: React.FC = () => {
         }&`;
       }
     });
-    setUrl(`/compareOPM?${str}`);
-    // if (showFilters) setShowFilters(false);
+    setUrl(`${URL_OPM_COMPARISON}?${str}`);
+    if (showFilters && width < 700) setShowFilters(false);
   };
 
   useEffect(() => {
@@ -221,7 +227,7 @@ const OpmComparison: React.FC = () => {
               startDate: formFields.find((e) => e.name === "startDate").value,
               endDate: formFields.find((e) => e.name === "endDate").value,
               isMobile: width < 700,
-            }),
+            })
       );
     }
   }, [apiResponse]);
@@ -274,9 +280,9 @@ const OpmComparison: React.FC = () => {
     <>
       {location.pathname.includes("home") && data && (
         <div className="w-full sm:w-1/2 bg-[#22262C] p-0 bg-transparent rounded-lg flex flex-col justify-between">
-          <div className="flex justify-between mb-3 items-center relative top-[2vh] z-[1] ml-[2vw] mr-[1vw]">
+          <div className="flex justify-between mb-3 items-center relative top-[6vh] z-[1] ml-[2vw] mr-[1vw]">
             <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
-              OPM Comparison
+              {TITLE.OPM_COMPARISON}
             </span>
             <div>
               <button
@@ -298,7 +304,7 @@ const OpmComparison: React.FC = () => {
       {!IS_FULLSCREEN && location.pathname.includes("opmcomparison") && (
         <div className="flex justify-between items-start lg:mb-[2vh] lg:mt-[4vh] ml-[5vw] lg:ml-[3vw] mr-[5vw] lg:mr-[3vw] mt-[3vh]">
           <p className="font-bold w-[50vw] text-[#F2F2F2] w-[50vw] lg:w-[30vw]">
-            OPM Comparison
+            {TITLE.OPM_COMPARISON}
           </p>
           <CustomImage
             src={FilterIcon}
@@ -324,8 +330,7 @@ const OpmComparison: React.FC = () => {
                         name={form.label}
                         placeholder={form.label}
                         onChange={(event) => handleFormChange(event)}
-                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
-                        id="promoCode"
+                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px] w-[9vw]"
                       />
                     )}
                     {form.type === "time" && (
@@ -358,7 +363,7 @@ const OpmComparison: React.FC = () => {
                 );
               })}
               <CustomButton
-                label="Submit"
+                label={LABELS.submit}
                 isDisabled={disabled}
                 isRounded={true}
                 className="submitBtnMobile self-end relative"
@@ -370,7 +375,7 @@ const OpmComparison: React.FC = () => {
                 header="Filters"
                 visible={visible}
                 position={position}
-                className="!bg-slate-900 filtersModal opmFiltersMobile h-[450px] w-[100vw]"
+                className="!bg-slate-900 filtersModal opmFiltersMobile h-[350px] w-[100vw]"
                 onHide={onModalCloseHandler}
                 isDraggable={false}
                 closeIcon={<CustomImage src={WhiteCrossIcon} />}
@@ -383,17 +388,16 @@ const OpmComparison: React.FC = () => {
                   {formFields.map((form) => {
                     return (
                       <>
-                        {form.type === "text" && (
+                        {form.type === INPUT_TYPES.text && (
                           <CustomInputText
                             value={form.value}
                             name={form.label}
                             placeholder={form.label}
                             onChange={(event) => handleFormChange(event)}
                             className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
-                            id="promoCode"
                           />
                         )}
-                        {form.type === "time" && (
+                        {form.type === INPUT_TYPES.time && (
                           <CustomCalendar
                             name={form.name}
                             containerClassName="opmFiltersMobileCalendar"
@@ -405,7 +409,7 @@ const OpmComparison: React.FC = () => {
                             value={form.value}
                           />
                         )}
-                        {form.type === "dropdown" && (
+                        {form.type === INPUT_TYPES.dropdown && (
                           <CustomDropdown
                             value={form.value}
                             name={form.name}
@@ -424,7 +428,7 @@ const OpmComparison: React.FC = () => {
                     );
                   })}
                   <CustomButton
-                    label="Submit"
+                    label={LABELS.submit}
                     isDisabled={disabled}
                     isRounded={true}
                     className="submitBtnMobile opmPopUp col-span-full"
@@ -463,7 +467,7 @@ const OpmComparison: React.FC = () => {
             ))}
           {!disabled && !IS_FULLSCREEN && (
             <CustomButton
-              label="Reset"
+              label={LABELS.reset}
               severity="secondary"
               className="resetFilters text-[12px] text-[#575353]"
               isTextButton={true}
@@ -474,7 +478,7 @@ const OpmComparison: React.FC = () => {
       )}
       {data && !isLoading && location.pathname.includes("opmcomparison") && (
         <LineChart
-          title="OPM Comparison"
+          title={TITLE.OPM_COMPARISON}
           isFullScreen={IS_FULLSCREEN}
           className="border-0 rounded-[10px] lg:w-[71.74vw] lg:ml-[2.85vw] h-[340px] lg:h-[62.23vh] lg:mt-[3vh] "
           options={options}

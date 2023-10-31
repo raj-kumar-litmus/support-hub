@@ -4,6 +4,7 @@ import { fetchData } from "../utils/fetchUtil";
 import { URL_DC_OPEN_ORDERS } from "../constants/apiConstants";
 import Table from "./common/Table";
 import Card from "./common/Card";
+import Loader from "./loader";
 
 interface orderData {
   country: string;
@@ -14,8 +15,10 @@ interface orderData {
 
 const DcOpenOrders: FC = () => {
   const [tableData, setTableData] = useState<DCOpenOrders[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setIsLoading(true);
     async function fetchOrdersData() {
       try {
         const data = await fetchData(URL_DC_OPEN_ORDERS, {});
@@ -28,32 +31,40 @@ const DcOpenOrders: FC = () => {
         setTableData(modifiedArray);
       } catch (error) {
         console.log("Error while fetching data: ", error);
+      } finally {
+        setIsLoading(false);
       }
     }
     fetchOrdersData();
   }, []);
 
   return (
-    <div className="w-11/12 m-auto mt-6">
-      <h3 className="sm:text-lg text-[#F2F2F2] font-bold m-3 ml-0 font-helvetica">
-        DC Open Orders
-      </h3>
-      <div className="hidden sm:block rounded-md">
-        {tableData?.length > 0 && (
-          <Table
-            tableData={tableData}
-            stripedRows={true}
-            className={"ordersTable"}
-          />
-        )}
-      </div>
-      <div className="block sm:hidden">
-        {tableData?.length > 0 &&
-          tableData?.map((dataObj, index) => (
-            <Card key={index} cardData={dataObj} />
-          ))}
-      </div>
-    </div>
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="w-11/12 m-auto mt-6">
+          <h3 className="sm:text-lg text-[#F2F2F2] font-bold m-3 ml-0 font-helvetica">
+            DC Open Orders
+          </h3>
+          <div className="hidden sm:block rounded-md">
+            {tableData?.length > 0 && (
+              <Table
+                tableData={tableData}
+                stripedRows={true}
+                className={"ordersTable"}
+              />
+            )}
+          </div>
+          <div className="block sm:hidden">
+            {tableData?.length > 0 &&
+              tableData?.map((dataObj, index) => (
+                <Card key={index} cardData={dataObj} />
+              ))}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

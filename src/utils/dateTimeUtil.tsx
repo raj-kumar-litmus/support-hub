@@ -49,3 +49,11 @@ export const formatDate = (
   }
   return formattedDate;
 };
+
+export const getLocaleTime = (timeVal: Date, is12Hr: boolean): string => {
+  return timeVal.toLocaleTimeString("en-US", {
+    hour12: is12Hr,
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+};
