@@ -41,6 +41,7 @@ import CustomIcon from "../common/CustomIcon";
 import CustomTab from "../common/customtab";
 import Loader from "../loader";
 import CustomImage from "../common/customimage";
+import CustomButton from "../Button";
 
 const BarChart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -271,11 +272,9 @@ const BarChart = () => {
   };
 
   useEffect(() => {
-    if (location?.pathname?.includes("sessions")) {
-      setId("bar-chart");
-    } else {
-      setId("home-bar-chart");
-    }
+    setId(
+      location?.pathname?.includes("sessions") ? "bar-chart" : "home-bar-chart"
+    );
   }, []);
 
   return (
@@ -384,11 +383,11 @@ const BarChart = () => {
               <>
                 <div className="flex flex-row justify-between">
                   <div className="text-[#F2F2F2] text-base sm:text-lg font-bold">
-                    Sessions
+                    {SESSIONS}
                   </div>
-                  <button className="ml-5 pb-[4px]" onClick={handleExpandClick}>
+                  <CustomButton className="home-expand-btn ml-5 pb-[4px]" onClick={handleExpandClick}>
                     <CustomImage src={open_in_new} />
-                  </button>
+                  </CustomButton>
                 </div>
                 <CustomTab
                   className="sessions-tabs sm:absolute sm:top-[1.25rem] sm:right-[4rem]"

@@ -20,6 +20,9 @@ export const TOTAL_SESSIONS_PER_MIN_SECONDARY: string =
   "Azure Secondary (Sessions/Min)";
 export const TOTAL_SESSIONS_PER_MINUTE: string = "Total Session per minute";
 export const MINS = "Mins";
+export const LASTDAY: string = "Last Day";
+export const TODAY: string = "Today";
+export const DIFFERENCE: string = "Difference";
 
 export const ORDER_DETAILS: string = "Order Details";
 export const PROMOTIONS: string = "Promotions";
@@ -51,6 +54,7 @@ export const AMOUNT: string = "Amount";
 export const NO_MATCHING_ORDERS_FOUND: string = "No Matching Orders.";
 export const VIEW_ALL: string = "View All";
 export const ORDERS_DURATION: number = 60;
+export const REFRESHTIME: number = 3000;
 
 export const LABELS = {
   duration: "Duration",

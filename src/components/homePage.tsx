@@ -5,18 +5,26 @@ import OPM from "../views/opm";
 import OpmComparison from "../views/opmComparison";
 import { URL_OPM } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
-import { ORDERS_DURATION } from "../constants/appConstants";
+import {
+  ORDERS_DURATION,
+  LASTDAY,
+  TODAY,
+  DIFFERENCE,
+  REFRESHTIME,
+} from "../constants/appConstants";
 import useScreenSize from "../hooks/useScreenSize";
 import TimeTracker from "./timeTracker";
-import avg_orders_per_min from "../assets/avg_orders_per_min.svg";
-import total_no_of_orders from "../assets/total_no_of_orders.svg";
-import total_order_comp from "../assets/total_order_comp.svg";
-import avg_opm_comp from "../assets/avg_opm_comp.svg";
-import last_min_opm from "../assets/last_min_opm.svg";
-import trending_down from "../assets/trending_down.svg";
-import refresh_icon from "../assets/refresh_icon.svg";
-import info_icon from "../assets/info_icon.svg";
+import avgOrdersPerMinIcon from "../assets/avg_orders_per_min.svg";
+import totalNoOfOrdersIcon from "../assets/total_no_of_orders.svg";
+import totalOrderCompIcon from "../assets/total_order_comp.svg";
+import avgOpmcompIcon from "../assets/avg_opm_comp.svg";
+import lastMinOpmIcon from "../assets/last_min_opm.svg";
+import trendingDownIcon from "../assets/trending_down.svg";
+import refreshIcon from "../assets/refresh_icon.svg";
+import infoIcon from "../assets/info_icon.svg";
 import BarChart from "./charts/BarChart";
+import Loader from "./loader";
+import CustomButton from "./Button";
 
 const CardTitle = ({ title, icon }: { title: string; icon: any }) => {
   return (
@@ -42,16 +50,16 @@ const ComparisonCards = ({
   today: number;
   lastDay: number;
 }) => {
-  const difference = lastDay - today;
+  const difference = lastDay - today || 0;
   return (
     <div className="flex">
       <div className="flex flex-col pr-1 sm:pr-2 justify-between">
-        <span className="text-[10px]">Today</span>
+        <span className="text-[10px]">{TODAY}</span>
         <span className="text-[#F2F2F2] text-xl">{today}</span>
       </div>
       <div className="border border-r border-[#383F47] h-[2.5rem] m-auto"></div>
       <div className="flex flex-col px-1 sm:px-2 justify-between">
-        <span className="text-[10px]">Last Day</span>
+        <span className="text-[10px]">{LASTDAY}</span>
         <span className="text-[#F2F2F2] text-xl">{lastDay}</span>
       </div>
       <div className="border border-r border-[#383F47] h-[2.5rem] m-auto"></div>
@@ -65,7 +73,7 @@ const ComparisonCards = ({
               : "text-[#8B8C8F]"
           } text-[10px]`}
         >
-          Difference
+          {DIFFERENCE}
         </span>
         <div className="flex">
           <span
@@ -75,15 +83,16 @@ const ComparisonCards = ({
                 : difference < 0
                 ? "text-[#5CB7ED]"
                 : "text-[#F2F2F2]"
-            } text-[#F16476] text-2xl`}
+            } text-xl`}
           >
-            {!isNaN(difference) && difference}
+            {difference}
           </span>
-          {difference > 0 ? (
-            <CustomImage className="flex ml-2" src={trending_down} />
-          ) : difference < 0 ? (
-            <CustomImage className="flex ml-2" src={trending_down} />
-          ) : null}
+          {difference !== 0 && (
+            <CustomImage
+              className="flex ml-2"
+              src={difference > 0 ? trendingDownIcon : trendingDownIcon} // need to change to up icon
+            />
+          )}
         </div>
       </div>
     </div>
@@ -98,14 +107,14 @@ const HomePage = () => {
   const [lastDayAvgOPM, setLastDayAvgOPM] = useState<number>(0);
   const [lastDaytotalOPM, setLastDayTotalOPM] = useState<number>(0);
   const [refreshTime, setRefreshTime] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { width } = useScreenSize();
 
   const fetchOPMData = async (url) => {
-    const opmData = await fetchData(
-      `${url}?period=${ORDERS_DURATION}&starttime=&channel=&promocode=&paymentType=&country=`,
-      {}
-    );
+    setIsLoading(true);
+    const opmData = await fetchData(`${url}?period=${ORDERS_DURATION}`, {});
+    setIsLoading(false);
     const totalOrders = opmData.reduce(
       (acc, obj) => acc + parseInt(obj.orderCount),
       0
@@ -116,10 +125,12 @@ const HomePage = () => {
   };
 
   const fetchCompData = async (url, date) => {
+    setIsLoading(true);
     const opmData = await fetchData(
-      `${url}?period=${ORDERS_DURATION}&date=${date}&channel=&promocode=&paymentType=&country=`,
+      `${url}?period=${ORDERS_DURATION}&date=${date}`,
       {}
     );
+    setIsLoading(false);
     const totalOrders = opmData.reduce(
       (acc, obj) => acc + parseInt(obj.orderCount),
       0
@@ -145,7 +156,7 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => setCanShow(!canShow), 30000);
+    const timer = setTimeout(() => setCanShow(!canShow), REFRESHTIME);
     return () => clearTimeout(timer);
   });
 
@@ -156,60 +167,72 @@ const HomePage = () => {
           <span className="text-lg text-[#F2F2F2] font-bold mr-4">
             Dashboard
           </span>
-          <CustomImage src={info_icon} />
+          <CustomImage src={infoIcon} />
           <span className="text-xs text-[#8B8C8F] ml-2">Last 60 min data</span>
         </div>
         <div className="flex items-center font-helvetica">
           {width > 700 && <TimeTracker timeStamp={refreshTime} />}
-          <button className="home-refresh-btn" onClick={handleRefreshBtnClick}>
-            <CustomImage src={refresh_icon} />
-          </button>
+          <CustomButton className="home-refresh-btn" onClick={handleRefreshBtnClick}>
+            <CustomImage src={refreshIcon} />
+          </CustomButton>
         </div>
       </div>
-      <div className="flex flex-wrap gap-[10px]">
-        <HomeCard
-          title={
-            <CardTitle title={"Avg Orders Per Min"} icon={avg_orders_per_min} />
-          }
-          value={<OPMCards value={avgOPM} />}
-          bgColor="#8F8E8E"
-          textColor="#FFFFFF"
-        />
-        <HomeCard
-          title={
-            <CardTitle
-              title={"Total Number of Orders"}
-              icon={total_no_of_orders}
-            />
-          }
-          value={<OPMCards value={totalOPM} />}
-          bgColor="#BCBBBB"
-          textColor="#FFFFFF"
-        />
-        <HomeCard
-          title={<CardTitle title={"Last min OPM"} icon={last_min_opm} />}
-          value={<OPMCards value={lastMinOPM} />}
-          bgColor="#E9E8E8"
-          textColor="#FFFFFF"
-        />
-        <HomeCard
-          title={<CardTitle title={"Avg OPM Comparison"} icon={avg_opm_comp} />}
-          value={<ComparisonCards today={avgOPM} lastDay={lastDayAvgOPM} />}
-          bgColor="#CCCBCB"
-          textColor="#FFFFFF"
-        />
-        <HomeCard
-          title={
-            <CardTitle
-              title={"Total Order Comparison"}
-              icon={total_order_comp}
-            />
-          }
-          value={<ComparisonCards today={totalOPM} lastDay={lastDaytotalOPM} />}
-          bgColor="#E9E8E8"
-          textColor="#FFFFFF"
-        />
-      </div>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="flex flex-wrap gap-[10px]">
+          <HomeCard
+            title={
+              <CardTitle
+                title={"Avg Orders Per Min"}
+                icon={avgOrdersPerMinIcon}
+              />
+            }
+            value={<OPMCards value={avgOPM} />}
+            bgColor="#8F8E8E"
+            textColor="#FFFFFF"
+          />
+          <HomeCard
+            title={
+              <CardTitle
+                title={"Total Number of Orders"}
+                icon={totalNoOfOrdersIcon}
+              />
+            }
+            value={<OPMCards value={totalOPM} />}
+            bgColor="#BCBBBB"
+            textColor="#FFFFFF"
+          />
+          <HomeCard
+            title={<CardTitle title={"Last min OPM"} icon={lastMinOpmIcon} />}
+            value={<OPMCards value={lastMinOPM} />}
+            bgColor="#E9E8E8"
+            textColor="#FFFFFF"
+          />
+          <HomeCard
+            title={
+              <CardTitle title={"Avg OPM Comparison"} icon={avgOpmcompIcon} />
+            }
+            value={<ComparisonCards today={avgOPM} lastDay={lastDayAvgOPM} />}
+            bgColor="#CCCBCB"
+            textColor="#FFFFFF"
+          />
+          <HomeCard
+            title={
+              <CardTitle
+                title={"Total Order Comparison"}
+                icon={totalOrderCompIcon}
+              />
+            }
+            value={
+              <ComparisonCards today={totalOPM} lastDay={lastDaytotalOPM} />
+            }
+            bgColor="#E9E8E8"
+            textColor="#FFFFFF"
+          />
+        </div>
+      )}
+
       <div className="home-opm-charts flex flex-col sm:flex-row sm:space-y-0 sm:space-x-4">
         <OPM />
         <OpmComparison />

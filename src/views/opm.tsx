@@ -42,7 +42,7 @@ import GreyCardIcon from "../assets/grey_card.svg";
 import GreyPromoIcon from "../assets/grey_promo.svg";
 import GreyHourGlassIcon from "../assets/hourglass-grey.svg";
 import PromoCodeIcon from "../assets/promocode.svg";
-import open_in_new from "../assets/open_in_new.svg";
+import openNewPageIcon from "../assets/open_in_new.svg";
 import { fetchData } from "../utils/fetchUtil";
 import {
   CHANNELS,
@@ -287,7 +287,7 @@ const OPM: React.FC = () => {
       customChartConfig.layout.padding.top = 70;
       customChartConfig.layout.padding.bottom = 0;
     } else {
-      customChartConfig.layout.padding.top = 100;
+      customChartConfig.layout.padding.top = 70;
     }
     return customChartConfig;
   };
@@ -305,12 +305,12 @@ const OPM: React.FC = () => {
               {TITLE.OPM}
             </span>
             <div>
-              <button
-                className="rounded-full pr-2"
+              <CustomButton
+                className="home-expand-btn"
                 onClick={handleOPMExpandClick}
               >
-                <CustomImage src={open_in_new} />
-              </button>
+                <CustomImage src={openNewPageIcon} />
+              </CustomButton>
             </div>
           </div>
           <LineChart

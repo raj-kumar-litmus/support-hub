@@ -39,7 +39,7 @@ import FilterIcon from "../assets/filter.svg";
 import ChannelIcon from "../assets/channel.svg";
 import SandGlassIcon from "../assets/sandglass.svg";
 import GreyHourGlassIcon from "../assets/hourglass-grey.svg";
-import open_in_new from "../assets/open_in_new.svg";
+import openNewPageIcon from "../assets/open_in_new.svg";
 import WhiteCalendarIcon from "../assets/white_calendar.svg";
 import GreyCalendarIcon from "../assets/calendar-grey.svg";
 import GreyChannelIcon from "../assets/channel-grey.svg";
@@ -286,7 +286,7 @@ const OpmComparison: React.FC = () => {
       customChartConfig.layout.padding.top = 70;
       customChartConfig.layout.padding.bottom = 20;
     } else {
-      customChartConfig.layout.padding.top = 100;
+      customChartConfig.layout.padding.top = 70;
     }
     return customChartConfig;
   };
@@ -304,12 +304,12 @@ const OpmComparison: React.FC = () => {
               {TITLE.OPM_COMPARISON}
             </span>
             <div>
-              <button
-                className="rounded-full pr-2"
+              <CustomButton
+                className="home-expand-btn"
                 onClick={handleOPMCompExpandClick}
               >
-                <CustomImage src={open_in_new} />
-              </button>
+                <CustomImage src={openNewPageIcon} />
+              </CustomButton>
             </div>
           </div>
           <LineChart
