@@ -112,31 +112,39 @@ const HomePage = () => {
   const { width } = useScreenSize();
 
   const fetchOPMData = async (url) => {
-    setIsLoading(true);
-    const opmData = await fetchData(`${url}?period=${ORDERS_DURATION}`, {});
-    setIsLoading(false);
-    const totalOrders = opmData.reduce(
-      (acc, obj) => acc + parseInt(obj.orderCount),
-      0
-    );
-    setTotalOPM(totalOrders);
-    setAvgOPM(Math.round(totalOrders / ORDERS_DURATION));
-    setLastMinOPM(opmData[opmData.length - 1]["orderCount"]);
+    try {
+      setIsLoading(true);
+      const opmData = await fetchData(`${url}?period=${ORDERS_DURATION}`, {});
+      setIsLoading(false);
+      const totalOrders = opmData.reduce(
+        (acc, obj) => acc + parseInt(obj.orderCount),
+        0
+      );
+      setTotalOPM(totalOrders);
+      setAvgOPM(Math.round(totalOrders / ORDERS_DURATION));
+      setLastMinOPM(opmData[opmData.length - 1]["orderCount"]);
+    } catch (err) {
+      console.log("Error occured while fetching data", err);
+    }
   };
 
   const fetchCompData = async (url, date) => {
-    setIsLoading(true);
-    const opmData = await fetchData(
-      `${url}?period=${ORDERS_DURATION}&date=${date}`,
-      {}
-    );
-    setIsLoading(false);
-    const totalOrders = opmData.reduce(
-      (acc, obj) => acc + parseInt(obj.orderCount),
-      0
-    );
-    setLastDayTotalOPM(totalOrders);
-    setLastDayAvgOPM(Math.round(totalOrders / ORDERS_DURATION));
+    try {
+      setIsLoading(true);
+      const opmData = await fetchData(
+        `${url}?period=${ORDERS_DURATION}&date=${date}`,
+        {}
+      );
+      setIsLoading(false);
+      const totalOrders = opmData.reduce(
+        (acc, obj) => acc + parseInt(obj.orderCount),
+        0
+      );
+      setLastDayTotalOPM(totalOrders);
+      setLastDayAvgOPM(Math.round(totalOrders / ORDERS_DURATION));
+    } catch (err) {
+      console.log("Error occured while fetching data", err);
+    }
   };
 
   const getCardsData = () => {
@@ -172,7 +180,10 @@ const HomePage = () => {
         </div>
         <div className="flex items-center font-helvetica">
           {width > 700 && <TimeTracker timeStamp={refreshTime} />}
-          <CustomButton className="home-refresh-btn" onClick={handleRefreshBtnClick}>
+          <CustomButton
+            className="home-refresh-btn"
+            onClick={handleRefreshBtnClick}
+          >
             <CustomImage src={refreshIcon} />
           </CustomButton>
         </div>
