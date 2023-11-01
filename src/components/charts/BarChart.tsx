@@ -7,7 +7,7 @@ import { ChartData, SessionData } from "../../@types/BarChart";
 import ChannelIcon from "../../assets/channel.svg";
 import FilterIcon from "../../assets/filter-dark.svg";
 import SandGlassIcon from "../../assets/sandglass.svg";
-import open_in_new from "../../assets/open_in_new.svg";
+import openNewPageIcon from "../../assets/open_in_new.svg";
 import CalendarIcon from "../../assets/white_calendar.svg";
 import { BAR_CHART_OPTIONS } from "../../config/chartConfig";
 import { URL_SESSIONS } from "../../constants/apiConstants";
@@ -386,7 +386,7 @@ const BarChart = () => {
                     {SESSIONS}
                   </div>
                   <CustomButton className="home-expand-btn ml-5 pb-[4px]" onClick={handleExpandClick}>
-                    <CustomImage src={open_in_new} />
+                    <CustomImage src={openNewPageIcon} />
                   </CustomButton>
                 </div>
                 <CustomTab
