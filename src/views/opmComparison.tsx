@@ -39,10 +39,10 @@ import FilterIcon from "../assets/filter.svg";
 import ChannelIcon from "../assets/channel.svg";
 import SandGlassIcon from "../assets/sandglass.svg";
 import GreyHourGlassIcon from "../assets/hourglass-grey.svg";
+import openNewPageIcon from "../assets/open_in_new.svg";
 import WhiteCalendarIcon from "../assets/white_calendar.svg";
 import GreyCalendarIcon from "../assets/calendar-grey.svg";
 import GreyChannelIcon from "../assets/channel-grey.svg";
-import open_in_full_window from "../assets/open_in_full_window.svg";
 
 import {
   OPM_COMPARISON_OPTIONS,
@@ -53,6 +53,7 @@ import {
   TITLE,
   INPUT_TYPES,
 } from "../constants/appConstants";
+import { URL_OPM_COMPARISON } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
 
 ChartJS.register(
@@ -64,7 +65,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ChartDataLabels,
+  ChartDataLabels
 );
 
 const OpmComparison: React.FC = () => {
@@ -72,7 +73,7 @@ const OpmComparison: React.FC = () => {
   const [visible, setVisible] = useState<boolean>(false);
   const [position, setPosition] = useState<ModalEnums>("center");
   const [apiResponse, setApiResponse] = useState<null | OpmComparisonType>(
-    null,
+    null
   );
 
   const { width } = useScreenSize();
@@ -87,7 +88,7 @@ const OpmComparison: React.FC = () => {
   };
 
   const [url, setUrl] = useState<string>(
-    `/supportdashboard/compareOPM?period=${DEFAULT.duration}&startTimeOne=${DEFAULT.startTimeOne}&startDateTwo=${DEFAULT.startDateTwo}&channel=${DEFAULT.channel}`,
+    `${URL_OPM_COMPARISON}?period=${DEFAULT.duration}&startTimeOne=${DEFAULT.startTimeOne}&startDateTwo=${DEFAULT.startDateTwo}&channel=${DEFAULT.channel}`
   );
 
   const [options, setOptions] = useState<null | ChartOptions>(null);
@@ -176,7 +177,7 @@ const OpmComparison: React.FC = () => {
         }&`;
       }
     });
-    setUrl(`/supportdashboard/compareOPM?${str}`);
+    setUrl(`${URL_OPM_COMPARISON}?${str}`);
     if (showFilters && width < 700) setShowFilters(false);
   };
 
@@ -234,7 +235,7 @@ const OpmComparison: React.FC = () => {
               startDate: formFields.find((e) => e.name === "startDate").value,
               endDate: formFields.find((e) => e.name === "endDate").value,
               isMobile: width < 700,
-            }),
+            })
       );
     }
   }, [apiResponse]);
@@ -279,6 +280,17 @@ const OpmComparison: React.FC = () => {
     setShowFilters(!showFilters);
   };
 
+  const getChartConfig = () => {
+    const customChartConfig = { ...options };
+    if (width < 700) {
+      customChartConfig.layout.padding.top = 70;
+      customChartConfig.layout.padding.bottom = 20;
+    } else {
+      customChartConfig.layout.padding.top = 70;
+    }
+    return customChartConfig;
+  };
+
   const handleOPMCompExpandClick = () => {
     navigate("/opmcomparison");
   };
@@ -287,23 +299,23 @@ const OpmComparison: React.FC = () => {
     <>
       {location.pathname.includes("home") && data && (
         <div className="w-full sm:w-1/2 bg-[#22262C] p-0 bg-transparent rounded-lg flex flex-col justify-between">
-          <div className="flex justify-between mb-3 items-center relative top-[2vh] z-[1] ml-[2vw] mr-[1vw]">
+          <div className="flex justify-between sm:mb-3 items-center relative top-[3vh] sm:top-[6vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
             <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
               {TITLE.OPM_COMPARISON}
             </span>
             <div>
-              <button
-                className="rounded-full pr-2"
+              <CustomButton
+                className="home-expand-btn"
                 onClick={handleOPMCompExpandClick}
               >
-                <CustomImage src={open_in_full_window} />
-              </button>
+                <CustomImage src={openNewPageIcon} />
+              </CustomButton>
             </div>
           </div>
           <LineChart
             title="OPM Comparison"
-            className="border-0 rounded-[10px] w-[89vw] lg:w-full lg:ml-[0] h-[340px] lg:h-[380px] top-[-5vh]"
-            options={options}
+            className="home-opm-comp border-0 rounded-[10px] w-[89vw] lg:w-full lg:ml-[0] h-[340px] lg:h-[380px] top-[-5vh]"
+            options={getChartConfig()}
             data={data}
           />
         </div>

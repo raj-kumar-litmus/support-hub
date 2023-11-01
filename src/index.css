@@ -58,6 +58,14 @@
   @apply h-[13px] rotate-180;
 }
 
+#bar-chart {
+  @apply m-0 p-5 sm:p-10 sm:pt-7 bg-[#1C1C20];
+}
+
+.home-sessions {
+  @apply pt-[3rem] pb-[4rem] sm:py-8;
+}
+
 #bar-chart .p-button,
 .p-dialog .p-button {
   @apply bg-[#30343B] border-[#898A8D] text-[#898A8D];
@@ -256,7 +264,7 @@ button.p-button-secondary {
   @apply w-[90vh] relative top-[50vh] left-[-13vw];
 }
 .landScape.opmComparison {
-  @apply top-[65vh]
+  @apply top-[65vh];
 }
 .landScape .filteredCard .p-button.p-component {
   @apply w-[12vh];
@@ -706,11 +714,20 @@ hr.horizontalLine.opmComparison {
 }
 
 .home-opm {
-  @apply mt-6;
+  @apply sm:mt-6 ml-0 sm:ml-[5vw];
 }
-
-.home-refresh-btn {
-  @apply bg-[#22262C] border-[#22262C] rounded-full text-white text-xs px-5 py-3;
+.home-opm-comp {
+  @apply ml-0 sm:ml-[5vw];
+}
+.home-refresh-btn,
+.home-expand-btn {
+  @apply !bg-[#22262C] p-0 rounded-full;
+}
+.home-refresh-btn button {
+  @apply !bg-[#22262C] border-[#22262C] rounded-full p-3 hover:bg-[#22262C] hover:!border-[#22262C] active:!border-[#22262C];
+}
+.home-expand-btn button {
+  @apply !bg-[#22262C] border-[#22262C] rounded-full p-0 hover:bg-[#22262C] hover:!border-[#22262C] active:!border-[#22262C];
 }
 .sessions-tabs.p-tabview .p-tabview-panels {
   @apply hidden;
@@ -745,6 +762,44 @@ hr.horizontalLine.opmComparison {
   .p-tabview-nav-link {
   @apply bg-[#292E36] text-[#8B8C8F];
 }
-.sessions-tabs.p-accordion .p-accordion-header .p-accordion-header-link, .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+.sessions-tabs.p-accordion .p-accordion-header .p-accordion-header-link,
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  @apply transition-none border-none py-0;
+}
+.sessions-tabs.p-tabview .p-tabview-panels {
+  @apply hidden;
+}
+.sessions-tabs.p-tabview {
+  @apply w-[245px] h-[36px] self-end;
+}
+.sessions-tabs.p-tabview .p-tabview-nav {
+  @apply border-none h-[32px] bg-[#292E36];
+}
+.sessions-tabs.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  @apply bg-[#292E36] text-[#8B8C8F] h-[30px] rounded-none border-none text-[12px] font-medium;
+}
+.sessions-tabs .p-tabview-nav-content {
+  @apply rounded-[8px];
+}
+.sessions-tabs.p-tabview .p-tabview-nav li {
+  @apply bg-[#292E36];
+}
+.sessions-tabs.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  @apply bg-[#F2F2F2] text-[#22262C] rounded-[8px] text-[12px] font-medium;
+}
+.sessions-tabs.p-tabview
+  .p-tabview-nav
+  li
+  .p-tabview-nav-link:not(.p-disabled):focus {
+  @apply shadow-none;
+}
+.sessions-tabs.p-tabview
+  .p-tabview-nav
+  li:not(.p-highlight):not(.p-disabled):hover
+  .p-tabview-nav-link {
+  @apply bg-[#292E36] text-[#8B8C8F];
+}
+.sessions-tabs.p-accordion .p-accordion-header .p-accordion-header-link,
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
   @apply transition-none border-none py-0;
 }

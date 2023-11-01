@@ -20,6 +20,9 @@ export const TOTAL_SESSIONS_PER_MIN_SECONDARY: string =
   "Azure Secondary (Sessions/Min)";
 export const TOTAL_SESSIONS_PER_MINUTE: string = "Total Session per minute";
 export const MINS = "Mins";
+export const LASTDAY: string = "Last Day";
+export const TODAY: string = "Today";
+export const DIFFERENCE: string = "Difference";
 
 export const ORDER_DETAILS: string = "Order Details";
 export const PROMOTIONS: string = "Promotions";
@@ -50,6 +53,8 @@ export const STATUS: string = "Status";
 export const AMOUNT: string = "Amount";
 export const NO_MATCHING_ORDERS_FOUND: string = "No Matching Orders.";
 export const VIEW_ALL: string = "View All";
+export const ORDERS_DURATION: number = 60;
+export const REFRESHTIME: number = 3000;
 
 export const LABELS = {
   duration: "Duration",
@@ -201,6 +206,9 @@ export const OPM_OPTIONS = (isMobile: boolean) => ({
       grid: {
         color: "#00000033",
       },
+      border: {
+        display: false,
+      },
     },
     x: {
       grid: {
@@ -211,11 +219,6 @@ export const OPM_OPTIONS = (isMobile: boolean) => ({
         color: "#FAF9F6",
         text: "Total Orders Per Minute",
         padding: isMobile ? { top: 35, bottom: 35 } : { top: 35 },
-      },
-    },
-    y: {
-      border: {
-        display: false,
       },
     },
   },
@@ -347,7 +350,17 @@ export const OPM_COMPARISON_OPTIONS_HOME = ({
         left: 30,
         right: 50,
         top: 35,
-        bottom: 20,
+        bottom: 0,
+      },
+    },
+    scales: {
+      ...options.scales,
+      x: {
+        ...options.scales.x,
+        title: {
+          ...options.scales.x.title,
+          padding: isMobile ? { top: 20, bottom: 20 } : { top: 25, bottom: 25 },
+        },
       },
     },
     plugins: {

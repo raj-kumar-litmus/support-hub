@@ -55,5 +55,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         </Routes>
       </Suspense>
     </Router>
-  </React.StrictMode>,
+  </React.StrictMode>
 );

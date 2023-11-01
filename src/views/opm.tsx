@@ -41,8 +41,8 @@ import GreyGlobeIcon from "../assets/grey_globe.svg";
 import GreyCardIcon from "../assets/grey_card.svg";
 import GreyPromoIcon from "../assets/grey_promo.svg";
 import GreyHourGlassIcon from "../assets/hourglass-grey.svg";
-import open_in_full_window from "../assets/open_in_full_window.svg";
 import PromoCodeIcon from "../assets/promocode.svg";
+import openNewPageIcon from "../assets/open_in_new.svg";
 import { fetchData } from "../utils/fetchUtil";
 import {
   CHANNELS,
@@ -54,6 +54,7 @@ import {
   TITLE,
   LOCALE_OPTIONS,
 } from "../constants/appConstants";
+import { URL_OPM } from "../constants/apiConstants";
 
 ChartJS.register(
   CategoryScale,
@@ -64,7 +65,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ChartDataLabels,
+  ChartDataLabels
 );
 
 const OPM: React.FC = () => {
@@ -86,7 +87,7 @@ const OPM: React.FC = () => {
   };
 
   const [url, setUrl] = useState<string>(
-    `/supportdashboard/opm?period=${DEFAULT.duration}&date=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${DEFAULT.promocode}&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`,
+    `${URL_OPM}?period=${DEFAULT.duration}&date=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${DEFAULT.promocode}&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`
   );
 
   const [options, setOptions] = useState<null | ChartOptions>(null);
@@ -98,7 +99,7 @@ const OPM: React.FC = () => {
       0,
       chartArea.bottom,
       0,
-      chartArea.top,
+      chartArea.top
     );
     gradient.addColorStop(0.9, "#5A9EF566");
     gradient.addColorStop(0.4, "#5A9EF52F");
@@ -262,7 +263,7 @@ const OPM: React.FC = () => {
         }&`;
       }
     });
-    setUrl(`/supportdashboard/opm?${str}`);
+    setUrl(`${URL_OPM}?${str}`);
     if (showFilters && width < 700) setShowFilters(false);
   };
 
@@ -280,16 +281,15 @@ const OPM: React.FC = () => {
     });
   }, []);
 
-  const getConfigOptions = () => {
-    const chartOptions = JSON.parse(JSON.stringify(options));
-    chartOptions.layout.padding = {
-      left: 30,
-      right: 50,
-      top: 75,
-      bottom: 20,
-    };
-    chartOptions.scales.x.title.padding.top = 10;
-    return chartOptions;
+  const getChartConfig = () => {
+    const customChartConfig = { ...options };
+    if (width < 700) {
+      customChartConfig.layout.padding.top = 70;
+      customChartConfig.layout.padding.bottom = 0;
+    } else {
+      customChartConfig.layout.padding.top = 70;
+    }
+    return customChartConfig;
   };
 
   const handleOPMExpandClick = () => {
@@ -300,23 +300,23 @@ const OPM: React.FC = () => {
     <>
       {location.pathname.includes("home") && data && (
         <div className="w-full sm:w-1/2 bg-[#22262C] p-0 bg-transparent rounded-lg">
-          <div className="flex justify-between mb-3 items-center relative top-[2vh] z-[1] ml-[2vw] mr-[1vw]">
+          <div className="flex justify-between sm:mb-3 items-center relative top-[3vh] sm:top-[6vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
             <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
               {TITLE.OPM}
             </span>
             <div>
-              <button
-                className="rounded-full pr-2"
+              <CustomButton
+                className="home-expand-btn"
                 onClick={handleOPMExpandClick}
               >
-                <CustomImage src={open_in_full_window} />
-              </button>
+                <CustomImage src={openNewPageIcon} />
+              </CustomButton>
             </div>
           </div>
           <LineChart
             title="OPM"
             className="home-opm border-0 rounded-[10px] w-[89vw] lg:w-full lg:ml-[0] h-[380px] lg:h-[380px] lg:mt-[3vh] top-[-5vh]"
-            options={getConfigOptions()}
+            options={getChartConfig()}
             data={data}
           />
         </div>

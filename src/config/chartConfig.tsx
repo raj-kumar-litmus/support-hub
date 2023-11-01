@@ -25,16 +25,6 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
-    title: {
-      display: false,
-      text: SESSIONS,
-      align: "start",
-      position: "top",
-      font: {
-        size: CHART.TITLE_FONT_SIZE,
-      },
-      color: "#F2F2F2",
-    },
     legend: {
       display: true,
       position: "bottom",
