@@ -18,6 +18,7 @@ import {
   DD_MM_YYYY,
   DEFAULT_PERIOD,
   DURATION,
+  DURATION30MIN,
   DURATION_LIST,
   FILTERS,
   RESET,
@@ -146,7 +147,9 @@ const BarChart = () => {
 
   const getSessionData = async () => {
     const params = {
-      period: DEFAULT_PERIOD,
+      period: location.pathname.includes("home")
+        ? DURATION30MIN
+        : DEFAULT_PERIOD,
       starttime: "",
       channel: "",
     };
@@ -385,7 +388,10 @@ const BarChart = () => {
                   <div className="text-[#F2F2F2] text-base sm:text-lg font-bold">
                     {SESSIONS}
                   </div>
-                  <CustomButton className="home-expand-btn ml-5 pb-[4px]" onClick={handleExpandClick}>
+                  <CustomButton
+                    className="home-expand-btn ml-5 pb-[4px]"
+                    onClick={handleExpandClick}
+                  >
                     <CustomImage src={openNewPageIcon} />
                   </CustomButton>
                 </div>

@@ -53,6 +53,7 @@ import {
   INPUT_TYPES,
   TITLE,
   LOCALE_OPTIONS,
+  DURATION30MIN,
 } from "../constants/appConstants";
 import { URL_OPM } from "../constants/apiConstants";
 
@@ -86,13 +87,21 @@ const OPM: React.FC = () => {
     country: "US",
   };
 
-  const [url, setUrl] = useState<string>(
-    `${URL_OPM}?period=${DEFAULT.duration}&date=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${DEFAULT.promocode}&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`
-  );
+  const [url, setUrl] = useState<string>();
 
   const [options, setOptions] = useState<null | ChartOptions>(null);
   const [data, setData] = useState<ChartData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    location.pathname.includes("opm")
+      ? setUrl(
+          `${URL_OPM}?period=${DEFAULT.duration}&date=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${DEFAULT.promocode}&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`
+        )
+      : setUrl(
+          `${URL_OPM}?period=${DURATION30MIN}&date=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${DEFAULT.promocode}&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`
+        );
+  }, []);
 
   function getGradient(ctx, chartArea) {
     const gradient = ctx.createLinearGradient(

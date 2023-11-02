@@ -6,7 +6,7 @@ import OpmComparison from "../views/opmComparison";
 import { URL_OPM } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
 import {
-  ORDERS_DURATION,
+  DURATION30MIN,
   LASTDAY,
   TODAY,
   DIFFERENCE,
@@ -114,14 +114,14 @@ const HomePage = () => {
   const fetchOPMData = async (url) => {
     try {
       setIsLoading(true);
-      const opmData = await fetchData(`${url}?period=${ORDERS_DURATION}`, {});
+      const opmData = await fetchData(`${url}?period=${DURATION30MIN}`, {});
       setIsLoading(false);
       const totalOrders = opmData.reduce(
         (acc, obj) => acc + parseInt(obj.orderCount),
         0
       );
       setTotalOPM(totalOrders);
-      setAvgOPM(Math.round(totalOrders / ORDERS_DURATION));
+      setAvgOPM(Math.round(totalOrders / DURATION30MIN));
       setLastMinOPM(opmData[opmData.length - 1]["orderCount"]);
     } catch (err) {
       console.log("Error occured while fetching data", err);
@@ -132,7 +132,7 @@ const HomePage = () => {
     try {
       setIsLoading(true);
       const opmData = await fetchData(
-        `${url}?period=${ORDERS_DURATION}&date=${date}`,
+        `${url}?period=${DURATION30MIN}&date=${date}`,
         {}
       );
       setIsLoading(false);
@@ -141,7 +141,7 @@ const HomePage = () => {
         0
       );
       setLastDayTotalOPM(totalOrders);
-      setLastDayAvgOPM(Math.round(totalOrders / ORDERS_DURATION));
+      setLastDayAvgOPM(Math.round(totalOrders / DURATION30MIN));
     } catch (err) {
       console.log("Error occured while fetching data", err);
     }
@@ -176,7 +176,9 @@ const HomePage = () => {
             Dashboard
           </span>
           <CustomImage src={infoIcon} />
-          <span className="text-xs text-[#8B8C8F] ml-2">Last 60 min data</span>
+          <span className="text-xs text-[#8B8C8F] ml-2">
+            Last {DURATION30MIN} min data
+          </span>
         </div>
         <div className="flex items-center font-helvetica">
           {width > 700 && <TimeTracker timeStamp={refreshTime} />}

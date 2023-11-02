@@ -52,6 +52,7 @@ import {
   LABELS,
   TITLE,
   INPUT_TYPES,
+  DURATION30MIN,
 } from "../constants/appConstants";
 import { URL_OPM_COMPARISON } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
@@ -87,9 +88,7 @@ const OpmComparison: React.FC = () => {
     channel: "",
   };
 
-  const [url, setUrl] = useState<string>(
-    `${URL_OPM_COMPARISON}?period=${DEFAULT.duration}&startTimeOne=${DEFAULT.startTimeOne}&startDateTwo=${DEFAULT.startDateTwo}&channel=${DEFAULT.channel}`
-  );
+  const [url, setUrl] = useState<string>();
 
   const [options, setOptions] = useState<null | ChartOptions>(null);
   const [data, setData] = useState<ChartData | null>(null);
@@ -141,6 +140,16 @@ const OpmComparison: React.FC = () => {
       })),
     },
   ]);
+
+  useEffect(() => {
+    location.pathname.includes("opmcomparison")
+      ? setUrl(
+          `${URL_OPM_COMPARISON}?period=${DEFAULT.duration}&startTimeOne=${DEFAULT.startTimeOne}&startDateTwo=${DEFAULT.startDateTwo}&channel=${DEFAULT.channel}`
+        )
+      : setUrl(
+          `${URL_OPM_COMPARISON}?period=${DURATION30MIN}&startTimeOne=${DEFAULT.startTimeOne}&startDateTwo=${DEFAULT.startDateTwo}&channel=${DEFAULT.channel}`
+        );
+  }, []);
 
   const handleFormChange = (event) => {
     const data = [...formFields];
