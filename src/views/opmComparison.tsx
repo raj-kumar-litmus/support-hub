@@ -303,18 +303,16 @@ const OpmComparison: React.FC = () => {
             <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
               {TITLE.OPM_COMPARISON}
             </span>
-            <div>
-              <CustomButton
-                className="home-expand-btn"
-                onClick={handleOPMCompExpandClick}
-              >
-                <CustomImage src={openNewPageIcon} />
-              </CustomButton>
-            </div>
+            <CustomButton
+              className="home-expand-btn mr-2 sm:mr-0"
+              onClick={handleOPMCompExpandClick}
+            >
+              <CustomImage src={openNewPageIcon} />
+            </CustomButton>
           </div>
           <LineChart
             title="OPM Comparison"
-            className="home-opm-comp border-0 rounded-[10px] w-[89vw] lg:w-full lg:ml-[0] h-[340px] lg:h-[380px] top-[-5vh]"
+            className="home-opm-comp border-0 rounded-[10px] w-full sm:w-[89vw] lg:w-full lg:ml-[0] h-[340px] lg:h-[380px] top-[-5vh]"
             options={getChartConfig()}
             data={data}
           />
