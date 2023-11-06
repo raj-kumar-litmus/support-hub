@@ -115,7 +115,7 @@ export const SESSIONS_CHART = {
   STEP_SIZE: 5000,
   TICK_COUNT: 5,
   CATEGORY_PERCENT: 0.6,
-  LEGEND_LINE_WIDTH: 2
+  LEGEND_LINE_WIDTH: 2,
 };
 
 export const DURATIONS = {
@@ -138,6 +138,7 @@ export const CHANNELS = {
 };
 
 export const LOCALE_OPTIONS = {
+  ALL: "",
   US: "US",
   CA: "CA",
 };
@@ -183,7 +184,7 @@ export const ORDER_STATUS_LIST = [
     description: "Shipped and invoiced",
   },
 ];
-export const OPM_OPTIONS = (isMobile: boolean) => ({
+export const OPM_OPTIONS = (isMobile: boolean, showDataLabels = false) => ({
   responsive: true,
   maintainAspectRatio: false,
   layout: {
@@ -231,7 +232,14 @@ export const OPM_OPTIONS = (isMobile: boolean) => ({
       external: (_) => externalTooltipHandler(_, "opm"),
     },
     datalabels: {
-      display: false,
+      display: showDataLabels,
+      formatter: (_, context) =>
+        context.chart.data.dataset?.[0]?.data?.[context.dataIndex],
+      align: "top",
+      anchor: "center",
+      font: {
+        size: "12",
+      },
     },
   },
   elements: {
@@ -247,6 +255,7 @@ export const OPM_COMPARISON_OPTIONS = ({
   startDate,
   endDate,
   isMobile,
+  showDataLabels = false,
 }) => ({
   responsive: true,
   maintainAspectRatio: false,
@@ -292,7 +301,14 @@ export const OPM_COMPARISON_OPTIONS = ({
   },
   plugins: {
     datalabels: {
-      display: false,
+      display: showDataLabels,
+      formatter: (_, context) =>
+        context.chart.data.dataset?.[0]?.data?.[context.dataIndex],
+      align: "top",
+      anchor: "center",
+      font: {
+        size: "12",
+      },
     },
     legend: {
       display: true,
@@ -306,15 +322,15 @@ export const OPM_COMPARISON_OPTIONS = ({
             text:
               index === 0
                 ? startDate?.toLocaleString("en-US", {
-                  year: "numeric",
-                  month: "2-digit",
-                  day: "2-digit",
-                })
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                  })
                 : endDate?.toLocaleString("en-US", {
-                  year: "numeric",
-                  month: "2-digit",
-                  day: "2-digit",
-                }),
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                  }),
             fillStyle: "transparent",
             lineWidth: 2,
             fontColor: index === 0 ? "#6370FF" : "#FDA44F",
@@ -335,6 +351,7 @@ export const OPM_COMPARISON_OPTIONS_HOME = ({
   startDate,
   endDate,
   isMobile,
+  showDataLabels = false,
 }) => {
   const options = OPM_COMPARISON_OPTIONS({
     apiResponse,
@@ -365,6 +382,16 @@ export const OPM_COMPARISON_OPTIONS_HOME = ({
     },
     plugins: {
       ...options.plugins,
+      datalabels: {
+        display: showDataLabels,
+        formatter: (_, context: any) =>
+          context.chart.data.dataset?.[0]?.data?.[context.dataIndex],
+        align: "top",
+        anchor: "center",
+        font: {
+          size: "10",
+        },
+      },
       legend: {
         ...options.plugins.legend,
         position: "top",
@@ -374,4 +401,8 @@ export const OPM_COMPARISON_OPTIONS_HOME = ({
 };
 
 export const ORDER_STATUS: string = "Order Status";
-export const SESSIONS_TABS = [{ header: PRIMARY }, { header: SECONDARY }, { header: BOTH }]
+export const SESSIONS_TABS = [
+  { header: PRIMARY },
+  { header: SECONDARY },
+  { header: BOTH },
+];

@@ -8,7 +8,7 @@ import {
   Legend,
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import { CHART, SESSIONS, SESSIONS_CHART } from "../constants/appConstants";
+import { SESSIONS_CHART } from "../constants/appConstants";
 import { externalTooltipHandler } from "../components/utils/Utils";
 
 Chart.register(
@@ -48,7 +48,15 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = {
       },
     },
     datalabels: {
-      display: false,
+      display: true,
+      formatter: (_, context) =>
+        context.chart.data.dataset?.[0]?.data?.[context.dataIndex],
+      align: "top",
+      anchor: "end",
+      color: "white",
+      font: {
+        size: "12",
+      },
     },
     tooltip: {
       enabled: false,

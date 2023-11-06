@@ -32,7 +32,7 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
 function LineChart({
@@ -61,7 +61,7 @@ function LineChart({
       className={`${className} ${
         rotate
           ? "rotate-90 w-[600px] h-[390px] w-[844px] bg-inherit ml-[-60vw] mt-[22vh]"
-          : "relative ml-[5vw] mr-[5vw] md:mr-[0] sm:h-[340px] md:h-[100%] bg-[#22262C]"
+          : "relative ml-[5vw] sm:ml-[1vw] mr-[5vw] sm:mr-[0] md:mr-[0] sm:h-[340px] bg-[#22262C]"
       }`}
     >
       {width < 700 &&
