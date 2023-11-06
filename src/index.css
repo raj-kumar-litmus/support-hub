@@ -723,11 +723,17 @@ hr.horizontalLine.opmComparison {
 .home-expand-btn {
   @apply !bg-[#22262C] p-0 rounded-full;
 }
-.home-refresh-btn button {
+.home-refresh-btn .p-button {
   @apply !bg-[#22262C] border-[#22262C] rounded-full p-3 hover:bg-[#22262C] hover:!border-[#22262C] active:!border-[#22262C];
+}
+.home-refresh-btn .p-button:focus {
+  @apply shadow-none;
 }
 .home-expand-btn button {
   @apply !bg-[#22262C] border-[#22262C] rounded-full p-0 hover:bg-[#22262C] hover:!border-[#22262C] active:!border-[#22262C];
+}
+.home-expand-btn .p-button:focus {
+  @apply shadow-none;
 }
 .sessions-tabs.p-tabview .p-tabview-panels {
   @apply hidden;

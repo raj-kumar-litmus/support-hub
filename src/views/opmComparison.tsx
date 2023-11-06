@@ -43,6 +43,7 @@ import openNewPageIcon from "../assets/open_in_new.svg";
 import WhiteCalendarIcon from "../assets/white_calendar.svg";
 import GreyCalendarIcon from "../assets/calendar-grey.svg";
 import GreyChannelIcon from "../assets/channel-grey.svg";
+import refreshIcon from "../assets/refresh_icon.svg";
 
 import {
   OPM_COMPARISON_OPTIONS,
@@ -52,6 +53,7 @@ import {
   LABELS,
   TITLE,
   INPUT_TYPES,
+  HOME_PAGE_REFERSH_DURATION,
 } from "../constants/appConstants";
 import { URL_OPM_COMPARISON } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
@@ -87,9 +89,7 @@ const OpmComparison: React.FC = () => {
     channel: "",
   };
 
-  const [url, setUrl] = useState<string>(
-    `${URL_OPM_COMPARISON}?period=${DEFAULT.duration}&startTimeOne=${DEFAULT.startTimeOne}&startDateTwo=${DEFAULT.startDateTwo}&channel=${DEFAULT.channel}`
-  );
+  const [url, setUrl] = useState<string>();
 
   const [options, setOptions] = useState<null | ChartOptions>(null);
   const [data, setData] = useState<ChartData | null>(null);
@@ -141,6 +141,18 @@ const OpmComparison: React.FC = () => {
       })),
     },
   ]);
+
+  useEffect(() => {
+    setUrl(
+      `${URL_OPM_COMPARISON}?period=${
+        location.pathname.includes("opm")
+          ? DEFAULT.duration
+          : HOME_PAGE_REFERSH_DURATION
+      }&startTimeOne=${DEFAULT.startTimeOne}&startDateTwo=${
+        DEFAULT.startDateTwo
+      }&channel=${DEFAULT.channel}`
+    );
+  }, []);
 
   const handleFormChange = (event) => {
     const data = [...formFields];
@@ -295,6 +307,10 @@ const OpmComparison: React.FC = () => {
     navigate("/opmcomparison");
   };
 
+  const handleOPMCompRefreshBtnClick = () => {
+    getData();
+  };
+
   return (
     <>
       {location.pathname.includes("home") && data && (
@@ -303,21 +319,31 @@ const OpmComparison: React.FC = () => {
             <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
               {TITLE.OPM_COMPARISON}
             </span>
-            <div>
+            <div className="flex items-center">
               <CustomButton
-                className="home-expand-btn"
+                className="home-refresh-btn"
+                onClick={handleOPMCompRefreshBtnClick}
+              >
+                <CustomImage src={refreshIcon} />
+              </CustomButton>
+              <CustomButton
+                className="home-expand-btn mr-2 ml-2 sm:mr-0"
                 onClick={handleOPMCompExpandClick}
               >
                 <CustomImage src={openNewPageIcon} />
               </CustomButton>
             </div>
           </div>
-          <LineChart
-            title="OPM Comparison"
-            className="home-opm-comp border-0 rounded-[10px] w-[89vw] lg:w-full lg:ml-[0] h-[340px] lg:h-[380px] top-[-5vh]"
-            options={getChartConfig()}
-            data={data}
-          />
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <LineChart
+              title="OPM Comparison"
+              className="home-opm-comp border-0 rounded-[10px] w-full sm:w-[89vw] lg:w-full lg:ml-[0] h-[340px] lg:h-[380px] top-[-5vh]"
+              options={getChartConfig()}
+              data={data}
+            />
+          )}
         </div>
       )}
       {!IS_FULLSCREEN && location.pathname.includes("opmcomparison") && (
@@ -501,16 +527,21 @@ const OpmComparison: React.FC = () => {
           )}
         </div>
       )}
-      {data && !isLoading && location.pathname.includes("opmcomparison") && (
-        <LineChart
-          title={TITLE.OPM_COMPARISON}
-          isFullScreen={IS_FULLSCREEN}
-          className="border-0 rounded-[10px] lg:w-[71.74vw] lg:ml-[2.85vw] h-[340px] lg:h-[62.23vh] lg:mt-[3vh] "
-          options={options}
-          data={data}
-        />
+      {isLoading && location.pathname.includes("opmcomparison") ? (
+        <Loader />
+      ) : (
+        data &&
+        !isLoading &&
+        location.pathname.includes("opmcomparison") && (
+          <LineChart
+            title={TITLE.OPM_COMPARISON}
+            isFullScreen={IS_FULLSCREEN}
+            className="border-0 rounded-[10px] lg:w-[71.74vw] lg:ml-[2.85vw] h-[340px] lg:h-[62.23vh] lg:mt-[3vh] "
+            options={options}
+            data={data}
+          />
+        )
       )}
-      {isLoading && <Loader />}
     </>
   );
 };

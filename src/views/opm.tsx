@@ -43,6 +43,7 @@ import GreyPromoIcon from "../assets/grey_promo.svg";
 import GreyHourGlassIcon from "../assets/hourglass-grey.svg";
 import PromoCodeIcon from "../assets/promocode.svg";
 import openNewPageIcon from "../assets/open_in_new.svg";
+import refreshIcon from "../assets/refresh_icon.svg";
 import { fetchData } from "../utils/fetchUtil";
 import {
   CHANNELS,
@@ -53,6 +54,7 @@ import {
   INPUT_TYPES,
   TITLE,
   LOCALE_OPTIONS,
+  HOME_PAGE_REFERSH_DURATION,
 } from "../constants/appConstants";
 import { URL_OPM } from "../constants/apiConstants";
 
@@ -86,13 +88,23 @@ const OPM: React.FC = () => {
     country: "US",
   };
 
-  const [url, setUrl] = useState<string>(
-    `${URL_OPM}?period=${DEFAULT.duration}&date=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${DEFAULT.promocode}&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`
-  );
+  const [url, setUrl] = useState<string>();
 
   const [options, setOptions] = useState<null | ChartOptions>(null);
   const [data, setData] = useState<ChartData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    setUrl(
+      `${URL_OPM}?period=${
+        location.pathname.includes("opm")
+          ? DEFAULT.duration
+          : HOME_PAGE_REFERSH_DURATION
+      }&date=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${
+        DEFAULT.promocode
+      }&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`
+    );
+  }, []);
 
   function getGradient(ctx, chartArea) {
     const gradient = ctx.createLinearGradient(
@@ -296,6 +308,10 @@ const OPM: React.FC = () => {
     navigate("/opm");
   };
 
+  const handleOPMRefreshBtnClick = () => {
+    getData();
+  };
+
   return (
     <>
       {location.pathname.includes("home") && data && (
@@ -304,21 +320,31 @@ const OPM: React.FC = () => {
             <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
               {TITLE.OPM}
             </span>
-            <div>
+            <div className="flex items-center">
               <CustomButton
-                className="home-expand-btn"
+                className="home-refresh-btn"
+                onClick={handleOPMRefreshBtnClick}
+              >
+                <CustomImage src={refreshIcon} />
+              </CustomButton>
+              <CustomButton
+                className="home-expand-btn mr-2 ml-2 sm:mr-0"
                 onClick={handleOPMExpandClick}
               >
                 <CustomImage src={openNewPageIcon} />
               </CustomButton>
             </div>
           </div>
-          <LineChart
-            title="OPM"
-            className="home-opm border-0 rounded-[10px] w-[89vw] lg:w-full lg:ml-[0] h-[380px] lg:h-[380px] lg:mt-[3vh] top-[-5vh]"
-            options={getChartConfig()}
-            data={data}
-          />
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <LineChart
+              title="OPM"
+              className="home-opm border-0 rounded-[10px] w-full sm:w-[89vw] lg:w-full lg:ml-[0] h-[380px] lg:h-[380px] lg:mt-[3vh] top-[-5vh]"
+              options={getChartConfig()}
+              data={data}
+            />
+          )}
         </div>
       )}
       {!IS_FULLSCREEN && location.pathname.includes("opm") && (
@@ -506,16 +532,21 @@ const OPM: React.FC = () => {
           )}
         </div>
       )}
-      {data && !isLoading && location.pathname.includes("opm") && (
-        <LineChart
-          title={TITLE.OPM}
-          isFullScreen={IS_FULLSCREEN}
-          className="border-0 rounded-[10px] lg:w-[71.74vw] lg:ml-[2.85vw] h-[340px] lg:h-[62.23vh] lg:mt-[3vh] "
-          options={options}
-          data={data}
-        />
+      {isLoading && location.pathname.includes("opm") ? (
+        <Loader />
+      ) : (
+        data &&
+        !isLoading &&
+        location.pathname.includes("opm") && (
+          <LineChart
+            title={TITLE.OPM}
+            isFullScreen={IS_FULLSCREEN}
+            className="border-0 rounded-[10px] lg:w-[71.74vw] lg:ml-[2.85vw] h-[340px] lg:h-[62.23vh] lg:mt-[3vh] "
+            options={options}
+            data={data}
+          />
+        )
       )}
-      {isLoading && <Loader />}
     </>
   );
 };
