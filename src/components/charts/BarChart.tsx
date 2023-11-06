@@ -19,7 +19,7 @@ import {
   DD_MM_YYYY,
   DEFAULT_PERIOD,
   DURATION,
-  DURATION30MIN,
+  HOME_PAGE_REFERSH_DURATION,
   DURATION_LIST,
   FILTERS,
   RESET,
@@ -148,7 +148,7 @@ const BarChart = () => {
   const getSessionData = async () => {
     const params = {
       period: location.pathname.includes("home")
-        ? DURATION30MIN
+        ? HOME_PAGE_REFERSH_DURATION
         : DEFAULT_PERIOD,
       starttime: "",
       channel: "",

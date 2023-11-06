@@ -6,7 +6,7 @@ import OpmComparison from "../views/opmComparison";
 import { URL_OPM } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
 import {
-  DURATION30MIN,
+  HOME_PAGE_REFERSH_DURATION,
   LASTDAY,
   TODAY,
   DIFFERENCE,
@@ -114,14 +114,14 @@ const HomePage = () => {
   const fetchOPMData = async (url) => {
     try {
       setIsLoading(true);
-      const opmData = await fetchData(`${url}?period=${DURATION30MIN}`, {});
+      const opmData = await fetchData(`${url}?period=${HOME_PAGE_REFERSH_DURATION}`, {});
       setIsLoading(false);
       const totalOrders = opmData.reduce(
         (acc, obj) => acc + parseInt(obj.orderCount),
         0
       );
       setTotalOPM(totalOrders);
-      setAvgOPM(Math.round(totalOrders / DURATION30MIN));
+      setAvgOPM(Math.round(totalOrders / HOME_PAGE_REFERSH_DURATION));
       setLastMinOPM(opmData[opmData.length - 1]["orderCount"]);
     } catch (err) {
       console.log("Error occured while fetching data", err);
@@ -132,7 +132,7 @@ const HomePage = () => {
     try {
       setIsLoading(true);
       const opmData = await fetchData(
-        `${url}?period=${DURATION30MIN}&date=${date}`,
+        `${url}?period=${HOME_PAGE_REFERSH_DURATION}&date=${date}`,
         {}
       );
       setIsLoading(false);
@@ -141,7 +141,7 @@ const HomePage = () => {
         0
       );
       setLastDayTotalOPM(totalOrders);
-      setLastDayAvgOPM(Math.round(totalOrders / DURATION30MIN));
+      setLastDayAvgOPM(Math.round(totalOrders / HOME_PAGE_REFERSH_DURATION));
     } catch (err) {
       console.log("Error occured while fetching data", err);
     }
@@ -177,7 +177,7 @@ const HomePage = () => {
           </span>
           <CustomImage src={infoIcon} />
           <span className="text-xs text-[#8B8C8F] ml-2">
-            Last {DURATION30MIN} min data
+            Last {HOME_PAGE_REFERSH_DURATION} min data
           </span>
         </div>
         <div className="flex items-center font-helvetica">

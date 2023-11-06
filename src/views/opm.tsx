@@ -54,7 +54,7 @@ import {
   INPUT_TYPES,
   TITLE,
   LOCALE_OPTIONS,
-  DURATION30MIN,
+  HOME_PAGE_REFERSH_DURATION,
 } from "../constants/appConstants";
 import { URL_OPM } from "../constants/apiConstants";
 
@@ -95,13 +95,15 @@ const OPM: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    location.pathname.includes("opm")
-      ? setUrl(
-          `${URL_OPM}?period=${DEFAULT.duration}&date=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${DEFAULT.promocode}&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`
-        )
-      : setUrl(
-          `${URL_OPM}?period=${DURATION30MIN}&date=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${DEFAULT.promocode}&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`
-        );
+    setUrl(
+      `${URL_OPM}?period=${
+        location.pathname.includes("opm")
+          ? DEFAULT.duration
+          : HOME_PAGE_REFERSH_DURATION
+      }&date=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${
+        DEFAULT.promocode
+      }&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`
+    );
   }, []);
 
   function getGradient(ctx, chartArea) {
@@ -326,7 +328,7 @@ const OPM: React.FC = () => {
                 <CustomImage src={refreshIcon} />
               </CustomButton>
               <CustomButton
-                className="home-expand-btn mr-2 sm:mr-0"
+                className="home-expand-btn mr-2 ml-2 sm:mr-0"
                 onClick={handleOPMExpandClick}
               >
                 <CustomImage src={openNewPageIcon} />

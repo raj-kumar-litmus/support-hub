@@ -53,7 +53,7 @@ import {
   LABELS,
   TITLE,
   INPUT_TYPES,
-  DURATION30MIN,
+  HOME_PAGE_REFERSH_DURATION,
 } from "../constants/appConstants";
 import { URL_OPM_COMPARISON } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
@@ -143,13 +143,15 @@ const OpmComparison: React.FC = () => {
   ]);
 
   useEffect(() => {
-    location.pathname.includes("opmcomparison")
-      ? setUrl(
-          `${URL_OPM_COMPARISON}?period=${DEFAULT.duration}&startTimeOne=${DEFAULT.startTimeOne}&startDateTwo=${DEFAULT.startDateTwo}&channel=${DEFAULT.channel}`
-        )
-      : setUrl(
-          `${URL_OPM_COMPARISON}?period=${DURATION30MIN}&startTimeOne=${DEFAULT.startTimeOne}&startDateTwo=${DEFAULT.startDateTwo}&channel=${DEFAULT.channel}`
-        );
+    setUrl(
+      `${URL_OPM_COMPARISON}?period=${
+        location.pathname.includes("opm")
+          ? DEFAULT.duration
+          : HOME_PAGE_REFERSH_DURATION
+      }&startTimeOne=${DEFAULT.startTimeOne}&startDateTwo=${
+        DEFAULT.startDateTwo
+      }&channel=${DEFAULT.channel}`
+    );
   }, []);
 
   const handleFormChange = (event) => {
@@ -325,7 +327,7 @@ const OpmComparison: React.FC = () => {
                 <CustomImage src={refreshIcon} />
               </CustomButton>
               <CustomButton
-                className="home-expand-btn mr-2 sm:mr-0"
+                className="home-expand-btn mr-2 ml-2 sm:mr-0"
                 onClick={handleOPMCompExpandClick}
               >
                 <CustomImage src={openNewPageIcon} />

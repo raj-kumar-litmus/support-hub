@@ -53,7 +53,7 @@ export const STATUS: string = "Status";
 export const AMOUNT: string = "Amount";
 export const NO_MATCHING_ORDERS_FOUND: string = "No Matching Orders.";
 export const VIEW_ALL: string = "View All";
-export const DURATION30MIN: number = 30;
+export const HOME_PAGE_REFERSH_DURATION: number = 30;
 export const REFRESHTIME: number = 3000;
 
 export const LABELS = {
