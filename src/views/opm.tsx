@@ -43,6 +43,7 @@ import GreyPromoIcon from "../assets/grey_promo.svg";
 import GreyHourGlassIcon from "../assets/hourglass-grey.svg";
 import PromoCodeIcon from "../assets/promocode.svg";
 import openNewPageIcon from "../assets/open_in_new.svg";
+import refreshIcon from "../assets/refresh_icon.svg";
 import { fetchData } from "../utils/fetchUtil";
 import {
   CHANNELS,
@@ -305,6 +306,10 @@ const OPM: React.FC = () => {
     navigate("/opm");
   };
 
+  const handleOPMRefreshBtnClick = () => {
+    getData();
+  };
+
   return (
     <>
       {location.pathname.includes("home") && data && (
@@ -313,19 +318,31 @@ const OPM: React.FC = () => {
             <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
               {TITLE.OPM}
             </span>
-            <CustomButton
-              className="home-expand-btn mr-2 sm:mr-0"
-              onClick={handleOPMExpandClick}
-            >
-              <CustomImage src={openNewPageIcon} />
-            </CustomButton>
+            <div className="flex items-center">
+              <CustomButton
+                className="home-refresh-btn"
+                onClick={handleOPMRefreshBtnClick}
+              >
+                <CustomImage src={refreshIcon} />
+              </CustomButton>
+              <CustomButton
+                className="home-expand-btn mr-2 sm:mr-0"
+                onClick={handleOPMExpandClick}
+              >
+                <CustomImage src={openNewPageIcon} />
+              </CustomButton>
+            </div>
           </div>
-          <LineChart
-            title="OPM"
-            className="home-opm border-0 rounded-[10px] w-full sm:w-[89vw] lg:w-full lg:ml-[0] h-[380px] lg:h-[380px] lg:mt-[3vh] top-[-5vh]"
-            options={getChartConfig()}
-            data={data}
-          />
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <LineChart
+              title="OPM"
+              className="home-opm border-0 rounded-[10px] w-full sm:w-[89vw] lg:w-full lg:ml-[0] h-[380px] lg:h-[380px] lg:mt-[3vh] top-[-5vh]"
+              options={getChartConfig()}
+              data={data}
+            />
+          )}
         </div>
       )}
       {!IS_FULLSCREEN && location.pathname.includes("opm") && (
@@ -513,16 +530,21 @@ const OPM: React.FC = () => {
           )}
         </div>
       )}
-      {data && !isLoading && location.pathname.includes("opm") && (
-        <LineChart
-          title={TITLE.OPM}
-          isFullScreen={IS_FULLSCREEN}
-          className="border-0 rounded-[10px] lg:w-[71.74vw] lg:ml-[2.85vw] h-[340px] lg:h-[62.23vh] lg:mt-[3vh] "
-          options={options}
-          data={data}
-        />
+      {isLoading && location.pathname.includes("opm") ? (
+        <Loader />
+      ) : (
+        data &&
+        !isLoading &&
+        location.pathname.includes("opm") && (
+          <LineChart
+            title={TITLE.OPM}
+            isFullScreen={IS_FULLSCREEN}
+            className="border-0 rounded-[10px] lg:w-[71.74vw] lg:ml-[2.85vw] h-[340px] lg:h-[62.23vh] lg:mt-[3vh] "
+            options={options}
+            data={data}
+          />
+        )
       )}
-      {isLoading && <Loader />}
     </>
   );
 };

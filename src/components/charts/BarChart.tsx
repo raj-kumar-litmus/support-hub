@@ -9,6 +9,7 @@ import FilterIcon from "../../assets/filter-dark.svg";
 import SandGlassIcon from "../../assets/sandglass.svg";
 import openNewPageIcon from "../../assets/open_in_new.svg";
 import CalendarIcon from "../../assets/white_calendar.svg";
+import refreshIcon from "../../assets/refresh_icon.svg";
 import { BAR_CHART_OPTIONS } from "../../config/chartConfig";
 import { URL_SESSIONS } from "../../constants/apiConstants";
 import {
@@ -90,7 +91,6 @@ const BarChart = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setIsLoading(true);
     getSessionData();
   }, [submitCounter]);
 
@@ -185,6 +185,7 @@ const BarChart = () => {
       }
       params["starttime"] = startTimeStr;
     }
+    setIsLoading(true);
     const data = await fetchData(URL_SESSIONS, params);
     setSessionData(data || []);
     setIsLoading(false);
@@ -272,6 +273,10 @@ const BarChart = () => {
 
   const handleExpandClick = () => {
     navigate("/sessions");
+  };
+
+  const handleOPMCompRefreshBtnClick = () => {
+    getSessionData();
   };
 
   useEffect(() => {
@@ -388,15 +393,23 @@ const BarChart = () => {
                   <div className="text-[#F2F2F2] text-base sm:text-lg font-bold">
                     {SESSIONS}
                   </div>
-                  <CustomButton
-                    className="home-expand-btn ml-5 pb-[4px]"
-                    onClick={handleExpandClick}
-                  >
-                    <CustomImage src={openNewPageIcon} />
-                  </CustomButton>
+                  <div className="flex items-center">
+                    <CustomButton
+                      className="home-refresh-btn"
+                      onClick={handleOPMCompRefreshBtnClick}
+                    >
+                      <CustomImage src={refreshIcon} />
+                    </CustomButton>
+                    <CustomButton
+                      className="home-expand-btn ml-5 pb-[4px]"
+                      onClick={handleExpandClick}
+                    >
+                      <CustomImage src={openNewPageIcon} />
+                    </CustomButton>
+                  </div>
                 </div>
                 <CustomTab
-                  className="sessions-tabs sm:absolute sm:top-[1.25rem] sm:right-[4rem]"
+                  className="sessions-tabs sm:absolute sm:top-[1.25rem] sm:right-[8rem]"
                   tabData={SESSIONS_TABS}
                   tabValue={tabValue}
                   setTabValue={setTabValue}
