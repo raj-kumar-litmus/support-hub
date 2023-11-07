@@ -249,6 +249,7 @@ const OpmComparison: React.FC = () => {
               isMobile: width < 700,
             })
       );
+      setIsLoading(false);
     }
   }, [apiResponse]);
 
@@ -256,7 +257,7 @@ const OpmComparison: React.FC = () => {
     try {
       setIsLoading(true);
       const data = await fetchData(url, {});
-      setIsLoading(false);
+      // setIsLoading(false);
       setApiResponse(data);
     } catch (err) {
       console.log(`Error occured while fetching ${url}`);
@@ -271,7 +272,7 @@ const OpmComparison: React.FC = () => {
 
   useEffect(() => {
     (async () => {
-      await getData();
+      url?.length > 0 && (await getData());
     })();
   }, [url]);
 
@@ -295,7 +296,7 @@ const OpmComparison: React.FC = () => {
   const getChartConfig = () => {
     const customChartConfig = { ...options };
     if (width < 700) {
-      customChartConfig.layout.padding.top = 70;
+      customChartConfig.layout.padding.top = 0;
       customChartConfig.layout.padding.bottom = 20;
     } else {
       customChartConfig.layout.padding.top = 70;
@@ -315,7 +316,7 @@ const OpmComparison: React.FC = () => {
     <>
       {location.pathname.includes("home") && data && (
         <div className="w-full sm:w-1/2 bg-[#22262C] p-0 bg-transparent rounded-lg flex flex-col justify-between">
-          <div className="flex justify-between sm:mb-3 items-center relative top-[3vh] sm:top-[6vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
+          <div className="flex justify-between items-center relative top-[3vh] sm:top-[6vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
             <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
               {TITLE.OPM_COMPARISON}
             </span>

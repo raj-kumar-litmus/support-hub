@@ -55,8 +55,10 @@ import {
   TITLE,
   LOCALE_OPTIONS,
   HOME_PAGE_REFERSH_DURATION,
+  OPM_OPTIONS_HOME,
 } from "../constants/appConstants";
 import { URL_OPM } from "../constants/apiConstants";
+import { Line } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -156,8 +158,13 @@ const OPM: React.FC = () => {
 
   useEffect(() => {
     (async () => {
-      setOptions(OPM_OPTIONS(width < 700));
-      await getData();
+      // setOptions(OPM_OPTIONS(width < 700));
+      setOptions(
+        location.pathname.includes("home")
+          ? OPM_OPTIONS_HOME(width < 700)
+          : OPM_OPTIONS(width < 700)
+      );
+      url?.length > 0 && (await getData());
     })();
   }, [url]);
 
@@ -293,16 +300,19 @@ const OPM: React.FC = () => {
     });
   }, []);
 
-  const getChartConfig = () => {
-    const customChartConfig = { ...options };
-    if (width < 700) {
-      customChartConfig.layout.padding.top = 70;
-      customChartConfig.layout.padding.bottom = 0;
-    } else {
-      customChartConfig.layout.padding.top = 70;
-    }
-    return customChartConfig;
-  };
+  // const getChartConfig = () => {
+  //   const customChartConfig = { ...options };
+  //   if (width < 700) {
+  //     customChartConfig.layout.padding.top = 70;
+  //     customChartConfig.layout.padding.bottom = 0;
+  //   } else {
+  //     customChartConfig.layout.padding.top = 0;
+  //     customChartConfig.layout.padding.bottom = 0;
+  //     customChartConfig.layout.padding.left = 0;
+  //     customChartConfig.layout.padding.right = 0;
+  //   }
+  //   return customChartConfig;
+  // };
 
   const handleOPMExpandClick = () => {
     navigate("/opm");
@@ -315,6 +325,34 @@ const OPM: React.FC = () => {
   return (
     <>
       {location.pathname.includes("home") && data && (
+        <div className="home-opm w-full sm:w-1/2 bg-[#22262C] p-4 rounded-lg  border-0 rounded-[10px] w-full sm:w-[89vw] h-[55vh] lg:h-[60vh] lg:w-1/2 lg:ml-[0] lg:mt-[3vh]">
+          <div className="flex justify-between mb-3 items-baseline">
+            <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
+              {TITLE.OPM}
+            </span>
+            <div className="flex items-center">
+              <CustomButton
+                className="home-refresh-btn"
+                onClick={handleOPMRefreshBtnClick}
+              >
+                <CustomImage src={refreshIcon} />
+              </CustomButton>
+              <CustomButton
+                className="home-expand-btn mr-2 ml-2 sm:mr-0"
+                onClick={handleOPMExpandClick}
+              >
+                <CustomImage src={openNewPageIcon} />
+              </CustomButton>
+            </div>
+          </div>
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <Line options={options} data={data} />
+          )}
+        </div>
+      )}
+      {/* {location.pathname.includes("home") && data && (
         <div className="w-full sm:w-1/2 bg-[#22262C] p-0 bg-transparent rounded-lg">
           <div className="flex justify-between sm:mb-3 items-center relative top-[3vh] sm:top-[6vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
             <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
@@ -346,7 +384,7 @@ const OPM: React.FC = () => {
             />
           )}
         </div>
-      )}
+      )} */}
       {!IS_FULLSCREEN && location.pathname.includes("opm") && (
         <div className="flex justify-between items-start lg:mb-[2vh] lg:mt-[4vh] ml-[5vw] lg:ml-[3vw] mr-[5vw] lg:mr-[3vw] mt-[3vh]">
           <p className="font-bold w-[50vw] text-[#F2F2F2] w-[50vw] lg:w-[30vw]">
