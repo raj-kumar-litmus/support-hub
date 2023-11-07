@@ -90,7 +90,7 @@ const OpmComparison: React.FC = () => {
     channel: "",
   };
 
-  const [url, setUrl] = useState<string>();
+  const [url, setUrl] = useState<string | null>(null);
 
   const [options, setOptions] = useState<null | ChartOptions>(null);
   const [data, setData] = useState<ChartData | null>(null);
@@ -344,7 +344,7 @@ const OpmComparison: React.FC = () => {
         </div>
       )}
       {!IS_FULLSCREEN && location.pathname.includes("opmcomparison") && (
-        <div className="flex justify-between items-start lg:mt-[4vh] ml-[1vw] lg:ml-[0.5vw] mt-[3vh]">
+        <div className="flex justify-between items-start lg:mt-[4vh] ml-[6vw] mr-[6vw] sm:ml-[1vw] sm:mr-0  lg:ml-[0.5vw] mt-[3vh]">
           <p className="font-bold w-[50vw] text-[#F2F2F2] w-[50vw] lg:w-[30vw]">
             {TITLE.OPM_COMPARISON}
           </p>

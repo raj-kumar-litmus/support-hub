@@ -9,7 +9,6 @@ import {
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { SESSIONS_CHART } from "../constants/appConstants";
-import { externalTooltipHandler } from "../components/utils/Utils";
 
 Chart.register(
   CategoryScale,
@@ -51,16 +50,13 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = {
       display: true,
       formatter: (_, context) =>
         context.chart.data.dataset?.[0]?.data?.[context.dataIndex],
-      align: "top",
-      anchor: "end",
-      color: "white",
+      color: "black",
       font: {
         size: "12",
       },
     },
     tooltip: {
       enabled: false,
-      external: (_) => externalTooltipHandler(_, "sessions"),
     },
   },
   scales: {

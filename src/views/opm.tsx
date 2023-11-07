@@ -88,9 +88,7 @@ const OPM: React.FC = () => {
     country: "",
   };
 
-  const [url, setUrl] = useState<string>(
-    `${URL_OPM}?period=${DEFAULT.duration}&date=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${DEFAULT.promocode}&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`,
-  );
+  const [url, setUrl] = useState<string | null>(null);
 
   const [options, setOptions] = useState<null | ChartOptions>(null);
   const [data, setData] = useState<ChartData | null>(null);
@@ -338,7 +336,7 @@ const OPM: React.FC = () => {
         </div>
       )}
       {!IS_FULLSCREEN && location.pathname.includes("opm") && (
-        <div className="flex justify-between items-start lg:mt-[4vh] ml-[1vw] lg:ml-[0.5vw] mt-[3vh]">
+        <div className="flex justify-between items-start lg:mt-[4vh] ml-[6vw] mr-[6vw] sm:ml-[1vw] sm:mr-0 lg:ml-[0.5vw] mt-[3vh]">
           <p className="font-bold w-[50vw] text-[#F2F2F2] w-[50vw] lg:w-[30vw]">
             {TITLE.OPM}
           </p>
