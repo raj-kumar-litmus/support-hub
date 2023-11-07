@@ -7,18 +7,18 @@ interface Props {
   name?: string;
   id?: string;
   icon?: string;
-  imageClassName?: string;
+  imageclassname?: string;
   label?: string;
   placeholder?: string;
   className?: string;
-  containerClassName?: string;
+  containerclassname?: string;
 }
 
 const CustomInputText: React.FC<Props> = ({
   onChange,
   className,
-  imageClassName,
-  containerClassName,
+  imageclassname,
+  containerclassname,
   name,
   label,
   icon,
@@ -26,12 +26,12 @@ const CustomInputText: React.FC<Props> = ({
   placeholder,
 }) => {
   return icon ? (
-    <div className={`flex flex-col ${containerClassName}`}>
-      <label className="labelClass relative mb-[5px] mt-[14px] ml-[18px]">
+    <div className={`flex flex-col md:w-[8vw] ${containerclassname}`}>
+      <label className="labelClass relative mb-[5px] mt-[14px] ml-[1.2vw]">
         {label}
       </label>
       <span className="p-input-icon-left flex">
-        <img className={imageClassName} src={icon} />
+        <img className={imageclassname} src={icon} />
         <InputText
           name={name}
           placeholder={placeholder}
@@ -43,8 +43,8 @@ const CustomInputText: React.FC<Props> = ({
       </span>
     </div>
   ) : (
-    <div className={`flex flex-col md:w-[8vw] ${containerClassName}`}>
-      <label className="labelClass relative mb-[5px] mt-[14px] ml-[18px]">
+    <div className={`flex flex-col md:w-[8vw] ${containerclassname}`}>
+      <label className="labelClass relative mb-[5px] mt-[14px] ml-[1.2vw]">
         {label}
       </label>
       <InputText

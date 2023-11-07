@@ -223,7 +223,7 @@ button.p-button-secondary {
 .submitBtnMobile button,
 .submitBtnMobile button:hover,
 .submitBtnMobile button:enabled:active {
-  @apply w-[10vw] h-[44px] text-[13px] text-white !bg-transparent border border-solid !border-[#30343B] items-center;
+  @apply w-[20vw] md:w-[10vw] h-[44px] text-[13px] text-white !bg-transparent border border-solid !border-[#30343B] items-center;
 }
 .submitBtnMobile button:focus {
   @apply !shadow-none;
@@ -312,7 +312,7 @@ button.p-button-secondary {
   @apply w-[135px];
 }
 .mobileInput .labelClass {
-  @apply ml-[2vw];
+  @apply ml-[1vw];
 }
 .mobileInput .p-inputtext {
   @apply relative w-[43vw] left-[-12px];

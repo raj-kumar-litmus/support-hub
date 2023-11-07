@@ -338,7 +338,7 @@ const OPM: React.FC = () => {
         </div>
       )}
       {!IS_FULLSCREEN && location.pathname.includes("opm") && (
-        <div className="flex justify-between items-start lg:mt-[4vh] ml-[1vw] lg:ml-[0.5vw] mr-[5vw] lg:mr-[3vw] mt-[3vh]">
+        <div className="flex justify-between items-start lg:mt-[4vh] ml-[1vw] lg:ml-[0.5vw] mt-[3vh]">
           <p className="font-bold w-[50vw] text-[#F2F2F2] w-[50vw] lg:w-[30vw]">
             {TITLE.OPM}
           </p>
@@ -355,29 +355,32 @@ const OPM: React.FC = () => {
       {showFilters && location.pathname.includes("opm") && (
         <>
           {width > 700 ? (
-            <form className="flex gap-[0.5vw] opmFilters" onSubmit={submit}>
+            <form
+              className="md:flex md:gap-[0.5vw] opmFilters sm:grid sm:grid-cols-3"
+              onSubmit={submit}
+            >
               {formFields.map((form, index) => {
                 return (
                   <React.Fragment key={index}>
                     {form.type === INPUT_TYPES.text && (
                       <CustomInputText
-                        containerClassName="lg:relative lg:top-[2px] lg:left-[-9px]"
+                        containerclassname="relative top-[2px] left-[-9px]"
                         value={form.value}
                         name={form.name}
                         label={form.label}
                         icon={form.imgsrc}
                         placeholder={form.label}
-                        imageClassName="relative left-[25px] z-[1]"
+                        imageclassname="relative left-[25px] z-[1]"
                         onChange={(event) => handleFormChange(event)}
-                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px] w-[8vw] lg:w-[10vw]"
+                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px] lg:w-[10vw] sm:w-[20vw]  md:w-[8vw]"
                       />
                     )}
                     {form.type === INPUT_TYPES.time && (
                       <CustomCalendar
                         name={form.name}
-                        containerClassName="ml-[10px] md:w-[10vw] lg:w-[12vw] xl:w-[14vw]"
-                        titleClassName="top-[2vh]"
-                        imageClassName="h-[20px] w-[20px] relative top-[3vh] left-[0.5vw] z-[1]"
+                        containerclassname="ml-[10px] sm:w-[20vw] md:w-[10vw] lg:w-[12vw] xl:w-[14vw]"
+                        titleclassname="top-[2vh]"
+                        imageclassname="h-[20px] w-[20px] relative top-[3vh] left-[0.5vw] z-[1]"
                         title={form.label}
                         showTime={form.showTime}
                         iconPos={form.iconPos || "left"}
@@ -391,8 +394,8 @@ const OPM: React.FC = () => {
                         value={form.value}
                         name={form.name}
                         onChange={(e) => handleFormChange(e)}
-                        containerClassName=""
-                        imageClassName="relative left-[25px] z-[1]"
+                        containerclassname="sm:w-[20vw]"
+                        imageclassname="relative left-[25px] z-[1]"
                         dropdownIcon={<CustomImage src={ArrowDownIcon} />}
                         icon={form.icon}
                         options={form.options}
@@ -408,7 +411,7 @@ const OPM: React.FC = () => {
                 label={LABELS.submit}
                 isDisabled={disabled}
                 isRounded={true}
-                className="submitBtnMobile self-end relative"
+                className="submitBtnMobile self-end relative w-[10vw] sm:w-[20vw]"
               />
             </form>
           ) : (
@@ -432,12 +435,12 @@ const OPM: React.FC = () => {
                       <>
                         {form.type === INPUT_TYPES.text && (
                           <CustomInputText
-                            containerClassName="w-[45vw] mobileInput"
+                            containerclassname="w-[45vw] mobileInput"
                             value={form.value}
                             name={form.name}
                             label={form.label}
                             icon={form.imgsrc}
-                            imageClassName="relative left-[12px] md:left-[25px] z-[1]"
+                            imageclassname="relative left-[12px] md:left-[25px] z-[1]"
                             placeholder={form.label}
                             onChange={(event) => handleFormChange(event)}
                             className="border rounded-[8px] border-solid border-slate-300 border-1 h-[40px]"
@@ -446,9 +449,9 @@ const OPM: React.FC = () => {
                         {form.type === INPUT_TYPES.time && (
                           <CustomCalendar
                             name={form.name}
-                            containerClassName="opmFiltersMobileCalendar"
-                            titleClassName="top-[2.2vh]"
-                            imageClassName="h-[20px] w-[20px] relative top-[3vh] left-[3.5vw] z-[1]"
+                            containerclassname="opmFiltersMobileCalendar"
+                            titleclassname="left-[1vw] md:left-[0] top-[2.2vh]"
+                            imageclassname="h-[20px] w-[20px] relative top-[3vh] left-[3.5vw] z-[1]"
                             title={form.label}
                             showTime={form.showTime}
                             iconPos={form.iconPos || "left"}
@@ -463,8 +466,8 @@ const OPM: React.FC = () => {
                             name={form.name}
                             dropdownIcon={<CustomImage src={DropDownIcon} />}
                             onChange={(e) => handleFormChange(e)}
-                            containerClassName="w-[44vw]"
-                            imageClassName="relative left-[25px] z-[1]"
+                            containerclassname="w-[44vw]"
+                            imageclassname="relative left-[25px] z-[1]"
                             icon={form.icon}
                             options={form.options}
                             label={form.label}
@@ -489,7 +492,7 @@ const OPM: React.FC = () => {
       )}
       {location.pathname.includes("opm") && showFilteredCards && (
         <div
-          className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[3vw] ${
+          className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[0.5vw] ${
             IS_FULLSCREEN
               ? "landScape rotate-90 absolute left-[40vw] top-[45vh] ml-[25vw] w-[22vh]"
               : `${width < 700 ? "portrait" : ""}`
@@ -531,7 +534,7 @@ const OPM: React.FC = () => {
           <LineChart
             title={TITLE.OPM}
             isFullScreen={IS_FULLSCREEN}
-            className="border-0 rounded-[10px] w-[90vw] sm:w-[67vw] lg:w-[75vw] lg:ml-[0] h-[340px] md:h-[340px] lg:h-[62.23vh] mt-[1vh] lg:mt-[3vh]"
+            className="border-0 rounded-[10px] w-[90vw] sm:w-[70vw] lg:w-[75vw] lg:ml-[0] h-[340px] md:h-[340px] lg:h-[62.23vh] mt-[1vh] lg:mt-[3vh]"
             options={options}
             data={data}
           />
