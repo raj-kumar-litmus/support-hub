@@ -10,6 +10,7 @@ import Chart from "./components/ChartIndex";
 import "./index.css";
 import OrderDetails from "./components/orderDetails/OrderDetails.js";
 import HomePage from "./components/homePage.js";
+import IncompleteOrders from "./components/IncompleteOrders";
 
 // const Loader = lazy(() => import("./components/Loader.tsx"));
 
@@ -52,6 +53,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             path="/orderDetails/:orderId"
             element={<App appContent={<OrderDetails />} />}
           />
+          <Route path="/incomplete-orders"
+        element={<App appContent={<IncompleteOrders/>}/>}/>
         </Routes>
       </Suspense>
     </Router>

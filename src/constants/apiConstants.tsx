@@ -7,3 +7,4 @@ export const URL_OMS_ORDER_STATUS: string =
 export const URL_PROMOTIONS: string =
   "/supportdashboard/v1/orders/:orderId/promo";
 export const URL_OMS_ORDER_FLOW: string = "/orderflowApp/oms/orderflow/order";
+export const URL_INCOMPLETE_ORDERS: string = "/supportdashboard/v1/orders/incomplete";

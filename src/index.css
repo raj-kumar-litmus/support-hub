@@ -688,3 +688,6 @@ hr.horizontalLine.opmComparison {
 .home-refresh-btn {
   @apply bg-[#22262C] border-[#22262C] rounded-full text-white text-xs px-5 py-3;
 }
+.incomplete-order .p-datatable-thead tr th {
+  @apply w-1/12
+}
