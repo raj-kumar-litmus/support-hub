@@ -310,9 +310,10 @@ const OpmComparison: React.FC = () => {
 
   return (
     <>
-      {location.pathname.includes("home") && data && (
+      {location.pathname.includes("home") && isLoading && <Loader />}
+      {location.pathname.includes("home") && !isLoading && data && (
         <div className="w-full sm:w-1/2 bg-[#22262C] p-0 bg-transparent rounded-lg flex flex-col justify-between">
-          <div className="flex justify-between sm:mb-3 items-center relative top-[3vh] sm:top-[6vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
+          <div className="flex justify-between sm:mb-3 items-center relative top-[3vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
             <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
               {TITLE.OPM_COMPARISON}
             </span>
@@ -331,16 +332,12 @@ const OpmComparison: React.FC = () => {
               </CustomButton>
             </div>
           </div>
-          {isLoading ? (
-            <Loader />
-          ) : (
-            <LineChart
-              title="OPM Comparison"
-              className="home-opm-comp border-0 rounded-[10px] w-full sm:w-[89vw] lg:w-full lg:ml-[0] h-[340px] lg:h-[380px] top-[-5vh]"
-              options={getChartConfig()}
-              data={data}
-            />
-          )}
+          <LineChart
+            title="OPM Comparison"
+            className="home-opm-comp border-0 rounded-[10px] w-full sm:w-[89vw] lg:w-full lg:ml-[0] h-[340px] lg:h-[380px] top-[-5vh]"
+            options={getChartConfig()}
+            data={data}
+          />
         </div>
       )}
       {!IS_FULLSCREEN && location.pathname.includes("opmcomparison") && (
@@ -537,7 +534,7 @@ const OpmComparison: React.FC = () => {
           <LineChart
             title={TITLE.OPM_COMPARISON}
             isFullScreen={IS_FULLSCREEN}
-            className="border-0 rounded-[10px] w-[90vw] sm:w-[70vw] lg:w-[75vw] lg:ml-[0] h-[340px] md:h-[340px] lg:h-[62.23vh] mt-[1vh] lg:mt-[3vh]"
+            className="border-0 rounded-[10px] sm:w-[70vw] lg:w-[75vw] lg:ml-[0] h-[340px] md:h-[340px] lg:h-[62.23vh] mt-[1vh] lg:mt-[3vh]"
             options={options}
             data={data}
           />

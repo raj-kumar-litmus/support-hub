@@ -194,7 +194,7 @@ button.p-button-secondary {
   @apply relative left-[10px];
 }
 .opmFiltersMobileCalendar span.p-calendar {
-  @apply relative left-[8px] h-[39px] w-[93%];
+  @apply relative left-[8px] h-[39px];
 }
 .opmFiltersMobile .p-dropdown .p-dropdown-trigger {
   @apply w-[4vw] relative right-[14px];
@@ -294,7 +294,7 @@ button.p-button-secondary {
   @apply text-[#E8E8E8] font-normal;
 }
 .inputContainer .p-inputtext {
-  @apply w-[150px] h-[37px];
+  @apply w-[38vw] h-[37px];
 }
 .opmFilters .p-inputtext {
   @apply text-[#E8E8E8];

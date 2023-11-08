@@ -138,13 +138,15 @@ const OPM: React.FC = () => {
 
   useEffect(() => {
     (async () => {
-      setOptions(
-        OPM_OPTIONS(
-          width < 700,
-          Number(url.split("period=")[1].split("&")[0]) < 16,
-        ),
-      );
-      await getData();
+      if (url) {
+        setOptions(
+          OPM_OPTIONS(
+            width < 700,
+            Number(url.split("period=")[1].split("&")[0]) < 16,
+          ),
+        );
+        await getData();
+      }
     })();
   }, [url]);
 
@@ -302,9 +304,10 @@ const OPM: React.FC = () => {
 
   return (
     <>
-      {location.pathname.includes("home") && data && (
+      {location.pathname.includes("home") && isLoading && <Loader />}
+      {location.pathname.includes("home") && data && !isLoading && (
         <div className="w-full sm:w-1/2 bg-[#22262C] p-0 bg-transparent rounded-lg">
-          <div className="flex justify-between sm:mb-3 items-center relative top-[3vh] sm:top-[6vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
+          <div className="flex justify-between sm:mb-3 items-center relative top-[3vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
             <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
               {TITLE.OPM}
             </span>
@@ -323,16 +326,12 @@ const OPM: React.FC = () => {
               </CustomButton>
             </div>
           </div>
-          {isLoading ? (
-            <Loader />
-          ) : (
-            <LineChart
-              title="OPM"
-              className="home-opm border-0 rounded-[10px] w-full sm:w-[89vw] lg:w-full lg:ml-[0] h-[380px] lg:h-[380px] lg:mt-[3vh] top-[-5vh]"
-              options={getChartConfig()}
-              data={data}
-            />
-          )}
+          <LineChart
+            title="OPM"
+            className="home-opm border-0 rounded-[10px] w-full sm:w-[89vw] lg:w-full lg:ml-[0] h-[380px] lg:h-[380px] lg:mt-[3vh] top-[-5vh]"
+            options={getChartConfig()}
+            data={data}
+          />
         </div>
       )}
       {!IS_FULLSCREEN && location.pathname.includes("opm") && (
@@ -532,7 +531,7 @@ const OPM: React.FC = () => {
           <LineChart
             title={TITLE.OPM}
             isFullScreen={IS_FULLSCREEN}
-            className="border-0 rounded-[10px] w-[90vw] sm:w-[70vw] lg:w-[75vw] lg:ml-[0] h-[340px] md:h-[340px] lg:h-[62.23vh] mt-[1vh] lg:mt-[3vh]"
+            className="border-0 rounded-[10px] sm:w-[70vw] lg:w-[75vw] lg:ml-[0] h-[340px] md:h-[340px] lg:h-[62.23vh] mt-[1vh] lg:mt-[3vh]"
             options={options}
             data={data}
           />

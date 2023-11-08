@@ -58,12 +58,13 @@ const BarChart = () => {
   const [showFilterPopup, setShowFilterPopup] = useState<boolean>(false);
   const [showFilters, setShowFilters] = useState<boolean>(true);
   const [submitCounter, setSubmitCounter] = useState<number>(0);
+  const [chartOptions, setChartOptions] = useState<any>(null);
   const [formFields, setFormFields] = useState([
     {
       type: "dropdown",
       name: "period",
       title: DURATION,
-      value: "",
+      value: 10,
       iconSrc: SandGlassIcon,
       options: DURATION_LIST,
     },
@@ -188,6 +189,11 @@ const BarChart = () => {
     setIsLoading(true);
     const data = await fetchData(URL_SESSIONS, params);
     setSessionData(data || []);
+    setChartOptions(
+      location.pathname.includes("home")
+        ? getChartConfig(HOME_PAGE_REFERSH_DURATION)
+        : getChartConfig(),
+    );
     setIsLoading(false);
   };
 
@@ -247,14 +253,20 @@ const BarChart = () => {
       : setShowFilterPopup(!showFilterPopup);
   };
 
-  const getChartConfig = () => {
+  const getChartConfig = (duration) => {
     const customChartConfig = { ...BAR_CHART_OPTIONS };
     if (width > 700) {
       customChartConfig.plugins.legend.position = "bottom";
       customChartConfig.plugins.legend.align = "start";
+      customChartConfig.plugins.datalabels.rotation =
+        (duration ||
+          Number(formFields.find((e) => e.name === "period").value)) < 11
+          ? 0
+          : 270;
     } else {
       customChartConfig.plugins.legend.position = "top";
       customChartConfig.plugins.legend.align = "start";
+      customChartConfig.plugins.datalabels.rotation = 270;
     }
     return customChartConfig;
   };
@@ -390,7 +402,7 @@ const BarChart = () => {
             {location.pathname.includes("home") && (
               <>
                 <div className="flex flex-row justify-between">
-                  <div className="text-[#F2F2F2] text-base sm:text-lg font-bold">
+                  <div className="text-[#F2F2F2] text-base sm:text-lg font-bold self-center">
                     {SESSIONS}
                   </div>
                   <div className="flex items-center">
@@ -424,8 +436,8 @@ const BarChart = () => {
                 setTabValue={setTabValue}
               />
             )}
-            {allData.labels.length > 0 && (
-              <Bar ref={chartRef} options={getChartConfig()} data={allData} />
+            {allData.labels.length > 0 && chartOptions && (
+              <Bar ref={chartRef} options={chartOptions} data={allData} />
             )}
             <div className="text-center text-xs text-[#FAF9F6] -mt-[2px] sm:-mt-[28px]">
               {TOTAL_SESSIONS_PER_MINUTE}
