@@ -1,10 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { BrowserRouter as Router } from "react-router-dom";
 import SearchField from "../components/common/searchfield";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 
 const meta = {
   title: "Stories/search-mobile",
   component: SearchField,
+  decorators: [
+    () => (
+      <Router>
+        <SearchField />
+      </Router>
+    ),
+  ],
   parameters: {
     viewport: {
       viewports: INITIAL_VIEWPORTS,

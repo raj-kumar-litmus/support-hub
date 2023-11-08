@@ -25,6 +25,8 @@ export interface CustomCalendarProps {
   placeholder?: string;
   name?: string;
   timeOnly?: boolean;
+  imageclassname?: string;
+  titleclassname?: string;
   showTime?: boolean;
   hideOnDateTimeSelect?: boolean;
   hourFormat?: "24" | "12";
@@ -32,7 +34,7 @@ export interface CustomCalendarProps {
   value: string;
   onChange: (value: Date) => void;
   iconPos: "left" | "right";
-  containerClassName?: string;
+  containerclassname?: string;
   imgalt?: string;
   imgsrc?: string;
   icon?: any;

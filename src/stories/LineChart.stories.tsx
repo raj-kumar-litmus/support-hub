@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { BrowserRouter as Router } from "react-router-dom";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import LineChart from "../components/LineChart";
@@ -6,6 +7,13 @@ import LineChart from "../components/LineChart";
 const meta = {
   title: "Components/LineChart",
   component: LineChart,
+  decorators: [
+    (LineChart) => (
+      <Router>
+        <LineChart />
+      </Router>
+    ),
+  ],
   parameters: {
     layout: "centered",
   },

@@ -20,6 +20,9 @@ export const TOTAL_SESSIONS_PER_MIN_SECONDARY: string =
   "Azure Secondary (Sessions/Min)";
 export const TOTAL_SESSIONS_PER_MINUTE: string = "Total Session per minute";
 export const MINS = "Mins";
+export const LASTDAY: string = "Last Day";
+export const TODAY: string = "Today";
+export const DIFFERENCE: string = "Difference";
 
 export const ORDER_DETAILS: string = "Order Details";
 export const PROMOTIONS: string = "Promotions";
@@ -50,6 +53,8 @@ export const STATUS: string = "Status";
 export const AMOUNT: string = "Amount";
 export const NO_MATCHING_ORDERS_FOUND: string = "No Matching Orders.";
 export const VIEW_ALL: string = "View All";
+export const HOME_PAGE_REFERSH_DURATION: number = 30;
+export const REFRESHTIME: number = 3000;
 
 export const LABELS = {
   duration: "Duration",
@@ -110,6 +115,7 @@ export const SESSIONS_CHART = {
   STEP_SIZE: 5000,
   TICK_COUNT: 5,
   CATEGORY_PERCENT: 0.6,
+  LEGEND_LINE_WIDTH: 2,
 };
 
 export const DURATIONS = {
@@ -132,6 +138,7 @@ export const CHANNELS = {
 };
 
 export const LOCALE_OPTIONS = {
+  ALL: "",
   US: "US",
   CA: "CA",
 };
@@ -177,7 +184,7 @@ export const ORDER_STATUS_LIST = [
     description: "Shipped and invoiced",
   },
 ];
-export const OPM_OPTIONS = (isMobile: boolean) => ({
+export const OPM_OPTIONS = (isMobile: boolean, showDataLabels = false) => ({
   responsive: true,
   maintainAspectRatio: false,
   layout: {
@@ -200,6 +207,9 @@ export const OPM_OPTIONS = (isMobile: boolean) => ({
       grid: {
         color: "#00000033",
       },
+      border: {
+        display: false,
+      },
     },
     x: {
       grid: {
@@ -212,11 +222,6 @@ export const OPM_OPTIONS = (isMobile: boolean) => ({
         padding: isMobile ? { top: 35, bottom: 35 } : { top: 35 },
       },
     },
-    y: {
-      border: {
-        display: false,
-      },
-    },
   },
   plugins: {
     legend: {
@@ -227,7 +232,14 @@ export const OPM_OPTIONS = (isMobile: boolean) => ({
       external: (_) => externalTooltipHandler(_, "opm"),
     },
     datalabels: {
-      display: false,
+      display: showDataLabels,
+      formatter: (_, context) =>
+        context.chart.data.dataset?.[0]?.data?.[context.dataIndex],
+      align: "top",
+      anchor: "center",
+      font: {
+        size: "12",
+      },
     },
   },
   elements: {
@@ -243,6 +255,7 @@ export const OPM_COMPARISON_OPTIONS = ({
   startDate,
   endDate,
   isMobile,
+  showDataLabels = false,
 }) => ({
   responsive: true,
   maintainAspectRatio: false,
@@ -288,7 +301,14 @@ export const OPM_COMPARISON_OPTIONS = ({
   },
   plugins: {
     datalabels: {
-      display: false,
+      display: showDataLabels,
+      formatter: (_, context) =>
+        context.chart.data.dataset?.[0]?.data?.[context.dataIndex],
+      align: "top",
+      anchor: "center",
+      font: {
+        size: "12",
+      },
     },
     legend: {
       display: true,
@@ -331,6 +351,7 @@ export const OPM_COMPARISON_OPTIONS_HOME = ({
   startDate,
   endDate,
   isMobile,
+  showDataLabels = false,
 }) => {
   const options = OPM_COMPARISON_OPTIONS({
     apiResponse,
@@ -346,11 +367,31 @@ export const OPM_COMPARISON_OPTIONS_HOME = ({
         left: 30,
         right: 50,
         top: 35,
-        bottom: 20,
+        bottom: 0,
+      },
+    },
+    scales: {
+      ...options.scales,
+      x: {
+        ...options.scales.x,
+        title: {
+          ...options.scales.x.title,
+          padding: isMobile ? { top: 20, bottom: 20 } : { top: 25, bottom: 25 },
+        },
       },
     },
     plugins: {
       ...options.plugins,
+      datalabels: {
+        display: showDataLabels,
+        formatter: (_, context: any) =>
+          context.chart.data.dataset?.[0]?.data?.[context.dataIndex],
+        align: "top",
+        anchor: "center",
+        font: {
+          size: "10",
+        },
+      },
       legend: {
         ...options.plugins.legend,
         position: "top",
@@ -360,3 +401,8 @@ export const OPM_COMPARISON_OPTIONS_HOME = ({
 };
 
 export const ORDER_STATUS: string = "Order Status";
+export const SESSIONS_TABS = [
+  { header: PRIMARY },
+  { header: SECONDARY },
+  { header: BOTH },
+];

@@ -178,8 +178,8 @@ const OrderDetails: React.FC = () => {
             onClick={showPromotions}
           >
             <CustomIcon
-              className="mr-1  "
-              alt="promotion-icon "
+              className="mr-1"
+              alt="promotion-icon"
               src={PromotionsIcon}
               width="0.75rem"
               height="0.75rem"
@@ -263,15 +263,17 @@ const OrderDetails: React.FC = () => {
             </span>
           </div>
           <div className="flexBlockWrapper border-t filterCardWrapper">
-            <span className="w-auto sm:w-1/6 flex items-center min-w-[4.5rem] cursor-pointer"  onClick={showOmsStatusInfo}>
+            <span
+              className="w-auto sm:w-1/6 flex items-center min-w-[4.5rem] cursor-pointer"
+              onClick={showOmsStatusInfo}
+            >
               {OMS}
               <CustomIcon
-                className="ml-2 "
+                className="ml-2"
                 alt="oms-info-icon"
                 src={OmsInfoIcon}
                 width="0.85rem"
                 height="0.85rem"
-               
               />
             </span>
             <span className="w-auto sm:w-5/6 font-medium">

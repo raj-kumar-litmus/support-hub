@@ -7,10 +7,10 @@ interface Props {
   icon?: string;
   dropdownIcon?: any;
   value?: string;
-  imageClassName?: string;
+  imageclassname?: string;
   optionLabel: string;
   label?: string;
-  containerClassName?: string;
+  containerclassname?: string;
   name?: string;
   placeholder: string;
 }
@@ -20,8 +20,8 @@ const CustomDropdown: React.FC<Props> = ({
   options,
   icon,
   name,
-  imageClassName,
-  containerClassName,
+  imageclassname,
+  containerclassname,
   label,
   value,
   optionLabel,
@@ -30,11 +30,11 @@ const CustomDropdown: React.FC<Props> = ({
 }) => {
   return icon ? (
     <div
-      className={`flex flex-col self-end inputContainer md:w-[8vw] ${containerClassName}`}
+      className={`flex flex-col self-end inputContainer w-[10vw] md:w-[8vw] ${containerclassname}`}
     >
       <label className="labelClass relative ml-[18px]">{label}</label>
       <span className="flex">
-        <img className={imageClassName} src={icon} />
+        <img className={imageclassname} src={icon} />
         <Dropdown
           dropdownIcon={dropdownIcon}
           value={value}

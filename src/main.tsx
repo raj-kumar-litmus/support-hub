@@ -1,6 +1,11 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import "primereact/resources/primereact.min.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import DcOpenOrders from "./components/DcOpenOrders";
@@ -20,6 +25,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       {/* <Suspense fallback={<Loader />}> */}
       <Suspense>
         <Routes>
+          <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/home" element={<App appContent={<HomePage />} />} />
           <Route
             path="/dc-open-orders"

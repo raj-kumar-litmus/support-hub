@@ -57,3 +57,9 @@ export const getLocaleTime = (timeVal: Date, is12Hr: boolean): string => {
     minute: "2-digit",
   });
 };
+
+export const tenMinutesAgoInCurrentTimeZone = () =>
+  new Date(
+    new Date(Date.now() - 1000 * 60 * 10).getTime() -
+      new Date().getTimezoneOffset() * 60000,
+  ).toISOString();

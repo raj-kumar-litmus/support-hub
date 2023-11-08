@@ -28,8 +28,21 @@ export const MENU_LIST = [
   }
 ];
 
-const getOrCreateTooltip = (chart, type) => {
+const getOrCreateTooltip = (chart, type, tooltip) => {
   let tooltipEl = chart.canvas.parentNode.querySelector("div.toolTipEl");
+  const shouldRenderPin = ["opm", "opmComparison"].includes(type);
+
+  if (shouldRenderPin && tooltipEl) {
+    const line = tooltipEl.querySelector(".horizontalLine");
+    const index = tooltip?.dataPoints?.[0]?.dataset?.index;
+    line.setAttribute("class", "");
+    type === "opm"
+      ? line.setAttribute("class", `horizontalLine opm`)
+      : line.setAttribute(
+          "class",
+          `horizontalLine ${index === 0 ? "yellow" : "blue"}`,
+        );
+  }
 
   if (!tooltipEl) {
     tooltipEl = document.createElement("div");
@@ -38,11 +51,18 @@ const getOrCreateTooltip = (chart, type) => {
     const table = document.createElement("table");
     table.className = "tableToolTip";
 
-    const verticalLine = document.createElement("hr");
-    verticalLine.className = `horizontalLine ${type}`;
-
-    tooltipEl.appendChild(table);
-    tooltipEl.appendChild(verticalLine);
+    if (shouldRenderPin) {
+      const verticalLine = document.createElement("hr");
+      const index = tooltip?.dataPoints?.[0]?.dataset?.index;
+      verticalLine.className =
+        type === "opm"
+          ? `horizontalLine opm`
+          : `horizontalLine ${index === 0 ? "yellow" : "blue"}`;
+      tooltipEl.appendChild(table);
+      tooltipEl.appendChild(verticalLine);
+    } else {
+      tooltipEl.appendChild(table);
+    }
     chart.canvas.parentNode.appendChild(tooltipEl);
   }
 
@@ -52,7 +72,7 @@ const getOrCreateTooltip = (chart, type) => {
 export const externalTooltipHandler = (context, type) => {
   // Tooltip Element
   const { chart, tooltip } = context;
-  const tooltipEl = getOrCreateTooltip(chart, type);
+  const tooltipEl = getOrCreateTooltip(chart, type, tooltip);
   // Hide if no tooltip
   if (tooltip.opacity === 0) {
     tooltipEl.style.opacity = 0;
