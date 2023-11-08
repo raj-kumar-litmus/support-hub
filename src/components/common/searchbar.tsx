@@ -25,7 +25,7 @@ const SearchBar: FC<Props> = ({
   const handleEnterPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      navigate(`/orderDetails/${searchValue}`);
+      navigate(`/order-details/${searchValue}`);
     }
   };
 

@@ -72,7 +72,7 @@ const OPM: React.FC = () => {
 
   const { width } = useScreenSize();
   const navigate = useNavigate();
-  const IS_FULLSCREEN = location?.pathname.includes("fullscreen");
+  const IS_FULLSCREEN = location?.pathname.includes("full-screen");
 
   const DEFAULT = {
     duration: 10,
@@ -293,7 +293,7 @@ const OPM: React.FC = () => {
   const handleOPMExpandClick = () => {
     navigate("/opm");
   };
-
+  console.log("x");
   return (
     <>
       {location.pathname.includes("home") && data && (

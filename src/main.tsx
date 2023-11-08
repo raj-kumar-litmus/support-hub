@@ -31,17 +31,17 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             element={<App appContent={<Chart type="opm" />} />}
           />
           <Route
-            path="/opm/fullscreen"
+            path="/opm/full-screen"
             element={
               <App showNavbar={false} appContent={<Chart type="opm" />} />
             }
           />
           <Route
-            path="/opmcomparison"
+            path="/opm-comparison"
             element={<App appContent={<Chart type="opmcomparison" />} />}
           />
           <Route
-            path="/opmcomparison/fullscreen"
+            path="/opm-comparison/full-screen"
             element={
               <App
                 showNavbar={false}
@@ -50,7 +50,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             }
           />
           <Route
-            path="/orderDetails/:orderId"
+            path="/order-details/:orderId"
             element={<App appContent={<OrderDetails />} />}
           />
           <Route path="/incomplete-orders"

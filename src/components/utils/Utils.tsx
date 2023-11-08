@@ -11,7 +11,7 @@ export const MENU_LIST = [
     id: 3,
     name: "OPM Comparison",
     icon: OPMComparisonIcon,
-    path: "/opmcomparison",
+    path: "/opm-comparison",
   },
   { id: 4, name: "Sessions", icon: SessionsIcon, path: "/sessions" },
   {
@@ -113,3 +113,4 @@ export const externalTooltipHandler = (context, type) => {
   tooltipEl.style.left = positionX + tooltip.caretX + "px";
   tooltipEl.style.top = positionY + tooltip.caretY + "px";
 };
+

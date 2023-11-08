@@ -13,7 +13,7 @@ const SearchField: FC<Props> = ({ searchValue, setSearchValue }) => {
   const searchOrder = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      navigate(`/orderDetails/${searchValue}`);
+      navigate(`/order-details/${searchValue}`);
     }
   };
 

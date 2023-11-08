@@ -18,7 +18,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [selectedMenu, setSelectedMenu] = useState<number>(0);
   const location = useLocation();
-  const IS_FULLSCREEN = location?.pathname.includes("fullscreen");
+  const IS_FULLSCREEN = location?.pathname.includes("full-screen");
 
   useEffect(() => {
     setOpenSearchField(false);

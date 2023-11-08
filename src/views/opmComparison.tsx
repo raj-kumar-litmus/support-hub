@@ -73,7 +73,7 @@ const OpmComparison: React.FC = () => {
 
   const { width } = useScreenSize();
   const navigate = useNavigate();
-  const IS_FULLSCREEN = location?.pathname.includes("fullscreen");
+  const IS_FULLSCREEN = location?.pathname.includes("full-screen");
 
   const DEFAULT = {
     duration: 10,
@@ -272,9 +272,8 @@ const OpmComparison: React.FC = () => {
   };
 
   const handleOPMCompExpandClick = () => {
-    navigate("/opmcomparison");
+    navigate("/opm-comparison");
   };
-
   return (
     <>
       {location.pathname.includes("home") && data && (
@@ -300,7 +299,7 @@ const OpmComparison: React.FC = () => {
           />
         </div>
       )}
-      {!IS_FULLSCREEN && location.pathname.includes("opmcomparison") && (
+      {!IS_FULLSCREEN && location.pathname.includes("opm-comparison") && (
         <div className="flex justify-between items-start lg:mb-[2vh] lg:mt-[4vh] ml-[5vw] lg:ml-[3vw] mr-[5vw] lg:mr-[3vw] mt-[3vh]">
           <p className="font-bold w-[50vw] text-[#F2F2F2] w-[50vw] lg:w-[30vw]">
             {TITLE.OPM_COMPARISON}
@@ -313,7 +312,7 @@ const OpmComparison: React.FC = () => {
           />
         </div>
       )}
-      {showFilters && location.pathname.includes("opmcomparison") && (
+      {showFilters && location.pathname.includes("opm-comparison") && (
         <>
           {width > 700 ? (
             <form
@@ -438,7 +437,7 @@ const OpmComparison: React.FC = () => {
           )}
         </>
       )}
-      {location.pathname.includes("opmcomparison") && (
+      {location.pathname.includes("opm-comparison") && (
         <div
           className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[3vw] w-[90vw] ${
             IS_FULLSCREEN ? "rotate-90 absolute left-[40vw] top-[45vh]" : ""
@@ -475,7 +474,7 @@ const OpmComparison: React.FC = () => {
           )}
         </div>
       )}
-      {data && !isLoading && location.pathname.includes("opmcomparison") && (
+      {data && !isLoading && location.pathname.includes("opm-comparison") && (
         <LineChart
           title={TITLE.OPM_COMPARISON}
           isFullScreen={IS_FULLSCREEN}

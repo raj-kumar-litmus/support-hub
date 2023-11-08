@@ -48,10 +48,10 @@ function LineChart({
   const navigate = useNavigate();
 
   const onRotateHandler = () => {
-    if (!location.pathname.includes("fullscreen")) {
-      navigate(`${location.pathname}/fullscreen`);
+    if (!location.pathname.includes("full-screen")) {
+      navigate(`${location.pathname}/full-screen`);
     } else {
-      navigate(location.pathname.split("/fullscreen")[0]);
+      navigate(location.pathname.split("/full-screen")[0]);
     }
     setRotate(!rotate);
   };
