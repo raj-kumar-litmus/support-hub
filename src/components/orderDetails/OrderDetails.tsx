@@ -65,7 +65,7 @@ const OrderDetails: React.FC = () => {
   const [omsOrderFlow, setOmsOrderFlow] = useState<orderStatus>();
   const [isOrderStatusVisible, setIsOrderStatusVisible] =
     useState<boolean>(false);
-    const [promotions, setPromotions] = useState<IPromotion[]>([]);
+  const [promotions, setPromotions] = useState<IPromotion[]>([]);
   const [itemTableData, setItemTableData] = useState<CommerceItemData[]>([]);
   const [openPromotionsPopup, setOpenPromotionsPopup] =
     useState<boolean>(false);
@@ -174,12 +174,12 @@ const OrderDetails: React.FC = () => {
             {ORDER_DETAILS}
           </span>
           <span
-            className="w-1/2 justify-end flex items-center !text-[12px] font-normal cursor-pointer !bg-[#1C1C20] sm:!bg-inherit"
+            className="justify-end flex items-center !text-[12px] font-normal cursor-pointer !bg-[#1C1C20] sm:!bg-inherit"
             onClick={showPromotions}
           >
             <CustomIcon
-              className="mr-1"
-              alt="promotion-icon"
+              className="mr-1  "
+              alt="promotion-icon "
               src={PromotionsIcon}
               width="0.75rem"
               height="0.75rem"
@@ -189,15 +189,17 @@ const OrderDetails: React.FC = () => {
         </div>
         <div className="flexColWrapper sm:gap-y-0 sm:grid-cols-2 ">
           <div className="flexWrapper justify-start bg-[#30343B] rounded-t-md">
-            <span className="w-auto sm:w-1/5 flex items-center min-w-[4.5rem]">
+            <span
+              className="w-auto sm:w-1/5 flex items-center min-w-[4.5rem]  cursor-pointer"
+              onClick={showOrderTimeline}
+            >
               {ORDER}
               <CustomIcon
-                className="ml-2 cursor-pointer"
+                className="ml-2"
                 alt="order-clock-icon"
                 src={OrderClockIcon}
                 width="1rem"
                 height="1rem"
-                onClick={showOrderTimeline}
               />
             </span>
             <span className="w-auto sm:w-4/5 font-medium self-center">
@@ -261,15 +263,15 @@ const OrderDetails: React.FC = () => {
             </span>
           </div>
           <div className="flexBlockWrapper border-t filterCardWrapper">
-            <span className="w-auto sm:w-1/6 flex items-center min-w-[4.5rem]">
+            <span className="w-auto sm:w-1/6 flex items-center min-w-[4.5rem] cursor-pointer"  onClick={showOmsStatusInfo}>
               {OMS}
               <CustomIcon
-                className="ml-2 cursor-pointer"
+                className="ml-2 "
                 alt="oms-info-icon"
                 src={OmsInfoIcon}
                 width="0.85rem"
                 height="0.85rem"
-                onClick={showOmsStatusInfo}
+               
               />
             </span>
             <span className="w-auto sm:w-5/6 font-medium">
@@ -377,14 +379,12 @@ const OrderDetails: React.FC = () => {
         openDialog={openOrderStatusPopup}
         setOpenDialog={setOpenOrderStatusPopup}
       />
-       <OrderStatus
+      <OrderStatus
         orderStatus={omsOrderFlow}
         isOrderStatusVisible={isOrderStatusVisible}
         setIsOrderStatusVisible={setIsOrderStatusVisible}
       />
     </div>
-     
-    
   ) : (
     <div className="text-md pt-48 text-center text-gray-400 font-semibold">
       {NO_MATCHING_ORDERS_FOUND}

@@ -58,7 +58,7 @@ const Navbar: FC<Props> = ({
           />
         )}
         <CustomImage
-          className=" h-[10px] bottom-1 sm:h-auto relative sm:right-5 cursor-pointer"
+          className=" h-[10px] bottom-1 sm:bottom-0 sm:h-auto relative sm:right-5 cursor-pointer"
           src={SephoraLogo}
           alt="SEPHORA"
           onClick={navigateToHome}
