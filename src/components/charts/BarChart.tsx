@@ -281,7 +281,7 @@ const BarChart = () => {
 
   useEffect(() => {
     setId(
-      location?.pathname?.includes("sessions") ? "bar-chart" : "home-bar-chart"
+      location?.pathname?.includes("sessions") ? "bar-chart" : "home-bar-chart",
     );
   }, []);
 
@@ -313,8 +313,8 @@ const BarChart = () => {
                         <CustomCalendar
                           name={form.name}
                           title={form.title}
-                          containerClassName="calendarSessions"
-                          imageClassName="h-[20px] w-[20px] relative top-[2.8vh] left-[0.5vw] z-[1]"
+                          containerclassname="calendarSessions"
+                          imageclassname="h-[20px] w-[20px] relative top-[2.8vh] left-[0.5vw] z-[1]"
                           // showTime={false}
                           showTime
                           timeOnly={form.name === "time"}
@@ -424,7 +424,9 @@ const BarChart = () => {
                 setTabValue={setTabValue}
               />
             )}
-            <Bar ref={chartRef} options={getChartConfig()} data={allData} />
+            {allData.labels.length > 0 && (
+              <Bar ref={chartRef} options={getChartConfig()} data={allData} />
+            )}
             <div className="text-center text-xs text-[#FAF9F6] -mt-[2px] sm:-mt-[28px]">
               {TOTAL_SESSIONS_PER_MINUTE}
             </div>
@@ -455,8 +457,8 @@ const BarChart = () => {
                       name={form.name}
                       title={form.title}
                       showTime
-                      containerClassName="calendarSessions"
-                      imageClassName="h-[20px] w-[20px] relative top-[3vh] left-[0.5vw] z-[1]"
+                      containerclassname="calendarSessions"
+                      imageclassname="h-[20px] w-[20px] relative top-[3vh] left-[0.5vw] z-[1]"
                       // timeOnly={form.name === "time"}
                       placeholder={DD_MM_YYYY}
                       value={form.value}

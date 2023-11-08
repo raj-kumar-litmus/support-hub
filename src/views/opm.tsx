@@ -67,7 +67,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ChartDataLabels
+  ChartDataLabels,
 );
 
 const OPM: React.FC = () => {
@@ -81,18 +81,19 @@ const OPM: React.FC = () => {
 
   const DEFAULT = {
     duration: 10,
-    starttime: new Date(),
-    channel: CHANNELS.DESKTOP,
+    starttime: "",
+    channel: CHANNELS.ALL,
     promocode: "",
-    paymentType: "",
-    country: "US",
+    paymentType: PAYMENT_TYPES.ALL,
+    country: "",
   };
 
-  const [url, setUrl] = useState<string>();
+  const [url, setUrl] = useState<string | null>(null);
 
   const [options, setOptions] = useState<null | ChartOptions>(null);
   const [data, setData] = useState<ChartData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showFilteredCards, setShowFilteredCards] = useState<boolean>(false);
 
   useEffect(() => {
     setUrl(
@@ -102,22 +103,9 @@ const OPM: React.FC = () => {
           : HOME_PAGE_REFERSH_DURATION
       }&date=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${
         DEFAULT.promocode
-      }&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`
+      }&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`,
     );
   }, []);
-
-  function getGradient(ctx, chartArea) {
-    const gradient = ctx.createLinearGradient(
-      0,
-      chartArea.bottom,
-      0,
-      chartArea.top
-    );
-    gradient.addColorStop(0.9, "#5A9EF566");
-    gradient.addColorStop(0.4, "#5A9EF52F");
-    gradient.addColorStop(0, "#5A9EF500");
-    return gradient;
-  }
 
   const getData = async () => {
     try {
@@ -132,13 +120,7 @@ const OPM: React.FC = () => {
             data: data.map((e) => Number(e.orderCount)),
             borderColor: "#599DF5",
             pointStyle: "circle",
-            fill: true,
-            backgroundColor: function (context) {
-              const chart = context.chart;
-              const { ctx, chartArea } = chart;
-              if (!chartArea) return;
-              return getGradient(ctx, chartArea);
-            },
+            backgroundColor: "white",
             borderWidth: 2,
           },
         ],
@@ -156,17 +138,20 @@ const OPM: React.FC = () => {
 
   useEffect(() => {
     (async () => {
-      setOptions(OPM_OPTIONS(width < 700));
+      setOptions(
+        OPM_OPTIONS(
+          width < 700,
+          Number(url.split("period=")[1].split("&")[0]) < 16,
+        ),
+      );
       await getData();
     })();
   }, [url]);
 
   const onFilterClickHandler = () => {
     setShowFilters(!showFilters);
-    if (width < 700) {
-      setPosition("bottom");
-      setVisible(true);
-    }
+    setPosition("bottom");
+    setVisible(true);
   };
 
   const onModalCloseHandler = () => {
@@ -183,7 +168,10 @@ const OPM: React.FC = () => {
       label: LABELS.duration,
       icon: SandGlassIcon,
       cardIcon: GreyHourGlassIcon,
-      value: "",
+      value: {
+        name: "10 mins",
+        code: 10,
+      },
       options: Object.keys(DURATIONS).map((e) => ({
         name: e,
         code: DURATIONS[e],
@@ -204,7 +192,10 @@ const OPM: React.FC = () => {
       label: LABELS.channel,
       icon: ChannelIcon,
       cardIcon: GreyChannelIcon,
-      value: "",
+      value: {
+        name: "ALL",
+        code: "",
+      },
       options: Object.keys(CHANNELS).map((e) => ({
         name: e,
         code: CHANNELS[e],
@@ -216,7 +207,10 @@ const OPM: React.FC = () => {
       label: LABELS.locale,
       icon: LocaleIcon,
       cardIcon: GreyGlobeIcon,
-      value: "",
+      value: {
+        name: "ALL",
+        code: "",
+      },
       options: Object.keys(LOCALE_OPTIONS).map((e) => ({
         name: e,
         code: LOCALE_OPTIONS[e],
@@ -228,7 +222,10 @@ const OPM: React.FC = () => {
       label: LABELS.payment,
       icon: PaymentIcon,
       cardIcon: GreyCardIcon,
-      value: "",
+      value: {
+        name: "ALL",
+        code: "",
+      },
       options: Object.keys(PAYMENT_TYPES).map((e) => ({
         name: e,
         code: PAYMENT_TYPES[e],
@@ -252,6 +249,7 @@ const OPM: React.FC = () => {
     } else {
       data.find((e) => e.name === val).value = event.target.value;
     }
+    setShowFilteredCards(true);
     setFormFields(data);
   };
 
@@ -271,7 +269,7 @@ const OPM: React.FC = () => {
           return;
         }
         str += `${e.name}=${
-          (e.value.code && String(e.value.code)) || e.value
+          (e.value.code !== undefined && String(e.value.code)) || e.value
         }&`;
       }
     });
@@ -282,16 +280,6 @@ const OPM: React.FC = () => {
   useEffect(() => {
     setDisabled(formFields.map((e) => e.value).filter(Boolean).length === 0);
   }, [formFields]);
-
-  useEffect(() => {
-    // on page load, we compare yesterday with today;
-    handleFormChange({
-      target: {
-        name: "date",
-        value: new Date(Date.now() - 86400000),
-      },
-    });
-  }, []);
 
   const getChartConfig = () => {
     const customChartConfig = { ...options };
@@ -348,23 +336,25 @@ const OPM: React.FC = () => {
         </div>
       )}
       {!IS_FULLSCREEN && location.pathname.includes("opm") && (
-        <div className="flex justify-between items-start lg:mb-[2vh] lg:mt-[4vh] ml-[5vw] lg:ml-[3vw] mr-[5vw] lg:mr-[3vw] mt-[3vh]">
+        <div className="flex justify-between items-start lg:mt-[4vh] ml-[6vw] mr-[6vw] sm:ml-[1vw] sm:mr-0 lg:ml-[0.5vw] mt-[3vh]">
           <p className="font-bold w-[50vw] text-[#F2F2F2] w-[50vw] lg:w-[30vw]">
             {TITLE.OPM}
           </p>
-          <CustomImage
-            src={FilterIcon}
-            className="lg:w-[2.34vw] self-end"
-            alt="Filter Icon"
-            onClick={onFilterClickHandler}
-          />
+          {width < 700 && (
+            <CustomImage
+              src={FilterIcon}
+              className="lg:w-[2.34vw] self-end"
+              alt="Filter Icon"
+              onClick={onFilterClickHandler}
+            />
+          )}
         </div>
       )}
       {showFilters && location.pathname.includes("opm") && (
         <>
           {width > 700 ? (
             <form
-              className="flex gap-[1vw] ml-[2.4vw] opmFilters"
+              className="md:flex md:gap-[0.5vw] opmFilters sm:grid sm:grid-cols-3"
               onSubmit={submit}
             >
               {formFields.map((form, index) => {
@@ -372,23 +362,23 @@ const OPM: React.FC = () => {
                   <React.Fragment key={index}>
                     {form.type === INPUT_TYPES.text && (
                       <CustomInputText
-                        containerClassName="lg:w-[10vw]"
+                        containerclassname="relative top-[2px] left-[-9px]"
                         value={form.value}
                         name={form.name}
                         label={form.label}
                         icon={form.imgsrc}
                         placeholder={form.label}
-                        imageClassName="relative left-[25px] z-[1]"
+                        imageclassname="relative left-[25px] z-[1]"
                         onChange={(event) => handleFormChange(event)}
-                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px] w-[9vw]"
+                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px] lg:w-[10vw] sm:w-[20vw]  md:w-[8vw]"
                       />
                     )}
                     {form.type === INPUT_TYPES.time && (
                       <CustomCalendar
                         name={form.name}
-                        containerClassName="ml-[10px] md:w-[14vw]"
-                        titleClassName="top-[2vh]"
-                        imageClassName="h-[20px] w-[20px] relative top-[3vh] left-[0.5vw] z-[1]"
+                        containerclassname="ml-[10px] sm:w-[20vw] md:w-[10vw] lg:w-[12vw] xl:w-[14vw]"
+                        titleclassname="top-[2vh]"
+                        imageclassname="h-[20px] w-[20px] relative top-[3vh] left-[0.5vw] z-[1]"
                         title={form.label}
                         showTime={form.showTime}
                         iconPos={form.iconPos || "left"}
@@ -402,7 +392,8 @@ const OPM: React.FC = () => {
                         value={form.value}
                         name={form.name}
                         onChange={(e) => handleFormChange(e)}
-                        imageClassName="relative left-[25px] z-[1]"
+                        containerclassname="sm:w-[20vw]"
+                        imageclassname="relative left-[25px] z-[1]"
                         dropdownIcon={<CustomImage src={ArrowDownIcon} />}
                         icon={form.icon}
                         options={form.options}
@@ -418,7 +409,7 @@ const OPM: React.FC = () => {
                 label={LABELS.submit}
                 isDisabled={disabled}
                 isRounded={true}
-                className="submitBtnMobile self-end relative"
+                className="submitBtnMobile self-end relative w-[10vw] sm:w-[20vw]"
               />
             </form>
           ) : (
@@ -442,12 +433,12 @@ const OPM: React.FC = () => {
                       <>
                         {form.type === INPUT_TYPES.text && (
                           <CustomInputText
-                            containerClassName="w-[41vw] mobileInput"
+                            containerclassname="w-[45vw] mobileInput"
                             value={form.value}
                             name={form.name}
                             label={form.label}
                             icon={form.imgsrc}
-                            imageClassName="relative left-[12px] md:left-[25px] z-[1]"
+                            imageclassname="relative left-[12px] md:left-[25px] z-[1]"
                             placeholder={form.label}
                             onChange={(event) => handleFormChange(event)}
                             className="border rounded-[8px] border-solid border-slate-300 border-1 h-[40px]"
@@ -456,9 +447,9 @@ const OPM: React.FC = () => {
                         {form.type === INPUT_TYPES.time && (
                           <CustomCalendar
                             name={form.name}
-                            containerClassName="opmFiltersMobileCalendar"
-                            titleClassName="top-[2.2vh]"
-                            imageClassName="h-[20px] w-[20px] relative top-[3.5vh] left-[3.5vw] z-[1]"
+                            containerclassname="opmFiltersMobileCalendar"
+                            titleclassname="left-[1vw] md:left-[0] top-[2.2vh]"
+                            imageclassname="h-[20px] w-[20px] relative top-[3vh] left-[3.5vw] z-[1]"
                             title={form.label}
                             showTime={form.showTime}
                             iconPos={form.iconPos || "left"}
@@ -473,8 +464,8 @@ const OPM: React.FC = () => {
                             name={form.name}
                             dropdownIcon={<CustomImage src={DropDownIcon} />}
                             onChange={(e) => handleFormChange(e)}
-                            containerClassName="w-[41vw]"
-                            imageClassName="relative left-[25px] z-[1]"
+                            containerclassname="w-[44vw]"
+                            imageclassname="relative left-[25px] z-[1]"
                             icon={form.icon}
                             options={form.options}
                             label={form.label}
@@ -497,9 +488,9 @@ const OPM: React.FC = () => {
           )}
         </>
       )}
-      {location.pathname.includes("opm") && (
+      {location.pathname.includes("opm") && showFilteredCards && (
         <div
-          className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[3vw] ${
+          className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[0.5vw] ${
             IS_FULLSCREEN
               ? "landScape rotate-90 absolute left-[40vw] top-[45vh] ml-[25vw] w-[22vh]"
               : `${width < 700 ? "portrait" : ""}`
@@ -541,7 +532,7 @@ const OPM: React.FC = () => {
           <LineChart
             title={TITLE.OPM}
             isFullScreen={IS_FULLSCREEN}
-            className="border-0 rounded-[10px] lg:w-[71.74vw] lg:ml-[2.85vw] h-[340px] lg:h-[62.23vh] lg:mt-[3vh] "
+            className="border-0 rounded-[10px] w-[90vw] sm:w-[70vw] lg:w-[75vw] lg:ml-[0] h-[340px] md:h-[340px] lg:h-[62.23vh] mt-[1vh] lg:mt-[3vh]"
             options={options}
             data={data}
           />

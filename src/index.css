@@ -182,7 +182,7 @@ button.p-button-secondary {
   @apply w-[100px];
 }
 .opmFiltersMobile .p-dropdown {
-  @apply bg-[#30343B] border-[#30343B];
+  @apply bg-[#30343B] border-[#30343B] w-full;
 }
 .opmFiltersMobile .p-inputtext {
   @apply text-white;
@@ -194,7 +194,7 @@ button.p-button-secondary {
   @apply relative left-[10px];
 }
 .opmFiltersMobileCalendar span.p-calendar {
-  @apply relative left-[8px] h-[39px];
+  @apply relative left-[8px] h-[39px] w-[93%];
 }
 .opmFiltersMobile .p-dropdown .p-dropdown-trigger {
   @apply w-[4vw] relative right-[14px];
@@ -223,7 +223,7 @@ button.p-button-secondary {
 .submitBtnMobile button,
 .submitBtnMobile button:hover,
 .submitBtnMobile button:enabled:active {
-  @apply w-[10vw] h-[44px] text-[13px] text-white !bg-transparent border border-solid !border-[#30343B] items-center;
+  @apply w-[20vw] md:w-[10vw] h-[44px] text-[13px] text-white !bg-transparent border border-solid !border-[#30343B] items-center;
 }
 .submitBtnMobile button:focus {
   @apply !shadow-none;
@@ -312,7 +312,7 @@ button.p-button-secondary {
   @apply w-[135px];
 }
 .mobileInput .labelClass {
-  @apply ml-[2vw];
+  @apply ml-[1vw];
 }
 .mobileInput .p-inputtext {
   @apply relative w-[43vw] left-[-12px];
@@ -600,6 +600,12 @@ hr.horizontalLine.opm {
 }
 hr.horizontalLine.opmComparison {
   background: linear-gradient(to right, #6370ff, #5a9ef500);
+}
+hr.horizontalLine.yellow {
+  background: linear-gradient(to right, #6370FF, #5a9ef500);
+}
+hr.horizontalLine.blue {
+  background: linear-gradient(to right, #FDA44F, #5a9ef500);
 }
 .calendarOpmComparison span input {
   @apply pl-[2.5vw];
