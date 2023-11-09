@@ -357,6 +357,12 @@ button.p-button-secondary {
 .p-dialog-content::-webkit-scrollbar {
   @apply w-1;
 }
+.order-report-comp::-webkit-scrollbar-thumb {
+  @apply bg-[#30343B] rounded-full;
+}
+.order-report-comp::-webkit-scrollbar {
+  @apply h-1;
+}
 .orderStatus-dialog.p-dialog {
   @apply absolute max-[639px]:max-h-[calc(100vh-154px)] min-[390px]:w-[390px] w-max max-[390px]:!bottom-0 min-[390px]:max-h-[490px];
 }
