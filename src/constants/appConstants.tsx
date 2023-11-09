@@ -156,32 +156,32 @@ export const PAYMENT_TYPES = {
 
 export const ORDER_STATUS_LIST = [
   {
-    code: 1111,
-    description: "Created",
+    "Status Code": 1111,
+    Description: "Created",
   },
   {
-    code: 1500,
-    description: "Scheduled",
+    "Status Code": 1500,
+    Description: "Scheduled",
   },
   {
-    code: 3200,
-    description: "Released",
+    "Status Code": 3200,
+    Description: "Released",
   },
   {
-    code: 3350,
-    description: "Included in shipments",
+    "Status Code": 3350,
+    Description: "Included in shipments",
   },
   {
-    code: 9000,
-    description: "Shipped",
+    "Status Code": 9000,
+    Description: "Shipped",
   },
   {
-    code: 3700,
-    description: "Cancelled",
+    "Status Code": 3700,
+    Description: "Cancelled",
   },
   {
-    code: 3700.5,
-    description: "Shipped and invoiced",
+    "Status Code": 3700.5,
+    Description: "Shipped and invoiced",
   },
 ];
 export const OPM_OPTIONS = (isMobile: boolean, showDataLabels = false) => ({

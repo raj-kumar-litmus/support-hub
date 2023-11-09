@@ -127,3 +127,8 @@ export const externalTooltipHandler = (context, type) => {
   tooltipEl.style.left = positionX + tooltip.caretX + "px";
   tooltipEl.style.top = positionY + tooltip.caretY + "px";
 };
+
+export const getTableHeaders = (data: Object[]) => {
+  const keyArray = Object.keys(data[0])?.map((key) => key);
+  return keyArray;
+}

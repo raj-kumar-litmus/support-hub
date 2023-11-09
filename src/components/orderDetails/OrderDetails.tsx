@@ -38,7 +38,6 @@ import {
   OrderData,
 } from "../../@types/OrderDetails";
 import { fetchData } from "../../utils/fetchUtil";
-import Table from "../common/Table";
 import CustomIcon from "../common/CustomIcon";
 import Card from "../common/Card";
 import PromotionsIcon from "../../assets/promotions_white.svg";
@@ -53,6 +52,9 @@ import { IPromotion } from "../../@types/promotion";
 import OrderStatusPopup from "../orderstatuspopup";
 import { promotionsJSON } from "../../sampleJSON/promotions";
 import CustomImage from "../common/customimage";
+import { getTableHeaders } from "../utils/Utils";
+import CustomTable from "../common/customtable";
+import { Column } from "primereact/column";
 
 const OrderDetails: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -65,7 +67,7 @@ const OrderDetails: React.FC = () => {
   const [omsOrderFlow, setOmsOrderFlow] = useState<orderStatus>();
   const [isOrderStatusVisible, setIsOrderStatusVisible] =
     useState<boolean>(false);
-    const [promotions, setPromotions] = useState<IPromotion[]>([]);
+  const [promotions, setPromotions] = useState<IPromotion[]>([]);
   const [itemTableData, setItemTableData] = useState<CommerceItemData[]>([]);
   const [openPromotionsPopup, setOpenPromotionsPopup] =
     useState<boolean>(false);
@@ -322,12 +324,15 @@ const OrderDetails: React.FC = () => {
         </div>
         <div className="hidden sm:block rounded-md">
           {itemTableData?.length > 0 && (
-            <Table
-              size="small"
-              tableData={itemTableData}
-              className={"orderItemInfoTable"}
-              scrollable={true}
-              scrollHeight={"20rem"}
+              <CustomTable
+                resizableColumns
+                showGridlines
+                stripedRows
+                value={itemTableData}
+                className={"custom-table order-details-table"}
+                children={getTableHeaders(itemTableData).map((h) => (
+                  <Column key={h} field={h} header={h}></Column>
+                ))}
             />
           )}
         </div>
@@ -377,14 +382,12 @@ const OrderDetails: React.FC = () => {
         openDialog={openOrderStatusPopup}
         setOpenDialog={setOpenOrderStatusPopup}
       />
-       <OrderStatus
+        <OrderStatus
         orderStatus={omsOrderFlow}
         isOrderStatusVisible={isOrderStatusVisible}
         setIsOrderStatusVisible={setIsOrderStatusVisible}
       />
-    </div>
-     
-    
+      </div>
   ) : (
     <div className="text-md pt-48 text-center text-gray-400 font-semibold">
       {NO_MATCHING_ORDERS_FOUND}
