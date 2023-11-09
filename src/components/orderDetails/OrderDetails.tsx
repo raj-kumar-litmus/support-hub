@@ -245,7 +245,7 @@ const OrderDetails: React.FC = () => {
           <div className="flexBlockWrapper py-1 px-4 sm:p-0 border-none">
             <span className="w-auto sm:w-1/5 min-w-[4.5rem]">{ORDER_TYPE}</span>
             <span className="w-auto sm:w-4/5 font-medium">
-              {orderData?.customerInfo?.biTier}
+
             </span>
           </div>
         </div>
