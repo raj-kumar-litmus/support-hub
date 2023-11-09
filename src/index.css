@@ -741,77 +741,77 @@ hr.horizontalLine.blue {
 .home-expand-btn .p-button:focus {
   @apply shadow-none;
 }
-.sessions-tabs.p-tabview .p-tabview-panels {
+.custom-tab.p-tabview .p-tabview-panels {
   @apply hidden;
 }
-.sessions-tabs.p-tabview {
+.custom-tab.p-tabview {
   @apply w-[245px] h-[36px] self-end;
 }
-.sessions-tabs.p-tabview .p-tabview-nav {
+.custom-tab.p-tabview .p-tabview-nav {
   @apply border-none h-[32px] bg-[#292E36];
 }
-.sessions-tabs.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+.custom-tab.p-tabview .p-tabview-nav li .p-tabview-nav-link {
   @apply bg-[#292E36] text-[#8B8C8F] h-[30px] rounded-none border-none text-[12px] font-medium;
 }
-.sessions-tabs .p-tabview-nav-content {
+.custom-tab .p-tabview-nav-content {
   @apply rounded-[8px];
 }
-.sessions-tabs.p-tabview .p-tabview-nav li {
+.custom-tab.p-tabview .p-tabview-nav li {
   @apply bg-[#292E36];
 }
-.sessions-tabs.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+.custom-tab.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
   @apply bg-[#F2F2F2] text-[#22262C] rounded-[8px] text-[12px] font-medium;
 }
-.sessions-tabs.p-tabview
+.custom-tab.p-tabview
   .p-tabview-nav
   li
   .p-tabview-nav-link:not(.p-disabled):focus {
   @apply shadow-none;
 }
-.sessions-tabs.p-tabview
+.custom-tab.p-tabview
   .p-tabview-nav
   li:not(.p-highlight):not(.p-disabled):hover
   .p-tabview-nav-link {
   @apply bg-[#292E36] text-[#8B8C8F];
 }
-.sessions-tabs.p-accordion .p-accordion-header .p-accordion-header-link,
+.custom-tab.p-accordion .p-accordion-header .p-accordion-header-link,
 .p-tabview .p-tabview-nav li .p-tabview-nav-link {
   @apply transition-none border-none py-0;
 }
-.sessions-tabs.p-tabview .p-tabview-panels {
+.custom-tab.p-tabview .p-tabview-panels {
   @apply hidden;
 }
-.sessions-tabs.p-tabview {
+.custom-tab.p-tabview {
   @apply w-[245px] h-[36px] self-end;
 }
-.sessions-tabs.p-tabview .p-tabview-nav {
+.custom-tab.p-tabview .p-tabview-nav {
   @apply border-none h-[32px] bg-[#292E36];
 }
-.sessions-tabs.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+.custom-tab.p-tabview .p-tabview-nav li .p-tabview-nav-link {
   @apply bg-[#292E36] text-[#8B8C8F] h-[30px] rounded-none border-none text-[12px] font-medium;
 }
-.sessions-tabs .p-tabview-nav-content {
+.custom-tab .p-tabview-nav-content {
   @apply rounded-[8px];
 }
-.sessions-tabs.p-tabview .p-tabview-nav li {
+.custom-tab.p-tabview .p-tabview-nav li {
   @apply bg-[#292E36];
 }
-.sessions-tabs.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+.custom-tab.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
   @apply bg-[#F2F2F2] text-[#22262C] rounded-[8px] text-[12px] font-medium;
 }
-.sessions-tabs.p-tabview
+.custom-tab.p-tabview
   .p-tabview-nav
   li
   .p-tabview-nav-link:not(.p-disabled):focus {
   @apply shadow-none;
 }
-.sessions-tabs.p-tabview
+.custom-tab.p-tabview
   .p-tabview-nav
   li:not(.p-highlight):not(.p-disabled):hover
   .p-tabview-nav-link {
   @apply bg-[#292E36] text-[#8B8C8F];
 }
-.sessions-tabs.p-accordion .p-accordion-header .p-accordion-header-link,
+.custom-tab.p-accordion .p-accordion-header .p-accordion-header-link,
 .p-tabview .p-tabview-nav li .p-tabview-nav-link {
   @apply transition-none border-none py-0;
 }
