@@ -468,7 +468,7 @@ const BarChart = () => {
                       title={form.title}
                       showTime
                       containerclassname="calendarSessions"
-                      imageclassname="h-[20px] w-[20px] relative top-[3vh] left-[0.5vw] z-[1]"
+                      imageclassname="h-[20px] w-[20px] relative top-[4vh] md:top-[3vh] left-[0.5vw] z-[1]"
                       // timeOnly={form.name === "time"}
                       placeholder={DD_MM_YYYY}
                       value={form.value}

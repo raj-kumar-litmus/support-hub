@@ -451,7 +451,7 @@ const OPM: React.FC = () => {
                             name={form.name}
                             containerclassname="opmFiltersMobileCalendar"
                             titleclassname="left-[1vw] md:left-[0] top-[2.2vh]"
-                            imageclassname="h-[20px] w-[20px] relative top-[3vh] left-[3.5vw] z-[1]"
+                            imageclassname="h-[20px] w-[20px] relative top-[4vh] md:top-[3vh] left-[3.5vw] z-[1]"
                             title={form.label}
                             showTime={form.showTime}
                             iconPos={form.iconPos || "left"}
