@@ -590,7 +590,7 @@ button.p-button-secondary {
   @apply content-[""] mt-0 mb-0 ml-[0.5rem] mr-[0.5rem] inline-block border-[7px] border-solid border-transparent border-t-[8px] border-t-[#25292D] border-b-0 absolute left-[65px] top-[70px];
 }
 .toolTipEl {
-  @apply bg-[#25292D] text-[12px] text-white opacity-100 pointer-events-none absolute -translate-x-[50%] -translate-y-[120%] text-left rounded-md px-[10px] py-[6px];
+  @apply z-[1] bg-[#25292D] text-[12px] text-white opacity-100 pointer-events-none absolute -translate-x-[50%] -translate-y-[120%] text-left rounded-md px-[10px] py-[6px];
 }
 hr.horizontalLine {
   @apply border-0 rotate-90 relative h-0.5 top-[100px];

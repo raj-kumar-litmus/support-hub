@@ -8,7 +8,7 @@ const Loader: React.FC<LoaderProps> = ({ className }) => {
   return (
     <div
       aria-label="Loader"
-      className={`${className} flex flex-col justify-center items-center pt-48`}
+      className={`${className} flex flex-col justify-center items-center`}
     >
       <svg
         version="1.1"

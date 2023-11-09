@@ -304,7 +304,9 @@ const OPM: React.FC = () => {
 
   return (
     <>
-      {location.pathname.includes("home") && isLoading && <Loader />}
+      {location.pathname.includes("home") && isLoading && (
+        <Loader className="!p-0 w-[40vw]" />
+      )}
       {location.pathname.includes("home") && data && !isLoading && (
         <div className="w-full sm:w-1/2 bg-[#22262C] p-0 bg-transparent rounded-lg">
           <div className="flex justify-between sm:mb-3 items-center relative top-[3vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
@@ -531,7 +533,7 @@ const OPM: React.FC = () => {
           <LineChart
             title={TITLE.OPM}
             isFullScreen={IS_FULLSCREEN}
-            className="border-0 rounded-[10px] sm:w-[70vw] lg:w-[75vw] lg:ml-[0] h-[340px] md:h-[340px] lg:h-[62.23vh] mt-[1vh] lg:mt-[3vh]"
+            className="border-0 rounded-[10px] sm:w-[70vw] lg:w-[75vw] lg:ml-[0] h-[340px] md:h-[340px] lg:h-[62.23vh] mt-[10vh] md:mt-[1vh] lg:mt-[3vh]"
             options={options}
             data={data}
           />

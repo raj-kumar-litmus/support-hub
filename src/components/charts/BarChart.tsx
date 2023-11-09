@@ -393,11 +393,9 @@ const BarChart = () => {
           </div>
         </>
       )}
-
-      <div className="home-sessions flex justify-center basis-full relative px-3 py-8 sm:px-5 h-64 mb-4 bg-[#22262C] w-[full] h-[22rem] sm:h-[24rem] drop-shadow-md rounded-xl flex-col">
-        {isLoading ? (
-          <Loader className="!p-0 m-auto" />
-        ) : (
+      {isLoading && <Loader className="!p-0 m-auto" />}
+      {!isLoading && (
+        <div className="home-sessions flex justify-center basis-full relative px-3 py-8 sm:px-5 h-64 mb-4 bg-[#22262C] w-[full] h-[22rem] sm:h-[24rem] drop-shadow-md rounded-xl flex-col">
           <>
             {location.pathname.includes("home") && (
               <>
@@ -443,8 +441,8 @@ const BarChart = () => {
               {TOTAL_SESSIONS_PER_MINUTE}
             </div>
           </>
-        )}
-      </div>
+        </div>
+      )}
 
       <Dialog
         id="modal-section"
