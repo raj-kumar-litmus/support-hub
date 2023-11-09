@@ -138,13 +138,15 @@ const OPM: React.FC = () => {
 
   useEffect(() => {
     (async () => {
-      setOptions(
-        OPM_OPTIONS(
-          width < 700,
-          Number(url.split("period=")[1].split("&")[0]) < 16,
-        ),
-      );
-      await getData();
+      if (url) {
+        setOptions(
+          OPM_OPTIONS(
+            width < 700,
+            Number(url.split("period=")[1].split("&")[0]) < 16,
+          ),
+        );
+        await getData();
+      }
     })();
   }, [url]);
 
@@ -302,9 +304,12 @@ const OPM: React.FC = () => {
 
   return (
     <>
-      {location.pathname.includes("home") && data && (
+      {location.pathname.includes("home") && isLoading && (
+        <Loader className="!p-0 w-[40vw]" />
+      )}
+      {location.pathname.includes("home") && data && !isLoading && (
         <div className="w-full sm:w-1/2 bg-[#22262C] p-0 bg-transparent rounded-lg">
-          <div className="flex justify-between sm:mb-3 items-center relative top-[3vh] sm:top-[6vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
+          <div className="flex justify-between sm:mb-3 items-center relative top-[3vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
             <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
               {TITLE.OPM}
             </span>
@@ -323,16 +328,12 @@ const OPM: React.FC = () => {
               </CustomButton>
             </div>
           </div>
-          {isLoading ? (
-            <Loader />
-          ) : (
-            <LineChart
-              title="OPM"
-              className="home-opm border-0 rounded-[10px] w-full sm:w-[89vw] lg:w-full lg:ml-[0] h-[380px] lg:h-[380px] lg:mt-[3vh] top-[-5vh]"
-              options={getChartConfig()}
-              data={data}
-            />
-          )}
+          <LineChart
+            title="OPM"
+            className="home-opm border-0 rounded-[10px] w-full sm:w-[89vw] lg:w-full lg:ml-[0] h-[380px] lg:h-[380px] lg:mt-[3vh] top-[-5vh]"
+            options={getChartConfig()}
+            data={data}
+          />
         </div>
       )}
       {!IS_FULLSCREEN && location.pathname.includes("opm") && (
@@ -406,10 +407,11 @@ const OPM: React.FC = () => {
                 );
               })}
               <CustomButton
+                id="page-btn-submit"
                 label={LABELS.submit}
                 isDisabled={disabled}
                 isRounded={true}
-                className="submitBtnMobile self-end relative w-[10vw] sm:w-[20vw]"
+                className="self-end relative left-[5vw] w-[10vw] sm:w-[20vw]"
               />
             </form>
           ) : (
@@ -449,7 +451,7 @@ const OPM: React.FC = () => {
                             name={form.name}
                             containerclassname="opmFiltersMobileCalendar"
                             titleclassname="left-[1vw] md:left-[0] top-[2.2vh]"
-                            imageclassname="h-[20px] w-[20px] relative top-[3vh] left-[3.5vw] z-[1]"
+                            imageclassname="h-[20px] w-[20px] relative top-[4vh] md:top-[3vh] left-[3.5vw] z-[1]"
                             title={form.label}
                             showTime={form.showTime}
                             iconPos={form.iconPos || "left"}
@@ -532,7 +534,7 @@ const OPM: React.FC = () => {
           <LineChart
             title={TITLE.OPM}
             isFullScreen={IS_FULLSCREEN}
-            className="border-0 rounded-[10px] w-[90vw] sm:w-[70vw] lg:w-[75vw] lg:ml-[0] h-[340px] md:h-[340px] lg:h-[62.23vh] mt-[1vh] lg:mt-[3vh]"
+            className="border-0 rounded-[10px] sm:w-[70vw] lg:w-[75vw] lg:ml-[0] h-[340px] md:h-[340px] lg:h-[62.23vh] mt-[10vh] md:mt-[1vh] lg:mt-[3vh]"
             options={options}
             data={data}
           />
