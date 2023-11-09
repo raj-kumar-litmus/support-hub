@@ -1,13 +1,14 @@
 import {
-  Chart,
-  CategoryScale,
-  LinearScale,
   BarElement,
+  CategoryScale,
+  Chart,
+  Legend,
+  LinearScale,
   Title,
   Tooltip,
-  Legend,
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
+import { externalTooltipHandler } from "../components/utils/Utils";
 import { SESSIONS_CHART } from "../constants/appConstants";
 
 Chart.register(
@@ -88,3 +89,66 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = {
     },
   },
 };
+
+export const ORDER_REPORT_PIE_CHART_OPTIONS = {
+  maintainAspectRatio: false,
+  responsive: false,
+  plugins: {
+    legend: {
+      display: true,
+      position: "right",
+      align: "start",
+      labels: {
+        usePointStyle: true,
+        font: {
+          size: 11
+        },
+        color: '#FFFFFF'
+      },
+    },
+    datalabels: {
+      formatter: (value, ctx) => {
+        let sum = 0;
+        let dataArr = ctx.chart.data.datasets[0].data;
+        dataArr.map(data => {
+          sum += data;
+        });
+        let _perc = (value * 100 / sum).toFixed(1);
+        let percentage = Number(_perc) > 5 ? `${_perc}%` : "";
+        return percentage;
+      },
+      font: { weight: 700 },
+      color: "#161A1D",
+
+    },
+    tooltip: {
+      enabled: false,
+      external: (context) => externalTooltipHandler(context, "reportPieChart", true),
+    }
+  },
+};
+
+export const HOURLY_ORDER_TREND_LINE_CHART_OPTION: Chart.ChartOptions = {
+  responsiveness: true,
+  plugins: {
+    legend: {
+      display: true,
+      position: "bottom",
+      align: "center",
+      labels: {
+        usePointStyle: true,
+        font: {
+          size: 11
+        },
+        color: '#FFFFFF'
+      },
+    },
+    datalabels: {
+      display: false,
+    },
+    tooltip: {
+      enabled: false,
+      external: (context) => externalTooltipHandler(context, "reportLineChart", true),
+    },
+  }
+}

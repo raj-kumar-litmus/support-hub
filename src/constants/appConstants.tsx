@@ -406,3 +406,16 @@ export const SESSIONS_TABS = [
   { header: SECONDARY },
   { header: BOTH },
 ];
+export const CAD = "CAD";
+export const USD = "USD";
+export const SUMMARY = "Summary";
+export const ORDER_PIE_CHART = "Order Pie Chart";
+export const CHANNELWISE_ORDER_LABELS = ["Web", "Mobile Web", "iPhone App", "Android App", "mPlus App", "JCPenny", "Instagram", "CSC"]
+export const PAYMENTWISE_ORDER_LABELS = ["Credit Card", "Paypal", "Klarna", "Giftcard", "Private Label Card", "Apple Pay", "JCP Dummy", "Sephora CBVI", "Sephora PLCC", "Sephora CBVIT", "Sephora PLCCT", "Instagram Dummy", "Google Dummy", "Sephora Pay", "Store Credit"];
+export const HOURLY_ORDER_TREND = "Hourly Order Trend";
+export const TIMESTAMPS = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00"];
+export const HOURLY_ORDER_DATA = "Hourly Order Data";
+export const LOCALE_WISE = "Locale Wise";
+export const CHANNEL_WISE = "Channel Wise";
+export const PAYMENT_WISE = "Payment Wise";
+export const REPORT_TABS = [{ header: LOCALE_WISE }, { header: CHANNEL_WISE }, { header: PAYMENT_WISE }]

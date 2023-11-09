@@ -815,3 +815,31 @@ hr.horizontalLine.blue {
 .p-tabview .p-tabview-nav li .p-tabview-nav-link {
   @apply transition-none border-none py-0;
 }
+.report-tab.p-tabview {
+  width: 335px;
+}
+
+.p-datatable .p-datatable-tfoot > tr > td {
+  @apply !bg-[#22262C] text-[#FFFFFF] border-0 border-[#292E36] p-3;
+}
+.report-table .p-datatable-tbody tr:last-child td:first-child {
+  @apply rounded-none;
+}
+.report-table .p-datatable-tbody tr:last-child td:last-child {
+  @apply rounded-none;
+}
+.report-table .p-datatable-tfoot tr:last-child td:first-child {
+  @apply rounded-bl-lg;
+}
+.report-table .p-datatable-tfoot tr:last-child td:last-child {
+  @apply rounded-br-lg;
+}
+.channel-table .p-datatable-tbody tr td {
+  @apply max-w-[82px] min-w-[82px];
+}
+.payment-table .p-datatable-thead tr th {
+  @apply py-[.75rem] px-[1.7px];
+}
+.payment-table .p-datatable-tfoot > tr > td {
+  @apply py-[.75rem] px-[1.7px];
+}

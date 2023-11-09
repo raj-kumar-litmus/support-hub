@@ -15,6 +15,7 @@ import Chart from "./components/ChartIndex";
 import "./index.css";
 import OrderDetails from "./components/orderDetails/OrderDetails.js";
 import HomePage from "./components/homePage.js";
+import OrderReport from "./components/orderreport";
 
 // const Loader = lazy(() => import("./components/Loader.tsx"));
 
@@ -57,6 +58,14 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route
             path="/orderDetails/:orderId"
             element={<App appContent={<OrderDetails />} />}
+          />
+          <Route
+            path="/order-report"
+            element={
+              <App
+                appContent={<OrderReport />}
+              />
+            }
           />
         </Routes>
       </Suspense>
