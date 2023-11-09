@@ -62,7 +62,7 @@ function LineChart ({
     <div
       className={`${className} ${!defaultClasses && (
         rotate
-          ? "rotate-90 w-[600px] h-[390px] w-[844px] bg-inherit ml-[-60vw] mt-[22vh]"
+          ? "rotate-90 h-[390px] w-[90vh] bg-inherit ml-[-50vw] mt-[22vh]"
           : "relative ml-[5vw] sm:ml-[1vw] mr-[5vw] sm:mr-[0] md:mr-[0] sm:h-[340px] bg-[#22262C]"
       )}`}
     >

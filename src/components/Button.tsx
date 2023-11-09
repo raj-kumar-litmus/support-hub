@@ -7,6 +7,7 @@ interface Props {
   isDisabled?: boolean;
   isRounded?: boolean;
   id?: string;
+  containerId?: string;
   children?: React.ReactNode;
   severity?:
     | "secondary"
@@ -24,6 +25,7 @@ const CustomButton: React.FC<Props> = ({
   onClick,
   label,
   id,
+  containerId,
   severity,
   isRounded,
   isDisabled,
@@ -32,7 +34,7 @@ const CustomButton: React.FC<Props> = ({
   isTextButton = false,
 }) => {
   return (
-    <div className={className}>
+    <div id={containerId} className={className}>
       <Button
         label={label}
         id={id}

@@ -114,11 +114,14 @@ const HomePage = () => {
   const fetchOPMData = async (url) => {
     try {
       setIsLoading(true);
-      const opmData = await fetchData(`${url}?period=${HOME_PAGE_REFERSH_DURATION}`, {});
+      const opmData = await fetchData(
+        `${url}?period=${HOME_PAGE_REFERSH_DURATION}`,
+        {},
+      );
       setIsLoading(false);
       const totalOrders = opmData.reduce(
         (acc, obj) => acc + parseInt(obj.orderCount),
-        0
+        0,
       );
       setTotalOPM(totalOrders);
       setAvgOPM(Math.round(totalOrders / HOME_PAGE_REFERSH_DURATION));
@@ -133,12 +136,12 @@ const HomePage = () => {
       setIsLoading(true);
       const opmData = await fetchData(
         `${url}?period=${HOME_PAGE_REFERSH_DURATION}&date=${date}`,
-        {}
+        {},
       );
       setIsLoading(false);
       const totalOrders = opmData.reduce(
         (acc, obj) => acc + parseInt(obj.orderCount),
-        0
+        0,
       );
       setLastDayTotalOPM(totalOrders);
       setLastDayAvgOPM(Math.round(totalOrders / HOME_PAGE_REFERSH_DURATION));

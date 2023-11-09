@@ -53,7 +53,7 @@ export const STATUS: string = "Status";
 export const AMOUNT: string = "Amount";
 export const NO_MATCHING_ORDERS_FOUND: string = "No Matching Orders.";
 export const VIEW_ALL: string = "View All";
-export const HOME_PAGE_REFERSH_DURATION: number = 30;
+export const HOME_PAGE_REFERSH_DURATION: number = 10;
 export const REFRESHTIME: number = 3000;
 
 export const LABELS = {
@@ -363,12 +363,14 @@ export const OPM_COMPARISON_OPTIONS_HOME = ({
     ...options,
     layout: {
       ...options.layout,
-      padding: {
-        left: 30,
-        right: 50,
-        top: 35,
-        bottom: 0,
-      },
+      padding: isMobile
+        ? { left: 10, right: 20, top: 15, bottom: 0 }
+        : {
+            left: 30,
+            right: 50,
+            top: 35,
+            bottom: 0,
+          },
     },
     scales: {
       ...options.scales,
@@ -376,7 +378,9 @@ export const OPM_COMPARISON_OPTIONS_HOME = ({
         ...options.scales.x,
         title: {
           ...options.scales.x.title,
-          padding: isMobile ? { top: 20, bottom: 20 } : { top: 25, bottom: 25 },
+          padding: isMobile
+            ? { top: 20, bottom: 20 }
+            : { left: 50, top: 35, bottom: -23 },
         },
       },
     },
@@ -394,7 +398,7 @@ export const OPM_COMPARISON_OPTIONS_HOME = ({
       },
       legend: {
         ...options.plugins.legend,
-        position: "top",
+        position: "bottom",
       },
     },
   };
