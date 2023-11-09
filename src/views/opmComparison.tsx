@@ -411,10 +411,11 @@ const OpmComparison: React.FC = () => {
                 );
               })}
               <CustomButton
+                id="page-btn-submit"
                 label={LABELS.submit}
                 isDisabled={disabled}
                 isRounded={true}
-                className="submitBtnMobile ml-[1vw] self-end relative"
+                className="ml-[1vw] self-end relative"
               />
             </form>
           ) : (

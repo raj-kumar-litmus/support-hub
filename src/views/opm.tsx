@@ -407,10 +407,11 @@ const OPM: React.FC = () => {
                 );
               })}
               <CustomButton
+                id="page-btn-submit"
                 label={LABELS.submit}
                 isDisabled={disabled}
                 isRounded={true}
-                className="submitBtnMobile self-end relative w-[10vw] sm:w-[20vw]"
+                className="self-end relative left-[5vw] w-[10vw] sm:w-[20vw]"
               />
             </form>
           ) : (
