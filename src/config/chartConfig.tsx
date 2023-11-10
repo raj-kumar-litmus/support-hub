@@ -13,6 +13,11 @@ import {
   TOTAL_ORDERS_PER_MINUTE,
 } from "../constants/appConstants";
 import { externalTooltipHandler } from "../components/utils/Utils";
+import {
+  SESSIONS_CHART,
+  TOTAL_ORDERS_PER_MINUTE,
+} from "../constants/appConstants";
+import { externalTooltipHandler } from "../components/utils/Utils";
 
 Chart.register(
   CategoryScale,
@@ -52,6 +57,7 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = {
     },
     datalabels: {
       display: false,
+      display: false,
       formatter: (_, context) =>
         context.chart.data.dataset?.[0]?.data?.[context.dataIndex],
       color: "black",
@@ -61,6 +67,8 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = {
     },
     tooltip: {
       enabled: false,
+      external: (_) => externalTooltipHandler(_, "session"),
+      mode: "index",
       external: (_) => externalTooltipHandler(_, "session"),
       mode: "index",
     },

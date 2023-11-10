@@ -15,10 +15,14 @@ import { Line } from "react-chartjs-2";
 import useScreenSize from "../hooks/useScreenSize";
 import RotateIcon from "../assets/rotate.svg";
 import CustomImage from "./common/customimage";
+import CustomTab from "./common/customtab";
+import { CHART_TABS } from "../constants/appConstants";
+import { OPM_BAR_CHART_OPTIONS } from "../config/chartConfig";
 
 interface Props {
   options: ChartOptions<"line"> | any;
   data: ChartData<"line">;
+  barChartData: ChartData<"bar">;
   className?: string;
   title: string;
   isFullScreen?: boolean;
@@ -40,12 +44,14 @@ function LineChart({
   title,
   options,
   data,
+  barChartData,
   className,
   isFullScreen = false,
   defaultClasses,
   plugins,
 }: Props) {
   const [rotate, setRotate] = useState<boolean>(isFullScreen);
+  const [tabValue, setTabValue] = useState<number>(1);
   const { width } = useScreenSize();
   const location = useLocation();
   const navigate = useNavigate();
