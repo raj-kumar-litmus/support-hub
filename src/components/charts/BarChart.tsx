@@ -31,10 +31,10 @@ import {
 } from "../../constants/appConstants";
 import useScreenSize from "../../hooks/useScreenSize";
 import {
-  DATE_FORMAT_2,
   DATE_FORMAT_3,
+  DATE_TIME_FORMAT_1,
+  DATE_TIME_FORMAT_2,
   formatDate,
-  getLocaleTime,
 } from "../../utils/dateTimeUtil";
 import { fetchData } from "../../utils/fetchUtil";
 import FilteredCard from "../FilteredCard";
@@ -156,8 +156,6 @@ const BarChart = () => {
       channel: "",
     };
     if (!disabled) {
-      let dateString: string = "";
-      let timeString: string = "";
       formFields.forEach((e: any) => {
         if (e.value) {
           switch (e.name) {
@@ -166,26 +164,13 @@ const BarChart = () => {
               params[e.name] = e.value;
               break;
             case "date":
-              dateString = formatDate(e.value, DATE_FORMAT_2);
-              break;
-            case "time":
-              timeString = getLocaleTime(e.value, false);
+              params["starttime"] = formatDate(e.value, DATE_TIME_FORMAT_1);
               break;
             default:
               break;
           }
         }
       });
-      let startTimeStr: string = "";
-      if (dateString === "" && timeString === "") {
-        startTimeStr = "";
-      } else {
-        if (dateString === "")
-          dateString = formatDate(new Date(), DATE_FORMAT_2);
-        if (timeString === "") timeString = getLocaleTime(new Date(), false);
-        startTimeStr = `${dateString}T${timeString}`;
-      }
-      params["starttime"] = startTimeStr;
     }
     setIsLoading(true);
     const data = await fetchData(URL_SESSIONS, params);
@@ -205,7 +190,7 @@ const BarChart = () => {
   const handleFormChange = (event) => {
     const data = [...formFields];
     const val = event.target.name || event.value.name;
-    if (val === "date" || val === "time") {
+    if (val === "date") {
       const dataItem = data.find((e) => e.name === val);
       dataItem.value = event.value;
     } else {
@@ -244,9 +229,7 @@ const BarChart = () => {
 
   const getFilterCardContent = (e) => {
     if (e.type === "calendar") {
-      return e.name === "time"
-        ? getLocaleTime(e.value, true)
-        : e.value.toLocaleDateString("en-US");
+      return `${formatDate(e.value, DATE_TIME_FORMAT_2)}`;
     } else {
       return e.options.find((option) => option.value === e.value).label;
     }
@@ -306,10 +289,10 @@ const BarChart = () => {
     <div id={id}>
       {location.pathname.includes("sessions") && (
         <>
-          <div className="flex basis-full justify-between pb-2 items-baseline">
+          <div className="flex basis-full justify-between pb-0 items-baseline">
             <div className="text-lg text-[#F2F2F2] font-bold">{SESSIONS}</div>
             <div
-              className="cursor-pointer"
+              className="cursor-pointer sm:hidden"
               onClick={() => toggleFilterVisibility()}
             >
               <CustomIcon
@@ -321,7 +304,7 @@ const BarChart = () => {
             </div>
           </div>
           {showFilters && (
-            <div className="basis-full justify-between pb-0 items-center hidden sm:flex">
+            <div className="basis-full justify-between pb-0 items-end hidden sm:flex">
               <div className="flex justify-start pb-4 items-end">
                 {formFields.map((form, index) => {
                   return (
@@ -331,8 +314,8 @@ const BarChart = () => {
                           name={form.name}
                           title={form.title}
                           containerclassname="calendarSessions"
-                          imageclassname="h-[20px] w-[20px] relative top-[2.8vh] left-[0.5vw] z-[1]"
-                          // showTime={false}
+                          titleclassname="top-[1.25rem]"
+                          imageclassname="h-[20px] w-[20px] relative top-[1.75rem] left-[0.5vw] z-[1]"
                           showTime
                           timeOnly={form.name === "time"}
                           placeholder={MM_DD_YYYY_HH_MM}
@@ -369,7 +352,7 @@ const BarChart = () => {
                 disabled={disabled}
                 label={SUBMIT}
                 id="page-btn-submit"
-                className="p-button-rounded min-w-[118px]"
+                className="p-button-rounded min-w-[118px] mb-4"
                 onClick={incrementCounter}
               />
             </div>
@@ -474,8 +457,8 @@ const BarChart = () => {
                       title={form.title}
                       showTime
                       containerclassname="calendarSessions"
-                      imageclassname="h-[20px] w-[20px] relative top-[4vh] md:top-[3vh] left-[0.5vw] z-[1]"
-                      // timeOnly={form.name === "time"}
+                      titleclassname="top-[1.25rem]"
+                      imageclassname="h-[20px] w-[20px] relative top-[1.75rem] md:top-[3vh] left-[0.5vw] z-[1]"
                       placeholder={DD_MM_YYYY}
                       value={form.value}
                       onChange={(event) => handleFormChange(event)}

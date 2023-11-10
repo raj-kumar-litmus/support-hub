@@ -4,16 +4,10 @@ export const DATE_FORMAT_2: string = "YYYY-MM-DD";
 export const DATE_FORMAT_3: string = "dd/mm/yy";
 export const DATE_FORMAT_4: string = "mm/dd/yyyy";
 
+export const DATE_TIME_FORMAT_1: string = "YYYY-MM-DDTHH:MM";
+export const DATE_TIME_FORMAT_2: string = "DD/MM/YYYY HH:MM AA";
 
 // Date Formatting Functions
-export const convertTo12HourFormat = (time: string): string => {
-  const [hours, minutes]: string[] = formatTime(time).split(":");
-  const period: string = parseInt(hours) >= 12 ? "PM" : "AM";
-  const hours12: number = parseInt(hours) % 12 || 12;
-  const convertedTime: string = `${hours12}:${minutes} ${period}`;
-  return convertedTime;
-};
-
 export const formatTime = (inputTime: string | Date): string => {
   const dateToBeFormatted: Date = new Date(inputTime);
   const hours: string = dateToBeFormatted
@@ -37,6 +31,8 @@ export const formatDate = (
     .toString()
     .padStart(2, "0");
   const year: number = dateToBeFormatted.getFullYear();
+  const time: string = formatTime(dateToBeFormatted);
+
   let formattedDate: string = ``;
   switch (format) {
     case "DD/MM/YYYY":
@@ -44,6 +40,15 @@ export const formatDate = (
       break;
     case "YYYY-MM-DD":
       formattedDate = `${year}-${month}-${day}`;
+      break;
+    case DATE_TIME_FORMAT_1:
+      formattedDate = `${year}-${month}-${day}T${time}`;
+      break;
+    case DATE_TIME_FORMAT_2:
+      formattedDate = `${day}/${month}/${year} ${getLocaleTime(
+        inputDate,
+        true,
+      )}`;
       break;
     default:
       formattedDate = `${year}-${month}-${day}`;
@@ -63,5 +68,5 @@ export const getLocaleTime = (timeVal: Date, is12Hr: boolean): string => {
 export const tenMinutesAgoInCurrentTimeZone = (date = null) =>
   new Date(
     new Date(date || Date.now() - 1000 * 60 * 10).getTime() -
-      new Date().getTimezoneOffset() * 60000,
+    new Date().getTimezoneOffset() * 60000,
   ).toISOString();
