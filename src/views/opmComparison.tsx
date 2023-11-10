@@ -383,8 +383,8 @@ const OpmComparison: React.FC = () => {
                       <CustomCalendar
                         name={form.name}
                         containerclassname="calendarOpmComparison ml-[10px] md:w-[10vw] lg:w-[12vw] xl:w-[14vw]"
-                        titleclassname="top-[2vh]"
-                        imageclassname="h-[20px] w-[20px] relative top-[3vh] left-[0.5vw] z-[1]"
+                        titleclassname="top-[1.25rem]"
+                        imageclassname="h-[20px] w-[20px] relative top-[1.75rem] left-[0.5vw] z-[1]"
                         title={form.label}
                         showTime={form.showTime}
                         iconPos={form.iconPos || "left"}
@@ -451,8 +451,8 @@ const OpmComparison: React.FC = () => {
                           <CustomCalendar
                             name={form.name}
                             containerclassname="opmFiltersMobileCalendar"
-                            imageclassname="h-[20px] w-[20px] relative top-[4vh] md:top-[3vh] left-[3.5vw] z-[1]"
-                            titleclassname="left-[1vw] md:left-[0] top-[2.2vh]"
+                            imageclassname="h-[20px] w-[20px] relative top-[1.75rem] md:top-[3vh] left-[3.5vw] z-[1]"
+                            titleclassname="left-[1vw] md:left-[0] top-[1.25rem]"
                             title={form.label}
                             showTime={form.showTime}
                             iconPos={form.iconPos || "left"}

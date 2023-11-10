@@ -19,10 +19,13 @@ export const TOTAL_SESSIONS_PER_MIN_PRIMARY: string =
 export const TOTAL_SESSIONS_PER_MIN_SECONDARY: string =
   "Azure Secondary (Sessions/Min)";
 export const TOTAL_SESSIONS_PER_MINUTE: string = "Total Session per minute";
+export const TOTAL_ORDERS_PER_MINUTE: string = "Total Orders Per Minute";
 export const MINS = "Mins";
 export const LASTDAY: string = "Last Day";
 export const TODAY: string = "Today";
 export const DIFFERENCE: string = "Difference";
+export const BAR: string = "Bar";
+export const LINE: string = "Line";
 
 export const ORDER_DETAILS: string = "Order Details";
 export const PROMOTIONS: string = "Promotions";
@@ -410,3 +413,4 @@ export const SESSIONS_TABS = [
   { header: SECONDARY },
   { header: BOTH },
 ];
+export const CHART_TABS = [{ header: BAR }, { header: LINE }];

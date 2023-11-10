@@ -67,6 +67,7 @@ export const externalTooltipHandler = (context, type) => {
   // Tooltip Element
   const { chart, tooltip } = context;
   const tooltipEl = getOrCreateTooltip(chart, type, tooltip);
+  tooltipEl.style.zIndex = 3;
   // Hide if no tooltip
   if (tooltip.opacity === 0) {
     tooltipEl.style.opacity = 0;
@@ -76,8 +77,17 @@ export const externalTooltipHandler = (context, type) => {
   // Set Text
   if (tooltip.body) {
     const titleLines = tooltip.title || [];
-    const bodyLines =
-      tooltip.body?.[0]?.lines && tooltip.body[0].lines[0].split(":");
+    let bodyLines = [];
+    if (type === "session") {
+      tooltip.body.forEach((bodyLineItem) => {
+        if (bodyLineItem.lines) {
+          bodyLines = [...bodyLines, ...bodyLineItem.lines[0].split(":")];
+        }
+      });
+    } else {
+      bodyLines =
+        tooltip.body?.[0]?.lines && tooltip.body[0].lines[0].split(":");
+    }
 
     const tableHead = document.createElement("thead");
 
@@ -85,18 +95,27 @@ export const externalTooltipHandler = (context, type) => {
       const tr = document.createElement("tr");
       const th = document.createElement("th");
       const text = document.createTextNode(title);
-
       th.appendChild(text);
       tr.appendChild(th);
       tableHead.appendChild(tr);
     });
 
     const tableBody = document.createElement("tbody");
+    if (type === "session") {
+      tableBody.classList.add("session-tooltip-tbody");
+    }
 
     bodyLines.forEach((body, i) => {
       const tr = document.createElement("tr");
       tr.style.backgroundColor = "inherit";
-
+      if (type === "session") {
+        if (i === 0 || i === 2) {
+          tr.style.width = "65%";
+        } else {
+          tr.style.width = "35%";
+          tr.style.textAlign = "-webkit-right";
+        }
+      }
       const td = document.createElement("td");
       const text = document.createTextNode(body);
 

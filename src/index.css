@@ -59,7 +59,7 @@
 }
 
 #bar-chart {
-  @apply m-0 p-5 sm:p-10 sm:pt-7 bg-[#1C1C20];
+  @apply m-0 p-5 sm:p-4 sm:pt-7 bg-[#1C1C20];
 }
 
 .home-sessions {
@@ -814,4 +814,66 @@ hr.horizontalLine.blue {
 .sessions-tabs.p-accordion .p-accordion-header .p-accordion-header-link,
 .p-tabview .p-tabview-nav li .p-tabview-nav-link {
   @apply transition-none border-none py-0;
+}
+
+.order-details-table.p-datatable .p-column-resizer {
+  @apply border-none w-0;
+}
+.order-details-table .p-datatable-tbody tr td {
+  @apply border-none;
+}
+.order-details-table .p-datatable-thead tr th {
+  @apply py-1;
+}
+
+/* OPM tab */
+.opm-tabs .p-tabview-nav-content {
+  @apply rounded-[8px];
+}
+.opm-tabs.p-accordion .p-accordion-header .p-accordion-header-link,
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  @apply transition-none border-none py-0;
+}
+.opm-tabs.p-tabview .p-tabview-panels {
+  @apply hidden;
+}
+.opm-tabs.p-tabview {
+  @apply w-[121px] h-[36px] self-end;
+}
+.opm-tabs.p-tabview .p-tabview-nav {
+  @apply border-none h-[32px] bg-[#292E36];
+}
+.opm-tabs.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  @apply bg-[#292E36] text-[#8B8C8F] h-[30px] rounded-none border-none text-[12px] font-medium;
+}
+.opm-tabs.p-tabview .p-tabview-nav li {
+  @apply bg-[#292E36];
+}
+.opm-tabs.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  @apply bg-[#F2F2F2] text-[#22262C] rounded-[8px] text-[12px] font-medium;
+}
+.opm-tabs.p-tabview
+  .p-tabview-nav
+  li
+  .p-tabview-nav-link:not(.p-disabled):focus {
+  @apply shadow-none;
+}
+.opm-tabs.p-tabview
+  .p-tabview-nav
+  li:not(.p-highlight):not(.p-disabled):hover
+  .p-tabview-nav-link {
+  @apply bg-[#292E36] text-[#8B8C8F];
+}
+.opm-tabs.p-accordion .p-accordion-header .p-accordion-header-link,
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  @apply transition-none border-none py-0;
+}
+.opm-tabs .p-tabview {
+  @apply w-[121px] h-[36px] z-0;
+}
+.opm-page-chart-container {
+  @apply border-0 rounded-[10px] sm:w-[62rem] lg:w-[73vw] lg:ml-[0] h-[24rem] md:h-[340px] lg:h-[62.23vh] mt-[3vh] md:mt-[1vh] lg:mt-[3vh];
+}
+.session-tooltip-tbody{
+  @apply flex flex-wrap;
 }
