@@ -162,32 +162,32 @@ export const PAYMENT_TYPES = {
 
 export const ORDER_STATUS_LIST = [
   {
-    code: 1111,
-    description: "Created",
+    "Status Code": 1111,
+    Description: "Created",
   },
   {
-    code: 1500,
-    description: "Scheduled",
+    "Status Code": 1500,
+    Description: "Scheduled",
   },
   {
-    code: 3200,
-    description: "Released",
+    "Status Code": 3200,
+    Description: "Released",
   },
   {
-    code: 3350,
-    description: "Included in shipments",
+    "Status Code": 3350,
+    Description: "Included in shipments",
   },
   {
-    code: 9000,
-    description: "Shipped",
+    "Status Code": 9000,
+    Description: "Shipped",
   },
   {
-    code: 3700,
-    description: "Cancelled",
+    "Status Code": 3700,
+    Description: "Cancelled",
   },
   {
-    code: 3700.5,
-    description: "Shipped and invoiced",
+    "Status Code": 3700.5,
+    Description: "Shipped and invoiced",
   },
 ];
 export const OPM_OPTIONS = (isMobile: boolean, showDataLabels = false) => ({
@@ -416,3 +416,44 @@ export const SESSIONS_TABS = [
   { header: SECONDARY },
   { header: BOTH },
 ];
+
+export const QUICK_LINKS = [{
+  id: 0,
+  header: "Alerting & Monitoring Tools",
+  links: [
+    { name: "Azure Splunk", link: import.meta.env.VITE_AZURE_SPLUNK },
+    { name: "Azure 2 Splunk", link: import.meta.env.VITE_AZURE_2_SPLUNK },
+    { name: "Dynatrace", link: import.meta.env.VITE_DYNATRACE },
+    { name: "Rigor Monitoring", link: import.meta.env.VITE_RIGOR_MONITORING },
+    { name: "Grafana", link: import.meta.env.VITE_GRAFANA },
+    { name: "Alert Manager", link: import.meta.env.VITE_ALERT_MANAGER },
+    { name: "Azure Endeca", link: import.meta.env.VITE_AZURE_EMDECA },
+    { name: "Forter Portal", link: import.meta.env.VITE_FORTER_PORTAL },
+    { name: "BI Rewards", link: import.meta.env.VITE_BI_REWARDS },
+    { name: "ArgoCD", link: import.meta.env.VITE_ARGOCD },
+    { name: "UserAgent Lookup", link: import.meta.env.VITE_USERAGENT_LOOKUP },
+    { name: "PagerDuty", link: import.meta.env.VITE_PAGERDUTY },
+    { name: "Service Now", link: import.meta.env.VITE_SERVICE_NOW },
+    { name: "PAM", link: import.meta.env.VITE_PAM },
+    { name: "Server Restart", link: import.meta.env.VITE_SERVER_RESTART },
+    { name: "SephAdmin", link: import.meta.env.VITE_SEPH_ADMIN },
+    { name: "True Origin", link: import.meta.env.VITE_TRUE_ORIGIN },
+    { name: "True Preview", link: import.meta.env.VITE_TRUE_PREVIEW },
+    { name: "Mule Catalog", link: import.meta.env.VITE_MULE_CATALOG },
+    { name: "Mule BackOffice", link: import.meta.env.VITE_MULE_BACKOFFICE },
+    { name: "BCC", link: import.meta.env.VITE_BCC },
+    { name: "CSC", link: import.meta.env.VITE_CSC },
+  ]
+}
+  , {
+  id: 1,
+  header: "Wiki Links", links: [
+    { name: "Environment URLs", link: import.meta.env.VITE_ENVIRONMENT_URLS },
+    { name: "Support Hub", link: import.meta.env.VITE_SUPPORT_HUB },
+    { name: "Dotcom Incident Report", link: import.meta.env.VITE_DOTCOM_INCIDENT_REPORT },
+    { name: "P1/P2 Checklist", link: import.meta.env.VITE_P1_P2_CHECKLIST },
+  ]
+}
+];
+
+export const QUICK_LINKS_HEADER = "Quick Links"

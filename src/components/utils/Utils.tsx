@@ -5,7 +5,7 @@ import SessionsIcon from "../../assets/sessions.svg";
 import DCOpenOrdersIcon from "../../assets/dcopenorders.svg";
 
 export const MENU_LIST = [
-  { id: 1, name: "Home", icon: DashboardIcon, path: "/home" },
+  { id: 1, name: "Dashboard", icon: DashboardIcon, path: "/home" },
   { id: 2, name: "OPM", icon: OPMIcon, path: "/opm" },
   {
     id: 3,
