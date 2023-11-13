@@ -51,16 +51,23 @@ const ComparisonCards = ({
   lastDay: number;
 }) => {
   const difference = lastDay - today || 0;
+  const kFormatter = (num) => {
+    return Math.abs(num) > 999
+      ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + "k"
+      : Math.sign(num) * Math.abs(num);
+  };
   return (
     <div className="flex">
       <div className="flex flex-col pr-1 sm:pr-2 justify-between">
         <span className="text-[10px]">{TODAY}</span>
-        <span className="text-[#F2F2F2] text-xl">{today}</span>
+        <span className="text-[#F2F2F2] text-xl">{kFormatter(today) || 0}</span>
       </div>
       <div className="border border-r border-[#383F47] h-[2.5rem] m-auto"></div>
       <div className="flex flex-col px-1 sm:px-2 justify-between">
         <span className="text-[10px]">{LASTDAY}</span>
-        <span className="text-[#F2F2F2] text-xl">{lastDay}</span>
+        <span className="text-[#F2F2F2] text-xl">
+          {kFormatter(lastDay) || 0}
+        </span>
       </div>
       <div className="border border-r border-[#383F47] h-[2.5rem] m-auto"></div>
       <div className="flex flex-col justify-between pl-1 sm:pl-2">
@@ -116,12 +123,12 @@ const HomePage = () => {
       setIsLoading(true);
       const opmData = await fetchData(
         `${url}?period=${HOME_PAGE_REFERSH_DURATION}`,
-        {},
+        {}
       );
       setIsLoading(false);
       const totalOrders = opmData.reduce(
         (acc, obj) => acc + parseInt(obj.orderCount),
-        0,
+        0
       );
       setTotalOPM(totalOrders);
       setAvgOPM(Math.round(totalOrders / HOME_PAGE_REFERSH_DURATION));
@@ -136,12 +143,12 @@ const HomePage = () => {
       setIsLoading(true);
       const opmData = await fetchData(
         `${url}?period=${HOME_PAGE_REFERSH_DURATION}&date=${date}`,
-        {},
+        {}
       );
       setIsLoading(false);
       const totalOrders = opmData.reduce(
         (acc, obj) => acc + parseInt(obj.orderCount),
-        0,
+        0
       );
       setLastDayTotalOPM(totalOrders);
       setLastDayAvgOPM(Math.round(totalOrders / HOME_PAGE_REFERSH_DURATION));

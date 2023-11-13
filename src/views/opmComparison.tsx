@@ -313,7 +313,7 @@ const OpmComparison: React.FC = () => {
   return (
     <>
       {location.pathname.includes("home") && isLoading && (
-        <Loader className="!p-0 w-[40vw]" />
+        <Loader className="!p-0 w-[40vw] m-auto" />
       )}
       {location.pathname.includes("home") && !isLoading && data && (
         <div className="w-full sm:w-1/2 bg-[#22262C] p-0 bg-transparent rounded-lg flex flex-col justify-between">
