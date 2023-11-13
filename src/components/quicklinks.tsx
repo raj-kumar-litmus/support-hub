@@ -1,12 +1,20 @@
-import { KeyboardEvent, useEffect, useState } from "react";
+import { FC, KeyboardEvent, useEffect, useState } from "react";
 import { QUICK_LINKS, QUICK_LINKS_HEADER } from "../constants/appConstants";
 
+import { IQuickLink } from "../@types/quicklinks";
 import ArrowTop from "../assets/arrow_top.svg";
 import ArrowTopWhite from "../assets/arrow_top_white.svg";
-import CustomImage from "./common/customimage";
-import CustomTab from "./common/customtab";
 import useScreenSize from "../hooks/useScreenSize";
 import CustomButton from "./Button";
+import CustomImage from "./common/customimage";
+import CustomTab from "./common/customtab";
+
+type Props = {
+  link: IQuickLink;
+  hoveredIndex: number;
+  setHoveredIndex: (a: number) => void;
+  index: number;
+};
 
 const QuickLinks = () => {
   const [tabValue, setTabValue] = useState<number>(0);
@@ -63,6 +71,7 @@ const QuickLinks = () => {
             hoveredIndex={hoveredIndex}
             setHoveredIndex={setHoveredIndex}
             index={i}
+            key={i}
           />
         )}
         {showSeeMoreBtn &&
@@ -77,22 +86,16 @@ const QuickLinks = () => {
   );
 }
 
-const QuickLinkBox = ({ link, hoveredIndex, setHoveredIndex, index }: { link, hoveredIndex: number, setHoveredIndex: (a: number) => void, index: number }) => {
+const QuickLinkBox: FC<Props> = ({ link, hoveredIndex, setHoveredIndex, index }) => {
   return (
     <div className="m-1 link-box flex justify-center cursor-pointer" onClick={() => window.open(link.link, "_blank")} key={link.name} onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)}>
       <span className="m-auto">
         {link.name}
       </span>
-      {index === hoveredIndex ?
-        <CustomImage
-          className="h-[13px] self-start mr-2 mt-2"
-          src={ArrowTopWhite}
-        /> :
-        <CustomImage
-          className="h-[13px] self-start mr-2 mt-2"
-          src={ArrowTop}
-        />
-      }
+      <CustomImage
+        className="h-[13px] self-start mr-2 mt-2"
+        src={index === hoveredIndex ? ArrowTopWhite : ArrowTop}
+      />
     </div>
   )
 }

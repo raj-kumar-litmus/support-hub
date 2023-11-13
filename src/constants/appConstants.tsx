@@ -449,3 +449,5 @@ export const QUICK_LINKS = [{
   ]
 }
 ];
+
+export const QUICK_LINKS_HEADER = "Quick Links"
