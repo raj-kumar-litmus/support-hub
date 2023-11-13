@@ -12,6 +12,7 @@ export const SELECT_CHANNEL: string = "Select Channel";
 export const DD_MM_YYYY: string = "dd/mm/yyyy";
 export const HH_MM: string = "hh:mm";
 export const DD_MM_YYYY_HH_MM: string = "dd/mm/yyyy hh:mm";
+export const MM_DD_YYYY_HH_MM: string = "mm/dd/yyyy hh:mm";
 export const FROM: string = "From";
 export const RESET: string = "Reset";
 export const TOTAL_SESSIONS_PER_MIN_PRIMARY: string =

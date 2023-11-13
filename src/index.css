@@ -613,6 +613,11 @@ hr.horizontalLine.blue {
 .calendarSessions span input {
   @apply !pl-[6.5vw] md:!pl-[2.5vw];
 }
+.calendarOpm span input {
+  @apply !pl-[6.5vw] md:!pl-[2.5vw];
+}
+
+
 .opmFiltersMobileCalendar span input {
   @apply !pl-[7vw];
 }

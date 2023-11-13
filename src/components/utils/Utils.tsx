@@ -155,3 +155,17 @@ export const convert12to24Hour = (hour, ampm) => {
   }
   return convertedHour;
 }
+export const submitOnEnter = (callback) => {
+  const handleGlobalKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      callback(event);
+    }
+  };
+
+  document.addEventListener("keydown", handleGlobalKeyDown);
+
+  return () => {
+    document.removeEventListener("keydown", handleGlobalKeyDown);
+  };
+};

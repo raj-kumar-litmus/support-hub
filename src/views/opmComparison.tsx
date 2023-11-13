@@ -44,7 +44,7 @@ import WhiteCalendarIcon from "../assets/white_calendar.svg";
 import GreyCalendarIcon from "../assets/calendar-grey.svg";
 import GreyChannelIcon from "../assets/channel-grey.svg";
 import refreshIcon from "../assets/refresh_icon.svg";
-
+import { submitOnEnter } from "../components/utils/Utils";
 import {
   OPM_COMPARISON_OPTIONS,
   OPM_COMPARISON_OPTIONS_HOME,
@@ -161,7 +161,11 @@ const OpmComparison: React.FC = () => {
       }&channel=${DEFAULT.channel}`,
     );
   }, []);
+  useEffect(() => {
+    const removeEventListener = submitOnEnter(submit);
 
+    return removeEventListener;
+  }, []);
   const handleFormChange = (event) => {
     const data = [...formFields];
     const val = event.target.name || event.value.name;

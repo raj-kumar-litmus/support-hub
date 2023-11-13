@@ -44,7 +44,7 @@ import CustomTab from "../common/customtab";
 import Loader from "../loader";
 import CustomImage from "../common/customimage";
 import CustomButton from "../Button";
-
+import { submitOnEnter } from "../utils/Utils";
 const BarChart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [sessionData, setSessionData] = useState<SessionData[]>([]);
@@ -196,6 +196,10 @@ const BarChart = () => {
     );
     setIsLoading(false);
   };
+  useEffect(() => {
+    const removeEventListener = submitOnEnter(incrementCounter);
+    return removeEventListener;
+  } );
 
   const handleFormChange = (event) => {
     const data = [...formFields];

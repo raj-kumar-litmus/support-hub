@@ -2,6 +2,8 @@
 export const DATE_FORMAT_1: string = "DD/MM/YYYY";
 export const DATE_FORMAT_2: string = "YYYY-MM-DD";
 export const DATE_FORMAT_3: string = "dd/mm/yy";
+export const DATE_FORMAT_4: string = "mm/dd/yyyy";
+
 
 // Date Formatting Functions
 export const convertTo12HourFormat = (time: string): string => {
