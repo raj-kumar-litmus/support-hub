@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+
+#loading div {
+  @apply w-full h-full fixed top-0 left-0 flex justify-center items-center z-[100] bg-[#22262C] opacity-80;
+}
 .ordersTable .p-datatable-table {
   @apply text-sm border-separate font-helvetica;
 }
@@ -602,10 +606,10 @@ hr.horizontalLine.opmComparison {
   background: linear-gradient(to right, #6370ff, #5a9ef500);
 }
 hr.horizontalLine.yellow {
-  background: linear-gradient(to right, #6370FF, #5a9ef500);
+  background: linear-gradient(to right, #6370ff, #5a9ef500);
 }
 hr.horizontalLine.blue {
-  background: linear-gradient(to right, #FDA44F, #5a9ef500);
+  background: linear-gradient(to right, #fda44f, #5a9ef500);
 }
 .calendarOpmComparison span input {
   @apply pl-[2.5vw];

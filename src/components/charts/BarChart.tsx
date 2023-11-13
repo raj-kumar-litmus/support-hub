@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import { Bar } from "react-chartjs-2";
 import { ChartData, SessionData } from "../../@types/BarChart";
 import ChannelIcon from "../../assets/channel.svg";
@@ -44,6 +44,7 @@ import CustomTab from "../common/customtab";
 import Loader from "../loader";
 import CustomImage from "../common/customimage";
 import CustomButton from "../Button";
+import { LoaderContext, LoaderContextType } from "../../context/loaderContext";
 
 const BarChart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -87,6 +88,9 @@ const BarChart = () => {
   const [disabled, setDisabled] = useState(true);
   const [tabValue, setTabValue] = useState<number>(2);
   const [id, setId] = useState<string>("home-bar-chart");
+  const { hideLoader } = useContext(
+    LoaderContext
+  ) as LoaderContextType;
   const { width } = useScreenSize();
   const chartRef = useRef(null);
   const navigate = useNavigate();
@@ -194,6 +198,7 @@ const BarChart = () => {
         ? getChartConfig(HOME_PAGE_REFERSH_DURATION)
         : getChartConfig(),
     );
+    hideLoader();
     setIsLoading(false);
   };
 

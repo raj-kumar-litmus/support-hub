@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState, Fragment, useContext } from "react";
 import { useNavigate } from "react-router";
 import {
   Chart as ChartJS,
@@ -57,6 +57,7 @@ import {
   HOME_PAGE_REFERSH_DURATION,
 } from "../constants/appConstants";
 import { URL_OPM } from "../constants/apiConstants";
+import { LoaderContext, LoaderContextType } from "../context/loaderContext";
 
 ChartJS.register(
   CategoryScale,
@@ -74,6 +75,9 @@ const OPM: React.FC = () => {
   const [showFilters, setShowFilters] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
   const [position, setPosition] = useState<ModalEnums>("center");
+  const { hideLoader } = useContext(
+    LoaderContext
+  ) as LoaderContextType;
 
   const { width } = useScreenSize();
   const navigate = useNavigate();
@@ -111,6 +115,7 @@ const OPM: React.FC = () => {
     try {
       setIsLoading(true);
       const data = await fetchData(url, {});
+      hideLoader();
       setIsLoading(false);
       setData({
         labels: data.map((e) => e.timestamp),

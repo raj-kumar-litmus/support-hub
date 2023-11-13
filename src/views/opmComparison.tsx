@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router";
 import {
   Chart as ChartJS,
@@ -58,6 +58,7 @@ import {
 import { URL_OPM_COMPARISON } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
 import { tenMinutesAgoInCurrentTimeZone } from "../utils/dateTimeUtil";
+import { LoaderContext, LoaderContextType } from "../context/loaderContext";
 
 ChartJS.register(
   CategoryScale,
@@ -98,6 +99,9 @@ const OpmComparison: React.FC = () => {
   const [showFilteredCards, setShowFilteredCards] = useState<boolean>(false);
 
   const [disabled, setDisabled] = useState(true);
+  const { hideLoader } = useContext(
+    LoaderContext
+  ) as LoaderContextType;
 
   const [formFields, setFormFields] = useState([
     {
@@ -254,6 +258,7 @@ const OpmComparison: React.FC = () => {
       setIsLoading(true);
       if (url) {
         const data = await fetchData(url, {});
+        hideLoader();
         setIsLoading(false);
         setApiResponse(data);
       }
