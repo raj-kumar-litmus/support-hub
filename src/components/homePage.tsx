@@ -11,6 +11,12 @@ import {
   TODAY,
   DIFFERENCE,
   REFRESHTIME,
+  DASHBOARD,
+  AVG_ORDERS_PER_MIN,
+  TOTAL_NO_OF_ORDERS,
+  LAST_MIN_OPM,
+  AVG_OPM_COMPARISON,
+  TOTAL_ORDER_COMPARISON,
 } from "../constants/appConstants";
 import useScreenSize from "../hooks/useScreenSize";
 import TimeTracker from "./timeTracker";
@@ -190,7 +196,7 @@ const HomePage = () => {
           <div className="flex sm:flex-row justify-between mb-4">
             <div className="flex items-center font-helvetica">
               <span className="text-lg text-[#F2F2F2] font-bold mr-4">
-                Dashboard
+                {DASHBOARD}
               </span>
               <CustomImage src={infoIcon} />
               <span className="text-xs text-[#8B8C8F] ml-2">
@@ -214,7 +220,7 @@ const HomePage = () => {
               <HomeCard
                 title={
                   <CardTitle
-                    title={"Avg Orders Per Min"}
+                    title={AVG_ORDERS_PER_MIN}
                     icon={avgOrdersPerMinIcon}
                   />
                 }
@@ -225,7 +231,7 @@ const HomePage = () => {
               <HomeCard
                 title={
                   <CardTitle
-                    title={"Total Number of Orders"}
+                    title={TOTAL_NO_OF_ORDERS}
                     icon={totalNoOfOrdersIcon}
                   />
                 }
@@ -234,19 +240,14 @@ const HomePage = () => {
                 textColor="#FFFFFF"
               />
               <HomeCard
-                title={
-                  <CardTitle title={"Last min OPM"} icon={lastMinOpmIcon} />
-                }
+                title={<CardTitle title={LAST_MIN_OPM} icon={lastMinOpmIcon} />}
                 value={<OPMCards value={lastMinOPM} />}
                 bgColor="#E9E8E8"
                 textColor="#FFFFFF"
               />
               <HomeCard
                 title={
-                  <CardTitle
-                    title={"Avg OPM Comparison"}
-                    icon={avgOpmcompIcon}
-                  />
+                  <CardTitle title={AVG_OPM_COMPARISON} icon={avgOpmcompIcon} />
                 }
                 value={
                   <ComparisonCards today={avgOPM} lastDay={lastDayAvgOPM} />
@@ -257,7 +258,7 @@ const HomePage = () => {
               <HomeCard
                 title={
                   <CardTitle
-                    title={"Total Order Comparison"}
+                    title={TOTAL_ORDER_COMPARISON}
                     icon={totalOrderCompIcon}
                   />
                 }
