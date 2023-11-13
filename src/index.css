@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 #loading div {
   @apply w-full h-full fixed top-0 left-0 flex justify-center items-center z-[100] bg-[#22262C] opacity-80;
 }
@@ -729,21 +728,21 @@ hr.horizontalLine.blue {
 .home-opm-comp {
   @apply ml-0 sm:ml-[5vw];
 }
-.home-refresh-btn,
-.home-expand-btn {
-  @apply !bg-[#22262C] p-0 rounded-full;
-}
 .home-refresh-btn .p-button {
-  @apply !bg-[#22262C] border-[#22262C] rounded-full p-3 hover:bg-[#22262C] hover:!border-[#22262C] active:!border-[#22262C];
+  @apply p-[0.54rem] bg-[#292E36] border-[#292E36] rounded-full hover:bg-[#292E36] hover:!border-[#292E36] active:!border-[#292E36];
 }
+.home-expand-btn .p-button {
+  @apply bg-transparent border-transparent rounded-full p-0 hover:bg-transparent hover:!border-transparent active:!border-transparent;
+}
+.home-expand-btn .p-button:enabled:hover {
+  @apply border-transparent;
+}
+.home-expand-btn .p-button:focus,
 .home-refresh-btn .p-button:focus {
   @apply shadow-none;
 }
-.home-expand-btn button {
-  @apply !bg-[#22262C] border-[#22262C] rounded-full p-0 hover:bg-[#22262C] hover:!border-[#22262C] active:!border-[#22262C];
-}
-.home-expand-btn .p-button:focus {
-  @apply shadow-none;
+.home-card-refresh-btn .p-button {
+  @apply bg-[#22262C];
 }
 .sessions-tabs.p-tabview .p-tabview-panels {
   @apply hidden;

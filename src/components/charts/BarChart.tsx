@@ -408,7 +408,7 @@ const BarChart = () => {
                   <div className="text-[#F2F2F2] text-base sm:text-lg font-bold self-center">
                     {SESSIONS}
                   </div>
-                  <div className="flex items-center">
+                  <div className="flex">
                     <CustomButton
                       className="home-refresh-btn"
                       onClick={handleOPMCompRefreshBtnClick}
@@ -416,7 +416,7 @@ const BarChart = () => {
                       <CustomImage src={refreshIcon} />
                     </CustomButton>
                     <CustomButton
-                      className="home-expand-btn ml-5 pb-[4px]"
+                      className="home-expand-btn ml-3 pb-[4px]"
                       onClick={handleExpandClick}
                     >
                       <CustomImage src={openNewPageIcon} />

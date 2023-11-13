@@ -200,7 +200,7 @@ const HomePage = () => {
             <div className="flex items-center font-helvetica">
               {width > 700 && <TimeTracker timeStamp={refreshTime} />}
               <CustomButton
-                className="home-refresh-btn"
+                className="home-refresh-btn home-card-refresh-btn"
                 onClick={handleRefreshBtnClick}
               >
                 <CustomImage src={refreshIcon} />
