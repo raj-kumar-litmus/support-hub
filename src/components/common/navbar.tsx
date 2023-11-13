@@ -78,7 +78,7 @@ const Navbar: FC<Props> = ({
         <CustomImage
           src={QuickLinksIcon}
           onClick={() => setShowQuickLinks(!showQuickLinks)}
-          className="cursor-pointer h-[24px] w-[24px] right-[4rem] top-[18px] sm:right-[2rem] absolute"
+          className="cursor-pointer h-[24px] w-[24px] right-[4rem] top-[18px] md:right-[2rem] sm:right-[0.6rem] absolute"
         />
         <SearchBar
           showSearchButton={!showSidePaneGrid}

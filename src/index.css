@@ -806,13 +806,15 @@ hr.horizontalLine.blue {
 .quick-links-tab.p-tabview {
   @apply h-[40px];
 }
-}
 .custom-btn {
   @apply mx-auto mt-2;
 }
 .custom-btn .p-button {
   @apply bg-[#22262C] border-[#FAF9F6] text-[#FAF9F6] text-[14px] rounded-full h-[44px] w-[160px] font-normal;
 }
-.p-button:enabled:active, .p-button:not(button):not(a):not(.p-disabled):active {
+.custom-btn .p-button:enabled:active, .p-button:not(button):not(a):not(.p-disabled):active {
   @apply bg-transparent shadow-none border-[#FAF9F6] border-2;
+}
+.custom-btn .p-button:enabled:hover, .p-button:not(button):not(a):not(.p-disabled):hover {
+    @apply bg-transparent shadow-none border-[#FAF9F6] border-2;
 }
