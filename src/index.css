@@ -423,7 +423,7 @@ button.p-button-secondary {
   @apply bg-transparent;
 }
 .search-button .p-button {
-  @apply -ml-8 sm:hidden !shadow-none !border-none;
+  @apply -ml-8 sm:hidden !shadow-none !border-none pl-0;
 }
 .popup-button .p-button {
   @apply !shadow-none !border-none;
@@ -812,4 +812,7 @@ hr.horizontalLine.blue {
 }
 .custom-btn .p-button {
   @apply bg-[#22262C] border-[#FAF9F6] text-[#FAF9F6] text-[14px] rounded-full h-[44px] w-[160px] font-normal;
+}
+.p-button:enabled:active, .p-button:not(button):not(a):not(.p-disabled):active {
+  @apply bg-transparent shadow-none border-[#FAF9F6] border-2;
 }

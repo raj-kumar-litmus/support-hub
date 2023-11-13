@@ -78,7 +78,7 @@ const QuickLinks = () => {
           <CustomButton
             label="See More"
             onClick={onSeeMoreClick}
-            className="custom-btn"
+          className="custom-btn block"
           />
         }
       </div>
