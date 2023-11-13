@@ -46,10 +46,6 @@ const Navbar: FC<Props> = ({
     }
   };
 
-  const toggleShowQuickLinks = () => {
-    setShowQuickLinks(!showQuickLinks);
-  }
-
   return (
     <div
       className={
@@ -81,7 +77,7 @@ const Navbar: FC<Props> = ({
       <div className="sm:m-auto">
         <CustomImage
           src={QuickLinksIcon}
-          onClick={toggleShowQuickLinks}
+          onClick={() => setShowQuickLinks(!showQuickLinks)}
           className="cursor-pointer h-[24px] w-[24px] right-[4rem] top-[18px] sm:right-[2rem] absolute"
         />
         <SearchBar
