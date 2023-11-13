@@ -5,7 +5,7 @@ import SessionsIcon from "../../assets/sessions.svg";
 import DCOpenOrdersIcon from "../../assets/dcopenorders.svg";
 
 export const MENU_LIST = [
-  { id: 1, name: "Home", icon: DashboardIcon, path: "/home" },
+  { id: 1, name: "Dashboard", icon: DashboardIcon, path: "/home" },
   { id: 2, name: "OPM", icon: OPMIcon, path: "/opm" },
   {
     id: 3,
@@ -127,3 +127,8 @@ export const externalTooltipHandler = (context, type) => {
   tooltipEl.style.left = positionX + tooltip.caretX + "px";
   tooltipEl.style.top = positionY + tooltip.caretY + "px";
 };
+
+export const getTableHeaders = (data: Object[]) => {
+  const keyArray = Object.keys(data[0])?.map((key) => key);
+  return keyArray;
+}
