@@ -1,5 +1,5 @@
 import { KeyboardEvent, useEffect, useState } from "react";
-import { QUICK_LINKS } from "../constants/appConstants";
+import { QUICK_LINKS, QUICK_LINKS_HEADER } from "../constants/appConstants";
 
 import ArrowTop from "../assets/arrow_top.svg";
 import ArrowTopWhite from "../assets/arrow_top_white.svg";
@@ -46,7 +46,7 @@ const QuickLinks = () => {
   return (
     <div className="p-4 sm:px-8 sm:py-6 bg-[#22262C] quick-links absolute top-[56px] sm:left-[25vw] lg:left-[21vw] right-0">
       <div className="flex flex-wrap justify-between items-center pb-2">
-        <span className="text-[#FAF9F6] pb-2 font-bold">Quick Links</span>
+        <span className="text-[#FAF9F6] pb-2 font-bold">{QUICK_LINKS_HEADER}</span>
         <div className="flex flex-wrap justify-between m-auto">
           <CustomTab
             className="custom-tab quick-links-tab"
