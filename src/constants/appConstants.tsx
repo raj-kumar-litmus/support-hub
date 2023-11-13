@@ -410,3 +410,42 @@ export const SESSIONS_TABS = [
   { header: SECONDARY },
   { header: BOTH },
 ];
+
+export const QUICK_LINKS = [{
+  id: 0,
+  header: "Alerting & Monitoring Tools",
+  links: [
+    { name: "Azure Splunk", link: "http://azruvapspl11.sephoraus.com:8000/en-US/app/atg/search" },
+    { name: "Azure 2 Splunk", link: "http://azruvapspl45.sephoraus.com:8000/en-US/app/atg/search" },
+    { name: "Dynatrace", link: "https://dtz52610.live.dynatrace.com/ui/dashboards?gtf=-2h&gf=all" },
+    { name: "Rigor Monitoring", link: "https://monitoring.rigor.com/checks/real-browsers" },
+    { name: "Grafana", link: "https://grafana.eus1-platform-prod.internalsephora.com/d/6bnz0T2Mz/overall-application-view?orgId=1&refresh=5m" },
+    { name: "Alert Manager", link: "https://alertmanager.eus1-platform-prod.internalsephora.com/#/alerts" },
+    { name: "Azure Endeca", link: "http://10.187.4.65:8008/endeca_jspref/controller.jsp?sid=179573DFAA65&enePort=15008&Ne=200000&eneHost=10.187.4.63&Nu=P_ROLLUP_KEY&N=900077&Np=1" },
+    { name: "Forter Portal", link: "https://portal.forter.com/app/dashboard/transactions/list" },
+    { name: "BI Rewards", link: "http://crm.internalsephora.com/rest/rewards" },
+    { name: "ArgoCD", link: "https://argocd.eus1-omni-prod.internalsephora.com/applications/" },
+    { name: "UserAgent Lookup", link: "http://gs.statcounter.com/detect" },
+    { name: "PagerDuty", link: "https://sephora.pagerduty.com/incidents" },
+    { name: "Service Now", link: "https://sephora.service-now.com/" },
+    { name: "PAM", link: "https://sephora.secretservercloud.com/Login.aspx" },
+    { name: "Server Restart", link: "https://rundeck.lipstack.sephoraus.com/project/Azure/job/show/azure-prd-cron-jobs-RollingRestart-ManageProd" },
+    { name: "SephAdmin", link: "http://10.187.4.47:36280/sephadmin" },
+    { name: "True Origin", link: "https://true-azre1-www.sephora.com/" },
+    { name: "True Preview", link: "https://true-azre1-preview.sephora.com/preview" },
+    { name: "Mule Catalog", link: "http://azruvapmul12:9996/feeds/static/index.html" },
+    { name: "Mule BackOffice", link: "http://azruvapmul11:9997/feeds/static/index.html" },
+    { name: "BCC", link: "http://prod-bcc-azre1.sephoraus.com/atg/bcc/" },
+    { name: "CSC", link: "http://prod-csc-azre1.sephoraus.com/agent/" },
+  ]
+}
+  , {
+  id: 1,
+  header: "Wiki Links", links: [
+    { name: "Environment URLs", link: "https://confluence.sephora.com/wiki/pages/viewpage.action?spaceKey=ILLUMINATE&title=ATG+Environment+URLs" },
+    { name: "Support Hub", link: "https://confluence.sephora.com/wiki/display/DOT/Support+Utility+Server" },
+    { name: "Dotcom Incident Report", link: "https://confluence.sephora.com/wiki/display/DOT/Dotcom+-+Monthly+Incidents+Report+-+2021" },
+    { name: "P1/P2 Checklist", link: "https://confluence.sephora.com/wiki/pages/viewpage.action?pageId=195756749" },
+  ]
+}
+];

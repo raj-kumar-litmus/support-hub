@@ -741,11 +741,8 @@ hr.horizontalLine.blue {
 .home-expand-btn .p-button:focus {
   @apply shadow-none;
 }
-.custom-tab.p-tabview .p-tabview-panels {
-  @apply hidden;
-}
 .custom-tab.p-tabview {
-  @apply w-[245px] h-[36px] self-end;
+  @apply w-fit h-[36px] self-end;
 }
 .custom-tab.p-tabview .p-tabview-nav {
   @apply border-none h-[32px] bg-[#292E36];
@@ -781,37 +778,44 @@ hr.horizontalLine.blue {
 .custom-tab.p-tabview .p-tabview-panels {
   @apply hidden;
 }
-.custom-tab.p-tabview {
-  @apply w-[245px] h-[36px] self-end;
-}
-.custom-tab.p-tabview .p-tabview-nav {
-  @apply border-none h-[32px] bg-[#292E36];
-}
-.custom-tab.p-tabview .p-tabview-nav li .p-tabview-nav-link {
-  @apply bg-[#292E36] text-[#8B8C8F] h-[30px] rounded-none border-none text-[12px] font-medium;
-}
-.custom-tab .p-tabview-nav-content {
-  @apply rounded-[8px];
-}
-.custom-tab.p-tabview .p-tabview-nav li {
-  @apply bg-[#292E36];
-}
-.custom-tab.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
-  @apply bg-[#F2F2F2] text-[#22262C] rounded-[8px] text-[12px] font-medium;
-}
 .custom-tab.p-tabview
   .p-tabview-nav
   li
   .p-tabview-nav-link:not(.p-disabled):focus {
   @apply shadow-none;
 }
-.custom-tab.p-tabview
-  .p-tabview-nav
-  li:not(.p-highlight):not(.p-disabled):hover
-  .p-tabview-nav-link {
-  @apply bg-[#292E36] text-[#8B8C8F];
+.custom-tab .p-tabview .p-tabview-nav .p-tabview-ink-bar {
+  @apply invisible;
 }
-.custom-tab.p-accordion .p-accordion-header .p-accordion-header-link,
-.p-tabview .p-tabview-nav li .p-tabview-nav-link {
-  @apply transition-none border-none py-0;
+.link-box {
+  @apply w-[10.1rem] sm:w-[11.1rem] h-[50px] text-[13px] text-white !bg-[#292E36] items-center rounded-lg;
+}
+.link-box:hover {
+  @apply border border-[#F2F2F2];
+}
+.quick-links-tab.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link,
+.quick-links-tab.p-tabview .p-tabview-nav li {
+  @apply rounded-full mr-1;
+}
+.quick-links-tab.p-tabview .p-tabview-nav {
+  @apply bg-inherit;
+}
+.quick-links-tab.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  @apply text-[#FAF9F6] rounded-full mr-1 h-[35px];
+}
+.quick-links-tab.p-tabview .p-tabview-nav li {
+  @apply bg-transparent;
+}
+.quick-links-tab .p-tabview-nav-content {
+  @apply h-[35px];
+}
+.quick-links-tab.p-tabview {
+  @apply h-[40px];
+}
+}
+.custom-btn {
+  @apply mx-auto mt-2;
+}
+.custom-btn .p-button {
+  @apply bg-[#22262C] border-[#FAF9F6] text-[#FAF9F6] text-[14px] rounded-full h-[44px] w-[160px] font-normal;
 }

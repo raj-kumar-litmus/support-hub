@@ -1,10 +1,11 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, KeyboardEvent } from "react";
 import Navbar from "./common/navbar";
 import SearchField from "./common/searchfield";
 import SidePaneGrid from "./common/sidepanegrid";
 import SidePaneList from "./common/sidepanelist";
 import { MENU_LIST } from "./utils/Utils";
 import { useLocation } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   showSidePane: boolean;
@@ -19,6 +20,14 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
   const [selectedMenu, setSelectedMenu] = useState<number>(0);
   const location = useLocation();
   const IS_FULLSCREEN = location?.pathname.includes("fullscreen");
+  const navigate = useNavigate();
+
+  const searchOrder = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      navigate(`/orderDetails/${searchValue}`);
+    }
+  };
 
   useEffect(() => {
     setOpenSearchField(false);
@@ -78,6 +87,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
                   <SearchField
                     searchValue={searchValue}
                     setSearchValue={setSearchValue}
+                    onSearch={searchOrder}
                   />
                 </div>
               )}

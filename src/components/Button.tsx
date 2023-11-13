@@ -1,7 +1,7 @@
 import React from "react";
-import { Button } from "primereact/button";
+import { Button, ButtonProps } from "primereact/button";
 
-interface Props {
+interface Props extends ButtonProps {
   className?: string;
   isTextButton?: boolean;
   isDisabled?: boolean;
