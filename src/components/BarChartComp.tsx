@@ -80,7 +80,11 @@ const BarChartComp = ({
         <Bar
           options={options}
           data={data}
-          className="!h-[21rem] sm:!h-[20rem] p-4 pt-0"
+          className={`${
+            location.pathname.includes("home")
+              ? "w-full !h-[24rem] pt-20 sm:pt-16"
+              : "!h-[21rem] sm:!h-[20rem] pt-8"
+          } p-4`}
         />
       }
     </div>
