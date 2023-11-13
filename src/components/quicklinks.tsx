@@ -12,7 +12,7 @@ const QuickLinks = () => {
   const [tabValue, setTabValue] = useState<number>(0);
   const [quickLinks, setQuickLinks] = useState([]);
   const [allQuickLinks, setAllQuickLinks] = useState([]);
-  const [hoveredIndex, setHoveredIndex] = useState<number>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [showSeeMoreBtn, setShowSeeMoreBtn] = useState<boolean>(false);
   const { width } = useScreenSize();
 
