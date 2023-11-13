@@ -96,20 +96,11 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = {
 };
 
 export const OPM_BAR_CHART_OPTIONS: Chart.ChartOptions = {
-  responsive: true,
-  maintainAspectRatio: false,
+  ...BAR_CHART_OPTIONS,
   plugins: {
+    ...BAR_CHART_OPTIONS.plugins,
     legend: {
       display: false,
-    },
-    datalabels: {
-      display: false,
-      formatter: (_, context) =>
-        context.chart.data.dataset?.[0]?.data?.[context.dataIndex],
-      color: "black",
-      font: {
-        size: "12",
-      },
     },
     tooltip: {
       enabled: false,
@@ -127,31 +118,13 @@ export const OPM_BAR_CHART_OPTIONS: Chart.ChartOptions = {
     },
   },
   scales: {
-    x: {
-      grid: {
-        display: false,
-      },
-    },
+    ...BAR_CHART_OPTIONS.scales,
     y: {
-      grid: {
-        display: true,
-      },
-      border: {
-        display: false,
-      },
+      ...BAR_CHART_OPTIONS.scales.y,
       ticks: {
-        display: false,
+        ...BAR_CHART_OPTIONS.scales.y.ticks,
         stepSize: 100,
-        count: SESSIONS_CHART.TICK_COUNT,
       },
-    },
-  },
-  datasets: {
-    bar: {
-      barPercentage: SESSIONS_CHART.BAR_PERCENT,
-      maxBarThickness: SESSIONS_CHART.MAX_BAR_THICKNESS,
-      borderRadius: SESSIONS_CHART.BAR_BORDER_RADIUS,
-      categoryPercentage: SESSIONS_CHART.CATEGORY_PERCENT,
     },
   },
 };

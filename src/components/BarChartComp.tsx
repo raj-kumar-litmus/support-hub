@@ -4,21 +4,20 @@ import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend,
 } from "chart.js";
 import type { ChartData, ChartOptions } from "chart.js";
-import { Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import useScreenSize from "../hooks/useScreenSize";
 import RotateIcon from "../assets/rotate.svg";
 import CustomImage from "./common/customimage";
 
 interface Props {
-  options: ChartOptions<"line"> | any;
-  data: ChartData<"line">;
+  options: ChartOptions<"bar"> | any;
+  data: ChartData<"bar">;
   className?: string;
   title: string;
   isFullScreen?: boolean;
@@ -27,20 +26,19 @@ interface Props {
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend,
 );
 
-function LineChart({
+const BarChartComp = ({
   title,
   options,
   data,
   className,
   isFullScreen = false,
-}: Props) {
+}: Props) => {
   const [rotate, setRotate] = useState<boolean>(isFullScreen);
   const { width } = useScreenSize();
   const location = useLocation();
@@ -63,26 +61,30 @@ function LineChart({
           : "relative ml-[5vw] sm:ml-[1rem] mr-[5vw] sm:mr-[0] sm:h-[340px] bg-[#22262C]"
       }`}
     >
-      {width < 700 &&
-        (location.pathname.includes("opm") ||
-          location.pathname.includes("opmcomparison")) && (
-          <div className="flex items-center justify-between ml-[20px] mr-[20px] pt-[16px]">
-            <p className="text-white">{title}</p>
-            <div className="flex items-center">
-              <div className="bg-[#383F47] w-[30px] h-[30px] rounded-full">
-                <CustomImage
-                  src={RotateIcon}
-                  className="relative top-[8px] left-[9px]"
-                  alt="Filter Icon"
-                  onClick={onRotateHandler}
-                />
-              </div>
+      {width < 700 && location.pathname.includes("opm") && (
+        <div className="flex items-center justify-between ml-[20px] mr-[20px] pt-[16px]">
+          <p className="text-white">{title}</p>
+          <div className="flex items-center">
+            <div className="bg-[#383F47] w-[30px] h-[30px] rounded-full">
+              <CustomImage
+                src={RotateIcon}
+                className="relative top-[8px] left-[9px]"
+                alt="Filter Icon"
+                onClick={onRotateHandler}
+              />
             </div>
           </div>
-        )}
-      <Line options={options} data={data} />
+        </div>
+      )}
+      {
+        <Bar
+          options={options}
+          data={data}
+          className="!h-[21rem] sm:!h-[20rem] p-4 pt-0"
+        />
+      }
     </div>
   );
-}
+};
 
-export default LineChart;
+export default BarChartComp;

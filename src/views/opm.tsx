@@ -60,12 +60,12 @@ import {
 import { URL_OPM } from "../constants/apiConstants";
 import CustomTab from "../components/common/customtab";
 import { OPM_BAR_CHART_OPTIONS } from "../config/chartConfig";
-import { Bar } from "react-chartjs-2";
 import {
   DATE_TIME_FORMAT_1,
   DATE_TIME_FORMAT_2,
   formatDate,
 } from "../utils/dateTimeUtil";
+import BarChartComp from "../components/BarChartComp";
 
 ChartJS.register(
   CategoryScale,
@@ -365,13 +365,12 @@ const OPM: React.FC = () => {
           </div>
           <>
             {tabValue === 0 ? (
-              <div className="home-opm border-0 rounded-[10px] w-full sm:w-[89vw] lg:w-full lg:ml-[0] h-[380px] lg:h-[380px] lg:mt-[3vh] top-[-5vh] relative ml-[5vw] sm:ml-[1vw] mr-[5vw] sm:mr-[0] md:mr-[0] sm:h-[340px] bg-[#22262C]">
-                <Bar
-                  options={OPM_BAR_CHART_OPTIONS}
-                  data={barChartData}
-                  className="border-0 rounded-[10px] sm:w-[62rem] h-[24rem] p-[2rem]"
-                />
-              </div>
+              <BarChartComp
+                title={TITLE.OPM}
+                options={OPM_BAR_CHART_OPTIONS}
+                data={barChartData}
+                className="home-opm border-0 rounded-[10px] w-full sm:w-[89vw] lg:w-full lg:ml-[0] h-[380px] lg:h-[380px] lg:mt-[3vh] top-[-5vh]"
+              />
             ) : (
               <LineChart
                 title={TITLE.OPM}
@@ -458,7 +457,7 @@ const OPM: React.FC = () => {
                 label={LABELS.submit}
                 isDisabled={disabled}
                 isRounded={true}
-                className="self-end relative left-[5vw] w-[10vw] sm:w-[20vw]"
+                className="self-end relative left-[5vw] w-[10vw]"
               />
             </form>
           ) : (
@@ -582,13 +581,13 @@ const OPM: React.FC = () => {
         location.pathname.includes("opm") && (
           <>
             {tabValue === 0 ? (
-              <div className="opm-page-chart-container pt-2 sm:pt-8 relative ml-[5vw] sm:ml-[1rem] mr-[5vw] sm:mr-[0] md:mr-[0] sm:h-[340px] bg-[#22262C]">
-                <Bar
-                  options={OPM_BAR_CHART_OPTIONS}
-                  data={barChartData}
-                  className="border-0 rounded-[10px] sm:w-[62rem] h-[24rem] p-[2rem]"
-                />
-              </div>
+              <BarChartComp
+                options={OPM_BAR_CHART_OPTIONS}
+                data={barChartData}
+                className="opm-page-chart-container pt-2 sm:pt-8"
+                title={TITLE.OPM}
+                isFullScreen={IS_FULLSCREEN}
+              />
             ) : (
               <LineChart
                 title={TITLE.OPM}
@@ -596,11 +595,10 @@ const OPM: React.FC = () => {
                 className="opm-page-chart-container pt-2 sm:pt-8"
                 options={options}
                 data={data}
-                barChartData={barChartData}
               />
             )}
             <CustomTab
-              className="hidden sm:block opm-tabs relative sm:bottom-[20rem] sm:left-[54.5rem]"
+              className="opm-tabs relative bottom-[22.5rem] sm:bottom-[20rem] left-[10rem] sm:left-[54.5rem]"
               tabData={CHART_TABS}
               tabValue={tabValue}
               setTabValue={setTabValue}
