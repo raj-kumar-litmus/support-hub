@@ -55,6 +55,7 @@ export const STATUS: string = "Status";
 export const AMOUNT: string = "Amount";
 export const NO_MATCHING_ORDERS_FOUND: string = "No Matching Orders.";
 export const VIEW_ALL: string = "View All";
+export const START_POLLING_TEXT: string = "Start Auto Refresh";
 export const HOME_PAGE_REFERSH_DURATION: number = 10;
 export const REFRESHTIME: number = 3000;
 export const DASHBOARD: string = 'Dashboard';
@@ -75,6 +76,7 @@ export const LABELS = {
   endDate: "Date 2",
   submit: "Submit",
   reset: "Reset",
+  autoRefresh: "Auto Refresh",
 };
 
 export const TITLE = {

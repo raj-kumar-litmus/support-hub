@@ -74,9 +74,35 @@ export const getFormattedPSTDate = (date = null) => {
   return formatDate(pstDateString, DATE_TIME_FORMAT_1);
 };
 
-
 export const tenMinutesAgoInCurrentTimeZone = (date = null) =>
   new Date(
     new Date(date || Date.now() - 1000 * 60 * 10).getTime() -
-    new Date().getTimezoneOffset() * 60000,
+      new Date().getTimezoneOffset() * 60000,
   ).toISOString();
+
+/**
+ * dateString is expected in this format --> '25/10/2023, 03:47:06'
+ */
+export const buildLocaleString = (dateString: string) => {
+  const [date, time] = dateString.split(",");
+  const [day, month, year] = date.split("/");
+  return `${year}-${month}-${day}T${time.trim()}`;
+};
+
+export const tenMinutesAgoInPST = () => {
+  const datetime = new Date(Date.now() - 1000 * 60 * 10).toLocaleString(
+    "us-PT",
+    {
+      timeZone: "America/Los_Angeles",
+      hourCycle: "h23",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    },
+  );
+
+  return buildLocaleString(datetime);
+};

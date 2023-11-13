@@ -55,6 +55,7 @@ import {
   HOME_PAGE_REFERSH_DURATION,
   MM_DD_YYYY_HH_MM,
   CHART_TABS,
+  START_POLLING_TEXT,
 } from "../constants/appConstants";
 import { submitOnEnter } from "../components/utils/Utils";
 import { URL_OPM } from "../constants/apiConstants";
@@ -64,9 +65,13 @@ import { OPM_BAR_CHART_OPTIONS, OPM_OPTIONS } from "../config/chartConfig";
 import {
   DATE_TIME_FORMAT_2,
   formatDate,
+  buildLocaleString,
   getFormattedPSTDate,
 } from "../utils/dateTimeUtil";
 import BarChartComp from "../components/BarChartComp";
+import useInterval from "../hooks/useInterval";
+import CustomCheckbox from "../components/common/CustomCheckBox";
+import CustomInputNumber from "../components/common/CustomInputNumber";
 
 ChartJS.register(
   CategoryScale,
@@ -84,9 +89,7 @@ const OPM: React.FC = () => {
   const [showFilters, setShowFilters] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
   const [position, setPosition] = useState<ModalEnums>("center");
-  const { hideLoader } = useContext(
-    LoaderContext
-  ) as LoaderContextType;
+  const { hideLoader } = useContext(LoaderContext) as LoaderContextType;
 
   const { width } = useScreenSize();
   const navigate = useNavigate();
@@ -112,6 +115,11 @@ const OPM: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showFilteredCards, setShowFilteredCards] = useState<boolean>(false);
   const [tabValue, setTabValue] = useState<number>(1);
+  const [startPolling, setStartPolling] = useState<boolean>(false);
+  const [pollingRefershDuration, setPollingRefreshDuration] =
+    useState<number>(0);
+  const [showPollingForm, setShowPollingForm] = useState<boolean>(false);
+
   useEffect(() => {
     const removeEventListener = submitOnEnter(submit);
     return removeEventListener;
@@ -119,10 +127,12 @@ const OPM: React.FC = () => {
 
   useEffect(() => {
     setUrl(
-      `${URL_OPM}?period=${location.pathname.includes("opm")
-        ? DEFAULT.duration
-        : HOME_PAGE_REFERSH_DURATION
-      }&date=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${DEFAULT.promocode
+      `${URL_OPM}?period=${
+        location.pathname.includes("opm")
+          ? DEFAULT.duration
+          : HOME_PAGE_REFERSH_DURATION
+      }&starttime=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${
+        DEFAULT.promocode
       }&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`,
     );
   }, []);
@@ -316,8 +326,9 @@ const OPM: React.FC = () => {
             str += `${e.name}=&`;
             return;
           }
-          str += `${e.name}=${(e.value.code !== undefined && String(e.value.code)) || e.value
-            }&`;
+          str += `${e.name}=${
+            (e.value.code !== undefined && String(e.value.code)) || e.value
+          }&`;
         }
       }
     });
@@ -340,12 +351,35 @@ const OPM: React.FC = () => {
     return customChartConfig;
   };
 
+  useInterval(() => {
+    if (startPolling) {
+      (async () => {
+        await getData();
+      })();
+    }
+  }, pollingRefershDuration || 60000);
+
+  useEffect(() => {
+    if (!showPollingForm) setStartPolling(false);
+  }, [showPollingForm]);
+
   const handleOPMExpandClick = () => {
     navigate("/opm");
   };
 
   const handleOPMRefreshBtnClick = () => {
     getData();
+  };
+
+  const startPollingHandler = () => {
+    setStartPolling(true);
+    (async () => {
+      try {
+        await getData();
+      } catch (err) {
+        console.log(`Something went wrong white fetching data : ${err}`);
+      }
+    })();
   };
 
   return (
@@ -475,10 +509,11 @@ const OPM: React.FC = () => {
               })}
               <CustomButton
                 id="page-btn-submit"
+                btnclassname="w-full"
                 label={LABELS.submit}
                 isDisabled={disabled}
                 isRounded={true}
-                className="self-end relative left-[5vw] w-[10vw]"
+                className="self-end relative left-[5vw] sm:w-[21vw] md:w-[15vw] lg:w-[10vw] sm:top-[2vh] md:top-[0] md:left-[3vw]"
               />
             </form>
           ) : (
@@ -561,10 +596,11 @@ const OPM: React.FC = () => {
 
       {location.pathname.includes("opm") && showFilteredCards && (
         <div
-          className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[5vw] lg:ml-[1rem] ${IS_FULLSCREEN
-            ? "landScape rotate-90 absolute left-[40vw] top-[45vh] ml-[25vw] w-[22vh]"
-            : `${width < 700 ? "portrait" : ""}`
-            }`}
+          className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[5vw] lg:ml-[1rem] ${
+            IS_FULLSCREEN
+              ? "landScape rotate-90 absolute left-[40vw] top-[45vh] ml-[25vw] w-[22vh]"
+              : `${width < 700 ? "portrait" : ""}`
+          }`}
         >
           {formFields
             .filter((e) => e.value)
@@ -575,7 +611,9 @@ const OPM: React.FC = () => {
                   leftIcon={e.cardIcon}
                   onClickHandler={removeFormEntry}
                   content={
-                    e.type === "time" ? formatDate(e.value, DATE_TIME_FORMAT_2) : e.value.name || e.value
+                    e.type === "time"
+                      ? formatDate(e.value, DATE_TIME_FORMAT_2)
+                      : e.value.name || e.value
                   }
                 />
               </Fragment>
@@ -591,8 +629,41 @@ const OPM: React.FC = () => {
           )}
         </div>
       )}
+      {location.pathname.includes("opm") && (
+        <CustomCheckbox
+          checked={showPollingForm}
+          onClick={() => setShowPollingForm(!showPollingForm)}
+          containerclassname="flex autoRefreshCheckBox pt-[2vh] ml-[0.5vw]"
+          label="Auto Refresh"
+          labelclassname="text-white text-[12px] ml-[0.5vw]"
+        />
+      )}
+      {showPollingForm && (
+        <div
+          className="md:flex gap-[1vw] pt-[2vh] ml-[1vw] opmFilters items-center"
+          onSubmit={submit}
+        >
+          <CustomInputNumber
+            containerclassname="w-[38vw] md:w-[24vw]"
+            min={30}
+            inputClassName="w-[60vw] sm:w-[38vw] md:w-[24vw]"
+            onChange={(e) => setPollingRefreshDuration(e.value * 1000)}
+            placeholder="Refresh duration starts from 30"
+            className="border rounded-[8px] border-solid border-slate-300 border-1 h-[40px]"
+          />
+          <CustomButton
+            id="page-btn-submit"
+            isDisabled={+pollingRefershDuration < 30 * 1000}
+            btnclassname="!text-[12px]"
+            className="relative sm:w-[23vw] lg:w-[18vw] top-[2vh] md:top-[0] left-[0] md:left-[3vw]"
+            onClick={startPollingHandler}
+          >
+            {START_POLLING_TEXT}
+          </CustomButton>
+        </div>
+      )}
       {isLoading && location.pathname.includes("opm") ? (
-        <Loader />
+        <Loader className="h-[50vh]" />
       ) : (
         data &&
         !isLoading &&

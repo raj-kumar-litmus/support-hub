@@ -56,13 +56,17 @@ import {
 } from "../constants/appConstants";
 import { URL_OPM_COMPARISON } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
-import { tenMinutesAgoInCurrentTimeZone } from "../utils/dateTimeUtil";
 import { LoaderContext, LoaderContextType } from "../context/loaderContext";
 import { getFormattedPSTDate } from "../utils/dateTimeUtil";
 import {
   OPM_COMPARISON_OPTIONS,
   OPM_COMPARISON_OPTIONS_HOME,
 } from "../config/chartConfig";
+import {
+  buildLocaleString,
+  tenMinutesAgoInPST,
+  tenMinutesAgoInCurrentTimeZone,
+} from "../utils/dateTimeUtil";
 
 ChartJS.register(
   CategoryScale,
@@ -73,15 +77,13 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ChartDataLabels
+  ChartDataLabels,
 );
 
 const DEFAULT = {
   duration: 10,
   startTimeOne: getFormattedPSTDate(),
-  startDateTwo: new Date(Date.now() - 2 * 86400000).toLocaleDateString(
-    "en-US",
-  ),
+  startDateTwo: new Date(Date.now() - 2 * 86400000).toLocaleDateString("en-US"),
   channel: "",
 };
 
@@ -90,13 +92,22 @@ const OpmComparison: React.FC = () => {
   const [visible, setVisible] = useState<boolean>(false);
   const [position, setPosition] = useState<ModalEnums>("center");
   const [apiResponse, setApiResponse] = useState<null | OpmComparisonType>(
-    null
+    null,
   );
   const [counter, setCounter] = useState<number>(0);
 
   const { width } = useScreenSize();
   const navigate = useNavigate();
   const IS_FULLSCREEN = location?.pathname.includes("fullscreen");
+
+  const DEFAULT = {
+    duration: 10,
+    startTimeOne: tenMinutesAgoInPST(),
+    startDateTwo: new Date(Date.now() - 2 * 86400000).toLocaleDateString(
+      "en-US",
+    ),
+    channel: "",
+  };
 
   const [url, setUrl] = useState<string | null>(null);
   const [options, setOptions] = useState<null | ChartOptions>(null);
@@ -159,13 +170,17 @@ const OpmComparison: React.FC = () => {
 
   useEffect(() => {
     const startTimeOne = getFormattedPSTDate();
-    const startDateTwo = new Date(Date.now() - 2 * 86400000).toLocaleDateString("en-US");
+    const startDateTwo = new Date(Date.now() - 2 * 86400000).toLocaleDateString(
+      "en-US",
+    );
     setUrl(
-      `${URL_OPM_COMPARISON}?period=${location.pathname.includes("opm")
-        ? DEFAULT.duration
-        : HOME_PAGE_REFERSH_DURATION
-      }&startTimeOne=${startTimeOne}&startDateTwo=${startDateTwo
-      }&channel=${DEFAULT.channel}`,
+      `${URL_OPM_COMPARISON}?period=${
+        location.pathname.includes("opm")
+          ? DEFAULT.duration
+          : HOME_PAGE_REFERSH_DURATION
+      }&startTimeOne=${startTimeOne}&startDateTwo=${startDateTwo}&channel=${
+        DEFAULT.channel
+      }`,
     );
   }, []);
 
@@ -240,21 +255,21 @@ const OpmComparison: React.FC = () => {
       setOptions(
         location.pathname.includes("home")
           ? OPM_COMPARISON_OPTIONS_HOME({
-            apiResponse,
-            startDate: formFields.find((e) => e.name === "startDate").value,
-            endDate: formFields.find((e) => e.name === "endDate").value,
-            isMobile: width < 700,
-            showDataLabels:
-              Number(url.split("period=")[1].split("&")[0]) < 16,
-          })
+              apiResponse,
+              startDate: formFields.find((e) => e.name === "startDate").value,
+              endDate: formFields.find((e) => e.name === "endDate").value,
+              isMobile: width < 700,
+              showDataLabels:
+                Number(url.split("period=")[1].split("&")[0]) < 16,
+            })
           : OPM_COMPARISON_OPTIONS({
-            apiResponse,
-            startDate: formFields.find((e) => e.name === "startDate").value,
-            endDate: formFields.find((e) => e.name === "endDate").value,
-            isMobile: width < 700,
-            showDataLabels:
-              Number(url.split("period=")[1].split("&")[0]) < 16,
-          }),
+              apiResponse,
+              startDate: formFields.find((e) => e.name === "startDate").value,
+              endDate: formFields.find((e) => e.name === "endDate").value,
+              isMobile: width < 700,
+              showDataLabels:
+                Number(url.split("period=")[1].split("&")[0]) < 16,
+            }),
       );
     }
   }, [apiResponse]);
