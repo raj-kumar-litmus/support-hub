@@ -199,7 +199,7 @@ const BarChart = () => {
   useEffect(() => {
     const removeEventListener = submitOnEnter(incrementCounter);
     return removeEventListener;
-  } );
+  }, [submitCounter]);
 
   const handleFormChange = (event) => {
     const data = [...formFields];
