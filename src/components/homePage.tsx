@@ -256,7 +256,7 @@ const HomePage = () => {
         </div>
       )}
 
-      <div className="home-opm-charts flex flex-col mt-6 sm:mt-0 sm:flex-row sm:space-y-0 sm:space-x-4">
+      <div className="home-opm-charts flex flex-col mt-6 sm:mt-0 lg:flex-row sm:space-y-0 lg:space-x-[2%]">
         <OPM />
         <OpmComparison />
       </div>

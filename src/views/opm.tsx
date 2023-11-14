@@ -308,7 +308,7 @@ const OPM: React.FC = () => {
         <Loader className="!p-0 w-[40vw] m-auto" />
       )}
       {location.pathname.includes("home") && data && !isLoading && (
-        <div className="w-full sm:w-1/2 bg-[#22262C] p-0 bg-transparent rounded-lg">
+        <div className="w-full lg:w-[49%] bg-[#22262C] p-0 bg-transparent rounded-lg">
           <div className="flex justify-between sm:mb-3 items-center relative top-[3vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
             <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
               {TITLE.OPM}
@@ -330,7 +330,7 @@ const OPM: React.FC = () => {
           </div>
           <LineChart
             title="OPM"
-            className="home-opm border-0 rounded-[10px] w-full sm:w-[89vw] lg:w-full lg:ml-[0] h-[380px] lg:h-[380px] lg:mt-[3vh] top-[-5vh]"
+            className="home-opm border-0 rounded-[10px] w-full lg:w-full sm:ml-[0] h-[380px] lg:h-[380px] lg:mt-[3vh] top-[-5vh]"
             options={getChartConfig()}
             data={data}
           />

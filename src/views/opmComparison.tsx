@@ -316,8 +316,8 @@ const OpmComparison: React.FC = () => {
         <Loader className="!p-0 w-[40vw] m-auto" />
       )}
       {location.pathname.includes("home") && !isLoading && data && (
-        <div className="w-full sm:w-1/2 bg-[#22262C] p-0 bg-transparent rounded-lg flex flex-col justify-between">
-          <div className="flex justify-between sm:mb-3 items-center relative top-[3vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
+        <div className="w-full lg:w-[49%] bg-[#22262C] p-0 bg-transparent rounded-lg flex flex-col justify-between">
+          <div className="flex justify-between sm:mb-3 items-center relative top-[3vh] z-[1] ml-[5vw] lg:ml-[2vw] mr-[1vw]">
             <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
               {TITLE.OPM_COMPARISON}
             </span>
@@ -338,7 +338,7 @@ const OpmComparison: React.FC = () => {
           </div>
           <LineChart
             title="OPM Comparison"
-            className="home-opm-comp border-0 rounded-[10px] w-full sm:w-[89vw] lg:w-full lg:ml-[0] h-[340px] lg:h-[380px] top-[-5vh]"
+            className="home-opm-comp border-0 rounded-[10px] w-full lg:w-full sm:ml-[0] h-[340px] lg:h-[380px] top-[-5vh]"
             options={getChartConfig()}
             data={data}
           />
