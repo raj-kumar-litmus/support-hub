@@ -38,7 +38,6 @@ import {
   OmsOrderStatus,
   OrderData,
   IPromotion,
-  OmsOrderFlow
 } from "../../@types/OrderDetails";
 
 import { fetchData } from "../../utils/fetchUtil";
