@@ -419,7 +419,7 @@ const BarChart = () => {
                   </div>
                 </div>
                 <CustomTab
-                  className="sessions-tabs sm:absolute sm:top-[1.25rem] sm:right-[8rem]"
+                  className="custom-tab sm:absolute sm:top-[1.25rem] sm:right-[8rem]"
                   tabData={SESSIONS_TABS}
                   tabValue={tabValue}
                   setTabValue={setTabValue}
@@ -428,7 +428,7 @@ const BarChart = () => {
             )}
             {location.pathname.includes("sessions") && (
               <CustomTab
-                className="sessions-tabs"
+                className="custom-tab"
                 tabData={SESSIONS_TABS}
                 tabValue={tabValue}
                 setTabValue={setTabValue}

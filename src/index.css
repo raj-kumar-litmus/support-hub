@@ -429,7 +429,7 @@ button.p-button-secondary {
   @apply bg-transparent;
 }
 .search-button .p-button {
-  @apply -ml-8 sm:hidden !shadow-none !border-none;
+  @apply -ml-8 sm:hidden !shadow-none !border-none pl-0;
 }
 .popup-button .p-button {
   @apply !shadow-none !border-none;
@@ -608,10 +608,10 @@ hr.horizontalLine.opmComparison {
   background: linear-gradient(to right, #6370ff, #5a9ef500);
 }
 hr.horizontalLine.yellow {
-  background: linear-gradient(to right, #6370FF, #5a9ef500);
+  background: linear-gradient(to right, #6370ff, #5a9ef500);
 }
 hr.horizontalLine.blue {
-  background: linear-gradient(to right, #FDA44F, #5a9ef500);
+  background: linear-gradient(to right, #fda44f, #5a9ef500);
 }
 .calendarOpmComparison span input {
   @apply pl-[2.5vw];
@@ -628,7 +628,7 @@ hr.horizontalLine.blue {
   @apply font-helvetica;
 }
 #orderDetailsComp .grid span {
-  @apply text-sm py-2 text-[#FAF9F6] bg-[#30343B];
+  @apply text-sm py-2 text-[#FAF9F6] bg-[#22262C];
 }
 #orderDetailsComp .grid span.p-column-title {
   @apply text-sm py-2 text-[#FAF9F6] bg-inherit;
@@ -697,16 +697,16 @@ hr.horizontalLine.blue {
   @apply flex justify-between w-full;
 }
 .flexWrapper {
-  @apply flexBlockWrapper py-1 px-4 sm:p-0 border-b border-solid border-[#383F47] sm:border-none;
+  @apply flexBlockWrapper py-1 px-4 sm:p-0 border-b border-solid border-[#292e36] sm:border-none;
 }
 .flexColWrapper {
-  @apply flex flex-col border-t-0 sm:border-t border-solid border-[#383F47] sm:grid;
+  @apply flex flex-col border-t-0 sm:border-t border-solid border-[#292e36] sm:grid;
 }
 .gridNoGapRounded {
   @apply grid gap-y-0 rounded-md;
 }
 .filterCardWrapper {
-  @apply py-1 px-4 sm:p-0 border-solid border-[#383F47] bg-[#30343B];
+  @apply py-1 px-4 sm:p-0 border-solid border-[#292e36]  bg-[#22262C];
 }
 
 .home-page .p-card {
@@ -747,79 +747,84 @@ hr.horizontalLine.blue {
 .home-expand-btn .p-button:focus {
   @apply shadow-none;
 }
-.sessions-tabs.p-tabview .p-tabview-panels {
-  @apply hidden;
+.custom-tab.p-tabview {
+  @apply w-fit h-[36px] self-end;
 }
-.sessions-tabs.p-tabview {
-  @apply w-[245px] h-[36px] self-end;
-}
-.sessions-tabs.p-tabview .p-tabview-nav {
+.custom-tab.p-tabview .p-tabview-nav {
   @apply border-none h-[32px] bg-[#292E36];
 }
-.sessions-tabs.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+.custom-tab.p-tabview .p-tabview-nav li .p-tabview-nav-link {
   @apply bg-[#292E36] text-[#8B8C8F] h-[30px] rounded-none border-none text-[12px] font-medium;
 }
-.sessions-tabs .p-tabview-nav-content {
+.custom-tab .p-tabview-nav-content {
   @apply rounded-[8px];
 }
-.sessions-tabs.p-tabview .p-tabview-nav li {
+.custom-tab.p-tabview .p-tabview-nav li {
   @apply bg-[#292E36];
 }
-.sessions-tabs.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+.custom-tab.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
   @apply bg-[#F2F2F2] text-[#22262C] rounded-[8px] text-[12px] font-medium;
 }
-.sessions-tabs.p-tabview
-  .p-tabview-nav
-  li
-  .p-tabview-nav-link:not(.p-disabled):focus {
-  @apply shadow-none;
-}
-.sessions-tabs.p-tabview
+.custom-tab.p-tabview
   .p-tabview-nav
   li:not(.p-highlight):not(.p-disabled):hover
   .p-tabview-nav-link {
   @apply bg-[#292E36] text-[#8B8C8F];
 }
-.sessions-tabs.p-accordion .p-accordion-header .p-accordion-header-link,
+.custom-tab.p-accordion .p-accordion-header .p-accordion-header-link,
 .p-tabview .p-tabview-nav li .p-tabview-nav-link {
   @apply transition-none border-none py-0;
 }
-.sessions-tabs.p-tabview .p-tabview-panels {
+.custom-tab.p-tabview .p-tabview-panels {
   @apply hidden;
 }
-.sessions-tabs.p-tabview {
-  @apply w-[245px] h-[36px] self-end;
-}
-.sessions-tabs.p-tabview .p-tabview-nav {
-  @apply border-none h-[32px] bg-[#292E36];
-}
-.sessions-tabs.p-tabview .p-tabview-nav li .p-tabview-nav-link {
-  @apply bg-[#292E36] text-[#8B8C8F] h-[30px] rounded-none border-none text-[12px] font-medium;
-}
-.sessions-tabs .p-tabview-nav-content {
-  @apply rounded-[8px];
-}
-.sessions-tabs.p-tabview .p-tabview-nav li {
-  @apply bg-[#292E36];
-}
-.sessions-tabs.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
-  @apply bg-[#F2F2F2] text-[#22262C] rounded-[8px] text-[12px] font-medium;
-}
-.sessions-tabs.p-tabview
+.custom-tab.p-tabview
   .p-tabview-nav
   li
   .p-tabview-nav-link:not(.p-disabled):focus {
   @apply shadow-none;
 }
-.sessions-tabs.p-tabview
-  .p-tabview-nav
-  li:not(.p-highlight):not(.p-disabled):hover
-  .p-tabview-nav-link {
-  @apply bg-[#292E36] text-[#8B8C8F];
+.custom-tab .p-tabview .p-tabview-nav .p-tabview-ink-bar {
+  @apply invisible;
 }
-.sessions-tabs.p-accordion .p-accordion-header .p-accordion-header-link,
-.p-tabview .p-tabview-nav li .p-tabview-nav-link {
-  @apply transition-none border-none py-0;
+.link-box {
+  @apply w-[10.1rem] sm:w-[11.1rem] h-[50px] text-[13px] text-white !bg-[#292E36] items-center rounded-lg;
+}
+.link-box:hover {
+  @apply border border-[#F2F2F2];
+}
+.quick-links-tab.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link,
+.quick-links-tab.p-tabview .p-tabview-nav li {
+  @apply rounded-full mr-1;
+}
+.quick-links-tab.p-tabview .p-tabview-nav {
+  @apply bg-inherit;
+}
+.quick-links-tab.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  @apply text-[#FAF9F6] rounded-full mr-1 h-[35px];
+}
+.quick-links-tab.p-tabview .p-tabview-nav li {
+  @apply bg-transparent;
+}
+.quick-links-tab .p-tabview-nav-content {
+  @apply h-[35px];
+}
+.quick-links-tab.p-tabview {
+  @apply h-[40px];
+}
+.custom-btn {
+  @apply mx-auto mt-2;
+}
+.custom-btn .p-button {
+  @apply bg-[#22262C] border-[#FAF9F6] text-[#FAF9F6] text-[14px] rounded-full h-[44px] w-[160px] font-normal;
+}
+.custom-btn .p-button:enabled:active,
+.p-button:not(button):not(a):not(.p-disabled):active {
+  @apply bg-transparent shadow-none border-[#FAF9F6] border-2;
+}
+.custom-btn .p-button:enabled:hover,
+.p-button:not(button):not(a):not(.p-disabled):hover {
+  @apply bg-transparent shadow-none border-[#FAF9F6] border-2;
 }
 .report-tab.p-tabview {
   width: 335px;

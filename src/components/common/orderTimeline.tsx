@@ -8,6 +8,18 @@ interface TimelineProps {
 }
 
 const Timeline: React.FC<TimelineProps> = ({ orderMap }) => {
+
+  const getStatusDate = (dateX: string) => {
+    let year = dateX.substring(0, 4);
+    let month = dateX.substring(4, 6);
+    let day = dateX.substring(6, 8);
+    let hour = dateX.substring(8, 10);
+    let min = dateX.substring(10, 12);
+    let sec = dateX.substring(12, 14);
+    let newDate = month + "-" + day + "-" + year + " " + hour + ":" + min + ":" + sec;
+    return newDate;
+  }
+
   return (
     <div className="  flex flex-col items-center">
       {Object.keys(orderMap).map((timestamp, index) => {
@@ -17,7 +29,7 @@ const Timeline: React.FC<TimelineProps> = ({ orderMap }) => {
         return (
           <div key={timestamp}>
             <TimelineCard
-              date={orderDetails.orderDate}
+              date={getStatusDate(timestamp)}
               statusName={orderDetails.statusName}
               statusDescription={orderDetails.statusDescription}
             />

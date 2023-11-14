@@ -5,7 +5,7 @@ import SessionsIcon from "../../assets/sessions.svg";
 import DCOpenOrdersIcon from "../../assets/dcopenorders.svg";
 
 export const MENU_LIST = [
-  { id: 1, name: "Home", icon: DashboardIcon, path: "/home" },
+  { id: 1, name: "Dashboard", icon: DashboardIcon, path: "/home" },
   { id: 2, name: "OPM", icon: OPMIcon, path: "/opm" },
   {
     id: 3,
@@ -39,9 +39,9 @@ const getOrCreateTooltip = (chart, type, tooltip) => {
     type === "opm"
       ? line.setAttribute("class", `horizontalLine opm`)
       : line.setAttribute(
-          "class",
-          `horizontalLine ${index === 0 ? "yellow" : "blue"}`,
-        );
+        "class",
+        `horizontalLine ${index === 0 ? "yellow" : "blue"}`,
+      );
   }
 
   if (!tooltipEl) {
@@ -129,11 +129,11 @@ export const externalTooltipHandler = (context, type, customPosition?: boolean) 
   if (customPosition) {
     getChartTooltipPosition(context, tooltipEl, tooltip);
   } else {
-  const { offsetLeft: positionX, offsetTop: positionY } = chart.canvas;
-  // Display, position, and set styles for font
-  tooltipEl.style.opacity = 1;
-  tooltipEl.style.left = positionX + tooltip.caretX + "px";
-  tooltipEl.style.top = positionY + tooltip.caretY + "px";
+    const { offsetLeft: positionX, offsetTop: positionY } = chart.canvas;
+    // Display, position, and set styles for font
+    tooltipEl.style.opacity = 1;
+    tooltipEl.style.left = positionX + tooltip.caretX + "px";
+    tooltipEl.style.top = positionY + tooltip.caretY + "px";
   }
 };
 
