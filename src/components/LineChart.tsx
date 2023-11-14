@@ -23,6 +23,8 @@ interface Props {
   className?: string;
   title: string;
   isFullScreen?: boolean;
+  defaultClasses?: boolean;
+  plugins?: boolean;
 }
 
 ChartJS.register(
@@ -41,6 +43,8 @@ function LineChart({
   data,
   className,
   isFullScreen = false,
+  defaultClasses,
+  plugins,
 }: Props) {
   const [rotate, setRotate] = useState<boolean>(isFullScreen);
   const { width } = useScreenSize();
@@ -59,9 +63,10 @@ function LineChart({
   return (
     <div
       className={`${className} ${
-        rotate
+        !defaultClasses &&
+        (rotate
           ? "rotate-90 h-[390px] w-[90vh] bg-inherit ml-[-50vw] mt-[22vh]"
-          : "relative ml-[5vw] sm:ml-[1vw] mr-[5vw] sm:mr-[0] md:mr-[0] sm:h-[340px] bg-[#22262C]"
+          : "relative ml-[5vw] sm:ml-[1vw] mr-[5vw] sm:mr-[0] md:mr-[0] sm:h-[340px] bg-[#22262C]")
       }`}
     >
       {width < 700 &&
@@ -79,7 +84,26 @@ function LineChart({
             </div>
           </div>
         )}
-      <Line options={options} data={data} />
+      {plugins ? (
+        <Line
+          options={options}
+          data={data}
+          plugins={[
+            {
+              id: "increase-legend-spacing",
+              beforeInit(chart) {
+                const originalFit = (chart.legend as any).fit;
+                (chart.legend as any).fit = function fit() {
+                  originalFit.bind(chart.legend)();
+                  this.height += 30;
+                };
+              },
+            },
+          ]}
+        />
+      ) : (
+        <Line options={options} data={data} />
+      )}
     </div>
   );
 }

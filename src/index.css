@@ -818,3 +818,6 @@ hr.horizontalLine.blue {
 .custom-btn .p-button:enabled:hover, .p-button:not(button):not(a):not(.p-disabled):hover {
     @apply bg-transparent shadow-none border-[#FAF9F6] border-2;
 }
+.home-opm-charts {
+  @apply my-6;
+}

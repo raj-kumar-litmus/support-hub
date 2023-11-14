@@ -53,7 +53,7 @@ const ComparisonCards = ({
   const difference = lastDay - today || 0;
   const kFormatter = (num) => {
     return Math.abs(num) > 999
-      ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + "k"
+      ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(0) + "k"    // toFixed(1) for decimals
       : Math.sign(num) * Math.abs(num);
   };
   return (
@@ -256,7 +256,7 @@ const HomePage = () => {
         </div>
       )}
 
-      <div className="home-opm-charts flex flex-col mt-6 sm:mt-0 lg:flex-row sm:space-y-0 lg:space-x-[2%]">
+      <div className="home-opm-charts flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-[2%]">
         <OPM />
         <OpmComparison />
       </div>
