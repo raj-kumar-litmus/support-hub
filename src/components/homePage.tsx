@@ -125,13 +125,10 @@ const HomePage = () => {
 
   const fetchOPMData = async (url) => {
     try {
-      setIsLoading(true);
       const opmData = await fetchData(
         `${url}?period=${HOME_PAGE_REFERSH_DURATION}`,
         {},
       );
-      setIsLoading(false);
-      hideLoader();
       const totalOrders = opmData.reduce(
         (acc, obj) => acc + parseInt(obj.orderCount),
         0,
@@ -146,13 +143,10 @@ const HomePage = () => {
 
   const fetchCompData = async (url, date) => {
     try {
-      setIsLoading(true);
       const opmData = await fetchData(
         `${url}?period=${HOME_PAGE_REFERSH_DURATION}&date=${date}`,
         {},
       );
-      hideLoader();
-      setIsLoading(false);
       const totalOrders = opmData.reduce(
         (acc, obj) => acc + parseInt(obj.orderCount),
         0,
@@ -164,11 +158,15 @@ const HomePage = () => {
     }
   };
 
-  const getCardsData = () => {
-    fetchOPMData(URL_OPM);
+  const getCardsData = async() => {
+    setIsLoading(true);
+
+    await fetchOPMData(URL_OPM);
     const date = new Date();
     date.setDate(date.getDate() - 1);
-    fetchCompData(URL_OPM, date);
+    await fetchCompData(URL_OPM, date);
+    await setIsLoading(false);
+    await hideLoader();
     setRefreshTime(new Date().getTime());
   };
 
