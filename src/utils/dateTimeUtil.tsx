@@ -74,6 +74,7 @@ export const getFormattedPSTDate = (date = null) => {
   return formatDate(pstDateString, DATE_TIME_FORMAT_1);
 };
 
+
 export const tenMinutesAgoInCurrentTimeZone = (date = null) =>
   new Date(
     new Date(date || Date.now() - 1000 * 60 * 10).getTime() -

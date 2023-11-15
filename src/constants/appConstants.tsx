@@ -1,5 +1,3 @@
-import { externalTooltipHandler } from "../components/utils/Utils";
-
 export const SESSIONS: string = "Sessions";
 export const DURATION: string = "Duration";
 export const TIME: string = "Time";
@@ -19,7 +17,7 @@ export const TOTAL_SESSIONS_PER_MIN_PRIMARY: string =
   "Azure Primary (Sessions/Min)";
 export const TOTAL_SESSIONS_PER_MIN_SECONDARY: string =
   "Azure Secondary (Sessions/Min)";
-export const TOTAL_SESSIONS_PER_MINUTE: string = "Total Session per minute";
+export const TOTAL_SESSIONS_PER_MINUTE: string = "Total Sessions per minute";
 export const TOTAL_ORDERS_PER_MINUTE: string = "Total Orders Per Minute";
 export const MINS = "Mins";
 export const LASTDAY: string = "Last Day";
@@ -112,14 +110,15 @@ export const CHART = {
   ROTATION_0: 0,
   ROTATION_270: 270,
 };
-export const SESSIONS_CHART = {
-  BAR_PERCENT: 0.9,
-  MAX_BAR_THICKNESS: 40,
+
+export const SESSIONS_CHART_DEFAULT = {
   BAR_BORDER_RADIUS: 6,
   STEP_SIZE: 5000,
   TICK_COUNT: 5,
-  CATEGORY_PERCENT: 0.6,
   LEGEND_LINE_WIDTH: 2,
+  BAR_PERCENT: 0.95,
+  MAX_BAR_THICKNESS: 50,
+  CATEGORY_PERCENT: 0.9,
 };
 
 export const DURATIONS = {
@@ -133,11 +132,11 @@ export const DURATIONS = {
 export const CHANNELS = {
   All: "",
   Desktop: 0,
-  "Mobile Web": 5, 
-  "iPhone App": 4,  
-  "Android App": 9,    
+  "Mobile Web": 5,
+  "iPhone App": 4,
+  "Android App": 9,
   CSC: 2,
-  "M Plus": 6,        
+  "M Plus": 6,
   Instagram: 11,
 };
 
@@ -150,7 +149,7 @@ export const LOCALE_OPTIONS = {
 export const PAYMENT_TYPES = {
   All: "",
   "Credit Card": "creditCard",
- " Klarna": "Klarna",
+  " Klarna": "Klarna",
   "Store Credit": "storeCredit",
   "Gift Card": "giftCard",
   PayPal: "payPal",
@@ -188,225 +187,6 @@ export const ORDER_STATUS_LIST = [
     Description: "Shipped and invoiced",
   },
 ];
-export const OPM_OPTIONS = (isMobile: boolean, showDataLabels = false) => ({
-  responsive: true,
-  maintainAspectRatio: false,
-  layout: {
-    padding: isMobile
-      ? {
-        left: 20,
-        right: 20,
-        top: 10,
-        bottom: 40,
-      }
-      : {
-        left: 30,
-        right: 50,
-        top: 50,
-        bottom: 20,
-      },
-  },
-  scales: {
-    y: {
-      grid: {
-        color: "#00000033",
-      },
-      border: {
-        display: false,
-      },
-    },
-    x: {
-      grid: {
-        display: false,
-      },
-      title: {
-        display: true,
-        color: "#FAF9F6",
-        text: "Total Orders Per Minute",
-        padding: isMobile ? { top: 35, bottom: 35 } : { top: 35 },
-      },
-    },
-  },
-  plugins: {
-    legend: {
-      display: false,
-    },
-    tooltip: {
-      enabled: false,
-      external: (_) => externalTooltipHandler(_, "opm"),
-    },
-    datalabels: {
-      display: showDataLabels,
-      formatter: (_, context) =>
-        context.chart.data.dataset?.[0]?.data?.[context.dataIndex],
-      align: "top",
-      anchor: "center",
-      font: {
-        size: "12",
-      },
-    },
-  },
-  elements: {
-    point: {
-      radius: 4,
-      backgroundColor: "white",
-    },
-  },
-});
-
-export const OPM_COMPARISON_OPTIONS = ({
-  apiResponse,
-  startDate,
-  endDate,
-  isMobile,
-  showDataLabels = false,
-}) => ({
-  responsive: true,
-  maintainAspectRatio: false,
-  layout: {
-    padding: isMobile
-      ? {
-        left: 20,
-        right: 20,
-        top: 10,
-        bottom: 40,
-      }
-      : {
-        left: 30,
-        right: 50,
-        top: 50,
-        bottom: 20,
-      },
-  },
-  scales: {
-    x: {
-      grid: {
-        display: false,
-      },
-      title: {
-        display: true,
-        text: "Total Orders Per Minute",
-        color: "#E8E8E8",
-        position: "left",
-        padding: isMobile ? { top: 20, bottom: 20 } : { top: 50 },
-      },
-    },
-    y: {
-      border: {
-        display: false,
-      },
-    },
-  },
-  elements: {
-    point: {
-      radius: 4,
-      backgroundColor: "white",
-    },
-  },
-  plugins: {
-    datalabels: {
-      display: showDataLabels,
-      formatter: (_, context) =>
-        context.chart.data.dataset?.[0]?.data?.[context.dataIndex],
-      align: "top",
-      anchor: "center",
-      font: {
-        size: "12",
-      },
-    },
-    legend: {
-      display: true,
-      position: isMobile ? "top" : "bottom",
-      align: "start",
-      labels: {
-        boxWidth: 30,
-        backgroundColor: "transparent",
-        generateLabels: () => {
-          return Object.keys(apiResponse).map((_, index) => ({
-            text:
-              index === 0
-                ? startDate?.toLocaleString("en-US", {
-                  year: "numeric",
-                  month: "2-digit",
-                  day: "2-digit",
-                })
-                : endDate?.toLocaleString("en-US", {
-                  year: "numeric",
-                  month: "2-digit",
-                  day: "2-digit",
-                }),
-            fillStyle: "transparent",
-            lineWidth: 2,
-            fontColor: index === 0 ? "#6370FF" : "#FDA44F",
-            strokeStyle: index === 0 ? "#6370FF" : "#FDA44F",
-          }));
-        },
-      },
-    },
-    tooltip: {
-      enabled: false,
-      external: (_) => externalTooltipHandler(_, "opmComparison"),
-    },
-  },
-});
-
-export const OPM_COMPARISON_OPTIONS_HOME = ({
-  apiResponse,
-  startDate,
-  endDate,
-  isMobile,
-  showDataLabels = false,
-}) => {
-  const options = OPM_COMPARISON_OPTIONS({
-    apiResponse,
-    startDate,
-    endDate,
-    isMobile,
-  });
-  return {
-    ...options,
-    layout: {
-      ...options.layout,
-      padding: isMobile
-        ? { left: 10, right: 20, top: 15, bottom: 0 }
-        : {
-          left: 30,
-          right: 50,
-          top: 35,
-          bottom: 0,
-        },
-    },
-    scales: {
-      ...options.scales,
-      x: {
-        ...options.scales.x,
-        title: {
-          ...options.scales.x.title,
-          padding: isMobile
-            ? { top: 20, bottom: 20 }
-            : { left: 50, top: 35, bottom: 0},
-        },
-      },
-    },
-    plugins: {
-      ...options.plugins,
-      datalabels: {
-        display: showDataLabels,
-        formatter: (_, context: any) =>
-          context.chart.data.dataset?.[0]?.data?.[context.dataIndex],
-        align: "top",
-        anchor: "center",
-        font: {
-          size: "10",
-        },
-      },
-      legend: {
-        ...options.plugins.legend,
-        position: "top",
-      },
-    },
-  };
-};
 
 export const ORDER_STATUS: string = "Order Status";
 export const SESSIONS_TABS = [

@@ -558,8 +558,8 @@ const OPM: React.FC = () => {
       {location.pathname.includes("opm") && showFilteredCards && (
         <div
           className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[5vw] lg:ml-[1rem] ${IS_FULLSCREEN
-            ? "landScape rotate-90 absolute left-[40vw] top-[45vh] ml-[25vw] w-[22vh]"
-            : `${width < 700 ? "portrait" : ""}`
+              ? "landScape rotate-90 absolute left-[40vw] top-[45vh] ml-[25vw] w-[22vh]"
+              : `${width < 700 ? "portrait" : ""}`
             }`}
         >
           {formFields

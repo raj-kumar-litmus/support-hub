@@ -190,9 +190,6 @@ const OpmComparison: React.FC = () => {
     formFields.forEach((e: any) => {
       if (e.value) {
         if (e.name === "startDate") {
-          // str += `startTimeOne=${tenMinutesAgoInCurrentTimeZone(
-          //   e.value.toISOString(),
-          // )}&`;
           str += `startTimeOne=${getFormattedPSTDate(e.value)}&`;
           return;
         }

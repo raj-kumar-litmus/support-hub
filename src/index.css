@@ -461,7 +461,7 @@ button.p-button-secondary {
   @apply border-[#292E36];
 }
 .custom-table .p-datatable-thead tr th {
-  @apply !bg-[#292E36] text-white font-bold p-3 border-0 w-1/4 border-[#292E36];
+  @apply !bg-[#292E36] text-white font-bold p-3 border-0 border-[#292E36];
 }
 .custom-table .p-datatable-thead tr th:first-child {
   @apply rounded-tl-md;
