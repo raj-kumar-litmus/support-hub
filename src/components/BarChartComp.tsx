@@ -55,11 +55,10 @@ const BarChartComp = ({
 
   return (
     <div
-      className={`${className} ${
-        rotate
+      className={`${className} ${rotate
           ? "rotate-90 h-[390px] w-[90vh] bg-inherit ml-[-50vw] mt-[22vh]"
           : "relative ml-[5vw] sm:ml-[1rem] mr-[5vw] sm:mr-[0] sm:h-[340px] bg-[#22262C]"
-      }`}
+        }`}
     >
       {width < 700 && location.pathname.includes("opm") && (
         <div className="flex items-center justify-between ml-[20px] mr-[20px] pt-[16px]">
@@ -80,11 +79,10 @@ const BarChartComp = ({
         <Bar
           options={options}
           data={data}
-          className={`${
-            location.pathname.includes("home")
+          className={`${location.pathname.includes("home")
               ? "w-full !h-[24rem] pt-20 sm:pt-16 sm:px-6 px-6"
               : "!h-[21rem] sm:!h-[20rem] pt-8"
-          }`}
+            }`}
         />
       }
     </div>
