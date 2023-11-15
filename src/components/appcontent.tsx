@@ -22,13 +22,6 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
   const IS_FULLSCREEN = location?.pathname.includes("fullscreen");
   const navigate = useNavigate();
 
-  const searchOrder = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      navigate(`/orderDetails/${searchValue}`);
-    }
-  };
-
   useEffect(() => {
     setOpenSearchField(false);
     setSearchValue("");
@@ -40,6 +33,13 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
     )?.id;
     setSelectedMenu(_selectedMenu);
   }, [location?.pathname]);
+
+  const searchOrder = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && searchValue.length > 0) {
+      e.preventDefault();
+      navigate(`/orderDetails/${searchValue}`);
+    }
+  };
 
   return (
     <div>
@@ -94,11 +94,9 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
             </div>
           )}
           <div
-            className={`w-full ${
-              showSidePaneGrid ? "hidden" : "block"
-            } pr-[2vw] sm:ml-[27vw] lg:ml-[23vw]  ${
-              IS_FULLSCREEN ? "h-[100vh]" : "h-[calc(100vh-56px)]"
-            } overflow-y-auto`}
+            className={`${showSidePaneGrid ? "hidden" : "block"} 
+              ${IS_FULLSCREEN ? "h-[100vh]" : "h-[calc(100vh-56px)]"} 
+              w-full pr-[2vw] sm:ml-[27vw] lg:ml-[23vw] overflow-y-auto`}
           >
             {appContent}
           </div>

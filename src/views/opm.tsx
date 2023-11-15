@@ -47,7 +47,6 @@ import refreshIcon from "../assets/refresh_icon.svg";
 import { fetchData } from "../utils/fetchUtil";
 import {
   CHANNELS,
-  OPM_OPTIONS,
   DURATIONS,
   PAYMENT_TYPES,
   LABELS,
@@ -61,11 +60,11 @@ import {
 import { submitOnEnter } from "../components/utils/Utils";
 import { URL_OPM } from "../constants/apiConstants";
 import CustomTab from "../components/common/customtab";
-import { OPM_BAR_CHART_OPTIONS } from "../config/chartConfig";
+import { OPM_BAR_CHART_OPTIONS, OPM_OPTIONS } from "../config/chartConfig";
 import {
-  DATE_TIME_FORMAT_1,
   DATE_TIME_FORMAT_2,
   formatDate,
+  getFormattedPSTDate,
 } from "../utils/dateTimeUtil";
 import BarChartComp from "../components/BarChartComp";
 
@@ -102,6 +101,9 @@ const OPM: React.FC = () => {
   const [url, setUrl] = useState<string | null>(null);
 
   const [options, setOptions] = useState<null | ChartOptions>(null);
+  const [barChartoptions, setBarChartOptions] = useState<null | ChartOptions>(
+    null,
+  );
   const [data, setData] = useState<ChartData | null>(null);
   const [barChartData, setBarChartData] = useState<ChartData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -127,12 +129,14 @@ const OPM: React.FC = () => {
       setIsLoading(true);
       const data = await fetchData(url, {});
       setIsLoading(false);
+      const xAxisLabels = data.map((e) => e.timestamp);
+      const dataArr = data.map((e) => Number(e.orderCount));
       setData({
-        labels: data.map((e) => e.timestamp),
+        labels: xAxisLabels,
         datasets: [
           {
             label: "No of orders",
-            data: data.map((e) => Number(e.orderCount)),
+            data: dataArr,
             borderColor: "#599DF5",
             pointStyle: "circle",
             backgroundColor: "white",
@@ -141,11 +145,11 @@ const OPM: React.FC = () => {
         ],
       });
       setBarChartData({
-        labels: data.map((e) => e.timestamp),
+        labels: xAxisLabels,
         datasets: [
           {
             label: "No of orders",
-            data: data.map((e) => Number(e.orderCount)),
+            data: dataArr,
             borderColor: "#599DF5",
             backgroundColor: "#599DF5",
             borderWidth: 2,
@@ -168,6 +172,12 @@ const OPM: React.FC = () => {
       if (url) {
         setOptions(
           OPM_OPTIONS(
+            width < 700,
+            Number(url.split("period=")[1].split("&")[0]) < 16,
+          ),
+        );
+        setBarChartOptions(
+          OPM_BAR_CHART_OPTIONS(
             width < 700,
             Number(url.split("period=")[1].split("&")[0]) < 16,
           ),
@@ -295,7 +305,7 @@ const OPM: React.FC = () => {
     formFields.forEach((e: any) => {
       if (e.value) {
         if (e.name === "date") {
-          dateString = formatDate(e.value, DATE_TIME_FORMAT_1);
+          dateString = getFormattedPSTDate(e.value);
           str += `starttime=${dateString}&`;
         } else {
           if (typeof e.value.code === "string" && e.value.code.length === 0) {
@@ -370,7 +380,7 @@ const OPM: React.FC = () => {
             {tabValue === 0 ? (
               <BarChartComp
                 title={TITLE.OPM}
-                options={OPM_BAR_CHART_OPTIONS}
+                options={barChartoptions}
                 data={barChartData}
                 className="home-opm border-0 rounded-[10px] w-full sm:w-[89vw] lg:w-full lg:ml-[0] h-[380px] lg:h-[380px] lg:mt-[3vh] top-[-5vh]"
               />
@@ -589,9 +599,9 @@ const OPM: React.FC = () => {
           <>
             {tabValue === 0 ? (
               <BarChartComp
-                options={OPM_BAR_CHART_OPTIONS}
+                options={barChartoptions}
                 data={barChartData}
-                className="opm-page-chart-container pt-2 sm:pt-8"
+                className="opm-page-chart-container pt-2 sm:pt-8 px-4"
                 title={TITLE.OPM}
                 isFullScreen={IS_FULLSCREEN}
               />
@@ -605,7 +615,7 @@ const OPM: React.FC = () => {
               />
             )}
             <CustomTab
-              className="opm-tabs relative bottom-[22.5rem] sm:bottom-[20rem] left-[10rem] sm:left-[54.5rem]"
+              className="opm-tabs relative bottom-[22.5rem] sm:bottom-[20rem] left-[10rem] sm:left-[53.75rem]"
               tabData={CHART_TABS}
               tabValue={tabValue}
               setTabValue={setTabValue}
