@@ -20,15 +20,24 @@ import totalOrderCompIcon from "../assets/total_order_comp.svg";
 import avgOpmcompIcon from "../assets/avg_opm_comp.svg";
 import lastMinOpmIcon from "../assets/last_min_opm.svg";
 import trendingDownIcon from "../assets/trending_down.svg";
+import trendingUpIcon from "../assets/trend_up.svg";
 import refreshIcon from "../assets/refresh_icon.svg";
 import infoIcon from "../assets/info_icon.svg";
 import BarChart from "./charts/BarChart";
 import Loader from "./loader";
 import CustomButton from "./Button";
 
-const CardTitle = ({ title, icon }: { title: string; icon: any }) => {
+const CardTitle = ({
+  title,
+  icon,
+  classname,
+}: {
+  title: string;
+  icon: any;
+  classname?: string;
+}) => {
   return (
-    <div className="flex justify-between">
+    <div className={`${classname} flex justify-between`}>
       <h6>{title}</h6>
       <CustomImage src={icon} />
     </div>
@@ -53,7 +62,7 @@ const ComparisonCards = ({
   const difference = lastDay - today || 0;
   const kFormatter = (num) => {
     return Math.abs(num) > 999
-      ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(0) + "k"    // toFixed(1) for decimals
+      ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(0) + "k"
       : Math.sign(num) * Math.abs(num);
   };
   return (
@@ -76,7 +85,7 @@ const ComparisonCards = ({
             difference > 0
               ? "text-[#F16476]"
               : difference < 0
-              ? "text-[#5CB7ED]"
+              ? "text-[#3A9F2D]"
               : "text-[#8B8C8F]"
           } text-[10px]`}
         >
@@ -88,16 +97,16 @@ const ComparisonCards = ({
               difference > 0
                 ? "text-[#F16476]"
                 : difference < 0
-                ? "text-[#5CB7ED]"
+                ? "text-[#3A9F2D]"
                 : "text-[#F2F2F2]"
             } text-xl`}
           >
-            {difference}
+            {Math.abs(difference)}
           </span>
           {difference !== 0 && (
             <CustomImage
               className="flex ml-2"
-              src={difference > 0 ? trendingDownIcon : trendingDownIcon} // need to change to up icon
+              src={difference > 0 ? trendingDownIcon : trendingUpIcon}
             />
           )}
         </div>
@@ -203,7 +212,7 @@ const HomePage = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="flex flex-wrap gap-[10px]">
+        <div className="flex flex-wrap gap-[10px] pb-4 border-b  border-b-[#22262C]">
           <HomeCard
             title={
               <CardTitle
@@ -220,6 +229,7 @@ const HomePage = () => {
               <CardTitle
                 title={"Total Number of Orders"}
                 icon={totalNoOfOrdersIcon}
+                classname={"card-title"}
               />
             }
             value={<OPMCards value={totalOPM} />}
