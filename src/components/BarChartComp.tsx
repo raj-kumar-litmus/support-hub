@@ -82,9 +82,9 @@ const BarChartComp = ({
           data={data}
           className={`${
             location.pathname.includes("home")
-              ? "w-full !h-[24rem] pt-20 sm:pt-16"
+              ? "w-full !h-[24rem] pt-20 sm:pt-16 sm:px-6 px-6"
               : "!h-[21rem] sm:!h-[20rem] pt-8"
-          } p-4`}
+          }`}
         />
       }
     </div>

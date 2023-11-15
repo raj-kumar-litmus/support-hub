@@ -237,15 +237,17 @@ const BarChart = () => {
   };
 
   const getChartConfig = (duration) => {
-    const customChartConfig = { ...BAR_CHART_OPTIONS };
+    const customChartConfig = {
+      ...BAR_CHART_OPTIONS(
+        (duration ||
+          Number(formFields.find((e) => e.name === "period").value)) < 11 &&
+          width > 700,
+      ),
+    };
     if (width > 700) {
       customChartConfig.plugins.legend.position = "bottom";
       customChartConfig.plugins.legend.align = "start";
-      customChartConfig.plugins.datalabels.rotation =
-        (duration ||
-          Number(formFields.find((e) => e.name === "period").value)) < 11
-          ? 0
-          : 270;
+      customChartConfig.plugins.datalabels.rotation = 0;
     } else {
       customChartConfig.plugins.legend.position = "top";
       customChartConfig.plugins.legend.align = "start";

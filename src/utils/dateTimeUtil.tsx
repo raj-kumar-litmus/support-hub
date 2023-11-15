@@ -63,6 +63,15 @@ export const getLocaleTime = (timeVal: Date, is12Hr: boolean): string => {
   });
 };
 
+export const getFormattedPSTDate = (date = null) => {
+  const currentDate = new Date(date || Date.now());
+  currentDate.setMinutes(currentDate.getMinutes() - 10);
+  const pstDateString = currentDate.toLocaleString("en-US", {
+    timeZone: "America/Los_Angeles",
+  });
+  return formatDate(pstDateString, DATE_TIME_FORMAT_1);
+};
+
 export const tenMinutesAgoInCurrentTimeZone = (date = null) =>
   new Date(
     new Date(date || Date.now() - 1000 * 60 * 10).getTime() -
