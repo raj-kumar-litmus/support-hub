@@ -35,6 +35,7 @@ import CustomButton from "./Button";
 import { LoaderContext, LoaderContextType } from "../context/loaderContext";
 import GlobalLoader from "./globalLoader";
 import LoaderPortal from "./loaderPortal";
+import { getFormattedPSTDate } from "../utils/dateTimeUtil";
 
 const CardTitle = ({
   title,
@@ -139,10 +140,12 @@ const HomePage = () => {
 
   const { width } = useScreenSize();
 
-  const fetchOPMData = async (url) => {
+  const fetchOPMData = async (url, date) => {
     try {
       const opmData = await fetchData(
-        `${url}?period=${HOME_PAGE_REFERSH_DURATION}`,
+        `${url}?period=${HOME_PAGE_REFERSH_DURATION}&starttime=${getFormattedPSTDate(
+          date
+        )}`,
         {}
       );
       const totalOrders = opmData.reduce(
@@ -160,7 +163,9 @@ const HomePage = () => {
   const fetchCompData = async (url, date) => {
     try {
       const opmData = await fetchData(
-        `${url}?period=${HOME_PAGE_REFERSH_DURATION}&date=${date}`,
+        `${url}?period=${HOME_PAGE_REFERSH_DURATION}&starttime=${getFormattedPSTDate(
+          date
+        )}`,
         {}
       );
       const totalOrders = opmData.reduce(
@@ -174,11 +179,10 @@ const HomePage = () => {
     }
   };
 
-  const getCardsData = async() => {
+  const getCardsData = async () => {
     setIsLoading(true);
-
-    await fetchOPMData(URL_OPM);
     const date = new Date();
+    await fetchOPMData(URL_OPM, date);
     date.setDate(date.getDate() - 1);
     await fetchCompData(URL_OPM, date);
     await setIsLoading(false);

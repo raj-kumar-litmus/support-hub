@@ -46,8 +46,6 @@ import GreyChannelIcon from "../assets/channel-grey.svg";
 import refreshIcon from "../assets/refresh_icon.svg";
 import { submitOnEnter } from "../components/utils/Utils";
 import {
-  OPM_COMPARISON_OPTIONS,
-  OPM_COMPARISON_OPTIONS_HOME,
   CHANNELS,
   DURATIONS,
   LABELS,
@@ -60,6 +58,11 @@ import { URL_OPM_COMPARISON } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
 import { tenMinutesAgoInCurrentTimeZone } from "../utils/dateTimeUtil";
 import { LoaderContext, LoaderContextType } from "../context/loaderContext";
+import { getFormattedPSTDate } from "../utils/dateTimeUtil";
+import {
+  OPM_COMPARISON_OPTIONS,
+  OPM_COMPARISON_OPTIONS_HOME,
+} from "../config/chartConfig";
 
 ChartJS.register(
   CategoryScale,
@@ -73,6 +76,15 @@ ChartJS.register(
   ChartDataLabels
 );
 
+const DEFAULT = {
+  duration: 10,
+  startTimeOne: getFormattedPSTDate(),
+  startDateTwo: new Date(Date.now() - 2 * 86400000).toLocaleDateString(
+    "en-US",
+  ),
+  channel: "",
+};
+
 const OpmComparison: React.FC = () => {
   const [showFilters, setShowFilters] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
@@ -80,25 +92,17 @@ const OpmComparison: React.FC = () => {
   const [apiResponse, setApiResponse] = useState<null | OpmComparisonType>(
     null
   );
+  const [counter, setCounter] = useState<number>(0);
 
   const { width } = useScreenSize();
   const navigate = useNavigate();
   const IS_FULLSCREEN = location?.pathname.includes("fullscreen");
 
-  const DEFAULT = {
-    duration: 10,
-    startTimeOne: tenMinutesAgoInCurrentTimeZone(),
-    startDateTwo: new Date(Date.now() - 86400000).toLocaleDateString("en-US"),
-    channel: "",
-  };
-
   const [url, setUrl] = useState<string | null>(null);
-
   const [options, setOptions] = useState<null | ChartOptions>(null);
   const [data, setData] = useState<ChartData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showFilteredCards, setShowFilteredCards] = useState<boolean>(false);
-
   const [disabled, setDisabled] = useState(true);
   const { hideLoader } = useContext(LoaderContext) as LoaderContextType;
 
@@ -124,7 +128,7 @@ const OpmComparison: React.FC = () => {
       label: LABELS.startDate,
       showTime: true,
       cardIcon: GreyCalendarIcon,
-      value: new Date(Date.now() - 600000),
+      value: new Date(DEFAULT.startTimeOne),
       imgsrc: WhiteCalendarIcon,
     },
     {
@@ -133,7 +137,7 @@ const OpmComparison: React.FC = () => {
       label: LABELS.endDate,
       cardIcon: GreyCalendarIcon,
       showTime: false,
-      value: new Date(Date.now() - 86400000),
+      value: new Date(DEFAULT.startDateTwo),
       imgsrc: WhiteCalendarIcon,
     },
     {
@@ -154,21 +158,22 @@ const OpmComparison: React.FC = () => {
   ]);
 
   useEffect(() => {
+    const startTimeOne = getFormattedPSTDate();
+    const startDateTwo = new Date(Date.now() - 2 * 86400000).toLocaleDateString("en-US");
     setUrl(
-      `${URL_OPM_COMPARISON}?period=${
-        location.pathname.includes("opm")
-          ? DEFAULT.duration
-          : HOME_PAGE_REFERSH_DURATION
-      }&startTimeOne=${DEFAULT.startTimeOne}&startDateTwo=${
-        DEFAULT.startDateTwo
-      }&channel=${DEFAULT.channel}`
+      `${URL_OPM_COMPARISON}?period=${location.pathname.includes("opm")
+        ? DEFAULT.duration
+        : HOME_PAGE_REFERSH_DURATION
+      }&startTimeOne=${startTimeOne}&startDateTwo=${startDateTwo
+      }&channel=${DEFAULT.channel}`,
     );
   }, []);
+
   useEffect(() => {
     const removeEventListener = submitOnEnter(submit);
-
     return removeEventListener;
   }, []);
+
   const handleFormChange = (event) => {
     const data = [...formFields];
     const val = event.target.name || event.value.name;
@@ -193,9 +198,7 @@ const OpmComparison: React.FC = () => {
     formFields.forEach((e: any) => {
       if (e.value) {
         if (e.name === "startDate") {
-          str += `startTimeOne=${tenMinutesAgoInCurrentTimeZone(
-            e.value.toISOString()
-          )}&`;
+          str += `startTimeOne=${getFormattedPSTDate(e.value)}&`;
           return;
         }
         if (e.name === "endDate") {
@@ -237,21 +240,21 @@ const OpmComparison: React.FC = () => {
       setOptions(
         location.pathname.includes("home")
           ? OPM_COMPARISON_OPTIONS_HOME({
-              apiResponse,
-              startDate: formFields.find((e) => e.name === "startDate").value,
-              endDate: formFields.find((e) => e.name === "endDate").value,
-              isMobile: width < 700,
-              showDataLabels:
-                Number(url.split("period=")[1].split("&")[0]) < 16,
-            })
+            apiResponse,
+            startDate: formFields.find((e) => e.name === "startDate").value,
+            endDate: formFields.find((e) => e.name === "endDate").value,
+            isMobile: width < 700,
+            showDataLabels:
+              Number(url.split("period=")[1].split("&")[0]) < 16,
+          })
           : OPM_COMPARISON_OPTIONS({
-              apiResponse,
-              startDate: formFields.find((e) => e.name === "startDate").value,
-              endDate: formFields.find((e) => e.name === "endDate").value,
-              isMobile: width < 700,
-              showDataLabels:
-                Number(url.split("period=")[1].split("&")[0]) < 16,
-            })
+            apiResponse,
+            startDate: formFields.find((e) => e.name === "startDate").value,
+            endDate: formFields.find((e) => e.name === "endDate").value,
+            isMobile: width < 700,
+            showDataLabels:
+              Number(url.split("period=")[1].split("&")[0]) < 16,
+          }),
       );
     }
   }, [apiResponse]);
@@ -315,7 +318,7 @@ const OpmComparison: React.FC = () => {
   };
 
   const handleOPMCompRefreshBtnClick = () => {
-    getData();
+    setCounter(counter + 1);
   };
 
   return (

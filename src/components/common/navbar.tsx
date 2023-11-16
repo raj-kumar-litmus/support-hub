@@ -40,7 +40,7 @@ const Navbar: FC<Props> = ({
   };
 
   const onSearch = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" && searchValue.length > 0) {
       event.preventDefault();
       navigate(`/orderDetails/${searchValue}`);
     }
@@ -53,11 +53,10 @@ const Navbar: FC<Props> = ({
       }
     >
       <div
-        className={`flex pl-4 ${
-          showSidePaneGrid
-            ? "w-[367px] bg-[#22262C] h-[56px] items-center border-[#30343B] border-solid border-b"
-            : "w-auto"
-        }`}
+        className={`flex pl-4 ${showSidePaneGrid
+          ? "w-[367px] bg-[#22262C] h-[56px] items-center border-[#30343B] border-solid border-b"
+          : "w-auto"
+          }`}
       >
         {showSidePane && (
           <CustomImage
