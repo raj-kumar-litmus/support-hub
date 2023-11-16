@@ -37,7 +37,9 @@ import {
   OmsOrderFlow,
   OmsOrderStatus,
   OrderData,
+  IPromotion,
 } from "../../@types/OrderDetails";
+
 import { fetchData } from "../../utils/fetchUtil";
 import CustomIcon from "../common/CustomIcon";
 import Card from "../common/Card";
@@ -47,9 +49,7 @@ import RightArrowIcon from "../../assets/right_arrow.svg";
 import OmsInfoIcon from "../../assets/oms_info_white.svg";
 import Loader from "../loader";
 import OrderStatus from "../orderstatus";
-import { orderStatus, orderTimeline } from "../../@types/ordertimeline";
 import PromotionsPopup from "../promotionspopup";
-import { IPromotion } from "../../@types/promotion";
 import OrderStatusPopup from "../orderstatuspopup";
 import { promotionsJSON } from "../../sampleJSON/promotions";
 import CustomImage from "../common/customimage";
@@ -65,10 +65,10 @@ const OrderDetails: React.FC = () => {
   const [omsOrderStatus, setOmsOrderStatus] = useState<
     OmsOrderStatus | Record<string, never>
   >({});
-  const [omsOrderFlow, setOmsOrderFlow] = useState<orderStatus>();
+  const [omsOrderFlow, setOmsOrderFlow] = useState<OmsOrderFlow |{}>();
   const [isOrderStatusVisible, setIsOrderStatusVisible] =
     useState<boolean>(false);
-  const [promotions, setPromotions] = useState<IPromotion[]>([]);
+    const [promotions, setPromotions] = useState<IPromotion[]|{}>([]);
   const [itemTableData, setItemTableData] = useState<CommerceItemData[]>([]);
   const [openPromotionsPopup, setOpenPromotionsPopup] =
     useState<boolean>(false);
@@ -127,7 +127,7 @@ const OrderDetails: React.FC = () => {
 
   const getPromotions = async () => {
     const promoUrl = URL_PROMOTIONS.replace(":orderId", orderId);
-    const data: OmsOrderFlow = await fetchData(promoUrl, {});
+    const data: IPromotion = await fetchData(promoUrl, {});
     setPromotions(data || {});
   };
 
@@ -175,7 +175,7 @@ const OrderDetails: React.FC = () => {
             {ORDER_DETAILS}
           </span>
           <span
-              className="w-1/2 justify-end flex items-center !text-[12px] font-normal cursor-pointer !bg-[#161A1D] sm:!bg-inherit"
+              className="justify-end flex items-center !text-[12px] font-normal cursor-pointer !bg-[#161A1D] sm:!bg-inherit"
             onClick={showPromotions}
           >
             <CustomIcon

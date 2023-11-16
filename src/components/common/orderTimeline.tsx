@@ -1,7 +1,7 @@
 import React from "react";
 import TimelineCard from "./TimelineCard";
 import Stepper from "./TimelineStepper";
-import { orderTimeline } from "../../@types/ordertimeline";
+import { orderTimeline } from "../../@types/OrderDetails";
 
 interface TimelineProps {
   orderMap: orderTimeline;
