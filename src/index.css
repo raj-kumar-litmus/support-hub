@@ -605,10 +605,10 @@ hr.horizontalLine.opmComparison {
   background: linear-gradient(to right, #6370ff, #5a9ef500);
 }
 hr.horizontalLine.yellow {
-  background: linear-gradient(to right, #6370FF, #5a9ef500);
+  background: linear-gradient(to right, #6370ff, #5a9ef500);
 }
 hr.horizontalLine.blue {
-  background: linear-gradient(to right, #FDA44F, #5a9ef500);
+  background: linear-gradient(to right, #fda44f, #5a9ef500);
 }
 .calendarOpmComparison span input {
   @apply pl-[2.5vw];
@@ -722,9 +722,12 @@ hr.horizontalLine.blue {
 }
 
 .home-page .p-card .p-card-title h6 {
-  @apply text-sm font-bold w-3/4 sm:w-1/2 font-helvetica;
+  @apply text-xs leading-[18px] w-3/4 sm:w-1/2 font-helvetica;
 }
 
+.home-page .p-card .p-card-title .card-title h6 {
+  @apply sm:w-[60%];
+}
 .home-opm {
   @apply sm:mt-6 ml-0 sm:ml-[5vw];
 }
@@ -845,4 +848,7 @@ hr.horizontalLine.blue {
 .custom-btn .p-button:enabled:hover,
 .p-button:not(button):not(a):not(.p-disabled):hover {
   @apply bg-transparent shadow-none border-[#FAF9F6] border-2;
+}
+.home-opm-charts {
+  @apply my-4;
 }
