@@ -458,4 +458,8 @@ export const QUICK_LINKS = [{
 }
 ];
 
-export const QUICK_LINKS_HEADER = "Quick Links"
+export const QUICK_LINKS_HEADER = "Quick Links";
+export const AM_PM_OPTIONS = [
+  { label: 'AM', value: 'AM' },
+  { label: 'PM', value: 'PM' },
+];

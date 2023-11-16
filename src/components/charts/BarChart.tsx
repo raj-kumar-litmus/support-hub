@@ -351,6 +351,7 @@ const BarChart = () => {
                           optionLabel={"label"}
                           placeholder={""}
                           showIcon={true}
+                          showLeftIcon={true}
                           iconSrc={form.iconSrc}
                           iconAlt={`${form.name}-icon`}
                         />
