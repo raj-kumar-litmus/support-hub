@@ -174,9 +174,9 @@ const OpmComparison: React.FC = () => {
     setFormFields(data);
   };
 
-  const removeFormEntry = (event) => {
+  const removeFormEntry = (label) => {
     const data = [...formFields];
-    data.find((e) => e.name === event.target.id).value = null;
+    data.find((e) => e.name === label).value = null;
     setFormFields(data);
   };
 
@@ -393,6 +393,7 @@ const OpmComparison: React.FC = () => {
                         imgsrc={form.imgsrc}
                         onChange={(event) => handleFormChange(event)}
                         value={form.value}
+                        maxDate={((form.name === "startDate") || (form.name === "endDate")) ? new Date() : null}
                       />
                     )}
                     {form.type === "dropdown" && (
@@ -461,6 +462,7 @@ const OpmComparison: React.FC = () => {
                             imgsrc={form.imgsrc}
                             onChange={(event) => handleFormChange(event)}
                             value={form.value}
+                            maxDate={((form.name === "startDate") || (form.name === "endDate")) ? new Date() : null}
                           />
                         )}
                         {form.type === INPUT_TYPES.dropdown && (
