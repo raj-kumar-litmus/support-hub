@@ -210,9 +210,9 @@ const BarChart = () => {
     setFormFields(data);
   };
 
-  const removeFormEntry = (event) => {
+  const removeFormEntry = (label) => {
     const data = [...formFields];
-    data.find((e) => e.name === event.target.id).value = null;
+    data.find((e) => e.name === label).value = null;
     setFormFields(data);
   };
 
@@ -351,6 +351,7 @@ const BarChart = () => {
                           optionLabel={"label"}
                           placeholder={""}
                           showIcon={true}
+                          showLeftIcon={true}
                           iconSrc={form.iconSrc}
                           iconAlt={`${form.name}-icon`}
                         />

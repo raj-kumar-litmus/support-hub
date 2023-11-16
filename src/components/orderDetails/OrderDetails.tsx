@@ -352,7 +352,7 @@ const OrderDetails: React.FC = () => {
             <div className="flexWrapper justify-start bg-[#22262C] rounded-t-md">
               <span className="w-auto sm:w-1/5 min-w-[4.5rem]">{PAYMENT_TYPE}</span>
             <span className="w-auto sm:w-4/5 font-medium">
-              {orderData?.paymentInfo?.[0].paymentType}
+                {orderData?.paymentInfo?.[0].paymentType} - {orderData?.paymentInfo?.[0].paymentCardType.toUpperCase()}
             </span>
           </div>
             <div className="flexWrapper bg-[#22262C]">

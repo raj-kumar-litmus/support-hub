@@ -415,28 +415,36 @@ export const QUICK_LINKS = [{
   id: 0,
   header: "Alerting & Monitoring Tools",
   links: [
-    { name: "Azure Splunk", link: import.meta.env.VITE_AZURE_SPLUNK },
-    { name: "Azure 2 Splunk", link: import.meta.env.VITE_AZURE_2_SPLUNK },
-    { name: "Dynatrace", link: import.meta.env.VITE_DYNATRACE },
-    { name: "Rigor Monitoring", link: import.meta.env.VITE_RIGOR_MONITORING },
-    { name: "Grafana", link: import.meta.env.VITE_GRAFANA },
-    { name: "Alert Manager", link: import.meta.env.VITE_ALERT_MANAGER },
-    { name: "Azure Endeca", link: import.meta.env.VITE_AZURE_EMDECA },
+    { name: "Splunk - AZR1", link: import.meta.env.VITE_SPLUNK_AZR1 },
+    { name: "Splunk - AZR2", link: import.meta.env.VITE_SPLUNK_AZR2 },
+    { name: "Dynatrace - SRE Digital Dashboard", link: import.meta.env.VITE_DYNATRACE },
+    { name: "Grafana - Overall Application View", link: import.meta.env.VITE_GRAFANA },
+    { name: "Alert Manager - Omni Prod", link: import.meta.env.VITE_ALERT_MANAGER_OMNI_PROD },
+    { name: "Alert Manager - AZR", link: import.meta.env.VITE_ALERT_MANAGER_AZR },
+    { name: "ArgoCD - OMNI", link: import.meta.env.VITE_ARGOCD_OMNI },
+    { name: "ArgoCD - PCI", link: import.meta.env.VITE_ARGOCD_PCI },
+    { name: "ArgoCD - AKS02", link: import.meta.env.VITE_ARGCD_AKS02 },
+    { name: "Orion Portal", link: import.meta.env.VITE_ORION_PORTAL },
+    { name: "Klarna Status Page", link: import.meta.env.VITE_KLARNA_STATUS_PAGE },
+    { name: "AfterPay Status Page", link: import.meta.env.VITE_AFTERPAY_STATUS_PAGE },
+    { name: "PayPal Status Page", link: import.meta.env.VITE_PAYPAL_STATUS_PAGE },
+    { name: "Narvar Status Page", link: import.meta.env.VITE_NARVAR_STATUS_PAGE },
+    { name: "DeliverySolution Status Page", link: import.meta.env.VITE_DELIVERYSOLUTION_STATUS_PAGE },
+    { name: "AWS Health Status", link: import.meta.env.VITE_AWS_HEALTH_STATUS },
     { name: "Forter Portal", link: import.meta.env.VITE_FORTER_PORTAL },
-    { name: "BI Rewards", link: import.meta.env.VITE_BI_REWARDS },
-    { name: "ArgoCD", link: import.meta.env.VITE_ARGOCD },
-    { name: "UserAgent Lookup", link: import.meta.env.VITE_USERAGENT_LOOKUP },
     { name: "PagerDuty", link: import.meta.env.VITE_PAGERDUTY },
-    { name: "Service Now", link: import.meta.env.VITE_SERVICE_NOW },
-    { name: "PAM", link: import.meta.env.VITE_PAM },
-    { name: "Server Restart", link: import.meta.env.VITE_SERVER_RESTART },
-    { name: "SephAdmin", link: import.meta.env.VITE_SEPH_ADMIN },
-    { name: "True Origin", link: import.meta.env.VITE_TRUE_ORIGIN },
-    { name: "True Preview", link: import.meta.env.VITE_TRUE_PREVIEW },
-    { name: "Mule Catalog", link: import.meta.env.VITE_MULE_CATALOG },
-    { name: "Mule BackOffice", link: import.meta.env.VITE_MULE_BACKOFFICE },
+    { name: "ServiceNow", link: import.meta.env.VITE_SERVICE_NOW },
+    { name: "SephAdmin", link: import.meta.env.VITE_SEPHADMIN },
+    { name: "Preview", link: import.meta.env.VITE_PREVIEW },
     { name: "BCC", link: import.meta.env.VITE_BCC },
     { name: "CSC", link: import.meta.env.VITE_CSC },
+    { name: "HAPROXY - Canary", link: import.meta.env.VITE_HAPROXY_CANARY },
+    { name: "HAPROXY - Non Canary", link: import.meta.env.VITE_HAPROXY_NON_CANARY },
+    { name: "HAPROXY - AZR2", link: import.meta.env.VITE_HAPROXY_AZR2 },
+    { name: "True Origin - Canary", link: import.meta.env.VITE_TRUE_ORIGIN_CANARY },
+    { name: "True Origin - Non Canary", link: import.meta.env.VITE_TRUE_ORIGIN_NON_CANARY },
+    { name: "True Origin - AZR2", link: import.meta.env.VITE_TRUE_ORIGIN_AZR2 },
+    { name: "Server Restart", link: import.meta.env.VITE_SERVER_RESTART },
   ]
 }
   , {
@@ -450,4 +458,8 @@ export const QUICK_LINKS = [{
 }
 ];
 
-export const QUICK_LINKS_HEADER = "Quick Links"
+export const QUICK_LINKS_HEADER = "Quick Links";
+export const AM_PM_OPTIONS = [
+  { label: 'AM', value: 'AM' },
+  { label: 'PM', value: 'PM' },
+];
