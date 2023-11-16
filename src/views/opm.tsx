@@ -72,6 +72,7 @@ import BarChartComp from "../components/BarChartComp";
 import useInterval from "../hooks/useInterval";
 import CustomCheckbox from "../components/common/CustomCheckBox";
 import CustomInputNumber from "../components/common/CustomInputNumber";
+import AutoRefresh from "../components/common/AutoRefresh";
 
 ChartJS.register(
   CategoryScale,
@@ -137,10 +138,11 @@ const OPM: React.FC = () => {
     );
   }, []);
 
-  const getData = async () => {
+  const getData = async (showLoader = true) => {
     try {
-      setIsLoading(true);
+      if (showLoader) setIsLoading(true);
       const data = await fetchData(url, {});
+      if (showLoader) setIsLoading(false);
       hideLoader();
       setIsLoading(false);
       const xAxisLabels = data.map((e) => e.timestamp);
@@ -351,18 +353,6 @@ const OPM: React.FC = () => {
     return customChartConfig;
   };
 
-  useInterval(() => {
-    if (startPolling) {
-      (async () => {
-        await getData();
-      })();
-    }
-  }, pollingRefershDuration || 60000);
-
-  useEffect(() => {
-    if (!showPollingForm) setStartPolling(false);
-  }, [showPollingForm]);
-
   const handleOPMExpandClick = () => {
     navigate("/opm");
   };
@@ -372,7 +362,6 @@ const OPM: React.FC = () => {
   };
 
   const startPollingHandler = () => {
-    setStartPolling(true);
     (async () => {
       try {
         await getData();
@@ -630,37 +619,14 @@ const OPM: React.FC = () => {
         </div>
       )}
       {location.pathname.includes("opm") && (
-        <CustomCheckbox
-          checked={showPollingForm}
-          onClick={() => setShowPollingForm(!showPollingForm)}
-          containerclassname="flex autoRefreshCheckBox pt-[2vh] ml-[0.5vw]"
-          label="Auto Refresh"
-          labelclassname="text-white text-[12px] ml-[0.5vw]"
+        <AutoRefresh
+          getData={getData}
+          startPollingHandler={startPollingHandler}
+          inputClassname="w-[60vw] sm:w-[38vw] md:w-[24vw]"
+          inputContainerClassname="w-[38vw] md:w-[24vw]"
+          checkBoxLabelClassname="text-white text-[12px] ml-[0.5vw]"
+          checkBoxContainerClassname="flex autoRefreshCheckBox ml-[6vw] sm:ml-[1vw] sm:pt-[4vh] md:pt-[2vh] ml-[0.5vw]"
         />
-      )}
-      {showPollingForm && (
-        <div
-          className="md:flex gap-[1vw] pt-[2vh] ml-[1vw] opmFilters items-center"
-          onSubmit={submit}
-        >
-          <CustomInputNumber
-            containerclassname="w-[38vw] md:w-[24vw]"
-            min={30}
-            inputClassName="w-[60vw] sm:w-[38vw] md:w-[24vw]"
-            onChange={(e) => setPollingRefreshDuration(e.value * 1000)}
-            placeholder="Refresh duration starts from 30"
-            className="border rounded-[8px] border-solid border-slate-300 border-1 h-[40px]"
-          />
-          <CustomButton
-            id="page-btn-submit"
-            isDisabled={+pollingRefershDuration < 30 * 1000}
-            btnclassname="!text-[12px]"
-            className="relative sm:w-[23vw] lg:w-[18vw] top-[2vh] md:top-[0] left-[0] md:left-[3vw]"
-            onClick={startPollingHandler}
-          >
-            {START_POLLING_TEXT}
-          </CustomButton>
-        </div>
       )}
       {isLoading && location.pathname.includes("opm") ? (
         <Loader className="h-[50vh]" />

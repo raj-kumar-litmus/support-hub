@@ -49,9 +49,9 @@ import RightArrowIcon from "../../assets/right_arrow.svg";
 import OmsInfoIcon from "../../assets/oms_info_white.svg";
 import Loader from "../loader";
 import OrderStatus from "../orderstatus";
+import { orderStatus } from "../../@types/ordertimeline";
 import PromotionsPopup from "../promotionspopup";
 import OrderStatusPopup from "../orderstatuspopup";
-import { promotionsJSON } from "../../sampleJSON/promotions";
 import CustomImage from "../common/customimage";
 import { getTableHeaders } from "../utils/Utils";
 import CustomTable from "../common/customtable";
@@ -60,15 +60,15 @@ import { Column } from "primereact/column";
 const OrderDetails: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [orderData, setOrderData] = useState<OrderData | Record<string, never>>(
-    {}
+    {},
   );
   const [omsOrderStatus, setOmsOrderStatus] = useState<
     OmsOrderStatus | Record<string, never>
   >({});
-  const [omsOrderFlow, setOmsOrderFlow] = useState<OmsOrderFlow |{}>();
+  const [omsOrderFlow, setOmsOrderFlow] = useState<OmsOrderFlow | {}>();
   const [isOrderStatusVisible, setIsOrderStatusVisible] =
     useState<boolean>(false);
-    const [promotions, setPromotions] = useState<IPromotion[]|{}>([]);
+  const [promotions, setPromotions] = useState<IPromotion[] | {}>([]);
   const [itemTableData, setItemTableData] = useState<CommerceItemData[]>([]);
   const [openPromotionsPopup, setOpenPromotionsPopup] =
     useState<boolean>(false);
@@ -89,7 +89,7 @@ const OrderDetails: React.FC = () => {
   const getOrderData = async () => {
     const data: OrderData = await fetchData(
       `${URL_ORDER_DETAILS}/${orderId}`,
-      {}
+      {},
     );
     setOrderData(data || {});
     if (data?.commerceItem?.length) {
@@ -102,7 +102,7 @@ const OrderDetails: React.FC = () => {
             "Unit Price": item.priceInfo.listPrice,
             "Total Price": item.priceInfo.rawTotalPrice,
           };
-        }
+        },
       );
       setItemTableData(convertedArray);
     }
@@ -112,7 +112,7 @@ const OrderDetails: React.FC = () => {
   const getOmsOrderStatus = async () => {
     const data: OmsOrderStatus = await fetchData(
       `${URL_OMS_ORDER_STATUS}/${orderId}`,
-      {}
+      {},
     );
     setOmsOrderStatus(data || {});
   };
@@ -120,7 +120,7 @@ const OrderDetails: React.FC = () => {
   const getOmsOrderFlow = async () => {
     const data: OmsOrderFlow = await fetchData(
       `${URL_OMS_ORDER_FLOW}/${orderId}`,
-      {}
+      {},
     );
     setOmsOrderFlow(data || {});
   };
@@ -158,7 +158,7 @@ const OrderDetails: React.FC = () => {
     <Loader />
   ) : Object.keys(orderData).length > 0 ? (
     <div id="orderDetailsComp" className="sm:my-8 mx-4">
-        <div className="flex sm:hidden border-b border-solid border-[#292e36] h-[44px] items-center px-[14px] py-[24px]">
+      <div className="flex sm:hidden border-b border-solid border-[#292e36] h-[44px] items-center px-[14px] py-[24px]">
         <CustomImage
           className="h-[13px]"
           src={RightArrowIcon}
@@ -169,13 +169,13 @@ const OrderDetails: React.FC = () => {
           Order #{orderId}
         </span>
       </div>
-        <div className="gridNoGapRounded grid-cols-1 m-4 p-0 sm:py-4 sm:px-6 sm:bg-[#22262C]">
-          <div className="flex justify-between border-none !bg-[#161A1D] sm:!bg-inherit">
-            <span className="w-1/2 !text-lg !text-[#F2F2F2] font-bold !bg-[#161A1D] sm:!bg-inherit">
+      <div className="gridNoGapRounded grid-cols-1 m-4 p-0 sm:py-4 sm:px-6 sm:bg-[#22262C]">
+        <div className="flex justify-between border-none !bg-[#161A1D] sm:!bg-inherit">
+          <span className="w-1/2 !text-lg !text-[#F2F2F2] font-bold !bg-[#161A1D] sm:!bg-inherit">
             {ORDER_DETAILS}
           </span>
           <span
-              className="justify-end flex items-center !text-[12px] font-normal cursor-pointer !bg-[#161A1D] sm:!bg-inherit"
+            className="justify-end flex items-center !text-[12px] font-normal cursor-pointer !bg-[#161A1D] sm:!bg-inherit"
             onClick={showPromotions}
           >
             <CustomIcon
@@ -189,7 +189,7 @@ const OrderDetails: React.FC = () => {
           </span>
         </div>
         <div className="flexColWrapper sm:gap-y-0 sm:grid-cols-2 ">
-            <div className="flexWrapper justify-start bg-[#22262C] rounded-t-md">
+          <div className="flexWrapper justify-start bg-[#22262C] rounded-t-md">
             <span className="w-auto sm:w-1/5 flex items-center min-w-[4.5rem]">
               {ORDER}
               <CustomIcon
@@ -205,7 +205,7 @@ const OrderDetails: React.FC = () => {
               {orderData?.orderId}
             </span>
           </div>
-            <div className="flexWrapper bg-[#22262C] ">
+          <div className="flexWrapper bg-[#22262C] ">
             <span className="w-auto sm:w-1/5 font-light min-w-[4.5rem]">
               {ORDER_TOTAL}
             </span>
@@ -214,7 +214,7 @@ const OrderDetails: React.FC = () => {
             </span>
           </div>
         </div>
-          <div className="flexColWrapper sm:gap-y-0 sm:grid-cols-2 bg-[#22262C] ">
+        <div className="flexColWrapper sm:gap-y-0 sm:grid-cols-2 bg-[#22262C] ">
           <div className="flexWrapper">
             <span className="w-auto sm:w-1/5 font-light min-w-[4.5rem]">
               {SUBMITTED}
@@ -232,7 +232,7 @@ const OrderDetails: React.FC = () => {
             </span>
           </div>
         </div>
-          <div className="flexColWrapper sm:gap-y-0 sm:grid-cols-2 bg-[#22262C]  rounded-b-md">
+        <div className="flexColWrapper sm:gap-y-0 sm:grid-cols-2 bg-[#22262C]  rounded-b-md">
           <div className="flexWrapper">
             <span className="w-auto sm:w-1/5 font-light min-w-[4.5rem]">
               {LOCALE}
@@ -243,19 +243,17 @@ const OrderDetails: React.FC = () => {
           </div>
           <div className="flexBlockWrapper py-1 px-4 sm:p-0 border-none">
             <span className="w-auto sm:w-1/5 min-w-[4.5rem]">{ORDER_TYPE}</span>
-            <span className="w-auto sm:w-4/5 font-medium">
-                &nbsp;&nbsp;-
-            </span>
+            <span className="w-auto sm:w-4/5 font-medium">&nbsp;&nbsp;-</span>
           </div>
         </div>
       </div>
 
       <div className="flex flex-col-reverse p-0 sm:grid gap-4 sm:grid-cols-2 m-4">
-          <div className="p-0 sm:py-4 sm:px-6 gridNoGapRounded grid-cols-1 bg-[#161A1D] sm:bg-[#22262C]">
-            <span className="!text-lg font-bold bg-[#161A1D] sm:bg-inherit">
+        <div className="p-0 sm:py-4 sm:px-6 gridNoGapRounded grid-cols-1 bg-[#161A1D] sm:bg-[#22262C]">
+          <span className="!text-lg font-bold bg-[#161A1D] sm:bg-inherit">
             {STATUS_ACROSS}
           </span>
-            <div className="flexBlockWrapper rounded-t-md border-t-0 py-1 px-4 sm:p-0 sm:border-t border-solid border-[#292e36] bg-[#22262C]">
+          <div className="flexBlockWrapper rounded-t-md border-t-0 py-1 px-4 sm:p-0 sm:border-t border-solid border-[#292e36] bg-[#22262C]">
             <span className="w-auto sm:w-1/6 min-w-[4.5rem]">{ATG}</span>
             <span className="w-auto sm:w-5/6 font-medium">
               {`${orderData?.status} - ${orderData?.sephOrderStatus}`}
@@ -282,21 +280,24 @@ const OrderDetails: React.FC = () => {
             <span className="w-auto sm:w-5/6 font-medium"></span>
           </div>
         </div>
-          <div className="p-0 sm:py-4 sm:px-6 gridNoGapRounded grid-cols-1 bg-[#161A1D] sm:bg-[#22262C]">
-            <span className="!text-lg font-bold bg-[#161A1D] sm:bg-inherit">
+        <div className="p-0 sm:py-4 sm:px-6 gridNoGapRounded grid-cols-1 bg-[#161A1D] sm:bg-[#22262C]">
+          <span className="!text-lg font-bold bg-[#161A1D] sm:bg-inherit">
             {CUSTOMER_INFO}
           </span>
           <div className="flexBlockWrapper border-t-0 sm:border-t filterCardWrapper rounded-t-md">
             <span className="w-auto sm:w-1/6 min-w-[4.5rem]">{NAME}</span>
             <span className="w-auto sm:w-5/6 font-medium">
               {formatName(
-                `${orderData?.customerInfo?.firstName} ${orderData?.customerInfo?.lastName}`
+                `${orderData?.customerInfo?.firstName} ${orderData?.customerInfo?.lastName}`,
               )}
             </span>
           </div>
           <div className="flexBlockWrapper border-t filterCardWrapper">
             <span className="w-auto sm:w-1/6 min-w-[4.5rem]">{EMAIL}</span>
-              <span className="w-auto sm:w-5/6 font-medium whitespace-nowrap text-ellipsis overflow-hidden" title={orderData?.customerInfo?.email}>
+            <span
+              className="w-auto sm:w-5/6 font-medium whitespace-nowrap text-ellipsis overflow-hidden"
+              title={orderData?.customerInfo?.email}
+            >
               {orderData?.customerInfo?.email}
             </span>
           </div>
@@ -309,13 +310,13 @@ const OrderDetails: React.FC = () => {
         </div>
       </div>
 
-        <div className="gridNoGapRounded grid-cols-1 m-4 p-0 sm:py-4 sm:px-6 bg-[#161A1D] sm:bg-[#22262C]">
-          <div className="flex justify-between border-none !bg-[#161A1D] sm:!bg-inherit">
-            <span className="w-3/4 sm:w-full !text-lg !text-[#F2F2F2] font-bold !bg-[#161A1D] sm:!bg-inherit">
+      <div className="gridNoGapRounded grid-cols-1 m-4 p-0 sm:py-4 sm:px-6 bg-[#161A1D] sm:bg-[#22262C]">
+        <div className="flex justify-between border-none !bg-[#161A1D] sm:!bg-inherit">
+          <span className="w-3/4 sm:w-full !text-lg !text-[#F2F2F2] font-bold !bg-[#161A1D] sm:!bg-inherit">
             {ITEMS_INFO}
           </span>
           <span
-              className="w-1/4 sm:hidden justify-end flex items-center !text-[12px] font-normal cursor-pointer !bg-[#161A1D] sm:!bg-inherit"
+            className="w-1/4 sm:hidden justify-end flex items-center !text-[12px] font-normal cursor-pointer !bg-[#161A1D] sm:!bg-inherit"
             onClick={viewAllItems}
           >
             {VIEW_ALL}
@@ -323,14 +324,14 @@ const OrderDetails: React.FC = () => {
         </div>
         <div className="hidden sm:block rounded-md">
           {itemTableData?.length > 0 && (
-              <CustomTable
-                showGridlines
-                stripedRows
-                value={itemTableData}
-                className={"custom-table order-details-table"}
-                children={getTableHeaders(itemTableData).map((h) => (
-                  <Column key={h} field={h} header={h}></Column>
-                ))}
+            <CustomTable
+              showGridlines
+              stripedRows
+              value={itemTableData}
+              className={"custom-table order-details-table"}
+              children={getTableHeaders(itemTableData).map((h) => (
+                <Column key={h} field={h} header={h}></Column>
+              ))}
             />
           )}
         </div>
@@ -342,29 +343,30 @@ const OrderDetails: React.FC = () => {
         </div>
       </div>
 
-        <div className="gridNoGapRounded m-4 p-0 sm:p-4 sm:py-4 sm:px-6 sm:bg-[#22262C]">
-          <div className="!bg-[#161A1D] sm:!bg-inherit">
-            <span className="block w-[100%] !text-lg font-bold !bg-[#161A1D] sm:!bg-inherit">
+      <div className="gridNoGapRounded m-4 p-0 sm:p-4 sm:py-4 sm:px-6 sm:bg-[#22262C]">
+        <div className="!bg-[#161A1D] sm:!bg-inherit">
+          <span className="block w-[100%] !text-lg font-bold !bg-[#161A1D] sm:!bg-inherit">
             {PAYMENT_INFO}
           </span>
         </div>
-          <div className="flexColWrapper gap-y-0 grid-cols-2">
-            <div className="flexWrapper justify-start bg-[#22262C] rounded-t-md">
-              <span className="w-auto sm:w-[35%]">{PAYMENT_TYPE}</span>
+        <div className="flexColWrapper gap-y-0 grid-cols-2">
+          <div className="flexWrapper justify-start bg-[#22262C] rounded-t-md">
+            <span className="w-auto sm:w-[35%]">{PAYMENT_TYPE}</span>
             <span className="w-auto sm:w-[65%] font-medium">
-            {orderData?.paymentInfo?.[0].paymentType} - {orderData?.paymentInfo?.[0].paymentCardType.toUpperCase()}
+              {orderData?.paymentInfo?.[0].paymentType} -{" "}
+              {orderData?.paymentInfo?.[0].paymentCardType.toUpperCase()}
             </span>
           </div>
-            <div className="flexWrapper bg-[#22262C]">
-              <span className="w-auto sm:w-1/5 min-w-[4.5rem]">{AMOUNT}</span>
+          <div className="flexWrapper bg-[#22262C]">
+            <span className="w-auto sm:w-1/5 min-w-[4.5rem]">{AMOUNT}</span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.paymentInfo?.[0].amount}
             </span>
           </div>
         </div>
         <div className="flexColWrapper gap-y-0 grid-cols-2">
-            <div className="flexWrapper bg-[#22262C] rounded-b-md border-none">
-              <span className="w-auto sm:w-[35%]">{STATUS}</span>
+          <div className="flexWrapper bg-[#22262C] rounded-b-md border-none">
+            <span className="w-auto sm:w-[35%]">{STATUS}</span>
             <span className="w-auto sm:w-[65%] font-medium">
               {orderData?.paymentInfo?.[0].status}
             </span>
@@ -380,12 +382,12 @@ const OrderDetails: React.FC = () => {
         openDialog={openOrderStatusPopup}
         setOpenDialog={setOpenOrderStatusPopup}
       />
-        <OrderStatus
+      <OrderStatus
         orderStatus={omsOrderFlow}
         isOrderStatusVisible={isOrderStatusVisible}
         setIsOrderStatusVisible={setIsOrderStatusVisible}
       />
-      </div>
+    </div>
   ) : (
     <div className="text-md pt-48 text-center text-gray-400 font-semibold">
       {NO_MATCHING_ORDERS_FOUND}
