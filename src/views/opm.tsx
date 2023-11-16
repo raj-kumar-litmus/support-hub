@@ -15,7 +15,7 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 
 import { ModalEnums, ChartData, ChartOptions } from "../@types/supportHub";
 import useScreenSize from "../hooks/useScreenSize";
-
+import { DATE_FORMAT_4 } from "../utils/dateTimeUtil";
 import CustomDropdown from "../components/DropDown";
 import CustomInputText from "../components/InputText";
 import CustomCalendar from "../components/common/CustomCalendar";
@@ -55,7 +55,9 @@ import {
   TITLE,
   LOCALE_OPTIONS,
   HOME_PAGE_REFERSH_DURATION,
+  MM_DD_YYYY_HH_MM,
 } from "../constants/appConstants";
+import { submitOnEnter } from "../components/utils/Utils";
 import { URL_OPM } from "../constants/apiConstants";
 
 ChartJS.register(
@@ -82,9 +84,9 @@ const OPM: React.FC = () => {
   const DEFAULT = {
     duration: 10,
     starttime: "",
-    channel: CHANNELS.ALL,
+    channel: CHANNELS.All,
     promocode: "",
-    paymentType: PAYMENT_TYPES.ALL,
+    paymentType: PAYMENT_TYPES.All,
     country: "",
   };
 
@@ -94,6 +96,10 @@ const OPM: React.FC = () => {
   const [data, setData] = useState<ChartData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showFilteredCards, setShowFilteredCards] = useState<boolean>(false);
+  useEffect(() => {
+    const removeEventListener = submitOnEnter(submit);
+    return removeEventListener;
+  }, []);
 
   useEffect(() => {
     setUrl(
@@ -195,7 +201,7 @@ const OPM: React.FC = () => {
       icon: ChannelIcon,
       cardIcon: GreyChannelIcon,
       value: {
-        name: "ALL",
+        name: "All",
         code: "",
       },
       options: Object.keys(CHANNELS).map((e) => ({
@@ -210,7 +216,7 @@ const OPM: React.FC = () => {
       icon: LocaleIcon,
       cardIcon: GreyGlobeIcon,
       value: {
-        name: "ALL",
+        name: "All",
         code: "",
       },
       options: Object.keys(LOCALE_OPTIONS).map((e) => ({
@@ -225,7 +231,7 @@ const OPM: React.FC = () => {
       icon: PaymentIcon,
       cardIcon: GreyCardIcon,
       value: {
-        name: "ALL",
+        name: "All",
         code: "",
       },
       options: Object.keys(PAYMENT_TYPES).map((e) => ({
@@ -377,9 +383,10 @@ const OPM: React.FC = () => {
                     {form.type === INPUT_TYPES.time && (
                       <CustomCalendar
                         name={form.name}
-                        containerclassname="ml-[10px] sm:w-[20vw] md:w-[10vw] lg:w-[12vw] xl:w-[14vw]"
+                        containerclassname="calendarOpm ml-[10px] sm:w-[20vw] md:w-[10vw] lg:w-[12vw] xl:w-[14vw]"
                         titleclassname="top-[2vh]"
                         imageclassname="h-[20px] w-[20px] relative top-[3vh] left-[0.5vw] z-[1]"
+                        placeholder={MM_DD_YYYY_HH_MM}
                         title={form.label}
                         showTime={form.showTime}
                         iconPos={form.iconPos || "left"}

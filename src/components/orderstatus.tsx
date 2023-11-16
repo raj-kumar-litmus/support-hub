@@ -1,9 +1,9 @@
 import React, { FC, useState } from "react";
-import { orderStatus } from "../@types/ordertimeline";
+import { OmsOrderFlow } from "../@types/OrderDetails";
 import { Dialog } from "primereact/dialog";
 import Timeline from "./common/orderTimeline";
 interface OrderStatusProps {
-  orderStatus: orderStatus;
+  orderStatus: OmsOrderFlow;
   isOrderStatusVisible:boolean;
   setIsOrderStatusVisible: (a: boolean) => void;
 }

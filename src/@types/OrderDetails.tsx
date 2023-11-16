@@ -38,10 +38,16 @@ export interface CommerceItem {
   priceInfo: PriceInfo;
 }
 
+export interface IPromotion {
+  promotionId: string;
+  discAmt: number;
+  claimableId: string;
+}
+
 export interface PriceInfo {
   listPrice: string;
   rawTotalPrice: string;
-  amount: strign;
+  amount: string;
 }
 
 export interface OmsOrderStatus {
@@ -54,4 +60,37 @@ export interface CommerceItemData {
   Quantity: number;
   "Unit Price": string;
   "Total Price": string;
+}
+export interface OmsOrderFlow {
+  orderNo: string;
+  orderMap: {
+    [timestamp: string]: {
+      orderNo: string;
+      shipmentNo: string;
+      lineType: string;
+      packlistType: string;
+      orderDate: string;
+      dc: string;
+      status: string;
+      statusName: string;
+      statusDescription: string;
+      shipmentType: string | null;
+    }[];
+  };
+  shipmentNo: string | null;
+  shipmentMap: string | null;
+}
+export interface orderTimeline {
+  [timestamp: string]: {
+    orderNo: string;
+    shipmentNo: string;
+    lineType: string;
+    packlistType: string;
+    orderDate: string;
+    dc: string;
+    status: string;
+    statusName: string;
+    statusDescription: string;
+    shipmentType: string | null;
+  }[];
 }

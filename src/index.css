@@ -320,6 +320,9 @@ button.p-button-secondary {
 .inputContainer {
   @apply relative left-[-10px];
 }
+.opmComparionInput{
+  @apply !relative left-[-18px];
+}
 .dropdownWithIcon .p-dropdown {
   @apply border-l-transparent rounded-l-none w-[135px];
 }
@@ -611,6 +614,9 @@ hr.horizontalLine.blue {
   @apply pl-[2.5vw];
 }
 .calendarSessions span input {
+  @apply !pl-[6.5vw] md:!pl-[2.5vw];
+}
+.calendarOpm span input {
   @apply !pl-[6.5vw] md:!pl-[2.5vw];
 }
 .opmFiltersMobileCalendar span input {

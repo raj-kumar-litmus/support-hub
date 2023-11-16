@@ -12,6 +12,7 @@ export const SELECT_CHANNEL: string = "Select Channel";
 export const DD_MM_YYYY: string = "dd/mm/yyyy";
 export const HH_MM: string = "hh:mm";
 export const DD_MM_YYYY_HH_MM: string = "dd/mm/yyyy hh:mm";
+export const MM_DD_YYYY_HH_MM: string = "mm/dd/yyyy hh:mm";
 export const FROM: string = "From";
 export const RESET: string = "Reset";
 export const TOTAL_SESSIONS_PER_MIN_PRIMARY: string =
@@ -127,28 +128,28 @@ export const DURATIONS = {
 };
 
 export const CHANNELS = {
-  ALL: "",
-  DESKTOP: 0,
-  MOBILE_WEB: 5,
-  IPHONE_APP: 4,
-  ANDROID_APP: 9,
+  All: "",
+  Desktop: 0,
+  "Mobile Web": 5, 
+  "iPhone App": 4,  
+  "Android App": 9,    
   CSC: 2,
-  MPLUS: 6,
-  INSTAGRAM: 11,
+  "M Plus": 6,        
+  Instagram: 11,
 };
 
 export const LOCALE_OPTIONS = {
-  ALL: "",
+  All: "",
   US: "US",
   CA: "CA",
 };
 
 export const PAYMENT_TYPES = {
-  ALL: "",
-  "CREDIT CARD": "creditCard",
-  KLARNA: "Klarna",
-  "STORE CREDIT": "storeCredit",
-  "GIFT CARD": "giftCard",
+  All: "",
+  "Credit Card": "creditCard",
+ " Klarna": "Klarna",
+  "Store Credit": "storeCredit",
+  "Gift Card": "giftCard",
   PayPal: "payPal",
   JCPenny: "JCPenny",
   "Apple Pay": "Applepay",
