@@ -391,6 +391,7 @@ const OpmComparison: React.FC = () => {
                         imgsrc={form.imgsrc}
                         onChange={(event) => handleFormChange(event)}
                         value={form.value}
+                        maxDate={((form.name === "startDate") || (form.name === "endDate")) ? new Date() : null}
                       />
                     )}
                     {form.type === "dropdown" && (
@@ -459,6 +460,7 @@ const OpmComparison: React.FC = () => {
                             imgsrc={form.imgsrc}
                             onChange={(event) => handleFormChange(event)}
                             value={form.value}
+                            maxDate={((form.name === "startDate") || (form.name === "endDate")) ? new Date() : null}
                           />
                         )}
                         {form.type === INPUT_TYPES.dropdown && (

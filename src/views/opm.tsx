@@ -386,6 +386,8 @@ const OPM: React.FC = () => {
                         imgsrc={form.imgsrc}
                         onChange={(event) => handleFormChange(event)}
                         value={form.value}
+                        maxDate={form.name === "date" ? new Date() : null}
+                        dateFormat="dd-MM-yyyy hh:mm"
                       />
                     )}
                     {form.type === INPUT_TYPES.dropdown && (
@@ -458,6 +460,7 @@ const OPM: React.FC = () => {
                             imgsrc={form.imgsrc}
                             onChange={(event) => handleFormChange(event)}
                             value={form.value}
+                            maxDate={form.name === "date" ? new Date() : null}
                           />
                         )}
                         {form.type === INPUT_TYPES.dropdown && (
