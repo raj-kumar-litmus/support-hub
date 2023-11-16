@@ -132,3 +132,26 @@ export const getTableHeaders = (data: Object[]) => {
   const keyArray = Object.keys(data[0])?.map((key) => key);
   return keyArray;
 }
+
+export const convert24to12Hour = (hour) => {
+  let convertedHour = parseInt(hour, 10);
+  if (convertedHour === 0) {
+    return { hour12: 12, ampm: 'AM' };
+  } else if (convertedHour >= 1 && convertedHour <= 11) {
+    return { hour12: convertedHour, ampm: 'AM' };
+  } else if (convertedHour === 12) {
+    return { hour12: 12, ampm: 'PM' };
+  } else {
+    return { hour12: convertedHour - 12, ampm: 'PM' };
+  }
+}
+
+export const convert12to24Hour = (hour, ampm) => {
+  let convertedHour = parseInt(hour, 10);
+  if (ampm === 'PM' && convertedHour < 12) {
+    convertedHour += 12;
+  } else if (ampm === 'AM' && convertedHour === 12) {
+    convertedHour = 0;
+  }
+  return convertedHour;
+}

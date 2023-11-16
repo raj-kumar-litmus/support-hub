@@ -9,7 +9,7 @@ const CustomDropdown: FC<CustomDropdownProps> = (props) => (
   <>
     <div className="text-xs font-medium pb-1 text-[#898A8D]">{props.title}</div>
     <div className="flex relative">
-      {props.showIcon && (
+      {props.showIcon && props.showLeftIcon && (
         <CustomIcon
           alt={props.iconAlt}
           src={props.iconSrc}
