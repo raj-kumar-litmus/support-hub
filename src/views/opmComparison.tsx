@@ -62,11 +62,7 @@ import {
   OPM_COMPARISON_OPTIONS,
   OPM_COMPARISON_OPTIONS_HOME,
 } from "../config/chartConfig";
-import {
-  buildLocaleString,
-  tenMinutesAgoInPST,
-  tenMinutesAgoInCurrentTimeZone,
-} from "../utils/dateTimeUtil";
+import { tenMinutesAgoInPST } from "../utils/dateTimeUtil";
 
 ChartJS.register(
   CategoryScale,
@@ -79,13 +75,6 @@ ChartJS.register(
   Legend,
   ChartDataLabels,
 );
-
-const DEFAULT = {
-  duration: 10,
-  startTimeOne: getFormattedPSTDate(),
-  startDateTwo: new Date(Date.now() - 2 * 86400000).toLocaleDateString("en-US"),
-  channel: "",
-};
 
 const OpmComparison: React.FC = () => {
   const [showFilters, setShowFilters] = useState<boolean>(true);
@@ -182,7 +171,7 @@ const OpmComparison: React.FC = () => {
         DEFAULT.channel
       }`,
     );
-  }, []);
+  }, [counter]);
 
   useEffect(() => {
     const removeEventListener = submitOnEnter(submit);
@@ -364,7 +353,7 @@ const OpmComparison: React.FC = () => {
           </div>
           <LineChart
             title="OPM Comparison"
-            className="home-opm-comp border-0 rounded-[10px] w-full lg:w-full sm:ml-[0] h-[400px] lg:h-[424px] relative top-[-8vh] 3xl:top-[-4vh]"
+            className="home-opm-comp border-0 rounded-[10px] w-full lg:w-full sm:ml-[0] h-[400px] lg:h-[424px] relative top-[-4vh] 3xl:top-[-4vh]"
             options={getChartConfig()}
             data={data}
             defaultClasses={true}

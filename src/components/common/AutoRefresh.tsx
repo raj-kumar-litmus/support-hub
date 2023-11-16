@@ -47,17 +47,6 @@ const AutoRefresh = (props: AutoRefreshProps) => {
   }, [showPollingForm]);
 
   const onPollingChangeHandler = (e) => {
-    // switch (e.value) {
-    //   case e.value > AUTO_REFRESH_MAX_DURATIONS_MINS:
-    //     setAutoRefreshDuration(AUTO_REFRESH_MAX_DURATIONS_MINS);
-    //     return;
-    //   case e.value < 1:
-    //     setAutoRefreshDuration(1);
-    //     return;
-    //   case e.value > 1 && e.value < AUTO_REFRESH_MAX_DURATIONS_MINS:
-    //     setAutoRefreshDuration(e.value);
-    //     return;
-    // }
     setAutoRefreshDuration(
       e.value > AUTO_REFRESH_MAX_DURATIONS_MINS
         ? AUTO_REFRESH_MAX_DURATIONS_MINS

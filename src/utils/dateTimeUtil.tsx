@@ -6,6 +6,7 @@ export const DATE_FORMAT_4: string = "mm/dd/yyyy";
 
 export const DATE_TIME_FORMAT_1: string = "YYYY-MM-DDTHH:MM";
 export const DATE_TIME_FORMAT_2: string = "DD/MM/YYYY HH:MM AA";
+export const DATE_TIME_FORMAT_3: string = "YYYY-MM-DDTHH:MM:SS";
 
 // Date Formatting Functions
 export const formatTime = (inputTime: string | Date): string => {
@@ -32,6 +33,7 @@ export const formatDate = (
     .padStart(2, "0");
   const year: number = dateToBeFormatted.getFullYear();
   const time: string = formatTime(dateToBeFormatted);
+  const seconds: number = dateToBeFormatted.getSeconds();
 
   let formattedDate: string = ``;
   switch (format) {
@@ -49,6 +51,9 @@ export const formatDate = (
         inputDate,
         true,
       )}`;
+      break;
+    case DATE_TIME_FORMAT_3:
+      formattedDate = `${year}-${month}-${day}T${time}:${seconds}`;
       break;
     default:
       formattedDate = `${year}-${month}-${day}`;
@@ -71,7 +76,7 @@ export const getFormattedPSTDate = (date = null) => {
   const pstDateString = currentDate.toLocaleString("en-US", {
     timeZone: "America/Los_Angeles",
   });
-  return formatDate(pstDateString, DATE_TIME_FORMAT_1);
+  return formatDate(pstDateString, DATE_TIME_FORMAT_3);
 };
 
 export const tenMinutesAgoInCurrentTimeZone = (date = null) =>
