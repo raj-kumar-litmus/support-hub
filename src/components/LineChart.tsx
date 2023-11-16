@@ -84,7 +84,7 @@ function LineChart({
             </div>
           </div>
         )}
-      {tabValue === 1 ? (
+      {
         plugins ? (
           <Line
             options={options}
@@ -104,13 +104,7 @@ function LineChart({
           />
         ) : (
           <Line options={options} data={data} />
-        )) : (
-        <Bar
-          options={OPM_BAR_CHART_OPTIONS}
-          data={barChartData}
-          className="!h-[18rem] p-4 pt-0"
-        />
-      )
+        )
       }
     </div >
   );

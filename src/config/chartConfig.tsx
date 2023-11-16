@@ -65,8 +65,6 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = (
       enabled: false,
       external: (_) => externalTooltipHandler(_, "session"),
       mode: "index",
-      external: (_) => externalTooltipHandler(_, "session"),
-      mode: "index",
     },
   },
   scales: {
@@ -324,6 +322,7 @@ export const OPM_COMPARISON_OPTIONS = ({
   },
 });
 
+
 export const OPM_COMPARISON_OPTIONS_HOME = ({
   apiResponse,
   startDate,
@@ -358,7 +357,7 @@ export const OPM_COMPARISON_OPTIONS_HOME = ({
           ...options.scales.x.title,
           padding: isMobile
             ? { top: 20, bottom: 20 }
-            : { left: 50, top: 35, bottom: -23 },
+            : { left: 50, top: 35, bottom: 0 },
         },
       },
     },
@@ -376,7 +375,7 @@ export const OPM_COMPARISON_OPTIONS_HOME = ({
       },
       legend: {
         ...options.plugins.legend,
-        position: "bottom",
+        position: "top",
       },
     },
   };

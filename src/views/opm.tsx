@@ -15,7 +15,6 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 
 import { ModalEnums, ChartData, ChartOptions } from "../@types/supportHub";
 import useScreenSize from "../hooks/useScreenSize";
-import { DATE_FORMAT_4 } from "../utils/dateTimeUtil";
 import CustomDropdown from "../components/DropDown";
 import CustomInputText from "../components/InputText";
 import CustomCalendar from "../components/common/CustomCalendar";
@@ -558,8 +557,8 @@ const OPM: React.FC = () => {
       {location.pathname.includes("opm") && showFilteredCards && (
         <div
           className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[5vw] lg:ml-[1rem] ${IS_FULLSCREEN
-              ? "landScape rotate-90 absolute left-[40vw] top-[45vh] ml-[25vw] w-[22vh]"
-              : `${width < 700 ? "portrait" : ""}`
+            ? "landScape rotate-90 absolute left-[40vw] top-[45vh] ml-[25vw] w-[22vh]"
+            : `${width < 700 ? "portrait" : ""}`
             }`}
         >
           {formFields
@@ -571,10 +570,7 @@ const OPM: React.FC = () => {
                   leftIcon={e.cardIcon}
                   onClickHandler={removeFormEntry}
                   content={
-                    e.type === "time"
-                      ? // ? e.value.toLocaleString("en-US", { hour12: false })
-                      formatDate(e.value, DATE_TIME_FORMAT_2)
-                      : e.value.name || e.value
+                    e.type === "time" ? formatDate(e.value, DATE_TIME_FORMAT_2) : e.value.name || e.value
                   }
                 />
               </Fragment>

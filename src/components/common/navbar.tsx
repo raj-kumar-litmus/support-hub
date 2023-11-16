@@ -54,10 +54,9 @@ const Navbar: FC<Props> = ({
     >
       <div
         className={`flex pl-4 ${showSidePaneGrid
-            ? "w-[367px] bg-[#22262C] h-[56px] items-center border-[#30343B] border-solid border-b"
-              ? "w-[367px] bg-[#22262C] h-[56px] items-center border-[#30343B] border-solid border-b"
-              : "w-auto"
-        }`}
+          ? "w-[367px] bg-[#22262C] h-[56px] items-center border-[#30343B] border-solid border-b"
+          : "w-auto"
+          }`}
       >
         {showSidePane && (
           <CustomImage
