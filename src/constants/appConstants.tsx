@@ -128,30 +128,31 @@ export const DURATIONS = {
 };
 
 export const CHANNELS = {
-  ALL: "",
-  DESKTOP: 0,
-  MOBILE_WEB: 5,
-  IPHONE_APP: 4,
-  ANDROID_APP: 9,
-  CSC: 2,
-  MPLUS: 6,
-  INSTAGRAM: 11,
+  All: "",
+  "Desktop": 0,  
+  "Mobile Web": 5, 
+  "iPhone App": 4,  
+  "Android App": 9,    
+  "CSC": 2,           
+  "M Plus": 6,        
+  "Instagram": 11,    
 };
 
+
 export const LOCALE_OPTIONS = {
-  ALL: "",
+  All: "",
   US: "US",
   CA: "CA",
 };
 
 export const PAYMENT_TYPES = {
-  ALL: "",
-  "CREDIT CARD": "creditCard",
-  KLARNA: "Klarna",
-  "STORE CREDIT": "storeCredit",
-  "GIFT CARD": "giftCard",
-  PayPal: "payPal",
-  JCPenny: "JCPenny",
+  All: "",
+  "Credit Card": "creditCard",
+ " Klarna": "Klarna",
+  "Store Credit": "storeCredit",
+  "Gift Card": "giftCard",
+ "PayPal": "payPal",
+  "JCPenny": "JCPenny",
   "Apple Pay": "Applepay",
 };
 

@@ -84,9 +84,9 @@ const OPM: React.FC = () => {
   const DEFAULT = {
     duration: 10,
     starttime: "",
-    channel: CHANNELS.ALL,
+    channel: CHANNELS.All,
     promocode: "",
-    paymentType: PAYMENT_TYPES.ALL,
+    paymentType: PAYMENT_TYPES.All,
     country: "",
   };
 
@@ -201,7 +201,7 @@ const OPM: React.FC = () => {
       icon: ChannelIcon,
       cardIcon: GreyChannelIcon,
       value: {
-        name: "ALL",
+        name: "All",
         code: "",
       },
       options: Object.keys(CHANNELS).map((e) => ({
@@ -216,7 +216,7 @@ const OPM: React.FC = () => {
       icon: LocaleIcon,
       cardIcon: GreyGlobeIcon,
       value: {
-        name: "ALL",
+        name: "All",
         code: "",
       },
       options: Object.keys(LOCALE_OPTIONS).map((e) => ({
@@ -231,7 +231,7 @@ const OPM: React.FC = () => {
       icon: PaymentIcon,
       cardIcon: GreyCardIcon,
       value: {
-        name: "ALL",
+        name: "All",
         code: "",
       },
       options: Object.keys(PAYMENT_TYPES).map((e) => ({

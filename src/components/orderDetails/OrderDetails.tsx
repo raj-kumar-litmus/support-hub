@@ -176,7 +176,7 @@ const OrderDetails: React.FC = () => {
             {ORDER_DETAILS}
           </span>
           <span
-              className="w-1/2 justify-end flex items-center !text-[12px] font-normal cursor-pointer !bg-[#161A1D] sm:!bg-inherit"
+              className="justify-end flex items-center !text-[12px] font-normal cursor-pointer !bg-[#161A1D] sm:!bg-inherit"
             onClick={showPromotions}
           >
             <CustomIcon

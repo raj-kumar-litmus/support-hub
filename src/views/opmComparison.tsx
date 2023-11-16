@@ -54,6 +54,7 @@ import {
   TITLE,
   INPUT_TYPES,
   HOME_PAGE_REFERSH_DURATION,
+  MM_DD_YYYY_HH_MM,
 } from "../constants/appConstants";
 import { URL_OPM_COMPARISON } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
@@ -140,7 +141,7 @@ const OpmComparison: React.FC = () => {
       icon: ChannelIcon,
       cardIcon: GreyChannelIcon,
       value: {
-        name: "ALL",
+        name: "All",
         code: "",
       },
       options: Object.keys(CHANNELS).map((e) => ({
@@ -348,8 +349,9 @@ const OpmComparison: React.FC = () => {
           />
         </div>
       )}
+      <div className="sm:mx-4">
       {!IS_FULLSCREEN && location.pathname.includes("opmcomparison") && (
-        <div className="flex justify-between items-start lg:mt-[4vh] ml-[6vw] mr-[6vw] sm:ml-[1vw] sm:mr-0  lg:ml-[0.5vw] mt-[3vh]">
+          <div className="flex justify-between items-start lg:mt-[4vh] ml-[6vw] mr-[6vw] sm:ml-[1vw] sm:mr-0  lg:ml-0 mt-[3vh]">
           <p className="font-bold w-[50vw] text-[#F2F2F2] w-[50vw] lg:w-[30vw]">
             {TITLE.OPM_COMPARISON}
           </p>
@@ -367,7 +369,7 @@ const OpmComparison: React.FC = () => {
         <>
           {width > 700 ? (
             <form
-              className="flex gap-[0.5vw] sm:gap-[0.1vw] opmFilters"
+                className="flex gap-[0.5vw] sm:gap-[0.8vw] opmFilters"
               onSubmit={submit}
             >
               {formFields.map((form, index) => {
@@ -386,10 +388,11 @@ const OpmComparison: React.FC = () => {
                     {form.type === "time" && (
                       <CustomCalendar
                         name={form.name}
-                        containerclassname="calendarOpmComparison ml-[10px] md:w-[10vw] lg:w-[12vw] xl:w-[14vw]"
+                          containerclassname="calendarOpmComparison md:w-[10vw] lg:w-[12vw] xl:w-[14vw]"
                         titleclassname="top-[2vh]"
                         imageclassname="h-[20px] w-[20px] relative top-[3vh] left-[0.5vw] z-[1]"
                         title={form.label}
+                          placeholder={MM_DD_YYYY_HH_MM}
                         showTime={form.showTime}
                         iconPos={form.iconPos || "left"}
                         imgsrc={form.imgsrc}
@@ -401,7 +404,7 @@ const OpmComparison: React.FC = () => {
                     {form.type === "dropdown" && (
                       <CustomDropdown
                         value={form.value}
-                        name={form.name}
+                          containerclassname="opmComparionInput"
                         onChange={(e) => handleFormChange(e)}
                         imageclassname="relative left-[25px] z-[1]"
                         dropdownIcon={<CustomImage src={ArrowDownIcon} />}
@@ -420,7 +423,7 @@ const OpmComparison: React.FC = () => {
                 label={LABELS.submit}
                 isDisabled={disabled}
                 isRounded={true}
-                className="ml-[1vw] self-end relative"
+                  className="ml-auto  self-end relative "
               />
             </form>
           ) : (
@@ -545,12 +548,13 @@ const OpmComparison: React.FC = () => {
           <LineChart
             title={TITLE.OPM_COMPARISON}
             isFullScreen={IS_FULLSCREEN}
-            className="border-0 rounded-[10px] sm:w-[70vw] lg:w-[75vw] lg:ml-[0] h-[340px] md:h-[340px] lg:h-[62.23vh] mt-[10vh] md:mt-[1vh] lg:mt-[3vh]"
+              className="border-0 rounded-[10px] sm:w-[70vw] lg:w-[72.75vw] lg:ml-[0] h-[340px] md:h-[340px] lg:h-[62.23vh] mt-[10vh] md:mt-[1vh] lg:mt-[3vh]"
             options={options}
             data={data}
           />
         )
       )}
+      </div>
     </>
   );
 };
