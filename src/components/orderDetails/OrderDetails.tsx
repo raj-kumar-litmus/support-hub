@@ -128,7 +128,6 @@ const OrderDetails: React.FC = () => {
   const getPromotions = async () => {
     const promoUrl = URL_PROMOTIONS.replace(":orderId", orderId);
     const data: IPromotion = await fetchData(promoUrl, {});
-    console.log(promotions);
     setPromotions(data || {});
   };
 
