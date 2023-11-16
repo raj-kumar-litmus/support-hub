@@ -81,7 +81,7 @@ const BarChart = () => {
       type: "dropdown",
       name: "channel",
       title: CHANNEL,
-      value: "",
+      value: "all",
       iconSrc: ChannelIcon,
       options: CHANNEL_LIST,
     },
