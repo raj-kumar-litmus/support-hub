@@ -57,12 +57,11 @@ import {
 import { URL_OPM_COMPARISON } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
 import { LoaderContext, LoaderContextType } from "../context/loaderContext";
-import { getFormattedPSTDate } from "../utils/dateTimeUtil";
+import { getFormattedPSTDate, timeInPST } from "../utils/dateTimeUtil";
 import {
   OPM_COMPARISON_OPTIONS,
   OPM_COMPARISON_OPTIONS_HOME,
 } from "../config/chartConfig";
-import { tenMinutesAgoInPST } from "../utils/dateTimeUtil";
 
 ChartJS.register(
   CategoryScale,
@@ -91,10 +90,8 @@ const OpmComparison: React.FC = () => {
 
   const DEFAULT = {
     duration: 10,
-    startTimeOne: tenMinutesAgoInPST(),
-    startDateTwo: new Date(Date.now() - 2 * 86400000).toLocaleDateString(
-      "en-US",
-    ),
+    startTimeOne: timeInPST(Date.now() - 1000 * 60 * 10), // 10 minutes ago.
+    startDateTwo: new Date(Date.now() - 86400000).toLocaleDateString("en-US"),
     channel: "",
   };
 
@@ -159,7 +156,7 @@ const OpmComparison: React.FC = () => {
 
   useEffect(() => {
     const startTimeOne = getFormattedPSTDate();
-    const startDateTwo = new Date(Date.now() - 2 * 86400000).toLocaleDateString(
+    const startDateTwo = new Date(Date.now() - 86400000).toLocaleDateString(
       "en-US",
     );
     setUrl(
@@ -403,7 +400,7 @@ const OpmComparison: React.FC = () => {
                             name={form.name}
                             containerclassname="calendarOpmComparison md:w-[10vw] lg:w-[12vw] xl:w-[14vw]"
                             titleclassname="top-[2vh]"
-                            imageclassname="h-[20px] w-[20px] relative top-[3vh] left-[0.5vw] z-[1]"
+                            imageclassname="h-[20px] w-[20px] relative top-[1.75rem] left-[0.5vw] z-[1]"
                             title={form.label}
                             placeholder={MM_DD_YYYY_HH_MM}
                             showTime={form.showTime}

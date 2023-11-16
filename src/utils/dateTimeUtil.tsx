@@ -94,20 +94,17 @@ export const buildLocaleString = (dateString: string) => {
   return `${year}-${month}-${day}T${time.trim()}`;
 };
 
-export const tenMinutesAgoInPST = () => {
-  const datetime = new Date(Date.now() - 1000 * 60 * 10).toLocaleString(
-    "us-PT",
-    {
-      timeZone: "America/Los_Angeles",
-      hourCycle: "h23",
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-    },
-  );
+export const timeInPST = (timestring: number) => {
+  const datetime = new Date(timestring).toLocaleString("us-PT", {
+    timeZone: "America/Los_Angeles",
+    hourCycle: "h23",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  });
 
   return buildLocaleString(datetime);
 };
