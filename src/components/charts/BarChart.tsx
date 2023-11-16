@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import { Bar } from "react-chartjs-2";
 import { ChartData, SessionData } from "../../@types/BarChart";
 import ChannelIcon from "../../assets/channel.svg";
@@ -45,6 +45,7 @@ import CustomTab from "../common/customtab";
 import Loader from "../loader";
 import CustomImage from "../common/customimage";
 import CustomButton from "../Button";
+import { LoaderContext, LoaderContextType } from "../../context/loaderContext";
 import { submitOnEnter } from "../utils/Utils";
 const BarChart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -88,6 +89,9 @@ const BarChart = () => {
   const [disabled, setDisabled] = useState(true);
   const [tabValue, setTabValue] = useState<number>(2);
   const [id, setId] = useState<string>("home-bar-chart");
+  const { hideLoader } = useContext(
+    LoaderContext
+  ) as LoaderContextType;
   const { width } = useScreenSize();
   const chartRef = useRef(null);
   const navigate = useNavigate();
@@ -180,6 +184,7 @@ const BarChart = () => {
         ? getChartConfig(HOME_PAGE_REFERSH_DURATION)
         : getChartConfig(),
     );
+    hideLoader();
     setIsLoading(false);
   };
   useEffect(() => {
@@ -394,7 +399,7 @@ const BarChart = () => {
                   <div className="text-[#F2F2F2] text-base sm:text-lg font-bold self-center">
                     {SESSIONS}
                   </div>
-                  <div className="flex items-center">
+                  <div className="flex">
                     <CustomButton
                       className="home-refresh-btn"
                       onClick={handleOPMCompRefreshBtnClick}
@@ -402,7 +407,7 @@ const BarChart = () => {
                       <CustomImage src={refreshIcon} />
                     </CustomButton>
                     <CustomButton
-                      className="home-expand-btn ml-5 pb-[4px]"
+                      className="home-expand-btn ml-3 pb-[4px]"
                       onClick={handleExpandClick}
                     >
                       <CustomImage src={openNewPageIcon} />

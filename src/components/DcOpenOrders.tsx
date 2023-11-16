@@ -2,9 +2,11 @@ import { FC, useEffect, useState } from "react";
 import { DCOpenOrders } from "../@types/dcOpenOrders";
 import { fetchData } from "../utils/fetchUtil";
 import { URL_DC_OPEN_ORDERS } from "../constants/apiConstants";
-import Table from "./common/Table";
 import Card from "./common/Card";
 import Loader from "./loader";
+import CustomTable from "./common/customtable";
+import { Column } from "primereact/column";
+import { getTableHeaders } from "./utils/Utils";
 
 interface orderData {
   country: string;
@@ -49,10 +51,14 @@ const DcOpenOrders: FC = () => {
           </h3>
           <div className="hidden sm:block rounded-md">
             {tableData?.length > 0 && (
-              <Table
-                tableData={tableData}
-                stripedRows={true}
-                className={"ordersTable"}
+              <CustomTable
+                resizableColumns
+                stripedRows
+                value={tableData}
+                className="custom-table ordersTable"
+                children={getTableHeaders(tableData).map((item, index) => (
+                  <Column key={index} field={item} header={item}></Column>
+                ))}
               />
             )}
           </div>

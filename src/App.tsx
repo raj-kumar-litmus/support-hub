@@ -1,5 +1,6 @@
 import { FC } from "react";
 import AppContent from "./components/appcontent";
+import { LoaderProvider } from "./context/loaderContext";
 
 type Props = {
   appContent: any;
@@ -13,13 +14,13 @@ const App: FC<Props> = ({
   showNavbar = true,
 }) => {
   return (
-    <div>
+    <LoaderProvider>
       <AppContent
         showSidePane={showSidePane}
         showNavbar={showNavbar}
         appContent={appContent}
       />
-    </div>
+    </LoaderProvider>
   );
 };
 export default App;

@@ -350,9 +350,9 @@ const OrderDetails: React.FC = () => {
         </div>
           <div className="flexColWrapper gap-y-0 grid-cols-2">
             <div className="flexWrapper justify-start bg-[#22262C] rounded-t-md">
-              <span className="w-auto sm:w-1/5 min-w-[4.5rem]">{PAYMENT_TYPE}</span>
-            <span className="w-auto sm:w-4/5 font-medium">
-                {orderData?.paymentInfo?.[0].paymentType} - {orderData?.paymentInfo?.[0].paymentCardType.toUpperCase()}
+              <span className="w-auto sm:w-[35%]">{PAYMENT_TYPE}</span>
+            <span className="w-auto sm:w-[65%] font-medium">
+            {orderData?.paymentInfo?.[0].paymentType} - {orderData?.paymentInfo?.[0].paymentCardType.toUpperCase()}
             </span>
           </div>
             <div className="flexWrapper bg-[#22262C]">
@@ -364,8 +364,8 @@ const OrderDetails: React.FC = () => {
         </div>
         <div className="flexColWrapper gap-y-0 grid-cols-2">
             <div className="flexWrapper bg-[#22262C] rounded-b-md border-none">
-              <span className="w-auto sm:w-1/5 min-w-[4.5rem]">{STATUS}</span>
-            <span className="w-auto sm:w-4/5 font-medium">
+              <span className="w-auto sm:w-[35%]">{STATUS}</span>
+            <span className="w-auto sm:w-[65%] font-medium">
               {orderData?.paymentInfo?.[0].status}
             </span>
           </div>

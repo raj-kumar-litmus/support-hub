@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState, Fragment, useContext } from "react";
 import { useNavigate } from "react-router";
 import {
   Chart as ChartJS,
@@ -58,6 +58,7 @@ import {
 } from "../constants/appConstants";
 import { submitOnEnter } from "../components/utils/Utils";
 import { URL_OPM } from "../constants/apiConstants";
+import { LoaderContext, LoaderContextType } from "../context/loaderContext";
 import CustomTab from "../components/common/customtab";
 import { OPM_BAR_CHART_OPTIONS, OPM_OPTIONS } from "../config/chartConfig";
 import {
@@ -83,6 +84,9 @@ const OPM: React.FC = () => {
   const [showFilters, setShowFilters] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
   const [position, setPosition] = useState<ModalEnums>("center");
+  const { hideLoader } = useContext(
+    LoaderContext
+  ) as LoaderContextType;
 
   const { width } = useScreenSize();
   const navigate = useNavigate();
@@ -127,6 +131,7 @@ const OPM: React.FC = () => {
     try {
       setIsLoading(true);
       const data = await fetchData(url, {});
+      hideLoader();
       setIsLoading(false);
       const xAxisLabels = data.map((e) => e.timestamp);
       const dataArr = data.map((e) => Number(e.orderCount));
