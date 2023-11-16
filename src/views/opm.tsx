@@ -255,9 +255,9 @@ const OPM: React.FC = () => {
     setFormFields(data);
   };
 
-  const removeFormEntry = (event) => {
+  const removeFormEntry = (label) => {
     const data = [...formFields];
-    data.find((e) => e.name === event.target.id).value = null;
+    data.find((e) => e.name === label).value = null;
     setFormFields(data);
   };
 
