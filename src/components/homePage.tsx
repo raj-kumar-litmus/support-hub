@@ -26,6 +26,7 @@ import totalOrderCompIcon from "../assets/total_order_comp.svg";
 import avgOpmcompIcon from "../assets/avg_opm_comp.svg";
 import lastMinOpmIcon from "../assets/last_min_opm.svg";
 import trendingDownIcon from "../assets/trending_down.svg";
+import trendingUpIcon from "../assets/trend_up.svg";
 import refreshIcon from "../assets/refresh_icon.svg";
 import infoIcon from "../assets/info_icon.svg";
 import BarChart from "./charts/BarChart";
@@ -35,9 +36,17 @@ import { LoaderContext, LoaderContextType } from "../context/loaderContext";
 import GlobalLoader from "./globalLoader";
 import LoaderPortal from "./loaderPortal";
 
-const CardTitle = ({ title, icon }: { title: string; icon: any }) => {
+const CardTitle = ({
+  title,
+  icon,
+  classname,
+}: {
+  title: string;
+  icon: any;
+  classname?: string;
+}) => {
   return (
-    <div className="flex justify-between">
+    <div className={`${classname} flex justify-between`}>
       <h6>{title}</h6>
       <CustomImage src={icon} />
     </div>
@@ -60,16 +69,23 @@ const ComparisonCards = ({
   lastDay: number;
 }) => {
   const difference = lastDay - today || 0;
+  const kFormatter = (num) => {
+    return Math.abs(num) > 999
+      ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(0) + "k"
+      : Math.sign(num) * Math.abs(num);
+  };
   return (
     <div className="flex">
       <div className="flex flex-col pr-1 sm:pr-2 justify-between">
         <span className="text-[10px]">{TODAY}</span>
-        <span className="text-[#F2F2F2] text-xl">{today}</span>
+        <span className="text-[#F2F2F2] text-xl">{kFormatter(today) || 0}</span>
       </div>
       <div className="border border-r border-[#383F47] h-[2.5rem] m-auto"></div>
       <div className="flex flex-col px-1 sm:px-2 justify-between">
         <span className="text-[10px]">{LASTDAY}</span>
-        <span className="text-[#F2F2F2] text-xl">{lastDay}</span>
+        <span className="text-[#F2F2F2] text-xl">
+          {kFormatter(lastDay) || 0}
+        </span>
       </div>
       <div className="border border-r border-[#383F47] h-[2.5rem] m-auto"></div>
       <div className="flex flex-col justify-between pl-1 sm:pl-2">
@@ -78,7 +94,7 @@ const ComparisonCards = ({
             difference > 0
               ? "text-[#F16476]"
               : difference < 0
-              ? "text-[#5CB7ED]"
+              ? "text-[#3A9F2D]"
               : "text-[#8B8C8F]"
           } text-[10px]`}
         >
@@ -90,16 +106,16 @@ const ComparisonCards = ({
               difference > 0
                 ? "text-[#F16476]"
                 : difference < 0
-                ? "text-[#5CB7ED]"
+                ? "text-[#3A9F2D]"
                 : "text-[#F2F2F2]"
             } text-xl`}
           >
-            {difference}
+            {Math.abs(difference)}
           </span>
           {difference !== 0 && (
             <CustomImage
               className="flex ml-2"
-              src={difference > 0 ? trendingDownIcon : trendingDownIcon} // need to change to up icon
+              src={difference > 0 ? trendingDownIcon : trendingUpIcon}
             />
           )}
         </div>
@@ -127,11 +143,11 @@ const HomePage = () => {
     try {
       const opmData = await fetchData(
         `${url}?period=${HOME_PAGE_REFERSH_DURATION}`,
-        {},
+        {}
       );
       const totalOrders = opmData.reduce(
         (acc, obj) => acc + parseInt(obj.orderCount),
-        0,
+        0
       );
       setTotalOPM(totalOrders);
       setAvgOPM(Math.round(totalOrders / HOME_PAGE_REFERSH_DURATION));
@@ -145,11 +161,11 @@ const HomePage = () => {
     try {
       const opmData = await fetchData(
         `${url}?period=${HOME_PAGE_REFERSH_DURATION}&date=${date}`,
-        {},
+        {}
       );
       const totalOrders = opmData.reduce(
         (acc, obj) => acc + parseInt(obj.orderCount),
-        0,
+        0
       );
       setLastDayTotalOPM(totalOrders);
       setLastDayAvgOPM(Math.round(totalOrders / HOME_PAGE_REFERSH_DURATION));
@@ -214,7 +230,7 @@ const HomePage = () => {
           {isLoading ? (
             <Loader />
           ) : (
-            <div className="flex flex-wrap gap-[10px]">
+            <div className="flex flex-wrap gap-[10px] pb-4 border-b  border-b-[#22262C]">
               <HomeCard
                 title={
                   <CardTitle
@@ -269,7 +285,7 @@ const HomePage = () => {
             </div>
           )}
 
-          <div className="home-opm-charts flex flex-col mt-6 sm:mt-0 sm:flex-row sm:space-y-0 sm:space-x-4">
+          <div className="home-opm-charts flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:gap-[2%]">
             <OPM />
             <OpmComparison />
           </div>
