@@ -89,7 +89,7 @@ const QuickLinks = () => {
 const QuickLinkBox: FC<Props> = ({ link, hoveredIndex, setHoveredIndex, index }) => {
   return (
     <div className="m-1 link-box flex justify-center cursor-pointer" onClick={() => window.open(link.link, "_blank")} key={link.name} onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)}>
-      <span className="m-auto">
+      <span className="m-auto text-center">
         {link.name}
       </span>
       <CustomImage
