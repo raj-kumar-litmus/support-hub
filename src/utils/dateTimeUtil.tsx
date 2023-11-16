@@ -70,13 +70,17 @@ export const getLocaleTime = (timeVal: Date, is12Hr: boolean): string => {
   });
 };
 
-export const getFormattedPSTDate = (date = null) => {
+export const getPSTdate = (date) => {
   const currentDate = new Date(date || Date.now());
   currentDate.setMinutes(currentDate.getMinutes() - 10);
-  const pstDateString = currentDate.toLocaleString("en-US", {
+  return currentDate.toLocaleString("en-US", {
     timeZone: "America/Los_Angeles",
   });
-  return formatDate(pstDateString, DATE_TIME_FORMAT_3);
+};
+
+export const getFormattedPSTDate = (date = null) => {
+  const pstDate = getPSTdate(date);
+  return formatDate(pstDate, DATE_TIME_FORMAT_3);
 };
 
 export const tenMinutesAgoInCurrentTimeZone = (date = null) =>

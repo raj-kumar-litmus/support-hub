@@ -57,7 +57,7 @@ import {
 import { URL_OPM_COMPARISON } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
 import { LoaderContext, LoaderContextType } from "../context/loaderContext";
-import { getFormattedPSTDate, timeInPST } from "../utils/dateTimeUtil";
+import { getFormattedPSTDate, getPSTdate } from "../utils/dateTimeUtil";
 import {
   OPM_COMPARISON_OPTIONS,
   OPM_COMPARISON_OPTIONS_HOME,
@@ -90,8 +90,10 @@ const OpmComparison: React.FC = () => {
 
   const DEFAULT = {
     duration: 10,
-    startTimeOne: timeInPST(Date.now() - 1000 * 60 * 10), // 10 minutes ago.
-    startDateTwo: new Date(Date.now() - 86400000).toLocaleDateString("en-US"),
+    startTimeOne: getFormattedPSTDate(), // 10 minutes ago.
+    startDateTwo: new Date(
+      new Date(getPSTdate(new Date())).getTime() - 86400000
+    ).toLocaleDateString("en-US"),
     channel: "",
   };
 
@@ -399,7 +401,7 @@ const OpmComparison: React.FC = () => {
                           <CustomCalendar
                             name={form.name}
                             containerclassname="calendarOpmComparison md:w-[10vw] lg:w-[12vw] xl:w-[14vw]"
-                            titleclassname="top-[2vh]"
+                            titleclassname="top-[1.25rem]"
                             imageclassname="h-[20px] w-[20px] relative top-[1.75rem] left-[0.5vw] z-[1]"
                             title={form.label}
                             placeholder={MM_DD_YYYY_HH_MM}
@@ -475,7 +477,7 @@ const OpmComparison: React.FC = () => {
                                 name={form.name}
                                 containerclassname="opmFiltersMobileCalendar"
                                 imageclassname="h-[20px] w-[20px] relative top-[4vh] md:top-[3vh] left-[3.5vw] z-[1]"
-                                titleclassname="left-[1vw] md:left-[0] top-[2.2vh]"
+                                titleclassname="left-[2vw] md:left-[0] top-[1.25rem]"
                                 title={form.label}
                                 showTime={form.showTime}
                                 iconPos={form.iconPos || "left"}
