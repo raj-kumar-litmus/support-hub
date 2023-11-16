@@ -932,3 +932,6 @@ hr.horizontalLine.blue {
 .autoRefreshCheckBox .p-checkbox .p-checkbox-box {
   @apply w-[18px] h-[18px];
 }
+.hide {
+  @apply invisible;
+}
