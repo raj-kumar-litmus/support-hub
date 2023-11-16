@@ -73,10 +73,9 @@ export const getLocaleTime = (timeVal: Date, is12Hr: boolean): string => {
 export const getPSTdate = (date) => {
   const currentDate = new Date(date || Date.now());
   currentDate.setMinutes(currentDate.getMinutes() - 10);
-  const pstDateString = currentDate.toLocaleString("en-US", {
+  return currentDate.toLocaleString("en-US", {
     timeZone: "America/Los_Angeles",
   });
-  return pstDateString;
 };
 
 export const getFormattedPSTDate = (date = null) => {
