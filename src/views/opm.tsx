@@ -55,6 +55,7 @@ import {
   HOME_PAGE_REFERSH_DURATION,
   MM_DD_YYYY_HH_MM,
   CHART_TABS,
+  START_POLLING_TEXT,
 } from "../constants/appConstants";
 import { submitOnEnter } from "../components/utils/Utils";
 import { URL_OPM } from "../constants/apiConstants";
@@ -64,9 +65,14 @@ import { OPM_BAR_CHART_OPTIONS, OPM_OPTIONS } from "../config/chartConfig";
 import {
   DATE_TIME_FORMAT_2,
   formatDate,
+  buildLocaleString,
   getFormattedPSTDate,
 } from "../utils/dateTimeUtil";
 import BarChartComp from "../components/BarChartComp";
+import useInterval from "../hooks/useInterval";
+import CustomCheckbox from "../components/common/CustomCheckBox";
+import CustomInputNumber from "../components/common/CustomInputNumber";
+import AutoRefresh from "../components/common/AutoRefresh";
 
 ChartJS.register(
   CategoryScale,
@@ -84,9 +90,7 @@ const OPM: React.FC = () => {
   const [showFilters, setShowFilters] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
   const [position, setPosition] = useState<ModalEnums>("center");
-  const { hideLoader } = useContext(
-    LoaderContext
-  ) as LoaderContextType;
+  const { hideLoader } = useContext(LoaderContext) as LoaderContextType;
 
   const { width } = useScreenSize();
   const navigate = useNavigate();
@@ -112,6 +116,11 @@ const OPM: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showFilteredCards, setShowFilteredCards] = useState<boolean>(false);
   const [tabValue, setTabValue] = useState<number>(1);
+  const [startPolling, setStartPolling] = useState<boolean>(false);
+  const [pollingRefershDuration, setPollingRefreshDuration] =
+    useState<number>(0);
+  const [showPollingForm, setShowPollingForm] = useState<boolean>(false);
+
   useEffect(() => {
     const removeEventListener = submitOnEnter(submit);
     return removeEventListener;
@@ -119,18 +128,21 @@ const OPM: React.FC = () => {
 
   useEffect(() => {
     setUrl(
-      `${URL_OPM}?period=${location.pathname.includes("opm")
-        ? DEFAULT.duration
-        : HOME_PAGE_REFERSH_DURATION
-      }&date=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${DEFAULT.promocode
+      `${URL_OPM}?period=${
+        location.pathname.includes("opm")
+          ? DEFAULT.duration
+          : HOME_PAGE_REFERSH_DURATION
+      }&starttime=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${
+        DEFAULT.promocode
       }&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`,
     );
   }, []);
 
-  const getData = async () => {
+  const getData = async (showLoader = true) => {
     try {
-      setIsLoading(true);
+      if (showLoader) setIsLoading(true);
       const data = await fetchData(url, {});
+      if (showLoader) setIsLoading(false);
       hideLoader();
       setIsLoading(false);
       const xAxisLabels = data.map((e) => e.timestamp);
@@ -316,8 +328,9 @@ const OPM: React.FC = () => {
             str += `${e.name}=&`;
             return;
           }
-          str += `${e.name}=${(e.value.code !== undefined && String(e.value.code)) || e.value
-            }&`;
+          str += `${e.name}=${
+            (e.value.code !== undefined && String(e.value.code)) || e.value
+          }&`;
         }
       }
     });
@@ -346,6 +359,16 @@ const OPM: React.FC = () => {
 
   const handleOPMRefreshBtnClick = () => {
     getData();
+  };
+
+  const startPollingHandler = () => {
+    (async () => {
+      try {
+        await getData();
+      } catch (err) {
+        console.log(`Something went wrong white fetching data : ${err}`);
+      }
+    })();
   };
 
   return (
@@ -475,10 +498,11 @@ const OPM: React.FC = () => {
               })}
               <CustomButton
                 id="page-btn-submit"
+                btnclassname="w-full"
                 label={LABELS.submit}
                 isDisabled={disabled}
                 isRounded={true}
-                className="self-end relative left-[5vw] w-[10vw]"
+                className="self-end relative left-[5vw] sm:w-[21vw] md:w-[15vw] lg:w-[10vw] sm:top-[2vh] md:top-[0] md:left-[3vw]"
               />
             </form>
           ) : (
@@ -561,10 +585,11 @@ const OPM: React.FC = () => {
 
       {location.pathname.includes("opm") && showFilteredCards && (
         <div
-          className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[5vw] lg:ml-[1rem] ${IS_FULLSCREEN
-            ? "landScape rotate-90 absolute left-[40vw] top-[45vh] ml-[25vw] w-[22vh]"
-            : `${width < 700 ? "portrait" : ""}`
-            }`}
+          className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[5vw] lg:ml-[1rem] ${
+            IS_FULLSCREEN
+              ? "landScape rotate-90 absolute left-[40vw] top-[45vh] ml-[25vw] w-[22vh]"
+              : `${width < 700 ? "portrait" : ""}`
+          }`}
         >
           {formFields
             .filter((e) => e.value)
@@ -575,7 +600,9 @@ const OPM: React.FC = () => {
                   leftIcon={e.cardIcon}
                   onClickHandler={removeFormEntry}
                   content={
-                    e.type === "time" ? formatDate(e.value, DATE_TIME_FORMAT_2) : e.value.name || e.value
+                    e.type === "time"
+                      ? formatDate(e.value, DATE_TIME_FORMAT_2)
+                      : e.value.name || e.value
                   }
                 />
               </Fragment>
@@ -591,8 +618,18 @@ const OPM: React.FC = () => {
           )}
         </div>
       )}
+      {location.pathname.includes("opm") && (
+        <AutoRefresh
+          getData={getData}
+          startPollingHandler={startPollingHandler}
+          inputClassname="w-[60vw] sm:w-[38vw] md:w-[24vw]"
+          inputContainerClassname="w-[38vw] md:w-[24vw]"
+          checkBoxLabelClassname="text-white text-[12px] ml-[0.5vw]"
+          checkBoxContainerClassname="flex autoRefreshCheckBox ml-[6vw] sm:ml-[1vw] sm:pt-[4vh] md:pt-[2vh] ml-[0.5vw]"
+        />
+      )}
       {isLoading && location.pathname.includes("opm") ? (
-        <Loader />
+        <Loader className="h-[50vh]" />
       ) : (
         data &&
         !isLoading &&

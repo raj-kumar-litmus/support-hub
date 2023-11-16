@@ -47,6 +47,7 @@ export interface CustomDropdownProps extends DropdownProps {
   title?: string;
   value: number | string;
   // onChange: (value: number | string) => void;
+  name?: string;
   options: DropDownOptions[];
   showIcon?: boolean;
   iconAlt?: string;

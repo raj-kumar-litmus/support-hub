@@ -56,9 +56,8 @@ import {
 } from "../constants/appConstants";
 import { URL_OPM_COMPARISON } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
-import { tenMinutesAgoInCurrentTimeZone } from "../utils/dateTimeUtil";
 import { LoaderContext, LoaderContextType } from "../context/loaderContext";
-import { getFormattedPSTDate } from "../utils/dateTimeUtil";
+import { getFormattedPSTDate, timeInPST } from "../utils/dateTimeUtil";
 import {
   OPM_COMPARISON_OPTIONS,
   OPM_COMPARISON_OPTIONS_HOME,
@@ -73,30 +72,28 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ChartDataLabels
+  ChartDataLabels,
 );
-
-const DEFAULT = {
-  duration: 10,
-  startTimeOne: getFormattedPSTDate(),
-  startDateTwo: new Date(Date.now() - 2 * 86400000).toLocaleDateString(
-    "en-US",
-  ),
-  channel: "",
-};
 
 const OpmComparison: React.FC = () => {
   const [showFilters, setShowFilters] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
   const [position, setPosition] = useState<ModalEnums>("center");
   const [apiResponse, setApiResponse] = useState<null | OpmComparisonType>(
-    null
+    null,
   );
   const [counter, setCounter] = useState<number>(0);
 
   const { width } = useScreenSize();
   const navigate = useNavigate();
   const IS_FULLSCREEN = location?.pathname.includes("fullscreen");
+
+  const DEFAULT = {
+    duration: 10,
+    startTimeOne: timeInPST(Date.now() - 1000 * 60 * 10), // 10 minutes ago.
+    startDateTwo: new Date(Date.now() - 86400000).toLocaleDateString("en-US"),
+    channel: "",
+  };
 
   const [url, setUrl] = useState<string | null>(null);
   const [options, setOptions] = useState<null | ChartOptions>(null);
@@ -159,15 +156,19 @@ const OpmComparison: React.FC = () => {
 
   useEffect(() => {
     const startTimeOne = getFormattedPSTDate();
-    const startDateTwo = new Date(Date.now() - 2 * 86400000).toLocaleDateString("en-US");
-    setUrl(
-      `${URL_OPM_COMPARISON}?period=${location.pathname.includes("opm")
-        ? DEFAULT.duration
-        : HOME_PAGE_REFERSH_DURATION
-      }&startTimeOne=${startTimeOne}&startDateTwo=${startDateTwo
-      }&channel=${DEFAULT.channel}`,
+    const startDateTwo = new Date(Date.now() - 86400000).toLocaleDateString(
+      "en-US",
     );
-  }, []);
+    setUrl(
+      `${URL_OPM_COMPARISON}?period=${
+        location.pathname.includes("opm")
+          ? DEFAULT.duration
+          : HOME_PAGE_REFERSH_DURATION
+      }&startTimeOne=${startTimeOne}&startDateTwo=${startDateTwo}&channel=${
+        DEFAULT.channel
+      }`,
+    );
+  }, [counter]);
 
   useEffect(() => {
     const removeEventListener = submitOnEnter(submit);
@@ -240,21 +241,21 @@ const OpmComparison: React.FC = () => {
       setOptions(
         location.pathname.includes("home")
           ? OPM_COMPARISON_OPTIONS_HOME({
-            apiResponse,
-            startDate: formFields.find((e) => e.name === "startDate").value,
-            endDate: formFields.find((e) => e.name === "endDate").value,
-            isMobile: width < 700,
-            showDataLabels:
-              Number(url.split("period=")[1].split("&")[0]) < 16,
-          })
+              apiResponse,
+              startDate: formFields.find((e) => e.name === "startDate").value,
+              endDate: formFields.find((e) => e.name === "endDate").value,
+              isMobile: width < 700,
+              showDataLabels:
+                Number(url.split("period=")[1].split("&")[0]) < 16,
+            })
           : OPM_COMPARISON_OPTIONS({
-            apiResponse,
-            startDate: formFields.find((e) => e.name === "startDate").value,
-            endDate: formFields.find((e) => e.name === "endDate").value,
-            isMobile: width < 700,
-            showDataLabels:
-              Number(url.split("period=")[1].split("&")[0]) < 16,
-          }),
+              apiResponse,
+              startDate: formFields.find((e) => e.name === "startDate").value,
+              endDate: formFields.find((e) => e.name === "endDate").value,
+              isMobile: width < 700,
+              showDataLabels:
+                Number(url.split("period=")[1].split("&")[0]) < 16,
+            }),
       );
     }
   }, [apiResponse]);
@@ -349,7 +350,7 @@ const OpmComparison: React.FC = () => {
           </div>
           <LineChart
             title="OPM Comparison"
-            className="home-opm-comp border-0 rounded-[10px] w-full lg:w-full sm:ml-[0] h-[400px] lg:h-[424px] relative top-[-8vh] 3xl:top-[-4vh]"
+            className="home-opm-comp border-0 rounded-[10px] w-full lg:w-full sm:ml-[0] h-[400px] lg:h-[424px] relative top-[-4vh] 3xl:top-[-4vh]"
             options={getChartConfig()}
             data={data}
             defaultClasses={true}
@@ -399,7 +400,7 @@ const OpmComparison: React.FC = () => {
                             name={form.name}
                             containerclassname="calendarOpmComparison md:w-[10vw] lg:w-[12vw] xl:w-[14vw]"
                             titleclassname="top-[2vh]"
-                            imageclassname="h-[20px] w-[20px] relative top-[3vh] left-[0.5vw] z-[1]"
+                            imageclassname="h-[20px] w-[20px] relative top-[1.75rem] left-[0.5vw] z-[1]"
                             title={form.label}
                             placeholder={MM_DD_YYYY_HH_MM}
                             showTime={form.showTime}
