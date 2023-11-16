@@ -46,8 +46,6 @@ import GreyChannelIcon from "../assets/channel-grey.svg";
 import refreshIcon from "../assets/refresh_icon.svg";
 import { submitOnEnter } from "../components/utils/Utils";
 import {
-  OPM_COMPARISON_OPTIONS,
-  OPM_COMPARISON_OPTIONS_HOME,
   CHANNELS,
   DURATIONS,
   LABELS,
@@ -58,7 +56,11 @@ import {
 } from "../constants/appConstants";
 import { URL_OPM_COMPARISON } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
-import { tenMinutesAgoInCurrentTimeZone } from "../utils/dateTimeUtil";
+import { getFormattedPSTDate } from "../utils/dateTimeUtil";
+import {
+  OPM_COMPARISON_OPTIONS,
+  OPM_COMPARISON_OPTIONS_HOME,
+} from "../config/chartConfig";
 
 ChartJS.register(
   CategoryScale,
@@ -72,6 +74,11 @@ ChartJS.register(
   ChartDataLabels,
 );
 
+const DEFAULT = {
+  duration: 10,
+  channel: "",
+};
+
 const OpmComparison: React.FC = () => {
   const [showFilters, setShowFilters] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
@@ -79,27 +86,18 @@ const OpmComparison: React.FC = () => {
   const [apiResponse, setApiResponse] = useState<null | OpmComparisonType>(
     null,
   );
+  const [counter, setCounter] = useState<number>(0);
 
   const { width } = useScreenSize();
   const navigate = useNavigate();
   const IS_FULLSCREEN = location?.pathname.includes("fullscreen");
 
-  const DEFAULT = {
-    duration: 10,
-    startTimeOne: tenMinutesAgoInCurrentTimeZone(),
-    startDateTwo: new Date(Date.now() - 86400000).toLocaleDateString("en-US"),
-    channel: "",
-  };
-
   const [url, setUrl] = useState<string | null>(null);
-
   const [options, setOptions] = useState<null | ChartOptions>(null);
   const [data, setData] = useState<ChartData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showFilteredCards, setShowFilteredCards] = useState<boolean>(false);
-
   const [disabled, setDisabled] = useState(true);
-
   const [formFields, setFormFields] = useState([
     {
       type: INPUT_TYPES.dropdown,
@@ -152,21 +150,22 @@ const OpmComparison: React.FC = () => {
   ]);
 
   useEffect(() => {
+    const startTimeOne = getFormattedPSTDate();
+    const startDateTwo = new Date(Date.now() - 86400000).toLocaleDateString("en-US");
     setUrl(
-      `${URL_OPM_COMPARISON}?period=${
-        location.pathname.includes("opm")
-          ? DEFAULT.duration
-          : HOME_PAGE_REFERSH_DURATION
-      }&startTimeOne=${DEFAULT.startTimeOne}&startDateTwo=${
-        DEFAULT.startDateTwo
+      `${URL_OPM_COMPARISON}?period=${location.pathname.includes("opm")
+        ? DEFAULT.duration
+        : HOME_PAGE_REFERSH_DURATION
+      }&startTimeOne=${startTimeOne}&startDateTwo=${startDateTwo
       }&channel=${DEFAULT.channel}`,
     );
   }, []);
+
   useEffect(() => {
     const removeEventListener = submitOnEnter(submit);
-
     return removeEventListener;
   }, []);
+
   const handleFormChange = (event) => {
     const data = [...formFields];
     const val = event.target.name || event.value.name;
@@ -191,9 +190,7 @@ const OpmComparison: React.FC = () => {
     formFields.forEach((e: any) => {
       if (e.value) {
         if (e.name === "startDate") {
-          str += `startTimeOne=${tenMinutesAgoInCurrentTimeZone(
-            e.value.toISOString(),
-          )}&`;
+          str += `startTimeOne=${getFormattedPSTDate(e.value)}&`;
           return;
         }
         if (e.name === "endDate") {
@@ -235,21 +232,21 @@ const OpmComparison: React.FC = () => {
       setOptions(
         location.pathname.includes("home")
           ? OPM_COMPARISON_OPTIONS_HOME({
-              apiResponse,
-              startDate: formFields.find((e) => e.name === "startDate").value,
-              endDate: formFields.find((e) => e.name === "endDate").value,
-              isMobile: width < 700,
-              showDataLabels:
-                Number(url.split("period=")[1].split("&")[0]) < 16,
-            })
+            apiResponse,
+            startDate: formFields.find((e) => e.name === "startDate").value,
+            endDate: formFields.find((e) => e.name === "endDate").value,
+            isMobile: width < 700,
+            showDataLabels:
+              Number(url.split("period=")[1].split("&")[0]) < 16,
+          })
           : OPM_COMPARISON_OPTIONS({
-              apiResponse,
-              startDate: formFields.find((e) => e.name === "startDate").value,
-              endDate: formFields.find((e) => e.name === "endDate").value,
-              isMobile: width < 700,
-              showDataLabels:
-                Number(url.split("period=")[1].split("&")[0]) < 16,
-            }),
+            apiResponse,
+            startDate: formFields.find((e) => e.name === "startDate").value,
+            endDate: formFields.find((e) => e.name === "endDate").value,
+            isMobile: width < 700,
+            showDataLabels:
+              Number(url.split("period=")[1].split("&")[0]) < 16,
+          }),
       );
     }
   }, [apiResponse]);
@@ -312,7 +309,7 @@ const OpmComparison: React.FC = () => {
   };
 
   const handleOPMCompRefreshBtnClick = () => {
-    getData();
+    setCounter(counter + 1);
   };
 
   return (
@@ -352,210 +349,209 @@ const OpmComparison: React.FC = () => {
         </div>
       )}
       <div className="sm:mx-4">
-      {!IS_FULLSCREEN && location.pathname.includes("opmcomparison") && (
+        {!IS_FULLSCREEN && location.pathname.includes("opmcomparison") && (
           <div className="flex justify-between items-start lg:mt-[4vh] ml-[6vw] mr-[6vw] sm:ml-[1vw] sm:mr-0  lg:ml-0 mt-[3vh]">
-          <p className="font-bold w-[50vw] text-[#F2F2F2] w-[50vw] lg:w-[30vw]">
-            {TITLE.OPM_COMPARISON}
-          </p>
-          {width < 700 && (
-            <CustomImage
-              src={FilterIcon}
-              className="lg:w-[2.34vw] self-end"
-              alt="Filter Icon"
-              onClick={onFilterClickHandler}
-            />
-          )}
-        </div>
-      )}
-      {showFilters && location.pathname.includes("opmcomparison") && (
-        <>
-          {width > 700 ? (
-            <form
-                className="flex gap-[0.5vw] sm:gap-[0.8vw] opmFilters"
-              onSubmit={submit}
-            >
-              {formFields.map((form, index) => {
-                return (
-                  <React.Fragment key={index}>
-                    {form.type === "text" && (
-                      <CustomInputText
-                        containerclassname="lg:relative lg:top-[2px] lg:left-[-9px]"
-                        value={form.value}
-                        name={form.label}
-                        placeholder={form.label}
-                        onChange={(event) => handleFormChange(event)}
-                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px] w-[8vw] lg:w-[10vw]"
-                      />
-                    )}
-                    {form.type === "time" && (
-                      <CustomCalendar
-                        name={form.name}
-                          containerclassname="calendarOpmComparison md:w-[10vw] lg:w-[12vw] xl:w-[14vw]"
-                        titleclassname="top-[2vh]"
-                        imageclassname="h-[20px] w-[20px] relative top-[3vh] left-[0.5vw] z-[1]"
-                        title={form.label}
-                          placeholder={MM_DD_YYYY_HH_MM}
-                        showTime={form.showTime}
-                        iconPos={form.iconPos || "left"}
-                        imgsrc={form.imgsrc}
-                        onChange={(event) => handleFormChange(event)}
-                        value={form.value}
-                        maxDate={((form.name === "startDate") || (form.name === "endDate")) ? new Date() : null}
-                      />
-                    )}
-                    {form.type === "dropdown" && (
-                      <CustomDropdown
-                        value={form.value}
-                          containerclassname="opmComparionInput"
-                        onChange={(e) => handleFormChange(e)}
-                        imageclassname="relative left-[25px] z-[1]"
-                        dropdownIcon={<CustomImage src={ArrowDownIcon} />}
-                        icon={form.icon}
-                        options={form.options}
-                        label={form.label}
-                        optionLabel="name"
-                        placeholder=""
-                      />
-                    )}
-                  </React.Fragment>
-                );
-              })}
-              <CustomButton
-                id="page-btn-submit"
-                label={LABELS.submit}
-                isDisabled={disabled}
-                isRounded={true}
-                  className="ml-auto  self-end relative "
+            <p className="font-bold w-[50vw] text-[#F2F2F2] w-[50vw] lg:w-[30vw]">
+              {TITLE.OPM_COMPARISON}
+            </p>
+            {width < 700 && (
+              <CustomImage
+                src={FilterIcon}
+                className="lg:w-[2.34vw] self-end"
+                alt="Filter Icon"
+                onClick={onFilterClickHandler}
               />
-            </form>
-          ) : (
-            <>
-              <CustomModal
-                header="Filters"
-                visible={visible}
-                position={position}
-                className="!bg-slate-900 filtersModal opmFiltersMobile h-[350px] w-[100vw]"
-                onHide={onModalCloseHandler}
-                isDraggable={false}
-                closeIcon={<CustomImage src={WhiteCrossIcon} />}
-                isResizable={false}
+            )}
+          </div>
+        )}
+        {showFilters && location.pathname.includes("opmcomparison") && (
+          <>
+            {width > 700 ? (
+              <form
+                className="flex gap-[0.5vw] sm:gap-[0.8vw] opmFilters"
+                onSubmit={submit}
               >
-                <form
-                  className="grid grid-cols-2 grid-rows-3 gap-x-5 gap-y-5"
-                  onSubmit={submit}
+                {formFields.map((form, index) => {
+                  return (
+                    <React.Fragment key={index}>
+                      {form.type === "text" && (
+                        <CustomInputText
+                          containerclassname="lg:relative lg:top-[2px] lg:left-[-9px]"
+                          value={form.value}
+                          name={form.label}
+                          placeholder={form.label}
+                          onChange={(event) => handleFormChange(event)}
+                          className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px] w-[8vw] lg:w-[10vw]"
+                        />
+                      )}
+                      {form.type === "time" && (
+                        <CustomCalendar
+                          name={form.name}
+                          containerclassname="calendarOpmComparison ml-[10px] md:w-[10vw] lg:w-[12vw] xl:w-[14vw]"
+                          titleclassname="top-[1.25rem]"
+                          imageclassname="h-[20px] w-[20px] relative top-[1.75rem] left-[0.5vw] z-[1]"
+                          title={form.label}
+                          placeholder={MM_DD_YYYY_HH_MM}
+                          showTime={form.showTime}
+                          iconPos={form.iconPos || "left"}
+                          imgsrc={form.imgsrc}
+                          onChange={(event) => handleFormChange(event)}
+                          value={form.value}
+                          maxDate={((form.name === "startDate") || (form.name === "endDate")) ? new Date() : null}
+                        />
+                      )}
+                      {form.type === "dropdown" && (
+                        <CustomDropdown
+                          value={form.value}
+                          containerclassname="opmComparionInput"
+                          onChange={(e) => handleFormChange(e)}
+                          imageclassname="relative left-[25px] z-[1]"
+                          dropdownIcon={<CustomImage src={ArrowDownIcon} />}
+                          icon={form.icon}
+                          options={form.options}
+                          label={form.label}
+                          optionLabel="name"
+                          placeholder=""
+                        />
+                      )}
+                    </React.Fragment>
+                  );
+                })}
+                <CustomButton
+                  id="page-btn-submit"
+                  label={LABELS.submit}
+                  isDisabled={disabled}
+                  isRounded={true}
+                  className="ml-auto  self-end relative "
+                />
+              </form>
+            ) : (
+              <>
+                <CustomModal
+                  header="Filters"
+                  visible={visible}
+                  position={position}
+                  className="!bg-slate-900 filtersModal opmFiltersMobile h-[350px] w-[100vw]"
+                  onHide={onModalCloseHandler}
+                  isDraggable={false}
+                  closeIcon={<CustomImage src={WhiteCrossIcon} />}
+                  isResizable={false}
                 >
-                  {formFields.map((form) => {
-                    return (
-                      <>
-                        {form.type === INPUT_TYPES.text && (
-                          <CustomInputText
-                            containerclassname="w-[45vw] mobileInput"
-                            value={form.value}
-                            name={form.label}
-                            placeholder={form.label}
-                            onChange={(event) => handleFormChange(event)}
-                            className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
-                          />
-                        )}
-                        {form.type === INPUT_TYPES.time && (
-                          <CustomCalendar
-                            name={form.name}
-                            containerclassname="opmFiltersMobileCalendar"
-                            imageclassname="h-[20px] w-[20px] relative top-[4vh] md:top-[3vh] left-[3.5vw] z-[1]"
-                            titleclassname="left-[1vw] md:left-[0] top-[2.2vh]"
-                            title={form.label}
-                            showTime={form.showTime}
-                            iconPos={form.iconPos || "left"}
-                            imgsrc={form.imgsrc}
-                            onChange={(event) => handleFormChange(event)}
-                            value={form.value}
-                            maxDate={((form.name === "startDate") || (form.name === "endDate")) ? new Date() : null}
-                          />
-                        )}
-                        {form.type === INPUT_TYPES.dropdown && (
-                          <CustomDropdown
-                            value={form.value}
-                            name={form.name}
-                            dropdownIcon={<CustomImage src={DropDownIcon} />}
-                            onChange={(e) => handleFormChange(e)}
-                            containerclassname="w-[44vw]"
-                            imageclassname="relative left-[25px] z-[1]"
-                            icon={form.icon}
-                            options={form.options}
-                            label={form.label}
-                            optionLabel="name"
-                            placeholder=""
-                          />
-                        )}
-                      </>
-                    );
-                  })}
-                  <CustomButton
-                    label={LABELS.submit}
-                    isDisabled={disabled}
-                    isRounded={true}
-                    className="submitBtnMobile opmPopUp col-span-full"
-                  />
-                </form>
-              </CustomModal>
-            </>
-          )}
-        </>
-      )}
-      {location.pathname.includes("opmcomparison") && showFilteredCards && (
-        <div
-          className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[0.5vw] ${
-            IS_FULLSCREEN
+                  <form
+                    className="grid grid-cols-2 grid-rows-3 gap-x-5 gap-y-5"
+                    onSubmit={submit}
+                  >
+                    {formFields.map((form) => {
+                      return (
+                        <>
+                          {form.type === INPUT_TYPES.text && (
+                            <CustomInputText
+                              containerclassname="w-[45vw] mobileInput"
+                              value={form.value}
+                              name={form.label}
+                              placeholder={form.label}
+                              onChange={(event) => handleFormChange(event)}
+                              className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
+                            />
+                          )}
+                          {form.type === INPUT_TYPES.time && (
+                            <CustomCalendar
+                              name={form.name}
+                              containerclassname="opmFiltersMobileCalendar"
+                              imageclassname="h-[20px] w-[20px] relative top-[1.75rem] md:top-[3vh] left-[3.5vw] z-[1]"
+                              titleclassname="left-[1vw] md:left-[0] top-[1.25rem]"
+                              title={form.label}
+                              showTime={form.showTime}
+                              iconPos={form.iconPos || "left"}
+                              imgsrc={form.imgsrc}
+                              onChange={(event) => handleFormChange(event)}
+                              value={form.value}
+                              maxDate={((form.name === "startDate") || (form.name === "endDate")) ? new Date() : null}
+                            />
+                          )}
+                          {form.type === INPUT_TYPES.dropdown && (
+                            <CustomDropdown
+                              value={form.value}
+                              name={form.name}
+                              dropdownIcon={<CustomImage src={DropDownIcon} />}
+                              onChange={(e) => handleFormChange(e)}
+                              containerclassname="w-[44vw]"
+                              imageclassname="relative left-[25px] z-[1]"
+                              icon={form.icon}
+                              options={form.options}
+                              label={form.label}
+                              optionLabel="name"
+                              placeholder=""
+                            />
+                          )}
+                        </>
+                      );
+                    })}
+                    <CustomButton
+                      label={LABELS.submit}
+                      isDisabled={disabled}
+                      isRounded={true}
+                      className="submitBtnMobile opmPopUp col-span-full"
+                    />
+                  </form>
+                </CustomModal>
+              </>
+            )}
+          </>
+        )}
+        {location.pathname.includes("opmcomparison") && showFilteredCards && (
+          <div
+            className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[0.5vw] ${IS_FULLSCREEN
               ? "landScape opmComparison rotate-90 absolute left-[40vw] top-[45vh]"
               : `${width < 700 ? "portrait" : ""}`
-          }`}
-        >
-          {formFields
-            .filter((e) => e.value)
-            .map((e: any) => (
-              <Fragment key={e.name}>
-                <FilteredCard
-                  label={e.name}
-                  leftIcon={e.cardIcon}
-                  onClickHandler={removeFormEntry}
-                  content={
-                    e.type === "time"
-                      ? e.name === "startDate"
-                        ? e.value.toLocaleString("en-US", {
+              }`}
+          >
+            {formFields
+              .filter((e) => e.value)
+              .map((e: any) => (
+                <Fragment key={e.name}>
+                  <FilteredCard
+                    label={e.name}
+                    leftIcon={e.cardIcon}
+                    onClickHandler={removeFormEntry}
+                    content={
+                      e.type === "time"
+                        ? e.name === "startDate"
+                          ? e.value.toLocaleString("en-US", {
                             hour12: false,
                           })
-                        : e.value.toLocaleDateString("en-US")
-                      : e.value.name || e.value
-                  }
-                />
-              </Fragment>
-            ))}
-          {!disabled && !IS_FULLSCREEN && (
-            <CustomButton
-              label={LABELS.reset}
-              severity="secondary"
-              className="resetFilters text-[12px] text-[#575353]"
-              isTextButton={true}
-              onClick={clearAllHandler}
-            />
-          )}
-        </div>
-      )}
-      {isLoading && location.pathname.includes("opmcomparison") ? (
-        <Loader />
-      ) : (
-        data &&
-        !isLoading &&
-        location.pathname.includes("opmcomparison") && (
-          <LineChart
-            title={TITLE.OPM_COMPARISON}
-            isFullScreen={IS_FULLSCREEN}
+                          : e.value.toLocaleDateString("en-US")
+                        : e.value.name || e.value
+                    }
+                  />
+                </Fragment>
+              ))}
+            {!disabled && !IS_FULLSCREEN && (
+              <CustomButton
+                label={LABELS.reset}
+                severity="secondary"
+                className="resetFilters text-[12px] text-[#575353]"
+                isTextButton={true}
+                onClick={clearAllHandler}
+              />
+            )}
+          </div>
+        )}
+        {isLoading && location.pathname.includes("opmcomparison") ? (
+          <Loader />
+        ) : (
+          data &&
+          !isLoading &&
+          location.pathname.includes("opmcomparison") && (
+            <LineChart
+              title={TITLE.OPM_COMPARISON}
+              isFullScreen={IS_FULLSCREEN}
               className="border-0 rounded-[10px] sm:w-[70vw] lg:w-[72.75vw] lg:ml-[0] h-[340px] md:h-[340px] lg:h-[62.23vh] mt-[10vh] md:mt-[1vh] lg:mt-[3vh]"
-            options={options}
-            data={data}
-          />
-        )
-      )}
+              options={options}
+              data={data}
+            />
+          )
+        )}
       </div>
     </>
   );
