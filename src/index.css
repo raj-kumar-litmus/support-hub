@@ -283,7 +283,7 @@ button.p-button-secondary {
   @apply w-[40vw];
 }
 .filteredCard .p-button.p-component {
-  @apply !bg-[#F4F4F400] !border-[#22262C] border rounded-[100px] text-[#8B8C8F] px-2 py-4 flex justify-evenly items-center;
+  @apply !bg-[#F4F4F400] !border-[#22262C] border rounded-[100px] text-[#8B8C8F] px-2 py-3 flex justify-evenly items-center;
 }
 .filteredCard .p-button {
   @apply flex gap-[10px] px-[10px] items-center leading-none border border-solid border-[#30343B] rounded rounded-[20px] h-[26px] text-[12px] text-[#898A8D] p-[5px] bg-transparent;
@@ -968,6 +968,9 @@ hr.horizontalLine.blue {
 }
 .ampm-comp {
   text-align: -webkit-center;
+}
+.filteredCard .p-image, .filteredCard img {
+  @apply !w-[.8rem] !h-[.8rem] max-w-[.8rem];
 }
 ::-webkit-scrollbar-thumb {
   @apply bg-[#30343B] rounded-full;
