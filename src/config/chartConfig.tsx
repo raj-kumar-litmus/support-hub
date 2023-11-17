@@ -166,17 +166,17 @@ export const OPM_OPTIONS = (isMobile: boolean, showDataLabels = false) => ({
   layout: {
     padding: isMobile
       ? {
-        left: 20,
-        right: 20,
-        top: 10,
-        bottom: 40,
-      }
+          left: 20,
+          right: 20,
+          top: 10,
+          bottom: 40,
+        }
       : {
-        left: 30,
-        right: 50,
-        top: 50,
-        bottom: 20,
-      },
+          left: 30,
+          right: 50,
+          top: 50,
+          bottom: 20,
+        },
   },
   scales: {
     y: {
@@ -238,17 +238,17 @@ export const OPM_COMPARISON_OPTIONS = ({
   layout: {
     padding: isMobile
       ? {
-        left: 20,
-        right: 20,
-        top: 10,
-        bottom: 40,
-      }
+          left: 20,
+          right: 20,
+          top: 10,
+          bottom: 40,
+        }
       : {
-        left: 30,
-        right: 50,
-        top: 50,
-        bottom: 20,
-      },
+          left: 30,
+          right: 50,
+          top: 50,
+          bottom: 20,
+        },
   },
   scales: {
     x: {
@@ -297,16 +297,16 @@ export const OPM_COMPARISON_OPTIONS = ({
           return Object.keys(apiResponse).map((_, index) => ({
             text:
               index === 0
-                ? startDate?.toLocaleString("en-US", {
-                  year: "numeric",
-                  month: "2-digit",
-                  day: "2-digit",
-                })
+                ? new Date(startDate)?.toLocaleString("en-US", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                  })
                 : endDate?.toLocaleString("en-US", {
-                  year: "numeric",
-                  month: "2-digit",
-                  day: "2-digit",
-                }),
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                  }),
             fillStyle: "transparent",
             lineWidth: 2,
             fontColor: index === 0 ? "#6370FF" : "#FDA44F",
@@ -321,7 +321,6 @@ export const OPM_COMPARISON_OPTIONS = ({
     },
   },
 });
-
 
 export const OPM_COMPARISON_OPTIONS_HOME = ({
   apiResponse,
@@ -343,11 +342,11 @@ export const OPM_COMPARISON_OPTIONS_HOME = ({
       padding: isMobile
         ? { left: 10, right: 20, top: 15, bottom: 0 }
         : {
-          left: 30,
-          right: 50,
-          top: 35,
-          bottom: 0,
-        },
+            left: 30,
+            right: 50,
+            top: 35,
+            bottom: 0,
+          },
     },
     scales: {
       ...options.scales,
