@@ -840,7 +840,7 @@ hr.horizontalLine.blue {
   @apply bg-transparent shadow-none border-[#FAF9F6] border-2;
 }
 .p-datepicker-footer .p-inputtext {
-  @apply bg-[#22262C] text-[#FAF9F6] w-[3rem] text-center border-none text-[1.1rem];
+  @apply bg-[#22262C] text-[#FAF9F6] w-[3rem] text-center border-none text-[1.1rem] px-0;
 }
 .p-datepicker-footer .p-button,
 .p-datepicker-footer .p-button:focus {
@@ -955,4 +955,10 @@ hr.horizontalLine.blue {
 }
 .p-toast-message-icon {
   @apply !h-0
+}
+.p-datepicker-footer .p-button:enabled:hover, .p-datepicker-footer .p-button:not(button):not(a):not(.p-disabled):hover {
+  @apply bg-transparent;
+}
+.p-datepicker-footer .p-dropdown {
+ @apply !border-none;
 }
