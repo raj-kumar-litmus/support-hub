@@ -134,7 +134,6 @@ const HomePage = () => {
   const [lastDaytotalOPM, setLastDayTotalOPM] = useState<number>(0);
   const [refreshTime, setRefreshTime] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [showClass, setShowClass] = useState<boolean>(true);
   const { showGlobalLoader, hideLoader } = useContext(
     LoaderContext
   ) as LoaderContextType;
@@ -187,7 +186,6 @@ const HomePage = () => {
     date.setDate(date.getDate() - 1);
     await fetchCompData(URL_OPM, date);
     await setIsLoading(false);
-    setShowClass(false);
     await hideLoader();
     setRefreshTime(new Date().getTime());
   };
@@ -226,9 +224,8 @@ const HomePage = () => {
               </span>
             </div>
             <div className="flex items-center font-helvetica">
-              {width > 700 && (
+              {width > 700 && !isLoading && (
                 <TimeTracker
-                  classname={`${showClass ? "hide" : ""}`}
                   timeStamp={refreshTime}
                 />
               )}
@@ -244,9 +241,7 @@ const HomePage = () => {
             <Loader />
           ) : (
             <div
-              className={`${
-                showClass ? "hide" : ""
-              } flex flex-wrap gap-[10px] pb-4 border-b  border-b-[#22262C]`}
+              className="flex flex-wrap gap-[10px] pb-4 border-b  border-b-[#22262C]"
             >
               <HomeCard
                 title={
