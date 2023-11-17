@@ -969,3 +969,9 @@ hr.horizontalLine.blue {
 .ampm-comp {
   text-align: -webkit-center;
 }
+::-webkit-scrollbar-thumb {
+  @apply bg-[#30343B] rounded-full;
+}
+::-webkit-scrollbar {
+  @apply w-1 h-1;
+}
