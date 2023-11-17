@@ -526,7 +526,7 @@ const OpmComparison: React.FC = () => {
           )}
           {location.pathname.includes("opmcomparison") && showFilteredCards && (
             <div
-              className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[0.5vw] ${
+              className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[5vw] lg:ml-[0.5vw] ${
                 IS_FULLSCREEN
                   ? "landScape opmComparison rotate-90 absolute left-[40vw] top-[45vh]"
                   : `${width < 700 ? "portrait" : ""}`
