@@ -187,7 +187,7 @@ const HomePage = () => {
     await fetchCompData(URL_OPM, date);
     await setIsLoading(false);
     await hideLoader();
-    setRefreshTime(new Date().getTime());
+    await setRefreshTime(new Date().getTime());
   };
 
   useEffect(() => {

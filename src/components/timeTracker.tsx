@@ -12,7 +12,7 @@ const TimeTracker = (props: TimeTrackerProps) => {
     const currentTime = new Date().getTime();
     const refreshTime = currentTime - props.timeStamp;
     setTimeInMin(Math.round(refreshTime / 60000));
-  }, []);
+  }, [new Date().getTime()]);
 
   return (
     <span className={`${props.classname} text-xs text-[#8B8C8F] mr-3`}>
