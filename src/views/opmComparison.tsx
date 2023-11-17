@@ -367,7 +367,7 @@ const OpmComparison: React.FC = () => {
           }`}
         >
           {!IS_FULLSCREEN && location.pathname.includes("opmcomparison") && (
-            <div className="flex justify-between items-start lg:mt-[4vh] ml-[6vw] mr-[6vw] sm:ml-[1vw] sm:mr-0  lg:ml-0 mt-[3vh]">
+            <div className="flex justify-between items-start ml-[6vw] mr-[6vw] sm:ml-[1vw] sm:mr-0  lg:ml-0">
               <p className="font-bold w-[50vw] text-[#F2F2F2] w-[50vw] lg:w-[30vw]">
                 {TITLE.OPM_COMPARISON}
               </p>

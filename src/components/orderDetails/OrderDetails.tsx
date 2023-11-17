@@ -151,7 +151,7 @@ const OrderDetails: React.FC = () => {
   return isLoading ? (
     <Loader className="h-full" />
   ) : Object.keys(orderData).length > 0 ? (
-    <div id="orderDetailsComp" className="sm:my-8 mx-4">
+      <div id="orderDetailsComp">
       <div className="flex sm:hidden border-b border-solid border-[#292e36] h-[44px] items-center px-[14px] py-[24px]">
         <CustomImage
           className="h-[13px]"
@@ -163,7 +163,7 @@ const OrderDetails: React.FC = () => {
           Order #{orderId}
         </span>
       </div>
-      <div className="gridNoGapRounded grid-cols-1 m-4 p-0 sm:py-4 sm:px-6 sm:bg-[#22262C]">
+        <div className="gridNoGapRounded grid-cols-1 mb-4 p-0 sm:py-4 sm:px-6 sm:bg-[#22262C]">
         <div className="flex justify-between border-none !bg-[#161A1D] sm:!bg-inherit">
           <span className="w-1/2 !text-lg !text-[#F2F2F2] font-bold !bg-[#161A1D] sm:!bg-inherit">
             {ORDER_DETAILS}
@@ -241,8 +241,7 @@ const OrderDetails: React.FC = () => {
           </div>
         </div>
       </div>
-
-      <div className="flex flex-col-reverse p-0 sm:grid gap-4 sm:grid-cols-2 m-4">
+        <div className="flex flex-col-reverse p-0 sm:grid gap-4 sm:grid-cols-2 mb-4">
         <div className="p-0 sm:py-4 sm:px-6 gridNoGapRounded grid-cols-1 bg-[#161A1D] sm:bg-[#22262C]">
           <span className="!text-lg font-bold bg-[#161A1D] sm:bg-inherit">
             {STATUS_ACROSS}
@@ -304,7 +303,7 @@ const OrderDetails: React.FC = () => {
         </div>
       </div>
 
-      <div className="gridNoGapRounded grid-cols-1 m-4 p-0 sm:py-4 sm:px-6 bg-[#161A1D] sm:bg-[#22262C]">
+        <div className="gridNoGapRounded grid-cols-1 mb-4 p-0 sm:py-4 sm:px-6 bg-[#161A1D] sm:bg-[#22262C]">
         <div className="flex justify-between border-none !bg-[#161A1D] sm:!bg-inherit">
           <span className="w-3/4 sm:w-full !text-lg !text-[#F2F2F2] font-bold !bg-[#161A1D] sm:!bg-inherit">
             {ITEMS_INFO}
@@ -338,7 +337,7 @@ const OrderDetails: React.FC = () => {
         </div>
       </div>
 
-      <div className="gridNoGapRounded m-4 p-0 sm:p-4 sm:py-4 sm:px-6 sm:bg-[#22262C]">
+        <div className="gridNoGapRounded mb-4 p-0 sm:p-4 sm:py-4 sm:px-6 sm:bg-[#22262C]">
         <div className="!bg-[#161A1D] sm:!bg-inherit">
           <span className="block w-[100%] !text-lg font-bold !bg-[#161A1D] sm:!bg-inherit">
             {PAYMENT_INFO}

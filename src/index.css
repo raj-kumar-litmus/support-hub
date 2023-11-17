@@ -62,7 +62,7 @@
 }
 
 #bar-chart {
-  @apply m-0 p-5 sm:p-4 sm:pt-7 bg-[#1C1C20];
+  @apply m-0 bg-[#161A1D];
 }
 
 .home-sessions {

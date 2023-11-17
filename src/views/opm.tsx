@@ -369,7 +369,7 @@ const OPM: React.FC = () => {
       )}
       {location.pathname.includes("home") && data && !isLoading && (
         <div className="w-full lg:w-[49%] bg-[#22262C] p-0 rounded-lg">
-          <div className="flex justify-between sm:mb-3 items-center relative top-[3vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
+          <div className="flex justify-between items-center relative top-[3vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
             <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
               {TITLE.OPM}
             </span>
@@ -415,7 +415,7 @@ const OPM: React.FC = () => {
         </div>
       )}
       {!IS_FULLSCREEN && location.pathname.includes("opm") && (
-        <div className="flex justify-between items-start lg:mt-[4vh] ml-[6vw] mr-[6vw] sm:ml-[1vw] sm:mr-0 lg:ml-[1rem] mt-[3vh]">
+        <div className="flex justify-between items-start">
           <p className="font-bold w-[50vw] text-[#F2F2F2] w-[50vw] lg:w-[30vw]">
             {TITLE.OPM}
           </p>
