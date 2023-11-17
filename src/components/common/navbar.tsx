@@ -74,7 +74,15 @@ const Navbar: FC<Props> = ({
         />
       </div>
 
-      <div className="ml-auto mr-[24px]">
+      <div>
+        {!showSidePaneGrid && (
+          <CustomImage
+            src={QuickLinksIcon}
+            onClick={() => setShowQuickLinks(!showQuickLinks)}
+            className="cursor-pointer h-[24px] w-[24px] right-[4rem] top-[18px] md:right-[2rem] sm:right-[0.6rem] absolute"
+          />
+        )}
+        <div className="sm:mr-[4vw]">
         <SearchBar
           showSearchButton={!showSidePaneGrid}
           setOpenSearchField={setOpenSearchField}
@@ -85,14 +93,9 @@ const Navbar: FC<Props> = ({
           placeholder="Search Order"
         />
       </div>
-      <div className="sm:mr-0">
-        <CustomImage
-          src={QuickLinksIcon}
-          onClick={() => setShowQuickLinks(!showQuickLinks)}
-          className="cursor-pointer h-[24px] w-[24px] right-[4rem] top-[18px] md:right-[2rem] sm:right-[0.6rem]"
-        />
       </div>
-      {showQuickLinks && <QuickLinks />}
+
+      {!showSidePaneGrid && showQuickLinks && <QuickLinks />}
     </div>
   );
 };
