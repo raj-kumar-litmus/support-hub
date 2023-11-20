@@ -2,9 +2,11 @@ import { Calendar } from "primereact/calendar";
 import { InputNumber, InputNumberValueChangeEvent } from "primereact/inputnumber";
 import { FC, useEffect, useState } from "react";
 import { CustomCalendarProps } from "../../@types/BarChart";
+import ArrowDown from "../../assets/arrow_down.svg";
+import ArrowUp from "../../assets/arrow_up.svg";
 import { AM_PM_OPTIONS } from "../../constants/appConstants";
 import { convert12to24Hour, convert24to12Hour } from "../utils/Utils";
-import CustomDropdown from "./CustomDropdown";
+import CustomImage from "./customimage";
 
 type ManualInputTimeProps = {
   hour: number;
@@ -12,7 +14,7 @@ type ManualInputTimeProps = {
   handleHourChange: (e: InputNumberValueChangeEvent) => void;
   handleMinuteChange: (e: InputNumberValueChangeEvent) => void;
   ampm: string;
-  handleAmPmChange: (e) => void;
+  toggleAmPmChange: (e) => void;
 };
 
 const CustomCalendar: FC<CustomCalendarProps> = (props) => {
@@ -33,9 +35,13 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
     setEvent(e);
   };
 
-  const handleAmPmChange = (e) => {
-    setAmPm(e.target.value);
-    setEvent(e);
+  const toggleAmPmChange = (e) => {
+    setEvent(e)
+    if (ampm === AM_PM_OPTIONS[0].value) {
+      setAmPm(AM_PM_OPTIONS[1].value)
+    } else {
+      setAmPm(AM_PM_OPTIONS[0].value);
+    }
   };
 
   const getUpdatedDate = (e) => {
@@ -99,7 +105,7 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
             handleHourChange={handleHourChange}
             handleMinuteChange={handleMinuteChange}
             ampm={ampm}
-            handleAmPmChange={handleAmPmChange}
+          toggleAmPmChange={toggleAmPmChange}
         />
         )
         } />
@@ -107,17 +113,24 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
   )
 }
 
-const ManualInputTime: FC<ManualInputTimeProps> = ({ hour, minute, handleHourChange, handleMinuteChange, ampm, handleAmPmChange }) => {
+const ManualInputTime: FC<ManualInputTimeProps> = ({ hour, minute, handleHourChange, handleMinuteChange, ampm, toggleAmPmChange }) => {
   return (
     <div className="flex justify-evenly w-[12rem] mx-auto items-center">
       <InputNumber value={hour} step={1} onValueChange={(e) => handleHourChange(e)} showButtons buttonLayout="vertical" min={0} max={12} /> :
       <InputNumber value={minute} onValueChange={(e) => handleMinuteChange(e)} showButtons buttonLayout="vertical" step={1} min={0} max={59} />:
-      <CustomDropdown
-        options={AM_PM_OPTIONS}
-        value={ampm}
-        onChange={(e) => handleAmPmChange(e)}
-        showIcon
-      />
+      <div className="ampm-comp px-[1rem] min-w-[4rem]">
+        <CustomImage
+          src={ArrowUp}
+          className="cursor-pointer"
+          onClick={toggleAmPmChange}
+        />
+        <div className="my-[0.3rem]">{ampm}</div>
+        <CustomImage
+          src={ArrowDown}
+          className="cursor-pointer"
+          onClick={toggleAmPmChange}
+        />
+      </div>
     </div>
   )
 }

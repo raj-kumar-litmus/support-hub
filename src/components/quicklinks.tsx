@@ -40,7 +40,7 @@ const QuickLinks = () => {
   }, [tabValue]);
 
   useEffect(() => {
-    if (width < 700 && allQuickLinks.length > 0 && !(allQuickLinks.length < 10)) {
+    if (width < 640 && allQuickLinks.length > 0 && !(allQuickLinks.length < 10)) {
       let _quickLinks = [...allQuickLinks];
       _quickLinks.splice(10);
       setQuickLinks(_quickLinks);

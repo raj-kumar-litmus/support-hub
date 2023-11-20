@@ -62,7 +62,7 @@
 }
 
 #bar-chart {
-  @apply m-0 p-5 sm:p-4 sm:pt-7 bg-[#1C1C20];
+  @apply m-0 bg-[#161A1D];
 }
 
 .home-sessions {
@@ -283,7 +283,7 @@ button.p-button-secondary {
   @apply w-[40vw];
 }
 .filteredCard .p-button.p-component {
-  @apply !bg-[#F4F4F400] !border-[#22262C] border rounded-[100px] text-[#8B8C8F] px-2 py-4 flex justify-evenly items-center;
+  @apply !bg-[#F4F4F400] !border-[#22262C] border rounded-[100px] text-[#8B8C8F] px-2 py-3 flex justify-evenly items-center;
 }
 .filteredCard .p-button {
   @apply flex gap-[10px] px-[10px] items-center leading-none border border-solid border-[#30343B] rounded rounded-[20px] h-[26px] text-[12px] text-[#898A8D] p-[5px] bg-transparent;
@@ -512,7 +512,7 @@ button.p-button-secondary {
   @apply !border-[#40444B];
 }
 .p-datepicker {
-  @apply rounded-[6px];
+  @apply rounded-[6px] p-0;
 }
 .p-datepicker thead {
   @apply bg-[#292E36];
@@ -839,12 +839,15 @@ hr.horizontalLine.blue {
 .p-button:not(button):not(a):not(.p-disabled):hover {
   @apply bg-transparent shadow-none border-[#FAF9F6] border-2;
 }
+.p-datepicker-footer {
+  @apply border-t border-[#292E36] py-4;
+}
 .p-datepicker-footer .p-inputtext {
-  @apply bg-[#22262C] text-[#FAF9F6] w-[3rem] text-center border-none text-[1.1rem];
+  @apply bg-[#22262C] text-[#F2F2F2] w-[3rem] text-center border-none text-[1.1rem] p-0;
 }
 .p-datepicker-footer .p-button,
 .p-datepicker-footer .p-button:focus {
-  @apply bg-[#22262C] border-none shadow-none p-0;
+  @apply bg-[#22262C] border-none shadow-none p-0 text-[#8b8c8f];
 }
 .p-datepicker-footer .p-button:not(button):not(a):not(.p-disabled):hover {
   @apply border-[292E36] bg-transparent;
@@ -955,4 +958,23 @@ hr.horizontalLine.blue {
 }
 .p-toast-message-icon {
   @apply !h-0
+}
+.p-datepicker-footer .p-button:enabled:hover,
+.p-datepicker-footer .p-button:not(button):not(a):not(.p-disabled):hover {
+  @apply bg-transparent text-[#292E36];
+}
+.p-datepicker-footer .p-dropdown {
+  @apply !border-none;
+}
+.ampm-comp {
+  text-align: -webkit-center;
+}
+.filteredCard .p-image, .filteredCard img {
+  @apply !w-[.8rem] !h-[.8rem] max-w-[.8rem];
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-[#30343B] rounded-full;
+}
+::-webkit-scrollbar {
+  @apply w-1 h-1;
 }
