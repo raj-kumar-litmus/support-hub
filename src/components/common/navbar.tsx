@@ -7,7 +7,7 @@ import SearchBar from "./searchbar";
 import CustomImage from "./customimage";
 import { MENU_LIST } from "../utils/Utils";
 import QuickLinks from "../quicklinks";
-
+ 
 type Props = {
   showSidePane: boolean;
   showSidePaneGrid: boolean;
@@ -17,7 +17,7 @@ type Props = {
   searchValue: string;
   setSearchValue: (a: string) => void;
 };
-
+ 
 const Navbar: FC<Props> = ({
   showSidePane,
   showSidePaneGrid,
@@ -29,23 +29,23 @@ const Navbar: FC<Props> = ({
 }) => {
   const navigate = useNavigate();
   const [showQuickLinks, setShowQuickLinks] = useState<boolean>(false);
-
+ 
   const navigateToHome = () => {
     navigate(MENU_LIST[0].path);
   };
-
+ 
   const toggleShowSidePane = () => {
     setShowSidePaneGrid(!showSidePaneGrid);
     setOpenSearchField(false);
   };
-
+ 
   const onSearch = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && searchValue.length > 0) {
       event.preventDefault();
       navigate(`/orderDetails/${searchValue}`);
     }
   };
-
+ 
   return (
     <div
       className={
@@ -73,17 +73,15 @@ const Navbar: FC<Props> = ({
           onClick={navigateToHome}
         />
       </div>
-
       <div>
         {!showSidePaneGrid && (
           <CustomImage
             src={QuickLinksIcon}
             onClick={() => setShowQuickLinks(!showQuickLinks)}
-            className="cursor-pointer h-[24px] w-[24px] right-[4rem] top-[18px] md:right-[2rem] sm:right-[0.6rem] absolute"
+            className="cursor-pointer h-[24px] w-[24px] right-[4rem] top-[18px] sm:right-[40px] absolute"
           />
         )}
-        <div className="sm:mr-[4vw]">
-        <SearchBar
+        <div className="sm:mr-[3rem]">  <SearchBar
           showSearchButton={!showSidePaneGrid}
           setOpenSearchField={setOpenSearchField}
           openSearchField={openSearchField}
@@ -92,12 +90,11 @@ const Navbar: FC<Props> = ({
           onSearch={onSearch}
           placeholder="Search Order"
         />
+        </div>
       </div>
-      </div>
-
       {!showSidePaneGrid && showQuickLinks && <QuickLinks />}
     </div>
   );
 };
-
+ 
 export default Navbar;
