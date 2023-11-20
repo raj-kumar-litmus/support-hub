@@ -65,7 +65,7 @@ function LineChart({
         !defaultClasses &&
         (rotate
           ? "rotate-90  !h-[85vw] w-[100vh] bg-inherit !mt-[23vh] ml-[-65vw]"
-          : "relative md:l-[5vw] md:mr-[5vw] sm:ml-[1rem] sm:mr-[0] sm:h-[340px] bg-[#22262C] ml-[0] mr-[0]")
+          : "relative md:l-[5vw] md:mr-[5vw] sm:mr-[0] sm:h-[340px] bg-[#22262C] ml-[0] mr-[0]")
       }`}
     >
       {width < 700 &&

@@ -339,8 +339,11 @@ const OPM: React.FC = () => {
       customChartConfig.layout.padding.top = 70;
       customChartConfig.layout.padding.bottom = 0;
     } else {
-      customChartConfig.layout.padding.top = 70;
+      customChartConfig.layout.padding.top = 30;
+      customChartConfig.layout.padding.left = 30;
+      customChartConfig.layout.padding.right = 50;
     }
+    console.log(customChartConfig);
     return customChartConfig;
   };
 
@@ -617,7 +620,7 @@ const OPM: React.FC = () => {
           inputClassname="w-[60vw] sm:w-[38vw] md:w-[24vw]"
           inputContainerClassname="w-[38vw] md:w-[24vw]"
           checkBoxLabelClassname="text-white text-[12px] ml-[0.5vw]"
-          checkBoxContainerClassname="flex autoRefreshCheckBox sm:ml-[1vw] md:ml-[1.25vw] items-center "
+          checkBoxContainerClassname="flex autoRefreshCheckBox sm:ml-[1vw] md:ml-[1.25vw] items-center mt-[3vh] md:mt-[0]"
         />
       )}
       {isLoading && location.pathname.includes("opm") ? (
@@ -631,7 +634,7 @@ const OPM: React.FC = () => {
               className={`opm-tabs absolute ${
                 IS_FULLSCREEN
                   ? "rotate-90 right-[-10rem] top-[1.35rem] relative top-[75vh] left-[59vw]"
-                  : "top-[6%] right-[21%] sm:right-[2%] md:right-[2%] lg:right-[4%]"
+                  : "right-[20vw] top-[3vh] md:right-[2%] lg:right-[4%]"
               }  z-10`}
               tabData={CHART_TABS}
               tabValue={tabValue}
@@ -641,7 +644,7 @@ const OPM: React.FC = () => {
               <BarChartComp
                 options={barChartoptions}
                 data={barChartData}
-                className="opm-page-chart-container pt-2 sm:pt-8 px-4"
+                className="opm-page-chart-container pt-2 sm:pt-0 px-4"
                 title={TITLE.OPM}
                 isFullScreen={IS_FULLSCREEN}
               />
@@ -649,7 +652,7 @@ const OPM: React.FC = () => {
               <LineChart
                 title={TITLE.OPM}
                 isFullScreen={IS_FULLSCREEN}
-                className="opm-page-chart-container pt-2 sm:pt-8 px-4"
+                className="opm-page-chart-container pt-2 sm:pt-0 px-4"
                 options={options}
                 data={data}
               />
