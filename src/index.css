@@ -635,10 +635,10 @@ hr.horizontalLine.blue {
 
 /* Order Details */
 #orderDetailsComp {
-  @apply font-helvetica;
+  @apply font-helvetica bg-[#161A1D] sm:bg-inherit; 
 }
 #orderDetailsComp .grid span {
-  @apply text-sm py-2 text-[#FAF9F6] bg-[#22262C];
+  @apply text-sm py-2 text-[#FAF9F6] sm:bg-[#22262C];
 }
 #orderDetailsComp .grid span.p-column-title {
   @apply text-sm py-2 text-[#FAF9F6] bg-inherit;
@@ -884,7 +884,7 @@ hr.horizontalLine.blue {
   @apply hidden;
 }
 .opm-tabs.p-tabview {
-  @apply w-[121px] h-[36px] self-end;
+  @apply w-fit h-[36px] self-end;
 }
 .opm-tabs.p-tabview .p-tabview-nav {
   @apply border-none h-[32px] bg-[#292E36];
@@ -922,6 +922,12 @@ hr.horizontalLine.blue {
 }
 .session-tooltip-tbody{
   @apply flex flex-wrap;
+}
+.session-tooltip-tbody tr.session-col-1{
+  @apply w-[65%];
+}
+.session-tooltip-tbody tr.session-col-2{
+  @apply w-[35%] text-right;
 }
 .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus {
   @apply !shadow-none !border-none

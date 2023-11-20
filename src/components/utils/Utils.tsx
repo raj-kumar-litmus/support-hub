@@ -67,7 +67,7 @@ export const externalTooltipHandler = (context, type) => {
   // Tooltip Element
   const { chart, tooltip } = context;
   const tooltipEl = getOrCreateTooltip(chart, type, tooltip);
-  tooltipEl.style.zIndex = 3;
+  tooltipEl.style.zIndex = 20;
   // Hide if no tooltip
   if (tooltip.opacity === 0) {
     tooltipEl.style.opacity = 0;
@@ -110,9 +110,9 @@ export const externalTooltipHandler = (context, type) => {
       tr.style.backgroundColor = "inherit";
       if (type === "session") {
         if (i === 0 || i === 2) {
-          tr.style.width = "65%";
+          tr.classList.add("session-col-1");
         } else {
-          tr.style.width = "35%";
+          tr.classList.add("session-col-2");
           tr.style.textAlign = "-webkit-right";
         }
       }
@@ -147,33 +147,33 @@ export const externalTooltipHandler = (context, type) => {
   tooltipEl.style.top = positionY + tooltip.caretY + "px";
 };
 
-export const getTableHeaders = (data: Object[]) => {
+export const getTableHeaders = (data: object[]) => {
   const keyArray = Object.keys(data[0])?.map((key) => key);
   return keyArray;
-}
+};
 
 export const convert24to12Hour = (hour) => {
-  let convertedHour = parseInt(hour, 10);
+  const convertedHour = parseInt(hour, 10);
   if (convertedHour === 0) {
-    return { hour12: 12, ampm: 'AM' };
+    return { hour12: 12, ampm: "AM" };
   } else if (convertedHour >= 1 && convertedHour <= 11) {
-    return { hour12: convertedHour, ampm: 'AM' };
+    return { hour12: convertedHour, ampm: "AM" };
   } else if (convertedHour === 12) {
-    return { hour12: 12, ampm: 'PM' };
+    return { hour12: 12, ampm: "PM" };
   } else {
-    return { hour12: convertedHour - 12, ampm: 'PM' };
+    return { hour12: convertedHour - 12, ampm: "PM" };
   }
-}
+};
 
 export const convert12to24Hour = (hour, ampm) => {
   let convertedHour = parseInt(hour, 10);
-  if (ampm === 'PM' && convertedHour < 12) {
+  if (ampm === "PM" && convertedHour < 12) {
     convertedHour += 12;
-  } else if (ampm === 'AM' && convertedHour === 12) {
+  } else if (ampm === "AM" && convertedHour === 12) {
     convertedHour = 0;
   }
   return convertedHour;
-}
+};
 export const submitOnEnter = (callback) => {
   const handleGlobalKeyDown = (event) => {
     if (event.key === "Enter") {

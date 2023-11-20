@@ -33,7 +33,10 @@ export const formatDate = (
     .padStart(2, "0");
   const year: number = dateToBeFormatted.getFullYear();
   const time: string = formatTime(dateToBeFormatted);
-  const seconds: number = dateToBeFormatted.getSeconds();
+  const seconds: string = dateToBeFormatted
+    .getSeconds()
+    .toString()
+    .padStart(2, "0");
 
   let formattedDate: string = ``;
   switch (format) {
