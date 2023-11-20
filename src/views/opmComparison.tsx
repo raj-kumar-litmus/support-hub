@@ -92,7 +92,7 @@ const OpmComparison: React.FC = () => {
     duration: 10,
     startTimeOne: getFormattedPSTDate(), // 10 minutes ago.
     startDateTwo: new Date(
-      new Date(getPSTdate(new Date())).getTime() - 86400000
+      new Date(getPSTdate(new Date())).getTime() - 86400000,
     ).toLocaleDateString("en-US"),
     channel: "",
   };
@@ -158,9 +158,9 @@ const OpmComparison: React.FC = () => {
 
   useEffect(() => {
     const startTimeOne = getFormattedPSTDate();
-    const startDateTwo = new Date(Date.now() - 86400000).toLocaleDateString(
-      "en-US",
-    );
+    const startDateTwo = new Date(
+      new Date(getPSTdate(new Date())).getTime() - 86400000,
+    ).toLocaleDateString("en-US");
     setUrl(
       `${URL_OPM_COMPARISON}?period=${
         location.pathname.includes("opm")
@@ -361,9 +361,13 @@ const OpmComparison: React.FC = () => {
         </div>
       )}
       {location.pathname.includes("opmcomparison") && (
-        <div className="sm:mx-4">
+        <div
+          className={`${isLoading ? "h-[80%]" : ""} ${
+            IS_FULLSCREEN ? "rotate-90" : "sm:mx-4"
+          }`}
+        >
           {!IS_FULLSCREEN && location.pathname.includes("opmcomparison") && (
-            <div className="flex justify-between items-start lg:mt-[4vh] ml-[6vw] mr-[6vw] sm:ml-[1vw] sm:mr-0  lg:ml-0 mt-[3vh]">
+            <div className="flex justify-between items-start ml-[6vw] mr-[6vw] sm:ml-[1vw] sm:mr-0  lg:ml-0">
               <p className="font-bold w-[50vw] text-[#F2F2F2] w-[50vw] lg:w-[30vw]">
                 {TITLE.OPM_COMPARISON}
               </p>
@@ -420,6 +424,7 @@ const OpmComparison: React.FC = () => {
                         )}
                         {form.type === "dropdown" && (
                           <CustomDropdown
+                            name={form.name}
                             value={form.value}
                             containerclassname="opmComparionInput"
                             onChange={(e) => handleFormChange(e)}
@@ -564,7 +569,7 @@ const OpmComparison: React.FC = () => {
             </div>
           )}
           {isLoading && location.pathname.includes("opmcomparison") ? (
-            <Loader />
+            <Loader className="h-full" />
           ) : (
             data &&
             !isLoading &&
@@ -572,7 +577,9 @@ const OpmComparison: React.FC = () => {
               <LineChart
                 title={TITLE.OPM_COMPARISON}
                 isFullScreen={IS_FULLSCREEN}
-                className="border-0 rounded-[10px] sm:w-[70vw] lg:w-[72.75vw] lg:ml-[0] h-[340px] md:h-[340px] lg:h-[62.23vh] mt-[10vh] md:mt-[1vh] lg:mt-[3vh]"
+                className={`border-0 rounded-[10px] sm:w-[70vw] lg:w-[72.75vw] lg:ml-[0] h-[340px] md:h-[340px] lg:h-[62.23vh] mt-[10vh] md:mt-[1vh] lg:mt-[3vh] ${
+                  IS_FULLSCREEN ? "ml-[-3rem] pb-[1rem]" : ""
+                }`}
                 options={options}
                 data={data}
               />

@@ -55,7 +55,6 @@ import {
   HOME_PAGE_REFERSH_DURATION,
   MM_DD_YYYY_HH_MM,
   CHART_TABS,
-  START_POLLING_TEXT,
 } from "../constants/appConstants";
 import { submitOnEnter } from "../components/utils/Utils";
 import { URL_OPM } from "../constants/apiConstants";
@@ -65,13 +64,9 @@ import { OPM_BAR_CHART_OPTIONS, OPM_OPTIONS } from "../config/chartConfig";
 import {
   DATE_TIME_FORMAT_2,
   formatDate,
-  buildLocaleString,
   getFormattedPSTDate,
 } from "../utils/dateTimeUtil";
 import BarChartComp from "../components/BarChartComp";
-import useInterval from "../hooks/useInterval";
-import CustomCheckbox from "../components/common/CustomCheckBox";
-import CustomInputNumber from "../components/common/CustomInputNumber";
 import AutoRefresh from "../components/common/AutoRefresh";
 
 ChartJS.register(
@@ -116,10 +111,6 @@ const OPM: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showFilteredCards, setShowFilteredCards] = useState<boolean>(false);
   const [tabValue, setTabValue] = useState<number>(1);
-  const [startPolling, setStartPolling] = useState<boolean>(false);
-  const [pollingRefershDuration, setPollingRefreshDuration] =
-    useState<number>(0);
-  const [showPollingForm, setShowPollingForm] = useState<boolean>(false);
 
   useEffect(() => {
     const removeEventListener = submitOnEnter(submit);
@@ -378,7 +369,7 @@ const OPM: React.FC = () => {
       )}
       {location.pathname.includes("home") && data && !isLoading && (
         <div className="w-full lg:w-[49%] bg-[#22262C] p-0 rounded-lg">
-          <div className="flex justify-between sm:mb-3 items-center relative top-[3vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
+          <div className="flex justify-between items-center relative top-[3vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
             <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
               {TITLE.OPM}
             </span>
@@ -424,7 +415,7 @@ const OPM: React.FC = () => {
         </div>
       )}
       {!IS_FULLSCREEN && location.pathname.includes("opm") && (
-        <div className="flex justify-between items-start lg:mt-[4vh] ml-[6vw] mr-[6vw] sm:ml-[1vw] sm:mr-0 lg:ml-[1rem] mt-[3vh]">
+        <div className="flex justify-between items-start">
           <p className="font-bold w-[50vw] text-[#F2F2F2] w-[50vw] lg:w-[30vw]">
             {TITLE.OPM}
           </p>
@@ -587,7 +578,7 @@ const OPM: React.FC = () => {
         <div
           className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[5vw] lg:ml-[1rem] ${
             IS_FULLSCREEN
-              ? "landScape rotate-90 absolute left-[40vw] top-[45vh] ml-[25vw] w-[22vh]"
+              ? "rotate-90 absolute left-[40vw] top-[45vh] ml-[25vw] w-[22vh]"
               : `${width < 700 ? "portrait" : ""}`
           }`}
         >
@@ -618,14 +609,15 @@ const OPM: React.FC = () => {
           )}
         </div>
       )}
-      {location.pathname.includes("opm") && (
+
+      {!IS_FULLSCREEN && location.pathname.includes("opm") && (
         <AutoRefresh
           getData={getData}
           startPollingHandler={startPollingHandler}
           inputClassname="w-[60vw] sm:w-[38vw] md:w-[24vw]"
           inputContainerClassname="w-[38vw] md:w-[24vw]"
           checkBoxLabelClassname="text-white text-[12px] ml-[0.5vw]"
-          checkBoxContainerClassname="flex autoRefreshCheckBox ml-[6vw] sm:ml-[1vw] sm:pt-[4vh] md:pt-[2vh] ml-[0.5vw]"
+          checkBoxContainerClassname="flex autoRefreshCheckBox ml-[6vw] items-center sm:ml-[1vw] ml-[0.5vw]"
         />
       )}
       {isLoading && location.pathname.includes("opm") ? (
@@ -634,7 +626,17 @@ const OPM: React.FC = () => {
         data &&
         !isLoading &&
         location.pathname.includes("opm") && (
-          <>
+          <div className={IS_FULLSCREEN ? "rotate-90 relative" : "relative "}>
+            <CustomTab
+              className={`opm-tabs absolute ${
+                IS_FULLSCREEN
+                  ? "right-[-10rem] top-[1.35rem]"
+                  : "top-[6%] right-[21%] sm:right-[2%] md:right-[2%] lg:right-[4%]"
+              }  z-10`}
+              tabData={CHART_TABS}
+              tabValue={tabValue}
+              setTabValue={setTabValue}
+            />
             {tabValue === 0 ? (
               <BarChartComp
                 options={barChartoptions}
@@ -652,13 +654,7 @@ const OPM: React.FC = () => {
                 data={data}
               />
             )}
-            <CustomTab
-              className="opm-tabs relative bottom-[22.5rem] sm:bottom-[20rem] left-[10rem] sm:left-[53.75rem]"
-              tabData={CHART_TABS}
-              tabValue={tabValue}
-              setTabValue={setTabValue}
-            />
-          </>
+          </div>
         )
       )}
     </>

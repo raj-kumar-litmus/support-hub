@@ -212,7 +212,7 @@ const HomePage = () => {
           <GlobalLoader />
         </LoaderPortal>
       ) : (
-        <div className="home-page p-6 box-border">
+          <div className="home-page py-[4px] box-border">
           <div className="flex sm:flex-row justify-between mb-4">
             <div className="flex items-center font-helvetica">
               <span className="text-lg text-[#F2F2F2] font-bold mr-4">
