@@ -311,7 +311,7 @@ const BarChart = () => {
             </div>
           </div>
           {showFilters && (
-            <div className="basis-full justify-between pb-0 items-end hidden sm:flex">
+            <div className="basis-full justify-between pb-0 items-end hidden sm:block lg:flex">
               <div className="flex justify-start pb-4 items-end">
                 {formFields.map((form, index) => {
                   return (

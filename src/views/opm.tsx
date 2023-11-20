@@ -433,7 +433,7 @@ const OPM: React.FC = () => {
         <>
           {width > 700 ? (
             <form
-              className="md:flex md:gap-[0.75rem] opmFilters sm:grid sm:grid-cols-3 lg:ml-[0.5rem] sm:mb-4"
+              className="lg:flex md:gap-[0.75rem] opmFilters sm:grid sm:grid-cols-3 lg:ml-[0.5rem] sm:mb-4"
               onSubmit={submit}
             >
               {formFields.map((form, index) => {
@@ -449,13 +449,13 @@ const OPM: React.FC = () => {
                         placeholder={form.label}
                         imageclassname="relative left-[25px] z-[1]"
                         onChange={(event) => handleFormChange(event)}
-                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px] lg:w-[10vw] sm:w-[20vw]  md:w-[8vw]"
+                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px] lg:w-[10vw] sm:w-[20vw] lg:w-[8vw]"
                       />
                     )}
                     {form.type === INPUT_TYPES.time && (
                       <CustomCalendar
                         name={form.name}
-                        containerclassname="calendarOpmComparison ml-[10px] md:w-[10vw] lg:w-[12vw] xl:w-[14vw] sm:mr-[-0.25rem]"
+                        containerclassname="calendarOpmComparison ml-[10px] lg:w-[10vw] lg:w-[12vw] xl:w-[14vw] sm:mr-[-0.25rem]"
                         titleclassname="top-[1.25rem]"
                         imageclassname="h-[20px] w-[20px] relative top-[1.75rem] left-[0.5vw] z-[1]"
                         placeholder={MM_DD_YYYY_HH_MM}
@@ -493,7 +493,7 @@ const OPM: React.FC = () => {
                 label={LABELS.submit}
                 isDisabled={disabled}
                 isRounded={true}
-                className="self-end relative left-[5vw] sm:w-[21vw] md:w-[15vw] lg:w-[10vw] sm:top-[2vh] md:top-[0] md:left-[3vw]"
+                className="self-end relative left-[5vw] sm:w-[21vw] md:w-[15vw] lg:w-[10vw] sm:top-[2vh] md:top-[0] sm:left-[1vw]"
               />
             </form>
           ) : (
