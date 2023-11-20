@@ -32,7 +32,7 @@ const CustomDropdown: React.FC<Props> = ({
 }) => {
   return icon ? (
     <div
-      className={`flex flex-col self-end inputContainer w-[10vw] md:w-[8vw] ${containerclassname}`}
+      className={`flex flex-col self-end inputContainer w-[10vw] lg:w-[8vw] ${containerclassname}`}
     >
       <label className={`labelClass relative ml-[18px] ${labelclassname}`}>
         {label}

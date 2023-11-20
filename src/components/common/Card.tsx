@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { DCOpenOrders } from "../../@types/dcOpenOrders";
+import useScreenSize from "../../hooks/useScreenSize";
 
 type CardProps = {
   cardData: DCOpenOrders | CommerceItemData;
@@ -11,6 +12,7 @@ const Card = (props: CardProps) => {
   const [cardTitle, setCardTitle] = useState(null);
   const [cardSubTitle, setSubTitle] = useState(null);
   const [cardItems, setCardItems] = useState([]);
+  const { width } = useScreenSize();
 
   useEffect(() => {
     const cards = [];
@@ -32,7 +34,13 @@ const Card = (props: CardProps) => {
     <div className="shadow-lg bg-[#22262C] w-full flex m-auto text-[#FAF9F6] pt-4 pb-4 pr-2 rounded-lg mb-3">
       <div className="w-3/12 pl-4 pr-4 text-center items-center border-r border-[#292E36] flex flex-col justify-center">
         <div className="text-xs mb-1 text-[#898A8D]">{cardTitle?.key}</div>
-        <div className="font-medium text-[#FAF9F6]">{cardTitle?.value}</div>
+        <div
+          className={`${
+            width < 350 ? "text-[0.8rem]" : ""
+          } font-medium text-[#FAF9F6]`}
+        >
+          {cardTitle?.value}
+        </div>
       </div>
       <div
         className={`w-9/12 ${
@@ -45,7 +53,11 @@ const Card = (props: CardProps) => {
               <div className="text-xs mb-2 text-[#898A8D]">
                 {cardSubTitle?.key}
               </div>
-              <div className="text-sm font-medium text-[#FAF9F6]">
+              <div
+                className={`${
+                  width < 350 ? "text-[0.75rem]" : "text-sm"
+                } font-medium text-[#FAF9F6]`}
+              >
                 {cardSubTitle?.value}
               </div>
             </div>
