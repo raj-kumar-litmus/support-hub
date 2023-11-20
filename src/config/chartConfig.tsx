@@ -141,10 +141,20 @@ export const OPM_BAR_CHART_OPTIONS: Chart.ChartOptions = (
         text: TOTAL_ORDERS_PER_MINUTE,
         position: "bottom",
         font: {
-          size: "12",
+          weight: 400,
         },
         padding: 20,
       },
+    },
+    layout: {
+      padding: isMobile
+        ? {
+            left: 6,
+            right: 20,
+            top: 10,
+            bottom: 40,
+          }
+        : {},
     },
     scales: {
       ...existingBarChartOptions.scales,
@@ -166,16 +176,13 @@ export const OPM_OPTIONS = (isMobile: boolean, showDataLabels = false) => ({
   layout: {
     padding: isMobile
       ? {
-          left: 20,
+          left: 5,
           right: 20,
           top: 10,
           bottom: 40,
         }
       : {
-          left: 30,
-          right: 50,
           top: 50,
-          bottom: 20,
         },
   },
   scales: {
@@ -195,7 +202,7 @@ export const OPM_OPTIONS = (isMobile: boolean, showDataLabels = false) => ({
         display: true,
         color: "#FAF9F6",
         text: TOTAL_ORDERS_PER_MINUTE,
-        padding: isMobile ? { top: 35, bottom: 35 } : { top: 35 },
+        padding: isMobile ? { top: 35, bottom: 35 } : { top: 15 },
       },
     },
   },

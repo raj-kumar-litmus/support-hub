@@ -328,7 +328,7 @@ button.p-button-secondary {
   @apply relative left-[-10px];
 }
 .opmComparionInput{
-  @apply !relative left-[-18px];
+  @apply !relative left-[-18px] md:!w-[9vw];
 }
 .dropdownWithIcon .p-dropdown {
   @apply border-l-transparent rounded-l-none w-[135px];
@@ -921,7 +921,7 @@ hr.horizontalLine.blue {
   @apply w-[121px] h-[36px] z-0;
 }
 .opm-page-chart-container {
-  @apply border-0 rounded-[10px] sm:w-[62rem] lg:w-[72vw] lg:ml-[0] h-[24rem] md:h-[340px] lg:h-[62.23vh] mt-[3vh] md:mt-[1vh] lg:mt-[3vh];
+  @apply border-0 rounded-[10px] sm:w-[62rem] lg:w-[72vw] lg:ml-[0] h-[24rem] md:h-[340px] lg:!h-[62.23vh] mt-[3vh] md:mt-[1vh] lg:mt-[3vh];
 }
 .session-tooltip-tbody{
   @apply flex flex-wrap;

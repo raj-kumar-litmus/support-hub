@@ -363,7 +363,7 @@ const OpmComparison: React.FC = () => {
       {location.pathname.includes("opmcomparison") && (
         <div
           className={`${isLoading ? "h-[80%]" : ""} ${
-            IS_FULLSCREEN ? "rotate-90" : "sm:mx-4"
+            IS_FULLSCREEN ? "" : "sm:mx-4"
           }`}
         >
           {!IS_FULLSCREEN && location.pathname.includes("opmcomparison") && (
@@ -531,7 +531,7 @@ const OpmComparison: React.FC = () => {
           )}
           {location.pathname.includes("opmcomparison") && showFilteredCards && (
             <div
-              className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[5vw] lg:ml-[0.5vw] ${
+              className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[5vw] lg:ml-[0] ${
                 IS_FULLSCREEN
                   ? "landScape opmComparison rotate-90 absolute left-[40vw] top-[45vh]"
                   : `${width < 700 ? "portrait" : ""}`
@@ -578,7 +578,9 @@ const OpmComparison: React.FC = () => {
                 title={TITLE.OPM_COMPARISON}
                 isFullScreen={IS_FULLSCREEN}
                 className={`border-0 rounded-[10px] sm:w-[70vw] lg:w-[72.75vw] lg:ml-[0] h-[340px] md:h-[340px] lg:h-[62.23vh] mt-[10vh] md:mt-[1vh] lg:mt-[3vh] ${
-                  IS_FULLSCREEN ? "ml-[-3rem] pb-[1rem]" : ""
+                  IS_FULLSCREEN
+                    ? "ml-[-3rem] pb-[1rem] !w-[90vh] !ml-[-60vw]"
+                    : ""
                 }`}
                 options={options}
                 data={data}
