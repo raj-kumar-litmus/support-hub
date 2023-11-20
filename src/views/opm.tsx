@@ -617,7 +617,7 @@ const OPM: React.FC = () => {
           inputClassname="w-[60vw] sm:w-[38vw] md:w-[24vw]"
           inputContainerClassname="w-[38vw] md:w-[24vw]"
           checkBoxLabelClassname="text-white text-[12px] ml-[0.5vw]"
-          checkBoxContainerClassname="flex autoRefreshCheckBox ml-[6vw] sm:ml-[1vw] sm:pt-[4vh] md:pt-[2vh] ml-[0.5vw]"
+          checkBoxContainerClassname="flex autoRefreshCheckBox ml-[6vw] items-center sm:ml-[1vw] ml-[0.5vw]"
         />
       )}
       {isLoading && location.pathname.includes("opm") ? (

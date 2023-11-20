@@ -57,13 +57,19 @@ const Card = (props: CardProps) => {
           }`}
         >
           {cardItems.map((item, ind) => (
-            <div
-              key={ind}
-              className="pl-2 pr-2 flex flex-col flex-1 justify-between"
-            >
-              <div className="text-xs mb-2 text-[#898A8D]">{item.key}</div>
-              <div className="text-[13px] font-medium text-[#FAF9F6]">
-                {item.value}
+            <div key={ind} className="pl-2 pr-2 flex flex-col flex-1">
+              <div className="text-xs text-[#898A8D] self-center">
+                {item.key}
+              </div>
+              <div className="text-[13px] font-medium text-[#FAF9F6] flex h-full items-center justify-center">
+                {["Total Price", "Unit Price"].includes(item.key) ? (
+                  <div className="flex flex-col">
+                    <span>{item.value.split(" ")[0]}</span>
+                    <span>{item.value.split(" ")[1]}</span>
+                  </div>
+                ) : (
+                  item.value
+                )}
               </div>
             </div>
           ))}

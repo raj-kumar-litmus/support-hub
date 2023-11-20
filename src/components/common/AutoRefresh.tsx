@@ -69,34 +69,39 @@ const AutoRefresh = (props: AutoRefreshProps) => {
 
   return (
     <>
-      <CustomCheckbox
-        checked={showPollingForm}
-        onClick={onCheckHandler}
-        containerclassname={props.checkBoxContainerClassname}
-        label="Auto Refresh"
-        labelclassname={props.checkBoxLabelClassname}
-      />
-      {showPollingForm && (
-        <div className="md:flex gap-[1vw] ml-[6vw] sm:ml-[1vw] pt-[2vh] ml-[1vw] opmFilters items-center">
-          <CustomInputNumber
-            containerclassname={props.inputContainerClassname}
-            min={1}
-            max={AUTO_REFRESH_MAX_DURATIONS_MINS}
-            value={autoRefreshDuration}
-            inputClassName={props.inputClassname}
-            onChange={onPollingChangeHandler}
-            placeholder={`Choose Refresh duration between 1 to ${AUTO_REFRESH_MAX_DURATIONS_MINS}`}
-          />
-        </div>
-      )}
+      <div className="md:flex gap-[1vw]">
+        <CustomCheckbox
+          checked={showPollingForm}
+          onClick={onCheckHandler}
+          containerclassname={props.checkBoxContainerClassname}
+          label="Auto Refresh"
+          labelclassname={props.checkBoxLabelClassname}
+        />
+        {showPollingForm && (
+          <div className="ml-[6vw] sm:ml-[1vw] ml-[1vw] opmFilters items-center">
+            <CustomInputNumber
+              containerclassname={props.inputContainerClassname}
+              min={1}
+              max={AUTO_REFRESH_MAX_DURATIONS_MINS}
+              value={autoRefreshDuration}
+              inputClassName={props.inputClassname}
+              onChange={onPollingChangeHandler}
+              placeholder={`Choose Refresh duration between 1 to ${AUTO_REFRESH_MAX_DURATIONS_MINS}`}
+            />
+          </div>
+        )}
+      </div>
       <CustomToast
         onHide={() => setShowAutoRefreshToast(false)}
         showToast={showAutoRefreshToast}
         severity="info"
-        closable={false}
-        detail={`The chart will be auto refreshed every ${autoRefreshDuration} minutes`}
-        life={3000}
-        position="top-right"
+        summary="Chart"
+        // closable={false}
+        detail={`The chart will be auto refreshed every ${
+          autoRefreshDuration * 60
+        } seconds`}
+        life={60000}
+        position="top-center"
       />
     </>
   );

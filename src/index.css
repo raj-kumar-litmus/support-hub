@@ -374,7 +374,7 @@ button.p-button-secondary {
   @apply backdrop-brightness-50;
 }
 .orderStatus-dialog .p-dialog-header {
-  @apply flex items-center p-1.5 bg-[#22262C]  border-b  border-slate-600 text-[#F2F2F2];
+  @apply flex items-center p-1.5 bg-[#22262C]  border-b  border-slate-600 text-[#F2F2F2] h-[6.3vh];
 }
 .orderStatus-dialog .p-dialog-header .p-dialog-title {
   @apply text-center  text-base font-helvetica  ml-6;
@@ -937,4 +937,22 @@ hr.horizontalLine.blue {
 }
 .autoRefreshCheckBox .p-checkbox .p-checkbox-box {
   @apply w-[18px] h-[18px];
+}
+.p-toast {
+  @apply top-[7vh];
+}
+.p-toast-message-info {
+  @apply !bg-[#2CB67D] !text-[#161A1D] !border-l-transparent;
+}
+.p-toast-message-content {
+  @apply !border-l-0
+}
+.p-toast-icon-close-icon {
+  @apply text-[#161A1D] bg-transparent
+}
+.p-toast-icon-close:hover {
+  @apply !bg-transparent
+}
+.p-toast-message-icon {
+  @apply !h-0
 }

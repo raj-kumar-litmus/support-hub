@@ -28,7 +28,6 @@ import {
   STATUS,
   STATUS_ACROSS,
   SUBMITTED,
-  VIEW_ALL,
   WMS,
 } from "../../constants/appConstants";
 import {
@@ -49,7 +48,6 @@ import RightArrowIcon from "../../assets/right_arrow.svg";
 import OmsInfoIcon from "../../assets/oms_info_white.svg";
 import Loader from "../loader";
 import OrderStatus from "../orderstatus";
-import { orderStatus } from "../../@types/ordertimeline";
 import PromotionsPopup from "../promotionspopup";
 import OrderStatusPopup from "../orderstatuspopup";
 import CustomImage from "../common/customimage";
@@ -65,10 +63,10 @@ const OrderDetails: React.FC = () => {
   const [omsOrderStatus, setOmsOrderStatus] = useState<
     OmsOrderStatus | Record<string, never>
   >({});
-  const [omsOrderFlow, setOmsOrderFlow] = useState<OmsOrderFlow | {}>();
+  const [omsOrderFlow, setOmsOrderFlow] = useState<OmsOrderFlow | any>();
   const [isOrderStatusVisible, setIsOrderStatusVisible] =
     useState<boolean>(false);
-  const [promotions, setPromotions] = useState<IPromotion[] | {}>([]);
+  const [promotions, setPromotions] = useState<IPromotion[] | any>([]);
   const [itemTableData, setItemTableData] = useState<CommerceItemData[]>([]);
   const [openPromotionsPopup, setOpenPromotionsPopup] =
     useState<boolean>(false);
@@ -150,12 +148,8 @@ const OrderDetails: React.FC = () => {
     setIsOrderStatusVisible(true);
   };
 
-  const viewAllItems = (): void => {
-    //viewAll functionality
-  };
-
   return isLoading ? (
-    <Loader />
+    <Loader className="h-full" />
   ) : Object.keys(orderData).length > 0 ? (
     <div id="orderDetailsComp" className="sm:my-8 mx-4">
       <div className="flex sm:hidden border-b border-solid border-[#292e36] h-[44px] items-center px-[14px] py-[24px]">
@@ -315,12 +309,12 @@ const OrderDetails: React.FC = () => {
           <span className="w-3/4 sm:w-full !text-lg !text-[#F2F2F2] font-bold !bg-[#161A1D] sm:!bg-inherit">
             {ITEMS_INFO}
           </span>
-          <span
+          {/* <span
             className="w-1/4 sm:hidden justify-end flex items-center !text-[12px] font-normal cursor-pointer !bg-[#161A1D] sm:!bg-inherit"
             onClick={viewAllItems}
           >
             {VIEW_ALL}
-          </span>
+          </span> */}
         </div>
         <div className="hidden sm:block rounded-md">
           {itemTableData?.length > 0 && (
@@ -329,10 +323,11 @@ const OrderDetails: React.FC = () => {
               stripedRows
               value={itemTableData}
               className={"custom-table order-details-table"}
-              children={getTableHeaders(itemTableData).map((h) => (
+            >
+              {getTableHeaders(itemTableData).map((h) => (
                 <Column key={h} field={h} header={h}></Column>
               ))}
-            />
+            </CustomTable>
           )}
         </div>
         <div className="block sm:hidden">
