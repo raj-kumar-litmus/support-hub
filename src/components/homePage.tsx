@@ -187,11 +187,13 @@ const HomePage = () => {
     await fetchCompData(URL_OPM, date);
     await setIsLoading(false);
     await hideLoader();
-    setRefreshTime(new Date().getTime());
+    await setRefreshTime(new Date().getTime());
   };
 
   useEffect(() => {
-    getCardsData();
+    (async () => {
+      await getCardsData();
+    })();
   }, []);
 
   const handleRefreshBtnClick = () => {
@@ -222,7 +224,11 @@ const HomePage = () => {
               </span>
             </div>
             <div className="flex items-center font-helvetica">
-              {width > 700 && <TimeTracker timeStamp={refreshTime} />}
+              {width > 700 && !isLoading && (
+                <TimeTracker
+                  timeStamp={refreshTime}
+                />
+              )}
               <CustomButton
                 className="home-refresh-btn home-card-refresh-btn"
                 onClick={handleRefreshBtnClick}
@@ -234,7 +240,9 @@ const HomePage = () => {
           {isLoading ? (
             <Loader />
           ) : (
-            <div className="flex flex-wrap gap-[10px] pb-4 border-b  border-b-[#22262C]">
+            <div
+              className="flex flex-wrap gap-[10px] pb-4 border-b  border-b-[#22262C]"
+            >
               <HomeCard
                 title={
                   <CardTitle

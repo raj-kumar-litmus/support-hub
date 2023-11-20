@@ -345,8 +345,8 @@ const OrderDetails: React.FC = () => {
         </div>
         <div className="flexColWrapper gap-y-0 grid-cols-2">
           <div className="flexWrapper justify-start bg-[#22262C] rounded-t-md">
-            <span className="w-auto sm:w-[35%]">{PAYMENT_TYPE}</span>
-            <span className="w-auto sm:w-[65%] font-medium">
+            <span className="w-auto mr-3.5 sm:mr-0 sm:w-[35%]">{PAYMENT_TYPE}</span>
+            <span className="w-auto sm:w-[65%] font-medium text-right sm:text-left">
               {orderData?.paymentInfo?.[0].paymentType} -{" "}
               {orderData?.paymentInfo?.[0].paymentCardType.toUpperCase()}
             </span>
