@@ -57,13 +57,17 @@ const BarChartComp = ({
     <div
       className={`${className} ${
         rotate
-          ? "h-[390px] w-[90vh] bg-inherit"
-          : "relative ml-[5vw] sm:ml-[1rem] mr-[5vw] sm:mr-[0] sm:h-[340px] bg-[#22262C]"
+          ? "rotate-90  !h-[85vw] w-[100vh] bg-inherit !mt-[23vh] ml-[-65vw]"
+          : "relative md:l-[5vw] md:mr-[5vw] sm:mr-[0] sm:h-[340px] bg-[#22262C] ml-[0] mr-[0]"
       }`}
     >
       {width < 700 && location.pathname.includes("opm") && (
-        <div className="flex items-center justify-between pt-[16px]">
-          <p className="text-white">{title}</p>
+        <div
+          className={`flex items-center justify-between pt-[16px] ${
+            rotate ? "mx-0" : " ml-[20px] mr-[20px]"
+          }`}
+        >
+          <p className={`text-white ${rotate ? "ml-[1.5vw]" : ""}`}>{title}</p>
           <div className="flex items-center">
             <div className="bg-[#383F47] w-[30px] h-[30px] rounded-full">
               <CustomImage
@@ -83,7 +87,7 @@ const BarChartComp = ({
           className={`${
             location.pathname.includes("home")
               ? "w-full !h-[24rem] pt-20 sm:pt-16 sm:px-6 px-6"
-              : `${rotate ? "!h-[20rem]" : "!h-[21rem]"} sm:!h-[20rem] pt-8`
+              : ``
           }`}
         />
       }

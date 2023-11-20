@@ -89,9 +89,7 @@ const BarChart = () => {
   const [disabled, setDisabled] = useState(true);
   const [tabValue, setTabValue] = useState<number>(2);
   const [id, setId] = useState<string>("home-bar-chart");
-  const { hideLoader } = useContext(
-    LoaderContext
-  ) as LoaderContextType;
+  const { hideLoader } = useContext(LoaderContext) as LoaderContextType;
   const { width } = useScreenSize();
   const chartRef = useRef(null);
   const navigate = useNavigate();
@@ -391,7 +389,7 @@ const BarChart = () => {
       )}
       {isLoading && <Loader className="!p-0 m-auto" />}
       {!isLoading && (
-        <div className="home-sessions flex justify-center basis-full relative px-3 py-8 sm:px-5 h-64 mb-4 bg-[#22262C] w-[full] h-[22rem] sm:h-[24rem] drop-shadow-md rounded-xl flex-col">
+        <div className="home-sessions flex justify-center basis-full relative px-3 py-8 sm:px-5 h-64 mb-4 bg-[#22262C] w-[full] h-[22rem] sm:h-[48vh] drop-shadow-md rounded-xl flex-col">
           <>
             {location.pathname.includes("home") && (
               <>

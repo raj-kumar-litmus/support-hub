@@ -64,15 +64,25 @@ function LineChart({
       className={`${className} ${
         !defaultClasses &&
         (rotate
-          ? "rotate-90 h-[390px] w-[90vh] bg-inherit ml-[-50vw] mt-[22vh]"
-          : "relative sm:h-[340px] bg-[#22262C]")
+          ? "rotate-90  !h-[85vw] w-[100vh] bg-inherit !mt-[23vh] ml-[-65vw]"
+          : "relative md:l-[5vw] md:mr-[5vw] sm:mr-[0] sm:h-[340px] bg-[#22262C] ml-[0] mr-[0]")
       }`}
     >
       {width < 700 &&
         (location.pathname.includes("opm") ||
           location.pathname.includes("opmcomparison")) && (
-          <div className="flex items-center justify-between ml-[20px] mr-[20px] pt-[16px]">
-            <p className="text-white">{title}</p>
+          <div
+            className={`flex items-center justify-between pt-[16px] ${
+              rotate ? "mx-0" : " ml-[20px] mr-[20px]"
+            }`}
+          >
+            <p
+              className={`text-white ${rotate ? "ml-[1.5vw]" : ""} ${
+                width > 700 ? "ml-[1vw]" : ""
+              }`}
+            >
+              {title}
+            </p>
             <div className="flex items-center">
               <div className="bg-[#383F47] w-[30px] h-[30px] rounded-full">
                 <CustomImage
@@ -85,7 +95,7 @@ function LineChart({
             </div>
           </div>
         )}
-      {plugins ? (
+      {plugins || width < 700 ? (
         <Line
           options={options}
           data={data}

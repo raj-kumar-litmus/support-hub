@@ -69,7 +69,7 @@ const AutoRefresh = (props: AutoRefreshProps) => {
 
   return (
     <>
-      <div className="md:flex gap-[1vw]">
+      <div className="md:flex md:gap-[1vw] md:relative md:top-[1vh]">
         <CustomCheckbox
           checked={showPollingForm}
           onClick={onCheckHandler}
