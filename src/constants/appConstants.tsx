@@ -58,12 +58,12 @@ export const VIEW_ALL: string = "View All";
 export const START_POLLING_TEXT: string = "Start Auto Refresh";
 export const HOME_PAGE_REFERSH_DURATION: number = 10;
 export const REFRESHTIME: number = 3000;
-export const DASHBOARD: string = 'Dashboard';
-export const AVG_ORDERS_PER_MIN: string = 'Average Orders Per Min';
-export const TOTAL_NO_OF_ORDERS: string = 'Total Number of Orders';
-export const LAST_MIN_OPM: string = 'Last min OPM';
-export const AVG_OPM_COMPARISON: string = 'Avg OPM Comparison';
-export const TOTAL_ORDER_COMPARISON: string = 'Total Order Comparison';
+export const DASHBOARD: string = "Dashboard";
+export const AVG_ORDERS_PER_MIN: string = "Average Orders Per Min";
+export const TOTAL_NO_OF_ORDERS: string = "Total Number of Orders";
+export const LAST_MIN_OPM: string = "Last min OPM";
+export const AVG_OPM_COMPARISON: string = "Avg OPM Comparison";
+export const TOTAL_ORDER_COMPARISON: string = "Total Order Comparison";
 
 export const LABELS = {
   duration: "Duration",
@@ -103,11 +103,11 @@ export const CHANNEL_LIST: { label: string; value: string }[] = [
   { label: "Android App", value: "androidApp" },
 ];
 export const DURATION_LIST: { label: string; value: number }[] = [
-  { label: "5 Mins", value: 5 },
   { label: "10 Mins", value: 10 },
   { label: "15 Mins", value: 15 },
   { label: "20 Mins", value: 20 },
   { label: "30 Mins", value: 30 },
+  { label: "45 Mins", value: 45 },
   { label: "60 Mins", value: 60 },
 ];
 // Chart Constants
@@ -167,7 +167,7 @@ export const PAYMENT_TYPES = {
 
 export const ORDER_STATUS_LIST = [
   {
-    "Status Code": 1111,
+    "Status Code": 1100,
     Description: "Created",
   },
   {
@@ -180,14 +180,14 @@ export const ORDER_STATUS_LIST = [
   },
   {
     "Status Code": 3350,
-    Description: "Included in shipments",
-  },
-  {
-    "Status Code": 9000,
-    Description: "Shipped",
+    Description: "Included in shipment",
   },
   {
     "Status Code": 3700,
+    Description: "Shipped",
+  },
+  {
+    "Status Code": 9000,
     Description: "Cancelled",
   },
   {
@@ -203,56 +203,103 @@ export const SESSIONS_TABS = [
   { header: BOTH },
 ];
 
-export const QUICK_LINKS = [{
-  id: 0,
-  header: "Alerting & Monitoring Tools",
-  links: [
-    { name: "Splunk - AZR1", link: import.meta.env.VITE_SPLUNK_AZR1 },
-    { name: "Splunk - AZR2", link: import.meta.env.VITE_SPLUNK_AZR2 },
-    { name: "Dynatrace - SRE Digital Dashboard", link: import.meta.env.VITE_DYNATRACE },
-    { name: "Grafana - Overall Application View", link: import.meta.env.VITE_GRAFANA },
-    { name: "Alert Manager - Omni Prod", link: import.meta.env.VITE_ALERT_MANAGER_OMNI_PROD },
-    { name: "Alert Manager - AZR", link: import.meta.env.VITE_ALERT_MANAGER_AZR },
-    { name: "ArgoCD - OMNI", link: import.meta.env.VITE_ARGOCD_OMNI },
-    { name: "ArgoCD - PCI", link: import.meta.env.VITE_ARGOCD_PCI },
-    { name: "ArgoCD - AKS02", link: import.meta.env.VITE_ARGCD_AKS02 },
-    { name: "Orion Portal", link: import.meta.env.VITE_ORION_PORTAL },
-    { name: "Klarna Status Page", link: import.meta.env.VITE_KLARNA_STATUS_PAGE },
-    { name: "AfterPay Status Page", link: import.meta.env.VITE_AFTERPAY_STATUS_PAGE },
-    { name: "PayPal Status Page", link: import.meta.env.VITE_PAYPAL_STATUS_PAGE },
-    { name: "Narvar Status Page", link: import.meta.env.VITE_NARVAR_STATUS_PAGE },
-    { name: "DeliverySolution Status Page", link: import.meta.env.VITE_DELIVERYSOLUTION_STATUS_PAGE },
-    { name: "AWS Health Status", link: import.meta.env.VITE_AWS_HEALTH_STATUS },
-    { name: "Forter Portal", link: import.meta.env.VITE_FORTER_PORTAL },
-    { name: "PagerDuty", link: import.meta.env.VITE_PAGERDUTY },
-    { name: "ServiceNow", link: import.meta.env.VITE_SERVICE_NOW },
-    { name: "SephAdmin", link: import.meta.env.VITE_SEPHADMIN },
-    { name: "Preview", link: import.meta.env.VITE_PREVIEW },
-    { name: "BCC", link: import.meta.env.VITE_BCC },
-    { name: "CSC", link: import.meta.env.VITE_CSC },
-    { name: "HAPROXY - Canary", link: import.meta.env.VITE_HAPROXY_CANARY },
-    { name: "HAPROXY - Non Canary", link: import.meta.env.VITE_HAPROXY_NON_CANARY },
-    { name: "HAPROXY - AZR2", link: import.meta.env.VITE_HAPROXY_AZR2 },
-    { name: "True Origin - Canary", link: import.meta.env.VITE_TRUE_ORIGIN_CANARY },
-    { name: "True Origin - Non Canary", link: import.meta.env.VITE_TRUE_ORIGIN_NON_CANARY },
-    { name: "True Origin - AZR2", link: import.meta.env.VITE_TRUE_ORIGIN_AZR2 },
-    { name: "Server Restart", link: import.meta.env.VITE_SERVER_RESTART },
-  ]
-}
-  , {
-  id: 1,
-  header: "Wiki Links", links: [
-    { name: "Environment URLs", link: import.meta.env.VITE_ENVIRONMENT_URLS },
-    { name: "Support Hub", link: import.meta.env.VITE_SUPPORT_HUB },
-    { name: "Dotcom Incident Report", link: import.meta.env.VITE_DOTCOM_INCIDENT_REPORT },
-    { name: "P1/P2 Checklist", link: import.meta.env.VITE_P1_P2_CHECKLIST },
-  ]
-}
+export const QUICK_LINKS = [
+  {
+    id: 0,
+    header: "Alerting & Monitoring Tools",
+    links: [
+      { name: "Splunk - AZR1", link: import.meta.env.VITE_SPLUNK_AZR1 },
+      { name: "Splunk - AZR2", link: import.meta.env.VITE_SPLUNK_AZR2 },
+      {
+        name: "Dynatrace - SRE Digital Dashboard",
+        link: import.meta.env.VITE_DYNATRACE,
+      },
+      {
+        name: "Grafana - Overall Application View",
+        link: import.meta.env.VITE_GRAFANA,
+      },
+      {
+        name: "Alert Manager - Omni Prod",
+        link: import.meta.env.VITE_ALERT_MANAGER_OMNI_PROD,
+      },
+      {
+        name: "Alert Manager - AZR",
+        link: import.meta.env.VITE_ALERT_MANAGER_AZR,
+      },
+      { name: "ArgoCD - OMNI", link: import.meta.env.VITE_ARGOCD_OMNI },
+      { name: "ArgoCD - PCI", link: import.meta.env.VITE_ARGOCD_PCI },
+      { name: "ArgoCD - AKS02", link: import.meta.env.VITE_ARGCD_AKS02 },
+      { name: "Orion Portal", link: import.meta.env.VITE_ORION_PORTAL },
+      {
+        name: "Klarna Status Page",
+        link: import.meta.env.VITE_KLARNA_STATUS_PAGE,
+      },
+      {
+        name: "AfterPay Status Page",
+        link: import.meta.env.VITE_AFTERPAY_STATUS_PAGE,
+      },
+      {
+        name: "PayPal Status Page",
+        link: import.meta.env.VITE_PAYPAL_STATUS_PAGE,
+      },
+      {
+        name: "Narvar Status Page",
+        link: import.meta.env.VITE_NARVAR_STATUS_PAGE,
+      },
+      {
+        name: "DeliverySolution Status Page",
+        link: import.meta.env.VITE_DELIVERYSOLUTION_STATUS_PAGE,
+      },
+      {
+        name: "AWS Health Status",
+        link: import.meta.env.VITE_AWS_HEALTH_STATUS,
+      },
+      { name: "Forter Portal", link: import.meta.env.VITE_FORTER_PORTAL },
+      { name: "PagerDuty", link: import.meta.env.VITE_PAGERDUTY },
+      { name: "ServiceNow", link: import.meta.env.VITE_SERVICE_NOW },
+      { name: "SephAdmin", link: import.meta.env.VITE_SEPHADMIN },
+      { name: "Preview", link: import.meta.env.VITE_PREVIEW },
+      { name: "BCC", link: import.meta.env.VITE_BCC },
+      { name: "CSC", link: import.meta.env.VITE_CSC },
+      { name: "HAPROXY - Canary", link: import.meta.env.VITE_HAPROXY_CANARY },
+      {
+        name: "HAPROXY - Non Canary",
+        link: import.meta.env.VITE_HAPROXY_NON_CANARY,
+      },
+      { name: "HAPROXY - AZR2", link: import.meta.env.VITE_HAPROXY_AZR2 },
+      {
+        name: "True Origin - Canary",
+        link: import.meta.env.VITE_TRUE_ORIGIN_CANARY,
+      },
+      {
+        name: "True Origin - Non Canary",
+        link: import.meta.env.VITE_TRUE_ORIGIN_NON_CANARY,
+      },
+      {
+        name: "True Origin - AZR2",
+        link: import.meta.env.VITE_TRUE_ORIGIN_AZR2,
+      },
+      { name: "Server Restart", link: import.meta.env.VITE_SERVER_RESTART },
+    ],
+  },
+  {
+    id: 1,
+    header: "Wiki Links",
+    links: [
+      { name: "Environment URLs", link: import.meta.env.VITE_ENVIRONMENT_URLS },
+      { name: "Support Hub", link: import.meta.env.VITE_SUPPORT_HUB },
+      {
+        name: "Dotcom Incident Report",
+        link: import.meta.env.VITE_DOTCOM_INCIDENT_REPORT,
+      },
+      { name: "P1/P2 Checklist", link: import.meta.env.VITE_P1_P2_CHECKLIST },
+    ],
+  },
 ];
 
 export const QUICK_LINKS_HEADER = "Quick Links";
 export const AM_PM_OPTIONS = [
-  { label: 'AM', value: 'AM' },
-  { label: 'PM', value: 'PM' },
+  { label: "AM", value: "AM" },
+  { label: "PM", value: "PM" },
 ];
 export const CHART_TABS = [{ header: BAR }, { header: LINE }];

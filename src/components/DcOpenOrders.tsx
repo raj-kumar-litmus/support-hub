@@ -43,7 +43,7 @@ const DcOpenOrders: FC = () => {
   return (
     <>
       {isLoading ? (
-        <Loader />
+        <Loader className="h-full" />
       ) : (
         <div className="w-11/12 m-auto mt-6">
           <h3 className="sm:text-lg text-[#F2F2F2] font-bold m-3 ml-0 font-helvetica">
@@ -56,10 +56,11 @@ const DcOpenOrders: FC = () => {
                 stripedRows
                 value={tableData}
                 className="custom-table ordersTable"
-                children={getTableHeaders(tableData).map((item, index) => (
+              >
+                {getTableHeaders(tableData).map((item, index) => (
                   <Column key={index} field={item} header={item}></Column>
                 ))}
-              />
+              </CustomTable>
             )}
           </div>
           <div className="block sm:hidden">

@@ -361,7 +361,11 @@ const OpmComparison: React.FC = () => {
         </div>
       )}
       {location.pathname.includes("opmcomparison") && (
-        <div className={IS_FULLSCREEN ? "rotate-90" : "sm:mx-4"}>
+        <div
+          className={`${isLoading ? "h-[80%]" : ""} ${
+            IS_FULLSCREEN ? "rotate-90" : "sm:mx-4"
+          }`}
+        >
           {!IS_FULLSCREEN && location.pathname.includes("opmcomparison") && (
             <div className="flex justify-between items-start lg:mt-[4vh] ml-[6vw] mr-[6vw] sm:ml-[1vw] sm:mr-0  lg:ml-0 mt-[3vh]">
               <p className="font-bold w-[50vw] text-[#F2F2F2] w-[50vw] lg:w-[30vw]">
@@ -565,7 +569,7 @@ const OpmComparison: React.FC = () => {
             </div>
           )}
           {isLoading && location.pathname.includes("opmcomparison") ? (
-            <Loader />
+            <Loader className="h-full" />
           ) : (
             data &&
             !isLoading &&
