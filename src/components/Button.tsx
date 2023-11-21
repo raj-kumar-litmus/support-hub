@@ -18,7 +18,6 @@ interface Props extends ButtonProps {
     | "danger"
     | "help"
     | undefined;
-  onClick?: () => void;
   label?: string;
 }
 
