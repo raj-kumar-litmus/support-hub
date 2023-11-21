@@ -1,16 +1,15 @@
 import React from "react";
-import { Dialog } from "primereact/dialog";
-import { ModalEnums } from "../@types/supportHub";
+import { Dialog, DialogProps } from "primereact/dialog";
 
 interface Props {
   children?: React.ReactNode;
   onHide(): void;
   closeIcon?: any;
   className?: string;
-  header: string;
+  header?: string;
   isTextButton?: boolean;
   visible: boolean;
-  position: ModalEnums;
+  position: DialogProps["position"];
   isDraggable?: boolean;
   isResizable?: boolean;
 }

@@ -58,12 +58,12 @@ export const VIEW_ALL: string = "View All";
 export const START_POLLING_TEXT: string = "Start Auto Refresh";
 export const HOME_PAGE_REFERSH_DURATION: number = 10;
 export const REFRESHTIME: number = 60000;
-export const DASHBOARD: string = 'Dashboard';
-export const AVG_ORDERS_PER_MIN: string = 'Average Orders Per Min';
-export const TOTAL_NO_OF_ORDERS: string = 'Total Number of Orders';
-export const LAST_MIN_OPM: string = 'Last min OPM';
-export const AVG_OPM_COMPARISON: string = 'Avg OPM Comparison';
-export const TOTAL_ORDER_COMPARISON: string = 'Total Order Comparison';
+export const DASHBOARD: string = "Dashboard";
+export const AVG_ORDERS_PER_MIN: string = "Average Orders Per Min";
+export const TOTAL_NO_OF_ORDERS: string = "Total Number of Orders";
+export const LAST_MIN_OPM: string = "Last min OPM";
+export const AVG_OPM_COMPARISON: string = "Avg OPM Comparison";
+export const TOTAL_ORDER_COMPARISON: string = "Total Order Comparison";
 
 export const LABELS = {
   duration: "Duration",
@@ -303,3 +303,70 @@ export const AM_PM_OPTIONS = [
   { label: "PM", value: "PM" },
 ];
 export const CHART_TABS = [{ header: BAR }, { header: LINE }];
+
+export const STATUS_CODES = {
+  130: {
+    description:
+      "Order will be moved to 130 from 105 state once it successfully submitted and authorized. In case order was submitted when Cybersource was not available, it will be moved to 115 state (or 116 for Klarna orders). As soon as Cybersource is up and payment authorization completed successfully, order will be moved to 130 state.",
+    nextStatusText: "Next state is 131 (Fraud Check Requested)",
+    SLA: "1 day",
+  },
+  131: {
+    description:
+      "Order is moved to the 131 state once sent for fraud review to Forter. An order may be reviewed automatically or manually. Manual review may take up to 5 days dependent on Sephora order traffic.",
+    nextStatusText:
+      "Next state is 132 (Forter Approved) or 227 (Forter Declined)",
+    SLA: "5 days",
+  },
+  132: {
+    description:
+      "Order is moved to the 132 state once Sephora receives a successful fraud review from Forter.",
+    nextStatusText: "Next state is 140",
+    SLA: "1 day",
+  },
+  140: {
+    description:
+      "Order is moved to 140 right after Fraud Review is successfully passed. The state indicates that order is ready for fulfillment. Right after the order is moved to the 140 state the JMS message is sent to the scheduler-04 instance to notify that Resolve Fulfillment Hold message can be sent for the order to OMS. OMS will not drop order to warehouse until OMS receives fulfillment hold release message.",
+    nextStatusText:
+      "Next state is 143 (Partially Released) / 144 (Fully Released)",
+    SLA: "1 day",
+  },
+  143: {
+    description:
+      "If a part of an order is released to warehouse and rest is pending to be released, order is moved to the 143 state. ATG system updates order with 143 state when release message is received from OMS for some line items in the order. Order can be split into several releases in case of multiple shipping groups or when split shipments are enabled and merchandise items are split into several releases.",
+    nextStatusText:
+      "Next step is 144 (Fully Released) / 155 (Partially Shipped) / 160 (Fully Shipped)",
+    SLA: "5 days",
+  },
+  144: {
+    description:
+      "Order is moved to 144 state once release confirmation is received for all items in the order.",
+    nextStatusText:
+      "Next step is 155 (Partially Shipped) / 160 (Fully Shipped)",
+    SLA: "5 days",
+  },
+  155: {
+    description:
+      "Order will be moved to 155 state when shipment confirmation for part of the order is received from OMS.",
+    nextStatusText: "Next step is 160 (Fully Shipped)",
+    SLA: "5 days",
+  },
+  440: {
+    description:
+      "A BOPIS order is moved to 440 when it is ready for fulfillment.",
+    nextStatusText:
+      "Next step is 455 (Partially Ready For Pickup) / 460 (Fully Ready For Pickup)",
+    SLA: "1 day",
+  },
+  455: {
+    description: "BOPIS Order is partially ready for pickup.",
+    nextStatusText:
+      "Next step is 460 (Fully Ready For Pickup) / 480 (Fully Picked Up)",
+    SLA: "5 days",
+  },
+  460: {
+    description:
+      "BOPIS Order is fully ready for pickup. Next step is 480 (Fully Picked Up) ",
+    SLA: "5 days",
+  },
+};

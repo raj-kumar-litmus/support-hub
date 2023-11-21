@@ -9,6 +9,7 @@ import {
 import "primereact/resources/primereact.min.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import DcOpenOrders from "./components/DcOpenOrders";
+import InCompleteOrders from "./components/InCompleteOrders";
 import BarChart from "./components/charts/BarChart";
 import App from "./App";
 import Chart from "./components/ChartIndex";
@@ -29,6 +30,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route
             path="/dc-open-orders"
             element={<App appContent={<DcOpenOrders />} />}
+          />
+          <Route
+            path="/incomplete-orders"
+            element={<App appContent={<InCompleteOrders />} />}
           />
           <Route path="/sessions" element={<App appContent={<BarChart />} />} />
           <Route

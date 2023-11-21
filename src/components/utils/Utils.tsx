@@ -20,6 +20,12 @@ export const MENU_LIST = [
     icon: DCOpenOrdersIcon,
     path: "/dc-open-orders",
   },
+  {
+    id: 6,
+    name: "Incomplete Orders",
+    icon: DCOpenOrdersIcon,
+    path: "/incomplete-orders",
+  },
 ];
 
 const getOrCreateTooltip = (chart, type, tooltip) => {
