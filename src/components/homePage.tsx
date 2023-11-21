@@ -135,7 +135,7 @@ const HomePage = () => {
   const [refreshTime, setRefreshTime] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { showGlobalLoader, hideLoader } = useContext(
-    LoaderContext
+    LoaderContext,
   ) as LoaderContextType;
 
   const { width } = useScreenSize();
@@ -144,13 +144,13 @@ const HomePage = () => {
     try {
       const opmData = await fetchData(
         `${url}?period=${HOME_PAGE_REFERSH_DURATION}&starttime=${getFormattedPSTDate(
-          date
+          date,
         )}`,
-        {}
+        {},
       );
       const totalOrders = opmData.reduce(
         (acc, obj) => acc + parseInt(obj.orderCount),
-        0
+        0,
       );
       setTotalOPM(totalOrders);
       setAvgOPM(Math.round(totalOrders / HOME_PAGE_REFERSH_DURATION));
@@ -164,13 +164,13 @@ const HomePage = () => {
     try {
       const opmData = await fetchData(
         `${url}?period=${HOME_PAGE_REFERSH_DURATION}&starttime=${getFormattedPSTDate(
-          date
+          date,
         )}`,
-        {}
+        {},
       );
       const totalOrders = opmData.reduce(
         (acc, obj) => acc + parseInt(obj.orderCount),
-        0
+        0,
       );
       setLastDayTotalOPM(totalOrders);
       setLastDayAvgOPM(Math.round(totalOrders / HOME_PAGE_REFERSH_DURATION));
@@ -212,7 +212,7 @@ const HomePage = () => {
           <GlobalLoader />
         </LoaderPortal>
       ) : (
-          <div className="home-page py-[4px] box-border">
+        <div className="home-page py-[4px] box-border">
           <div className="flex sm:flex-row justify-between mb-4">
             <div className="flex items-center font-helvetica">
               <span className="text-lg text-[#F2F2F2] font-bold mr-4">
@@ -224,10 +224,8 @@ const HomePage = () => {
               </span>
             </div>
             <div className="flex items-center font-helvetica">
-              {width > 700 && !isLoading && (
-                <TimeTracker
-                  timeStamp={refreshTime}
-                />
+              {width > 640 && !isLoading && (
+                <TimeTracker timeStamp={refreshTime} />
               )}
               <CustomButton
                 className="home-refresh-btn home-card-refresh-btn"
@@ -240,9 +238,7 @@ const HomePage = () => {
           {isLoading ? (
             <Loader />
           ) : (
-            <div
-              className="flex flex-wrap gap-[10px] pb-4 border-b  border-b-[#22262C]"
-            >
+            <div className="flex flex-wrap gap-[10px] pb-4 border-b  border-b-[#22262C]">
               <HomeCard
                 title={
                   <CardTitle

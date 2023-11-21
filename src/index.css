@@ -280,7 +280,7 @@ button.p-button-secondary {
   @apply w-[15vh];
 }
 .portrait .filteredCard .p-button.p-component {
-  @apply w-[40vw];
+  @apply w-[28vw] sm:w-[40vw];
 }
 .filteredCard .p-button.p-component {
   @apply !bg-[#F4F4F400] !border-[#22262C] border rounded-[100px] text-[#8B8C8F] px-2 py-3 flex justify-evenly items-center;
@@ -328,7 +328,7 @@ button.p-button-secondary {
   @apply relative left-[-10px];
 }
 .opmComparionInput{
-  @apply !relative left-[-18px] md:!w-[9vw];
+  @apply !relative left-[-18px] md:!w-[11vw];
 }
 .dropdownWithIcon .p-dropdown {
   @apply border-l-transparent rounded-l-none w-[135px];
@@ -502,7 +502,10 @@ button.p-button-secondary {
   @apply !bg-[#30343B] border border-solid border-[#30343B];
 }
 .opmFilters .p-calendar .p-inputtext {
-  @apply pl-[2.6vw] md:pl-[2vw]
+  @apply pl-[2.6vw] md:w-[20vw] lg:w-[12vw]
+}
+.opmComparisonFilters .p-calendar .p-inputtext {
+  @apply md:w-[9vw] lg:w-[12vw]
 }
 .opmFilters .p-dropdown:not(.p-disabled).p-focus {
   @apply !border-[#30343B];

@@ -179,13 +179,13 @@ const OPM: React.FC = () => {
       if (url) {
         setOptions(
           OPM_OPTIONS(
-            width < 700,
+            width < 640,
             Number(url.split("period=")[1].split("&")[0]) < 16,
           ),
         );
         setBarChartOptions(
           OPM_BAR_CHART_OPTIONS(
-            width < 700,
+            width < 640,
             Number(url.split("period=")[1].split("&")[0]) < 16,
           ),
         );
@@ -326,7 +326,7 @@ const OPM: React.FC = () => {
       }
     });
     setUrl(`${URL_OPM}?${str}`);
-    if (showFilters && width < 700) setShowFilters(false);
+    if (showFilters && width < 640) setShowFilters(false);
   };
 
   useEffect(() => {
@@ -335,15 +335,14 @@ const OPM: React.FC = () => {
 
   const getChartConfig = () => {
     const customChartConfig = { ...options };
-    if (width < 700) {
+    if (width < 640) {
       customChartConfig.layout.padding.top = 70;
       customChartConfig.layout.padding.bottom = 0;
     } else {
-      customChartConfig.layout.padding.top = 30;
-      customChartConfig.layout.padding.left = 30;
-      customChartConfig.layout.padding.right = 50;
+      customChartConfig.layout.padding.top = 20;
+      customChartConfig.layout.padding.left = 10;
+      customChartConfig.layout.padding.right = 20;
     }
-    console.log(customChartConfig);
     return customChartConfig;
   };
 
@@ -403,7 +402,8 @@ const OPM: React.FC = () => {
                 title={TITLE.OPM}
                 options={barChartoptions}
                 data={barChartData}
-                className="home-opm border-0 rounded-[10px] w-full sm:w-[89vw] lg:w-full lg:ml-[0] h-[380px] lg:h-[380px] lg:mt-[3vh] top-[-5vh]"
+                className="home-opm border-0 rounded-[10px] w-full lg:w-full lg:ml-[0] h-[380px] lg:h-[380px] lg:mt-[3vh] top-[-5vh]"
+                defaultClasses={true}
               />
             ) : (
               <LineChart
@@ -419,10 +419,10 @@ const OPM: React.FC = () => {
       )}
       {!IS_FULLSCREEN && location.pathname.includes("opm") && (
         <div className="flex justify-between items-start">
-          <p className="font-bold w-[50vw] text-[#F2F2F2] w-[50vw] lg:w-[30vw] lg:ml-[1vw]">
+          <p className="font-bold w-[50vw] text-[#F2F2F2] w-[50vw] lg:w-[30vw] sm:ml-[2.5vw] md:ml-[1.5vw] lg:ml-[1vw]">
             {TITLE.OPM}
           </p>
-          {width < 700 && (
+          {width < 640 && (
             <CustomImage
               src={FilterIcon}
               className="lg:w-[2.34vw] self-end"
@@ -434,71 +434,76 @@ const OPM: React.FC = () => {
       )}
       {showFilters && location.pathname.includes("opm") && (
         <>
-          {width > 700 ? (
-            <form
-              className="lg:flex md:gap-[0.75rem] opmFilters sm:grid sm:grid-cols-3 lg:ml-[0.5rem] sm:mb-4"
-              onSubmit={submit}
-            >
-              {formFields.map((form, index) => {
-                return (
-                  <div className="flex justify-center items-center" key={index}>
-                    {form.type === INPUT_TYPES.text && (
-                      <CustomInputText
-                        containerclassname="relative top-[2px] left-[-9px]"
-                        value={form.value}
-                        name={form.name}
-                        label={form.label}
-                        icon={form.imgsrc}
-                        placeholder={form.label}
-                        imageclassname="relative left-[25px] z-[1]"
-                        onChange={(event) => handleFormChange(event)}
-                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px] lg:w-[10vw] sm:w-[20vw] lg:w-[8vw]"
-                      />
-                    )}
-                    {form.type === INPUT_TYPES.time && (
-                      <CustomCalendar
-                        name={form.name}
-                        containerclassname="calendarOpmComparison ml-[10px] lg:w-[10vw] lg:w-[12vw] xl:w-[14vw] sm:mr-[-0.25rem]"
-                        titleclassname="top-[1.25rem]"
-                        imageclassname="h-[20px] w-[20px] relative top-[1.75rem] left-[0.5vw] z-[1]"
-                        placeholder={MM_DD_YYYY_HH_MM}
-                        title={form.label}
-                        showTime={form.showTime}
-                        iconPos={form.iconPos || "left"}
-                        imgsrc={form.imgsrc}
-                        onChange={(event) => handleFormChange(event)}
-                        value={form.value}
-                        maxDate={form.name === "date" ? new Date() : null}
-                        dateFormat="dd-MM-yyyy hh:mm"
-                      />
-                    )}
-                    {form.type === INPUT_TYPES.dropdown && (
-                      <CustomDropdown
-                        value={form.value}
-                        name={form.name}
-                        onChange={(e) => handleFormChange(e)}
-                        containerclassname="sm:w-[20vw]"
-                        imageclassname="relative left-[25px] z-[1]"
-                        dropdownIcon={<CustomImage src={ArrowDownIcon} />}
-                        icon={form.icon}
-                        options={form.options}
-                        label={form.label}
-                        optionLabel="name"
-                        placeholder=""
-                      />
-                    )}
-                  </div>
-                );
-              })}
+          {width > 640 ? (
+            <>
+              <form
+                className="lg:flex md:gap-[0.15rem] opmFilters sm:grid sm:grid-cols-3 lg:ml-[0.5rem] sm:mb-4"
+                onSubmit={submit}
+              >
+                {formFields.map((form, index) => {
+                  return (
+                    <div
+                      className="flex justify-center items-center"
+                      key={index}
+                    >
+                      {form.type === INPUT_TYPES.text && (
+                        <CustomInputText
+                          containerclassname="relative top-[2px] md:left-[-0.2vw] lg:left-[-9px]"
+                          value={form.value}
+                          name={form.name}
+                          label={form.label}
+                          icon={form.imgsrc}
+                          placeholder={form.label}
+                          imageclassname="relative left-[25px] z-[1]"
+                          onChange={(event) => handleFormChange(event)}
+                          className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px] sm:w-[20vw] lg:w-[11vw]"
+                        />
+                      )}
+                      {form.type === INPUT_TYPES.time && (
+                        <CustomCalendar
+                          name={form.name}
+                          containerclassname="calendarOpmComparison ml-[10px] lg:w-[10vw] lg:w-[12vw] xl:w-[14vw] sm:mr-[-0.25rem]"
+                          titleclassname="top-[1.25rem]"
+                          imageclassname="h-[20px] w-[20px] relative top-[1.75rem] left-[0.5vw] z-[1]"
+                          placeholder={MM_DD_YYYY_HH_MM}
+                          title={form.label}
+                          showTime={form.showTime}
+                          iconPos={form.iconPos || "left"}
+                          imgsrc={form.imgsrc}
+                          onChange={(event) => handleFormChange(event)}
+                          value={form.value}
+                          maxDate={form.name === "date" ? new Date() : null}
+                          dateFormat="dd-MM-yyyy hh:mm"
+                        />
+                      )}
+                      {form.type === INPUT_TYPES.dropdown && (
+                        <CustomDropdown
+                          value={form.value}
+                          name={form.name}
+                          onChange={(e) => handleFormChange(e)}
+                          containerclassname="sm:w-[20vw] lg:!w-[11vw]"
+                          imageclassname="relative left-[25px] z-[1]"
+                          dropdownIcon={<CustomImage src={ArrowDownIcon} />}
+                          icon={form.icon}
+                          options={form.options}
+                          label={form.label}
+                          optionLabel="name"
+                          placeholder=""
+                        />
+                      )}
+                    </div>
+                  );
+                })}
+              </form>
               <CustomButton
                 id="page-btn-submit"
                 btnclassname="w-full"
                 label={LABELS.submit}
                 isDisabled={disabled}
                 isRounded={true}
-                className="self-end relative left-[5vw] sm:w-[21vw] md:w-[15vw] lg:w-[10vw] sm:top-[2vh] md:top-[0] sm:left-[1vw]"
+                className="self-end relative left-[5vw] sm:w-[21vw] md:w-[15vw] lg:w-[10vw] sm:top-[2vh] md:top-[0] sm:left-[2.5vw] md:left-[1.5vw] lg:left-[1vw]"
               />
-            </form>
+            </>
           ) : (
             <>
               <CustomModal
@@ -579,10 +584,10 @@ const OPM: React.FC = () => {
 
       {location.pathname.includes("opm") && showFilteredCards && (
         <div
-          className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[5vw] lg:ml-[1rem] ${
+          className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[0] sm:ml-[5vw] lg:ml-[1rem] ${
             IS_FULLSCREEN
-              ? "rotate-90 absolute left-[40vw] top-[45vh] ml-[25vw] w-[22vh]"
-              : `${width < 700 ? "portrait" : ""}`
+              ? "rotate-90 absolute left-[-9vh] top-[45vh] ml-[25vw] w-[70vh] mt-[0]"
+              : `${width < 640 ? "portrait" : ""}`
           }`}
         >
           {formFields
@@ -620,7 +625,7 @@ const OPM: React.FC = () => {
           inputClassname="w-[60vw] sm:w-[38vw] md:w-[24vw]"
           inputContainerClassname="w-[38vw] md:w-[24vw]"
           checkBoxLabelClassname="text-white text-[12px] ml-[0.5vw]"
-          checkBoxContainerClassname="flex autoRefreshCheckBox sm:ml-[1vw] md:ml-[1.25vw] items-center mt-[3vh] md:mt-[0]"
+          checkBoxContainerClassname="flex autoRefreshCheckBox sm:ml-[2.5vw] md:ml-[1vw] md:ml-[1.5vw] lg:ml-[1.25vw] items-center mt-[3vh] md:mt-[0]"
         />
       )}
       {isLoading && location.pathname.includes("opm") ? (
@@ -634,7 +639,7 @@ const OPM: React.FC = () => {
               className={`opm-tabs absolute ${
                 IS_FULLSCREEN
                   ? "rotate-90 right-[-10rem] top-[1.35rem] relative top-[75vh] left-[59vw]"
-                  : "right-[20vw] top-[3vh] md:right-[2%] lg:right-[4%]"
+                  : "right-[15vw] sm:right-[2vw] top-[3vh] sm:top-[1vh] lg:right-[4%]"
               }  z-10`}
               tabData={CHART_TABS}
               tabValue={tabValue}
@@ -644,7 +649,7 @@ const OPM: React.FC = () => {
               <BarChartComp
                 options={barChartoptions}
                 data={barChartData}
-                className="opm-page-chart-container pt-2 sm:pt-0 px-4"
+                className="opm-page-chart-container pt-2 px-4"
                 title={TITLE.OPM}
                 isFullScreen={IS_FULLSCREEN}
               />
@@ -652,7 +657,7 @@ const OPM: React.FC = () => {
               <LineChart
                 title={TITLE.OPM}
                 isFullScreen={IS_FULLSCREEN}
-                className="opm-page-chart-container pt-2 sm:pt-0 px-4"
+                className="opm-page-chart-container pt-2 px-4"
                 options={options}
                 data={data}
               />

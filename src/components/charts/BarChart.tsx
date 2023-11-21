@@ -239,7 +239,7 @@ const BarChart = () => {
   };
 
   const toggleFilterVisibility = () => {
-    width > 700
+    width > 640
       ? setShowFilters(!showFilters)
       : setShowFilterPopup(!showFilterPopup);
   };
@@ -249,10 +249,10 @@ const BarChart = () => {
       ...BAR_CHART_OPTIONS(
         (duration ||
           Number(formFields.find((e) => e.name === "period").value)) < 11 &&
-          width > 700,
+          width > 640,
       ),
     };
-    if (width > 700) {
+    if (width > 640) {
       customChartConfig.plugins.legend.position = "bottom";
       customChartConfig.plugins.legend.align = "start";
       customChartConfig.plugins.datalabels.rotation = 0;
@@ -389,7 +389,7 @@ const BarChart = () => {
       )}
       {isLoading && <Loader className="!p-0 m-auto" />}
       {!isLoading && (
-        <div className="home-sessions flex justify-center basis-full relative px-3 py-8 sm:px-5 h-64 mb-4 bg-[#22262C] w-[full] h-[22rem] sm:h-[48vh] drop-shadow-md rounded-xl flex-col">
+        <div className="home-sessions flex justify-center basis-full relative px-3 py-8 sm:px-5 h-64 mb-4 bg-[#22262C] w-[full] h-[22rem] sm:h-[60vh] drop-shadow-md rounded-xl flex-col">
           <>
             {location.pathname.includes("home") && (
               <>
