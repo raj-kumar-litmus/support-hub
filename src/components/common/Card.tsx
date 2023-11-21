@@ -70,7 +70,7 @@ const Card = (props: CardProps) => {
         >
           {cardItems.map((item, ind) => (
             <div key={ind} className="pl-2 pr-2 flex flex-col flex-1">
-              <div className="text-xs text-[#898A8D] self-center">
+              <div className="text-xs text-[#898A8D] text-center">
                 {item.key}
               </div>
               <div className="text-[13px] font-medium text-[#FAF9F6] flex h-full items-center justify-center">

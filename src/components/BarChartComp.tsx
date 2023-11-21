@@ -19,6 +19,7 @@ interface Props {
   options: ChartOptions<"bar"> | any;
   data: ChartData<"bar">;
   className?: string;
+  defaultClasses?: boolean;
   title: string;
   isFullScreen?: boolean;
 }
@@ -37,6 +38,7 @@ const BarChartComp = ({
   options,
   data,
   className,
+  defaultClasses,
   isFullScreen = false,
 }: Props) => {
   const [rotate, setRotate] = useState<boolean>(isFullScreen);
@@ -56,20 +58,25 @@ const BarChartComp = ({
   return (
     <div
       className={`${className} ${
-        rotate
+        !defaultClasses &&
+        (rotate
           ? "rotate-90  !h-[85vw] w-[100vh] bg-inherit !mt-[23vh] ml-[-65vw]"
-          : "relative md:l-[5vw] md:mr-[5vw] sm:mr-[0] sm:h-[340px] bg-[#22262C] ml-[0] mr-[0]"
+          : "relative md:l-[5vw] md:mr-[5vw] sm:mr-[0] sm:h-[45vh] bg-[#22262C] ml-[0] lg:pb-[0] sm:pt-[7vh] lg:pt-[10vh] sm:w-[68vw] md:w-[67vw] lg:w-[71.5vw] sm:ml-[1.25vw] lg:ml-[1.1vw] lg:mr-[0]")
       }`}
     >
-      {width < 700 && location.pathname.includes("opm") && (
+      {width < 640 && location.pathname.includes("opm") && (
         <div
           className={`flex items-center justify-between pt-[16px] ${
-            rotate ? "mx-0" : " ml-[20px] mr-[20px]"
+            rotate ? "mx-0" : " ml-[2vw] mr-[20px]"
           }`}
         >
           <p className={`text-white ${rotate ? "ml-[1.5vw]" : ""}`}>{title}</p>
           <div className="flex items-center">
-            <div className="bg-[#383F47] w-[30px] h-[30px] rounded-full">
+            <div
+              className={`bg-[#383F47] w-[30px] h-[30px] rounded-full relative ${
+                rotate ? "left-[3vw]" : "left-[5vw]"
+              }`}
+            >
               <CustomImage
                 src={RotateIcon}
                 className="relative top-[8px] left-[9px]"
@@ -84,11 +91,7 @@ const BarChartComp = ({
         <Bar
           options={options}
           data={data}
-          className={`${
-            location.pathname.includes("home")
-              ? "w-full !h-[24rem] pt-20 sm:pt-16 sm:px-6 px-6"
-              : ``
-          }`}
+          className={`${location.pathname.includes("home") ? "" : ``}`}
         />
       }
     </div>

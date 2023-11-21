@@ -65,26 +65,30 @@ function LineChart({
         !defaultClasses &&
         (rotate
           ? "rotate-90  !h-[85vw] w-[100vh] bg-inherit !mt-[23vh] ml-[-65vw]"
-          : "relative md:l-[5vw] md:mr-[5vw] sm:mr-[0] sm:h-[340px] bg-[#22262C] ml-[0] mr-[0]")
+          : "relative md:l-[5vw] md:mr-[5vw] sm:mr-[0] sm:h-[45vh] bg-[#22262C] ml-[0] lg:pb-[0] lg:py-[3vh] sm:w-[68vw] md:w-[67vw] lg:w-[71.5vw] sm:ml-[1.25vw] lg:ml-[1.1vw] lg:mr-[0]")
       }`}
     >
-      {width < 700 &&
+      {width < 640 &&
         (location.pathname.includes("opm") ||
           location.pathname.includes("opmcomparison")) && (
           <div
             className={`flex items-center justify-between pt-[16px] ${
-              rotate ? "mx-0" : " ml-[20px] mr-[20px]"
+              rotate ? "mx-0" : " ml-[2vw] mr-[20px]"
             }`}
           >
             <p
               className={`text-white ${rotate ? "ml-[1.5vw]" : ""} ${
-                width > 700 ? "ml-[1vw]" : ""
+                width > 640 ? "ml-[1vw]" : ""
               }`}
             >
               {title}
             </p>
             <div className="flex items-center">
-              <div className="bg-[#383F47] w-[30px] h-[30px] rounded-full">
+              <div
+                className={`bg-[#383F47] w-[30px] h-[30px] rounded-full relative ${
+                  rotate ? "left-[3vw]" : "left-[2vw]"
+                }`}
+              >
                 <CustomImage
                   src={RotateIcon}
                   className="relative top-[8px] left-[9px]"
@@ -95,7 +99,7 @@ function LineChart({
             </div>
           </div>
         )}
-      {plugins || width < 700 ? (
+      {plugins || width < 640 ? (
         <Line
           options={options}
           data={data}

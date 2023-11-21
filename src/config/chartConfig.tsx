@@ -154,7 +154,11 @@ export const OPM_BAR_CHART_OPTIONS: Chart.ChartOptions = (
             top: 10,
             bottom: 40,
           }
-        : {},
+        : {
+            left: 10,
+            right: 20,
+            top: 20,
+          },
     },
     scales: {
       ...existingBarChartOptions.scales,
@@ -346,14 +350,7 @@ export const OPM_COMPARISON_OPTIONS_HOME = ({
     ...options,
     layout: {
       ...options.layout,
-      padding: isMobile
-        ? { left: 10, right: 20, top: 15, bottom: 0 }
-        : {
-            left: 30,
-            right: 50,
-            top: 35,
-            bottom: 0,
-          },
+      padding: isMobile ? { left: 10, right: 20, top: 15, bottom: 0 } : {},
     },
     scales: {
       ...options.scales,
@@ -363,7 +360,7 @@ export const OPM_COMPARISON_OPTIONS_HOME = ({
           ...options.scales.x.title,
           padding: isMobile
             ? { top: 20, bottom: 20 }
-            : { left: 50, top: 35, bottom: 0 },
+            : { left: 50, top: 15, bottom: 0 },
         },
       },
     },
