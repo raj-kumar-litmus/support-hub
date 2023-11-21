@@ -438,7 +438,6 @@ const OPM: React.FC = () => {
             <>
               <form
                 className="lg:flex md:gap-[0.15rem] opmFilters sm:grid sm:grid-cols-3 lg:ml-[0.5rem] sm:mb-4"
-                onSubmit={submit}
               >
                 {formFields.map((form, index) => {
                   return (
@@ -501,6 +500,7 @@ const OPM: React.FC = () => {
                 label={LABELS.submit}
                 isDisabled={disabled}
                 isRounded={true}
+                onClick={submit}
                 className="self-end relative left-[5vw] sm:w-[21vw] md:w-[15vw] lg:w-[10vw] sm:top-[2vh] md:top-[0] sm:left-[2.5vw] md:left-[1.5vw] lg:left-[1vw]"
               />
             </>
