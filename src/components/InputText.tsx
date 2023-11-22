@@ -16,6 +16,7 @@ interface Props {
 
 const CustomInputText: React.FC<Props> = ({
   onChange,
+  value,
   className,
   imageclassname,
   containerclassname,
@@ -33,6 +34,7 @@ const CustomInputText: React.FC<Props> = ({
       <span className="p-input-icon-left flex">
         <img className={imageclassname} src={icon} />
         <InputText
+          value={value}
           name={name}
           placeholder={placeholder}
           onChange={onChange}
@@ -48,6 +50,7 @@ const CustomInputText: React.FC<Props> = ({
         {label}
       </label>
       <InputText
+        value={value}
         name={name}
         placeholder={placeholder}
         onChange={onChange}
