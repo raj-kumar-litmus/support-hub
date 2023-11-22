@@ -61,7 +61,7 @@ const BarChart = () => {
   const [showFilters, setShowFilters] = useState<boolean>(true);
   const [submitCounter, setSubmitCounter] = useState<number>(0);
   const [chartOptions, setChartOptions] = useState<any>(null);
-  const [formFields, setFormFields] = useState([
+  const DEFAULT_FORM_FIELDS = [
     {
       type: "dropdown",
       name: "period",
@@ -74,7 +74,7 @@ const BarChart = () => {
       type: "calendar",
       name: "date",
       title: DATE,
-      value: "",
+      value: new Date(),
       imgsrc: CalendarIcon,
     },
     {
@@ -85,7 +85,8 @@ const BarChart = () => {
       iconSrc: ChannelIcon,
       options: CHANNEL_LIST,
     },
-  ]);
+  ];
+  const [formFields, setFormFields] = useState(DEFAULT_FORM_FIELDS);
   const [disabled, setDisabled] = useState(true);
   const [tabValue, setTabValue] = useState<number>(2);
   const [id, setId] = useState<string>("home-bar-chart");
@@ -195,7 +196,7 @@ const BarChart = () => {
     const val = event.target.name || event.value.name;
     if (val === "date") {
       const dataItem = data.find((e) => e.name === val);
-      dataItem.value = event.value;
+      dataItem.value = isNaN(event.value) ? new Date() : event.value;
     } else {
       const dataItem = data.find((e) => e.name === val);
       dataItem.value = event.target.value;
@@ -222,12 +223,6 @@ const BarChart = () => {
 
   const onHide = () => {
     setShowFilterPopup(false);
-  };
-
-  const clearAllHandler = () => {
-    const data = [...formFields];
-    data.forEach((e) => (e.value = ""));
-    setFormFields(data);
   };
 
   const getFilterCardContent = (e) => {
@@ -378,7 +373,7 @@ const BarChart = () => {
 
             {!disabled && (
               <div
-                onClick={clearAllHandler}
+                onClick={() => setFormFields(DEFAULT_FORM_FIELDS)}
                 className="text-[#FAF9F6] font-normal text-xs ml-2 cursor-pointer"
               >
                 {RESET}

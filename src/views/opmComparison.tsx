@@ -104,8 +104,7 @@ const OpmComparison: React.FC = () => {
   const [showFilteredCards, setShowFilteredCards] = useState<boolean>(false);
   const [disabled, setDisabled] = useState(true);
   const { hideLoader } = useContext(LoaderContext) as LoaderContextType;
-
-  const [formFields, setFormFields] = useState([
+  const DEFAULT_FORM_FIELDS = [
     {
       type: INPUT_TYPES.dropdown,
       name: "period",
@@ -154,7 +153,8 @@ const OpmComparison: React.FC = () => {
         code: CHANNELS[e],
       })),
     },
-  ]);
+  ];
+  const [formFields, setFormFields] = useState(DEFAULT_FORM_FIELDS);
 
   useEffect(() => {
     const startTimeOne = getFormattedPSTDate();
@@ -180,8 +180,10 @@ const OpmComparison: React.FC = () => {
   const handleFormChange = (event) => {
     const data = [...formFields];
     const val = event.target.name || event.value.name;
-    if (val === "date") {
-      data.find((e) => e.name === val).value = event.value;
+    if (["startDate", "endDate"].includes(val)) {
+      data.find((e) => e.name === val).value = isNaN(event.value)
+        ? new Date()
+        : event.value;
     } else {
       data.find((e) => e.name === val).value = event.target.value;
     }
@@ -274,12 +276,6 @@ const OpmComparison: React.FC = () => {
     } catch (err) {
       console.log(`Error occured while fetching ${url}`);
     }
-  };
-
-  const clearAllHandler = () => {
-    const data = [...formFields];
-    data.forEach((e) => (e.value = ""));
-    setFormFields(data);
   };
 
   useEffect(() => {
@@ -571,7 +567,7 @@ const OpmComparison: React.FC = () => {
                   severity="secondary"
                   className="resetFilters text-[12px] text-[#575353]"
                   isTextButton={true}
-                  onClick={clearAllHandler}
+                  onClick={() => setFormFields(DEFAULT_FORM_FIELDS)}
                 />
               )}
             </div>

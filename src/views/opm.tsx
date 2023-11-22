@@ -100,114 +100,7 @@ const OPM: React.FC = () => {
     country: "",
   };
 
-  const [url, setUrl] = useState<string | null>(null);
-
-  const [options, setOptions] = useState<null | ChartOptions>(null);
-  const [barChartoptions, setBarChartOptions] = useState<null | ChartOptions>(
-    null,
-  );
-  const [data, setData] = useState<ChartData | null>(null);
-  const [barChartData, setBarChartData] = useState<ChartData | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [showFilteredCards, setShowFilteredCards] = useState<boolean>(false);
-  const [tabValue, setTabValue] = useState<number>(1);
-
-  useEffect(() => {
-    const removeEventListener = submitOnEnter(submit);
-    return removeEventListener;
-  }, []);
-
-  useEffect(() => {
-    setUrl(
-      `${URL_OPM}?period=${
-        location.pathname.includes("opm")
-          ? DEFAULT.duration
-          : HOME_PAGE_REFERSH_DURATION
-      }&starttime=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${
-        DEFAULT.promocode
-      }&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`,
-    );
-  }, []);
-
-  const getData = async (showLoader = true) => {
-    try {
-      if (showLoader) setIsLoading(true);
-      const data = await fetchData(url, {});
-      if (showLoader) setIsLoading(false);
-      hideLoader();
-      setIsLoading(false);
-      const xAxisLabels = data.map((e) => e.timestamp);
-      const dataArr = data.map((e) => Number(e.orderCount));
-      setData({
-        labels: xAxisLabels,
-        datasets: [
-          {
-            label: "No of orders",
-            data: dataArr,
-            borderColor: "#599DF5",
-            pointStyle: "circle",
-            backgroundColor: "white",
-            borderWidth: 2,
-          },
-        ],
-      });
-      setBarChartData({
-        labels: xAxisLabels,
-        datasets: [
-          {
-            label: "No of orders",
-            data: dataArr,
-            borderColor: "#599DF5",
-            backgroundColor: "#599DF5",
-            borderWidth: 2,
-          },
-        ],
-      });
-    } catch (err) {
-      console.log(`Error occured while fetching ${url}`);
-    }
-  };
-
-  const clearAllHandler = () => {
-    const data = [...formFields];
-    data.forEach((e) => (e.value = ""));
-    setFormFields(data);
-  };
-
-  useEffect(() => {
-    (async () => {
-      if (url) {
-        setOptions(
-          OPM_OPTIONS(
-            width < 640,
-            Number(url.split("period=")[1].split("&")[0]) < 16,
-          ),
-        );
-        setBarChartOptions(
-          OPM_BAR_CHART_OPTIONS(
-            width < 640,
-            Number(url.split("period=")[1].split("&")[0]) < 16,
-          ),
-        );
-        await getData();
-      }
-    })();
-  }, [url]);
-
-  const onFilterClickHandler = () => {
-    setShowFilters(!showFilters);
-    setPosition("bottom");
-    setVisible(true);
-  };
-
-  const onModalCloseHandler = () => {
-    setVisible(false);
-    setShowFilters(!showFilters);
-  };
-
-  const [disabled, setDisabled] = useState(true);
-
-  const [formFields, setFormFields] = useState([
+  const DEFAULT_FORM_FIELDS = [
     {
       type: INPUT_TYPES.dropdown,
       name: "period",
@@ -227,7 +120,7 @@ const OPM: React.FC = () => {
       type: INPUT_TYPES.time,
       name: "date",
       label: LABELS.date,
-      value: "",
+      value: new Date(),
       showTime: true,
       cardIcon: GreyCalendarIcon,
       imgsrc: WhiteCalendarIcon,
@@ -285,13 +178,117 @@ const OPM: React.FC = () => {
       cardIcon: GreyPromoIcon,
       value: "",
     },
-  ]);
+  ];
+
+  const [url, setUrl] = useState<string | null>(null);
+
+  const [options, setOptions] = useState<null | ChartOptions>(null);
+  const [barChartoptions, setBarChartOptions] = useState<null | ChartOptions>(
+    null,
+  );
+  const [data, setData] = useState<ChartData | null>(null);
+  const [barChartData, setBarChartData] = useState<ChartData | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showFilteredCards, setShowFilteredCards] = useState<boolean>(false);
+  const [tabValue, setTabValue] = useState<number>(1);
+  const [formFields, setFormFields] = useState(DEFAULT_FORM_FIELDS);
+
+  useEffect(() => {
+    const removeEventListener = submitOnEnter(submit);
+    return removeEventListener;
+  }, []);
+
+  useEffect(() => {
+    setUrl(
+      `${URL_OPM}?period=${
+        location.pathname.includes("opm")
+          ? DEFAULT.duration
+          : HOME_PAGE_REFERSH_DURATION
+      }&starttime=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${
+        DEFAULT.promocode
+      }&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`,
+    );
+  }, []);
+
+  const getData = async (showLoader = true) => {
+    try {
+      if (showLoader) setIsLoading(true);
+      const data = await fetchData(url, {});
+      if (showLoader) setIsLoading(false);
+      hideLoader();
+      setIsLoading(false);
+      const xAxisLabels = data.map((e) => e.timestamp);
+      const dataArr = data.map((e) => Number(e.orderCount));
+      setData({
+        labels: xAxisLabels,
+        datasets: [
+          {
+            label: "No of orders",
+            data: dataArr,
+            borderColor: "#599DF5",
+            pointStyle: "circle",
+            backgroundColor: "white",
+            borderWidth: 2,
+          },
+        ],
+      });
+      setBarChartData({
+        labels: xAxisLabels,
+        datasets: [
+          {
+            label: "No of orders",
+            data: dataArr,
+            borderColor: "#599DF5",
+            backgroundColor: "#599DF5",
+            borderWidth: 2,
+          },
+        ],
+      });
+    } catch (err) {
+      console.log(`Error occured while fetching ${url}`);
+    }
+  };
+
+  useEffect(() => {
+    (async () => {
+      if (url) {
+        setOptions(
+          OPM_OPTIONS(
+            width < 640,
+            Number(url.split("period=")[1].split("&")[0]) < 16,
+          ),
+        );
+        setBarChartOptions(
+          OPM_BAR_CHART_OPTIONS(
+            width < 640,
+            Number(url.split("period=")[1].split("&")[0]) < 16,
+          ),
+        );
+        await getData();
+      }
+    })();
+  }, [url]);
+
+  const onFilterClickHandler = () => {
+    setShowFilters(!showFilters);
+    setPosition("bottom");
+    setVisible(true);
+  };
+
+  const onModalCloseHandler = () => {
+    setVisible(false);
+    setShowFilters(!showFilters);
+  };
+
+  const [disabled, setDisabled] = useState(true);
 
   const handleFormChange = (event) => {
     const data = [...formFields];
     const val = event.target.name || event.value.name;
     if (val === "date") {
-      data.find((e) => e.name === val).value = event.value;
+      data.find((e) => e.name === val).value = isNaN(event.value)
+        ? new Date()
+        : event.value;
     } else {
       data.find((e) => e.name === val).value = event.target.value;
     }
@@ -612,7 +609,7 @@ const OPM: React.FC = () => {
               severity="secondary"
               className="resetFilters text-[12px] text-[#575353]"
               isTextButton={true}
-              onClick={clearAllHandler}
+              onClick={() => setFormFields(DEFAULT_FORM_FIELDS)}
             />
           )}
         </div>
