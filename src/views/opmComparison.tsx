@@ -57,7 +57,7 @@ import {
 import { URL_OPM_COMPARISON } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
 import { LoaderContext, LoaderContextType } from "../context/loaderContext";
-import { getFormattedPSTDate, getPSTdate } from "../utils/dateTimeUtil";
+import { CURRENT_PST_DATE, getFormattedPSTDate, getPSTdate } from "../utils/dateTimeUtil";
 import {
   OPM_COMPARISON_OPTIONS,
   OPM_COMPARISON_OPTIONS_HOME,
@@ -421,7 +421,7 @@ const OpmComparison: React.FC = () => {
                             maxDate={
                               form.name === "startDate" ||
                               form.name === "endDate"
-                                ? new Date()
+                                ? CURRENT_PST_DATE
                                 : null
                             }
                           />
@@ -496,7 +496,7 @@ const OpmComparison: React.FC = () => {
                                 maxDate={
                                   form.name === "startDate" ||
                                   form.name === "endDate"
-                                    ? new Date()
+                                    ? CURRENT_PST_DATE
                                     : null
                                 }
                               />

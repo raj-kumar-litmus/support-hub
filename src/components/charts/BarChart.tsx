@@ -31,6 +31,7 @@ import {
 } from "../../constants/appConstants";
 import useScreenSize from "../../hooks/useScreenSize";
 import {
+  CURRENT_PST_DATE,
   DATE_FORMAT_3,
   DATE_TIME_FORMAT_1,
   DATE_TIME_FORMAT_2,
@@ -74,7 +75,7 @@ const BarChart = () => {
       type: "calendar",
       name: "date",
       title: DATE,
-      value: new Date(),
+      value: CURRENT_PST_DATE,
       imgsrc: CalendarIcon,
     },
     {
@@ -321,7 +322,7 @@ const BarChart = () => {
                           placeholder={MM_DD_YYYY_HH_MM}
                           value={form.value}
                           onChange={(event) => handleFormChange(event)}
-                          maxDate={form.name === "date" ? new Date() : null}
+                          maxDate={form.name === "date" ? CURRENT_PST_DATE : null}
                           dateFormat={DATE_FORMAT_3}
                           iconPos={"left"}
                           imgalt={`${form.name}-icon`}
@@ -462,7 +463,7 @@ const BarChart = () => {
                       placeholder={DD_MM_YYYY}
                       value={form.value}
                       onChange={(event) => handleFormChange(event)}
-                      maxDate={form.name === "date" ? new Date() : null}
+                      maxDate={form.name === "date" ? CURRENT_PST_DATE : null}
                       dateFormat={DATE_FORMAT_3}
                       iconPos={"left"}
                       imgalt={`${form.name}-icon`}

@@ -62,6 +62,7 @@ import { LoaderContext, LoaderContextType } from "../context/loaderContext";
 import CustomTab from "../components/common/customtab";
 import { OPM_BAR_CHART_OPTIONS, OPM_OPTIONS } from "../config/chartConfig";
 import {
+  CURRENT_PST_DATE,
   DATE_TIME_FORMAT_2,
   formatDate,
   getFormattedPSTDate,
@@ -120,7 +121,7 @@ const OPM: React.FC = () => {
       type: INPUT_TYPES.time,
       name: "date",
       label: LABELS.date,
-      value: new Date(),
+      value: CURRENT_PST_DATE,
       showTime: true,
       cardIcon: GreyCalendarIcon,
       imgsrc: WhiteCalendarIcon,
@@ -287,7 +288,7 @@ const OPM: React.FC = () => {
     const val = event.target.name || event.value.name;
     if (val === "date") {
       data.find((e) => e.name === val).value = isNaN(event.value)
-        ? new Date()
+        ? CURRENT_PST_DATE
         : event.value;
     } else {
       data.find((e) => e.name === val).value = event.target.value;
@@ -468,7 +469,7 @@ const OPM: React.FC = () => {
                           imgsrc={form.imgsrc}
                           onChange={(event) => handleFormChange(event)}
                           value={form.value}
-                          maxDate={form.name === "date" ? new Date() : null}
+                          maxDate={form.name === "date" ? CURRENT_PST_DATE : null}
                           dateFormat="dd-MM-yyyy hh:mm"
                         />
                       )}
@@ -545,7 +546,7 @@ const OPM: React.FC = () => {
                             imgsrc={form.imgsrc}
                             onChange={(event) => handleFormChange(event)}
                             value={form.value}
-                            maxDate={form.name === "date" ? new Date() : null}
+                            maxDate={form.name === "date" ? CURRENT_PST_DATE : null}
                           />
                         )}
                         {form.type === INPUT_TYPES.dropdown && (
