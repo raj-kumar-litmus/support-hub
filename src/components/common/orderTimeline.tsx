@@ -8,17 +8,17 @@ interface TimelineProps {
 }
 
 const Timeline: React.FC<TimelineProps> = ({ orderMap }) => {
-
   const getStatusDate = (dateX: string) => {
-    let year = dateX.substring(0, 4);
-    let month = dateX.substring(4, 6);
-    let day = dateX.substring(6, 8);
-    let hour = dateX.substring(8, 10);
-    let min = dateX.substring(10, 12);
-    let sec = dateX.substring(12, 14);
-    let newDate = month + "-" + day + "-" + year + " " + hour + ":" + min + ":" + sec;
+    const year = dateX.substring(0, 4);
+    const month = dateX.substring(4, 6);
+    const day = dateX.substring(6, 8);
+    const hour = dateX.substring(8, 10);
+    const min = dateX.substring(10, 12);
+    const sec = dateX.substring(12, 14);
+    const newDate =
+      month + "-" + day + "-" + year + " " + hour + ":" + min + ":" + sec;
     return newDate;
-  }
+  };
 
   return (
     <div className="  flex flex-col items-center">
@@ -40,7 +40,7 @@ const Timeline: React.FC<TimelineProps> = ({ orderMap }) => {
               </div>
             )}
             {isLast && (
-              <div className="relative left-[32%] bottom-[45%] w-3.5 h-3.5 border-2 border-[#898A8D] rounded-full"></div>
+              <div className="relative left-[32%] bottom-[45%] w-3.5 h-3.5 border-2 border-gray-400 rounded-full"></div>
             )}
           </div>
         );

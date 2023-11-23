@@ -3,6 +3,8 @@ import useInterval from "../../hooks/useInterval";
 import CustomCheckbox from "./CustomCheckBox";
 import CustomInputNumber from "./CustomInputNumber";
 import CustomToast from "./CustomToast";
+import CustomImage from "./customimage";
+import InfoIcon from "../../assets/info.svg";
 
 interface AutoRefreshProps {
   getData(): any;
@@ -95,8 +97,7 @@ const AutoRefresh = (props: AutoRefreshProps) => {
         onHide={() => setShowAutoRefreshToast(false)}
         showToast={showAutoRefreshToast}
         severity="info"
-        summary="Chart"
-        // closable={false}
+        messageIcon={<CustomImage src={InfoIcon} />}
         detail={`The chart will be auto refreshed every ${
           autoRefreshDuration * 60
         } seconds`}

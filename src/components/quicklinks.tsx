@@ -1,4 +1,4 @@
-import { FC, KeyboardEvent, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { QUICK_LINKS, QUICK_LINKS_HEADER } from "../constants/appConstants";
 
 import { IQuickLink } from "../@types/quicklinks";
@@ -27,21 +27,25 @@ const QuickLinks = () => {
   const onSeeMoreClick = () => {
     setQuickLinks(allQuickLinks);
     setShowSeeMoreBtn(false);
-  }
+  };
 
   const getQuickLinks = () => {
-    let links = QUICK_LINKS.find(l => l.id === tabValue).links;
+    const links = QUICK_LINKS.find((l) => l.id === tabValue).links;
     setQuickLinks(links);
     setAllQuickLinks(links);
-  }
+  };
 
   useEffect(() => {
     getQuickLinks();
   }, [tabValue]);
 
   useEffect(() => {
-    if (width < 640 && allQuickLinks.length > 0 && !(allQuickLinks.length < 10)) {
-      let _quickLinks = [...allQuickLinks];
+    if (
+      width < 640 &&
+      allQuickLinks.length > 0 &&
+      !(allQuickLinks.length < 10)
+    ) {
+      const _quickLinks = [...allQuickLinks];
       _quickLinks.splice(10);
       setQuickLinks(_quickLinks);
       setShowSeeMoreBtn(true);
@@ -52,9 +56,11 @@ const QuickLinks = () => {
   }, [width, allQuickLinks]);
 
   return (
-    <div className="p-4 sm:px-8 sm:py-6 bg-[#22262C] quick-links absolute top-[56px] sm:left-[25vw] lg:left-[21vw] right-0">
+    <div className="p-4 sm:px-8 sm:py-6 bg-black-200 quick-links absolute top-[56px] sm:left-[25vw] lg:left-[21vw] right-0">
       <div className="flex flex-wrap justify-between items-center pb-2">
-        <span className="text-[#FAF9F6] pb-2 font-bold">{QUICK_LINKS_HEADER}</span>
+        <span className="text-gray-300 pb-2 font-bold">
+          {QUICK_LINKS_HEADER}
+        </span>
         <div className="flex flex-wrap justify-between m-auto">
           <CustomTab
             className="custom-tab quick-links-tab"
@@ -65,7 +71,7 @@ const QuickLinks = () => {
         </div>
       </div>
       <div className="flex flex-wrap ">
-        {quickLinks.map((l, i) =>
+        {quickLinks.map((l, i) => (
           <QuickLinkBox
             link={l}
             hoveredIndex={hoveredIndex}
@@ -73,35 +79,40 @@ const QuickLinks = () => {
             index={i}
             key={i}
           />
-        )}
-        {showSeeMoreBtn &&
+        ))}
+        {showSeeMoreBtn && (
           <CustomButton
             label="See More"
             onClick={onSeeMoreClick}
-          className="custom-btn block"
+            className="custom-btn block"
           />
-        }
+        )}
       </div>
     </div>
   );
-}
+};
 
-const QuickLinkBox: FC<Props> = ({ link, hoveredIndex, setHoveredIndex, index }) => {
+const QuickLinkBox: FC<Props> = ({
+  link,
+  hoveredIndex,
+  setHoveredIndex,
+  index,
+}) => {
   return (
-    <div className="m-1 link-box flex justify-center cursor-pointer" onClick={() => window.open(link.link, "_blank")} key={link.name} onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)}>
-      <span className="m-auto text-center">
-        {link.name}
-      </span>
+    <div
+      className="m-1 link-box flex justify-center cursor-pointer"
+      onClick={() => window.open(link.link, "_blank")}
+      key={link.name}
+      onMouseEnter={() => setHoveredIndex(index)}
+      onMouseLeave={() => setHoveredIndex(null)}
+    >
+      <span className="m-auto text-center">{link.name}</span>
       <CustomImage
         className="h-[13px] self-start mr-2 mt-2"
         src={index === hoveredIndex ? ArrowTopWhite : ArrowTop}
       />
     </div>
-  )
-}
-
+  );
+};
 
 export default QuickLinks;
-
-
-

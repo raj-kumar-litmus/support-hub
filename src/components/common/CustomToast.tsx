@@ -8,6 +8,7 @@ interface Props extends ToastProps {
   detail?: string;
   life?: number;
   closable?: boolean;
+  messageIcon?: any;
 }
 
 const CustomToast = (props: Props) => {
@@ -20,6 +21,7 @@ const CustomToast = (props: Props) => {
         summary: props.summary,
         detail: props.detail,
         life: props.life,
+        icon: props.messageIcon,
         closable: props.closable,
       });
       props.onHide();
