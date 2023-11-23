@@ -96,7 +96,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
           <div
             className={`${showSidePaneGrid ? "hidden" : "block"} 
               ${IS_FULLSCREEN ? "h-[100vh]" : "h-[calc(100vh-56px)]"} 
-              w-full sm:ml-[25vw] md:ml-[27vw] lg:ml-[21vw] overflow-y-auto p-[20px] sm:pl-[2.5vw] sm-py-[28px] bg-[#161A1D]`}
+              w-full sm:ml-[25vw] md:ml-[27vw] lg:ml-[21vw] overflow-y-auto p-[20px] sm:px-[2.5rem] sm-py-[28px] bg-[#161A1D]`}
           >
             {appContent}
           </div>
