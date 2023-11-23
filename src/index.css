@@ -403,11 +403,9 @@ button.p-button-secondary {
 .custom-popup.p-dialog {
   @apply absolute max-[639px]:max-h-[calc(100vh-154px)] max-[390px]:w-full w-[390px] max-[390px]:!bottom-0 sm:max-h-[528px];
 }
-
 .p-dialog-mask.p-component-overlay {
-  @apply backdrop-brightness-50;
+  @apply backdrop-contrast-[.85];
 }
-
 .custom-popup .p-dialog-header {
   @apply py-4 text-[#757575] z-10 font-medium bg-[#22262C] border-[#383F47] border-solid border-b;
 }
@@ -804,7 +802,7 @@ hr.horizontalLine.blue {
   @apply invisible;
 }
 .link-box {
-  @apply w-[10.1rem] sm:w-[11.1rem] h-[50px] text-[13px] text-white !bg-[#292E36] items-center rounded-lg;
+  @apply w-full h-[50px] text-[13px] text-white !bg-[#22262C] border border-[#292E36] items-center rounded-lg;
 }
 .link-box:hover {
   @apply border border-[#F2F2F2];
@@ -826,7 +824,7 @@ hr.horizontalLine.blue {
   @apply h-[35px];
 }
 .quick-links-tab.p-tabview {
-  @apply h-[40px];
+  @apply h-[2.25rem];
 }
 .custom-btn {
   @apply mx-auto mt-2;
@@ -980,4 +978,16 @@ hr.horizontalLine.blue {
 }
 ::-webkit-scrollbar {
   @apply w-1 h-1;
+}
+.quick-links-popup {
+  @apply bg-[#161A1D] absolute top-[56px] left-0 sm:left-[25vw] lg:left-[21vw] right-0;
+}
+.quick-links-popup .p-dialog-header {
+  @apply bg-[#161A1D] rounded-none p-5 sm:px-10 pb-0 border border-[#292E36] border-b-0 border-r-0;
+}
+.quick-links-popup .p-dialog-content {
+  @apply bg-inherit !rounded-none  border border-[#292E36] border-t-0 border-r-0 p-5 pt-3 sm:pt-5 sm:px-10;
+}
+.quick-link-btn .p-button .p-button-label {
+  @apply text-white font-normal;
 }
