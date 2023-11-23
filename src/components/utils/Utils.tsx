@@ -155,7 +155,7 @@ export const getTableHeaders = (data: object[]) => {
 export const convert24to12Hour = (hour) => {
   const convertedHour = parseInt(hour, 10);
   if (convertedHour === 0) {
-    return { hour12: 12, ampm: "AM" };
+    return { hour12: 0, ampm: "AM" };
   } else if (convertedHour >= 1 && convertedHour <= 11) {
     return { hour12: convertedHour, ampm: "AM" };
   } else if (convertedHour === 12) {

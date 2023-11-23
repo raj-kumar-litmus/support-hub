@@ -5,8 +5,10 @@ import { CustomCalendarProps } from "../../@types/BarChart";
 import ArrowDown from "../../assets/arrow_down.svg";
 import ArrowUp from "../../assets/arrow_up.svg";
 import { AM_PM_OPTIONS } from "../../constants/appConstants";
+import { CURRENT_PST_DATE } from "../../utils/dateTimeUtil";
 import { convert12to24Hour, convert24to12Hour } from "../utils/Utils";
 import CustomImage from "./customimage";
+import CustomToast from "./CustomToast";
 
 type ManualInputTimeProps = {
   hour: number;
@@ -18,12 +20,13 @@ type ManualInputTimeProps = {
 };
 
 const CustomCalendar: FC<CustomCalendarProps> = (props) => {
-  const today = new Date();
-  const [hour, setHour] = useState<number>(convert24to12Hour(today.getHours()).hour12);
-  const [minute, setMinute] = useState<number>(today.getMinutes());
-  const [date, setDate] = useState<Date>(today);
+  const [hour, setHour] = useState<number>(convert24to12Hour(CURRENT_PST_DATE.getHours()).hour12);
+  const [minute, setMinute] = useState<number>(CURRENT_PST_DATE.getMinutes());
+  const [date, setDate] = useState<Date>(CURRENT_PST_DATE);
   const [event, setEvent] = useState(null);
-  const [ampm, setAmPm] = useState(convert24to12Hour(today.getHours()).ampm);
+  const [ampm, setAmPm] = useState(convert24to12Hour(CURRENT_PST_DATE.getHours()).ampm);
+  const [showFutureDateToast, setShowFutureDateToast] =
+    useState<boolean>(false);
 
   const handleHourChange = (e) => {
     setHour(e.target.value);
@@ -46,10 +49,20 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
 
   const getUpdatedDate = (e) => {
     let _hour = convert12to24Hour(hour, ampm);
-    date.setHours(_hour);
-    date.setMinutes(minute);
-    setDate(date);
-    let event = { ...e, value: date, target: { value: date, name: props.name } };
+    let _date = new Date(date);
+    _date.setHours(_hour);
+    _date.setMinutes(minute);
+    setShowFutureDateToast(false);
+    if (props.maxDate && !(_date < props.maxDate)) {
+      setShowFutureDateToast(true);
+      setHour(convert24to12Hour(CURRENT_PST_DATE.getHours()).hour12);
+      setMinute(CURRENT_PST_DATE.getMinutes());
+      setAmPm(convert24to12Hour(CURRENT_PST_DATE.getHours()).ampm);
+      setDate(CURRENT_PST_DATE)
+      return;
+    }
+    setDate(_date);
+    let event = { ...e, value: _date, target: { value: _date, name: props.name } };
     props.onChange(event);
   }
 
@@ -109,6 +122,14 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
         />
         )
         } />
+      <CustomToast
+        onHide={() => setShowFutureDateToast(false)}
+        showToast={showFutureDateToast}
+        severity="warn"
+        detail="Please select a date and time on or before the current moment."
+        position="top-center"
+        life={3000}
+      />
     </div>
   )
 }
@@ -116,18 +137,18 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
 const ManualInputTime: FC<ManualInputTimeProps> = ({ hour, minute, handleHourChange, handleMinuteChange, ampm, toggleAmPmChange }) => {
   return (
     <div className="flex justify-evenly w-[12rem] mx-auto items-center">
-      <InputNumber value={hour} step={1} onValueChange={(e) => handleHourChange(e)} showButtons buttonLayout="vertical" min={0} max={12} /> :
-      <InputNumber value={minute} onValueChange={(e) => handleMinuteChange(e)} showButtons buttonLayout="vertical" step={1} min={0} max={59} />:
+      <InputNumber value={hour < 1 ? 12 : hour} step={1} onValueChange={(e) => handleHourChange(e)} showButtons buttonLayout="vertical" min={0} max={12} prefix={hour && hour < 10 && "0"} /> :
+      <InputNumber value={minute} onValueChange={(e) => handleMinuteChange(e)} showButtons buttonLayout="vertical" step={1} min={0} max={59} prefix={minute < 10 && "0"} />:
       <div className="ampm-comp px-[1rem] min-w-[4rem]">
         <CustomImage
           src={ArrowUp}
-          className="cursor-pointer"
+          className="cursor-pointer ampm-arrow"
           onClick={toggleAmPmChange}
         />
         <div className="my-[0.3rem]">{ampm}</div>
         <CustomImage
           src={ArrowDown}
-          className="cursor-pointer"
+          className="cursor-pointer ampm-arrow"
           onClick={toggleAmPmChange}
         />
       </div>

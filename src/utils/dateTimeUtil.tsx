@@ -115,3 +115,7 @@ export const timeInPST = (timestring: number) => {
 
   return buildLocaleString(datetime);
 };
+
+export const CURRENT_PST_DATE = new Date(new Date().toLocaleString("en-US", {
+  timeZone: "America/Los_Angeles",
+}));
