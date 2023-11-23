@@ -47,7 +47,7 @@ const CardTitle = ({
   classname?: string;
 }) => {
   return (
-    <div className={`${classname} flex justify-between`}>
+    <div className={`${classname ? classname : ""} flex justify-between`}>
       <h6>{title}</h6>
       <CustomImage src={icon} />
     </div>
@@ -236,9 +236,9 @@ const HomePage = () => {
             </div>
           </div>
           {isLoading ? (
-            <Loader />
+            <Loader className={"card-loader-height"} />
           ) : (
-            <div className="flex flex-wrap gap-[10px] pb-4 border-b  border-b-[#22262C]">
+            <div className="flex flex-wrap gap-[10px] pb-4 border-b border-b-[#22262C] card-loader-height">
               <HomeCard
                 title={
                   <CardTitle
@@ -262,7 +262,13 @@ const HomePage = () => {
                 textColor="#FFFFFF"
               />
               <HomeCard
-                title={<CardTitle title={LAST_MIN_OPM} icon={lastMinOpmIcon} />}
+                title={
+                  <CardTitle
+                    title={LAST_MIN_OPM}
+                    icon={lastMinOpmIcon}
+                    classname={"card-title"}
+                  />
+                }
                 value={<OPMCards value={lastMinOPM} />}
                 bgColor="#E9E8E8"
                 textColor="#FFFFFF"
@@ -293,7 +299,7 @@ const HomePage = () => {
             </div>
           )}
 
-          <div className="home-opm-charts flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:gap-[2%]">
+          <div className="home-opm-charts flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:gap-[2%] opm-loader-height">
             <OPM />
             <OpmComparison />
           </div>

@@ -31,7 +31,6 @@ export interface CustomCalendarProps extends CalendarProps {
   imageclassname?: string;
   titleclassname?: string;
   showTime?: boolean;
-  hideOnDateTimeSelect?: boolean;
   hourFormat?: "24" | "12";
   selectionMode?: "single" | "range" | "multiple";
   value: string;

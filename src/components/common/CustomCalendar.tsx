@@ -95,7 +95,6 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
         placeholder={props.placeholder}
         value={date}
         dateFormat="mm/dd/yy"
-        hideOnDateTimeSelect={props.hideOnDateTimeSelect || true}
         onChange={(e) => onChange(e)}
         iconPos={props.iconPos}
         footerTemplate={() => (props.showTime &&

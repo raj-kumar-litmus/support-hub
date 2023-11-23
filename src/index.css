@@ -502,10 +502,10 @@ button.p-button-secondary {
   @apply !bg-[#30343B] border border-solid border-[#30343B];
 }
 .opmFilters .p-calendar .p-inputtext {
-  @apply pl-[2.6vw] md:w-[20vw] lg:w-[12vw]
+  @apply pl-[2.6vw] md:w-[20vw] lg:w-[12vw];
 }
 .opmComparisonFilters .p-calendar .p-inputtext {
-  @apply md:w-[9vw] lg:w-[12vw]
+  @apply md:w-[9vw] lg:w-[12vw];
 }
 .opmFilters .p-dropdown:not(.p-disabled).p-focus {
   @apply !border-[#30343B];
@@ -638,7 +638,7 @@ hr.horizontalLine.blue {
 
 /* Order Details */
 #orderDetailsComp {
-  @apply font-helvetica bg-[#161A1D] sm:bg-inherit; 
+  @apply font-helvetica bg-[#161A1D] sm:bg-inherit;
 }
 #orderDetailsComp .grid span {
   @apply text-sm py-2 text-[#FAF9F6] sm:bg-[#22262C];
@@ -735,11 +735,11 @@ hr.horizontalLine.blue {
 }
 
 .home-page .p-card .p-card-title h6 {
-  @apply text-xs leading-[18px] w-3/4 sm:w-1/2 font-helvetica;
+  @apply text-xs leading-[1.125rem] w-3/5 sm:w-3/5 font-helvetica;
 }
 
 .home-page .p-card .p-card-title .card-title h6 {
-  @apply sm:w-[60%];
+  @apply sm:w-2/5;
 }
 .home-opm {
   @apply sm:mt-6 ml-0 sm:ml-[5vw];
@@ -926,20 +926,20 @@ hr.horizontalLine.blue {
 .opm-page-chart-container {
   @apply border-0 rounded-[10px] sm:w-[65vw] lg:w-[72vw] lg:ml-[0] h-[24rem] md:h-[340px] lg:!h-[62.23vh] mt-[3vh] md:mt-[1vh] lg:mt-[3vh];
 }
-.session-tooltip-tbody{
+.session-tooltip-tbody {
   @apply flex flex-wrap;
 }
-.session-tooltip-tbody tr.session-col-1{
+.session-tooltip-tbody tr.session-col-1 {
   @apply w-[65%];
 }
-.session-tooltip-tbody tr.session-col-2{
+.session-tooltip-tbody tr.session-col-2 {
   @apply w-[35%] text-right;
 }
 .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus {
-  @apply !shadow-none !border-none
+  @apply !shadow-none !border-none;
 }
 .p-checkbox .p-checkbox-box.p-highlight {
-  @apply !border-white !bg-transparent
+  @apply !border-white !bg-transparent;
 }
 .autoRefreshCheckBox .p-checkbox .p-checkbox-box {
   @apply w-[18px] h-[18px];
@@ -951,16 +951,16 @@ hr.horizontalLine.blue {
   @apply !bg-[#2CB67D] !text-[#161A1D] !border-l-transparent;
 }
 .p-toast-message-content {
-  @apply !border-l-0
+  @apply !border-l-0;
 }
 .p-toast-icon-close-icon {
-  @apply text-[#161A1D] bg-transparent
+  @apply text-[#161A1D] bg-transparent;
 }
 .p-toast-icon-close:hover {
-  @apply !bg-transparent
+  @apply !bg-transparent;
 }
 .p-toast-message-icon {
-  @apply !h-0
+  @apply !h-0;
 }
 .p-datepicker-footer .p-button:enabled:hover,
 .p-datepicker-footer .p-button:not(button):not(a):not(.p-disabled):hover {
@@ -972,7 +972,8 @@ hr.horizontalLine.blue {
 .ampm-comp {
   text-align: -webkit-center;
 }
-.filteredCard .p-image, .filteredCard img {
+.filteredCard .p-image,
+.filteredCard img {
   @apply !w-[.8rem] !h-[.8rem] max-w-[.8rem];
 }
 ::-webkit-scrollbar-thumb {
@@ -980,4 +981,13 @@ hr.horizontalLine.blue {
 }
 ::-webkit-scrollbar {
   @apply w-1 h-1;
+}
+.card-loader-height {
+  @apply min-h-[7.188rem] sm:min-h-[17rem] lg:min-h-[16rem] xl:min-h-[9.5rem] 3xl:min-h-[8.5rem];
+}
+.sessions-loader-height {
+  @apply min-h-[24rem];
+}
+.opm-loader-height {
+  @apply min-h-[29rem];
 }
