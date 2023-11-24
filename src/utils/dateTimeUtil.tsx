@@ -7,6 +7,7 @@ export const DATE_FORMAT_4: string = "mm/dd/yyyy";
 export const DATE_TIME_FORMAT_1: string = "YYYY-MM-DDTHH:MM";
 export const DATE_TIME_FORMAT_2: string = "DD/MM/YYYY HH:MM AA";
 export const DATE_TIME_FORMAT_3: string = "YYYY-MM-DDTHH:MM:SS";
+export const DATE_TIME_FORMAT_4: string = "MM/DD/YYYY HH:MM AA";
 
 // Date Formatting Functions
 export const formatTime = (inputTime: string | Date): string => {
@@ -57,6 +58,12 @@ export const formatDate = (
       break;
     case DATE_TIME_FORMAT_3:
       formattedDate = `${year}-${month}-${day}T${time}:${seconds}`;
+      break;
+    case DATE_TIME_FORMAT_4:
+      formattedDate = `${month}/${day}/${year} ${getLocaleTime(
+        dateToBeFormatted,
+        true,
+      )}`;
       break;
     default:
       formattedDate = `${year}-${month}-${day}`;

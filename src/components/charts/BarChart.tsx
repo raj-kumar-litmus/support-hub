@@ -36,6 +36,7 @@ import {
   DATE_TIME_FORMAT_1,
   DATE_TIME_FORMAT_4,
   formatDate,
+  getFormattedPSTDate,
 } from "../../utils/dateTimeUtil";
 import { fetchData } from "../../utils/fetchUtil";
 import FilteredCard from "../FilteredCard";
@@ -75,7 +76,7 @@ const BarChart = () => {
       type: "calendar",
       name: "date",
       title: DATE,
-      value: CURRENT_PST_DATE,
+      value: getFormattedPSTDate(),
       imgsrc: CalendarIcon,
     },
     {

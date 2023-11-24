@@ -122,7 +122,7 @@ const OPM: React.FC = () => {
       type: INPUT_TYPES.time,
       name: "date",
       label: LABELS.date,
-      value: CURRENT_PST_DATE,
+      value: getFormattedPSTDate(),
       showTime: true,
       cardIcon: GreyCalendarIcon,
       imgsrc: WhiteCalendarIcon,
@@ -311,7 +311,7 @@ const OPM: React.FC = () => {
     formFields.forEach((e: any) => {
       if (e.value) {
         if (e.name === "date") {
-          dateString = getFormattedPSTDate(e.value);
+          dateString = formatDate(e.value, DATE_TIME_FORMAT_3);
           str += `starttime=${dateString}&`;
         } else {
           if (typeof e.value.code === "string" && e.value.code.length === 0) {
