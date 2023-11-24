@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router";
 import { Button } from "primereact/button";
-import { Dialog } from "primereact/dialog";
+import CustomDialog from "../common/customdialog";
 import React, { useEffect, useRef, useState, useContext } from "react";
 import { Bar } from "react-chartjs-2";
 import { ChartData, SessionData } from "../../@types/BarChart";
 import ChannelIcon from "../../assets/channel.svg";
 import FilterIcon from "../../assets/filter-dark.svg";
+import ArrowDownIcon from "../../assets/arrown_down_white.svg"
 import SandGlassIcon from "../../assets/sandglass.svg";
 import openNewPageIcon from "../../assets/open_in_new.svg";
 import CalendarIcon from "../../assets/white_calendar.svg";
@@ -433,17 +434,14 @@ const BarChart = () => {
         </div>
       )}
 
-      <Dialog
+      <CustomDialog
         id="modal-section"
         header={FILTERS}
         visible={showFilterPopup}
         footer={renderFooter()}
         onHide={onHide}
         blockScroll={true}
-        position="bottom"
-        draggable={false}
-        resizable={false}
-        style={{ width: "100vw", margin: 0 }}
+        className="filtersModal-popup"
       >
         <div className="filter-popup-content">
           <div className="flex gap-4 mb-4 w-full">
@@ -497,7 +495,7 @@ const BarChart = () => {
               })}
           </div>
         </div>
-      </Dialog>
+      </CustomDialog>
     </div>
   );
 };

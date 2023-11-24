@@ -20,8 +20,6 @@ const PromotionsPopup: FC<Props> = ({
       header={PROMOTIONS}
       visible={openPromotionsPopup}
       onHide={() => setOpenPromotionsPopup(false)}
-      draggable={false}
-      resizable={false}
       className="custom-popup"
     >
       {promotions.length > 0 ? (

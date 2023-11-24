@@ -25,10 +25,10 @@ import CustomDropdown from "../components/DropDown";
 import CustomInputText from "../components/InputText";
 import CustomCalendar from "../components/common/CustomCalendar";
 import CustomButton from "../components/Button";
-import CustomModal from "../components/Modal";
 import LineChart from "../components/LineChart";
 import FilteredCard from "../components/FilteredCard";
 import CustomImage from "../components/common/customimage";
+import CustomDialog from "../components/common/customdialog";
 import Loader from "../components/loader";
 
 import WhiteCrossIcon from "../assets/white_cross.svg";
@@ -454,15 +454,12 @@ const OpmComparison: React.FC = () => {
                 </form>
               ) : (
                 <>
-                  <CustomModal
+                  <CustomDialog
                     header="Filters"
                     visible={visible}
-                    position={position}
-                    className="!bg-slate-900 filtersModal opmFiltersMobile h-[350px] w-[100vw]"
+                    className="!bg-slate-900 filtersModal filtersModal-popup opmFiltersMobile"
                     onHide={onModalCloseHandler}
-                    isDraggable={false}
                     closeIcon={<CustomImage src={WhiteCrossIcon} />}
-                    isResizable={false}
                   >
                     <form
                       className="grid grid-cols-2 grid-rows-3 gap-x-5 gap-y-5"
@@ -528,7 +525,7 @@ const OpmComparison: React.FC = () => {
                         className="submitBtnMobile opmPopUp col-span-full"
                       />
                     </form>
-                  </CustomModal>
+                  </CustomDialog>
                 </>
               )}
             </>

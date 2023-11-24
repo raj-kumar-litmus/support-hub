@@ -19,7 +19,7 @@ import CustomDropdown from "../components/DropDown";
 import CustomInputText from "../components/InputText";
 import CustomCalendar from "../components/common/CustomCalendar";
 import CustomButton from "../components/Button";
-import CustomModal from "../components/Modal";
+import CustomDialog from "../components/common/customdialog";
 import LineChart from "../components/LineChart";
 import FilteredCard from "../components/FilteredCard";
 import CustomImage from "../components/common/customimage";
@@ -503,15 +503,13 @@ const OPM: React.FC = () => {
             </>
           ) : (
             <>
-              <CustomModal
+              <CustomDialog
                 header="Filters"
                 visible={visible}
-                position={position}
-                className="!bg-slate-900 filtersModal opmFiltersMobile h-[450px] w-[100vw]"
+                // className="!bg-slate-700 filtersModal opmFiltersMobile h-[450px] w-[100vw]"
+                className="!bg-[#22262C] filtersModal filtersModal-popup opmFiltersMobile"
                 onHide={onModalCloseHandler}
-                isDraggable={false}
                 closeIcon={<CustomImage src={WhiteCrossIcon} />}
-                isResizable={false}
               >
                 <form
                   className="grid grid-cols-2 grid-rows-3 gap-x-5 gap-y-5"
@@ -573,7 +571,7 @@ const OPM: React.FC = () => {
                     className="submitBtnMobile opmPopUp col-span-full"
                   />
                 </form>
-              </CustomModal>
+              </CustomDialog>
             </>
           )}
         </>

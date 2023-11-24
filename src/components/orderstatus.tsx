@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import { OmsOrderFlow } from "../@types/OrderDetails";
-import { Dialog } from "primereact/dialog";
+import CustomDialog from "./common/customdialog";
 import Timeline from "./common/orderTimeline";
 interface OrderStatusProps {
   orderStatus: OmsOrderFlow;
@@ -11,18 +11,16 @@ const OrderStatus: React.FC<OrderStatusProps> = ({orderStatus,isOrderStatusVisib
   const orderMap = orderStatus?.orderMap;
   return (
     <div className="block w-screen font-helvetica sm:rounded-lg">
-      <Dialog
+      <CustomDialog
         header="Order Timeline"
         visible={isOrderStatusVisible}
-        className="orderStatus-dialog bg-[#22262C] flex "
+        className="custom-popup  bg-[#22262C] flex "
         onHide={() =>{setIsOrderStatusVisible(false)}}
-        draggable={false}
-        resizable={false}
       >
         <div className="flex justify-center ml-2">
           <Timeline orderMap={orderMap} />
         </div>
-      </Dialog>
+      </CustomDialog>
     </div>
   );
 };

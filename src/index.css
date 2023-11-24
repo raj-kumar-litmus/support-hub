@@ -157,6 +157,9 @@ button.p-button-secondary {
 .filtersModal .p-dialog-header {
   @apply px-[8px] py-[10px] rounded-t-[10px] border-b border-b-[#F4F4F4] border-solid;
 }
+.filtersModal-popup.p-dialog {
+  @apply absolute max-[639px]:max-h-[calc(100vh-154px)] max-[480px]:w-full w-[390px] max-[480px]:!bottom-0 sm:max-h-[528px];
+}
 .filtersModal .p-dialog-header .p-dialog-title {
   @apply font-normal text-center text-[16px];
 }
@@ -177,7 +180,7 @@ button.p-button-secondary {
 }
 .opmFiltersMobile.p-dialog .p-dialog-header,
 .opmFiltersMobile.p-dialog .p-dialog-content {
-  @apply bg-[#1C1C20] border border-solid border-[#30343B] pl-[3vw];
+  @apply bg-[#1C1C20] border border-solid border-[#30343B] px-[1vw];
 }
 .opmFiltersMobile.p-dialog {
   @apply m-0;
@@ -361,26 +364,14 @@ button.p-button-secondary {
 .p-dialog-content::-webkit-scrollbar-thumb {
   @apply bg-[#30343B] rounded-full;
 }
-.orderStatus-dialog .p-dialog-content {
-  @apply pl-[22px] mr-[9px] pr-[15px] bg-[#22262C];
-}
 .p-dialog-content::-webkit-scrollbar {
   @apply w-1;
 }
 .orderStatus-dialog.p-dialog {
-  @apply absolute max-[639px]:max-h-[calc(100vh-154px)] min-[390px]:w-[390px] w-max max-[390px]:!bottom-0 min-[390px]:max-h-[490px];
+  @apply !absolute max-[639px]:!max-h-[calc(100vh-154px)] min-[390px]:!w-[390px] !w-max max-[390px]:!bottom-0 min-[390px]:!max-h-[490px];
 }
 .p-dialog-mask.p-component-overlay {
   @apply backdrop-brightness-50;
-}
-.orderStatus-dialog .p-dialog-header {
-  @apply flex items-center p-1.5 bg-[#22262C]  border-b  border-slate-600 text-[#F2F2F2] h-[6.3vh];
-}
-.orderStatus-dialog .p-dialog-header .p-dialog-title {
-  @apply text-center  text-base font-helvetica  ml-6;
-}
-.orderStatus-dialog .p-dialog-content {
-  @apply border-[#30343B] border-t text-center text-base font-helvetica;
 }
 .backButton .p-button {
   @apply !shadow-none !border-none bg-transparent;
@@ -397,17 +388,12 @@ button.p-button-secondary {
 .backButton .p-button {
   @apply bg-transparent !shadow-none;
 }
-.orderStatus-dialog .p-dialog-header-icon:enabled:hover {
-  @apply !bg-transparent;
-}
 .custom-popup.p-dialog {
-  @apply absolute max-[639px]:max-h-[calc(100vh-154px)] max-[390px]:w-full w-[390px] max-[390px]:!bottom-0 sm:max-h-[528px];
+  @apply absolute max-[639px]:max-h-[63vh] max-[480px]:w-full w-[390px] max-[480px]:!bottom-0 sm:max-h-[63vh];
 }
-
 .p-dialog-mask.p-component-overlay {
   @apply backdrop-brightness-50;
 }
-
 .custom-popup .p-dialog-header {
   @apply py-4 text-[#757575] z-10 font-medium bg-[#22262C] border-[#383F47] border-solid border-b;
 }

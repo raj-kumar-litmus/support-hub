@@ -18,8 +18,6 @@ const OrderStatusPopup: FC<Props> = ({ openDialog, setOpenDialog }) => {
       visible={openDialog}
       onHide={() => setOpenDialog(false)}
       className="custom-popup"
-      draggable={false}
-      resizable={false}
     >
       <CustomTable
         resizableColumns
