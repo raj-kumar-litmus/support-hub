@@ -127,7 +127,7 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
         onHide={() => setShowFutureDateToast(false)}
         showToast={showFutureDateToast}
         severity="warn"
-        detail="Please select a date and time on or before the current moment."
+        detail="Please don't select a future date and time"
         position="top-center"
       />
     </div>
