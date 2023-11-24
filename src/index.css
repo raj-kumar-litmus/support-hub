@@ -924,13 +924,13 @@ hr.horizontalLine.blue {
   @apply w-1 h-1;
 }
 .quick-links-popup {
-  @apply bg-[#161A1D] absolute top-[56px] left-0 sm:left-[25vw] lg:left-[21vw] right-0;
+  @apply bg-black-100 absolute top-[56px] left-0 sm:left-[25vw] lg:left-[21vw] right-0;
 }
 .quick-links-popup .p-dialog-header {
-  @apply bg-[#161A1D] rounded-none p-5 sm:px-10 pb-0 border border-[#292E36] border-b-0 border-r-0;
+  @apply bg-black-100 rounded-none p-5 sm:px-10 pb-0 border border-black-300 border-b-0 border-r-0;
 }
 .quick-links-popup .p-dialog-content {
-  @apply bg-inherit !rounded-none  border border-[#292E36] border-t-0 border-r-0 p-5 pt-3 sm:pt-5 sm:px-10;
+  @apply bg-inherit !rounded-none  border border-black-300 border-t-0 border-r-0 p-5 pt-3 sm:pt-5 sm:px-10;
 }
 .quick-link-btn .p-button .p-button-label {
   @apply text-white-700 text-lg font-normal;

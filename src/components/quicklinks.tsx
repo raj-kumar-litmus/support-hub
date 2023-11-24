@@ -98,7 +98,7 @@ const QuickLinks: FC<QuickLinksProps> = ({ showQuickLinks, setShowQuickLinks }) 
         <CustomButton
           label="See More"
           onClick={onSeeMoreClick}
-          className="custom-btn text-center quick-link-btn border-white bg-[#161A1D]"
+          className="custom-btn text-center quick-link-btn border-white bg-black-100"
         />
       }
     </CustomDialog>
