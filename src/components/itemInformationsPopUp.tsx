@@ -6,20 +6,20 @@ import { ITEMS_INFO } from "../constants/appConstants";
 
 type Props = {
   lineitems: CommerceItemData[];
-  openPromotionsPopup: boolean;
-  setOpenPromotionsPopup: (a: boolean) => void;
+  openItemInformationPopup: boolean;
+  setItemInformationPopup: (a: boolean) => void;
 };
 
 const ItemInformationsPopUp: FC<Props> = ({
   lineitems,
-  openPromotionsPopup,
-  setOpenPromotionsPopup,
+  openItemInformationPopup,
+  setItemInformationPopup,
 }) => {
   return (
     <CustomDialog
       header={ITEMS_INFO}
-      visible={openPromotionsPopup}
-      onHide={() => setOpenPromotionsPopup(false)}
+      visible={openItemInformationPopup}
+      onHide={() => setItemInformationPopup(false)}
       draggable={false}
       resizable={false}
       className="custom-popup lineitem-popup"

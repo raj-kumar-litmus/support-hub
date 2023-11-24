@@ -83,7 +83,8 @@ const OrderDetails: React.FC = () => {
   const navigate = useNavigate();
   const { width } = useScreenSize();
   const { orderId } = useParams<{ orderId: string }>();
-  const MOBILE_MIN_ORDER_LIST = 5; // todo. change to 5.
+  const MOBILE_MIN_ORDER_LIST = 5;
+  const IS_MOBILE_SCREEN = width < 640;
 
   useEffect(() => {
     setIsLoading(true);
@@ -94,7 +95,7 @@ const OrderDetails: React.FC = () => {
   }, [orderId]);
 
   useEffect(() => {
-    if (width < 640 && itemTableData.length > MOBILE_MIN_ORDER_LIST) {
+    if (IS_MOBILE_SCREEN && itemTableData.length > MOBILE_MIN_ORDER_LIST) {
       setItemTableDataSliced(itemTableData.slice(0, MOBILE_MIN_ORDER_LIST));
     }
   }, [itemTableData]);
@@ -319,7 +320,11 @@ const OrderDetails: React.FC = () => {
       </div>
 
       <div className="gridNoGapRounded grid-cols-1 mb-4 p-0 sm:py-4 sm:px-6 bg-black-100 sm:bg-black-200">
-        <div className="flex sticky top-0 justify-between border-none !bg-black-100 sm:!bg-inherit">
+        <div
+          className={`flex justify-between border-none !bg-black-100 sm:!bg-inherit ${
+            IS_MOBILE_SCREEN ? "sticky top-0" : ""
+          }`}
+        >
           <span className="w-3/4 sm:w-full !text-lg !text-gray-200 font-bold !bg-black-100 sm:!bg-inherit">
             {ITEMS_INFO}
           </span>
@@ -398,8 +403,8 @@ const OrderDetails: React.FC = () => {
         </div>
       </div>
       <ItemInformationsPopUp
-        openPromotionsPopup={openItemInformationPopup}
-        setOpenPromotionsPopup={setItemInformationPopup}
+        openItemInformationPopup={openItemInformationPopup}
+        setItemInformationPopup={setItemInformationPopup}
         lineitems={itemTableData}
       />
       <PromotionsPopup
