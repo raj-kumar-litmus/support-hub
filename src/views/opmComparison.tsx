@@ -57,7 +57,7 @@ import {
 import { URL_OPM_COMPARISON } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
 import { LoaderContext, LoaderContextType } from "../context/loaderContext";
-import { CURRENT_PST_DATE, getFormattedPSTDate, getPSTdate } from "../utils/dateTimeUtil";
+import { CURRENT_PST_DATE, DATE_TIME_FORMAT_3, formatDate, getFormattedPSTDate, getPSTdate } from "../utils/dateTimeUtil";
 import {
   OPM_COMPARISON_OPTIONS,
   OPM_COMPARISON_OPTIONS_HOME,
@@ -203,7 +203,7 @@ const OpmComparison: React.FC = () => {
     formFields.forEach((e: any) => {
       if (e.value) {
         if (e.name === "startDate") {
-          str += `startTimeOne=${getFormattedPSTDate(e.value)}&`;
+          str += `startTimeOne=${formatDate(e.value, DATE_TIME_FORMAT_3)}&`;
           return;
         }
         if (e.name === "endDate") {
