@@ -64,7 +64,7 @@ const Card = (props: CardProps) => {
           </div>
         )}
         <div
-          className={`pl-2 flex ${
+          className={`pl-2 w-full flex ${
             props.type === "ORDER_DETAILS_ITEM" ? `flex-row-reverse` : ``
           }`}
         >
