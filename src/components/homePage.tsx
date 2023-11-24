@@ -247,8 +247,6 @@ const HomePage = () => {
                   />
                 }
                 value={<OPMCards value={avgOPM} />}
-                bgColor="#8F8E8E"
-                textColor="#FFFFFF"
               />
               <HomeCard
                 title={
@@ -258,8 +256,6 @@ const HomePage = () => {
                   />
                 }
                 value={<OPMCards value={totalOPM} />}
-                bgColor="#BCBBBB"
-                textColor="#FFFFFF"
               />
               <HomeCard
                 title={
@@ -270,8 +266,6 @@ const HomePage = () => {
                   />
                 }
                 value={<OPMCards value={lastMinOPM} />}
-                bgColor="#E9E8E8"
-                textColor="#FFFFFF"
               />
               <HomeCard
                 title={
@@ -280,8 +274,6 @@ const HomePage = () => {
                 value={
                   <ComparisonCards today={avgOPM} lastDay={lastDayAvgOPM} />
                 }
-                bgColor="#CCCBCB"
-                textColor="#FFFFFF"
               />
               <HomeCard
                 title={
@@ -293,8 +285,6 @@ const HomePage = () => {
                 value={
                   <ComparisonCards today={totalOPM} lastDay={lastDaytotalOPM} />
                 }
-                bgColor="#E9E8E8"
-                textColor="#FFFFFF"
               />
             </div>
           )}
