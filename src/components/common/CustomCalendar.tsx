@@ -1,5 +1,8 @@
 import { Calendar } from "primereact/calendar";
-import { InputNumber, InputNumberValueChangeEvent } from "primereact/inputnumber";
+import {
+  InputNumber,
+  InputNumberValueChangeEvent,
+} from "primereact/inputnumber";
 import { FC, useEffect, useState } from "react";
 import { CustomCalendarProps } from "../../@types/BarChart";
 import ArrowDown from "../../assets/arrow_down.svg";
@@ -19,7 +22,9 @@ type ManualInputTimeProps = {
 
 const CustomCalendar: FC<CustomCalendarProps> = (props) => {
   const today = new Date();
-  const [hour, setHour] = useState<number>(convert24to12Hour(today.getHours()).hour12);
+  const [hour, setHour] = useState<number>(
+    convert24to12Hour(today.getHours()).hour12,
+  );
   const [minute, setMinute] = useState<number>(today.getMinutes());
   const [date, setDate] = useState<Date>(today);
   const [event, setEvent] = useState(null);
@@ -36,53 +41,56 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
   };
 
   const toggleAmPmChange = (e) => {
-    setEvent(e)
+    setEvent(e);
     if (ampm === AM_PM_OPTIONS[0].value) {
-      setAmPm(AM_PM_OPTIONS[1].value)
+      setAmPm(AM_PM_OPTIONS[1].value);
     } else {
       setAmPm(AM_PM_OPTIONS[0].value);
     }
   };
 
   const getUpdatedDate = (e) => {
-    let _hour = convert12to24Hour(hour, ampm);
+    const _hour = convert12to24Hour(hour, ampm);
     date.setHours(_hour);
     date.setMinutes(minute);
     setDate(date);
-    let event = { ...e, value: date, target: { value: date, name: props.name } };
+    const event = {
+      ...e,
+      value: date,
+      target: { value: date, name: props.name },
+    };
     props.onChange(event);
-  }
+  };
 
   const onChange = (e) => {
     if (props.showTime) {
-      let date = e.target?.value;
+      const date = e.target?.value;
       setDate(date);
       setEvent(e);
     } else {
       props.onChange(e);
     }
-  }
+  };
 
   useEffect(() => {
     if (props.value) {
-      let _date = new Date(props.value);
+      const _date = new Date(props.value);
       setDate(_date);
       setHour(convert24to12Hour(_date.getHours()).hour12);
       setMinute(_date.getMinutes());
     }
   }, [props.value]);
 
-
   useEffect(() => {
     if (event) {
       getUpdatedDate(event);
     }
-  }, [hour, minute, ampm, event])
+  }, [hour, minute, ampm, event]);
 
   return (
     <div className={`flex flex-col self-end ${props.containerclassname}`}>
       <div
-        className={`text-xs font-medium pb-1 text-[#898A8D] relative ${props.titleclassname}`}
+        className={`text-xs font-medium pb-1 text-gray-400 relative ${props.titleclassname}`}
       >
         {props.title}
       </div>
@@ -97,26 +105,53 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
         dateFormat="mm/dd/yy"
         onChange={(e) => onChange(e)}
         iconPos={props.iconPos}
-        footerTemplate={() => (props.showTime &&
-          <ManualInputTime
-            hour={hour}
-            minute={minute}
-            handleHourChange={handleHourChange}
-            handleMinuteChange={handleMinuteChange}
-            ampm={ampm}
-          toggleAmPmChange={toggleAmPmChange}
-        />
-        )
-        } />
+        footerTemplate={() =>
+          props.showTime && (
+            <ManualInputTime
+              hour={hour}
+              minute={minute}
+              handleHourChange={handleHourChange}
+              handleMinuteChange={handleMinuteChange}
+              ampm={ampm}
+              toggleAmPmChange={toggleAmPmChange}
+            />
+          )
+        }
+      />
     </div>
-  )
-}
+  );
+};
 
-const ManualInputTime: FC<ManualInputTimeProps> = ({ hour, minute, handleHourChange, handleMinuteChange, ampm, toggleAmPmChange }) => {
+const ManualInputTime: FC<ManualInputTimeProps> = ({
+  hour,
+  minute,
+  handleHourChange,
+  handleMinuteChange,
+  ampm,
+  toggleAmPmChange,
+}) => {
   return (
     <div className="flex justify-evenly w-[12rem] mx-auto items-center">
-      <InputNumber value={hour} step={1} onValueChange={(e) => handleHourChange(e)} showButtons buttonLayout="vertical" min={0} max={12} /> :
-      <InputNumber value={minute} onValueChange={(e) => handleMinuteChange(e)} showButtons buttonLayout="vertical" step={1} min={0} max={59} />:
+      <InputNumber
+        value={hour}
+        step={1}
+        onValueChange={(e) => handleHourChange(e)}
+        showButtons
+        buttonLayout="vertical"
+        min={0}
+        max={12}
+      />{" "}
+      :
+      <InputNumber
+        value={minute}
+        onValueChange={(e) => handleMinuteChange(e)}
+        showButtons
+        buttonLayout="vertical"
+        step={1}
+        min={0}
+        max={59}
+      />
+      :
       <div className="ampm-comp px-[1rem] min-w-[4rem]">
         <CustomImage
           src={ArrowUp}
@@ -131,6 +166,6 @@ const ManualInputTime: FC<ManualInputTimeProps> = ({ hour, minute, handleHourCha
         />
       </div>
     </div>
-  )
-}
+  );
+};
 export default CustomCalendar;

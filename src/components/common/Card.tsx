@@ -31,13 +31,13 @@ const Card = (props: CardProps) => {
   }, []);
 
   return (
-    <div className="shadow-lg bg-[#22262C] w-full flex m-auto text-[#FAF9F6] pt-4 pb-4 pr-2 rounded-lg mb-3">
-      <div className="w-3/12 pl-4 pr-4 text-center items-center border-r border-[#292E36] flex flex-col justify-center">
-        <div className="text-xs mb-1 text-[#898A8D]">{cardTitle?.key}</div>
+    <div className="shadow-lg bg-black-200 w-full flex m-auto text-gray-300 pt-4 pb-4 pr-2 rounded-lg mb-3">
+      <div className="w-3/12 pl-4 pr-4 text-center items-center border-r border-black-300 flex flex-col justify-center">
+        <div className="text-xs mb-1 text-gray-400">{cardTitle?.key}</div>
         <div
           className={`${
             width < 350 ? "text-[0.8rem]" : ""
-          } font-medium text-[#FAF9F6]`}
+          } font-medium text-gray-300`}
         >
           {cardTitle?.value}
         </div>
@@ -48,15 +48,15 @@ const Card = (props: CardProps) => {
         }`}
       >
         {cardSubTitle && (
-          <div className="w-full pl-2 pb-2 mb-2 flex border-b border-solid border-[#292E36]">
+          <div className="w-full pl-2 pb-2 mb-2 flex border-b border-solid border-black-300">
             <div className="pl-2 pr-2 flex flex-col flex-1 justify-between">
-              <div className="text-xs mb-2 text-[#898A8D]">
+              <div className="text-xs mb-2 text-gray-400">
                 {cardSubTitle?.key}
               </div>
               <div
                 className={`${
                   width < 350 ? "text-[0.75rem]" : "text-sm"
-                } font-medium text-[#FAF9F6]`}
+                } font-medium text-gray-300`}
               >
                 {cardSubTitle?.value}
               </div>
@@ -71,14 +71,14 @@ const Card = (props: CardProps) => {
           {cardItems.map((item, ind) => (
             <div key={ind} className="pl-2 pr-2 flex flex-col flex-1">
               <div
-                className={`text-xs text-[#898A8D] ${
-                  props.type === "ORDER_DETAILS_ITEM" ? "self-center" : ""
+                className={`text-xs text-gray-400 ${
+                  props.type === "ORDER_DETAILS_ITEM" ? "text-center" : ""
                 }`}
               >
                 {item.key}
               </div>
               <div
-                className={`text-[13px] font-medium text-[#FAF9F6] flex h-full items-center ${
+                className={`text-[13px] font-medium text-gray-300 flex h-full items-center ${
                   props.type === "ORDER_DETAILS_ITEM" ? "justify-center" : ""
                 }`}
               >

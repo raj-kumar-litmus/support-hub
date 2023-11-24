@@ -7,7 +7,7 @@ import ArrowDownIcon from "../../assets/arrowdown.svg";
 
 const CustomDropdown: FC<CustomDropdownProps> = (props) => (
   <>
-    <div className="text-xs font-medium pb-1 text-[#898A8D]">{props.title}</div>
+    <div className="text-xs font-medium pb-1 text-gray-400">{props.title}</div>
     <div className="flex relative">
       {props.showIcon && props.showLeftIcon && (
         <CustomIcon
