@@ -94,6 +94,7 @@ const AutoRefresh = (props: AutoRefreshProps) => {
         )}
       </div>
       <CustomToast
+        className="autoRefreshToast"
         onHide={() => setShowAutoRefreshToast(false)}
         showToast={showAutoRefreshToast}
         severity="info"

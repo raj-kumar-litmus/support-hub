@@ -9,6 +9,7 @@ interface Props extends ToastProps {
   life?: number;
   closable?: boolean;
   messageIcon?: any;
+  className?: string;
 }
 
 const CustomToast = (props: Props) => {
@@ -28,7 +29,13 @@ const CustomToast = (props: Props) => {
     }
   }, [props.showToast]);
 
-  return <Toast ref={ref} position={props.position || "center"} />;
+  return (
+    <Toast
+      className={props.className}
+      ref={ref}
+      position={props.position || "center"}
+    />
+  );
 };
 
 export default CustomToast;

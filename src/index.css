@@ -925,11 +925,17 @@ hr.horizontalLine.blue {
   @apply w-1 h-1;
 }
 .p-toast .p-toast-message {
-  @apply w-444;
+  @apply m-auto w-95w xs:w-80w sm:w-50w lg:w-40w;
 }
 .p-toast .p-toast-message .p-toast-message-content {
   @apply flex items-center text-14;
 }
 .p-toast .p-toast-message .p-toast-message-content .p-toast-detail {
   @apply mt-0
+}
+.autoRefreshToast.p-toast .p-toast-icon-close {
+ @apply left-[1vw] md:left-0
+}
+.p-toast-message-content .p-image img {
+  @apply max-w-max
 }

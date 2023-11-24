@@ -29,6 +29,7 @@ import {
   STATUS_ACROSS,
   VIEW_ALL,
   SUBMITTED,
+  VIEW_ALL_MIN_ORDER_LIST_MOBILE,
   WMS,
 } from "../../constants/appConstants";
 import {
@@ -83,7 +84,6 @@ const OrderDetails: React.FC = () => {
   const navigate = useNavigate();
   const { width } = useScreenSize();
   const { orderId } = useParams<{ orderId: string }>();
-  const MOBILE_MIN_ORDER_LIST = 5;
   const IS_MOBILE_SCREEN = width < 640;
 
   useEffect(() => {
@@ -95,8 +95,13 @@ const OrderDetails: React.FC = () => {
   }, [orderId]);
 
   useEffect(() => {
-    if (IS_MOBILE_SCREEN && itemTableData.length > MOBILE_MIN_ORDER_LIST) {
-      setItemTableDataSliced(itemTableData.slice(0, MOBILE_MIN_ORDER_LIST));
+    if (
+      IS_MOBILE_SCREEN &&
+      itemTableData.length > VIEW_ALL_MIN_ORDER_LIST_MOBILE
+    ) {
+      setItemTableDataSliced(
+        itemTableData.slice(0, VIEW_ALL_MIN_ORDER_LIST_MOBILE),
+      );
     }
   }, [itemTableData]);
 
