@@ -45,8 +45,8 @@ const DcOpenOrders: FC = () => {
       {isLoading ? (
         <Loader className="h-full" />
       ) : (
-          <div>
-          <h3 className="sm:text-lg text-[#F2F2F2] font-bold m-3 ml-0 font-helvetica">
+        <div>
+          <h3 className="sm:text-lg text-gray-200 font-bold m-3 ml-0 font-helvetica">
             DC Open Orders
           </h3>
           <div className="hidden sm:block rounded-md">

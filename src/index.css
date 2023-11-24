@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 #loading div {
-  @apply w-full h-full fixed top-0 left-0 flex justify-center items-center z-[100] bg-[#22262C] opacity-80;
+  @apply w-full h-full fixed top-0 left-0 flex justify-center items-center z-[100] bg-black-200 opacity-80;
 }
 .ordersTable .p-datatable-table {
   @apply text-sm border-separate font-helvetica;
 }
 .ordersTable .p-datatable-tbody tr td {
-  @apply border-[#D4D4D4];
+  @apply border-gray-102;
 }
 .ordersTable .p-datatable-thead tr th {
-  @apply !bg-[#292E36] text-[#F2F2F2] font-bold p-3 border-0 w-1/4 border-[#292E36];
+  @apply !bg-black-300 text-gray-200 font-bold p-3 border-0 w-1/4 border-black-300;
 }
 .ordersTable .p-datatable-thead tr th:first-child {
   @apply rounded-tl-lg;
@@ -27,10 +27,10 @@
   @apply rounded-br-lg;
 }
 .ordersTable .p-datatable-tbody tr {
-  @apply !bg-[#22262C] text-[#FAF9F6];
+  @apply !bg-black-200 text-gray-300;
 }
 .ordersTable .p-datatable-tbody tr.p-row-odd {
-  @apply !bg-[#292E36] text-[#FAF9F6];
+  @apply !bg-black-300 text-gray-300;
 }
 .ordersTable .p-datatable-thead tr th .p-column-header-content {
   @apply justify-center;
@@ -62,7 +62,7 @@
 }
 
 #bar-chart {
-  @apply m-0 bg-[#161A1D];
+  @apply m-0 bg-black-100;
 }
 
 .home-sessions {
@@ -71,7 +71,7 @@
 
 #bar-chart .p-button,
 .p-dialog .p-button {
-  @apply bg-[#30343B] border-[#898A8D] text-[#898A8D];
+  @apply bg-gray-900 border-gray-400 text-gray-400;
 }
 
 #bar-chart .p-button:focus,
@@ -81,7 +81,7 @@
 
 #bar-chart .p-inputtext,
 .p-dialog .p-inputtext {
-  @apply p-2 pl-0 border-none bg-[#30343B] rounded-r-lg;
+  @apply p-2 pl-0 border-none bg-gray-900 rounded-r-lg;
 }
 
 #bar-chart .p-inputtext:enabled:focus,
@@ -98,12 +98,12 @@
 #bar-chart .p-button-label,
 .p-dialog .p-icon,
 .p-dialog .p-button-label {
-  @apply text-[#979797];
+  @apply text-gray-103;
 }
 
 #bar-chart .p-button.p-button-icon-only,
 .p-dialog .p-button.p-button-icon-only {
-  @apply p-0 w-12 bg-[#30343B] rounded-l-lg;
+  @apply p-0 w-12 bg-gray-900 rounded-l-lg;
 }
 
 #bar-chart .p-calendar,
@@ -112,12 +112,12 @@
 }
 
 #bar-chart .p-dropdown {
-  @apply border-none bg-[#30343B] rounded-lg;
+  @apply border-none bg-gray-900 rounded-lg;
 }
 
 #page-btn-submit.p-button,
 #popup-btn-submit.p-button {
-  @apply bg-[#1C1C20] text-sm px-8 py-2 transition-none border-2 border-[#FAF9F6] rounded-[22px];
+  @apply bg-black-100 text-sm px-8 py-2 transition-none border-2 border-gray-300 rounded-[22px];
 }
 
 #page-btn-submit.p-button:focus {
@@ -126,11 +126,11 @@
 
 #page-btn-submit .p-button-label,
 #popup-btn-submit .p-button-label {
-  @apply !text-white text-[14px] font-medium;
+  @apply !text-white-500  text-[14px] font-medium;
 }
 
 #modal-section .filter-popup-content .p-dropdown {
-  @apply !bg-[#30343B];
+  @apply !bg-gray-900;
 }
 
 #modal-section .filter-popup-content .p-dropdown-trigger {
@@ -138,24 +138,24 @@
 }
 
 #modal-section .p-dialog-content {
-  @apply px-4 pt-6 pb-0 bg-[#1C1C20];
+  @apply px-4 pt-6 pb-0 bg-black-200;
 }
 
 #modal-section .p-dialog-header {
-  @apply text-center p-4 bg-[#1C1C20] text-[#F2F2F2] border-solid border-b border-[#FFFFFF];
+  @apply text-center p-4 bg-black-200 text-gray-200 border-solid border-b border-white-500;
 }
 #modal-section .p-dialog-footer {
-  @apply py-4 px-6 text-center bg-[#1C1C20];
+  @apply py-4 px-6 text-center bg-black-200;
 }
 
 button.p-button-secondary {
-  @apply text-[12px] !text-[#757575];
+  @apply text-[12px] !text-gray-101;
 }
 .p-button.p-button-secondary:enabled:focus {
   @apply shadow-none;
 }
 .filtersModal .p-dialog-header {
-  @apply px-[8px] py-[10px] rounded-t-[10px] border-b border-b-[#F4F4F4] border-solid;
+  @apply px-[8px] py-[10px] rounded-t-[10px] border-b border-b-gray-700 border-solid;
 }
 .filtersModal .p-dialog-header .p-dialog-title {
   @apply font-normal text-center text-[16px];
@@ -177,22 +177,22 @@ button.p-button-secondary {
 }
 .opmFiltersMobile.p-dialog .p-dialog-header,
 .opmFiltersMobile.p-dialog .p-dialog-content {
-  @apply bg-[#1C1C20] border border-solid border-[#30343B] pl-[3vw];
+  @apply bg-black-200 border border-solid border-gray-900 pl-[3vw];
 }
 .opmFiltersMobile.p-dialog {
   @apply m-0;
 }
 .opmFiltersMobile .p-dialog-header .p-dialog-title {
-  @apply ml-[10vw] text-white;
+  @apply ml-[10vw] text-white-500 ;
 }
 .opmFiltersMobile .labelClass {
   @apply w-[100px];
 }
 .opmFiltersMobile .p-dropdown {
-  @apply bg-[#30343B] border-[#30343B] w-full;
+  @apply bg-gray-900 border-gray-900 w-full;
 }
 .opmFiltersMobile .p-inputtext {
-  @apply text-white;
+  @apply text-white-500 ;
 }
 .opmFiltersMobile .p-dropdown-label {
   @apply pl-[30px];
@@ -207,7 +207,7 @@ button.p-button-secondary {
   @apply w-[4vw] relative right-[14px];
 }
 .p-datepicker-trigger {
-  @apply !p-0 border border-solid border-[#ced4da] border-r-0;
+  @apply !p-0 border border-solid border-gray-105 border-r-0;
 }
 .p-datepicker-trigger img {
   @apply w-[50%] h-[50%];
@@ -216,7 +216,7 @@ button.p-button-secondary {
   @apply text-[13px] border-l-0 w-[110%];
 }
 .p-inputtext.p-placeholder {
-  @apply text-[13px] !text-[#B9B9B9];
+  @apply text-[13px] !text-gray-104;
 }
 .p-inputtext {
   @apply text-[13px];
@@ -230,28 +230,28 @@ button.p-button-secondary {
 .submitBtnMobile button,
 .submitBtnMobile button:hover,
 .submitBtnMobile button:enabled:active {
-  @apply w-[20vw] md:w-[10vw] h-[44px] text-[13px] text-white !bg-transparent border border-solid !border-[#30343B] items-center;
+  @apply w-[20vw] md:w-[10vw] h-[44px] text-[13px] text-white-500  !bg-transparent border border-solid !border-gray-900 items-center;
 }
 .submitBtnMobile button:focus {
   @apply !shadow-none;
 }
 .submitBtnMobile button:active {
-  @apply !bg-[#757575];
+  @apply !bg-gray-101;
 }
 .p-dialog .p-dialog-header .p-dialog-title {
   @apply text-base;
 }
 .p-datepicker:not(.p-datepicker-inline) {
-  @apply !bg-[#1C1C20] !text-[#F4F4F4];
+  @apply !bg-black-200 !text-gray-700;
 }
 .p-datepicker:not(.p-datepicker-inline) .p-datepicker-header {
-  @apply !bg-[#1C1C20] !text-[#F4F4F4];
+  @apply !bg-black-200 !text-gray-700;
 }
 .submitBtnMobile.opmPopUp button {
-  @apply w-[160px] !bg-transparent border border-solid !border-[#30343B] rounded-3xl;
+  @apply w-[160px] !bg-transparent border border-solid !border-gray-900 rounded-3xl;
 }
 .submitBtnMobile.opmPopUp button span {
-  @apply text-white;
+  @apply text-white-500 ;
 }
 .p-dialog .p-dialog-header .p-dialog-header-icon:focus {
   @apply shadow-none;
@@ -265,7 +265,7 @@ button.p-button-secondary {
 }
 .p-calendar .p-datepicker-trigger,
 .p-calendar .p-datepicker-trigger:hover {
-  @apply !border-transparent bg-transparent text-[#757575];
+  @apply !border-transparent bg-transparent text-gray-101;
 }
 .landScape {
   @apply w-[90vh] relative top-[50vh] left-[-13vw];
@@ -283,28 +283,28 @@ button.p-button-secondary {
   @apply w-[28vw] sm:w-[40vw];
 }
 .filteredCard .p-button.p-component {
-  @apply !bg-[#F4F4F400] !border-[#22262C] border rounded-[100px] text-[#8B8C8F] px-2 py-3 flex justify-evenly items-center;
+  @apply !bg-white-400 !border-black-200 border rounded-[100px] text-gray-400 px-2 py-3 flex justify-evenly items-center;
 }
 .filteredCard .p-button {
-  @apply flex gap-[10px] px-[10px] items-center leading-none border border-solid border-[#30343B] rounded rounded-[20px] h-[26px] text-[12px] text-[#898A8D] p-[5px] bg-transparent;
+  @apply flex gap-[10px] px-[10px] items-center leading-none border border-solid border-gray-900 rounded rounded-[20px] h-[26px] text-[12px] text-gray-400 p-[5px] bg-transparent;
 }
 .filteredCard .p-button:focus {
   @apply shadow-none;
 }
 .filteredCard .p-button:hover {
-  @apply bg-transparent text-[#E8E8E8] border-[#30343B];
+  @apply bg-transparent text-white-700 !border-gray-900;
 }
 .resetFilters .p-button {
   @apply !bg-transparent;
 }
 .resetFilters span {
-  @apply text-[#E8E8E8] font-normal;
+  @apply text-white-700 font-normal;
 }
 .inputContainer .p-inputtext {
   @apply w-[38vw] h-[37px];
 }
 .opmFilters .p-inputtext {
-  @apply text-[#E8E8E8];
+  @apply text-white-700;
 }
 .inputContainer span.flex {
   @apply mt-1;
@@ -338,10 +338,10 @@ button.p-button-secondary {
   @apply !border-transparent;
 }
 .dropdownWithIcon img {
-  @apply border border-solid border-[#30343B] border-r-transparent rounded-l-md rounded-tr-none left-[2px] pl-[5px] bg-[#30343B];
+  @apply border border-solid border-gray-900 border-r-transparent rounded-l-md rounded-tr-none left-[2px] pl-[5px] bg-gray-900;
 }
 .p-inputtext {
-  @apply text-[#FAF9F6];
+  @apply text-gray-300;
 }
 .p-input-icon-left > .p-inputtext {
   @apply !pl-[2rem];
@@ -350,19 +350,19 @@ button.p-button-secondary {
   @apply !pl-14;
 }
 .p-calendar-w-btn-left button.p-button {
-  @apply !bg-[#30343B] !border-[#30343B];
+  @apply !bg-gray-900 !border-gray-900;
 }
 .p-calendar-w-btn-left .p-inputtext {
-  @apply pl-0 bg-[#30343B] border-[#30343B];
+  @apply pl-0 bg-gray-900 border-gray-900;
 }
 .opmFilters .inputContainer .p-dropdown {
   @apply w-full pl-[20px];
 }
 .p-dialog-content::-webkit-scrollbar-thumb {
-  @apply bg-[#30343B] rounded-full;
+  @apply bg-gray-900 rounded-full;
 }
 .orderStatus-dialog .p-dialog-content {
-  @apply pl-[22px] mr-[9px] pr-[15px] bg-[#22262C];
+  @apply pl-[22px] mr-[9px] pr-[15px] bg-black-200;
 }
 .p-dialog-content::-webkit-scrollbar {
   @apply w-1;
@@ -374,13 +374,13 @@ button.p-button-secondary {
   @apply backdrop-brightness-50;
 }
 .orderStatus-dialog .p-dialog-header {
-  @apply flex items-center p-1.5 bg-[#22262C]  border-b  border-slate-600 text-[#F2F2F2] h-[6.3vh];
+  @apply flex items-center p-1.5 bg-black-200  border-b  border-slate-600 text-gray-200 h-[6.3vh];
 }
 .orderStatus-dialog .p-dialog-header .p-dialog-title {
   @apply text-center  text-base font-helvetica  ml-6;
 }
 .orderStatus-dialog .p-dialog-content {
-  @apply border-[#30343B] border-t text-center text-base font-helvetica;
+  @apply border-gray-900 border-t text-center text-base font-helvetica;
 }
 .backButton .p-button {
   @apply !shadow-none !border-none bg-transparent;
@@ -389,7 +389,7 @@ button.p-button-secondary {
   @apply bg-transparent !shadow-none;
 }
 .backButton .p-button {
-  @apply bg-[#898A8D];
+  @apply bg-gray-400;
 }
 .backButton .p-button:hover {
   @apply bg-transparent !shadow-none;
@@ -409,16 +409,16 @@ button.p-button-secondary {
 }
 
 .custom-popup .p-dialog-header {
-  @apply py-4 text-[#757575] z-10 font-medium bg-[#22262C] border-[#383F47] border-solid border-b;
+  @apply py-4 text-gray-101 z-10 font-medium bg-black-200 border-black-400 border-solid border-b;
 }
 .custom-popup .p-dialog-content {
-  @apply pt-4 overflow-auto text-[#FFFFFF00] bg-[#22262C] pl-[24px] mr-[10px] pr-[14px];
+  @apply pt-4 overflow-auto text-white-600 bg-black-200 pl-[24px] mr-[10px] pr-[14px];
 }
 .custom-popup .p-dialog-title {
-  @apply text-center !text-[16px] !font-medium leading-[19px] text-[#F2F2F2];
+  @apply text-center !text-[16px] !font-medium leading-[19px] text-gray-200;
 }
 .custom-popup .p-dialog-header-icon {
-  @apply text-[#898A8D];
+  @apply text-gray-400;
 }
 .p-dialog-header-icon:enabled:hover {
   @apply !bg-transparent;
@@ -440,15 +440,18 @@ button.p-button-secondary {
 }
 
 .p-dialog-content::-webkit-scrollbar-thumb {
-  @apply bg-[#30343B] rounded-full;
+  @apply bg-gray-900 rounded-full;
 }
 
 .custom-popup .p-dialog-content {
-  @apply pl-[24px] mr-[10px] pr-[14px] bg-[#22262C];
+  @apply pl-[24px] mr-[10px] pr-[14px] bg-black-200;
+}
+.custom-popup.lineitem-popup .p-dialog-content {
+  @apply bg-black-100;
 }
 
 .p-dialog {
-  @apply bg-[#22262C];
+  @apply bg-black-200;
 }
 
 .p-dialog-content::-webkit-scrollbar {
@@ -465,10 +468,10 @@ button.p-button-secondary {
   @apply text-[14px] leading-[17px] border-separate font-helvetica;
 }
 .custom-table .p-datatable-tbody tr td {
-  @apply border-[#292E36];
+  @apply border-black-300;
 }
 .custom-table .p-datatable-thead tr th {
-  @apply !bg-[#292E36] text-white font-bold p-3 border-0 border-[#292E36];
+  @apply !bg-black-300 text-white-500  font-bold p-3 border-0 border-black-300;
 }
 .custom-table .p-datatable-thead tr th:first-child {
   @apply rounded-tl-md;
@@ -483,10 +486,10 @@ button.p-button-secondary {
   @apply rounded-br-md;
 }
 .custom-table .p-datatable-tbody tr {
-  @apply !bg-[#22262C] text-[#FFFFFF];
+  @apply !bg-black-200 text-white-500;
 }
 .custom-table .p-datatable-tbody tr.p-row-odd {
-  @apply !bg-[#292E36] text-[#FFFFFF];
+  @apply !bg-black-300 text-white-500;
 }
 .custom-table .p-datatable-thead tr th .p-column-header-content {
   @apply justify-center;
@@ -499,7 +502,7 @@ button.p-button-secondary {
 }
 .opmFilters .p-dropdown,
 .opmFilters .p-inputtext {
-  @apply !bg-[#30343B] border border-solid border-[#30343B];
+  @apply !bg-gray-900 border border-solid border-gray-900;
 }
 .opmFilters .p-calendar .p-inputtext {
   @apply pl-[2.6vw] md:w-[20vw] lg:w-[12vw]
@@ -508,28 +511,28 @@ button.p-button-secondary {
   @apply md:w-[9vw] lg:w-[12vw]
 }
 .opmFilters .p-dropdown:not(.p-disabled).p-focus {
-  @apply !border-[#30343B];
+  @apply !border-gray-900;
 }
 .opmFilters .p-dropdown:hover,
 .opmFilters .p-inputtext:hover {
-  @apply !border-[#40444B];
+  @apply !border-black-800;
 }
 .p-datepicker {
   @apply rounded-[6px] p-0;
 }
 .p-datepicker thead {
-  @apply bg-[#292E36];
+  @apply bg-black-300;
 }
 .p-datepicker .p-datepicker-header {
   @apply border-none pb-0 max-h-[40px];
 }
 .p-datepicker:not(.p-datepicker-inline),
 .p-datepicker:not(.p-datepicker-inline) .p-datepicker-header {
-  @apply !bg-[#22262C];
+  @apply !bg-black-200;
 }
 .p-datepicker .p-datepicker-header .p-datepicker-next,
 .p-datepicker .p-datepicker-header .p-datepicker-prev {
-  @apply text-[#FAF9F6];
+  @apply text-gray-300;
 }
 .p-datepicker .p-datepicker-header .p-datepicker-next:focus,
 .p-datepicker .p-datepicker-header .p-datepicker-prev:focus {
@@ -539,10 +542,10 @@ button.p-button-secondary {
   @apply text-inherit;
 }
 .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
-  @apply text-[#F2F2F2];
+  @apply text-gray-200;
 }
 .p-datepicker table td > span.p-highlight {
-  @apply !bg-[#292E36] !text-[#F2F2F2];
+  @apply !bg-black-300 !text-gray-200;
 }
 .p-datepicker table td.p-datepicker-today > span {
   @apply bg-inherit text-inherit;
@@ -560,7 +563,7 @@ button.p-button-secondary {
   .p-monthpicker
   .p-monthpicker-month:not(.p-disabled):not(.p-highlight):hover,
 .p-datepicker .p-yearpicker .p-yearpicker-year.p-highlight {
-  @apply bg-[#292E36] text-[#F2F2F2];
+  @apply bg-black-300 text-gray-200;
 }
 .p-datepicker
   .p-datepicker-header
@@ -570,17 +573,17 @@ button.p-button-secondary {
   .p-datepicker-header
   .p-datepicker-title
   .p-datepicker-year:enabled:hover {
-  @apply text-[#F2F2F2];
+  @apply text-gray-200;
 }
 .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month,
 .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year {
-  @apply text-[#F2F2F2];
+  @apply text-gray-200;
 }
 .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
-  @apply bg-[#30343B] text-[white];
+  @apply bg-gray-900 text-[white];
 }
 .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
-  @apply bg-[#30343B] text-[white];
+  @apply bg-gray-900 text-[white];
 }
 .p-dropdown-panel .p-dropdown-items {
   @apply p-0;
@@ -588,25 +591,25 @@ button.p-button-secondary {
 .p-dropdown-panel
   .p-dropdown-items
   .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
-  @apply bg-[#40444B] text-[white];
+  @apply bg-black-800 text-[white];
 }
 .labelClass {
-  @apply text-[12px] text-[#898A8D] font-medium;
+  @apply text-[12px] text-gray-400 font-medium;
 }
 .tableToolTip {
   @apply w-[140px] mr-[0];
 }
 .tableToolTip thead tr th {
-  @apply border border-solid border-t-0 border-l-0 border-r-0 border-[#383F47] pb-[10px];
+  @apply border border-solid border-t-0 border-l-0 border-r-0 border-black-400 pb-[10px];
 }
 .tableToolTip tbody {
   @apply flex justify-between	pt-[5px] pb-[5px];
 }
 .tableToolTip:after {
-  @apply content-[""] mt-0 mb-0 ml-[0.5rem] mr-[0.5rem] inline-block border-[7px] border-solid border-transparent border-t-[8px] border-t-[#25292D] border-b-0 absolute left-[65px] top-[70px];
+  @apply content-[""] mt-0 mb-0 ml-[0.5rem] mr-[0.5rem] inline-block border-[7px] border-solid border-transparent border-t-[8px] border-t-black-900 border-b-0 absolute left-[65px] top-[70px];
 }
 .toolTipEl {
-  @apply z-[1] bg-[#25292D] text-[12px] text-white opacity-100 pointer-events-none absolute -translate-x-[50%] -translate-y-[120%] text-left rounded-md px-[10px] py-[6px];
+  @apply z-[1] bg-black-900 text-[12px] text-white-500  opacity-100 pointer-events-none absolute -translate-x-[50%] -translate-y-[120%] text-left rounded-md px-[10px] py-[6px];
 }
 hr.horizontalLine {
   @apply border-0 rotate-90 relative h-0.5 top-[100px];
@@ -638,92 +641,32 @@ hr.horizontalLine.blue {
 
 /* Order Details */
 #orderDetailsComp {
-  @apply font-helvetica bg-[#161A1D] sm:bg-inherit; 
+  @apply font-helvetica bg-black-100 sm:bg-inherit; 
 }
 #orderDetailsComp .grid span {
-  @apply text-sm py-2 text-[#FAF9F6] sm:bg-[#22262C];
+  @apply text-sm py-2 text-gray-300 sm:bg-black-200;
 }
 #orderDetailsComp .grid span.p-column-title {
-  @apply text-sm py-2 text-[#FAF9F6] bg-inherit;
-}
-.orderItemInfoTable .p-datatable-table {
-  @apply text-sm border-[#f4f4f4] font-helvetica !pb-8;
-}
-.orderItemInfoTable .p-datatable-thead tr th {
-  @apply !bg-[#26262B] font-bold border-0 border-none;
-}
-.orderItemInfoTable .p-datatable-thead tr th span {
-  @apply text-[#F2F2F2];
-}
-.orderItemInfoTable .p-datatable-thead tr th:first-child {
-  @apply rounded-tl-lg border-none pl-8 w-[20%];
-}
-.orderItemInfoTable .p-datatable-thead tr th:nth-child(2) {
-  @apply w-[29%];
-}
-.orderItemInfoTable .p-datatable-thead tr th:nth-child(3) div span {
-  @apply w-full text-center;
-}
-.orderItemInfoTable .p-datatable-thead tr th:nth-child(4) div span {
-  @apply w-full text-center;
-}
-.orderItemInfoTable .p-datatable-thead tr th:last-child div span {
-  @apply w-full text-end;
-}
-.orderItemInfoTable .p-datatable-thead tr th:last-child {
-  @apply rounded-tr-lg border-none pr-8;
-}
-.orderItemInfoTable .p-datatable-tbody tr td {
-  @apply border-none;
-}
-.orderItemInfoTable .p-datatable-tbody tr td:first-child {
-  @apply pl-8 w-[20%];
-}
-.orderItemInfoTable .p-datatable-tbody tr td:nth-child(2) {
-  @apply w-[29%];
-}
-.orderItemInfoTable .p-datatable-tbody tr td:nth-child(3) {
-  @apply text-center;
-}
-.orderItemInfoTable .p-datatable-tbody tr td:nth-child(4) {
-  @apply text-center;
-}
-.orderItemInfoTable .p-datatable-tbody tr td:last-child {
-  @apply text-end pr-8;
-}
-.orderItemInfoTable .p-datatable-tbody tr:last-child td:first-child {
-  @apply rounded-bl-lg;
-}
-.orderItemInfoTable .p-datatable-tbody tr:last-child td:last-child {
-  @apply rounded-br-lg pr-8;
-}
-.orderItemInfoTable .p-datatable-tbody tr {
-  @apply !bg-[#30343B] text-[#FAF9F6];
-}
-.orderItemInfoTable .p-datatable-tbody tr.p-row-odd {
-  @apply !bg-[#26262B] text-[#FAF9F6];
-}
-.orderItemInfoTable span.p-column-title {
-  @apply bg-inherit;
+  @apply text-sm py-2 text-gray-300 bg-inherit;
 }
 .flexBlockWrapper {
   @apply flex justify-between w-full;
 }
 .flexWrapper {
-  @apply flexBlockWrapper py-1 px-4 sm:p-0 border-b border-solid border-[#292e36] sm:border-none;
+  @apply flexBlockWrapper py-1 px-4 sm:p-0 border-b border-solid border-black-300 sm:border-none;
 }
 .flexColWrapper {
-  @apply flex flex-col border-t-0 sm:border-t border-solid border-[#292e36] sm:grid;
+  @apply flex flex-col border-t-0 sm:border-t border-solid border-black-300 sm:grid;
 }
 .gridNoGapRounded {
   @apply grid gap-y-0 rounded-md;
 }
 .filterCardWrapper {
-  @apply py-1 px-4 sm:p-0 border-solid border-[#292e36]  bg-[#22262C];
+  @apply py-1 px-4 sm:p-0 border-solid border-black-300  bg-black-200;
 }
 
 .home-page .p-card {
-  @apply rounded-lg shadow-lg shadow-[#00000029] grow w-[35%] sm:w-[25%] md:w-[19%];
+  @apply rounded-lg shadow-lg shadow-gray-600 grow w-[35%] sm:w-[25%] md:w-[19%];
 }
 
 .home-page .p-card .p-card-body {
@@ -748,7 +691,7 @@ hr.horizontalLine.blue {
   @apply ml-0 sm:ml-[5vw];
 }
 .home-refresh-btn .p-button {
-  @apply p-[0.54rem] bg-[#292E36] border-[#292E36] rounded-full hover:bg-[#292E36] hover:!border-[#292E36] active:!border-[#292E36];
+  @apply p-[0.54rem] bg-black-300 border-black-300 rounded-full hover:bg-black-300 hover:!border-black-300 active:!border-black-300;
 }
 .home-expand-btn .p-button {
   @apply bg-transparent border-transparent rounded-full p-0 hover:bg-transparent hover:!border-transparent active:!border-transparent;
@@ -761,31 +704,31 @@ hr.horizontalLine.blue {
   @apply shadow-none;
 }
 .home-card-refresh-btn .p-button {
-  @apply bg-[#22262C];
+  @apply bg-black-200;
 }
 .custom-tab.p-tabview {
   @apply w-fit h-[36px] self-end;
 }
 .custom-tab.p-tabview .p-tabview-nav {
-  @apply border-none h-[32px] bg-[#292E36];
+  @apply border-none h-[32px] bg-black-300;
 }
 .custom-tab.p-tabview .p-tabview-nav li .p-tabview-nav-link {
-  @apply bg-[#292E36] text-[#8B8C8F] h-[30px] rounded-none border-none text-[12px] font-medium;
+  @apply bg-black-300 text-gray-400 h-[30px] rounded-none border-none text-[12px] font-medium;
 }
 .custom-tab .p-tabview-nav-content {
   @apply rounded-[8px];
 }
 .custom-tab.p-tabview .p-tabview-nav li {
-  @apply bg-[#292E36];
+  @apply bg-black-300;
 }
 .custom-tab.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
-  @apply bg-[#F2F2F2] text-[#22262C] rounded-[8px] text-[12px] font-medium;
+  @apply bg-gray-200 text-black-200 rounded-[8px] text-[12px] font-medium;
 }
 .custom-tab.p-tabview
   .p-tabview-nav
   li:not(.p-highlight):not(.p-disabled):hover
   .p-tabview-nav-link {
-  @apply bg-[#292E36] text-[#8B8C8F];
+  @apply bg-black-300 text-gray-400;
 }
 .custom-tab.p-accordion .p-accordion-header .p-accordion-header-link,
 .p-tabview .p-tabview-nav li .p-tabview-nav-link {
@@ -804,10 +747,10 @@ hr.horizontalLine.blue {
   @apply invisible;
 }
 .link-box {
-  @apply w-[10.1rem] sm:w-[11.1rem] h-[50px] text-[13px] text-white !bg-[#292E36] items-center rounded-lg;
+  @apply w-[10.1rem] sm:w-[11.1rem] h-[50px] text-[13px] text-white-500  !bg-black-300 items-center rounded-lg;
 }
 .link-box:hover {
-  @apply border border-[#F2F2F2];
+  @apply border border-gray-200;
 }
 .quick-links-tab.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link,
 .quick-links-tab.p-tabview .p-tabview-nav li {
@@ -817,7 +760,7 @@ hr.horizontalLine.blue {
   @apply bg-inherit;
 }
 .quick-links-tab.p-tabview .p-tabview-nav li .p-tabview-nav-link {
-  @apply text-[#FAF9F6] rounded-full mr-1 h-[35px];
+  @apply text-gray-300 rounded-full mr-1 h-[35px];
 }
 .quick-links-tab.p-tabview .p-tabview-nav li {
   @apply bg-transparent;
@@ -832,38 +775,38 @@ hr.horizontalLine.blue {
   @apply mx-auto mt-2;
 }
 .custom-btn .p-button {
-  @apply bg-[#22262C] border-[#FAF9F6] text-[#FAF9F6] text-[14px] rounded-full h-[44px] w-[160px] font-normal;
+  @apply bg-black-200 border-gray-300 text-gray-300 text-[14px] rounded-full h-[44px] w-[160px] font-normal;
 }
 .custom-btn .p-button:enabled:active,
 .p-button:not(button):not(a):not(.p-disabled):active {
-  @apply bg-transparent shadow-none border-[#FAF9F6] border-2;
+  @apply bg-transparent shadow-none border-gray-300 border-2;
 }
 .custom-btn .p-button:enabled:hover,
 .p-button:not(button):not(a):not(.p-disabled):hover {
-  @apply bg-transparent shadow-none border-[#FAF9F6] border-2;
+  @apply bg-transparent shadow-none border-gray-300 border-2;
 }
 .p-datepicker-footer {
-  @apply border-t border-[#292E36] py-4;
+  @apply border-t border-black-300 py-4;
 }
 .p-datepicker-footer .p-inputtext {
-  @apply bg-[#22262C] text-[#F2F2F2] w-[3rem] text-center border-none text-[1.1rem] p-0;
+  @apply bg-black-200 text-gray-200 w-[3rem] text-center border-none text-[1.1rem] p-0;
 }
 .p-datepicker-footer .p-button,
 .p-datepicker-footer .p-button:focus {
-  @apply bg-[#22262C] border-none shadow-none p-0 text-[#8b8c8f];
+  @apply bg-black-200 border-none shadow-none p-0 text-gray-400;
 }
 .p-datepicker-footer .p-button:not(button):not(a):not(.p-disabled):hover {
   @apply border-[292E36] bg-transparent;
 }
 .p-datepicker-footer .p-dropdown {
-  @apply bg-[#22262C] pl-0 w-[3rem] sm:w-[4rem] ml-4;
+  @apply bg-black-200 pl-0 w-[3rem] sm:w-[4rem] ml-4;
 }
 .p-datepicker .p-timepicker {
   @apply hidden;
 }
 .custom-btn .p-button:enabled:hover,
 .p-button:not(button):not(a):not(.p-disabled):hover {
-  @apply bg-transparent shadow-none border-[#FAF9F6] border-2;
+  @apply bg-transparent shadow-none border-gray-300 border-2;
 }
 .home-opm-charts {
   @apply my-4;
@@ -880,7 +823,7 @@ hr.horizontalLine.blue {
 
 /* OPM tab */
 .opm-tabs .p-tabview-nav-content {
-  @apply rounded-[8px];
+  @apply rounded-8;
 }
 .opm-tabs.p-accordion .p-accordion-header .p-accordion-header-link,
 .p-tabview .p-tabview-nav li .p-tabview-nav-link {
@@ -893,16 +836,16 @@ hr.horizontalLine.blue {
   @apply w-fit h-[36px] self-end;
 }
 .opm-tabs.p-tabview .p-tabview-nav {
-  @apply border-none h-[32px] bg-[#292E36];
+  @apply border-none h-[32px] bg-black-300;
 }
 .opm-tabs.p-tabview .p-tabview-nav li .p-tabview-nav-link {
-  @apply bg-[#292E36] text-[#8B8C8F] h-[30px] rounded-none border-none text-[12px] font-medium;
+  @apply bg-black-300 text-gray-400 h-[30px] rounded-none border-none text-[12px] font-medium;
 }
 .opm-tabs.p-tabview .p-tabview-nav li {
-  @apply bg-[#292E36];
+  @apply bg-black-300;
 }
 .opm-tabs.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
-  @apply bg-[#F2F2F2] text-[#22262C] rounded-[8px] text-[12px] font-medium;
+  @apply bg-gray-200 text-black-200 rounded-[8px] text-[12px] font-medium;
 }
 .opm-tabs.p-tabview
   .p-tabview-nav
@@ -914,7 +857,7 @@ hr.horizontalLine.blue {
   .p-tabview-nav
   li:not(.p-highlight):not(.p-disabled):hover
   .p-tabview-nav-link {
-  @apply bg-[#292E36] text-[#8B8C8F];
+  @apply bg-black-300 text-gray-400;
 }
 .opm-tabs.p-accordion .p-accordion-header .p-accordion-header-link,
 .p-tabview .p-tabview-nav li .p-tabview-nav-link {
@@ -939,7 +882,7 @@ hr.horizontalLine.blue {
   @apply !shadow-none !border-none
 }
 .p-checkbox .p-checkbox-box.p-highlight {
-  @apply !border-white !bg-transparent
+  @apply !border-white-100 !bg-transparent
 }
 .autoRefreshCheckBox .p-checkbox .p-checkbox-box {
   @apply w-[18px] h-[18px];
@@ -948,13 +891,13 @@ hr.horizontalLine.blue {
   @apply top-[7vh];
 }
 .p-toast-message-info {
-  @apply !bg-[#2CB67D] !text-[#161A1D] !border-l-transparent;
+  @apply !bg-green-100 !text-black-700 !border-l-transparent;
 }
 .p-toast-message-content {
   @apply !border-l-0
 }
 .p-toast-icon-close-icon {
-  @apply text-[#161A1D] bg-transparent
+  @apply text-black-700 bg-transparent
 }
 .p-toast-icon-close:hover {
   @apply !bg-transparent
@@ -964,7 +907,7 @@ hr.horizontalLine.blue {
 }
 .p-datepicker-footer .p-button:enabled:hover,
 .p-datepicker-footer .p-button:not(button):not(a):not(.p-disabled):hover {
-  @apply bg-transparent text-[#292E36];
+  @apply bg-transparent text-black-300;
 }
 .p-datepicker-footer .p-dropdown {
   @apply !border-none;
@@ -976,8 +919,23 @@ hr.horizontalLine.blue {
   @apply !w-[.8rem] !h-[.8rem] max-w-[.8rem];
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-[#30343B] rounded-full;
+  @apply bg-gray-900 rounded-full;
 }
 ::-webkit-scrollbar {
   @apply w-1 h-1;
+}
+.p-toast .p-toast-message {
+  @apply m-auto w-95w xs:w-80w sm:w-50w lg:w-40w;
+}
+.p-toast .p-toast-message .p-toast-message-content {
+  @apply flex items-center text-14;
+}
+.p-toast .p-toast-message .p-toast-message-content .p-toast-detail {
+  @apply mt-0
+}
+.autoRefreshToast.p-toast .p-toast-icon-close {
+ @apply left-[1vw] md:left-0
+}
+.p-toast-message-content .p-image img {
+  @apply max-w-max
 }

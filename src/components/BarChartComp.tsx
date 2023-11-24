@@ -61,7 +61,7 @@ const BarChartComp = ({
         !defaultClasses &&
         (rotate
           ? "rotate-90  !h-[85vw] w-[100vh] bg-inherit !mt-[23vh] ml-[-65vw]"
-          : "relative md:l-[5vw] md:mr-[5vw] sm:mr-[0] sm:h-[45vh] bg-[#22262C] ml-[0] lg:pb-[0] sm:pt-[7vh] lg:pt-[10vh] sm:w-[68vw] md:w-[67vw] lg:w-[71.5vw] sm:ml-[1.25vw] lg:ml-[1.1vw] lg:mr-[0]")
+          : "relative md:l-[5vw] md:mr-[5vw] sm:mr-[0] sm:h-[45vh] bg-black-200 ml-[0] lg:pb-[0] sm:pt-[7vh] lg:pt-[10vh] sm:w-[68vw] md:w-[67vw] lg:w-[71.5vw] sm:ml-[1.25vw] lg:ml-[1.1vw] lg:mr-[0]")
       }`}
     >
       {width < 640 && location.pathname.includes("opm") && (
@@ -70,10 +70,12 @@ const BarChartComp = ({
             rotate ? "mx-0" : " ml-[2vw] mr-[20px]"
           }`}
         >
-          <p className={`text-white ${rotate ? "ml-[1.5vw]" : ""}`}>{title}</p>
+          <p className={`text-white-500 ${rotate ? "ml-[1.5vw]" : ""}`}>
+            {title}
+          </p>
           <div className="flex items-center">
             <div
-              className={`bg-[#383F47] w-[30px] h-[30px] rounded-full relative ${
+              className={`bg-black-400 w-[30px] h-[30px] rounded-full relative ${
                 rotate ? "left-[3vw]" : "left-[5vw]"
               }`}
             >
