@@ -1,5 +1,5 @@
 import { Calendar } from "primereact/calendar";
-import { InputNumber, InputNumberValueChangeEvent } from "primereact/inputnumber";
+import { InputNumberValueChangeEvent } from "primereact/inputnumber";
 import { FC, useEffect, useState } from "react";
 import { CustomCalendarProps } from "../../@types/BarChart";
 import ArrowDown from "../../assets/arrow_down.svg";
@@ -7,8 +7,9 @@ import ArrowUp from "../../assets/arrow_up.svg";
 import { AM_PM_OPTIONS } from "../../constants/appConstants";
 import { CURRENT_PST_DATE } from "../../utils/dateTimeUtil";
 import { convert12to24Hour, convert24to12Hour } from "../utils/Utils";
-import CustomImage from "./customimage";
+import CustomInputNumber from "./CustomInputNumber";
 import CustomToast from "./CustomToast";
+import CustomImage from "./customimage";
 
 type ManualInputTimeProps = {
   hour: number;
@@ -53,7 +54,7 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
     _date.setHours(_hour);
     _date.setMinutes(minute);
     setShowFutureDateToast(false);
-    if (props.maxDate && !(_date < props.maxDate)) {
+    if (props.maxDate && ((_date > props.maxDate) || (_date === props.maxDate))) {
       setShowFutureDateToast(true);
       setHour(convert24to12Hour(CURRENT_PST_DATE.getHours()).hour12);
       setMinute(CURRENT_PST_DATE.getMinutes());
@@ -137,8 +138,8 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
 const ManualInputTime: FC<ManualInputTimeProps> = ({ hour, minute, handleHourChange, handleMinuteChange, ampm, toggleAmPmChange }) => {
   return (
     <div className="flex justify-evenly w-[12rem] mx-auto items-center">
-      <InputNumber value={hour < 1 ? 12 : hour} step={1} onValueChange={(e) => handleHourChange(e)} showButtons buttonLayout="vertical" min={0} max={12} prefix={hour && hour < 10 && "0"} /> :
-      <InputNumber value={minute} onValueChange={(e) => handleMinuteChange(e)} showButtons buttonLayout="vertical" step={1} min={0} max={59} prefix={minute < 10 && "0"} />:
+      <CustomInputNumber value={hour < 1 ? 12 : hour} step={1} onValueChange={(e) => handleHourChange(e)} showButtons buttonLayout="vertical" min={0} max={12} prefix={hour && hour < 10 && "0"} /> :
+      <CustomInputNumber value={minute} onValueChange={(e) => handleMinuteChange(e)} showButtons buttonLayout="vertical" step={1} min={0} max={59} prefix={minute < 10 && "0"} />:
       <div className="ampm-comp px-[1rem] min-w-[4rem]">
         <CustomImage
           src={ArrowUp}

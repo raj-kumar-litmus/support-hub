@@ -63,7 +63,8 @@ import CustomTab from "../components/common/customtab";
 import { OPM_BAR_CHART_OPTIONS, OPM_OPTIONS } from "../config/chartConfig";
 import {
   CURRENT_PST_DATE,
-  DATE_TIME_FORMAT_2,
+  DATE_TIME_FORMAT_3,
+  DATE_TIME_FORMAT_4,
   formatDate,
   getFormattedPSTDate,
 } from "../utils/dateTimeUtil";
@@ -598,7 +599,7 @@ const OPM: React.FC = () => {
                   onClickHandler={removeFormEntry}
                   content={
                     e.type === "time"
-                      ? formatDate(e.value, DATE_TIME_FORMAT_2)
+                      ? formatDate(e.value, DATE_TIME_FORMAT_4)
                       : e.value.name || e.value
                   }
                 />

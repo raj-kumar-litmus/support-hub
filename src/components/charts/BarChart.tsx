@@ -34,7 +34,7 @@ import {
   CURRENT_PST_DATE,
   DATE_FORMAT_3,
   DATE_TIME_FORMAT_1,
-  DATE_TIME_FORMAT_2,
+  DATE_TIME_FORMAT_4,
   formatDate,
 } from "../../utils/dateTimeUtil";
 import { fetchData } from "../../utils/fetchUtil";
@@ -228,7 +228,7 @@ const BarChart = () => {
 
   const getFilterCardContent = (e) => {
     if (e.type === "calendar") {
-      return `${formatDate(e.value, DATE_TIME_FORMAT_2)}`;
+      return `${formatDate(e.value, DATE_TIME_FORMAT_4)}`;
     } else {
       return e.options.find((option) => option.value === e.value).label;
     }
