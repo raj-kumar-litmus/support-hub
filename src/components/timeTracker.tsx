@@ -15,7 +15,7 @@ const TimeTracker = (props: TimeTrackerProps) => {
   }, [new Date().getTime()]);
 
   return (
-    <span className={`${props.classname} text-xs text-[#8B8C8F] mr-3`}>
+    <span className={`${props.classname} text-xs text-gray-400 mr-3`}>
       Last Refreshed {timeInMin} min ago
     </span>
   );

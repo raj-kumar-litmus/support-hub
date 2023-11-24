@@ -57,7 +57,7 @@ const CardTitle = ({
 const OPMCards = ({ value }: { value: number }) => {
   return (
     <div className="flex items-end">
-      <span className="text-2xl text-[#F2F2F2]">{value}</span>
+      <span className="text-2xl text-gray-200">{value}</span>
     </div>
   );
 };
@@ -79,24 +79,24 @@ const ComparisonCards = ({
     <div className="flex">
       <div className="flex flex-col pr-1 sm:pr-2 justify-between">
         <span className="text-[10px]">{TODAY}</span>
-        <span className="text-[#F2F2F2] text-xl">{kFormatter(today) || 0}</span>
+        <span className="text-gray-200 text-xl">{kFormatter(today) || 0}</span>
       </div>
-      <div className="border border-r border-[#383F47] h-[2.5rem] m-auto"></div>
+      <div className="border border-r border-black-400 h-[2.5rem] m-auto"></div>
       <div className="flex flex-col px-1 sm:px-2 justify-between">
         <span className="text-[10px]">{LASTDAY}</span>
-        <span className="text-[#F2F2F2] text-xl">
+        <span className="text-gray-200 text-xl">
           {kFormatter(lastDay) || 0}
         </span>
       </div>
-      <div className="border border-r border-[#383F47] h-[2.5rem] m-auto"></div>
+      <div className="border border-r border-black-400 h-[2.5rem] m-auto"></div>
       <div className="flex flex-col justify-between pl-1 sm:pl-2">
         <span
           className={`${
             difference > 0
-              ? "text-[#F16476]"
+              ? "text-pink-100"
               : difference < 0
-              ? "text-[#3A9F2D]"
-              : "text-[#8B8C8F]"
+              ? "text-green-300"
+              : "text-gray-400"
           } text-[10px]`}
         >
           {DIFFERENCE}
@@ -105,10 +105,10 @@ const ComparisonCards = ({
           <span
             className={`${
               difference > 0
-                ? "text-[#F16476]"
+                ? "text-pink-100"
                 : difference < 0
-                ? "text-[#3A9F2D]"
-                : "text-[#F2F2F2]"
+                ? "text-green-300"
+                : "text-gray-200"
             } text-xl`}
           >
             {Math.abs(difference)}
@@ -215,11 +215,11 @@ const HomePage = () => {
         <div className="home-page py-[4px] box-border">
           <div className="flex sm:flex-row justify-between mb-4">
             <div className="flex items-center font-helvetica">
-              <span className="text-lg text-[#F2F2F2] font-bold mr-4">
+              <span className="text-lg text-gray-200 font-bold mr-4">
                 {DASHBOARD}
               </span>
               <CustomImage src={infoIcon} />
-              <span className="text-xs text-[#8B8C8F] ml-2">
+              <span className="text-xs text-gray-400 ml-2">
                 Last {HOME_PAGE_REFERSH_DURATION} min data
               </span>
             </div>
@@ -238,7 +238,7 @@ const HomePage = () => {
           {isLoading ? (
             <Loader />
           ) : (
-            <div className="flex flex-wrap gap-[10px] pb-4 border-b  border-b-[#22262C]">
+            <div className="flex flex-wrap gap-[10px] pb-4 border-b  border-b-black-200">
               <HomeCard
                 title={
                   <CardTitle

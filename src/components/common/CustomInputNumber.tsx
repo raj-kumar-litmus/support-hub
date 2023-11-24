@@ -4,6 +4,8 @@ interface Props extends InputNumberProps {
   containerclassname?: string;
   labelclassname?: string;
   label?: string;
+  incrementButtonIcon?: any;
+  decrementButtonIcon?: any;
 }
 
 const CustomInputNumber = (props: Props) => (
@@ -17,6 +19,8 @@ const CustomInputNumber = (props: Props) => (
       inputClassName={props.inputClassName}
       onValueChange={props.onValueChange}
       onChange={props.onChange}
+      incrementButtonIcon={props.incrementButtonIcon}
+      decrementButtonIcon={props.decrementButtonIcon}
       {...props}
     />
     {props.label && (

@@ -40,17 +40,17 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
   };
 
   const toggleAmPmChange = (e) => {
-    setEvent(e)
+    setEvent(e);
     if (ampm === AM_PM_OPTIONS[0].value) {
-      setAmPm(AM_PM_OPTIONS[1].value)
+      setAmPm(AM_PM_OPTIONS[1].value);
     } else {
       setAmPm(AM_PM_OPTIONS[0].value);
     }
   };
 
   const getUpdatedDate = (e) => {
-    let _hour = convert12to24Hour(hour, ampm);
-    let _date = new Date(date);
+    const _hour = convert12to24Hour(hour, ampm);
+    const _date = new Date(date);
     _date.setHours(_hour);
     _date.setMinutes(minute);
     setShowFutureDateToast(false);
@@ -63,19 +63,19 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
       return;
     }
     setDate(_date);
-    let event = { ...e, value: _date, target: { value: _date, name: props.name } };
+    const event = { ...e, value: _date, target: { value: _date, name: props.name } };
     props.onChange(event);
-  }
+  };
 
   const onChange = (e) => {
     if (props.showTime) {
-      let date = e.target?.value;
+      const date = e.target?.value;
       setDate(date);
       setEvent(e);
     } else {
       props.onChange(e);
     }
-  }
+  };
 
   useEffect(() => {
     if (props.value) {
@@ -91,12 +91,12 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
     if (event) {
       getUpdatedDate(event);
     }
-  }, [hour, minute, ampm, event])
+  }, [hour, minute, ampm, event]);
 
   return (
     <div className={`flex flex-col self-end ${props.containerclassname}`}>
       <div
-        className={`text-xs font-medium pb-1 text-[#898A8D] relative ${props.titleclassname}`}
+        className={`text-xs font-medium pb-1 text-gray-400 relative ${props.titleclassname}`}
       >
         {props.title}
       </div>
@@ -119,8 +119,8 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
             handleHourChange={handleHourChange}
             handleMinuteChange={handleMinuteChange}
             ampm={ampm}
-          toggleAmPmChange={toggleAmPmChange}
-        />
+            toggleAmPmChange={toggleAmPmChange}
+          />
         )
         } />
       <CustomToast
@@ -131,10 +131,17 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
         position="top-center"
       />
     </div>
-  )
-}
+  );
+};
 
-const ManualInputTime: FC<ManualInputTimeProps> = ({ hour, minute, handleHourChange, handleMinuteChange, ampm, toggleAmPmChange }) => {
+const ManualInputTime: FC<ManualInputTimeProps> = ({
+  hour,
+  minute,
+  handleHourChange,
+  handleMinuteChange,
+  ampm,
+  toggleAmPmChange,
+}) => {
   return (
     <div className="flex justify-evenly w-[12rem] mx-auto items-center">
       <CustomInputNumber
@@ -146,6 +153,15 @@ const ManualInputTime: FC<ManualInputTimeProps> = ({ hour, minute, handleHourCha
         min={0}
         max={12}
         prefix={hour && hour < 10 && "0"}
+        incrementButtonIcon={<CustomImage
+          src={ArrowUp}
+          className="cursor-pointer"
+        />}
+        decrementButtonIcon={<CustomImage
+          src={ArrowDown}
+          className="cursor-pointer"
+        />
+        }
       /> :
       <CustomInputNumber
         value={minute}
@@ -156,21 +172,30 @@ const ManualInputTime: FC<ManualInputTimeProps> = ({ hour, minute, handleHourCha
         min={0}
         max={59}
         prefix={minute < 10 && "0"}
+        incrementButtonIcon={<CustomImage
+          src={ArrowUp}
+          className="cursor-pointer"
+        />}
+        decrementButtonIcon={<CustomImage
+          src={ArrowDown}
+          className="cursor-pointer"
+        />
+        }
       />:
-      <div className="ampm-comp px-[1rem] min-w-[4rem]">
+      <div className="ampm-comp px-[1rem] min-w-[4rem] pt-4">
         <CustomImage
           src={ArrowUp}
-          className="cursor-pointer ampm-arrow"
+          className="cursor-pointer"
           onClick={toggleAmPmChange}
         />
-        <div className="my-[0.3rem]">{ampm}</div>
+        <div className="my-[0.3rem] text-base">{ampm}</div>
         <CustomImage
           src={ArrowDown}
-          className="cursor-pointer ampm-arrow"
+          className="cursor-pointer"
           onClick={toggleAmPmChange}
         />
       </div>
-    </div>
-  )
-}
+    </div >
+  );
+};
 export default CustomCalendar;

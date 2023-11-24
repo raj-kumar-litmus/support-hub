@@ -1,4 +1,4 @@
-import { FC, KeyboardEvent, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { QUICK_LINKS, QUICK_LINKS_HEADER } from "../constants/appConstants";
 
 import { IQuickLink } from "../@types/quicklinks";
@@ -33,21 +33,25 @@ const QuickLinks: FC<QuickLinksProps> = ({ showQuickLinks, setShowQuickLinks }) 
   const onSeeMoreClick = () => {
     setQuickLinks(allQuickLinks);
     setShowSeeMoreBtn(false);
-  }
+  };
 
   const getQuickLinks = () => {
-    let links = QUICK_LINKS.find(l => l.id === tabValue).links;
+    const links = QUICK_LINKS.find((l) => l.id === tabValue).links;
     setQuickLinks(links);
     setAllQuickLinks(links);
-  }
+  };
 
   useEffect(() => {
     getQuickLinks();
   }, [tabValue]);
 
   useEffect(() => {
-    if (width < 640 && allQuickLinks.length > 0 && !(allQuickLinks.length < 10)) {
-      let _quickLinks = [...allQuickLinks];
+    if (
+      width < 640 &&
+      allQuickLinks.length > 0 &&
+      !(allQuickLinks.length < 10)
+    ) {
+      const _quickLinks = [...allQuickLinks];
       _quickLinks.splice(10);
       setQuickLinks(_quickLinks);
       setShowSeeMoreBtn(true);
@@ -60,7 +64,7 @@ const QuickLinks: FC<QuickLinksProps> = ({ showQuickLinks, setShowQuickLinks }) 
   return (
     <CustomDialog
       header={<div className="flex flex-wrap justify-between items-center">
-        <span className="text-[#FAF9F6] font-bold pb-2 sm:p-0">{QUICK_LINKS_HEADER}</span>
+        <span className="text-gray-300 font-bold pb-2 sm:p-0">{QUICK_LINKS_HEADER}</span>
         <div className="flex flex-wrap justify-between m-0 sm:m-auto">
           <CustomTab
             className="custom-tab quick-links-tab"
@@ -79,7 +83,7 @@ const QuickLinks: FC<QuickLinksProps> = ({ showQuickLinks, setShowQuickLinks }) 
       dismissableMask
       transitionOptions={null}
     >
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(175px,1fr))] gap-3">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(159px,1fr))] gap-3">
         {quickLinks.map((l, i) =>
           <QuickLinkBox
             link={l}
@@ -99,11 +103,21 @@ const QuickLinks: FC<QuickLinksProps> = ({ showQuickLinks, setShowQuickLinks }) 
       }
     </CustomDialog>
   );
-}
+};
 
-const QuickLinkBox: FC<QuickLinkBoxProps> = ({ link, hoveredIndex, setHoveredIndex, index }) => {
+const QuickLinkBox: FC<QuickLinkBoxProps> = ({
+  link,
+  hoveredIndex,
+  setHoveredIndex,
+  index }) => {
   return (
-    <div className="link-box flex justify-center cursor-pointer p-1" onClick={() => window.open(link.link, "_blank")} key={link.name} onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)}>
+    <div
+      className="link-box flex justify-center cursor-pointer p-1"
+      onClick={() => window.open(link.link, "_blank")}
+      key={link.name}
+      onMouseEnter={() => setHoveredIndex(index)}
+      onMouseLeave={() => setHoveredIndex(null)}
+    >
       <span className="m-auto text-center font-normal leading-snug">
         {link.name}
       </span>
@@ -112,11 +126,7 @@ const QuickLinkBox: FC<QuickLinkBoxProps> = ({ link, hoveredIndex, setHoveredInd
         src={index === hoveredIndex ? ArrowTopWhite : ArrowTop}
       />
     </div>
-  )
-}
-
+  );
+};
 
 export default QuickLinks;
-
-
-

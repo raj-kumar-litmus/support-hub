@@ -8,6 +8,8 @@ interface Props extends ToastProps {
   detail?: string;
   life?: number;
   closable?: boolean;
+  messageIcon?: any;
+  className?: string;
 }
 
 const CustomToast = (props: Props) => {
@@ -20,13 +22,20 @@ const CustomToast = (props: Props) => {
         summary: props.summary,
         detail: props.detail,
         life: props.life,
+        icon: props.messageIcon,
         closable: props.closable,
       });
       props.onHide();
     }
   }, [props.showToast]);
 
-  return <Toast ref={ref} position={props.position || "center"} />;
+  return (
+    <Toast
+      className={props.className}
+      ref={ref}
+      position={props.position || "center"}
+    />
+  );
 };
 
 export default CustomToast;
