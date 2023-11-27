@@ -29,6 +29,7 @@ import {
   SUBMIT,
   TOTAL_SESSIONS_PER_MINUTE,
   SESSIONS_CHART_DEFAULT,
+  SCREEN_WIDTH,
 } from "../../constants/appConstants";
 import useScreenSize from "../../hooks/useScreenSize";
 import {
@@ -48,7 +49,7 @@ import Loader from "../loader";
 import CustomImage from "../common/customimage";
 import CustomButton from "../Button";
 import { LoaderContext, LoaderContextType } from "../../context/loaderContext";
-import { submitOnEnter } from "../utils/Utils";
+import { increaseLegendSpacing, submitOnEnter } from "../utils/Utils";
 const BarChart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [sessionData, setSessionData] = useState<SessionData[]>([]);
@@ -188,11 +189,6 @@ const BarChart = () => {
     setIsLoading(true);
     const data = await fetchData(URL_SESSIONS, params);
     setSessionData(data || []);
-    // setChartOptions(getChartConfig());
-    //   location.pathname.includes("home")
-    //     ? getChartConfig(HOME_PAGE_REFERSH_DURATION)
-    //     : getChartConfig(),
-    // );
     hideLoader();
     setIsLoading(false);
   };
@@ -245,7 +241,7 @@ const BarChart = () => {
   };
 
   const toggleFilterVisibility = () => {
-    width > 640
+    width > SCREEN_WIDTH.SM
       ? setShowFilters(!showFilters)
       : setShowFilterPopup(!showFilterPopup);
   };
@@ -255,10 +251,10 @@ const BarChart = () => {
       ...BAR_CHART_OPTIONS(
         (duration ||
           Number(formFields.find((e) => e.name === "period").value)) < 11 &&
-          width > 640,
+          width > SCREEN_WIDTH.SM,
       ),
     };
-    if (width > 640) {
+    if (width > SCREEN_WIDTH.SM) {
       customChartConfig.plugins.legend.position = "bottom";
       customChartConfig.plugins.legend.align = "start";
     } else {
@@ -266,7 +262,7 @@ const BarChart = () => {
       customChartConfig.plugins.legend.align = "start";
     }
 
-    if (width > 640 && width <= 1024) {
+    if (width > SCREEN_WIDTH.SM && width <= SCREEN_WIDTH.LG) {
       customChartConfig.plugins.datalabels.rotation = 270;
       customChartConfig.plugins.datalabels.anchor = "center";
       customChartConfig.plugins.datalabels.align = "center";
@@ -333,7 +329,7 @@ const BarChart = () => {
                           name={form.name}
                           title={form.title}
                           containerclassname="calendarSessions"
-                          titleclassname="top-[1.25rem]"
+                          titleclassname="top-5"
                           imageclassname="h-[20px] w-[20px] relative top-[1.75rem] left-[0.5vw] z-[1]"
                           showTime
                           timeOnly={form.name === "time"}
@@ -409,8 +405,8 @@ const BarChart = () => {
           className={`${
             location.pathname.includes("home")
               ? "home-sessions"
-              : "sessions-main"
-          } flex justify-center relative bg-black-200 h-[24rem] lg:h-[29rem] rounded-lg flex-col min-h-[24rem]`}
+              : "main-sessions"
+          } flex justify-center relative bg-black-200 h-96 lg:h-[29rem] rounded-lg flex-col min-h-[24rem]`}
         >
           <>
             {location.pathname.includes("home") && (
@@ -436,7 +432,7 @@ const BarChart = () => {
                 </div>
                 <div className="flex justify-start mb-2 md:mb-0 md:justify-center items-center">
                   <CustomTab
-                    className="custom-tab md:absolute md:top-[1.25rem] md:right-[8rem]"
+                    className="custom-tab md:absolute md:top-5 md:right-32"
                     tabData={SESSIONS_TABS}
                     tabValue={tabValue}
                     setTabValue={setTabValue}
@@ -450,7 +446,9 @@ const BarChart = () => {
                   {SESSIONS}
                 </div>
                 <CustomTab
-                  className={`custom-tab ${width < 640 && "!self-start"}`}
+                  className={`custom-tab ${
+                    width < SCREEN_WIDTH.SM ? "!self-start" : ""
+                  }`}
                   tabData={SESSIONS_TABS}
                   tabValue={tabValue}
                   setTabValue={setTabValue}
@@ -462,18 +460,7 @@ const BarChart = () => {
                 ref={chartRef}
                 options={chartOptions}
                 data={allData}
-                plugins={[
-                  {
-                    id: "increase-legend-spacing",
-                    beforeInit(chart) {
-                      const originalFit = (chart.legend as any).fit;
-                      (chart.legend as any).fit = function fit() {
-                        originalFit.bind(chart.legend)();
-                        this.height += 20;
-                      };
-                    },
-                  },
-                ]}
+                plugins={increaseLegendSpacing(20)}
               />
             )}
             <div className="text-center text-xs text-gray-300 mt-2 sm:-mt-11">
@@ -507,7 +494,7 @@ const BarChart = () => {
                       title={form.title}
                       showTime
                       containerclassname="calendarSessions"
-                      titleclassname="top-[1.25rem]"
+                      titleclassname="top-5"
                       imageclassname="h-[20px] w-[20px] relative top-[1.75rem] md:top-[3vh] left-[0.5vw] z-[1]"
                       placeholder={DD_MM_YYYY}
                       value={form.value}

@@ -63,7 +63,7 @@ const getOrCreateTooltip = (chart, type, tooltip) => {
   return tooltipEl;
 };
 
-export const externalTooltipHandler = (context, type) => {
+export const externalTooltipHandler = (context, type, customPosition) => {
   // Tooltip Element
   const { chart, tooltip } = context;
   const tooltipEl = getOrCreateTooltip(chart, type, tooltip);
@@ -140,11 +140,25 @@ export const externalTooltipHandler = (context, type) => {
     tableRoot.appendChild(tableBody);
   }
 
-  const { offsetLeft: positionX, offsetTop: positionY } = chart.canvas;
-  // Display, position, and set styles for font
-  tooltipEl.style.opacity = 1;
-  tooltipEl.style.left = positionX + tooltip.caretX + "px";
-  tooltipEl.style.top = positionY + tooltip.caretY + "px";
+  if (customPosition) {
+    getChartTooltipPosition(context, tooltipEl, tooltip);
+  } else {
+    const { offsetLeft: positionX, offsetTop: positionY } = chart.canvas;
+    // Display, position, and set styles for font
+    tooltipEl.style.opacity = 1;
+    tooltipEl.style.left = positionX + tooltip.caretX + "px";
+    tooltipEl.style.top = positionY + tooltip.caretY + "px";
+  }
+};
+
+export const getChartTooltipPosition = (context, tooltipEl, tooltip) => {
+  const position = context.chart.canvas.getBoundingClientRect();
+  tooltipEl.style.opacity = "1";
+  tooltipEl.style.position = "absolute";
+  tooltipEl.style.left = position.left + tooltip.caretX + "px";
+  tooltipEl.style.top = position.top + tooltip.caretY + "px";
+  tooltipEl.style.padding = tooltip.padding + "px " + tooltip.padding + "px";
+  tooltipEl.style.pointerEvents = "none";
 };
 
 export const getTableHeaders = (data: object[]) => {
@@ -188,3 +202,16 @@ export const submitOnEnter = (callback) => {
     document.removeEventListener("keydown", handleGlobalKeyDown);
   };
 };
+
+export const increaseLegendSpacing = (customHeight) => [
+  {
+    id: "increase-legend-spacing",
+    beforeInit(chart) {
+      const originalFit = (chart.legend as any).fit;
+      (chart.legend as any).fit = function fit() {
+        originalFit.bind(chart.legend)();
+        this.height += customHeight;
+      };
+    },
+  },
+];

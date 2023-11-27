@@ -56,12 +56,19 @@ import {
   MM_DD_YYYY_HH_MM,
   CHART_TABS,
   OPM_CHART_DEFAULT,
+  SCREEN_WIDTH,
+  NO_OF_ORDERS,
 } from "../constants/appConstants";
 import { submitOnEnter } from "../components/utils/Utils";
 import { URL_OPM } from "../constants/apiConstants";
 import { LoaderContext, LoaderContextType } from "../context/loaderContext";
 import CustomTab from "../components/common/customtab";
-import { OPM_BAR_CHART_OPTIONS, OPM_OPTIONS } from "../config/chartConfig";
+import {
+  OPM_BAR_CHART_OPTIONS,
+  OPM_BAR_CHART_OPTIONS_HOME,
+  OPM_OPTIONS,
+  OPM_OPTIONS_HOME,
+} from "../config/chartConfig";
 import {
   CURRENT_PST_DATE,
   DATE_TIME_FORMAT_3,
@@ -232,7 +239,7 @@ const OPM: React.FC = () => {
         labels: xAxisLabels,
         datasets: [
           {
-            label: "No of orders",
+            label: NO_OF_ORDERS,
             data: dataArr,
             borderColor: "#599DF5",
             pointStyle: "circle",
@@ -244,7 +251,7 @@ const OPM: React.FC = () => {
         labels: xAxisLabels,
         datasets: [
           {
-            label: "No of orders",
+            label: NO_OF_ORDERS,
             data: dataArr,
             borderColor: "#599DF5",
             backgroundColor: "#599DF5",
@@ -261,16 +268,30 @@ const OPM: React.FC = () => {
     (async () => {
       if (url) {
         setOptions(
-          OPM_OPTIONS(
-            width < 640,
-            Number(url.split("period=")[1].split("&")[0]) < 16 && width > 640,
-          ),
+          location.pathname.includes("home")
+            ? OPM_OPTIONS_HOME(
+                width < SCREEN_WIDTH.SM,
+                Number(url.split("period=")[1].split("&")[0]) < 16 &&
+                  width > SCREEN_WIDTH.SM,
+              )
+            : OPM_OPTIONS(
+                width < SCREEN_WIDTH.SM,
+                Number(url.split("period=")[1].split("&")[0]) < 16 &&
+                  width > SCREEN_WIDTH.SM,
+              ),
         );
         setBarChartOptions(
-          OPM_BAR_CHART_OPTIONS(
-            width < 640,
-            Number(url.split("period=")[1].split("&")[0]) < 16 && width > 640,
-          ),
+          location.pathname.includes("home")
+            ? OPM_BAR_CHART_OPTIONS_HOME(
+                width < SCREEN_WIDTH.SM,
+                Number(url.split("period=")[1].split("&")[0]) < 16 &&
+                  width > SCREEN_WIDTH.SM,
+              )
+            : OPM_BAR_CHART_OPTIONS(
+                width < SCREEN_WIDTH.SM,
+                Number(url.split("period=")[1].split("&")[0]) < 16 &&
+                  width > SCREEN_WIDTH.SM,
+              ),
         );
         await getData();
       }
@@ -331,7 +352,7 @@ const OPM: React.FC = () => {
       }
     });
     setUrl(`${URL_OPM}?${str}`);
-    if (showFilters && width < 640) setShowFilters(false);
+    if (showFilters && width < SCREEN_WIDTH.SM) setShowFilters(false);
   };
 
   useEffect(() => {
@@ -343,7 +364,7 @@ const OPM: React.FC = () => {
     if (tabValue === 0) {
       customChartConfig = { ...barChartoptions };
       customChartConfig.scales.y.max = maxOPM;
-      if (width > 640 && width <= 1024) {
+      if (width > SCREEN_WIDTH.SM && width <= SCREEN_WIDTH.LG) {
         customChartConfig.plugins.datalabels.rotation = 270;
         customChartConfig.plugins.datalabels.anchor = "center";
         customChartConfig.plugins.datalabels.align = "center";
@@ -420,13 +441,13 @@ const OPM: React.FC = () => {
               title={TITLE.OPM}
               options={getChartConfig()}
               data={barChartData}
-              className="border-0 w-full h-[16rem]"
+              className="border-0 w-full h-64"
               defaultClasses={true}
             />
           ) : (
             <LineChart
               title={TITLE.OPM}
-              className="border-0 w-full h-[16rem]"
+              className="border-0 w-full h-64"
               options={getChartConfig()}
               data={data}
               defaultClasses={true}
@@ -437,7 +458,7 @@ const OPM: React.FC = () => {
       {!IS_FULLSCREEN && location.pathname.includes("opm") && (
         <div className="flex justify-between items-start">
           <p className="font-bold text-gray-200">{TITLE.OPM}</p>
-          {width < 640 && (
+          {width < SCREEN_WIDTH.SM && (
             <CustomImage
               src={FilterIcon}
               className="self-end"
@@ -449,7 +470,7 @@ const OPM: React.FC = () => {
       )}
       {showFilters && location.pathname.includes("opm") && (
         <>
-          {width > 640 ? (
+          {width > SCREEN_WIDTH.SM ? (
             <>
               <form className="lg:flex md:gap-[0.15rem] opmFilters sm:grid sm:grid-cols-3 lg:ml-[0.5rem] sm:mb-4">
                 {formFields.map((form, index) => {
@@ -475,7 +496,7 @@ const OPM: React.FC = () => {
                         <CustomCalendar
                           name={form.name}
                           containerclassname="calendarOpmComparison ml-[10px] lg:w-[10vw] lg:w-[12vw] xl:w-[14vw] sm:mr-[-0.25rem]"
-                          titleclassname="top-[1.25rem]"
+                          titleclassname="top-5"
                           imageclassname="h-[20px] w-[20px] relative top-[1.75rem] left-[0.5vw] z-[1]"
                           placeholder={MM_DD_YYYY_HH_MM}
                           title={form.label}
@@ -553,7 +574,7 @@ const OPM: React.FC = () => {
                           <CustomCalendar
                             name={form.name}
                             containerclassname="opmFiltersMobileCalendar"
-                            titleclassname="left-[1vw] md:left-[0] top-[1.25rem]"
+                            titleclassname="left-[1vw] md:left-[0] top-5"
                             imageclassname="h-[20px] w-[20px] relative top-[1.75rem] md:top-[3vh] left-[3.5vw] z-[1]"
                             title={form.label}
                             showTime={form.showTime}
@@ -600,7 +621,7 @@ const OPM: React.FC = () => {
           className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[0] sm:ml-[5vw] lg:ml-[1rem] ${
             IS_FULLSCREEN
               ? "rotate-90 absolute left-[-9vh] top-[45vh] ml-[25vw] w-[70vh] mt-[0]"
-              : `${width < 640 ? "portrait" : ""}`
+              : `${width < SCREEN_WIDTH.SM ? "portrait" : ""}`
           }`}
         >
           {formFields
@@ -648,7 +669,7 @@ const OPM: React.FC = () => {
         !isLoading &&
         location.pathname.includes("opm") && (
           <div
-            className={`relative h-[24rem] lg:h-[29rem] ${
+            className={`relative h-96 lg:h-[29rem] ${
               IS_FULLSCREEN ? "rotate-90" : ""
             }`}
           >
@@ -656,7 +677,7 @@ const OPM: React.FC = () => {
               className={`opm-tabs absolute z-10 pt-2 top-2 ${
                 IS_FULLSCREEN
                   ? "right-[calc(100vh-57rem)]"
-                  : "right-[3.5rem] sm:right-3 md:right-4 lg:right-6"
+                  : "right-14 sm:right-3 md:right-4 lg:right-6"
               }`}
               tabData={CHART_TABS}
               tabValue={tabValue}

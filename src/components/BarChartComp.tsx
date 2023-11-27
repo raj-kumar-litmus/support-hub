@@ -14,6 +14,8 @@ import { Bar } from "react-chartjs-2";
 import useScreenSize from "../hooks/useScreenSize";
 import RotateIcon from "../assets/rotate.svg";
 import CustomImage from "./common/customimage";
+import { SCREEN_WIDTH } from "../constants/appConstants";
+import { increaseLegendSpacing } from "./utils/Utils";
 
 interface Props {
   options: ChartOptions<"bar"> | any;
@@ -59,7 +61,7 @@ const BarChartComp = ({
 
   return (
     <div className={`${className} ${!defaultClasses && "bg-black-200"}`}>
-      {width < 640 && location.pathname.includes("opm") && (
+      {width < SCREEN_WIDTH.SM && location.pathname.includes("opm") && (
         <div className="flex items-center justify-between mb-4">
           <p className="text-white-500">{title}</p>
           <div className="flex items-center">
@@ -74,22 +76,11 @@ const BarChartComp = ({
           </div>
         </div>
       )}
-      {plugins || width < 640 ? (
+      {plugins || width < SCREEN_WIDTH.SM ? (
         <Bar
           options={options}
           data={data}
-          plugins={[
-            {
-              id: "increase-legend-spacing",
-              beforeInit(chart) {
-                const originalFit = (chart.legend as any).fit;
-                (chart.legend as any).fit = function fit() {
-                  originalFit.bind(chart.legend)();
-                  this.height += 20;
-                };
-              },
-            },
-          ]}
+          plugins={increaseLegendSpacing(20)}
         />
       ) : (
         <Bar options={options} data={data} />

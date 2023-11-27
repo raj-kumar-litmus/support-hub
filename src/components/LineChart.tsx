@@ -15,6 +15,8 @@ import { Line } from "react-chartjs-2";
 import useScreenSize from "../hooks/useScreenSize";
 import RotateIcon from "../assets/rotate.svg";
 import CustomImage from "./common/customimage";
+import { SCREEN_WIDTH } from "../constants/appConstants";
+import { increaseLegendSpacing } from "./utils/Utils";
 
 interface Props {
   options: ChartOptions<"line"> | any;
@@ -61,7 +63,7 @@ function LineChart({
 
   return (
     <div className={`${className} ${!defaultClasses && "bg-black-200"}`}>
-      {width < 640 &&
+      {width < SCREEN_WIDTH.SM &&
         (location.pathname.includes("opm") ||
           location.pathname.includes("opmcomparison")) && (
           <div className="flex items-center justify-between mb-4">
@@ -78,22 +80,11 @@ function LineChart({
             </div>
           </div>
         )}
-      {plugins || width < 640 ? (
+      {plugins || width < SCREEN_WIDTH.SM ? (
         <Line
           options={options}
           data={data}
-          plugins={[
-            {
-              id: "increase-legend-spacing",
-              beforeInit(chart) {
-                const originalFit = (chart.legend as any).fit;
-                (chart.legend as any).fit = function fit() {
-                  originalFit.bind(chart.legend)();
-                  this.height += 20;
-                };
-              },
-            },
-          ]}
+          plugins={increaseLegendSpacing(20)}
         />
       ) : (
         <Line options={options} data={data} />

@@ -57,6 +57,8 @@ import {
   CHART_TABS,
   OPM_COMPARISON_CHART_STYLES,
   OPM_CHART_DEFAULT,
+  SCREEN_WIDTH,
+  NO_OF_ORDERS,
 } from "../constants/appConstants";
 import { URL_OPM_COMPARISON } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
@@ -238,7 +240,7 @@ const OpmComparison: React.FC = () => {
       }
     });
     setUrl(`${URL_OPM_COMPARISON}?${str}`);
-    if (showFilters && width < 640) setShowFilters(false);
+    if (showFilters && width < SCREEN_WIDTH.SM) setShowFilters(false);
   };
 
   useEffect(() => {
@@ -267,11 +269,9 @@ const OpmComparison: React.FC = () => {
         datasets:
           apiResponse &&
           Object.keys(apiResponse)?.map((e, index) => ({
-            /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
-            // @ts-ignore
             data: apiResponse?.[e].map((e) => Number(e.orderCount)),
             backgroundColor: "white",
-            label: "No of orders",
+            label: NO_OF_ORDERS,
             index,
             borderColor:
               index === 0
@@ -286,7 +286,7 @@ const OpmComparison: React.FC = () => {
           apiResponse &&
           Object.keys(apiResponse)?.map((e, index) => ({
             data: apiResponse?.[e].map((e) => Number(e.orderCount)),
-            label: index === 0 ? "No of orders" : "No of orders",
+            label: NO_OF_ORDERS,
             backgroundColor:
               index === 0
                 ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR
@@ -304,19 +304,19 @@ const OpmComparison: React.FC = () => {
               apiResponse,
               startDate: formFields.find((e) => e.name === "startDate").value,
               endDate: formFields.find((e) => e.name === "endDate").value,
-              isMobile: width < 640,
+              isMobile: width < SCREEN_WIDTH.SM,
               showDataLabels:
                 Number(url.split("period=")[1].split("&")[0]) < 11 &&
-                width > 640,
+                width > SCREEN_WIDTH.SM,
             })
           : OPM_COMPARISON_OPTIONS({
               apiResponse,
               startDate: formFields.find((e) => e.name === "startDate").value,
               endDate: formFields.find((e) => e.name === "endDate").value,
-              isMobile: width < 640,
+              isMobile: width < SCREEN_WIDTH.SM,
               showDataLabels:
                 Number(url.split("period=")[1].split("&")[0]) < 11 &&
-                width > 640,
+                width > SCREEN_WIDTH.SM,
             }),
       );
       setBarChartOptions(
@@ -325,19 +325,19 @@ const OpmComparison: React.FC = () => {
               apiResponse,
               startDate: formFields.find((e) => e.name === "startDate").value,
               endDate: formFields.find((e) => e.name === "endDate").value,
-              isMobile: width < 640,
+              isMobile: width < SCREEN_WIDTH.SM,
               showDataLabels:
                 Number(url.split("period=")[1].split("&")[0]) < 11 &&
-                width > 640,
+                width > SCREEN_WIDTH.SM,
             })
           : OPM_COMPARISON_BAR_OPTIONS({
               apiResponse,
               startDate: formFields.find((e) => e.name === "startDate").value,
               endDate: formFields.find((e) => e.name === "endDate").value,
-              isMobile: width < 640,
+              isMobile: width < SCREEN_WIDTH.SM,
               showDataLabels:
                 Number(url.split("period=")[1].split("&")[0]) < 11 &&
-                width > 640,
+                width > SCREEN_WIDTH.SM,
             }),
       );
     }
@@ -369,7 +369,7 @@ const OpmComparison: React.FC = () => {
 
   const onFilterClickHandler = () => {
     setShowFilters(!showFilters);
-    if (width < 640) {
+    if (width < SCREEN_WIDTH.SM) {
       setPosition("bottom");
       setVisible(true);
     }
@@ -385,7 +385,7 @@ const OpmComparison: React.FC = () => {
     if (tabValue === 0) {
       customChartConfig = { ...barChartoptions };
       customChartConfig.scales.y.max = maxOPM;
-      if (width > 640 && width <= 1024) {
+      if (width > SCREEN_WIDTH.SM && width <= SCREEN_WIDTH.LG) {
         customChartConfig.plugins.datalabels.rotation = 270;
         customChartConfig.plugins.datalabels.anchor = "center";
         customChartConfig.plugins.datalabels.align = "center";
@@ -452,13 +452,13 @@ const OpmComparison: React.FC = () => {
               title={TITLE.OPM_COMPARISON}
               options={getChartConfig()}
               data={barChartData}
-              className="border-0 w-full h-[16rem]"
+              className="border-0 w-full h-64"
               defaultClasses={true}
             />
           ) : (
             <LineChart
               title={TITLE.OPM_COMPARISON}
-              className="border-0 w-full h-[16rem]"
+              className="border-0 w-full h-64"
               options={getChartConfig()}
               data={data}
               defaultClasses={true}
@@ -481,7 +481,7 @@ const OpmComparison: React.FC = () => {
           {!IS_FULLSCREEN && location.pathname.includes("opmcomparison") && (
             <div className="flex justify-between items-start">
               <p className="font-bold text-gray-200">{TITLE.OPM_COMPARISON}</p>
-              {width < 640 && (
+              {width < SCREEN_WIDTH.SM && (
                 <CustomImage
                   src={FilterIcon}
                   className="self-end"
@@ -493,7 +493,7 @@ const OpmComparison: React.FC = () => {
           )}
           {showFilters && location.pathname.includes("opmcomparison") && (
             <>
-              {width > 640 ? (
+              {width > SCREEN_WIDTH.SM ? (
                 <form
                   className="flex gap-[0.5vw] sm:gap-[0.8vw] opmFilters opmComparisonFilters"
                   onSubmit={submit}
@@ -523,7 +523,7 @@ const OpmComparison: React.FC = () => {
                                 ? "md:!w-[11vw] lg:!w-[12vw]"
                                 : ""
                             } `}
-                            titleclassname="top-[1.25rem]"
+                            titleclassname="top-5"
                             imageclassname="h-[20px] w-[20px] relative top-[1.75rem] left-[0.5vw] z-[1]"
                             title={form.label}
                             placeholder={MM_DD_YYYY_HH_MM}
@@ -600,7 +600,7 @@ const OpmComparison: React.FC = () => {
                                 name={form.name}
                                 containerclassname="opmFiltersMobileCalendar"
                                 imageclassname="h-[20px] w-[20px] relative top-[1.75rem] md:top-[3vh] left-[3.5vw] z-[1]"
-                                titleclassname="left-[2vw] md:left-[0] top-[1.25rem]"
+                                titleclassname="left-[2vw] md:left-[0] top-5"
                                 title={form.label}
                                 showTime={form.showTime}
                                 iconPos={form.iconPos || "left"}
@@ -652,7 +652,7 @@ const OpmComparison: React.FC = () => {
               className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[5vw] lg:ml-[0] ${
                 IS_FULLSCREEN
                   ? "landScape opmComparison rotate-90 absolute left-[-9vh] top-[45vh] ml-[25vw] w-[70vh] mt-[0]"
-                  : `${width < 640 ? "portrait" : ""}`
+                  : `${width < SCREEN_WIDTH.SM ? "portrait" : ""}`
               }`}
             >
               {formFields
@@ -700,10 +700,10 @@ const OpmComparison: React.FC = () => {
                 }`}
               >
                 <CustomTab
-                  className={`opm-tabs absolute z-10 pt-2 lg:right-6 top-2 ${
+                  className={`opm-tabs absolute z-10 pt-2  top-2 ${
                     IS_FULLSCREEN
                       ? "right-[calc(100vh-57rem)]"
-                      : "right-[3.5rem]"
+                      : "right-14 sm:right-3 md:right-4 lg:right-6"
                   }`}
                   tabData={CHART_TABS}
                   tabValue={tabValue}

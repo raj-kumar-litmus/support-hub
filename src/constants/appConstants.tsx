@@ -65,6 +65,7 @@ export const TOTAL_NO_OF_ORDERS: string = "Total Number of Orders";
 export const LAST_MIN_OPM: string = "Last min OPM";
 export const AVG_OPM_COMPARISON: string = "Avg OPM Comparison";
 export const TOTAL_ORDER_COMPARISON: string = "Total Order Comparison";
+export const NO_OF_ORDERS: string = "No of Orders";
 export const VIEW_ALL_MIN_ORDER_LIST_MOBILE: number = 5;
 
 export const LABELS = {
@@ -142,9 +143,9 @@ export const OPM_CHART_DEFAULT = {
 
 export const OPM_COMP_CHART_DEFAULT = {
   BAR_BORDER_RADIUS: 6,
-  BAR_PERCENT: 0.98,
+  BAR_PERCENT: 0.95,
   MAX_BAR_THICKNESS: 50,
-  CATEGORY_PERCENT: 0.98,
+  CATEGORY_PERCENT: 0.9,
 };
 
 export const DURATIONS = {
@@ -321,3 +322,12 @@ export const AM_PM_OPTIONS = [
   { label: "PM", value: "PM" },
 ];
 export const CHART_TABS = [{ header: BAR }, { header: LINE }];
+
+export const SCREEN_WIDTH = {
+  XS: 450,
+  SM: 640,
+  ABOVE_SM: 768,
+  MD: 850,
+  LG: 1024,
+  XL: 1280,
+};

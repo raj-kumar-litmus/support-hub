@@ -216,6 +216,28 @@ export const OPM_OPTIONS = (isMobile: boolean, showDataLabels = false) => ({
   },
 });
 
+export const OPM_OPTIONS_HOME = (isMobile: boolean, showDataLabels = false) => {
+  const existingLineChartOptions = {
+    ...OPM_OPTIONS(isMobile, showDataLabels),
+  };
+  return {
+    ...existingLineChartOptions,
+    plugins: {
+      ...existingLineChartOptions.plugins,
+      legend: {
+        display: false,
+      },
+      title: {
+        ...existingLineChartOptions.plugins.title,
+      },
+      tooltip: {
+        enabled: false,
+        external: (_) => externalTooltipHandler(_, "opm", true),
+      },
+    },
+  };
+};
+
 export const OPM_BAR_CHART_OPTIONS = (
   isMobile: boolean,
   showDataLabels = false,
@@ -299,6 +321,25 @@ export const OPM_BAR_CHART_OPTIONS = (
         maxBarThickness: SESSIONS_CHART_DEFAULT.MAX_BAR_THICKNESS,
         borderRadius: SESSIONS_CHART_DEFAULT.BAR_BORDER_RADIUS,
         categoryPercentage: SESSIONS_CHART_DEFAULT.CATEGORY_PERCENT,
+      },
+    },
+  };
+};
+
+export const OPM_BAR_CHART_OPTIONS_HOME = (
+  isMobile: boolean,
+  showDataLabels = false,
+) => {
+  const existingBarChartOptions = {
+    ...OPM_BAR_CHART_OPTIONS(isMobile, showDataLabels),
+  };
+  return {
+    ...existingBarChartOptions,
+    plugins: {
+      ...existingBarChartOptions.plugins,
+      tooltip: {
+        enabled: false,
+        external: (_) => externalTooltipHandler(_, "opm_bar", true),
       },
     },
   };
@@ -465,6 +506,10 @@ export const OPM_COMPARISON_OPTIONS_HOME = ({
           },
         },
       },
+      tooltip: {
+        enabled: false,
+        external: (_) => externalTooltipHandler(_, "opmComparison", true),
+      },
     },
     scales: {
       x: {
@@ -584,6 +629,11 @@ export const OPM_COMPARISON_BAR_OPTIONS_HOME = ({
             }));
           },
         },
+      },
+      tooltip: {
+        enabled: false,
+        external: (_) => externalTooltipHandler(_, "opm_comp_bar", true),
+        mode: "index",
       },
     },
   };
