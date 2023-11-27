@@ -616,8 +616,8 @@ const OPM: React.FC = () => {
       {location.pathname.includes("opm") && showFilteredCards && (
         <div
           className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[0] sm:ml-[5vw] lg:ml-[1rem] ${IS_FULLSCREEN
-              ? "rotate-90 absolute left-[-9vh] top-[45vh] ml-[25vw] w-[70vh] mt-[0]"
-              : `${width < SCREEN_WIDTH.SM ? "portrait" : ""}`
+            ? "rotate-90 absolute left-[-9vh] top-[45vh] ml-[25vw] w-[70vh] mt-[0]"
+            : `${width < SCREEN_WIDTH.SM ? "portrait" : ""}`
             }`}
         >
           {formFields
@@ -670,8 +670,8 @@ const OPM: React.FC = () => {
           >
             <CustomTab
               className={`opm-tabs absolute z-10 pt-2 top-2 ${IS_FULLSCREEN
-                  ? "right-[calc(100vh-57rem)]"
-                  : "right-14 sm:right-3 md:right-4 lg:right-6"
+                ? "right-[calc(100vh-57rem)]"
+                : "right-14 sm:right-3 md:right-4 lg:right-6"
                 }`}
               tabData={CHART_TABS}
               tabValue={tabValue}

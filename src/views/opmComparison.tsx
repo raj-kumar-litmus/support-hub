@@ -512,8 +512,8 @@ const OpmComparison: React.FC = () => {
                           <CustomCalendar
                             name={form.name}
                             containerclassname={`calendarOpmComparison ${form.name === "startDate"
-                                ? "md:!w-[18vw] lg:w-[14vw]"
-                                : ""
+                              ? "md:!w-[18vw] lg:w-[14vw]"
+                              : ""
                               } ${form.name === "endDate"
                                 ? "md:!w-[11vw] lg:!w-[12vw]"
                                 : ""
@@ -645,8 +645,8 @@ const OpmComparison: React.FC = () => {
           {location.pathname.includes("opmcomparison") && showFilteredCards && (
             <div
               className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[5vw] lg:ml-[0] ${IS_FULLSCREEN
-                  ? "landScape opmComparison rotate-90 absolute left-[-9vh] top-[45vh] ml-[25vw] w-[70vh] mt-[0]"
-                  : `${width < SCREEN_WIDTH.SM ? "portrait" : ""}`
+                ? "landScape opmComparison rotate-90 absolute left-[-9vh] top-[45vh] ml-[25vw] w-[70vh] mt-[0]"
+                : `${width < SCREEN_WIDTH.SM ? "portrait" : ""}`
                 }`}
             >
               {formFields
@@ -688,14 +688,14 @@ const OpmComparison: React.FC = () => {
             location.pathname.includes("opmcomparison") && (
               <div
                 className={`relative ${IS_FULLSCREEN
-                    ? "rotate-90 h-[23rem]"
-                    : "h-[28rem] lg:h-[29rem]"
+                  ? "rotate-90 h-[23rem]"
+                  : "h-[28rem] lg:h-[29rem]"
                   }`}
               >
                 <CustomTab
                   className={`opm-tabs absolute z-10 pt-2  top-2 ${IS_FULLSCREEN
-                      ? "right-[calc(100vh-57rem)]"
-                      : "right-14 sm:right-3 md:right-4 lg:right-6"
+                    ? "right-[calc(100vh-57rem)]"
+                    : "right-14 sm:right-3 md:right-4 lg:right-6"
                     }`}
                   tabData={CHART_TABS}
                   tabValue={tabValue}
@@ -706,8 +706,8 @@ const OpmComparison: React.FC = () => {
                     title={TITLE.OPM_COMPARISON}
                     isFullScreen={IS_FULLSCREEN}
                     className={`opm-comparison-page-chart-container ${IS_FULLSCREEN
-                        ? "opm-comparison-page-chart-container-rotated"
-                        : ""
+                      ? "opm-comparison-page-chart-container-rotated"
+                      : ""
                       }`}
                     options={getChartConfig()}
                     data={barChartData}
@@ -717,8 +717,8 @@ const OpmComparison: React.FC = () => {
                     title={TITLE.OPM_COMPARISON}
                     isFullScreen={IS_FULLSCREEN}
                     className={`opm-comparison-page-chart-container ${IS_FULLSCREEN
-                        ? "opm-comparison-page-chart-container-rotated"
-                        : ""
+                      ? "opm-comparison-page-chart-container-rotated"
+                      : ""
                       }`}
                     options={getChartConfig()}
                     data={data}

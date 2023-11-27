@@ -403,8 +403,8 @@ const BarChart = () => {
       {!isLoading && (
         <div
           className={`${location.pathname.includes("home")
-              ? "home-sessions"
-              : "main-sessions"
+            ? "home-sessions"
+            : "main-sessions"
             } flex justify-center relative bg-black-200 h-96 lg:h-[29rem] rounded-lg flex-col min-h-[24rem]`}
         >
           <>
