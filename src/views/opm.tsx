@@ -365,7 +365,7 @@ const OPM: React.FC = () => {
   return (
     <>
       {location.pathname.includes("home") && isLoading && (
-        <Loader className="!p-0 w-[40vw] m-auto" />
+        <Loader className="!p-0 w-[40vw] m-auto min-h-[29rem]" />
       )}
       {location.pathname.includes("home") && data && !isLoading && (
         <div className="w-full lg:w-[49%] bg-black-200 p-0 rounded-lg">

@@ -384,9 +384,9 @@ const BarChart = () => {
           </div>
         </>
       )}
-      {isLoading && <Loader className="!p-0 m-auto" />}
+      {isLoading && <Loader className="!p-0 m-auto min-h-[24rem]" />}
       {!isLoading && (
-        <div className="home-sessions flex justify-center basis-full relative px-3 py-8 sm:px-5 h-64 mb-4 bg-black-200 w-[full] h-[22rem] sm:h-[60vh] drop-shadow-md rounded-xl flex-col">
+        <div className="home-sessions flex justify-center basis-full relative px-3 py-8 sm:px-5 h-64 mb-4 bg-black-200 w-[full] h-[22rem] sm:h-[60vh] drop-shadow-md rounded-xl flex-col min-h-[24rem]">
           <>
             {location.pathname.includes("home") && (
               <>

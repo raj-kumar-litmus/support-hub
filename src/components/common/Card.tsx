@@ -64,16 +64,24 @@ const Card = (props: CardProps) => {
           </div>
         )}
         <div
-          className={`pl-2 flex ${
+          className={`pl-2 w-full flex ${
             props.type === "ORDER_DETAILS_ITEM" ? `flex-row-reverse` : ``
           }`}
         >
           {cardItems.map((item, ind) => (
             <div key={ind} className="pl-2 pr-2 flex flex-col flex-1">
-              <div className="text-xs text-gray-400 text-center">
+              <div
+                className={`text-xs text-gray-400 ${
+                  props.type === "ORDER_DETAILS_ITEM" ? "text-center" : ""
+                }`}
+              >
                 {item.key}
               </div>
-              <div className="text-[13px] font-medium text-gray-300 flex h-full items-center justify-center">
+              <div
+                className={`text-[13px] font-medium text-gray-300 flex h-full items-center ${
+                  props.type === "ORDER_DETAILS_ITEM" ? "justify-center" : ""
+                }`}
+              >
                 {["Total Price", "Unit Price"].includes(item.key) ? (
                   <div className="flex flex-col">
                     <span>{item.value.split(" ")[0]}</span>

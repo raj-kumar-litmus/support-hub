@@ -40,7 +40,7 @@ import { getFormattedPSTDate } from "../utils/dateTimeUtil";
 const CardTitle = ({
   title,
   icon,
-  classname,
+  classname = "",
 }: {
   title: string;
   icon: any;
@@ -236,9 +236,9 @@ const HomePage = () => {
             </div>
           </div>
           {isLoading ? (
-            <Loader />
+            <Loader className="card-loader-height" />
           ) : (
-            <div className="flex flex-wrap gap-[10px] pb-4 border-b  border-b-black-200">
+            <div className="flex flex-wrap gap-[10px] pb-4 border-b border-b-black-200 card-loader-height">
               <HomeCard
                 title={
                   <CardTitle
@@ -247,8 +247,6 @@ const HomePage = () => {
                   />
                 }
                 value={<OPMCards value={avgOPM} />}
-                bgColor="#8F8E8E"
-                textColor="#FFFFFF"
               />
               <HomeCard
                 title={
@@ -258,14 +256,16 @@ const HomePage = () => {
                   />
                 }
                 value={<OPMCards value={totalOPM} />}
-                bgColor="#BCBBBB"
-                textColor="#FFFFFF"
               />
               <HomeCard
-                title={<CardTitle title={LAST_MIN_OPM} icon={lastMinOpmIcon} />}
+                title={
+                  <CardTitle
+                    title={LAST_MIN_OPM}
+                    icon={lastMinOpmIcon}
+                    classname={"card-title"}
+                  />
+                }
                 value={<OPMCards value={lastMinOPM} />}
-                bgColor="#E9E8E8"
-                textColor="#FFFFFF"
               />
               <HomeCard
                 title={
@@ -274,8 +274,6 @@ const HomePage = () => {
                 value={
                   <ComparisonCards today={avgOPM} lastDay={lastDayAvgOPM} />
                 }
-                bgColor="#CCCBCB"
-                textColor="#FFFFFF"
               />
               <HomeCard
                 title={
@@ -287,13 +285,11 @@ const HomePage = () => {
                 value={
                   <ComparisonCards today={totalOPM} lastDay={lastDaytotalOPM} />
                 }
-                bgColor="#E9E8E8"
-                textColor="#FFFFFF"
               />
             </div>
           )}
 
-          <div className="home-opm-charts flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:gap-[2%]">
+          <div className="home-opm-charts flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:gap-[2%] min-h-[29rem]">
             <OPM />
             <OpmComparison />
           </div>
