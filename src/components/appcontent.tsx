@@ -59,9 +59,8 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
           />
         )}
         <div
-          className={`flex flex-col sm:flex-row ${
-            IS_FULLSCREEN ? "" : "mt-[3.5rem]"
-          } ml-[0] bg-black-200`}
+          className={`flex flex-col sm:flex-row ${IS_FULLSCREEN ? "" : "mt-[3.5rem]"
+            } ml-[0] bg-black-200`}
         >
           {showSidePane && (
             <SidePaneList
@@ -72,9 +71,8 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
           )}
           {showSidePane && (
             <div
-              className={`${
-                showSidePaneGrid ? "bg-black-200  min-h-[calc(100vh-56px)]" : ""
-              } flex w-full sm:hidden`}
+              className={`${showSidePaneGrid ? "bg-black-200  min-h-[calc(100vh-56px)]" : ""
+                } flex w-full sm:hidden`}
               onClick={() => setShowSidePaneGrid(false)}
             >
               <SidePaneGrid
@@ -99,7 +97,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
           <div
             className={`${showSidePaneGrid ? "hidden" : "block"} 
               ${IS_FULLSCREEN ? "h-[100vh]" : "h-[calc(100vh-56px)]"} 
-              w-full sm:ml-[25vw] md:ml-[27vw] lg:ml-[21vw] overflow-y-auto p-[20px] sm:pl-[2.5vw] sm-py-[28px] bg-black-100
+              w-full sm:ml-[25vw] md:ml-[27vw] lg:ml-[21vw] overflow-y-auto p-[20px] sm:px-[2.5rem] bg-black-100
               ${width < 640 && IS_ORDER_DETAILS ? "pt-0" : ""}
               `}
           >

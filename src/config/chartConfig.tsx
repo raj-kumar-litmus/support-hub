@@ -174,6 +174,14 @@ export const OPM_BAR_CHART_OPTIONS: Chart.ChartOptions = (
   };
 };
 
+const getOpmChartGradient = (ctx) => {
+  var gradient = ctx.createLinearGradient(0, 0, 0, 400);
+  gradient.addColorStop(0, '#6370FF66');
+  gradient.addColorStop(0.5, '#617AFD2E');
+  gradient.addColorStop(1, '#6175FC00');
+  return gradient;
+}
+
 export const OPM_OPTIONS = (isMobile: boolean, showDataLabels = false) => ({
   responsive: true,
   maintainAspectRatio: false,
@@ -209,6 +217,13 @@ export const OPM_OPTIONS = (isMobile: boolean, showDataLabels = false) => ({
         padding: isMobile ? { top: 35, bottom: 35 } : { top: 15 },
       },
     },
+  },
+  fill: true,
+  backgroundColor: (context) => {
+    const chart = context.chart;
+    const { ctx, chartArea } = chart;
+    if (!chartArea) return;
+    return getOpmChartGradient(ctx);
   },
   plugins: {
     legend: {

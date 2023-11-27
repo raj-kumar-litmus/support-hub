@@ -183,7 +183,7 @@ button.p-button-secondary {
   @apply m-0;
 }
 .opmFiltersMobile .p-dialog-header .p-dialog-title {
-  @apply ml-[10vw] text-white-500 ;
+  @apply ml-[10vw] text-white-500;
 }
 .opmFiltersMobile .labelClass {
   @apply w-[100px];
@@ -192,7 +192,7 @@ button.p-button-secondary {
   @apply bg-gray-900 border-gray-900 w-full;
 }
 .opmFiltersMobile .p-inputtext {
-  @apply text-white-500 ;
+  @apply text-white-500;
 }
 .opmFiltersMobile .p-dropdown-label {
   @apply pl-[30px];
@@ -251,7 +251,7 @@ button.p-button-secondary {
   @apply w-[160px] !bg-transparent border border-solid !border-gray-900 rounded-3xl;
 }
 .submitBtnMobile.opmPopUp button span {
-  @apply text-white-500 ;
+  @apply text-white-500;
 }
 .p-dialog .p-dialog-header .p-dialog-header-icon:focus {
   @apply shadow-none;
@@ -327,7 +327,7 @@ button.p-button-secondary {
 .inputContainer {
   @apply relative left-[-10px];
 }
-.opmComparionInput{
+.opmComparionInput {
   @apply !relative left-[-18px] md:!w-[11vw];
 }
 .dropdownWithIcon .p-dropdown {
@@ -403,11 +403,9 @@ button.p-button-secondary {
 .custom-popup.p-dialog {
   @apply absolute max-[639px]:max-h-[calc(100vh-154px)] max-[390px]:w-full w-[390px] max-[390px]:!bottom-0 sm:max-h-[528px];
 }
-
 .p-dialog-mask.p-component-overlay {
-  @apply backdrop-brightness-50;
+  @apply backdrop-contrast-[.85];
 }
-
 .custom-popup .p-dialog-header {
   @apply py-4 text-gray-101 z-10 font-medium bg-black-200 border-black-400 border-solid border-b;
 }
@@ -505,10 +503,10 @@ button.p-button-secondary {
   @apply !bg-gray-900 border border-solid border-gray-900;
 }
 .opmFilters .p-calendar .p-inputtext {
-  @apply pl-[2.6vw] md:w-[20vw] lg:w-[12vw]
+  @apply pl-[2.6vw] md:w-[20vw] lg:w-[12vw];
 }
 .opmComparisonFilters .p-calendar .p-inputtext {
-  @apply md:w-[9vw] lg:w-[12vw]
+  @apply md:w-[9vw] lg:w-[12vw];
 }
 .opmFilters .p-dropdown:not(.p-disabled).p-focus {
   @apply !border-gray-900;
@@ -641,7 +639,7 @@ hr.horizontalLine.blue {
 
 /* Order Details */
 #orderDetailsComp {
-  @apply font-helvetica bg-black-100 sm:bg-inherit; 
+  @apply font-helvetica bg-black-100 sm:bg-inherit;
 }
 #orderDetailsComp .grid span {
   @apply text-sm py-2 text-gray-300 sm:bg-black-200;
@@ -747,7 +745,7 @@ hr.horizontalLine.blue {
   @apply invisible;
 }
 .link-box {
-  @apply w-[10.1rem] sm:w-[11.1rem] h-[50px] text-[13px] text-white-500  !bg-black-300 items-center rounded-lg;
+  @apply w-full h-[50px] text-[13px] text-white-500  !bg-black-200 border border-black-300 items-center rounded-lg;
 }
 .link-box:hover {
   @apply border border-gray-200;
@@ -769,7 +767,7 @@ hr.horizontalLine.blue {
   @apply h-[35px];
 }
 .quick-links-tab.p-tabview {
-  @apply h-[40px];
+  @apply h-[2.25rem];
 }
 .custom-btn {
   @apply mx-auto mt-2;
@@ -789,14 +787,14 @@ hr.horizontalLine.blue {
   @apply border-t border-black-300 py-4;
 }
 .p-datepicker-footer .p-inputtext {
-  @apply bg-black-200 text-gray-200 w-[3rem] text-center border-none text-[1.1rem] p-0;
+  @apply bg-black-200 text-gray-200 w-[3rem] text-center border-none text-[1.1rem] px-0 py-1;
 }
 .p-datepicker-footer .p-button,
 .p-datepicker-footer .p-button:focus {
   @apply bg-black-200 border-none shadow-none p-0 text-gray-400;
 }
 .p-datepicker-footer .p-button:not(button):not(a):not(.p-disabled):hover {
-  @apply border-[292E36] bg-transparent;
+  @apply border-black-300 bg-transparent;
 }
 .p-datepicker-footer .p-dropdown {
   @apply bg-black-200 pl-0 w-[3rem] sm:w-[4rem] ml-4;
@@ -869,20 +867,20 @@ hr.horizontalLine.blue {
 .opm-page-chart-container {
   @apply border-0 rounded-[10px] sm:w-[65vw] lg:w-[72vw] lg:ml-[0] h-[24rem] md:h-[340px] lg:!h-[62.23vh] mt-[3vh] md:mt-[1vh] lg:mt-[3vh];
 }
-.session-tooltip-tbody{
+.session-tooltip-tbody {
   @apply flex flex-wrap;
 }
-.session-tooltip-tbody tr.session-col-1{
+.session-tooltip-tbody tr.session-col-1 {
   @apply w-[65%];
 }
-.session-tooltip-tbody tr.session-col-2{
+.session-tooltip-tbody tr.session-col-2 {
   @apply w-[35%] text-right;
 }
 .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus {
-  @apply !shadow-none !border-none
+  @apply !shadow-none !border-none;
 }
 .p-checkbox .p-checkbox-box.p-highlight {
-  @apply !border-white-100 !bg-transparent
+  @apply !border-white-100 !bg-transparent;
 }
 .autoRefreshCheckBox .p-checkbox .p-checkbox-box {
   @apply w-[18px] h-[18px];
@@ -894,20 +892,20 @@ hr.horizontalLine.blue {
   @apply !bg-green-100 !text-black-700 !border-l-transparent;
 }
 .p-toast-message-content {
-  @apply !border-l-0
+  @apply !border-l-0;
 }
 .p-toast-icon-close-icon {
-  @apply text-black-700 bg-transparent
+  @apply text-black-700 bg-transparent;
 }
 .p-toast-icon-close:hover {
-  @apply !bg-transparent
+  @apply !bg-transparent;
 }
-.p-toast-message-icon {
-  @apply !h-0
+.autoRefreshToast .p-toast-message-icon {
+  @apply !h-0;
 }
 .p-datepicker-footer .p-button:enabled:hover,
 .p-datepicker-footer .p-button:not(button):not(a):not(.p-disabled):hover {
-  @apply bg-transparent text-black-300;
+  @apply bg-transparent text-gray-400;
 }
 .p-datepicker-footer .p-dropdown {
   @apply !border-none;
@@ -915,7 +913,8 @@ hr.horizontalLine.blue {
 .ampm-comp {
   text-align: -webkit-center;
 }
-.filteredCard .p-image, .filteredCard img {
+.filteredCard .p-image,
+.filteredCard img {
   @apply !w-[.8rem] !h-[.8rem] max-w-[.8rem];
 }
 ::-webkit-scrollbar-thumb {
@@ -924,6 +923,18 @@ hr.horizontalLine.blue {
 ::-webkit-scrollbar {
   @apply w-1 h-1;
 }
+.quick-links-popup {
+  @apply bg-black-100 absolute top-[56px] left-0 sm:left-[25vw] lg:left-[21vw] right-0;
+}
+.quick-links-popup .p-dialog-header {
+  @apply bg-black-100 rounded-none p-5 sm:px-10 pb-0 border border-black-300 border-b-0 border-r-0;
+}
+.quick-links-popup .p-dialog-content {
+  @apply bg-inherit !rounded-none  border border-black-300 border-t-0 border-r-0 p-5 pt-3 sm:pt-5 sm:px-10;
+}
+.quick-link-btn .p-button .p-button-label {
+  @apply text-white-700 text-lg font-normal;
+}
 .p-toast .p-toast-message {
   @apply m-auto w-95w xs:w-80w sm:w-50w lg:w-40w;
 }
@@ -931,11 +942,11 @@ hr.horizontalLine.blue {
   @apply flex items-center text-14;
 }
 .p-toast .p-toast-message .p-toast-message-content .p-toast-detail {
-  @apply mt-0
+  @apply mt-0;
 }
 .autoRefreshToast.p-toast .p-toast-icon-close {
- @apply left-[1vw] md:left-0
+  @apply left-[1vw] md:left-0;
 }
 .p-toast-message-content .p-image img {
-  @apply max-w-max
+  @apply max-w-max;
 }

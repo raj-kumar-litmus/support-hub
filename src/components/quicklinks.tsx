@@ -8,15 +8,21 @@ import useScreenSize from "../hooks/useScreenSize";
 import CustomButton from "./Button";
 import CustomImage from "./common/customimage";
 import CustomTab from "./common/customtab";
+import CustomDialog from "./common/customdialog";
 
-type Props = {
+type QuickLinkBoxProps = {
   link: IQuickLink;
   hoveredIndex: number;
   setHoveredIndex: (a: number) => void;
   index: number;
 };
 
-const QuickLinks = () => {
+type QuickLinksProps = {
+  showQuickLinks: boolean;
+  setShowQuickLinks: (a: boolean) => void;
+};
+
+const QuickLinks: FC<QuickLinksProps> = ({ showQuickLinks, setShowQuickLinks }) => {
   const [tabValue, setTabValue] = useState<number>(0);
   const [quickLinks, setQuickLinks] = useState([]);
   const [allQuickLinks, setAllQuickLinks] = useState([]);
@@ -56,12 +62,10 @@ const QuickLinks = () => {
   }, [width, allQuickLinks]);
 
   return (
-    <div className="p-4 sm:px-8 sm:py-6 bg-black-200 quick-links absolute top-[56px] sm:left-[25vw] lg:left-[21vw] right-0">
-      <div className="flex flex-wrap justify-between items-center pb-2">
-        <span className="text-gray-300 pb-2 font-bold">
-          {QUICK_LINKS_HEADER}
-        </span>
-        <div className="flex flex-wrap justify-between m-auto">
+    <CustomDialog
+      header={<div className="flex flex-wrap justify-between items-center">
+        <span className="text-gray-300 font-bold pb-2 sm:p-0">{QUICK_LINKS_HEADER}</span>
+        <div className="flex flex-wrap justify-between m-0 sm:m-auto">
           <CustomTab
             className="custom-tab quick-links-tab"
             tabData={QUICK_LINKS}
@@ -69,9 +73,18 @@ const QuickLinks = () => {
             setTabValue={setTabValue}
           />
         </div>
-      </div>
-      <div className="flex flex-wrap ">
-        {quickLinks.map((l, i) => (
+      </div>}
+      visible={showQuickLinks}
+      onHide={() => setShowQuickLinks(false)}
+      draggable={false}
+      resizable={false}
+      className="quick-links-popup"
+      closable={false}
+      dismissableMask
+      transitionOptions={null}
+    >
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(159px,1fr))] gap-3">
+        {quickLinks.map((l, i) =>
           <QuickLinkBox
             link={l}
             hoveredIndex={hoveredIndex}
@@ -79,34 +92,35 @@ const QuickLinks = () => {
             index={i}
             key={i}
           />
-        ))}
-        {showSeeMoreBtn && (
-          <CustomButton
-            label="See More"
-            onClick={onSeeMoreClick}
-            className="custom-btn block"
-          />
         )}
       </div>
-    </div>
+      {showSeeMoreBtn &&
+        <CustomButton
+          label="See More"
+          onClick={onSeeMoreClick}
+          className="custom-btn text-center quick-link-btn border-white bg-black-100"
+        />
+      }
+    </CustomDialog>
   );
 };
 
-const QuickLinkBox: FC<Props> = ({
+const QuickLinkBox: FC<QuickLinkBoxProps> = ({
   link,
   hoveredIndex,
   setHoveredIndex,
-  index,
-}) => {
+  index }) => {
   return (
     <div
-      className="m-1 link-box flex justify-center cursor-pointer"
+      className="link-box flex justify-center cursor-pointer p-1"
       onClick={() => window.open(link.link, "_blank")}
       key={link.name}
       onMouseEnter={() => setHoveredIndex(index)}
       onMouseLeave={() => setHoveredIndex(null)}
     >
-      <span className="m-auto text-center">{link.name}</span>
+      <span className="m-auto text-center font-normal leading-snug">
+        {link.name}
+      </span>
       <CustomImage
         className="h-[13px] self-start mr-2 mt-2"
         src={index === hoveredIndex ? ArrowTopWhite : ArrowTop}
