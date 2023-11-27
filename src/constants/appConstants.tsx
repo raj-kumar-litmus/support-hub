@@ -22,9 +22,10 @@ export const TOTAL_ORDERS_PER_MINUTE: string = "Total Orders Per Minute";
 export const MINS = "Mins";
 export const LASTDAY: string = "Last Day";
 export const TODAY: string = "Today";
+export const YESTERDAY: string = "Yesterday";
 export const DIFFERENCE: string = "Difference";
 export const BAR: string = "Bar";
-export const LINE: string = "Line";
+export const LINE: string = "Lines";
 
 export const ORDER_DETAILS: string = "Order Details";
 export const PROMOTIONS: string = "Promotions";
@@ -106,28 +107,44 @@ export const CHANNEL_LIST: { label: string; value: string }[] = [
 export const DURATION_LIST: { label: string; value: number }[] = [
   { label: "10 Mins", value: 10 },
   { label: "15 Mins", value: 15 },
-  { label: "20 Mins", value: 20 },
   { label: "30 Mins", value: 30 },
   { label: "45 Mins", value: 45 },
   { label: "60 Mins", value: 60 },
 ];
 // Chart Constants
 export const CHART = {
+  FONT_FAMILY: "Arial, sans-serif, Helvetica Neue",
   TITLE_FONT_SIZE: 12,
   SUBTITLE_FONT_SIZE: 12,
   DATALABEL_FONT_SIZE: 10,
-  ROTATION_0: 0,
-  ROTATION_270: 270,
+};
+
+export const OPM_COMPARISON_CHART_STYLES = {
+  PRIMARY_COLOR: "#6370FF",
+  SECONDARY_COLOR: "#FDA44F",
 };
 
 export const SESSIONS_CHART_DEFAULT = {
   BAR_BORDER_RADIUS: 6,
-  STEP_SIZE: 5000,
+  STEP_SIZE: 2500,
   TICK_COUNT: 5,
   LEGEND_LINE_WIDTH: 2,
   BAR_PERCENT: 0.95,
   MAX_BAR_THICKNESS: 50,
   CATEGORY_PERCENT: 0.9,
+};
+
+export const OPM_CHART_DEFAULT = {
+  MAX: 300,
+  STEP_SIZE: 30,
+  TICK_COUNT: 5,
+};
+
+export const OPM_COMP_CHART_DEFAULT = {
+  BAR_BORDER_RADIUS: 6,
+  BAR_PERCENT: 0.98,
+  MAX_BAR_THICKNESS: 50,
+  CATEGORY_PERCENT: 0.98,
 };
 
 export const DURATIONS = {

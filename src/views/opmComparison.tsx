@@ -53,15 +53,29 @@ import {
   INPUT_TYPES,
   HOME_PAGE_REFERSH_DURATION,
   MM_DD_YYYY_HH_MM,
+  TOTAL_ORDERS_PER_MINUTE,
+  CHART_TABS,
+  OPM_COMPARISON_CHART_STYLES,
+  OPM_CHART_DEFAULT,
 } from "../constants/appConstants";
 import { URL_OPM_COMPARISON } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
 import { LoaderContext, LoaderContextType } from "../context/loaderContext";
-import { CURRENT_PST_DATE, DATE_TIME_FORMAT_3, formatDate, getFormattedPSTDate, getPSTdate } from "../utils/dateTimeUtil";
 import {
+  CURRENT_PST_DATE,
+  DATE_TIME_FORMAT_3,
+  formatDate,
+  getFormattedPSTDate,
+  getPSTdate,
+} from "../utils/dateTimeUtil";
+import {
+  OPM_COMPARISON_BAR_OPTIONS,
+  OPM_COMPARISON_BAR_OPTIONS_HOME,
   OPM_COMPARISON_OPTIONS,
   OPM_COMPARISON_OPTIONS_HOME,
 } from "../config/chartConfig";
+import CustomTab from "../components/common/customtab";
+import BarChartComp from "../components/BarChartComp";
 
 ChartJS.register(
   CategoryScale,
@@ -99,10 +113,17 @@ const OpmComparison: React.FC = () => {
 
   const [url, setUrl] = useState<string | null>(null);
   const [options, setOptions] = useState<null | ChartOptions>(null);
+  const [barChartoptions, setBarChartOptions] = useState<null | ChartOptions>(
+    null,
+  );
   const [data, setData] = useState<ChartData | null>(null);
+  const [barChartData, setBarChartData] = useState<ChartData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showFilteredCards, setShowFilteredCards] = useState<boolean>(false);
   const [disabled, setDisabled] = useState(true);
+  const [tabValue, setTabValue] = useState<number>(0);
+  const [maxOPM, setMaxOPM] = useState<number>(OPM_CHART_DEFAULT.MAX);
+
   const { hideLoader } = useContext(LoaderContext) as LoaderContextType;
   const DEFAULT_FORM_FIELDS = [
     {
@@ -157,7 +178,7 @@ const OpmComparison: React.FC = () => {
   const [formFields, setFormFields] = useState(DEFAULT_FORM_FIELDS);
 
   useEffect(() => {
-    const startTimeOne = getFormattedPSTDate();
+    const startTimeOne = getFormattedPSTDate(null, DEFAULT.duration);
     const startDateTwo = new Date(
       new Date(getPSTdate(new Date())).getTime() - 86400000,
     ).toLocaleDateString("en-US");
@@ -197,17 +218,20 @@ const OpmComparison: React.FC = () => {
     setFormFields(data);
   };
 
-  const submit = (e) => {
-    e.preventDefault();
+  const submit = (event) => {
+    event.preventDefault();
     let str = ``;
     formFields.forEach((e: any) => {
       if (e.value) {
         if (e.name === "startDate") {
           str += `startTimeOne=${formatDate(e.value, DATE_TIME_FORMAT_3)}&`;
+          str += `startTimeOne=${formatDate(e.value, DATE_TIME_FORMAT_3)}&`;
           return;
         }
         if (e.name === "endDate") {
-          str += `startDateTwo=${e.value.toLocaleDateString("en-US")}&`;
+          str += `startDateTwo=${new Date(
+            new Date(getPSTdate(e.value)).getTime() - 86400000,
+          ).toLocaleDateString("en-US")}&`;
           return;
         }
         str += `${e.name}=${String(e.value.code)}&`;
@@ -227,8 +251,19 @@ const OpmComparison: React.FC = () => {
         gradient.addColorStop(0, "yellow");
         gradient.addColorStop(1, "white");
       }
+      const xAxisLabels = apiResponse["opmOne"].map((e) => e.timestamp);
+      const allOrderCounts = Object.values(apiResponse).flatMap((opm) =>
+        opm.map((item) => parseInt(item.orderCount)),
+      );
+      const maxValue = Math.max(...allOrderCounts);
+      setMaxOPM(
+        Math.round(maxValue / OPM_CHART_DEFAULT.STEP_SIZE) *
+          OPM_CHART_DEFAULT.STEP_SIZE +
+          OPM_CHART_DEFAULT.STEP_SIZE,
+      );
+
       setData({
-        labels: apiResponse["opmOne"].map((e) => e.timestamp),
+        labels: xAxisLabels,
         datasets:
           apiResponse &&
           Object.keys(apiResponse)?.map((e, index) => ({
@@ -238,7 +273,28 @@ const OpmComparison: React.FC = () => {
             backgroundColor: "white",
             label: "No of orders",
             index,
-            borderColor: index === 0 ? "#6370FF" : "#FDA44F",
+            borderColor:
+              index === 0
+                ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR
+                : OPM_COMPARISON_CHART_STYLES.SECONDARY_COLOR,
+            borderWidth: 2,
+          })),
+      });
+      setBarChartData({
+        labels: xAxisLabels,
+        datasets:
+          apiResponse &&
+          Object.keys(apiResponse)?.map((e, index) => ({
+            data: apiResponse?.[e].map((e) => Number(e.orderCount)),
+            label: index === 0 ? "No of orders" : "No of orders",
+            backgroundColor:
+              index === 0
+                ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR
+                : OPM_COMPARISON_CHART_STYLES.SECONDARY_COLOR,
+            borderColor:
+              index === 0
+                ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR
+                : OPM_COMPARISON_CHART_STYLES.SECONDARY_COLOR,
             borderWidth: 2,
           })),
       });
@@ -250,7 +306,8 @@ const OpmComparison: React.FC = () => {
               endDate: formFields.find((e) => e.name === "endDate").value,
               isMobile: width < 640,
               showDataLabels:
-                Number(url.split("period=")[1].split("&")[0]) < 16,
+                Number(url.split("period=")[1].split("&")[0]) < 11 &&
+                width > 640,
             })
           : OPM_COMPARISON_OPTIONS({
               apiResponse,
@@ -258,7 +315,29 @@ const OpmComparison: React.FC = () => {
               endDate: formFields.find((e) => e.name === "endDate").value,
               isMobile: width < 640,
               showDataLabels:
-                Number(url.split("period=")[1].split("&")[0]) < 16,
+                Number(url.split("period=")[1].split("&")[0]) < 11 &&
+                width > 640,
+            }),
+      );
+      setBarChartOptions(
+        location.pathname.includes("home")
+          ? OPM_COMPARISON_BAR_OPTIONS_HOME({
+              apiResponse,
+              startDate: formFields.find((e) => e.name === "startDate").value,
+              endDate: formFields.find((e) => e.name === "endDate").value,
+              isMobile: width < 640,
+              showDataLabels:
+                Number(url.split("period=")[1].split("&")[0]) < 11 &&
+                width > 640,
+            })
+          : OPM_COMPARISON_BAR_OPTIONS({
+              apiResponse,
+              startDate: formFields.find((e) => e.name === "startDate").value,
+              endDate: formFields.find((e) => e.name === "endDate").value,
+              isMobile: width < 640,
+              showDataLabels:
+                Number(url.split("period=")[1].split("&")[0]) < 11 &&
+                width > 640,
             }),
       );
     }
@@ -302,12 +381,20 @@ const OpmComparison: React.FC = () => {
   };
 
   const getChartConfig = () => {
-    const customChartConfig = { ...options };
-    if (width < 640) {
-      customChartConfig.layout.padding.top = 70;
-      customChartConfig.layout.padding.bottom = 20;
+    let customChartConfig = null;
+    if (tabValue === 0) {
+      customChartConfig = { ...barChartoptions };
+      customChartConfig.scales.y.max = maxOPM;
+      if (width > 640 && width <= 1024) {
+        customChartConfig.plugins.datalabels.rotation = 270;
+        customChartConfig.plugins.datalabels.anchor = "center";
+        customChartConfig.plugins.datalabels.align = "center";
+      } else {
+        customChartConfig.plugins.datalabels.rotation = 0;
+      }
     } else {
-      customChartConfig.layout.padding.top = 70;
+      customChartConfig = { ...options };
+      customChartConfig.scales.y.max = maxOPM;
     }
     return customChartConfig;
   };
@@ -323,15 +410,21 @@ const OpmComparison: React.FC = () => {
   return (
     <>
       {location.pathname.includes("home") && isLoading && (
-        <Loader className="!p-0 w-[40vw] m-auto min-h-[29rem]" />
+        <Loader className="!p-0 w-[40vw] m-auto min-h-[21rem]" />
       )}
       {location.pathname.includes("home") && !isLoading && data && (
-        <div className="w-full lg:w-[49%] bg-black-200 p-0 rounded-lg">
-          <div className="flex justify-between sm:mb-3 items-center relative top-[3vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
+        <div className="w-full xl:w-1/2 bg-black-200 rounded-lg px-4 lg:px-6 py-4">
+          <div className="flex justify-between items-center relative mb-2 sm:mb-4 lg:mb-2 xl:mb-4">
             <span className="text-gray-200 font-bold text-lg font-helvetica">
               {TITLE.OPM_COMPARISON}
             </span>
             <div className="flex items-center">
+              <CustomTab
+                className="opm-tabs mr-2 hidden md:block"
+                tabData={CHART_TABS}
+                tabValue={tabValue}
+                setTabValue={setTabValue}
+              />
               <CustomButton
                 className="home-refresh-btn"
                 onClick={handleOPMCompRefreshBtnClick}
@@ -339,21 +432,44 @@ const OpmComparison: React.FC = () => {
                 <CustomImage src={refreshIcon} />
               </CustomButton>
               <CustomButton
-                className="home-expand-btn mr-2 ml-2 sm:mr-0"
+                className="home-expand-btn ml-2"
                 onClick={handleOPMCompExpandClick}
               >
                 <CustomImage src={openNewPageIcon} />
               </CustomButton>
             </div>
           </div>
-          <LineChart
-            title="OPM Comparison"
-            className="home-opm-comp border-0 rounded-[10px] w-full lg:w-full sm:ml-[0] h-[400px] lg:h-[424px] relative top-[-4vh] 3xl:top-[-4vh]"
-            options={getChartConfig()}
-            data={data}
-            defaultClasses={true}
-            plugins={true}
-          />
+          <div className="flex justify-start items-center relative mb-0 sm:mb-4 lg:mb-1 xl:mb-4 md:hidden">
+            <CustomTab
+              className="opm-tabs mr-2"
+              tabData={CHART_TABS}
+              tabValue={tabValue}
+              setTabValue={setTabValue}
+            />
+          </div>
+          {tabValue === 0 ? (
+            <BarChartComp
+              title={TITLE.OPM_COMPARISON}
+              options={getChartConfig()}
+              data={barChartData}
+              className="border-0 w-full h-[16rem]"
+              defaultClasses={true}
+            />
+          ) : (
+            <LineChart
+              title={TITLE.OPM_COMPARISON}
+              className="border-0 w-full h-[16rem]"
+              options={getChartConfig()}
+              data={data}
+              defaultClasses={true}
+              plugins={false}
+            />
+          )}
+          <div className="text-xs text-gray-300 flex justify-center mt-3 sm:mt-[-1.65rem] mb-2 sm:mb-0">
+            <div className="w-auto font-helvetica">
+              {TOTAL_ORDERS_PER_MINUTE}
+            </div>
+          </div>
         </div>
       )}
       {location.pathname.includes("opmcomparison") && (
@@ -363,14 +479,12 @@ const OpmComparison: React.FC = () => {
           }`}
         >
           {!IS_FULLSCREEN && location.pathname.includes("opmcomparison") && (
-            <div className="flex justify-between items-start ml-[1vw] md:ml-[6vw] mr-[0] md:mr-[6vw] sm:ml-[1vw] sm:mr-0  lg:ml-0">
-              <p className="font-bold w-[50vw] text-gray-200 w-[50vw] lg:w-[30vw] sm:ml-[-1vw] md:ml-[-6vw] lg:ml-[0]">
-                {TITLE.OPM_COMPARISON}
-              </p>
+            <div className="flex justify-between items-start">
+              <p className="font-bold text-gray-200">{TITLE.OPM_COMPARISON}</p>
               {width < 640 && (
                 <CustomImage
                   src={FilterIcon}
-                  className="lg:w-[2.34vw] self-end"
+                  className="self-end"
                   alt="Filter Icon"
                   onClick={onFilterClickHandler}
                 />
@@ -468,9 +582,9 @@ const OpmComparison: React.FC = () => {
                       className="grid grid-cols-2 grid-rows-3 gap-x-5 gap-y-5"
                       onSubmit={submit}
                     >
-                      {formFields.map((form) => {
+                      {formFields.map((form, index) => {
                         return (
-                          <>
+                          <React.Fragment key={index}>
                             {form.type === INPUT_TYPES.text && (
                               <CustomInputText
                                 containerclassname="w-[45vw] mobileInput"
@@ -518,7 +632,7 @@ const OpmComparison: React.FC = () => {
                                 placeholder=""
                               />
                             )}
-                          </>
+                          </React.Fragment>
                         );
                       })}
                       <CustomButton
@@ -578,17 +692,58 @@ const OpmComparison: React.FC = () => {
             data &&
             !isLoading &&
             location.pathname.includes("opmcomparison") && (
-              <LineChart
-                title={TITLE.OPM_COMPARISON}
-                isFullScreen={IS_FULLSCREEN}
-                className={`border-0 rounded-[10px] sm:w-[66vw] lg:w-[72.75vw] h-[340px] md:h-[340px] lg:h-[62.23vh] sm:mt-[10vh] md:mt-[5vh] lg:mt-[3vh] ${
+              <div
+                className={`relative ${
                   IS_FULLSCREEN
-                    ? "ml-[-3rem] pb-[1rem] !w-[90vh] !ml-[-60vw]"
-                    : "!ml-[0] lg:!ml-[0]"
+                    ? "rotate-90 h-[23rem]"
+                    : "h-[28rem] lg:h-[29rem]"
                 }`}
-                options={options}
-                data={data}
-              />
+              >
+                <CustomTab
+                  className={`opm-tabs absolute z-10 pt-2 lg:right-6 top-2 ${
+                    IS_FULLSCREEN
+                      ? "right-[calc(100vh-57rem)]"
+                      : "right-[3.5rem]"
+                  }`}
+                  tabData={CHART_TABS}
+                  tabValue={tabValue}
+                  setTabValue={setTabValue}
+                />
+                {tabValue === 0 ? (
+                  <BarChartComp
+                    title={TITLE.OPM_COMPARISON}
+                    isFullScreen={IS_FULLSCREEN}
+                    className={`opm-comparison-page-chart-container ${
+                      IS_FULLSCREEN
+                        ? "opm-comparison-page-chart-container-rotated"
+                        : ""
+                    }`}
+                    options={getChartConfig()}
+                    data={barChartData}
+                  />
+                ) : (
+                  <LineChart
+                    title={TITLE.OPM_COMPARISON}
+                    isFullScreen={IS_FULLSCREEN}
+                    className={`opm-comparison-page-chart-container ${
+                      IS_FULLSCREEN
+                        ? "opm-comparison-page-chart-container-rotated"
+                        : ""
+                    }`}
+                    options={getChartConfig()}
+                    data={data}
+                  />
+                )}
+                <div
+                  className={`text-xs text-gray-300 flex justify-center -mt-10 ${
+                    IS_FULLSCREEN ? "w-[calc(100vh-5vh)]" : ""
+                  }`}
+                >
+                  <div className="w-auto font-helvetica">
+                    {TOTAL_ORDERS_PER_MINUTE}
+                  </div>
+                </div>
+              </div>
             )
           )}
         </div>

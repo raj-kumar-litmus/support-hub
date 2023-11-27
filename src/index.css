@@ -66,7 +66,15 @@
 }
 
 .home-sessions {
-  @apply pt-[3rem] pb-[4rem] sm:py-8;
+  @apply pt-[4.5rem] sm:pt-12 md:pt-8 pb-20 sm:pb-12 md:pb-8 px-4 sm:px-6;
+}
+
+.sessions-main {
+  @apply pt-[3.5rem] sm:pt-8 xl:pt-6 pb-16 sm:pb-8 px-4 sm:px-6;
+}
+
+.session-page-title{
+  @apply text-gray-200 text-lg font-bold font-helvetica;
 }
 
 #bar-chart .p-button,
@@ -688,6 +696,9 @@ hr.horizontalLine.blue {
 .home-opm-comp {
   @apply ml-0 sm:ml-[5vw];
 }
+.home-refresh-btn, .home-expand-btn{
+  @apply mb-1;
+}
 .home-refresh-btn .p-button {
   @apply p-[0.54rem] bg-black-300 border-black-300 rounded-full hover:bg-black-300 hover:!border-black-300 active:!border-black-300;
 }
@@ -865,7 +876,16 @@ hr.horizontalLine.blue {
   @apply w-[121px] h-[36px] z-0;
 }
 .opm-page-chart-container {
-  @apply border-0 rounded-[10px] sm:w-[65vw] lg:w-[72vw] lg:ml-[0] h-[24rem] md:h-[340px] lg:!h-[62.23vh] mt-[3vh] md:mt-[1vh] lg:mt-[3vh];
+  @apply border-0 rounded-lg h-[inherit] mt-4 pb-14 lg:pb-4 pt-4 lg:pt-14 px-4 lg:px-6;
+}
+.opm-page-chart-container-rotated {
+  @apply w-[calc(100vh-1.75rem)] h-[calc(100vw-1rem)] mt-[-2rem] bg-inherit;
+}
+.opm-comparison-page-chart-container{
+  @apply border-0 rounded-lg h-[inherit] mt-4 pb-24 lg:pb-4 pt-4 lg:pt-14 px-4 lg:px-6;
+}
+.opm-comparison-page-chart-container-rotated {
+  @apply w-[calc(100vh-1.75rem)] h-[calc(100vw-0rem)] mt-[-1rem] bg-inherit;
 }
 .session-tooltip-tbody {
   @apply flex flex-wrap;

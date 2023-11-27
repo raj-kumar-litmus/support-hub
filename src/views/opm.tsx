@@ -55,6 +55,7 @@ import {
   HOME_PAGE_REFERSH_DURATION,
   MM_DD_YYYY_HH_MM,
   CHART_TABS,
+  OPM_CHART_DEFAULT,
 } from "../constants/appConstants";
 import { submitOnEnter } from "../components/utils/Utils";
 import { URL_OPM } from "../constants/apiConstants";
@@ -192,7 +193,8 @@ const OPM: React.FC = () => {
   const [barChartData, setBarChartData] = useState<ChartData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showFilteredCards, setShowFilteredCards] = useState<boolean>(false);
-  const [tabValue, setTabValue] = useState<number>(1);
+  const [tabValue, setTabValue] = useState<number>(0);
+  const [maxOPM, setMaxOPM] = useState<number>(OPM_CHART_DEFAULT.MAX);
   const [formFields, setFormFields] = useState(DEFAULT_FORM_FIELDS);
 
   useEffect(() => {
@@ -221,6 +223,11 @@ const OPM: React.FC = () => {
       setIsLoading(false);
       const xAxisLabels = data.map((e) => e.timestamp);
       const dataArr = data.map((e) => Number(e.orderCount));
+      setMaxOPM(
+        Math.round(Math.max(...dataArr) / OPM_CHART_DEFAULT.STEP_SIZE) *
+          OPM_CHART_DEFAULT.STEP_SIZE +
+          OPM_CHART_DEFAULT.STEP_SIZE,
+      );
       setData({
         labels: xAxisLabels,
         datasets: [
@@ -256,13 +263,13 @@ const OPM: React.FC = () => {
         setOptions(
           OPM_OPTIONS(
             width < 640,
-            Number(url.split("period=")[1].split("&")[0]) < 16,
+            Number(url.split("period=")[1].split("&")[0]) < 16 && width > 640,
           ),
         );
         setBarChartOptions(
           OPM_BAR_CHART_OPTIONS(
             width < 640,
-            Number(url.split("period=")[1].split("&")[0]) < 16,
+            Number(url.split("period=")[1].split("&")[0]) < 16 && width > 640,
           ),
         );
         await getData();
@@ -332,14 +339,20 @@ const OPM: React.FC = () => {
   }, [formFields]);
 
   const getChartConfig = () => {
-    const customChartConfig = { ...options };
-    if (width < 640) {
-      customChartConfig.layout.padding.top = 70;
-      customChartConfig.layout.padding.bottom = 0;
+    let customChartConfig = null;
+    if (tabValue === 0) {
+      customChartConfig = { ...barChartoptions };
+      customChartConfig.scales.y.max = maxOPM;
+      if (width > 640 && width <= 1024) {
+        customChartConfig.plugins.datalabels.rotation = 270;
+        customChartConfig.plugins.datalabels.anchor = "center";
+        customChartConfig.plugins.datalabels.align = "center";
+      } else {
+        customChartConfig.plugins.datalabels.rotation = 0;
+      }
     } else {
-      customChartConfig.layout.padding.top = 20;
-      customChartConfig.layout.padding.left = 10;
-      customChartConfig.layout.padding.right = 20;
+      customChartConfig = { ...options };
+      customChartConfig.scales.y.max = maxOPM;
     }
     return customChartConfig;
   };
@@ -365,17 +378,17 @@ const OPM: React.FC = () => {
   return (
     <>
       {location.pathname.includes("home") && isLoading && (
-        <Loader className="!p-0 w-[40vw] m-auto min-h-[29rem]" />
+        <Loader className="!p-0 w-[40vw] m-auto min-h-[21rem]" />
       )}
       {location.pathname.includes("home") && data && !isLoading && (
-        <div className="w-full lg:w-[49%] bg-black-200 p-0 rounded-lg">
-          <div className="flex justify-between items-center relative top-[3vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
+        <div className="w-full xl:w-1/2 bg-black-200 rounded-lg px-4 lg:px-6 py-4">
+          <div className="flex justify-between items-center relative mb-2 sm:mb-4 lg:mb-2 xl:mb-4">
             <span className="text-gray-200 font-bold text-lg font-helvetica">
               {TITLE.OPM}
             </span>
             <div className="flex items-center">
               <CustomTab
-                className="opm-tabs mr-2"
+                className="opm-tabs mr-2 hidden md:block"
                 tabData={CHART_TABS}
                 tabValue={tabValue}
                 setTabValue={setTabValue}
@@ -387,43 +400,47 @@ const OPM: React.FC = () => {
                 <CustomImage src={refreshIcon} />
               </CustomButton>
               <CustomButton
-                className="home-expand-btn mr-2 ml-2 sm:mr-0"
+                className="home-expand-btn ml-2"
                 onClick={handleOPMExpandClick}
               >
                 <CustomImage src={openNewPageIcon} />
               </CustomButton>
             </div>
           </div>
-          <>
-            {tabValue === 0 ? (
-              <BarChartComp
-                title={TITLE.OPM}
-                options={barChartoptions}
-                data={barChartData}
-                className="home-opm border-0 rounded-[10px] w-full lg:w-full lg:ml-[0] h-[380px] lg:h-[380px] lg:mt-[3vh] top-[-5vh]"
-                defaultClasses={true}
-              />
-            ) : (
-              <LineChart
-                title={TITLE.OPM}
-                className="home-opm border-0 rounded-[10px] w-full lg:w-full sm:ml-[0] h-[380px] lg:h-[380px] lg:mt-[3vh] top-[-5vh]"
-                options={getChartConfig()}
-                data={data}
-                defaultClasses={true}
-              />
-            )}
-          </>
+          <div className="flex justify-start items-center relative mb-0 sm:mb-4 lg:mb-1 xl:mb-4 md:hidden">
+            <CustomTab
+              className="opm-tabs mr-2"
+              tabData={CHART_TABS}
+              tabValue={tabValue}
+              setTabValue={setTabValue}
+            />
+          </div>
+          {tabValue === 0 ? (
+            <BarChartComp
+              title={TITLE.OPM}
+              options={getChartConfig()}
+              data={barChartData}
+              className="border-0 w-full h-[16rem]"
+              defaultClasses={true}
+            />
+          ) : (
+            <LineChart
+              title={TITLE.OPM}
+              className="border-0 w-full h-[16rem]"
+              options={getChartConfig()}
+              data={data}
+              defaultClasses={true}
+            />
+          )}
         </div>
       )}
       {!IS_FULLSCREEN && location.pathname.includes("opm") && (
         <div className="flex justify-between items-start">
-          <p className="font-bold w-[50vw] text-gray-200 w-[50vw] lg:w-[30vw] sm:ml-[2.5vw] md:ml-[1.5vw] lg:ml-[1vw]">
-            {TITLE.OPM}
-          </p>
+          <p className="font-bold text-gray-200">{TITLE.OPM}</p>
           {width < 640 && (
             <CustomImage
               src={FilterIcon}
-              className="lg:w-[2.34vw] self-end"
+              className="self-end"
               alt="Filter Icon"
               onClick={onFilterClickHandler}
             />
@@ -467,7 +484,7 @@ const OPM: React.FC = () => {
                           imgsrc={form.imgsrc}
                           onChange={(event) => handleFormChange(event)}
                           value={form.value}
-                          maxDate={form.name === "date" ? CURRENT_PST_DATE : null}
+                          maxDate={form.name === "date" ? new Date() : null}
                           dateFormat="dd-MM-yyyy hh:mm"
                         />
                       )}
@@ -544,7 +561,7 @@ const OPM: React.FC = () => {
                             imgsrc={form.imgsrc}
                             onChange={(event) => handleFormChange(event)}
                             value={form.value}
-                            maxDate={form.name === "date" ? CURRENT_PST_DATE : null}
+                            maxDate={form.name === "date" ? new Date() : null}
                           />
                         )}
                         {form.type === INPUT_TYPES.dropdown && (
@@ -630,22 +647,28 @@ const OPM: React.FC = () => {
         data &&
         !isLoading &&
         location.pathname.includes("opm") && (
-          <div className="relative">
+          <div
+            className={`relative h-[24rem] lg:h-[29rem] ${
+              IS_FULLSCREEN ? "rotate-90" : ""
+            }`}
+          >
             <CustomTab
-              className={`opm-tabs absolute ${
+              className={`opm-tabs absolute z-10 pt-2 top-2 ${
                 IS_FULLSCREEN
-                  ? "rotate-90 right-[-10rem] top-[1.35rem] relative top-[75vh] left-[59vw]"
-                  : "right-[15vw] sm:right-[2vw] top-[3vh] sm:top-[1vh] lg:right-[4%]"
-              }  z-10`}
+                  ? "right-[calc(100vh-57rem)]"
+                  : "right-[3.5rem] sm:right-3 md:right-4 lg:right-6"
+              }`}
               tabData={CHART_TABS}
               tabValue={tabValue}
               setTabValue={setTabValue}
             />
             {tabValue === 0 ? (
               <BarChartComp
-                options={barChartoptions}
+                options={getChartConfig()}
                 data={barChartData}
-                className="opm-page-chart-container pt-2 px-4"
+                className={`opm-page-chart-container ${
+                  IS_FULLSCREEN ? "opm-page-chart-container-rotated" : ""
+                }`}
                 title={TITLE.OPM}
                 isFullScreen={IS_FULLSCREEN}
               />
@@ -653,8 +676,10 @@ const OPM: React.FC = () => {
               <LineChart
                 title={TITLE.OPM}
                 isFullScreen={IS_FULLSCREEN}
-                className="opm-page-chart-container pt-2 px-4"
-                options={options}
+                className={`opm-page-chart-container ${
+                  IS_FULLSCREEN ? "opm-page-chart-container-rotated" : ""
+                }`}
+                options={getChartConfig()}
                 data={data}
               />
             )}

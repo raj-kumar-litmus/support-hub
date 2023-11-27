@@ -78,7 +78,7 @@ export const externalTooltipHandler = (context, type) => {
   if (tooltip.body) {
     const titleLines = tooltip.title || [];
     let bodyLines = [];
-    if (type === "session") {
+    if (type === "session" || type === "opm_comp_bar") {
       tooltip.body.forEach((bodyLineItem) => {
         if (bodyLineItem.lines) {
           bodyLines = [...bodyLines, ...bodyLineItem.lines[0].split(":")];
@@ -101,14 +101,14 @@ export const externalTooltipHandler = (context, type) => {
     });
 
     const tableBody = document.createElement("tbody");
-    if (type === "session") {
+    if (type === "session" || type === "opm_comp_bar") {
       tableBody.classList.add("session-tooltip-tbody");
     }
 
     bodyLines.forEach((body, i) => {
       const tr = document.createElement("tr");
       tr.style.backgroundColor = "inherit";
-      if (type === "session") {
+      if (type === "session" || type === "opm_comp_bar") {
         if (i === 0 || i === 2) {
           tr.classList.add("session-col-1");
         } else {
