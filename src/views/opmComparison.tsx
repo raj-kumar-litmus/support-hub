@@ -654,8 +654,8 @@ const OpmComparison: React.FC = () => {
             showFilteredCards && (
               <div
                 className={`flex items-center gap-4 mt-2.5 overflow-auto ml-5w lg:ml-0 ${IS_FULLSCREEN
-                    ? "landScape opmComparison rotate-90 absolute -left-9h top-45h ml-25w w-70h mt-0"
-                    : `${width < SCREEN_WIDTH.SM ? "portrait" : ""}`
+                  ? "landScape opmComparison rotate-90 absolute -left-9h top-45h ml-25w w-70h mt-0"
+                  : `${width < SCREEN_WIDTH.SM ? "portrait" : ""}`
                   }`}
               >
                 {formFields
