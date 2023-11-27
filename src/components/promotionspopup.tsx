@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { IPromotion } from "../@types/OrderDetails";
 import CustomDialog from "./common/customdialog";
 import PromotionCard from "./common/promotioncard";
+import { IPromotion } from "../@types/OrderDetails";
 import { PROMOTIONS } from "../constants/appConstants";
 
 type Props = {

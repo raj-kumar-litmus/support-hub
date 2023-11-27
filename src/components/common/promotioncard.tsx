@@ -1,8 +1,8 @@
 import { FC } from "react";
-import CustomImage from "./customimage";
-import { IPromotion } from "../../@types/promotion";
-import CheckCircle from "../../assets/check_circle.svg";
 import CustomCard from "./customcard";
+import CustomImage from "./customimage";
+import CheckCircle from "../../assets/check_circle.svg";
+import { IPromotion } from "../../@types/OrderDetails";
 
 type Props = {
   promotion: IPromotion;

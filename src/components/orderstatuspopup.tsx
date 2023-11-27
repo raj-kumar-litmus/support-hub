@@ -1,8 +1,8 @@
 import { Column } from "primereact/column";
 import { FC } from "react";
-import { ORDER_STATUS, ORDER_STATUS_LIST } from "../constants/appConstants";
 import CustomDialog from "./common/customdialog";
 import CustomTable from "./common/customtable";
+import { ORDER_STATUS, ORDER_STATUS_LIST } from "../constants/appConstants";
 import { getTableHeaders } from "./utils/Utils";
 
 type Props = {

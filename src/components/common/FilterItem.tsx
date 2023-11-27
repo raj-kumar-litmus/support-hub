@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import CustomIcon from "./CustomIcon";
 import { FilterItemProps } from "../../@types/BarChart";
 

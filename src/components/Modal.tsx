@@ -1,5 +1,5 @@
-import React from "react";
 import { Dialog } from "primereact/dialog";
+import React from "react";
 import { ModalEnums } from "../@types/supportHub";
 
 interface Props {

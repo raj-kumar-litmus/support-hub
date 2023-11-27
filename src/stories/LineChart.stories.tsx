@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { BrowserRouter as Router } from "react-router-dom";
-import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import { BrowserRouter as Router } from "react-router-dom";
 import LineChart from "../components/LineChart";
 
 const meta = {

@@ -1,7 +1,7 @@
 import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 import MenuCard from "./menucard";
 import { IMenu } from "../../@types/menu";
-import { useNavigate } from "react-router-dom";
 
 type Props = {
   menuList: Array<IMenu>;

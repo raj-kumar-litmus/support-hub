@@ -1,6 +1,6 @@
 import React from "react";
-import CustomImage from "./common/customimage";
 import GlobalLoaderIcon from "../assets/loader.gif";
+import CustomImage from "./common/customimage";
 
 interface LoaderProps {
   className?: string;

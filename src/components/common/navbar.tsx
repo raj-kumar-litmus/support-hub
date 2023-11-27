@@ -1,12 +1,12 @@
 import { FC, KeyboardEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import QuickLinks from "../quicklinks";
+import CustomImage from "./customimage";
+import SearchBar from "./searchbar";
+import QuickLinksIcon from "../../assets/Quick Links.svg";
 import SephoraLogo from "../../assets/logo.svg";
 import MenuIcon from "../../assets/menu.svg";
-import QuickLinksIcon from "../../assets/Quick Links.svg";
-import SearchBar from "./searchbar";
-import CustomImage from "./customimage";
 import { MENU_LIST } from "../utils/Utils";
-import QuickLinks from "../quicklinks";
 
 type Props = {
   showSidePane: boolean;

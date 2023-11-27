@@ -1,66 +1,65 @@
-import React, { useEffect, useState, Fragment, useContext } from "react";
-import { useNavigate } from "react-router";
 import {
-  Chart as ChartJS,
   CategoryScale,
+  Chart as ChartJS,
+  Filler,
+  Legend,
+  LineElement,
   LinearScale,
   PointElement,
-  LineElement,
-  Filler,
   Title,
   Tooltip,
-  Legend,
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-
-import { ModalEnums, ChartData, ChartOptions } from "../@types/supportHub";
+import React, { Fragment, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import useScreenSize from "../hooks/useScreenSize";
-import CustomDropdown from "../components/DropDown";
-import CustomInputText from "../components/InputText";
-import CustomCalendar from "../components/common/CustomCalendar";
 import CustomButton from "../components/Button";
-import CustomModal from "../components/Modal";
-import LineChart from "../components/LineChart";
+import CustomDropdown from "../components/DropDown";
 import FilteredCard from "../components/FilteredCard";
+import CustomInputText from "../components/InputText";
+import LineChart from "../components/LineChart";
+import CustomModal from "../components/Modal";
+import CustomCalendar from "../components/common/CustomCalendar";
 import CustomImage from "../components/common/customimage";
 import Loader from "../components/loader";
-
-import WhiteCrossIcon from "../assets/white_cross.svg";
-import DropDownIcon from "../assets/dropdownIcon.svg";
+import BarChartComp from "../components/BarChartComp";
+import AutoRefresh from "../components/common/AutoRefresh";
+import CustomTab from "../components/common/customtab";
 import ArrowDownIcon from "../assets/arrown_down_white.svg";
-import FilterIcon from "../assets/filter.svg";
-import ChannelIcon from "../assets/channel.svg";
-import LocaleIcon from "../assets/locale.svg";
-import PaymentIcon from "../assets/payment.svg";
-import SandGlassIcon from "../assets/sandglass.svg";
-import GreyChannelIcon from "../assets/channel-grey.svg";
 import GreyCalendarIcon from "../assets/calendar-grey.svg";
-import WhiteCalendarIcon from "../assets/white_calendar.svg";
-import GreyGlobeIcon from "../assets/grey_globe.svg";
+import GreyChannelIcon from "../assets/channel-grey.svg";
+import ChannelIcon from "../assets/channel.svg";
+import DropDownIcon from "../assets/dropdownIcon.svg";
+import FilterIcon from "../assets/filter.svg";
 import GreyCardIcon from "../assets/grey_card.svg";
+import GreyGlobeIcon from "../assets/grey_globe.svg";
 import GreyPromoIcon from "../assets/grey_promo.svg";
 import GreyHourGlassIcon from "../assets/hourglass-grey.svg";
-import PromoCodeIcon from "../assets/promocode.svg";
+import LocaleIcon from "../assets/locale.svg";
 import openNewPageIcon from "../assets/open_in_new.svg";
+import PaymentIcon from "../assets/payment.svg";
+import PromoCodeIcon from "../assets/promocode.svg";
 import refreshIcon from "../assets/refresh_icon.svg";
-import { fetchData } from "../utils/fetchUtil";
+import SandGlassIcon from "../assets/sandglass.svg";
+import WhiteCalendarIcon from "../assets/white_calendar.svg";
+import WhiteCrossIcon from "../assets/white_cross.svg";
+import { submitOnEnter } from "../components/utils/Utils";
+import { OPM_BAR_CHART_OPTIONS, OPM_OPTIONS } from "../config/chartConfig";
+import { URL_OPM } from "../constants/apiConstants";
 import {
   CHANNELS,
-  DURATIONS,
-  PAYMENT_TYPES,
-  LABELS,
-  INPUT_TYPES,
-  TITLE,
-  LOCALE_OPTIONS,
-  HOME_PAGE_REFERSH_DURATION,
-  MM_DD_YYYY_HH_MM,
   CHART_TABS,
+  DURATIONS,
+  HOME_PAGE_REFERSH_DURATION,
+  INPUT_TYPES,
+  LABELS,
+  LOCALE_OPTIONS,
+  MM_DD_YYYY_HH_MM,
+  PAYMENT_TYPES,
+  TITLE,
 } from "../constants/appConstants";
-import { submitOnEnter } from "../components/utils/Utils";
-import { URL_OPM } from "../constants/apiConstants";
 import { LoaderContext, LoaderContextType } from "../context/loaderContext";
-import CustomTab from "../components/common/customtab";
-import { OPM_BAR_CHART_OPTIONS, OPM_OPTIONS } from "../config/chartConfig";
+import { ChartData, ChartOptions, ModalEnums } from "../@types/supportHub";
 import {
   CURRENT_PST_DATE,
   DATE_TIME_FORMAT_3,
@@ -68,8 +67,7 @@ import {
   formatDate,
   getFormattedPSTDate,
 } from "../utils/dateTimeUtil";
-import BarChartComp from "../components/BarChartComp";
-import AutoRefresh from "../components/common/AutoRefresh";
+import { fetchData } from "../utils/fetchUtil";
 
 ChartJS.register(
   CategoryScale,

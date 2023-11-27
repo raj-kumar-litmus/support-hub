@@ -1,7 +1,7 @@
-import { FC } from "react";
-import { IMenu } from "../../@types/menu";
 import { Card } from "primereact/card";
+import { FC } from "react";
 import CustomImage from "./customimage";
+import { IMenu } from "../../@types/menu";
 
 type Props = {
   menu: IMenu;

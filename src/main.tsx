@@ -1,27 +1,24 @@
+import "primereact/resources/primereact.min.css";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import {
+  Navigate,
+  Route,
   BrowserRouter as Router,
   Routes,
-  Route,
-  Navigate,
 } from "react-router-dom";
-import "primereact/resources/primereact.min.css";
-import "primereact/resources/themes/lara-light-indigo/theme.css";
-import DcOpenOrders from "./components/DcOpenOrders";
-import BarChart from "./components/charts/BarChart";
 import App from "./App";
 import Chart from "./components/ChartIndex";
-import "./index.css";
-import OrderDetails from "./components/orderDetails/OrderDetails.js";
+import DcOpenOrders from "./components/DcOpenOrders";
+import BarChart from "./components/charts/BarChart";
 import HomePage from "./components/homePage";
-
-// const Loader = lazy(() => import("./components/Loader.tsx"));
+import OrderDetails from "./components/orderDetails/OrderDetails.js";
+import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Router>
-      {/* <Suspense fallback={<Loader />}> */}
       <Suspense>
         <Routes>
           <Route path="/" element={<Navigate to="/home" />} />
@@ -61,5 +58,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         </Routes>
       </Suspense>
     </Router>
-  </React.StrictMode>,
+  </React.StrictMode>
 );

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { IMenu } from "../../@types/menu";
 import CustomImage from "./customimage";
+import { IMenu } from "../../@types/menu";
 
 type Props = {
   menuList: Array<IMenu>;

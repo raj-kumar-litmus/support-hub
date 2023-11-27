@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { CommerceItemData } from "../@types/OrderDetails";
 import Card from "./common/Card";
 import CustomDialog from "./common/customdialog";
+import { CommerceItemData } from "../@types/OrderDetails";
 import { ITEMS_INFO } from "../constants/appConstants";
 
 type Props = {

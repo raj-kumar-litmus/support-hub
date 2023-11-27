@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { DCOpenOrders } from "../../@types/dcOpenOrders";
 import useScreenSize from "../../hooks/useScreenSize";
+import { DCOpenOrders } from "../../@types/dcOpenOrders";
+import { CommerceItemData } from "../../@types/OrderDetails";
 
 type CardProps = {
   cardData: DCOpenOrders | CommerceItemData;

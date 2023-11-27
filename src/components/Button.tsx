@@ -1,5 +1,5 @@
-import React from "react";
 import { Button, ButtonProps } from "primereact/button";
+import React from "react";
 
 interface Props extends ButtonProps {
   className?: string;

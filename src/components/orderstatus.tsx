@@ -1,7 +1,7 @@
-import React from "react";
-import { OmsOrderFlow } from "../@types/OrderDetails";
 import { Dialog } from "primereact/dialog";
+import React from "react";
 import Timeline from "./common/orderTimeline";
+import { OmsOrderFlow } from "../@types/OrderDetails";
 interface OrderStatusProps {
   orderStatus: OmsOrderFlow;
   isOrderStatusVisible: boolean;

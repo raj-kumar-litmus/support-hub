@@ -1,5 +1,20 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { Column } from "primereact/column";
+import useScreenSize from "../../hooks/useScreenSize";
+import Loader from "../loader";
+import OrderStatus from "../orderstatus";
+import PromotionsPopup from "../promotionspopup";
+import OrderStatusPopup from "../orderstatuspopup";
+import CustomImage from "../common/customimage";
+import CustomTable from "../common/customtable";
+import CustomIcon from "../common/CustomIcon";
+import Card from "../common/Card";
+import ItemInformationsPopUp from "../itemInformationsPopUp";
+import PromotionsIcon from "../../assets/promotions_white.svg";
+import OrderClockIcon from "../../assets/order_clock_white.svg";
+import RightArrowIcon from "../../assets/right_arrow.svg";
+import OmsInfoIcon from "../../assets/oms_info_white.svg";
 import {
   URL_OMS_ORDER_STATUS,
   URL_ORDER_DETAILS,
@@ -40,24 +55,8 @@ import {
   OrderData,
   IPromotion,
 } from "../../@types/OrderDetails";
-
 import { fetchData } from "../../utils/fetchUtil";
-import CustomIcon from "../common/CustomIcon";
-import Card from "../common/Card";
-import PromotionsIcon from "../../assets/promotions_white.svg";
-import OrderClockIcon from "../../assets/order_clock_white.svg";
-import RightArrowIcon from "../../assets/right_arrow.svg";
-import OmsInfoIcon from "../../assets/oms_info_white.svg";
-import Loader from "../loader";
-import OrderStatus from "../orderstatus";
-import PromotionsPopup from "../promotionspopup";
-import OrderStatusPopup from "../orderstatuspopup";
-import CustomImage from "../common/customimage";
 import { getTableHeaders } from "../utils/Utils";
-import CustomTable from "../common/customtable";
-import useScreenSize from "../../hooks/useScreenSize";
-import { Column } from "primereact/column";
-import ItemInformationsPopUp from "../itemInformationsPopUp";
 
 const OrderDetails: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);

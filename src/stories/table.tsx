@@ -1,7 +1,7 @@
+import { Column } from "primereact/column";
+import { DataTable } from "primereact/datatable";
 import { useState } from "react";
 import { DCOpenOrders } from "../@types/dcOpenOrders";
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
 
 interface TableProps {
   tableData: DCOpenOrders[];

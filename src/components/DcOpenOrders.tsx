@@ -1,15 +1,15 @@
-import { FC, useEffect, useState } from "react";
-import { DCOpenOrders } from "../@types/dcOpenOrders";
-import { fetchData } from "../utils/fetchUtil";
-import { URL_DC_OPEN_ORDERS } from "../constants/apiConstants";
-import Card from "./common/Card";
-import Loader from "./loader";
-import CustomTable from "./common/customtable";
 import { Column } from "primereact/column";
+import { FC, useEffect, useState } from "react";
+import Card from "./common/Card";
+import CustomTable from "./common/customtable";
+import Loader from "./loader";
+import { DCOpenOrders } from "../@types/dcOpenOrders";
+import { URL_DC_OPEN_ORDERS } from "../constants/apiConstants";
+import { fetchData } from "../utils/fetchUtil";
 import { getTableHeaders } from "./utils/Utils";
 
 interface orderData {
-  country: string;
+  country: string; 
   shipNode: string;
   dcName: string;
   workableOrders: number;

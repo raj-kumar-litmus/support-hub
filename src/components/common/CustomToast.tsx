@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
 import { Toast, ToastProps } from "primereact/toast";
+import { useEffect, useRef } from "react";
 
 interface Props extends ToastProps {
   showToast?: boolean;

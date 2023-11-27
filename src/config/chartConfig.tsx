@@ -1,18 +1,18 @@
 import {
-  Chart,
-  CategoryScale,
-  LinearScale,
   BarElement,
+  CategoryScale,
+  Chart,
+  Legend,
+  LinearScale,
   Title,
   Tooltip,
-  Legend,
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
+import { externalTooltipHandler } from "../components/utils/Utils";
 import {
   SESSIONS_CHART_DEFAULT,
   TOTAL_ORDERS_PER_MINUTE,
 } from "../constants/appConstants";
-import { externalTooltipHandler } from "../components/utils/Utils";
 
 Chart.register(
   CategoryScale,

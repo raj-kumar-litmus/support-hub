@@ -1,8 +1,8 @@
 import { FC, KeyboardEvent } from "react";
-import HeaderSearch from "../../assets/headersearch.svg";
 import CustomButton from "../Button";
 import CustomImage from "./customimage";
 import CustomInputText from "./custominputtext";
+import HeaderSearch from "../../assets/headersearch.svg";
 
 type Props = {
   showSearchButton?: boolean;

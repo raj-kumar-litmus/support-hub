@@ -1,15 +1,24 @@
-import { useNavigate } from "react-router";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import React, { useEffect, useRef, useState, useContext } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Bar } from "react-chartjs-2";
-import { ChartData, SessionData } from "../../@types/BarChart";
+import { useNavigate } from "react-router";
+import useScreenSize from "../../hooks/useScreenSize";
+import CustomButton from "../Button";
+import FilteredCard from "../FilteredCard";
+import CustomCalendar from "../common/CustomCalendar";
+import CustomDropdown from "../common/CustomDropdown";
+import CustomIcon from "../common/CustomIcon";
+import CustomImage from "../common/customimage";
+import CustomTab from "../common/customtab";
+import Loader from "../loader";
 import ChannelIcon from "../../assets/channel.svg";
 import FilterIcon from "../../assets/filter-dark.svg";
-import SandGlassIcon from "../../assets/sandglass.svg";
 import openNewPageIcon from "../../assets/open_in_new.svg";
-import CalendarIcon from "../../assets/white_calendar.svg";
 import refreshIcon from "../../assets/refresh_icon.svg";
+import SandGlassIcon from "../../assets/sandglass.svg";
+import CalendarIcon from "../../assets/white_calendar.svg";
+import { ChartData, SessionData } from "../../@types/BarChart";
 import { BAR_CHART_OPTIONS } from "../../config/chartConfig";
 import { URL_SESSIONS } from "../../constants/apiConstants";
 import {
@@ -17,19 +26,19 @@ import {
   CHANNEL_LIST,
   DATE,
   DD_MM_YYYY,
-  MM_DD_YYYY_HH_MM,
   DEFAULT_PERIOD,
   DURATION,
-  HOME_PAGE_REFERSH_DURATION,
   DURATION_LIST,
   FILTERS,
+  HOME_PAGE_REFERSH_DURATION,
+  MM_DD_YYYY_HH_MM,
   RESET,
   SESSIONS,
   SESSIONS_TABS,
   SUBMIT,
   TOTAL_SESSIONS_PER_MINUTE,
 } from "../../constants/appConstants";
-import useScreenSize from "../../hooks/useScreenSize";
+import { LoaderContext, LoaderContextType } from "../../context/loaderContext";
 import {
   CURRENT_PST_DATE,
   DATE_FORMAT_3,
@@ -39,15 +48,6 @@ import {
   getFormattedPSTDate,
 } from "../../utils/dateTimeUtil";
 import { fetchData } from "../../utils/fetchUtil";
-import FilteredCard from "../FilteredCard";
-import CustomCalendar from "../common/CustomCalendar";
-import CustomDropdown from "../common/CustomDropdown";
-import CustomIcon from "../common/CustomIcon";
-import CustomTab from "../common/customtab";
-import Loader from "../loader";
-import CustomImage from "../common/customimage";
-import CustomButton from "../Button";
-import { LoaderContext, LoaderContextType } from "../../context/loaderContext";
 import { submitOnEnter } from "../utils/Utils";
 const BarChart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);

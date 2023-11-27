@@ -1,7 +1,7 @@
-import { DCOpenOrders } from "../../@types/dcOpenOrders";
-import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
+import { DataTable } from "primereact/datatable";
 import { CommerceItemData } from "../../@types/OrderDetails";
+import { DCOpenOrders } from "../../@types/dcOpenOrders";
 
 type TableProps = {
   tableData: DCOpenOrders[] | CommerceItemData[];

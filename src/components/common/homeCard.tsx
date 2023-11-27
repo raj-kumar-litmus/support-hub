@@ -1,5 +1,5 @@
-import { FC } from "react";
 import { Card } from "primereact/card";
+import { FC } from "react";
 
 type Props = {
   title: string;

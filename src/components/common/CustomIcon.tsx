@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { CustomIconProps } from "../../@types/BarChart";
 
 const CustomIcon: FC<CustomIconProps> = (props) => (

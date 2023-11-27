@@ -1,41 +1,41 @@
 import { useContext, useEffect, useState } from "react";
-import HomeCard from "./common/homeCard";
-import CustomImage from "./common/customimage";
+import useScreenSize from "../hooks/useScreenSize";
 import OPM from "../views/opm";
 import OpmComparison from "../views/opmComparison";
-import { URL_OPM } from "../constants/apiConstants";
-import { fetchData } from "../utils/fetchUtil";
-import {
-  HOME_PAGE_REFERSH_DURATION,
-  LASTDAY,
-  TODAY,
-  DIFFERENCE,
-  REFRESHTIME,
-  DASHBOARD,
-  AVG_ORDERS_PER_MIN,
-  TOTAL_NO_OF_ORDERS,
-  LAST_MIN_OPM,
-  AVG_OPM_COMPARISON,
-  TOTAL_ORDER_COMPARISON,
-} from "../constants/appConstants";
-import useScreenSize from "../hooks/useScreenSize";
+import CustomButton from "./Button";
+import BarChart from "./charts/BarChart";
+import CustomImage from "./common/customimage";
+import HomeCard from "./common/homeCard";
+import GlobalLoader from "./globalLoader";
+import Loader from "./loader";
 import TimeTracker from "./timeTracker";
+import LoaderPortal from "./loaderPortal";
+import avgOpmcompIcon from "../assets/avg_opm_comp.svg";
 import avgOrdersPerMinIcon from "../assets/avg_orders_per_min.svg";
+import infoIcon from "../assets/info_icon.svg";
+import lastMinOpmIcon from "../assets/last_min_opm.svg";
+import refreshIcon from "../assets/refresh_icon.svg";
 import totalNoOfOrdersIcon from "../assets/total_no_of_orders.svg";
 import totalOrderCompIcon from "../assets/total_order_comp.svg";
-import avgOpmcompIcon from "../assets/avg_opm_comp.svg";
-import lastMinOpmIcon from "../assets/last_min_opm.svg";
-import trendingDownIcon from "../assets/trending_down.svg";
 import trendingUpIcon from "../assets/trend_up.svg";
-import refreshIcon from "../assets/refresh_icon.svg";
-import infoIcon from "../assets/info_icon.svg";
-import BarChart from "./charts/BarChart";
-import Loader from "./loader";
-import CustomButton from "./Button";
+import trendingDownIcon from "../assets/trending_down.svg";
+import { URL_OPM } from "../constants/apiConstants";
+import {
+  AVG_OPM_COMPARISON,
+  AVG_ORDERS_PER_MIN,
+  DASHBOARD,
+  DIFFERENCE,
+  HOME_PAGE_REFERSH_DURATION,
+  LASTDAY,
+  LAST_MIN_OPM,
+  REFRESHTIME,
+  TODAY,
+  TOTAL_NO_OF_ORDERS,
+  TOTAL_ORDER_COMPARISON,
+} from "../constants/appConstants";
 import { LoaderContext, LoaderContextType } from "../context/loaderContext";
-import GlobalLoader from "./globalLoader";
-import LoaderPortal from "./loaderPortal";
 import { getFormattedPSTDate } from "../utils/dateTimeUtil";
+import { fetchData } from "../utils/fetchUtil";
 
 const CardTitle = ({
   title,

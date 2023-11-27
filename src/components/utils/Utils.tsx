@@ -1,8 +1,8 @@
 import DashboardIcon from "../../assets/dashboard.svg";
+import DCOpenOrdersIcon from "../../assets/dcopenorders.svg";
 import OPMIcon from "../../assets/opm.svg";
 import OPMComparisonIcon from "../../assets/opmcomparison.svg";
 import SessionsIcon from "../../assets/sessions.svg";
-import DCOpenOrdersIcon from "../../assets/dcopenorders.svg";
 
 export const MENU_LIST = [
   { id: 1, name: "Dashboard", icon: DashboardIcon, path: "/home" },

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from "react";
+import { useEffect, useState } from "react";
 import useInterval from "../../hooks/useInterval";
 import CustomCheckbox from "./CustomCheckBox";
 import CustomInputNumber from "./CustomInputNumber";
@@ -52,7 +52,7 @@ const AutoRefresh = (props: AutoRefreshProps) => {
     setAutoRefreshDuration(
       e.value > AUTO_REFRESH_MAX_DURATIONS_MINS
         ? AUTO_REFRESH_MAX_DURATIONS_MINS
-        : e.value,
+        : e.value
     );
     setPollingRefreshDuration(e.value * 60 * 1000);
     if (e.value) {

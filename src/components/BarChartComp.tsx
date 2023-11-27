@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import type { ChartData, ChartOptions } from "chart.js";
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
   BarElement,
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
   Title,
   Tooltip,
-  Legend,
 } from "chart.js";
-import type { ChartData, ChartOptions } from "chart.js";
+import { useState } from "react";
 import { Bar } from "react-chartjs-2";
+import { useLocation, useNavigate } from "react-router-dom";
 import useScreenSize from "../hooks/useScreenSize";
 import RotateIcon from "../assets/rotate.svg";
 import CustomImage from "./common/customimage";
