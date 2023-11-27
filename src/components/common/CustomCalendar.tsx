@@ -1,14 +1,14 @@
 import { Calendar } from "primereact/calendar";
-import {
-  InputNumber,
-  InputNumberValueChangeEvent,
-} from "primereact/inputnumber";
+import { InputNumberValueChangeEvent } from "primereact/inputnumber";
 import { FC, useEffect, useState } from "react";
 import { CustomCalendarProps } from "../../@types/BarChart";
 import ArrowDown from "../../assets/arrow_down.svg";
 import ArrowUp from "../../assets/arrow_up.svg";
 import { AM_PM_OPTIONS } from "../../constants/appConstants";
+import { CURRENT_PST_DATE } from "../../utils/dateTimeUtil";
 import { convert12to24Hour, convert24to12Hour } from "../utils/Utils";
+import CustomInputNumber from "./CustomInputNumber";
+import CustomToast from "./CustomToast";
 import CustomImage from "./customimage";
 
 type ManualInputTimeProps = {
@@ -21,14 +21,13 @@ type ManualInputTimeProps = {
 };
 
 const CustomCalendar: FC<CustomCalendarProps> = (props) => {
-  const today = new Date();
-  const [hour, setHour] = useState<number>(
-    convert24to12Hour(today.getHours()).hour12,
-  );
-  const [minute, setMinute] = useState<number>(today.getMinutes());
-  const [date, setDate] = useState<Date>(today);
+  const [hour, setHour] = useState<number>();
+  const [minute, setMinute] = useState<number>();
+  const [date, setDate] = useState<Date>();
   const [event, setEvent] = useState(null);
-  const [ampm, setAmPm] = useState(convert24to12Hour(today.getHours()).ampm);
+  const [ampm, setAmPm] = useState<string>("");
+  const [showFutureDateToast, setShowFutureDateToast] =
+    useState<boolean>(false);
 
   const handleHourChange = (e) => {
     setHour(e.target.value);
@@ -51,14 +50,20 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
 
   const getUpdatedDate = (e) => {
     const _hour = convert12to24Hour(hour, ampm);
-    date.setHours(_hour);
-    date.setMinutes(minute);
-    setDate(date);
-    const event = {
-      ...e,
-      value: date,
-      target: { value: date, name: props.name },
-    };
+    const _date = new Date(date);
+    _date.setHours(_hour);
+    _date.setMinutes(minute);
+    setShowFutureDateToast(false);
+    if (props.maxDate && (_date > props.maxDate)) {
+      setShowFutureDateToast(true);
+      setHour(convert24to12Hour(CURRENT_PST_DATE.getHours()).hour12);
+      setMinute(CURRENT_PST_DATE.getMinutes());
+      setAmPm(convert24to12Hour(CURRENT_PST_DATE.getHours()).ampm);
+      setDate(CURRENT_PST_DATE)
+      return;
+    }
+    setDate(_date);
+    const event = { ...e, value: _date, target: { value: _date, name: props.name } };
     props.onChange(event);
   };
 
@@ -78,6 +83,7 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
       setDate(_date);
       setHour(convert24to12Hour(_date.getHours()).hour12);
       setMinute(_date.getMinutes());
+      setAmPm(convert24to12Hour(_date.getHours()).ampm);
     }
   }, [props.value]);
 
@@ -105,18 +111,23 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
         dateFormat="mm/dd/yy"
         onChange={(e) => onChange(e)}
         iconPos={props.iconPos}
-        footerTemplate={() =>
-          props.showTime && (
-            <ManualInputTime
-              hour={hour}
-              minute={minute}
-              handleHourChange={handleHourChange}
-              handleMinuteChange={handleMinuteChange}
-              ampm={ampm}
-              toggleAmPmChange={toggleAmPmChange}
-            />
-          )
-        }
+        footerTemplate={() => (props.showTime &&
+          <ManualInputTime
+            hour={hour}
+            minute={minute}
+            handleHourChange={handleHourChange}
+            handleMinuteChange={handleMinuteChange}
+            ampm={ampm}
+            toggleAmPmChange={toggleAmPmChange}
+          />
+        )
+        } />
+      <CustomToast
+        onHide={() => setShowFutureDateToast(false)}
+        showToast={showFutureDateToast}
+        severity="warn"
+        detail="Please don't select a future date and time"
+        position="top-center"
       />
     </div>
   );
@@ -132,17 +143,26 @@ const ManualInputTime: FC<ManualInputTimeProps> = ({
 }) => {
   return (
     <div className="flex justify-evenly w-[12rem] mx-auto items-center">
-      <InputNumber
-        value={hour}
+      <CustomInputNumber
+        value={hour < 1 ? 12 : hour}
         step={1}
         onValueChange={(e) => handleHourChange(e)}
         showButtons
         buttonLayout="vertical"
         min={0}
         max={12}
-      />{" "}
-      :
-      <InputNumber
+        prefix={hour && hour < 10 && "0"}
+        incrementButtonIcon={<CustomImage
+          src={ArrowUp}
+          className="cursor-pointer"
+        />}
+        decrementButtonIcon={<CustomImage
+          src={ArrowDown}
+          className="cursor-pointer"
+        />
+        }
+      /> :
+      <CustomInputNumber
         value={minute}
         onValueChange={(e) => handleMinuteChange(e)}
         showButtons
@@ -150,22 +170,31 @@ const ManualInputTime: FC<ManualInputTimeProps> = ({
         step={1}
         min={0}
         max={59}
-      />
-      :
-      <div className="ampm-comp px-[1rem] min-w-[4rem]">
+        prefix={minute < 10 && "0"}
+        incrementButtonIcon={<CustomImage
+          src={ArrowUp}
+          className="cursor-pointer"
+        />}
+        decrementButtonIcon={<CustomImage
+          src={ArrowDown}
+          className="cursor-pointer"
+        />
+        }
+      />:
+      <div className="ampm-comp px-[1rem] min-w-[4rem] pt-4">
         <CustomImage
           src={ArrowUp}
           className="cursor-pointer"
           onClick={toggleAmPmChange}
         />
-        <div className="my-[0.3rem]">{ampm}</div>
+        <div className="my-[0.3rem] text-base">{ampm}</div>
         <CustomImage
           src={ArrowDown}
           className="cursor-pointer"
           onClick={toggleAmPmChange}
         />
       </div>
-    </div>
+    </div >
   );
 };
 export default CustomCalendar;

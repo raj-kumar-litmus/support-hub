@@ -62,7 +62,9 @@ import { LoaderContext, LoaderContextType } from "../context/loaderContext";
 import CustomTab from "../components/common/customtab";
 import { OPM_BAR_CHART_OPTIONS, OPM_OPTIONS } from "../config/chartConfig";
 import {
-  DATE_TIME_FORMAT_2,
+  CURRENT_PST_DATE,
+  DATE_TIME_FORMAT_3,
+  DATE_TIME_FORMAT_4,
   formatDate,
   getFormattedPSTDate,
 } from "../utils/dateTimeUtil";
@@ -120,7 +122,7 @@ const OPM: React.FC = () => {
       type: INPUT_TYPES.time,
       name: "date",
       label: LABELS.date,
-      value: new Date(),
+      value: getFormattedPSTDate(),
       showTime: true,
       cardIcon: GreyCalendarIcon,
       imgsrc: WhiteCalendarIcon,
@@ -227,7 +229,6 @@ const OPM: React.FC = () => {
             data: dataArr,
             borderColor: "#599DF5",
             pointStyle: "circle",
-            backgroundColor: "white",
             borderWidth: 2,
           },
         ],
@@ -287,7 +288,7 @@ const OPM: React.FC = () => {
     const val = event.target.name || event.value.name;
     if (val === "date") {
       data.find((e) => e.name === val).value = isNaN(event.value)
-        ? new Date()
+        ? CURRENT_PST_DATE
         : event.value;
     } else {
       data.find((e) => e.name === val).value = event.target.value;
@@ -309,7 +310,7 @@ const OPM: React.FC = () => {
     formFields.forEach((e: any) => {
       if (e.value) {
         if (e.name === "date") {
-          dateString = getFormattedPSTDate(e.value);
+          dateString = formatDate(e.value, DATE_TIME_FORMAT_3);
           str += `starttime=${dateString}&`;
         } else {
           if (typeof e.value.code === "string" && e.value.code.length === 0) {
@@ -364,7 +365,7 @@ const OPM: React.FC = () => {
   return (
     <>
       {location.pathname.includes("home") && isLoading && (
-        <Loader className="!p-0 w-[40vw] m-auto opm-loader-height" />
+        <Loader className="!p-0 w-[40vw] m-auto min-h-[29rem]" />
       )}
       {location.pathname.includes("home") && data && !isLoading && (
         <div className="w-full lg:w-[49%] bg-black-200 p-0 rounded-lg">
@@ -466,7 +467,7 @@ const OPM: React.FC = () => {
                           imgsrc={form.imgsrc}
                           onChange={(event) => handleFormChange(event)}
                           value={form.value}
-                          maxDate={form.name === "date" ? new Date() : null}
+                          maxDate={form.name === "date" ? CURRENT_PST_DATE : null}
                           dateFormat="dd-MM-yyyy hh:mm"
                         />
                       )}
@@ -543,7 +544,7 @@ const OPM: React.FC = () => {
                             imgsrc={form.imgsrc}
                             onChange={(event) => handleFormChange(event)}
                             value={form.value}
-                            maxDate={form.name === "date" ? new Date() : null}
+                            maxDate={form.name === "date" ? CURRENT_PST_DATE : null}
                           />
                         )}
                         {form.type === INPUT_TYPES.dropdown && (
@@ -595,7 +596,7 @@ const OPM: React.FC = () => {
                   onClickHandler={removeFormEntry}
                   content={
                     e.type === "time"
-                      ? formatDate(e.value, DATE_TIME_FORMAT_2)
+                      ? formatDate(e.value, DATE_TIME_FORMAT_4)
                       : e.value.name || e.value
                   }
                 />

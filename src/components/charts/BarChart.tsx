@@ -31,10 +31,12 @@ import {
 } from "../../constants/appConstants";
 import useScreenSize from "../../hooks/useScreenSize";
 import {
+  CURRENT_PST_DATE,
   DATE_FORMAT_3,
   DATE_TIME_FORMAT_1,
-  DATE_TIME_FORMAT_2,
+  DATE_TIME_FORMAT_4,
   formatDate,
+  getFormattedPSTDate,
 } from "../../utils/dateTimeUtil";
 import { fetchData } from "../../utils/fetchUtil";
 import FilteredCard from "../FilteredCard";
@@ -74,7 +76,7 @@ const BarChart = () => {
       type: "calendar",
       name: "date",
       title: DATE,
-      value: new Date(),
+      value: getFormattedPSTDate(),
       imgsrc: CalendarIcon,
     },
     {
@@ -227,7 +229,7 @@ const BarChart = () => {
 
   const getFilterCardContent = (e) => {
     if (e.type === "calendar") {
-      return `${formatDate(e.value, DATE_TIME_FORMAT_2)}`;
+      return `${formatDate(e.value, DATE_TIME_FORMAT_4)}`;
     } else {
       return e.options.find((option) => option.value === e.value).label;
     }
@@ -321,7 +323,7 @@ const BarChart = () => {
                           placeholder={MM_DD_YYYY_HH_MM}
                           value={form.value}
                           onChange={(event) => handleFormChange(event)}
-                          maxDate={form.name === "date" ? new Date() : null}
+                          maxDate={form.name === "date" ? CURRENT_PST_DATE : null}
                           dateFormat={DATE_FORMAT_3}
                           iconPos={"left"}
                           imgalt={`${form.name}-icon`}
@@ -382,9 +384,9 @@ const BarChart = () => {
           </div>
         </>
       )}
-      {isLoading && <Loader className="!p-0 m-auto sessions-loader-height" />}
+      {isLoading && <Loader className="!p-0 m-auto min-h-[24rem]" />}
       {!isLoading && (
-        <div className="home-sessions flex justify-center basis-full relative px-3 py-8 sm:px-5 h-64 mb-4 bg-black-200 w-[full] h-[22rem] sm:h-[60vh] drop-shadow-md rounded-xl flex-col sessions-loader-height">
+        <div className="home-sessions flex justify-center basis-full relative px-3 py-8 sm:px-5 h-64 mb-4 bg-black-200 w-[full] h-[22rem] sm:h-[60vh] drop-shadow-md rounded-xl flex-col min-h-[24rem]">
           <>
             {location.pathname.includes("home") && (
               <>
@@ -462,7 +464,7 @@ const BarChart = () => {
                       placeholder={DD_MM_YYYY}
                       value={form.value}
                       onChange={(event) => handleFormChange(event)}
-                      maxDate={form.name === "date" ? new Date() : null}
+                      maxDate={form.name === "date" ? CURRENT_PST_DATE : null}
                       dateFormat={DATE_FORMAT_3}
                       iconPos={"left"}
                       imgalt={`${form.name}-icon`}
