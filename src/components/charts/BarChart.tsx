@@ -251,7 +251,7 @@ const BarChart = () => {
       ...BAR_CHART_OPTIONS(
         (duration ||
           Number(formFields.find((e) => e.name === "period").value)) < 11 &&
-          width > SCREEN_WIDTH.SM,
+        width > SCREEN_WIDTH.SM,
       ),
     };
     if (width > SCREEN_WIDTH.SM) {
@@ -402,11 +402,10 @@ const BarChart = () => {
       {isLoading && <Loader className="!p-0 m-auto min-h-[24rem]" />}
       {!isLoading && (
         <div
-          className={`${
-            location.pathname.includes("home")
+          className={`${location.pathname.includes("home")
               ? "home-sessions"
               : "main-sessions"
-          } flex justify-center relative bg-black-200 h-96 lg:h-[29rem] rounded-lg flex-col min-h-[24rem]`}
+            } flex justify-center relative bg-black-200 h-96 lg:h-[29rem] rounded-lg flex-col min-h-[24rem]`}
         >
           <>
             {location.pathname.includes("home") && (
@@ -446,9 +445,8 @@ const BarChart = () => {
                   {SESSIONS}
                 </div>
                 <CustomTab
-                  className={`custom-tab ${
-                    width < SCREEN_WIDTH.SM ? "!self-start" : ""
-                  }`}
+                  className={`custom-tab ${width < SCREEN_WIDTH.SM ? "!self-start" : ""
+                    }`}
                   tabData={SESSIONS_TABS}
                   tabValue={tabValue}
                   setTabValue={setTabValue}

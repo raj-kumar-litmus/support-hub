@@ -419,15 +419,15 @@ export const OPM_COMPARISON_OPTIONS = ({
             text:
               index === 0
                 ? new Date(startDate)?.toLocaleString("en-US", {
-                    year: "numeric",
-                    month: "2-digit",
-                    day: "2-digit",
-                  })
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                })
                 : endDate?.toLocaleString("en-US", {
-                    year: "numeric",
-                    month: "2-digit",
-                    day: "2-digit",
-                  }),
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                }),
             fillStyle:
               index === 0
                 ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR
