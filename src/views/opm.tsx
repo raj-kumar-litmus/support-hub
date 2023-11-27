@@ -229,7 +229,6 @@ const OPM: React.FC = () => {
             data: dataArr,
             borderColor: "#599DF5",
             pointStyle: "circle",
-            backgroundColor: "white",
             borderWidth: 2,
           },
         ],
