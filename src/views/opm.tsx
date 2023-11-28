@@ -44,7 +44,6 @@ import SandGlassIcon from "../assets/sandglass.svg";
 import WhiteCalendarIcon from "../assets/white_calendar.svg";
 import WhiteCrossIcon from "../assets/white_cross.svg";
 import { submitOnEnter } from "../components/utils/Utils";
-import { OPM_BAR_CHART_OPTIONS, OPM_OPTIONS } from "../config/chartConfig";
 import { URL_OPM } from "../constants/apiConstants";
 import {
   CHANNELS,
@@ -57,9 +56,18 @@ import {
   MM_DD_YYYY_HH_MM,
   PAYMENT_TYPES,
   TITLE,
+  OPM_CHART_DEFAULT,
+  SCREEN_WIDTH,
+  NO_OF_ORDERS,
 } from "../constants/appConstants";
 import { LoaderContext, LoaderContextType } from "../context/loaderContext";
 import { ChartData, ChartOptions, ModalEnums } from "../@types/supportHub";
+import {
+  OPM_BAR_CHART_OPTIONS,
+  OPM_BAR_CHART_OPTIONS_HOME,
+  OPM_OPTIONS,
+  OPM_OPTIONS_HOME,
+} from "../config/chartConfig";
 import {
   CURRENT_PST_DATE,
   DATE_TIME_FORMAT_3,
@@ -190,7 +198,8 @@ const OPM: React.FC = () => {
   const [barChartData, setBarChartData] = useState<ChartData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showFilteredCards, setShowFilteredCards] = useState<boolean>(false);
-  const [tabValue, setTabValue] = useState<number>(1);
+  const [tabValue, setTabValue] = useState<number>(0);
+  const [maxOPM, setMaxOPM] = useState<number>(OPM_CHART_DEFAULT.MAX);
   const [formFields, setFormFields] = useState(DEFAULT_FORM_FIELDS);
 
   useEffect(() => {
@@ -219,11 +228,16 @@ const OPM: React.FC = () => {
       setIsLoading(false);
       const xAxisLabels = data.map((e) => e.timestamp);
       const dataArr = data.map((e) => Number(e.orderCount));
+      setMaxOPM(
+        Math.round(Math.max(...dataArr) / OPM_CHART_DEFAULT.STEP_SIZE) *
+          OPM_CHART_DEFAULT.STEP_SIZE +
+          OPM_CHART_DEFAULT.STEP_SIZE,
+      );
       setData({
         labels: xAxisLabels,
         datasets: [
           {
-            label: "No of orders",
+            label: NO_OF_ORDERS,
             data: dataArr,
             borderColor: "#599DF5",
             pointStyle: "circle",
@@ -235,7 +249,7 @@ const OPM: React.FC = () => {
         labels: xAxisLabels,
         datasets: [
           {
-            label: "No of orders",
+            label: NO_OF_ORDERS,
             data: dataArr,
             borderColor: "#599DF5",
             backgroundColor: "#599DF5",
@@ -252,16 +266,30 @@ const OPM: React.FC = () => {
     (async () => {
       if (url) {
         setOptions(
-          OPM_OPTIONS(
-            width < 640,
-            Number(url.split("period=")[1].split("&")[0]) < 16,
-          ),
+          location.pathname.includes("home")
+            ? OPM_OPTIONS_HOME(
+                width < SCREEN_WIDTH.SM,
+                Number(url.split("period=")[1].split("&")[0]) < 16 &&
+                  width > SCREEN_WIDTH.SM,
+              )
+            : OPM_OPTIONS(
+                width < SCREEN_WIDTH.SM,
+                Number(url.split("period=")[1].split("&")[0]) < 16 &&
+                  width > SCREEN_WIDTH.SM,
+              ),
         );
         setBarChartOptions(
-          OPM_BAR_CHART_OPTIONS(
-            width < 640,
-            Number(url.split("period=")[1].split("&")[0]) < 16,
-          ),
+          location.pathname.includes("home")
+            ? OPM_BAR_CHART_OPTIONS_HOME(
+                width < SCREEN_WIDTH.SM,
+                Number(url.split("period=")[1].split("&")[0]) < 16 &&
+                  width > SCREEN_WIDTH.SM,
+              )
+            : OPM_BAR_CHART_OPTIONS(
+                width < SCREEN_WIDTH.SM,
+                Number(url.split("period=")[1].split("&")[0]) < 16 &&
+                  width > SCREEN_WIDTH.SM,
+              ),
         );
         await getData();
       }
@@ -322,7 +350,7 @@ const OPM: React.FC = () => {
       }
     });
     setUrl(`${URL_OPM}?${str}`);
-    if (showFilters && width < 640) setShowFilters(false);
+    if (showFilters && width < SCREEN_WIDTH.SM) setShowFilters(false);
   };
 
   useEffect(() => {
@@ -330,14 +358,20 @@ const OPM: React.FC = () => {
   }, [formFields]);
 
   const getChartConfig = () => {
-    const customChartConfig = { ...options };
-    if (width < 640) {
-      customChartConfig.layout.padding.top = 70;
-      customChartConfig.layout.padding.bottom = 0;
+    let customChartConfig = null;
+    if (tabValue === 0) {
+      customChartConfig = { ...barChartoptions };
+      customChartConfig.scales.y.max = maxOPM;
+      if (width > SCREEN_WIDTH.SM && width <= SCREEN_WIDTH.LG) {
+        customChartConfig.plugins.datalabels.rotation = 270;
+        customChartConfig.plugins.datalabels.anchor = "center";
+        customChartConfig.plugins.datalabels.align = "center";
+      } else {
+        customChartConfig.plugins.datalabels.rotation = 0;
+      }
     } else {
-      customChartConfig.layout.padding.top = 20;
-      customChartConfig.layout.padding.left = 10;
-      customChartConfig.layout.padding.right = 20;
+      customChartConfig = { ...options };
+      customChartConfig.scales.y.max = maxOPM;
     }
     return customChartConfig;
   };
@@ -363,17 +397,17 @@ const OPM: React.FC = () => {
   return (
     <>
       {location.pathname.includes("home") && isLoading && (
-        <Loader className="!p-0 w-[40vw] m-auto min-h-[29rem]" />
+        <Loader className="!p-0 w-[40vw] m-auto min-h-[21rem]" />
       )}
       {location.pathname.includes("home") && data && !isLoading && (
-        <div className="w-full lg:w-[49%] bg-black-200 p-0 rounded-lg">
-          <div className="flex justify-between items-center relative top-[3vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
+        <div className="w-full xl:w-1/2 bg-black-200 rounded-lg px-4 lg:px-6 py-4">
+          <div className="flex justify-between items-center relative mb-2 sm:mb-4 lg:mb-2 xl:mb-4">
             <span className="text-gray-200 font-bold text-lg font-helvetica">
               {TITLE.OPM}
             </span>
             <div className="flex items-center">
               <CustomTab
-                className="opm-tabs mr-2"
+                className="opm-tabs mr-2 hidden md:block"
                 tabData={CHART_TABS}
                 tabValue={tabValue}
                 setTabValue={setTabValue}
@@ -385,43 +419,47 @@ const OPM: React.FC = () => {
                 <CustomImage src={refreshIcon} />
               </CustomButton>
               <CustomButton
-                className="home-expand-btn mr-2 ml-2 sm:mr-0"
+                className="home-expand-btn ml-2"
                 onClick={handleOPMExpandClick}
               >
                 <CustomImage src={openNewPageIcon} />
               </CustomButton>
             </div>
           </div>
-          <>
-            {tabValue === 0 ? (
-              <BarChartComp
-                title={TITLE.OPM}
-                options={barChartoptions}
-                data={barChartData}
-                className="home-opm border-0 rounded-[10px] w-full lg:w-full lg:ml-[0] h-[380px] lg:h-[380px] lg:mt-[3vh] top-[-5vh]"
-                defaultClasses={true}
-              />
-            ) : (
-              <LineChart
-                title={TITLE.OPM}
-                className="home-opm border-0 rounded-[10px] w-full lg:w-full sm:ml-[0] h-[380px] lg:h-[380px] lg:mt-[3vh] top-[-5vh]"
-                options={getChartConfig()}
-                data={data}
-                defaultClasses={true}
-              />
-            )}
-          </>
+          <div className="flex justify-start items-center relative mb-0 sm:mb-4 lg:mb-1 xl:mb-4 md:hidden">
+            <CustomTab
+              className="opm-tabs mr-2"
+              tabData={CHART_TABS}
+              tabValue={tabValue}
+              setTabValue={setTabValue}
+            />
+          </div>
+          {tabValue === 0 ? (
+            <BarChartComp
+              title={TITLE.OPM}
+              options={getChartConfig()}
+              data={barChartData}
+              className="border-0 w-full h-64"
+              defaultClasses={true}
+            />
+          ) : (
+            <LineChart
+              title={TITLE.OPM}
+              className="border-0 w-full h-64"
+              options={getChartConfig()}
+              data={data}
+              defaultClasses={true}
+            />
+          )}
         </div>
       )}
       {!IS_FULLSCREEN && location.pathname.includes("opm") && (
         <div className="flex justify-between items-start">
-          <p className="font-bold w-[50vw] text-gray-200 w-[50vw] lg:w-[30vw] sm:ml-[2.5vw] md:ml-[1.5vw] lg:ml-[1vw]">
-            {TITLE.OPM}
-          </p>
-          {width < 640 && (
+          <p className="font-bold text-gray-200">{TITLE.OPM}</p>
+          {width < SCREEN_WIDTH.SM && (
             <CustomImage
               src={FilterIcon}
-              className="lg:w-[2.34vw] self-end"
+              className="self-end"
               alt="Filter Icon"
               onClick={onFilterClickHandler}
             />
@@ -430,7 +468,7 @@ const OPM: React.FC = () => {
       )}
       {showFilters && location.pathname.includes("opm") && (
         <>
-          {width > 640 ? (
+          {width > SCREEN_WIDTH.SM ? (
             <>
               <form className="lg:flex md:gap-[0.15rem] opmFilters sm:grid sm:grid-cols-3 lg:ml-[0.5rem] sm:mb-4">
                 {formFields.map((form, index) => {
@@ -456,7 +494,7 @@ const OPM: React.FC = () => {
                         <CustomCalendar
                           name={form.name}
                           containerclassname="calendarOpmComparison ml-[10px] lg:w-[10vw] lg:w-[12vw] xl:w-[14vw] sm:mr-[-0.25rem]"
-                          titleclassname="top-[1.25rem]"
+                          titleclassname="top-5"
                           imageclassname="h-[20px] w-[20px] relative top-[1.75rem] left-[0.5vw] z-[1]"
                           placeholder={MM_DD_YYYY_HH_MM}
                           title={form.label}
@@ -465,7 +503,7 @@ const OPM: React.FC = () => {
                           imgsrc={form.imgsrc}
                           onChange={(event) => handleFormChange(event)}
                           value={form.value}
-                          maxDate={form.name === "date" ? CURRENT_PST_DATE : null}
+                          maxDate={form.name === "date" ? new Date() : null}
                           dateFormat="dd-MM-yyyy hh:mm"
                         />
                       )}
@@ -534,7 +572,7 @@ const OPM: React.FC = () => {
                           <CustomCalendar
                             name={form.name}
                             containerclassname="opmFiltersMobileCalendar"
-                            titleclassname="left-[1vw] md:left-[0] top-[1.25rem]"
+                            titleclassname="left-[1vw] md:left-[0] top-5"
                             imageclassname="h-[20px] w-[20px] relative top-[1.75rem] md:top-[3vh] left-[3.5vw] z-[1]"
                             title={form.label}
                             showTime={form.showTime}
@@ -542,7 +580,7 @@ const OPM: React.FC = () => {
                             imgsrc={form.imgsrc}
                             onChange={(event) => handleFormChange(event)}
                             value={form.value}
-                            maxDate={form.name === "date" ? CURRENT_PST_DATE : null}
+                            maxDate={form.name === "date" ? new Date() : null}
                           />
                         )}
                         {form.type === INPUT_TYPES.dropdown && (
@@ -581,7 +619,7 @@ const OPM: React.FC = () => {
           className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[0] sm:ml-[5vw] lg:ml-[1rem] ${
             IS_FULLSCREEN
               ? "rotate-90 absolute left-[-9vh] top-[45vh] ml-[25vw] w-[70vh] mt-[0]"
-              : `${width < 640 ? "portrait" : ""}`
+              : `${width < SCREEN_WIDTH.SM ? "portrait" : ""}`
           }`}
         >
           {formFields
@@ -628,22 +666,28 @@ const OPM: React.FC = () => {
         data &&
         !isLoading &&
         location.pathname.includes("opm") && (
-          <div className="relative">
+          <div
+            className={`relative h-96 lg:h-[29rem] ${
+              IS_FULLSCREEN ? "rotate-90" : ""
+            }`}
+          >
             <CustomTab
-              className={`opm-tabs absolute ${
+              className={`opm-tabs absolute z-10 pt-2 top-2 ${
                 IS_FULLSCREEN
-                  ? "rotate-90 right-[-10rem] top-[1.35rem] relative top-[75vh] left-[59vw]"
-                  : "right-[15vw] sm:right-[2vw] top-[3vh] sm:top-[1vh] lg:right-[4%]"
-              }  z-10`}
+                  ? "right-[calc(100vh-57rem)]"
+                  : "right-14 sm:right-3 md:right-4 lg:right-6"
+              }`}
               tabData={CHART_TABS}
               tabValue={tabValue}
               setTabValue={setTabValue}
             />
             {tabValue === 0 ? (
               <BarChartComp
-                options={barChartoptions}
+                options={getChartConfig()}
                 data={barChartData}
-                className="opm-page-chart-container pt-2 px-4"
+                className={`opm-page-chart-container ${
+                  IS_FULLSCREEN ? "opm-page-chart-container-rotated" : ""
+                }`}
                 title={TITLE.OPM}
                 isFullScreen={IS_FULLSCREEN}
               />
@@ -651,8 +695,10 @@ const OPM: React.FC = () => {
               <LineChart
                 title={TITLE.OPM}
                 isFullScreen={IS_FULLSCREEN}
-                className="opm-page-chart-container pt-2 px-4"
-                options={options}
+                className={`opm-page-chart-container ${
+                  IS_FULLSCREEN ? "opm-page-chart-container-rotated" : ""
+                }`}
+                options={getChartConfig()}
                 data={data}
               />
             )}
