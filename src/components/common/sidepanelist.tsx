@@ -21,22 +21,20 @@ const SidePaneList: FC<SidePaneListProps> = (props) => {
         <a
           key={menu.id}
           className={`flex pl-4 pr-2 py-4 items-center cursor-pointer h-11 mx-auto ${props.selectedMenu === menu.id
-              ? "bg-black-300 rounded-lg"
-              : "bg-transparent"
+            ? "bg-black-300 rounded-lg"
+            : "bg-transparent"
             }`}
           onClick={() => navigateToMenu(menu)}
         >
           <CustomImage
             src={menu.icon}
-            className={`menu-sm-icon ${
-              props.selectedMenu === menu.id ? "selected-menu" : ""
-            }`}
+            className={`menu-sm-icon ${props.selectedMenu === menu.id ? "selected-menu" : ""
+              }`}
             alt="menu.name"
           />
           <span
-            className={`block pl-6  text-sm font-normal  ${
-              props.selectedMenu === menu.id ? "text-gray-200" : "text-gray-300"
-            }`}
+            className={`block pl-6  text-sm font-normal  ${props.selectedMenu === menu.id ? "text-gray-200" : "text-gray-300"
+              }`}
           >
             {menu.name}
           </span>

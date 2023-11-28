@@ -88,7 +88,7 @@ const AppContent: FC<AppContentProps> = (props) => {
                   />
                 </div>
               )}
-            </div>
+            </a>
           )}
           <div
             className={`${showSidePaneGrid ? "hidden" : "block"} 
