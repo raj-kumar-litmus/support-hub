@@ -17,6 +17,7 @@ import {
   LAST_MIN_OPM,
   AVG_OPM_COMPARISON,
   TOTAL_ORDER_COMPARISON,
+  SCREEN_WIDTH,
 } from "../constants/appConstants";
 import useScreenSize from "../hooks/useScreenSize";
 import TimeTracker from "./timeTracker";
@@ -224,7 +225,7 @@ const HomePage = () => {
               </span>
             </div>
             <div className="flex items-center font-helvetica">
-              {width > 640 && !isLoading && (
+              {width > SCREEN_WIDTH.SM && !isLoading && (
                 <TimeTracker timeStamp={refreshTime} />
               )}
               <CustomButton
@@ -289,7 +290,7 @@ const HomePage = () => {
             </div>
           )}
 
-          <div className="home-opm-charts flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:gap-[2%] min-h-[29rem]">
+          <div className="home-opm-charts flex flex-col xl:flex-row space-y-6 xl:space-y-0 xl:gap-[2%] min-h-[21rem]">
             <OPM />
             <OpmComparison />
           </div>

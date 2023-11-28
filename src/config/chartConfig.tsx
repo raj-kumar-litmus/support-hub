@@ -11,6 +11,12 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 import {
   SESSIONS_CHART_DEFAULT,
   TOTAL_ORDERS_PER_MINUTE,
+  CHART,
+  TODAY,
+  YESTERDAY,
+  OPM_COMPARISON_CHART_STYLES,
+  OPM_COMP_CHART_DEFAULT,
+  OPM_CHART_DEFAULT,
 } from "../constants/appConstants";
 import { externalTooltipHandler } from "../components/utils/Utils";
 
@@ -24,9 +30,8 @@ Chart.register(
   ChartDataLabels,
 );
 
-export const BAR_CHART_OPTIONS: Chart.ChartOptions = (
-  showDataLabels = false,
-) => ({
+//Session Chart
+export const BAR_CHART_OPTIONS = (showDataLabels = false) => ({
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
@@ -36,14 +41,17 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = (
       align: "start",
       maxWidth: 100,
       labels: {
-        padding: 16,
-        boxWidth: 32,
+        boxWidth: 6,
+        boxHeight: 4,
+        pointStyle: "circle",
+        usePointStyle: true,
+        textAlign: "right",
         generateLabels: (chart) => {
           const data = chart.data;
           if (data.datasets.length) {
             return data.datasets.map((dataset) => ({
               text: dataset.label,
-              fillStyle: "#30343B",
+              fillStyle: dataset.backgroundColor,
               fontColor: dataset.backgroundColor,
               lineWidth: SESSIONS_CHART_DEFAULT.LEGEND_LINE_WIDTH,
               strokeStyle: dataset.backgroundColor,
@@ -54,12 +62,22 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = (
     },
     datalabels: {
       display: showDataLabels,
-      formatter: (_, context) =>
-        context.chart.data.dataset?.[0]?.data?.[context.dataIndex],
-      color: "black",
-      font: {
-        size: "12",
+      formatter: (value) => {
+        if (value > 1000) {
+          return (value / 1000).toFixed(1) + "K";
+        } else {
+          return value;
+        }
       },
+      color: "black",
+      anchor: "end",
+      align: "top",
+      font: {
+        size: CHART.DATALABEL_FONT_SIZE,
+        family: CHART.FONT_FAMILY,
+      },
+      rotation: 270,
+      color: "#ffffff",
     },
     tooltip: {
       enabled: false,
@@ -105,119 +123,18 @@ export const BAR_CHART_OPTIONS: Chart.ChartOptions = (
   },
 });
 
-//OPM Charts
-export const OPM_BAR_CHART_OPTIONS: Chart.ChartOptions = (
-  isMobile: boolean,
-  showDataLabels = false,
-) => {
-  const existingBarChartOptions = {
-    ...BAR_CHART_OPTIONS(showDataLabels && !isMobile),
-  };
-  return {
-    ...existingBarChartOptions,
-    plugins: {
-      ...existingBarChartOptions.plugins,
-      legend: {
-        display: false,
-      },
-      tooltip: {
-        enabled: false,
-        external: (_) => externalTooltipHandler(_, "opm_bar"),
-      },
-      datalabels: {
-        display: showDataLabels,
-        formatter: (_, context) =>
-          context.chart.data.dataset?.[0]?.data?.[context.dataIndex],
-        align: "top",
-        anchor: "center",
-        font: {
-          size: "12",
-          color: "#000000",
-        },
-      },
-      title: {
-        display: true,
-        color: "#FAF9F6",
-        text: TOTAL_ORDERS_PER_MINUTE,
-        position: "bottom",
-        font: {
-          weight: 400,
-        },
-        padding: 20,
-      },
-    },
-    layout: {
-      padding: isMobile
-        ? {
-            left: 6,
-            right: 20,
-            top: 10,
-            bottom: 40,
-          }
-        : {
-            left: 10,
-            right: 20,
-            top: 20,
-          },
-    },
-    scales: {
-      ...existingBarChartOptions.scales,
-      y: {
-        grid: {
-          color: "#00000033",
-        },
-        border: {
-          display: false,
-        },
-      },
-    },
-  };
+const getOpmChartGradient = (ctx) => {
+  const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+  gradient.addColorStop(0, "#6370FF66");
+  gradient.addColorStop(0.5, "#617AFD2E");
+  gradient.addColorStop(1, "#6175FC00");
+  return gradient;
 };
 
-const getOpmChartGradient = (ctx) => {
-  var gradient = ctx.createLinearGradient(0, 0, 0, 400);
-  gradient.addColorStop(0, '#6370FF66');
-  gradient.addColorStop(0.5, '#617AFD2E');
-  gradient.addColorStop(1, '#6175FC00');
-  return gradient;
-}
-
+//OPM Charts
 export const OPM_OPTIONS = (isMobile: boolean, showDataLabels = false) => ({
   responsive: true,
   maintainAspectRatio: false,
-  layout: {
-    padding: isMobile
-      ? {
-          left: 5,
-          right: 20,
-          top: 10,
-          bottom: 40,
-        }
-      : {
-          top: 50,
-        },
-  },
-  scales: {
-    y: {
-      grid: {
-        color: "#00000033",
-      },
-      border: {
-        display: false,
-      },
-    },
-    x: {
-      grid: {
-        display: false,
-      },
-      title: {
-        display: true,
-        color: "#FAF9F6",
-        text: TOTAL_ORDERS_PER_MINUTE,
-        padding: isMobile ? { top: 35, bottom: 35 } : { top: 15 },
-      },
-    },
-  },
   fill: true,
   backgroundColor: (context) => {
     const chart = context.chart;
@@ -225,7 +142,52 @@ export const OPM_OPTIONS = (isMobile: boolean, showDataLabels = false) => ({
     if (!chartArea) return;
     return getOpmChartGradient(ctx);
   },
+  scales: {
+    y: {
+      beginAtZero: true,
+      max: OPM_CHART_DEFAULT.MAX,
+      grid: {
+        color: "#00000033",
+      },
+      border: {
+        display: false,
+      },
+      ticks: {
+        display: true,
+        stepSize: OPM_CHART_DEFAULT.STEP_SIZE,
+        count: OPM_CHART_DEFAULT.TICK_COUNT,
+        callback: function (value) {
+          if (value >= 1000) {
+            return value / 1000 + "K";
+          } else {
+            return value;
+          }
+        },
+      },
+    },
+    x: {
+      grid: {
+        display: false,
+      },
+    },
+  },
   plugins: {
+    title: {
+      display: true,
+      text: TOTAL_ORDERS_PER_MINUTE,
+      position: "bottom",
+      align: "center",
+      color: "#FAF9F6",
+      font: {
+        weight: 50,
+        size: CHART.TITLE_FONT_SIZE,
+        family: CHART.FONT_FAMILY,
+      },
+      padding: {
+        top: 10,
+        bottom: 10,
+      },
+    },
     legend: {
       display: false,
     },
@@ -237,21 +199,153 @@ export const OPM_OPTIONS = (isMobile: boolean, showDataLabels = false) => ({
       display: showDataLabels,
       formatter: (_, context) =>
         context.chart.data.dataset?.[0]?.data?.[context.dataIndex],
+      anchor: "end",
       align: "top",
-      anchor: "center",
       font: {
-        size: "12",
+        size: CHART.DATALABEL_FONT_SIZE,
+        family: CHART.FONT_FAMILY,
       },
+      color: "#ffffff",
     },
   },
   elements: {
     point: {
       radius: 4,
-      backgroundColor: "white",
+      backgroundColor: "#FFFFFF",
     },
   },
 });
 
+export const OPM_OPTIONS_HOME = (isMobile: boolean, showDataLabels = false) => {
+  const existingLineChartOptions = {
+    ...OPM_OPTIONS(isMobile, showDataLabels),
+  };
+  return {
+    ...existingLineChartOptions,
+    plugins: {
+      ...existingLineChartOptions.plugins,
+      legend: {
+        display: false,
+      },
+      title: {
+        ...existingLineChartOptions.plugins.title,
+      },
+      tooltip: {
+        enabled: false,
+        external: (_) => externalTooltipHandler(_, "opm", true),
+      },
+    },
+  };
+};
+
+export const OPM_BAR_CHART_OPTIONS = (
+  isMobile: boolean,
+  showDataLabels = false,
+) => {
+  const existingBarChartOptions = {
+    ...BAR_CHART_OPTIONS(showDataLabels && !isMobile),
+  };
+  return {
+    ...existingBarChartOptions,
+    plugins: {
+      ...existingBarChartOptions.plugins,
+      title: {
+        display: true,
+        text: TOTAL_ORDERS_PER_MINUTE,
+        position: "bottom",
+        align: "center",
+        color: "#FAF9F6",
+        font: {
+          weight: 50,
+          size: CHART.TITLE_FONT_SIZE,
+          family: CHART.FONT_FAMILY,
+        },
+        padding: {
+          top: 10,
+          bottom: 10,
+        },
+      },
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        enabled: false,
+        external: (_) => externalTooltipHandler(_, "opm_bar"),
+      },
+      datalabels: {
+        display: showDataLabels,
+        formatter: (_, context) =>
+          context.chart.data.dataset?.[0]?.data?.[context.dataIndex],
+        anchor: "end",
+        align: "top",
+        color: "#ffffff",
+        font: {
+          size: CHART.DATALABEL_FONT_SIZE,
+          family: CHART.FONT_FAMILY,
+        },
+      },
+    },
+    scales: {
+      ...existingBarChartOptions.scales,
+      y: {
+        beginAtZero: true,
+        max: OPM_CHART_DEFAULT.MAX,
+        grid: {
+          color: "#00000033",
+        },
+        border: {
+          display: false,
+        },
+        ticks: {
+          display: true,
+          stepSize: OPM_CHART_DEFAULT.STEP_SIZE,
+          count: OPM_CHART_DEFAULT.TICK_COUNT,
+          callback: function (value) {
+            if (value >= 1000) {
+              return value / 1000 + "K";
+            } else {
+              return value;
+            }
+          },
+        },
+      },
+      x: {
+        grid: {
+          display: false,
+        },
+      },
+    },
+    datasets: {
+      bar: {
+        barPercentage: SESSIONS_CHART_DEFAULT.BAR_PERCENT,
+        maxBarThickness: SESSIONS_CHART_DEFAULT.MAX_BAR_THICKNESS,
+        borderRadius: SESSIONS_CHART_DEFAULT.BAR_BORDER_RADIUS,
+        categoryPercentage: SESSIONS_CHART_DEFAULT.CATEGORY_PERCENT,
+      },
+    },
+  };
+};
+
+export const OPM_BAR_CHART_OPTIONS_HOME = (
+  isMobile: boolean,
+  showDataLabels = false,
+) => {
+  const existingBarChartOptions = {
+    ...OPM_BAR_CHART_OPTIONS(isMobile, showDataLabels),
+  };
+  return {
+    ...existingBarChartOptions,
+    plugins: {
+      ...existingBarChartOptions.plugins,
+      tooltip: {
+        enabled: false,
+        external: (_) => externalTooltipHandler(_, "opm_bar", true),
+      },
+    },
+  };
+};
+
+//OPM Comparison Charts
 export const OPM_COMPARISON_OPTIONS = ({
   apiResponse,
   startDate,
@@ -261,44 +355,39 @@ export const OPM_COMPARISON_OPTIONS = ({
 }) => ({
   responsive: true,
   maintainAspectRatio: false,
-  layout: {
-    padding: isMobile
-      ? {
-          left: 20,
-          right: 20,
-          top: 10,
-          bottom: 40,
-        }
-      : {
-          left: 30,
-          right: 50,
-          top: 50,
-          bottom: 20,
-        },
-  },
   scales: {
     x: {
       grid: {
         display: false,
       },
-      title: {
-        display: true,
-        text: TOTAL_ORDERS_PER_MINUTE,
-        color: "#E8E8E8",
-        position: "left",
-        padding: isMobile ? { top: 20, bottom: 20 } : { top: 50 },
-      },
     },
     y: {
+      beginAtZero: true,
+      max: OPM_CHART_DEFAULT.MAX,
+      grid: {
+        color: "#00000033",
+      },
       border: {
         display: false,
+      },
+      ticks: {
+        display: true,
+        stepSize: OPM_CHART_DEFAULT.STEP_SIZE,
+        count: OPM_CHART_DEFAULT.TICK_COUNT,
+        callback: function (value) {
+          if (value >= 1000) {
+            return value / 1000 + "K";
+          } else {
+            return value;
+          }
+        },
       },
     },
   },
   elements: {
     point: {
       radius: 4,
-      backgroundColor: "white",
+      backgroundColor: "#FFFFFF",
     },
   },
   plugins: {
@@ -306,19 +395,25 @@ export const OPM_COMPARISON_OPTIONS = ({
       display: showDataLabels,
       formatter: (_, context) =>
         context.chart.data.dataset?.[0]?.data?.[context.dataIndex],
+      anchor: "end",
       align: "top",
-      anchor: "center",
       font: {
-        size: "12",
+        size: CHART.DATALABEL_FONT_SIZE,
+        family: CHART.FONT_FAMILY,
       },
+      color: "#ffffff",
     },
     legend: {
       display: true,
       position: isMobile ? "top" : "bottom",
       align: "start",
+      fullWidth: false,
       labels: {
-        boxWidth: 30,
-        backgroundColor: "transparent",
+        boxWidth: 6,
+        boxHeight: 4,
+        pointStyle: "circle",
+        usePointStyle: true,
+        textAlign: "right",
         generateLabels: () => {
           return Object.keys(apiResponse).map((_, index) => ({
             text:
@@ -333,10 +428,19 @@ export const OPM_COMPARISON_OPTIONS = ({
                     month: "2-digit",
                     day: "2-digit",
                   }),
-            fillStyle: "transparent",
-            lineWidth: 2,
-            fontColor: index === 0 ? "#6370FF" : "#FDA44F",
-            strokeStyle: index === 0 ? "#6370FF" : "#FDA44F",
+            fillStyle:
+              index === 0
+                ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR
+                : OPM_COMPARISON_CHART_STYLES.SECONDARY_COLOR,
+            lineWidth: 1,
+            fontColor:
+              index === 0
+                ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR
+                : OPM_COMPARISON_CHART_STYLES.SECONDARY_COLOR,
+            strokeStyle:
+              index === 0
+                ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR
+                : OPM_COMPARISON_CHART_STYLES.SECONDARY_COLOR,
           }));
         },
       },
@@ -363,37 +467,173 @@ export const OPM_COMPARISON_OPTIONS_HOME = ({
   });
   return {
     ...options,
-    layout: {
-      ...options.layout,
-      padding: isMobile ? { left: 10, right: 20, top: 15, bottom: 0 } : {},
-    },
-    scales: {
-      ...options.scales,
-      x: {
-        ...options.scales.x,
-        title: {
-          ...options.scales.x.title,
-          padding: isMobile
-            ? { top: 20, bottom: 20 }
-            : { left: 50, top: 15, bottom: 0 },
-        },
-      },
-    },
     plugins: {
       ...options.plugins,
       datalabels: {
         display: showDataLabels,
         formatter: (_, context: any) =>
           context.chart.data.dataset?.[0]?.data?.[context.dataIndex],
+        anchor: "end",
         align: "top",
-        anchor: "center",
         font: {
-          size: "10",
+          size: CHART.DATALABEL_FONT_SIZE,
+          family: CHART.FONT_FAMILY,
         },
+        color: "#ffffff",
       },
       legend: {
         ...options.plugins.legend,
-        position: "top",
+        position: isMobile ? "top" : "bottom",
+        labels: {
+          ...options.plugins.legend.labels,
+          generateLabels: () => {
+            return Object.keys(apiResponse).map((_, index) => ({
+              text: index === 0 ? TODAY : YESTERDAY,
+              fillStyle:
+                index === 0
+                  ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR
+                  : OPM_COMPARISON_CHART_STYLES.SECONDARY_COLOR,
+              lineWidth: 1,
+              fontColor:
+                index === 0
+                  ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR
+                  : OPM_COMPARISON_CHART_STYLES.SECONDARY_COLOR,
+              strokeStyle:
+                index === 0
+                  ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR
+                  : OPM_COMPARISON_CHART_STYLES.SECONDARY_COLOR,
+            }));
+          },
+        },
+      },
+      tooltip: {
+        enabled: false,
+        external: (_) => externalTooltipHandler(_, "opmComparison", true),
+      },
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+      },
+      y: {
+        beginAtZero: true,
+        max: OPM_CHART_DEFAULT.MAX,
+        grid: {
+          color: "#00000033",
+        },
+        border: {
+          display: false,
+        },
+        ticks: {
+          display: true,
+          stepSize: OPM_CHART_DEFAULT.STEP_SIZE,
+          count: OPM_CHART_DEFAULT.TICK_COUNT,
+          callback: function (value) {
+            if (value >= 1000) {
+              return value / 1000 + "K";
+            } else {
+              return value;
+            }
+          },
+        },
+      },
+    },
+  };
+};
+
+export const OPM_COMPARISON_BAR_OPTIONS = ({
+  apiResponse,
+  startDate,
+  endDate,
+  isMobile,
+  showDataLabels = false,
+}) => {
+  const options = OPM_COMPARISON_OPTIONS({
+    apiResponse,
+    startDate,
+    endDate,
+    isMobile,
+  });
+  return {
+    ...options,
+    plugins: {
+      ...options.plugins,
+      datalabels: {
+        ...options.plugins.datalabels,
+        display: showDataLabels,
+        color: "#ffffff",
+        anchor: "end",
+        align: "top",
+      },
+      legend: {
+        ...options.plugins.legend,
+        position: isMobile ? "top" : "bottom",
+      },
+      tooltip: {
+        enabled: false,
+        external: (_) => externalTooltipHandler(_, "opm_comp_bar"),
+        mode: "index",
+      },
+    },
+    datasets: {
+      bar: {
+        barPercentage: OPM_COMP_CHART_DEFAULT.BAR_PERCENT,
+        maxBarThickness: OPM_COMP_CHART_DEFAULT.MAX_BAR_THICKNESS,
+        borderRadius: OPM_COMP_CHART_DEFAULT.BAR_BORDER_RADIUS,
+        categoryPercentage: OPM_COMP_CHART_DEFAULT.CATEGORY_PERCENT,
+      },
+    },
+  };
+};
+
+export const OPM_COMPARISON_BAR_OPTIONS_HOME = ({
+  apiResponse,
+  startDate,
+  endDate,
+  isMobile,
+  showDataLabels = false,
+}) => {
+  const options = OPM_COMPARISON_BAR_OPTIONS({
+    apiResponse,
+    startDate,
+    endDate,
+    isMobile,
+    showDataLabels,
+  });
+  return {
+    ...options,
+    plugins: {
+      ...options.plugins,
+      legend: {
+        ...options.plugins.legend,
+        labels: {
+          ...options.plugins.legend.labels,
+          generateLabels: () => {
+            return Object.keys(apiResponse).map((_, index) => ({
+              text: index === 0 ? TODAY : YESTERDAY,
+              fillStyle:
+                index === 0
+                  ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR
+                  : OPM_COMPARISON_CHART_STYLES.SECONDARY_COLOR,
+              lineWidth: 1,
+              fontColor:
+                index === 0
+                  ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR
+                  : OPM_COMPARISON_CHART_STYLES.SECONDARY_COLOR,
+              strokeStyle:
+                index === 0
+                  ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR
+                  : OPM_COMPARISON_CHART_STYLES.SECONDARY_COLOR,
+            }));
+          },
+        },
+      },
+      tooltip: {
+        enabled: false,
+        external: (_) => externalTooltipHandler(_, "opm_comp_bar", true),
+        mode: "index",
       },
     },
   };
