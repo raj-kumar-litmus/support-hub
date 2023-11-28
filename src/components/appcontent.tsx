@@ -72,7 +72,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
             />
           )}
           {showSidePane && (
-            <div
+            <a
               className={`${
                 showSidePaneGrid ? "bg-black-200  min-h-[calc(100vh-56px)]" : ""
               } flex w-full sm:hidden`}
@@ -95,7 +95,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
                   />
                 </div>
               )}
-            </div>
+            </a>
           )}
           <div
             className={`${showSidePaneGrid ? "hidden" : "block"} 

@@ -73,6 +73,9 @@ export const formatDate = (
 };
 
 export const getLocaleTime = (timeVal: Date, is12Hr: boolean): string => {
+  if (is12Hr) {
+    timeVal.getHours() ? timeVal.getHours() : timeVal.setHours(12);
+  }
   return timeVal.toLocaleTimeString("en-US", {
     hour12: is12Hr,
     hour: "2-digit",
@@ -123,6 +126,8 @@ export const timeInPST = (timestring: number) => {
   return buildLocaleString(datetime);
 };
 
-export const CURRENT_PST_DATE = new Date(new Date().toLocaleString("en-US", {
-  timeZone: "America/Los_Angeles",
-}));
+export const CURRENT_PST_DATE = new Date(
+  new Date().toLocaleString("en-US", {
+    timeZone: "America/Los_Angeles",
+  }),
+);

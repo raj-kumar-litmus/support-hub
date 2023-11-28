@@ -28,27 +28,30 @@ const SidePaneList: FC<Props> = ({
       }
     >
       {menuList.map((menu) => (
-        <div
+        <a
           key={menu.id}
-          className={`flex pl-4 pr-2 py-4 items-center  cursor-pointer h-[44px] mx-auto ${selectedMenu === menu.id
-            ? "bg-black-300 rounded-lg"
-            : "bg-transparent"
-            }`}
+          className={`flex pl-4 pr-2 py-4 items-center  cursor-pointer h-[44px] mx-auto ${
+            selectedMenu === menu.id
+              ? "bg-black-300 rounded-lg"
+              : "bg-transparent"
+          }`}
           onClick={() => navigateToMenu(menu)}
         >
           <CustomImage
             src={menu.icon}
-            className={`menu-sm-icon ${selectedMenu === menu.id ? "selected-menu" : ""
-              }`}
+            className={`menu-sm-icon ${
+              selectedMenu === menu.id ? "selected-menu" : ""
+            }`}
             alt="menu.name"
           />
           <span
-            className={`block pl-6  text-sm font-normal  ${selectedMenu === menu.id ? "text-gray-200" : "text-gray-300"
-              }`}
+            className={`block pl-6  text-sm font-normal  ${
+              selectedMenu === menu.id ? "text-gray-200" : "text-gray-300"
+            }`}
           >
             {menu.name}
           </span>
-        </div>
+        </a>
       ))}
     </div>
   );

@@ -66,6 +66,7 @@ import { LoaderContext, LoaderContextType } from "../context/loaderContext";
 import {
   CURRENT_PST_DATE,
   DATE_TIME_FORMAT_3,
+  DATE_TIME_FORMAT_4,
   formatDate,
   getFormattedPSTDate,
   getPSTdate,
@@ -185,10 +186,12 @@ const OpmComparison: React.FC = () => {
       new Date(getPSTdate(new Date())).getTime() - 86400000,
     ).toLocaleDateString("en-US");
     setUrl(
-      `${URL_OPM_COMPARISON}?period=${location.pathname.includes("opm")
-        ? DEFAULT.duration
-        : HOME_PAGE_REFERSH_DURATION
-      }&startTimeOne=${startTimeOne}&startDateTwo=${startDateTwo}&channel=${DEFAULT.channel
+      `${URL_OPM_COMPARISON}?period=${
+        location.pathname.includes("opm")
+          ? DEFAULT.duration
+          : HOME_PAGE_REFERSH_DURATION
+      }&startTimeOne=${startTimeOne}&startDateTwo=${startDateTwo}&channel=${
+        DEFAULT.channel
       }`,
     );
   }, [counter]);
@@ -203,7 +206,7 @@ const OpmComparison: React.FC = () => {
     const val = event.target.name || event.value.name;
     if (["startDate", "endDate"].includes(val)) {
       data.find((e) => e.name === val).value = isNaN(event.value)
-        ? new Date()
+        ? CURRENT_PST_DATE
         : event.value;
     } else {
       data.find((e) => e.name === val).value = event.target.value;
@@ -216,6 +219,11 @@ const OpmComparison: React.FC = () => {
     const data = [...formFields];
     data.find((e) => e.name === label).value = null;
     setFormFields(data);
+  };
+
+  const resetFormEntry = () => {
+    setFormFields(DEFAULT_FORM_FIELDS);
+    setShowFilteredCards(false);
   };
 
   const submit = (event) => {
@@ -258,8 +266,8 @@ const OpmComparison: React.FC = () => {
       const maxValue = Math.max(...allOrderCounts);
       setMaxOPM(
         Math.round(maxValue / OPM_CHART_DEFAULT.STEP_SIZE) *
-        OPM_CHART_DEFAULT.STEP_SIZE +
-        OPM_CHART_DEFAULT.STEP_SIZE,
+          OPM_CHART_DEFAULT.STEP_SIZE +
+          OPM_CHART_DEFAULT.STEP_SIZE,
       );
 
       setData({
@@ -299,44 +307,44 @@ const OpmComparison: React.FC = () => {
       setOptions(
         location.pathname.includes("home")
           ? OPM_COMPARISON_OPTIONS_HOME({
-            apiResponse,
-            startDate: formFields.find((e) => e.name === "startDate").value,
-            endDate: formFields.find((e) => e.name === "endDate").value,
-            isMobile: width < SCREEN_WIDTH.SM,
-            showDataLabels:
-              Number(url.split("period=")[1].split("&")[0]) < 11 &&
-              width > SCREEN_WIDTH.SM,
-          })
+              apiResponse,
+              startDate: formFields.find((e) => e.name === "startDate").value,
+              endDate: formFields.find((e) => e.name === "endDate").value,
+              isMobile: width < SCREEN_WIDTH.SM,
+              showDataLabels:
+                Number(url.split("period=")[1].split("&")[0]) < 11 &&
+                width > SCREEN_WIDTH.SM,
+            })
           : OPM_COMPARISON_OPTIONS({
-            apiResponse,
-            startDate: formFields.find((e) => e.name === "startDate").value,
-            endDate: formFields.find((e) => e.name === "endDate").value,
-            isMobile: width < SCREEN_WIDTH.SM,
-            showDataLabels:
-              Number(url.split("period=")[1].split("&")[0]) < 11 &&
-              width > SCREEN_WIDTH.SM,
-          }),
+              apiResponse,
+              startDate: formFields.find((e) => e.name === "startDate").value,
+              endDate: formFields.find((e) => e.name === "endDate").value,
+              isMobile: width < SCREEN_WIDTH.SM,
+              showDataLabels:
+                Number(url.split("period=")[1].split("&")[0]) < 11 &&
+                width > SCREEN_WIDTH.SM,
+            }),
       );
       setBarChartOptions(
         location.pathname.includes("home")
           ? OPM_COMPARISON_BAR_OPTIONS_HOME({
-            apiResponse,
-            startDate: formFields.find((e) => e.name === "startDate").value,
-            endDate: formFields.find((e) => e.name === "endDate").value,
-            isMobile: width < SCREEN_WIDTH.SM,
-            showDataLabels:
-              Number(url.split("period=")[1].split("&")[0]) < 11 &&
-              width > SCREEN_WIDTH.SM,
-          })
+              apiResponse,
+              startDate: formFields.find((e) => e.name === "startDate").value,
+              endDate: formFields.find((e) => e.name === "endDate").value,
+              isMobile: width < SCREEN_WIDTH.SM,
+              showDataLabels:
+                Number(url.split("period=")[1].split("&")[0]) < 11 &&
+                width > SCREEN_WIDTH.SM,
+            })
           : OPM_COMPARISON_BAR_OPTIONS({
-            apiResponse,
-            startDate: formFields.find((e) => e.name === "startDate").value,
-            endDate: formFields.find((e) => e.name === "endDate").value,
-            isMobile: width < SCREEN_WIDTH.SM,
-            showDataLabels:
-              Number(url.split("period=")[1].split("&")[0]) < 11 &&
-              width > SCREEN_WIDTH.SM,
-          }),
+              apiResponse,
+              startDate: formFields.find((e) => e.name === "startDate").value,
+              endDate: formFields.find((e) => e.name === "endDate").value,
+              isMobile: width < SCREEN_WIDTH.SM,
+              showDataLabels:
+                Number(url.split("period=")[1].split("&")[0]) < 11 &&
+                width > SCREEN_WIDTH.SM,
+            }),
       );
     }
   }, [apiResponse]);
@@ -412,7 +420,7 @@ const OpmComparison: React.FC = () => {
       )}
       {location.pathname.includes("home") && !isLoading && data && (
         <div className="w-full xl:w-1/2 bg-black-200 rounded-lg px-4 lg:px-6 py-4">
-          <div className="flex justify-between items-center relative mb-2 sm:mb-4 lg:mb-2 xl:mb-4">
+          <div className="flex justify-between items-center relative mb-2 md:mb-4 lg:mb-2 xl:mb-4">
             <span className="text-gray-200 font-bold text-lg font-helvetica">
               {TITLE.OPM_COMPARISON}
             </span>
@@ -471,10 +479,7 @@ const OpmComparison: React.FC = () => {
         </div>
       )}
       {location.pathname.includes("opmcomparison") && (
-        <div
-          className={`${isLoading ? "h-[80%]" : ""} ${IS_FULLSCREEN ? "" : "sm:mx-4"
-            }`}
-        >
+        <div className={`${isLoading ? "h-[80%]" : ""}`}>
           {!IS_FULLSCREEN && location.pathname.includes("opmcomparison") && (
             <div className="flex justify-between items-start">
               <p className="font-bold text-gray-200">{TITLE.OPM_COMPARISON}</p>
@@ -511,13 +516,15 @@ const OpmComparison: React.FC = () => {
                         {form.type === "time" && (
                           <CustomCalendar
                             name={form.name}
-                            containerclassname={`calendarOpmComparison ${form.name === "startDate"
-                              ? "md:!w-[18vw] lg:w-[14vw]"
-                              : ""
-                              } ${form.name === "endDate"
+                            containerclassname={`calendarOpmComparison ${
+                              form.name === "startDate"
+                                ? "md:!w-[18vw] lg:w-[14vw]"
+                                : ""
+                            } ${
+                              form.name === "endDate"
                                 ? "md:!w-[11vw] lg:!w-[12vw]"
                                 : ""
-                              } `}
+                            } `}
                             titleclassname="top-5"
                             imageclassname="h-[20px] w-[20px] relative top-[1.75rem] left-[0.5vw] z-[1]"
                             title={form.label}
@@ -529,7 +536,7 @@ const OpmComparison: React.FC = () => {
                             value={form.value}
                             maxDate={
                               form.name === "startDate" ||
-                                form.name === "endDate"
+                              form.name === "endDate"
                                 ? CURRENT_PST_DATE
                                 : null
                             }
@@ -604,7 +611,7 @@ const OpmComparison: React.FC = () => {
                                 value={form.value}
                                 maxDate={
                                   form.name === "startDate" ||
-                                    form.name === "endDate"
+                                  form.name === "endDate"
                                     ? CURRENT_PST_DATE
                                     : null
                                 }
@@ -644,10 +651,11 @@ const OpmComparison: React.FC = () => {
           )}
           {location.pathname.includes("opmcomparison") && showFilteredCards && (
             <div
-              className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[5vw] lg:ml-[0] ${IS_FULLSCREEN
-                ? "landScape opmComparison rotate-90 absolute left-[-9vh] top-[45vh] ml-[25vw] w-[70vh] mt-[0]"
-                : `${width < SCREEN_WIDTH.SM ? "portrait" : ""}`
-                }`}
+              className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[5vw] lg:ml-[0] ${
+                IS_FULLSCREEN
+                  ? "landScape opmComparison rotate-90 absolute left-[-9vh] top-[45vh] ml-[25vw] w-[70vh] mt-[0]"
+                  : `${width < SCREEN_WIDTH.SM ? "portrait" : ""}`
+              }`}
             >
               {formFields
                 .filter((e) => e.value)
@@ -660,9 +668,7 @@ const OpmComparison: React.FC = () => {
                       content={
                         e.type === "time"
                           ? e.name === "startDate"
-                            ? e.value.toLocaleString("en-US", {
-                              hour12: false,
-                            })
+                            ? formatDate(e.value, DATE_TIME_FORMAT_4)
                             : e.value.toLocaleDateString("en-US")
                           : e.value.name || e.value
                       }
@@ -675,7 +681,7 @@ const OpmComparison: React.FC = () => {
                   severity="secondary"
                   className="resetFilters text-[12px] text-gray-300"
                   isTextButton={true}
-                  onClick={() => setFormFields(DEFAULT_FORM_FIELDS)}
+                  onClick={() => resetFormEntry()}
                 />
               )}
             </div>
@@ -687,16 +693,18 @@ const OpmComparison: React.FC = () => {
             !isLoading &&
             location.pathname.includes("opmcomparison") && (
               <div
-                className={`relative ${IS_FULLSCREEN
-                  ? "rotate-90 h-[23rem]"
-                  : "h-[28rem] lg:h-[29rem]"
-                  }`}
+                className={`relative ${
+                  IS_FULLSCREEN
+                    ? "rotate-90 h-[23rem]"
+                    : "h-[28rem] lg:h-[29rem]"
+                }`}
               >
                 <CustomTab
-                  className={`opm-tabs absolute z-10 pt-2  top-2 ${IS_FULLSCREEN
-                    ? "right-[calc(100vh-57rem)]"
-                    : "right-14 sm:right-3 md:right-4 lg:right-6"
-                    }`}
+                  className={`opm-tabs absolute z-10 pt-2  top-2 ${
+                    IS_FULLSCREEN
+                      ? "right-[calc(100vh-57rem)]"
+                      : "right-14 sm:right-3 md:right-4 lg:right-6"
+                  }`}
                   tabData={CHART_TABS}
                   tabValue={tabValue}
                   setTabValue={setTabValue}
@@ -705,10 +713,11 @@ const OpmComparison: React.FC = () => {
                   <BarChartComp
                     title={TITLE.OPM_COMPARISON}
                     isFullScreen={IS_FULLSCREEN}
-                    className={`opm-comparison-page-chart-container ${IS_FULLSCREEN
-                      ? "opm-comparison-page-chart-container-rotated"
-                      : ""
-                      }`}
+                    className={`opm-comparison-page-chart-container ${
+                      IS_FULLSCREEN
+                        ? "opm-comparison-page-chart-container-rotated"
+                        : ""
+                    }`}
                     options={getChartConfig()}
                     data={barChartData}
                   />
@@ -716,17 +725,19 @@ const OpmComparison: React.FC = () => {
                   <LineChart
                     title={TITLE.OPM_COMPARISON}
                     isFullScreen={IS_FULLSCREEN}
-                    className={`opm-comparison-page-chart-container ${IS_FULLSCREEN
-                      ? "opm-comparison-page-chart-container-rotated"
-                      : ""
-                      }`}
+                    className={`opm-comparison-page-chart-container ${
+                      IS_FULLSCREEN
+                        ? "opm-comparison-page-chart-container-rotated"
+                        : ""
+                    }`}
                     options={getChartConfig()}
                     data={data}
                   />
                 )}
                 <div
-                  className={`text-xs text-gray-300 flex justify-center -mt-10 ${IS_FULLSCREEN ? "w-[calc(100vh-5vh)]" : ""
-                    }`}
+                  className={`text-xs text-gray-300 flex justify-center -mt-10 ${
+                    IS_FULLSCREEN ? "w-[calc(100vh-5vh)]" : ""
+                  }`}
                 >
                   <div className="w-auto font-helvetica">
                     {TOTAL_ORDERS_PER_MINUTE}

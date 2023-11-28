@@ -211,10 +211,12 @@ const OPM: React.FC = () => {
 
   useEffect(() => {
     setUrl(
-      `${URL_OPM}?period=${location.pathname.includes("opm")
-        ? DEFAULT.duration
-        : HOME_PAGE_REFERSH_DURATION
-      }&starttime=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${DEFAULT.promocode
+      `${URL_OPM}?period=${
+        location.pathname.includes("opm")
+          ? DEFAULT.duration
+          : HOME_PAGE_REFERSH_DURATION
+      }&starttime=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${
+        DEFAULT.promocode
       }&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`,
     );
   }, []);
@@ -230,8 +232,8 @@ const OPM: React.FC = () => {
       const dataArr = data.map((e) => Number(e.orderCount));
       setMaxOPM(
         Math.round(Math.max(...dataArr) / OPM_CHART_DEFAULT.STEP_SIZE) *
-        OPM_CHART_DEFAULT.STEP_SIZE +
-        OPM_CHART_DEFAULT.STEP_SIZE,
+          OPM_CHART_DEFAULT.STEP_SIZE +
+          OPM_CHART_DEFAULT.STEP_SIZE,
       );
       setData({
         labels: xAxisLabels,
@@ -268,28 +270,28 @@ const OPM: React.FC = () => {
         setOptions(
           location.pathname.includes("home")
             ? OPM_OPTIONS_HOME(
-              width < SCREEN_WIDTH.SM,
-              Number(url.split("period=")[1].split("&")[0]) < 16 &&
-              width > SCREEN_WIDTH.SM,
-            )
+                width < SCREEN_WIDTH.SM,
+                Number(url.split("period=")[1].split("&")[0]) < 16 &&
+                  width > SCREEN_WIDTH.SM,
+              )
             : OPM_OPTIONS(
-              width < SCREEN_WIDTH.SM,
-              Number(url.split("period=")[1].split("&")[0]) < 16 &&
-              width > SCREEN_WIDTH.SM,
-            ),
+                width < SCREEN_WIDTH.SM,
+                Number(url.split("period=")[1].split("&")[0]) < 16 &&
+                  width > SCREEN_WIDTH.SM,
+              ),
         );
         setBarChartOptions(
           location.pathname.includes("home")
             ? OPM_BAR_CHART_OPTIONS_HOME(
-              width < SCREEN_WIDTH.SM,
-              Number(url.split("period=")[1].split("&")[0]) < 16 &&
-              width > SCREEN_WIDTH.SM,
-            )
+                width < SCREEN_WIDTH.SM,
+                Number(url.split("period=")[1].split("&")[0]) < 16 &&
+                  width > SCREEN_WIDTH.SM,
+              )
             : OPM_BAR_CHART_OPTIONS(
-              width < SCREEN_WIDTH.SM,
-              Number(url.split("period=")[1].split("&")[0]) < 16 &&
-              width > SCREEN_WIDTH.SM,
-            ),
+                width < SCREEN_WIDTH.SM,
+                Number(url.split("period=")[1].split("&")[0]) < 16 &&
+                  width > SCREEN_WIDTH.SM,
+              ),
         );
         await getData();
       }
@@ -329,6 +331,11 @@ const OPM: React.FC = () => {
     setFormFields(data);
   };
 
+  const resetFormEntry = () => {
+    setFormFields(DEFAULT_FORM_FIELDS);
+    setShowFilteredCards(false);
+  };
+
   const submit = (e) => {
     e.preventDefault();
     let str = ``;
@@ -343,8 +350,9 @@ const OPM: React.FC = () => {
             str += `${e.name}=&`;
             return;
           }
-          str += `${e.name}=${(e.value.code !== undefined && String(e.value.code)) || e.value
-            }&`;
+          str += `${e.name}=${
+            (e.value.code !== undefined && String(e.value.code)) || e.value
+          }&`;
         }
       }
     });
@@ -400,7 +408,7 @@ const OPM: React.FC = () => {
       )}
       {location.pathname.includes("home") && data && !isLoading && (
         <div className="w-full xl:w-1/2 bg-black-200 rounded-lg px-4 lg:px-6 py-4">
-          <div className="flex justify-between items-center relative mb-2 sm:mb-4 lg:mb-2 xl:mb-4">
+          <div className="flex justify-between items-center relative mb-2 md:mb-4 lg:mb-2 xl:mb-4">
             <span className="text-gray-200 font-bold text-lg font-helvetica">
               {TITLE.OPM}
             </span>
@@ -502,7 +510,9 @@ const OPM: React.FC = () => {
                           imgsrc={form.imgsrc}
                           onChange={(event) => handleFormChange(event)}
                           value={form.value}
-                          maxDate={form.name === "date" ? new Date() : null}
+                          maxDate={
+                            form.name === "date" ? CURRENT_PST_DATE : null
+                          }
                           dateFormat="dd-MM-yyyy hh:mm"
                         />
                       )}
@@ -579,7 +589,9 @@ const OPM: React.FC = () => {
                             imgsrc={form.imgsrc}
                             onChange={(event) => handleFormChange(event)}
                             value={form.value}
-                            maxDate={form.name === "date" ? new Date() : null}
+                            maxDate={
+                              form.name === "date" ? CURRENT_PST_DATE : null
+                            }
                           />
                         )}
                         {form.type === INPUT_TYPES.dropdown && (
@@ -615,10 +627,11 @@ const OPM: React.FC = () => {
 
       {location.pathname.includes("opm") && showFilteredCards && (
         <div
-          className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[0] sm:ml-[5vw] lg:ml-[1rem] ${IS_FULLSCREEN
-            ? "rotate-90 absolute left-[-9vh] top-[45vh] ml-[25vw] w-[70vh] mt-[0]"
-            : `${width < SCREEN_WIDTH.SM ? "portrait" : ""}`
-            }`}
+          className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[0] sm:ml-[5vw] lg:ml-[1rem] ${
+            IS_FULLSCREEN
+              ? "rotate-90 absolute left-[-9vh] top-[45vh] ml-[25vw] w-[70vh] mt-[0]"
+              : `${width < SCREEN_WIDTH.SM ? "portrait" : ""}`
+          }`}
         >
           {formFields
             .filter((e) => e.value)
@@ -642,7 +655,7 @@ const OPM: React.FC = () => {
               severity="secondary"
               className="resetFilters text-[12px] text-gray-300"
               isTextButton={true}
-              onClick={() => setFormFields(DEFAULT_FORM_FIELDS)}
+              onClick={() => resetFormEntry()}
             />
           )}
         </div>
@@ -665,14 +678,16 @@ const OPM: React.FC = () => {
         !isLoading &&
         location.pathname.includes("opm") && (
           <div
-            className={`relative h-96 lg:h-[29rem] ${IS_FULLSCREEN ? "rotate-90" : ""
-              }`}
+            className={`relative h-96 lg:h-[29rem] ${
+              IS_FULLSCREEN ? "rotate-90" : ""
+            }`}
           >
             <CustomTab
-              className={`opm-tabs absolute z-10 pt-2 top-2 ${IS_FULLSCREEN
-                ? "right-[calc(100vh-57rem)]"
-                : "right-14 sm:right-3 md:right-4 lg:right-6"
-                }`}
+              className={`opm-tabs absolute z-10 pt-2 top-2 ${
+                IS_FULLSCREEN
+                  ? "right-[calc(100vh-57rem)]"
+                  : "right-14 sm:right-3 md:right-4 lg:right-6"
+              }`}
               tabData={CHART_TABS}
               tabValue={tabValue}
               setTabValue={setTabValue}
@@ -681,8 +696,9 @@ const OPM: React.FC = () => {
               <BarChartComp
                 options={getChartConfig()}
                 data={barChartData}
-                className={`opm-page-chart-container ${IS_FULLSCREEN ? "opm-page-chart-container-rotated" : ""
-                  }`}
+                className={`opm-page-chart-container ${
+                  IS_FULLSCREEN ? "opm-page-chart-container-rotated" : ""
+                }`}
                 title={TITLE.OPM}
                 isFullScreen={IS_FULLSCREEN}
               />
@@ -690,8 +706,9 @@ const OPM: React.FC = () => {
               <LineChart
                 title={TITLE.OPM}
                 isFullScreen={IS_FULLSCREEN}
-                className={`opm-page-chart-container ${IS_FULLSCREEN ? "opm-page-chart-container-rotated" : ""
-                  }`}
+                className={`opm-page-chart-container ${
+                  IS_FULLSCREEN ? "opm-page-chart-container-rotated" : ""
+                }`}
                 options={getChartConfig()}
                 data={data}
               />

@@ -189,8 +189,8 @@ const OrderDetails: React.FC = () => {
           <span className="w-1/2 !text-lg !text-gray-200 font-bold !bg-black-100 sm:!bg-inherit">
             {ORDER_DETAILS}
           </span>
-          <span
-            className="justify-end flex items-center !text-[12px] font-normal cursor-pointer !bg-black-100 sm:!bg-inherit"
+          <a
+            className="flex justify-end items-center !text-xs text-gray-300 font-normal cursor-pointer !bg-black-100 sm:!bg-inherit"
             onClick={showPromotions}
           >
             <CustomIcon
@@ -201,7 +201,7 @@ const OrderDetails: React.FC = () => {
               height="0.75rem"
             />
             {PROMOTIONS}
-          </span>
+          </a>
         </div>
         <div className="flexColWrapper sm:gap-y-0 sm:grid-cols-2 ">
           <div className="flexWrapper justify-start bg-black-200 rounded-t-md">
@@ -334,12 +334,12 @@ const OrderDetails: React.FC = () => {
             {ITEMS_INFO}
           </span>
           {itemTableDataSliced.length > 0 && (
-            <span
-              className="w-1/4 sm:hidden justify-end flex items-center !text-[12px] font-normal cursor-pointer !bg-black-100 sm:!bg-inherit"
+            <a
+              className="w-1/4 sm:hidden justify-end flex items-center !text-xs text-gray-300 font-normal cursor-pointer !bg-black-100 sm:!bg-inherit"
               onClick={() => setItemInformationPopup(true)}
             >
               {VIEW_ALL}
-            </span>
+            </a>
           )}
         </div>
         <div className="hidden sm:block rounded-md">

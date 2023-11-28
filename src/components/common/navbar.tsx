@@ -68,7 +68,7 @@ const Navbar: FC<Props> = ({
           />
         )}
         <CustomImage
-          className=" h-[10px] bottom-1 sm:h-auto relative sm:right-5 cursor-pointer"
+          className=" h-2.5 sm:h-auto bottom-2.5 sm:bottom-0 relative sm:right-5 cursor-pointer"
           src={SephoraLogo}
           alt="SEPHORA"
           onClick={navigateToHome}
@@ -95,7 +95,12 @@ const Navbar: FC<Props> = ({
           />
         </div>
       </div>
-      {!showSidePaneGrid && showQuickLinks && <QuickLinks showQuickLinks={showQuickLinks} setShowQuickLinks={setShowQuickLinks} />}
+      {!showSidePaneGrid && showQuickLinks && (
+        <QuickLinks
+          showQuickLinks={showQuickLinks}
+          setShowQuickLinks={setShowQuickLinks}
+        />
+      )}
     </div>
   );
 };
