@@ -711,8 +711,8 @@ const OpmComparison: React.FC = () => {
                     title={PAGE_TITLES.OPM_COMPARISON}
                     isFullScreen={IS_FULLSCREEN}
                     className={`opm-comparison-page-chart-container ${IS_FULLSCREEN
-                        ? "opm-comparison-page-chart-container-rotated"
-                        : ""
+                      ? "opm-comparison-page-chart-container-rotated"
+                      : ""
                       }`}
                     options={getChartConfig()}
                     data={barChartData}
@@ -722,8 +722,8 @@ const OpmComparison: React.FC = () => {
                     title={PAGE_TITLES.OPM_COMPARISON}
                     isFullScreen={IS_FULLSCREEN}
                     className={`opm-comparison-page-chart-container ${IS_FULLSCREEN
-                        ? "opm-comparison-page-chart-container-rotated"
-                        : ""
+                      ? "opm-comparison-page-chart-container-rotated"
+                      : ""
                       }`}
                     options={getChartConfig()}
                     data={data}

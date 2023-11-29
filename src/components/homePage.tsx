@@ -24,6 +24,7 @@ import {
   DASHBOARD_LABELS,
   PAGE_TITLES,
   SCREEN_WIDTH,
+  TITLE,
 } from "../constants/appConstants";
 import { LoaderContext } from "../context/loaderContext";
 import { getFormattedPSTDate } from "../utils/dateTimeUtil";

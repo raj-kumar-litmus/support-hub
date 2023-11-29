@@ -222,9 +222,9 @@ export const submitOnEnter = (callback) => {
 export const increaseLegendSpacing = (customHeight) => [
   {
     id: "increase-legend-spacing",
-    beforeInit (chart) {
+    beforeInit(chart) {
       const originalFit = (chart.legend as any).fit;
-      (chart.legend as any).fit = function fit () {
+      (chart.legend as any).fit = function fit() {
         originalFit.bind(chart.legend)();
         this.height += customHeight;
       };
