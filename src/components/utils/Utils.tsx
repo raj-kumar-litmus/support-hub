@@ -3,20 +3,26 @@ import DCOpenOrdersIcon from "../../assets/dcopenorders.svg";
 import OPMIcon from "../../assets/opm.svg";
 import OPMComparisonIcon from "../../assets/opmcomparison.svg";
 import SessionsIcon from "../../assets/sessions.svg";
+import {
+  DASHBOARD,
+  TITLE,
+  SESSIONS,
+  DC_OPEN_ORDERS,
+} from "../../constants/appConstants";
 
 export const MENU_LIST = [
-  { id: 1, name: "Dashboard", icon: DashboardIcon, path: "/home" },
-  { id: 2, name: "OPM", icon: OPMIcon, path: "/opm" },
+  { id: 1, name: DASHBOARD, icon: DashboardIcon, path: "/home" },
+  { id: 2, name: TITLE.OPM, icon: OPMIcon, path: "/opm" },
   {
     id: 3,
-    name: "OPM Comparison",
+    name: TITLE.OPM_COMPARISON,
     icon: OPMComparisonIcon,
     path: "/opmcomparison",
   },
-  { id: 4, name: "Sessions", icon: SessionsIcon, path: "/sessions" },
+  { id: 4, name: SESSIONS, icon: SessionsIcon, path: "/sessions" },
   {
     id: 5,
-    name: "DC Open Orders",
+    name: DC_OPEN_ORDERS,
     icon: DCOpenOrdersIcon,
     path: "/dc-open-orders",
   },
@@ -34,7 +40,7 @@ const getOrCreateTooltip = (chart, type, tooltip) => {
       ? line.setAttribute("class", `horizontalLine opm`)
       : line.setAttribute(
           "class",
-          `horizontalLine ${index === 0 ? "yellow" : "blue"}`,
+          `horizontalLine ${index === 0 ? "yellow" : "blue"}`
         );
   }
 

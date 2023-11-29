@@ -67,6 +67,14 @@ export const AVG_OPM_COMPARISON: string = "Avg OPM Comparison";
 export const TOTAL_ORDER_COMPARISON: string = "Total Order Comparison";
 export const NO_OF_ORDERS: string = "No of Orders";
 export const VIEW_ALL_MIN_ORDER_LIST_MOBILE: number = 5;
+export const CALENDAR_TOAST_MESSAGE: string =
+  "Please don't select a future date and time";
+export const DISCOUNT_AMOUNT: string = "Discount Amount";
+export const PROMOTION: string = "Promotion";
+export const DC_OPEN_ORDERS: string = "DC Open Orders";
+export const ORDER_TIMELINE: string = "Order Timeline";
+export const NO_DATA: string = "No Data";
+export const SEE_MORE: string = "See More";
 
 export const LABELS = {
   duration: "Duration",

@@ -2,6 +2,7 @@ import { Dialog } from "primereact/dialog";
 import React from "react";
 import Timeline from "./common/orderTimeline";
 import { OmsOrderFlow } from "../@types/OrderDetails";
+import { ORDER_TIMELINE } from "../constants/appConstants";
 interface OrderStatusProps {
   orderStatus: OmsOrderFlow;
   isOrderStatusVisible: boolean;
@@ -16,7 +17,7 @@ const OrderStatus: React.FC<OrderStatusProps> = ({
   return (
     <div className="block w-screen font-helvetica sm:rounded-lg">
       <Dialog
-        header="Order Timeline"
+        header={ORDER_TIMELINE}
         visible={isOrderStatusVisible}
         className="orderStatus-dialog bg-black-200 flex "
         onHide={() => {

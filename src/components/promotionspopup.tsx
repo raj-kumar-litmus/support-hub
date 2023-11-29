@@ -2,7 +2,7 @@ import { FC } from "react";
 import CustomDialog from "./common/customdialog";
 import PromotionCard from "./common/promotioncard";
 import { IPromotion } from "../@types/OrderDetails";
-import { PROMOTIONS } from "../constants/appConstants";
+import { NO_DATA, PROMOTIONS } from "../constants/appConstants";
 
 type Props = {
   promotions: IPromotion[];
@@ -29,7 +29,7 @@ const PromotionsPopup: FC<Props> = ({
           <PromotionCard key={p.promotionId} promotion={p} />
         ))
       ) : (
-        <div className="text-center">No Data</div>
+        <div className="text-center">{NO_DATA}</div>
       )}
     </CustomDialog>
   );

@@ -116,7 +116,7 @@ const ComparisonCards = ({
           </span>
           {difference !== 0 && (
             <CustomImage
-              className="flex ml-2"
+              className="flex ml-2 w-5"
               src={difference > 0 ? trendingDownIcon : trendingUpIcon}
             />
           )}
@@ -239,7 +239,7 @@ const HomePage = () => {
           {isLoading ? (
             <Loader className="card-loader-height" />
           ) : (
-            <div className="flex flex-wrap gap-[10px] pb-4 border-b border-b-black-200 card-loader-height">
+            <div className="flex flex-wrap gap-[10px] pb-4 border-b border-b-black-200 card-loader-height font-helvetica ">
               <HomeCard
                 title={
                   <CardTitle

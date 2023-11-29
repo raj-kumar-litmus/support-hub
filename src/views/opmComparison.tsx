@@ -51,6 +51,7 @@ import { URL_OPM_COMPARISON } from "../constants/apiConstants";
 import {
   CHANNELS,
   DURATIONS,
+  FILTERS,
   HOME_PAGE_REFERSH_DURATION,
   INPUT_TYPES,
   LABELS,
@@ -565,7 +566,7 @@ const OpmComparison: React.FC = () => {
               ) : (
                 <>
                   <CustomModal
-                    header="Filters"
+                    header={FILTERS}
                     visible={visible}
                     position={position}
                     className="!bg-slate-900 filtersModal opmFiltersMobile h-[350px] w-[100vw]"

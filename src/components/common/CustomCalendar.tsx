@@ -7,7 +7,7 @@ import CustomInputNumber from "./CustomInputNumber";
 import ArrowDown from "../../assets/arrow_down.svg";
 import ArrowUp from "../../assets/arrow_up.svg";
 import { CustomCalendarProps } from "../../@types/BarChart";
-import { AM_PM_OPTIONS } from "../../constants/appConstants";
+import { AM_PM_OPTIONS, CALENDAR_TOAST_MESSAGE } from "../../constants/appConstants";
 import { CURRENT_PST_DATE } from "../../utils/dateTimeUtil";
 import { convert12to24Hour, convert24to12Hour } from "../utils/Utils";
 
@@ -126,7 +126,7 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
         onHide={() => setShowFutureDateToast(false)}
         showToast={showFutureDateToast}
         severity="warn"
-        detail="Please don't select a future date and time"
+        detail={CALENDAR_TOAST_MESSAGE}
         position="top-center"
       />
     </div>

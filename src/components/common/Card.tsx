@@ -5,8 +5,8 @@ import { CommerceItemData } from "../../@types/OrderDetails";
 
 type CardProps = {
   cardData: DCOpenOrders | CommerceItemData;
-  type: string;
   key: number;
+  type?: string;
 };
 
 const Card = (props: CardProps) => {

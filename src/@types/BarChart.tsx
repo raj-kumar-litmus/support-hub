@@ -62,6 +62,7 @@ export interface CustomIconProps {
   width: string;
   height: string;
   className?: string;
+  onClick?: () => void;
 }
 
 export interface FilterItemProps {

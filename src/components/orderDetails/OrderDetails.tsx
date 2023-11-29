@@ -180,7 +180,7 @@ const OrderDetails: React.FC = () => {
           onClick={() => navigate(-1)}
         />
         <span className="text-gray-300 text-center mx-auto text-[14px]">
-          Order #{orderId}
+          {ORDER} #{orderId}
         </span>
       </div>
       <div className="gridNoGapRounded grid-cols-1 mb-4 p-0 sm:py-4 sm:px-6 sm:bg-black-200">

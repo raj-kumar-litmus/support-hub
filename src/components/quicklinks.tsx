@@ -7,7 +7,7 @@ import CustomTab from "./common/customtab";
 import ArrowTop from "../assets/arrow_top.svg";
 import ArrowTopWhite from "../assets/arrow_top_white.svg";
 import { IQuickLink } from "../@types/quicklinks";
-import { QUICK_LINKS, QUICK_LINKS_HEADER } from "../constants/appConstants";
+import { QUICK_LINKS, QUICK_LINKS_HEADER, SEE_MORE } from "../constants/appConstants";
 
 type QuickLinkBoxProps = {
   link: IQuickLink;
@@ -102,7 +102,7 @@ const QuickLinks: FC<QuickLinksProps> = ({
       </div>
       {showSeeMoreBtn && (
         <CustomButton
-          label="See More"
+          label={SEE_MORE}
           onClick={onSeeMoreClick}
           className="custom-btn text-center quick-link-btn border-white bg-black-100"
         />
