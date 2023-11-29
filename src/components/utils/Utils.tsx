@@ -3,22 +3,43 @@ import OPMIcon from "../../assets/opm.svg";
 import OPMComparisonIcon from "../../assets/opmcomparison.svg";
 import SessionsIcon from "../../assets/sessions.svg";
 import DCOpenOrdersIcon from "../../assets/dcopenorders.svg";
+import { TITLE } from "../../constants/appConstants";
+
+export const ROUTES = {
+  home: "home",
+  opm: "opm",
+  opmComparison: "opm-comparison",
+  sessions: "sessions",
+  dcOpenOrders: "dc-open-orders",
+  fullScreen: "fullscreen",
+  orderDetails: "order-details",
+};
 
 export const MENU_LIST = [
-  { id: 1, name: "Dashboard", icon: DashboardIcon, path: "/home" },
-  { id: 2, name: "OPM", icon: OPMIcon, path: "/opm" },
+  {
+    id: 1,
+    name: TITLE.DASHBOARD,
+    icon: DashboardIcon,
+    path: `/${ROUTES.home}`,
+  },
+  { id: 2, name: TITLE.OPM, icon: OPMIcon, path: `/${ROUTES.opm}` },
   {
     id: 3,
-    name: "OPM Comparison",
+    name: TITLE.OPM_COMPARISON,
     icon: OPMComparisonIcon,
-    path: "/opmcomparison",
+    path: `/${ROUTES.opmComparison}`,
   },
-  { id: 4, name: "Sessions", icon: SessionsIcon, path: "/sessions" },
+  {
+    id: 4,
+    name: TITLE.SESSIONS,
+    icon: SessionsIcon,
+    path: `/${ROUTES.sessions}`,
+  },
   {
     id: 5,
-    name: "DC Open Orders",
+    name: TITLE.DC_OPEN_ORDERS,
     icon: DCOpenOrdersIcon,
-    path: "/dc-open-orders",
+    path: `/${ROUTES.dcOpenOrders}`,
   },
 ];
 

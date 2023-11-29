@@ -23,13 +23,13 @@ import {
   HOME_PAGE_REFERSH_DURATION,
   DURATION_LIST,
   FILTERS,
-  SESSIONS,
   SESSIONS_TABS,
   SUBMIT,
   TOTAL_SESSIONS_PER_MINUTE,
   SESSIONS_CHART_DEFAULT,
   SCREEN_WIDTH,
   LABELS,
+  TITLE,
 } from "../../constants/appConstants";
 import useScreenSize from "../../hooks/useScreenSize";
 import {
@@ -49,7 +49,8 @@ import Loader from "../loader";
 import CustomImage from "../common/customimage";
 import CustomButton from "../Button";
 import { LoaderContext, LoaderContextType } from "../../context/loaderContext";
-import { increaseLegendSpacing, submitOnEnter } from "../utils/Utils";
+import { ROUTES, increaseLegendSpacing, submitOnEnter } from "../utils/Utils";
+
 const BarChart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [sessionData, setSessionData] = useState<SessionData[]>([]);
@@ -165,7 +166,7 @@ const BarChart = () => {
 
   const getSessionData = async () => {
     const params = {
-      period: location.pathname.includes("home")
+      period: location.pathname.includes(ROUTES.home)
         ? HOME_PAGE_REFERSH_DURATION
         : DEFAULT_PERIOD,
       starttime: "",
@@ -295,7 +296,7 @@ const BarChart = () => {
   };
 
   const handleExpandClick = () => {
-    navigate("/sessions");
+    navigate(`/${ROUTES.sessions}`);
   };
 
   const handleOPMCompRefreshBtnClick = () => {
@@ -310,10 +311,12 @@ const BarChart = () => {
 
   return (
     <div id={id}>
-      {location.pathname.includes("sessions") && (
+      {location.pathname.includes(ROUTES.sessions) && (
         <>
           <div className="flex basis-full justify-between pb-0 items-baseline">
-            <div className="text-lg text-gray-200 font-bold">{SESSIONS}</div>
+            <div className="text-lg text-gray-200 font-bold">
+              {TITLE.SESSIONS}
+            </div>
             <CustomIcon
               alt="show-filters"
               src={FilterIcon}
@@ -395,12 +398,13 @@ const BarChart = () => {
                 ))}
 
               {!disabled && (
-                <a
+                <CustomButton
+                  label={LABELS.reset}
+                  severity="secondary"
+                  className="resetFilters text-xs text-white-700 ml-2"
+                  isTextButton={true}
                   onClick={() => resetFormEntry()}
-                  className="text-gray-300 font-normal text-xs ml-2 cursor-pointer"
-                >
-                  {LABELS.reset}
-                </a>
+                />
               )}
             </div>
           )}
@@ -410,17 +414,17 @@ const BarChart = () => {
       {!isLoading && (
         <div
           className={`${
-            location.pathname.includes("home")
+            location.pathname.includes(ROUTES.home)
               ? "home-sessions"
               : "main-sessions"
           } flex justify-center relative bg-black-200 h-96 lg:h-[29rem] rounded-lg flex-col min-h-[24rem]`}
         >
           <>
-            {location.pathname.includes("home") && (
+            {location.pathname.includes(ROUTES.home) && (
               <>
                 <div className="flex flex-row justify-between mb-2 md:mb-4">
                   <div className="session-page-title self-center">
-                    {SESSIONS}
+                    {TITLE.SESSIONS}
                   </div>
                   <div className="flex">
                     <CustomButton
@@ -447,10 +451,10 @@ const BarChart = () => {
                 </div>
               </>
             )}
-            {location.pathname.includes("sessions") && (
+            {location.pathname.includes(ROUTES.sessions) && (
               <>
                 <div className="block sm:hidden session-page-title mb-2">
-                  {SESSIONS}
+                  {TITLE.SESSIONS}
                 </div>
                 <CustomTab
                   className={`custom-tab ${

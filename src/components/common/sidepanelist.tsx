@@ -30,7 +30,7 @@ const SidePaneList: FC<Props> = ({
       {menuList.map((menu) => (
         <a
           key={menu.id}
-          className={`flex pl-4 pr-2 py-4 items-center  cursor-pointer h-[44px] mx-auto ${
+          className={`flex pl-4 pr-2 py-4 items-center cursor-pointer h-11 mx-auto ${
             selectedMenu === menu.id
               ? "bg-black-300 rounded-lg"
               : "bg-transparent"

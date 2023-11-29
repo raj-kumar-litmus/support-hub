@@ -1,4 +1,3 @@
-export const SESSIONS: string = "Sessions";
 export const DURATION: string = "Duration";
 export const TIME: string = "Time";
 export const DATE: string = "Date";
@@ -58,13 +57,15 @@ export const VIEW_ALL: string = "View All";
 export const START_POLLING_TEXT: string = "Start Auto Refresh";
 export const HOME_PAGE_REFERSH_DURATION: number = 10;
 export const REFRESHTIME: number = 60000;
-export const DASHBOARD: string = "Dashboard";
 export const AVG_ORDERS_PER_MIN: string = "Average Orders Per Min";
 export const TOTAL_NO_OF_ORDERS: string = "Total Number of Orders";
 export const LAST_MIN_OPM: string = "Last min OPM";
 export const AVG_OPM_COMPARISON: string = "Avg OPM Comparison";
 export const TOTAL_ORDER_COMPARISON: string = "Total Order Comparison";
 export const NO_OF_ORDERS: string = "No of Orders";
+export const NO_FUTURE_DATETIME: string =
+  "Please don't select a future date and time";
+
 export const VIEW_ALL_MIN_ORDER_LIST_MOBILE: number = 5;
 
 export const LABELS = {
@@ -84,6 +85,9 @@ export const LABELS = {
 export const TITLE = {
   OPM: "OPM",
   OPM_COMPARISON: "OPM Comparison",
+  DASHBOARD: "Dashboard",
+  SESSIONS: "Sessions",
+  DC_OPEN_ORDERS: "DC Open Orders",
 };
 
 export const INPUT_TYPES = {

@@ -44,7 +44,7 @@ import WhiteCalendarIcon from "../assets/white_calendar.svg";
 import GreyCalendarIcon from "../assets/calendar-grey.svg";
 import GreyChannelIcon from "../assets/channel-grey.svg";
 import refreshIcon from "../assets/refresh_icon.svg";
-import { submitOnEnter } from "../components/utils/Utils";
+import { ROUTES, submitOnEnter } from "../components/utils/Utils";
 import {
   CHANNELS,
   DURATIONS,
@@ -103,7 +103,7 @@ const OpmComparison: React.FC = () => {
 
   const { width } = useScreenSize();
   const navigate = useNavigate();
-  const IS_FULLSCREEN = location?.pathname.includes("fullscreen");
+  const IS_FULLSCREEN = location?.pathname.includes(ROUTES.fullScreen);
 
   const DEFAULT = {
     duration: 10,
@@ -187,7 +187,7 @@ const OpmComparison: React.FC = () => {
     ).toLocaleDateString("en-US");
     setUrl(
       `${URL_OPM_COMPARISON}?period=${
-        location.pathname.includes("opm")
+        location.pathname.includes(ROUTES.opmComparison)
           ? DEFAULT.duration
           : HOME_PAGE_REFERSH_DURATION
       }&startTimeOne=${startTimeOne}&startDateTwo=${startDateTwo}&channel=${
@@ -305,7 +305,7 @@ const OpmComparison: React.FC = () => {
           })),
       });
       setOptions(
-        location.pathname.includes("home")
+        location.pathname.includes(ROUTES.home)
           ? OPM_COMPARISON_OPTIONS_HOME({
               apiResponse,
               startDate: formFields.find((e) => e.name === "startDate").value,
@@ -326,7 +326,7 @@ const OpmComparison: React.FC = () => {
             }),
       );
       setBarChartOptions(
-        location.pathname.includes("home")
+        location.pathname.includes(ROUTES.home)
           ? OPM_COMPARISON_BAR_OPTIONS_HOME({
               apiResponse,
               startDate: formFields.find((e) => e.name === "startDate").value,
@@ -406,7 +406,7 @@ const OpmComparison: React.FC = () => {
   };
 
   const handleOPMCompExpandClick = () => {
-    navigate("/opmcomparison");
+    navigate(`/${ROUTES.opmComparison}`);
   };
 
   const handleOPMCompRefreshBtnClick = () => {
@@ -415,10 +415,10 @@ const OpmComparison: React.FC = () => {
 
   return (
     <>
-      {location.pathname.includes("home") && isLoading && (
+      {location.pathname.includes(ROUTES.home) && isLoading && (
         <Loader className="!p-0 w-[40vw] m-auto min-h-[21rem]" />
       )}
-      {location.pathname.includes("home") && !isLoading && data && (
+      {location.pathname.includes(ROUTES.home) && !isLoading && data && (
         <div className="w-full xl:w-1/2 bg-black-200 rounded-lg px-4 lg:px-6 py-4">
           <div className="flex justify-between items-center relative mb-2 md:mb-4 lg:mb-2 xl:mb-4">
             <span className="text-gray-200 font-bold text-lg font-helvetica">
@@ -478,22 +478,25 @@ const OpmComparison: React.FC = () => {
           </div>
         </div>
       )}
-      {location.pathname.includes("opmcomparison") && (
-        <div className={`${isLoading ? "h-[80%]" : ""}`}>
-          {!IS_FULLSCREEN && location.pathname.includes("opmcomparison") && (
-            <div className="flex justify-between items-start">
-              <p className="font-bold text-gray-200">{TITLE.OPM_COMPARISON}</p>
-              {width < SCREEN_WIDTH.SM && (
-                <CustomImage
-                  src={FilterIcon}
-                  className="self-end"
-                  alt="Filter Icon"
-                  onClick={onFilterClickHandler}
-                />
-              )}
-            </div>
-          )}
-          {showFilters && location.pathname.includes("opmcomparison") && (
+      {location.pathname.includes(ROUTES.opmComparison) && (
+        <div className={`${isLoading ? "h-4/5" : ""}`}>
+          {!IS_FULLSCREEN &&
+            location.pathname.includes(ROUTES.opmComparison) && (
+              <div className="flex justify-between items-start">
+                <p className="font-bold text-gray-200">
+                  {TITLE.OPM_COMPARISON}
+                </p>
+                {width < SCREEN_WIDTH.SM && (
+                  <CustomImage
+                    src={FilterIcon}
+                    className="self-end"
+                    alt="Filter Icon"
+                    onClick={onFilterClickHandler}
+                  />
+                )}
+              </div>
+            )}
+          {showFilters && location.pathname.includes(ROUTES.opmComparison) && (
             <>
               {width > SCREEN_WIDTH.SM ? (
                 <form
@@ -649,49 +652,50 @@ const OpmComparison: React.FC = () => {
               )}
             </>
           )}
-          {location.pathname.includes("opmcomparison") && showFilteredCards && (
-            <div
-              className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[5vw] lg:ml-[0] ${
-                IS_FULLSCREEN
-                  ? "landScape opmComparison rotate-90 absolute left-[-9vh] top-[45vh] ml-[25vw] w-[70vh] mt-[0]"
-                  : `${width < SCREEN_WIDTH.SM ? "portrait" : ""}`
-              }`}
-            >
-              {formFields
-                .filter((e) => e.value)
-                .map((e: any) => (
-                  <Fragment key={e.name}>
-                    <FilteredCard
-                      label={e.name}
-                      leftIcon={e.cardIcon}
-                      onClickHandler={removeFormEntry}
-                      content={
-                        e.type === "time"
-                          ? e.name === "startDate"
-                            ? formatDate(e.value, DATE_TIME_FORMAT_4)
-                            : e.value.toLocaleDateString("en-US")
-                          : e.value.name || e.value
-                      }
-                    />
-                  </Fragment>
-                ))}
-              {!disabled && !IS_FULLSCREEN && (
-                <CustomButton
-                  label={LABELS.reset}
-                  severity="secondary"
-                  className="resetFilters text-[12px] text-gray-300"
-                  isTextButton={true}
-                  onClick={() => resetFormEntry()}
-                />
-              )}
-            </div>
-          )}
-          {isLoading && location.pathname.includes("opmcomparison") ? (
+          {location.pathname.includes(ROUTES.opmComparison) &&
+            showFilteredCards && (
+              <div
+                className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[5vw] lg:ml-[0] ${
+                  IS_FULLSCREEN
+                    ? "landScape opmComparison rotate-90 absolute left-[-9vh] top-[45vh] ml-[25vw] w-[70vh] mt-[0]"
+                    : `${width < SCREEN_WIDTH.SM ? "portrait" : ""}`
+                }`}
+              >
+                {formFields
+                  .filter((e) => e.value)
+                  .map((e: any) => (
+                    <Fragment key={e.name}>
+                      <FilteredCard
+                        label={e.name}
+                        leftIcon={e.cardIcon}
+                        onClickHandler={removeFormEntry}
+                        content={
+                          e.type === "time"
+                            ? e.name === "startDate"
+                              ? formatDate(e.value, DATE_TIME_FORMAT_4)
+                              : e.value.toLocaleDateString("en-US")
+                            : e.value.name || e.value
+                        }
+                      />
+                    </Fragment>
+                  ))}
+                {!disabled && !IS_FULLSCREEN && (
+                  <CustomButton
+                    label={LABELS.reset}
+                    severity="secondary"
+                    className="resetFilters text-[12px] text-gray-300"
+                    isTextButton={true}
+                    onClick={() => resetFormEntry()}
+                  />
+                )}
+              </div>
+            )}
+          {isLoading && location.pathname.includes(ROUTES.opmComparison) ? (
             <Loader className="h-full" />
           ) : (
             data &&
             !isLoading &&
-            location.pathname.includes("opmcomparison") && (
+            location.pathname.includes(ROUTES.opmComparison) && (
               <div
                 className={`relative ${
                   IS_FULLSCREEN

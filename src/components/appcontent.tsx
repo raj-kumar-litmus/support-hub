@@ -3,7 +3,7 @@ import Navbar from "./common/navbar";
 import SearchField from "./common/searchfield";
 import SidePaneGrid from "./common/sidepanegrid";
 import SidePaneList from "./common/sidepanelist";
-import { MENU_LIST } from "./utils/Utils";
+import { MENU_LIST, ROUTES } from "./utils/Utils";
 import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
 import useScreenSize from "../hooks/useScreenSize";
@@ -21,8 +21,8 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [selectedMenu, setSelectedMenu] = useState<number>(0);
   const location = useLocation();
-  const IS_FULLSCREEN = location?.pathname.includes("fullscreen");
-  const IS_ORDER_DETAILS = location?.pathname.includes("orderDetails");
+  const IS_FULLSCREEN = location?.pathname.includes(ROUTES.fullScreen);
+  const IS_ORDER_DETAILS = location?.pathname.includes(ROUTES.orderDetails);
   const navigate = useNavigate();
   const { width } = useScreenSize();
 
@@ -41,7 +41,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
   const searchOrder = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && searchValue.length > 0) {
       e.preventDefault();
-      navigate(`/orderDetails/${searchValue}`);
+      navigate(`/${ROUTES.orderDetails}/${searchValue}`);
     }
   };
 
@@ -61,7 +61,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
         )}
         <div
           className={`flex flex-col sm:flex-row ${
-            IS_FULLSCREEN ? "" : "mt-[3.5rem]"
+            IS_FULLSCREEN ? "" : "mt-14"
           } ml-[0] bg-black-200`}
         >
           {showSidePane && (
@@ -72,17 +72,17 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
             />
           )}
           {showSidePane && (
-            <a
+            <div
               className={`${
                 showSidePaneGrid ? "bg-black-200  min-h-[calc(100vh-56px)]" : ""
               } flex w-full sm:hidden`}
-              onClick={() => setShowSidePaneGrid(false)}
             >
               <SidePaneGrid
                 menuList={MENU_LIST}
                 selectedMenu={selectedMenu}
                 setSelectedMenu={setSelectedMenu}
                 showSidePaneGrid={showSidePaneGrid}
+                setShowSidePaneGrid={setShowSidePaneGrid}
               />
               {openSearchField && (
                 <div
@@ -95,7 +95,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
                   />
                 </div>
               )}
-            </a>
+            </div>
           )}
           <div
             className={`${showSidePaneGrid ? "hidden" : "block"} 

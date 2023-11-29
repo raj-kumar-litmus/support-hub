@@ -73,7 +73,7 @@
   @apply pt-14 sm:pt-8 xl:pt-6 pb-16 sm:pb-8 px-4 sm:px-6;
 }
 
-.session-page-title{
+.session-page-title {
   @apply text-gray-200 text-lg font-bold font-helvetica;
 }
 
@@ -307,6 +307,9 @@ button.p-button-secondary {
 }
 .resetFilters span {
   @apply text-white-700 font-normal;
+}
+#bar-chart .resetFilters .p-button {
+  @apply bg-inherit border-none p-0;
 }
 .inputContainer .p-inputtext {
   @apply w-[38vw] h-[37px];
@@ -696,7 +699,8 @@ hr.horizontalLine.blue {
 .home-opm-comp {
   @apply ml-0 sm:ml-[5vw];
 }
-.home-refresh-btn, .home-expand-btn{
+.home-refresh-btn,
+.home-expand-btn {
   @apply mb-1;
 }
 .home-refresh-btn .p-button {
@@ -881,7 +885,7 @@ hr.horizontalLine.blue {
 .opm-page-chart-container-rotated {
   @apply w-[calc(100vh-1.75rem)] h-[calc(100vw-1rem)] -mt-8 bg-inherit;
 }
-.opm-comparison-page-chart-container{
+.opm-comparison-page-chart-container {
   @apply border-0 rounded-lg h-[inherit] mt-4 pb-24 sm:pb-4 pt-4 sm:pt-12 lg:pt-14 px-4 lg:px-6;
 }
 .opm-comparison-page-chart-container-rotated {
@@ -972,4 +976,13 @@ hr.horizontalLine.blue {
 }
 .p-toast-message-content .p-image img {
   @apply max-w-max;
+}
+.order-details-btn-link .p-button {
+  @apply text-xs text-white-700 border-none p-0 bg-inherit;
+}
+.order-details-btn-link .p-button:focus {
+  @apply shadow-none;
+}
+.order-details-btn-link .p-button:enabled:hover {
+  @apply border-none bg-inherit;
 }

@@ -5,7 +5,7 @@ import MenuIcon from "../../assets/menu.svg";
 import QuickLinksIcon from "../../assets/Quick Links.svg";
 import SearchBar from "./searchbar";
 import CustomImage from "./customimage";
-import { MENU_LIST } from "../utils/Utils";
+import { MENU_LIST, ROUTES } from "../utils/Utils";
 import QuickLinks from "../quicklinks";
 
 type Props = {
@@ -42,7 +42,7 @@ const Navbar: FC<Props> = ({
   const onSearch = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && searchValue.length > 0) {
       event.preventDefault();
-      navigate(`/orderDetails/${searchValue}`);
+      navigate(`/${ROUTES.orderDetails}/${searchValue}`);
     }
   };
 

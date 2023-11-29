@@ -11,13 +11,13 @@ import {
   TODAY,
   DIFFERENCE,
   REFRESHTIME,
-  DASHBOARD,
   AVG_ORDERS_PER_MIN,
   TOTAL_NO_OF_ORDERS,
   LAST_MIN_OPM,
   AVG_OPM_COMPARISON,
   TOTAL_ORDER_COMPARISON,
   SCREEN_WIDTH,
+  TITLE,
 } from "../constants/appConstants";
 import useScreenSize from "../hooks/useScreenSize";
 import TimeTracker from "./timeTracker";
@@ -217,7 +217,7 @@ const HomePage = () => {
           <div className="flex sm:flex-row justify-between mb-4">
             <div className="flex items-center font-helvetica">
               <span className="text-lg text-gray-200 font-bold mr-4">
-                {DASHBOARD}
+                {TITLE.DASHBOARD}
               </span>
               <CustomImage src={infoIcon} />
               <span className="text-xs text-gray-400 ml-2">

@@ -58,6 +58,7 @@ import CustomTable from "../common/customtable";
 import useScreenSize from "../../hooks/useScreenSize";
 import { Column } from "primereact/column";
 import ItemInformationsPopUp from "../itemInformationsPopUp";
+import CustomButton from "../Button";
 
 const OrderDetails: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -189,8 +190,8 @@ const OrderDetails: React.FC = () => {
           <span className="w-1/2 !text-lg !text-gray-200 font-bold !bg-black-100 sm:!bg-inherit">
             {ORDER_DETAILS}
           </span>
-          <a
-            className="flex justify-end items-center !text-xs text-gray-300 font-normal cursor-pointer !bg-black-100 sm:!bg-inherit"
+          <CustomButton
+            className="flex justify-end items-center order-details-btn-link"
             onClick={showPromotions}
           >
             <CustomIcon
@@ -201,7 +202,7 @@ const OrderDetails: React.FC = () => {
               height="0.75rem"
             />
             {PROMOTIONS}
-          </a>
+          </CustomButton>
         </div>
         <div className="flexColWrapper sm:gap-y-0 sm:grid-cols-2 ">
           <div className="flexWrapper justify-start bg-black-200 rounded-t-md">
@@ -334,12 +335,12 @@ const OrderDetails: React.FC = () => {
             {ITEMS_INFO}
           </span>
           {itemTableDataSliced.length > 0 && (
-            <a
-              className="w-1/4 sm:hidden justify-end flex items-center !text-xs text-gray-300 font-normal cursor-pointer !bg-black-100 sm:!bg-inherit"
+            <CustomButton
+              className="w-1/4 sm:hidden justify-end flex items-center order-details-btn-link"
               onClick={() => setItemInformationPopup(true)}
             >
               {VIEW_ALL}
-            </a>
+            </CustomButton>
           )}
         </div>
         <div className="hidden sm:block rounded-md">
