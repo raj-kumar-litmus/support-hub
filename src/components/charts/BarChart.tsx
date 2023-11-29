@@ -330,7 +330,7 @@ const BarChart = () => {
                           title={form.title}
                           containerclassname="calendarSessions"
                           titleclassname="top-5"
-                          imageclassname="h-[20px] w-[20px] relative top-[1.75rem] left-[0.5vw] z-[1]"
+                          imageclassname="h-5 w-5 relative top-7 left-0.5w z-1"
                           showTime
                           timeOnly={form.name === "time"}
                           placeholder={MM_DD_YYYY_HH_MM}
@@ -399,14 +399,14 @@ const BarChart = () => {
           </div>
         </>
       )}
-      {isLoading && <Loader className="!p-0 m-auto min-h-[24rem]" />}
+      {isLoading && <Loader className="!p-0 m-auto min-h-24r" />}
       {!isLoading && (
         <div
           className={`${
             location.pathname.includes("home")
               ? "home-sessions"
               : "main-sessions"
-          } flex justify-center relative bg-black-200 h-96 lg:h-[29rem] rounded-lg flex-col min-h-[24rem]`}
+          } flex justify-center relative bg-black-200 h-96 lg:h-29r rounded-lg flex-col min-h-24r`}
         >
           <>
             {location.pathname.includes("home") && (
@@ -495,7 +495,7 @@ const BarChart = () => {
                       showTime
                       containerclassname="calendarSessions"
                       titleclassname="top-5"
-                      imageclassname="h-[20px] w-[20px] relative top-[1.75rem] md:top-[3vh] left-[0.5vw] z-[1]"
+                      imageclassname="h-5 w-5 relative top-7 md:top-3h left-0.5w z-1"
                       placeholder={DD_MM_YYYY}
                       value={form.value}
                       onChange={(event) => handleFormChange(event)}

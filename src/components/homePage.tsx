@@ -79,17 +79,17 @@ const ComparisonCards = ({
   return (
     <div className="flex">
       <div className="flex flex-col pr-1 sm:pr-2 justify-between">
-        <span className="text-[10px]">{TODAY}</span>
+        <span className="text-10">{TODAY}</span>
         <span className="text-gray-200 text-xl">{kFormatter(today) || 0}</span>
       </div>
-      <div className="border border-r border-black-400 h-[2.5rem] m-auto"></div>
+      <div className="border border-r border-black-400 h-10 m-auto"></div>
       <div className="flex flex-col px-1 sm:px-2 justify-between">
-        <span className="text-[10px]">{LASTDAY}</span>
+        <span className="text-10">{LASTDAY}</span>
         <span className="text-gray-200 text-xl">
           {kFormatter(lastDay) || 0}
         </span>
       </div>
-      <div className="border border-r border-black-400 h-[2.5rem] m-auto"></div>
+      <div className="border border-r border-black-400 h-10 m-auto"></div>
       <div className="flex flex-col justify-between pl-1 sm:pl-2">
         <span
           className={`${
@@ -98,7 +98,7 @@ const ComparisonCards = ({
               : difference < 0
               ? "text-green-300"
               : "text-gray-400"
-          } text-[10px]`}
+          } text-10`}
         >
           {DIFFERENCE}
         </span>
@@ -213,7 +213,7 @@ const HomePage = () => {
           <GlobalLoader />
         </LoaderPortal>
       ) : (
-        <div className="home-page py-[4px] box-border">
+        <div className="home-page py-1 box-border">
           <div className="flex sm:flex-row justify-between mb-4">
             <div className="flex items-center font-helvetica">
               <span className="text-lg text-gray-200 font-bold mr-4">
@@ -239,7 +239,7 @@ const HomePage = () => {
           {isLoading ? (
             <Loader className="card-loader-height" />
           ) : (
-            <div className="flex flex-wrap gap-[10px] pb-4 border-b border-b-black-200 card-loader-height">
+            <div className="flex flex-wrap gap-2.5 pb-4 border-b border-b-black-200 card-loader-height">
               <HomeCard
                 title={
                   <CardTitle
@@ -290,7 +290,7 @@ const HomePage = () => {
             </div>
           )}
 
-          <div className="home-opm-charts flex flex-col xl:flex-row space-y-6 xl:space-y-0 xl:gap-[2%] min-h-[21rem]">
+          <div className="home-opm-charts flex flex-col xl:flex-row space-y-6 xl:space-y-0 xl:gap-[2%] min-h-21r">
             <OPM />
             <OpmComparison />
           </div>

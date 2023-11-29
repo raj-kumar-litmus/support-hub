@@ -410,7 +410,7 @@ const OpmComparison: React.FC = () => {
   return (
     <>
       {location.pathname.includes("home") && isLoading && (
-        <Loader className="!p-0 w-[40vw] m-auto min-h-[21rem]" />
+        <Loader className="!p-0 w-40w m-auto min-h-21r" />
       )}
       {location.pathname.includes("home") && !isLoading && data && (
         <div className="w-full xl:w-1/2 bg-black-200 rounded-lg px-4 lg:px-6 py-4">
@@ -473,11 +473,7 @@ const OpmComparison: React.FC = () => {
         </div>
       )}
       {location.pathname.includes("opmcomparison") && (
-        <div
-          className={`${isLoading ? "h-[80%]" : ""} ${
-            IS_FULLSCREEN ? "" : "sm:mx-4"
-          }`}
-        >
+        <div className={`${isLoading ? "h-4/5" : ""}`}>
           {!IS_FULLSCREEN && location.pathname.includes("opmcomparison") && (
             <div className="flex justify-between items-start">
               <p className="font-bold text-gray-200">{TITLE.OPM_COMPARISON}</p>
@@ -495,7 +491,7 @@ const OpmComparison: React.FC = () => {
             <>
               {width > SCREEN_WIDTH.SM ? (
                 <form
-                  className="flex gap-[0.5vw] sm:gap-[0.8vw] opmFilters opmComparisonFilters"
+                  className="flex gap-0.5w sm:gap-[0.8vw] opmFilters opmComparisonFilters"
                   onSubmit={submit}
                 >
                   {formFields.map((form, index) => {
@@ -503,12 +499,12 @@ const OpmComparison: React.FC = () => {
                       <React.Fragment key={index}>
                         {form.type === "text" && (
                           <CustomInputText
-                            containerclassname="relative top-[2px] md:left-[-0.2vw] lg:left-[-9px]"
+                            containerclassname="relative top-0.5 md:-left-0.2w lg:-left-9p"
                             value={form.value}
                             name={form.label}
                             placeholder={form.label}
                             onChange={(event) => handleFormChange(event)}
-                            className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px] w-[8vw] lg:w-[10vw]"
+                            className="border rounded-lg border-solid border-slate-300 border-1 h-38 w-8w lg:w-10w"
                           />
                         )}
                         {form.type === "time" && (
@@ -516,15 +512,19 @@ const OpmComparison: React.FC = () => {
                             name={form.name}
                             containerclassname={`calendarOpmComparison ${
                               form.name === "startDate"
-                                ? "md:!w-[18vw] lg:w-[14vw]"
+                                ? "md:!w-[18vw] lg:w-14w"
                                 : ""
                             } ${
                               form.name === "endDate"
-                                ? "md:!w-[11vw] lg:!w-[12vw]"
+                                ? "md:!w-11w lg:!w-12w"
+                                : ""
+                            } ${
+                              form.name === "endDate"
+                                ? "md:!w-11w lg:!w-12w"
                                 : ""
                             } `}
                             titleclassname="top-5"
-                            imageclassname="h-[20px] w-[20px] relative top-[1.75rem] left-[0.5vw] z-[1]"
+                            imageclassname="h-5 w-5 relative top-7 left-0.5w z-1"
                             title={form.label}
                             placeholder={MM_DD_YYYY_HH_MM}
                             showTime={form.showTime}
@@ -546,7 +546,7 @@ const OpmComparison: React.FC = () => {
                             value={form.value}
                             containerclassname="opmComparionInput"
                             onChange={(e) => handleFormChange(e)}
-                            imageclassname="relative left-[25px] z-[1]"
+                            imageclassname="relative left-25 z-1"
                             dropdownIcon={<CustomImage src={ArrowDownIcon} />}
                             icon={form.icon}
                             options={form.options}
@@ -572,7 +572,7 @@ const OpmComparison: React.FC = () => {
                     header="Filters"
                     visible={visible}
                     position={position}
-                    className="!bg-slate-900 filtersModal opmFiltersMobile h-[350px] w-[100vw]"
+                    className="!bg-slate-900 filtersModal opmFiltersMobile h-[350px] w-screen"
                     onHide={onModalCloseHandler}
                     isDraggable={false}
                     closeIcon={<CustomImage src={WhiteCrossIcon} />}
@@ -587,20 +587,20 @@ const OpmComparison: React.FC = () => {
                           <React.Fragment key={index}>
                             {form.type === INPUT_TYPES.text && (
                               <CustomInputText
-                                containerclassname="w-[45vw] mobileInput"
+                                containerclassname="w-45w mobileInput"
                                 value={form.value}
                                 name={form.label}
                                 placeholder={form.label}
                                 onChange={(event) => handleFormChange(event)}
-                                className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
+                                className="border rounded-lg border-solid border-slate-300 border-1 h-38"
                               />
                             )}
                             {form.type === INPUT_TYPES.time && (
                               <CustomCalendar
                                 name={form.name}
                                 containerclassname="opmFiltersMobileCalendar"
-                                imageclassname="h-[20px] w-[20px] relative top-[1.75rem] md:top-[3vh] left-[3.5vw] z-[1]"
-                                titleclassname="left-[2vw] md:left-[0] top-5"
+                                imageclassname="h-5 w-5 relative top-7 md:top-3h left-3.5w z-1"
+                                titleclassname="left-[2vw] md:left-0 top-5"
                                 title={form.label}
                                 showTime={form.showTime}
                                 iconPos={form.iconPos || "left"}
@@ -623,8 +623,8 @@ const OpmComparison: React.FC = () => {
                                   <CustomImage src={DropDownIcon} />
                                 }
                                 onChange={(e) => handleFormChange(e)}
-                                containerclassname="w-[44vw]"
-                                imageclassname="relative left-[25px] z-[1]"
+                                containerclassname="w-44w"
+                                imageclassname="relative left-25 z-1"
                                 icon={form.icon}
                                 options={form.options}
                                 label={form.label}
@@ -649,9 +649,9 @@ const OpmComparison: React.FC = () => {
           )}
           {location.pathname.includes("opmcomparison") && showFilteredCards && (
             <div
-              className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[5vw] lg:ml-[0] ${
+              className={`flex items-center gap-4 mt-2.5 overflow-auto ml-5w lg:ml-0 ${
                 IS_FULLSCREEN
-                  ? "landScape opmComparison rotate-90 absolute left-[-9vh] top-[45vh] ml-[25vw] w-[70vh] mt-[0]"
+                  ? "landScape opmComparison rotate-90 absolute -left-9h top-45h ml-25w w-70h mt-0"
                   : `${width < SCREEN_WIDTH.SM ? "portrait" : ""}`
               }`}
             >
@@ -679,7 +679,7 @@ const OpmComparison: React.FC = () => {
                 <CustomButton
                   label={LABELS.reset}
                   severity="secondary"
-                  className="resetFilters text-[12px] text-gray-300"
+                  className="resetFilters text-xs text-gray-300"
                   isTextButton={true}
                   onClick={() => setFormFields(DEFAULT_FORM_FIELDS)}
                 />
@@ -694,15 +694,13 @@ const OpmComparison: React.FC = () => {
             location.pathname.includes("opmcomparison") && (
               <div
                 className={`relative ${
-                  IS_FULLSCREEN
-                    ? "rotate-90 h-[23rem]"
-                    : "h-[28rem] lg:h-[29rem]"
+                  IS_FULLSCREEN ? "rotate-90 h-[23rem]" : "h-[28rem] lg:h-29r"
                 }`}
               >
                 <CustomTab
                   className={`opm-tabs absolute z-10 pt-2  top-2 ${
                     IS_FULLSCREEN
-                      ? "right-[calc(100vh-57rem)]"
+                      ? "right-100vh-57r"
                       : "right-14 sm:right-3 md:right-4 lg:right-6"
                   }`}
                   tabData={CHART_TABS}

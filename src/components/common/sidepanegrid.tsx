@@ -25,7 +25,7 @@ const SidePaneGrid: FC<Props> = ({
 
   return (
     <div
-      className={`transition-all ease-in-out !duration-300 min-h-[calc(100vh-56px)] !w-[367px] ${
+      className={`transition-all ease-in-out !duration-300 min-h-100vh-56 !w-[367px] ${
         showSidePaneGrid ? "left-0  right-full" : "-left-[367px] right-0"
       } drop-shadow absolute z-10 bg-black-200`}
     >

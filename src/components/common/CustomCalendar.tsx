@@ -54,16 +54,20 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
     _date.setHours(_hour);
     _date.setMinutes(minute);
     setShowFutureDateToast(false);
-    if (props.maxDate && (_date > props.maxDate)) {
+    if (props.maxDate && _date > props.maxDate) {
       setShowFutureDateToast(true);
       setHour(convert24to12Hour(CURRENT_PST_DATE.getHours()).hour12);
       setMinute(CURRENT_PST_DATE.getMinutes());
       setAmPm(convert24to12Hour(CURRENT_PST_DATE.getHours()).ampm);
-      setDate(CURRENT_PST_DATE)
+      setDate(CURRENT_PST_DATE);
       return;
     }
     setDate(_date);
-    const event = { ...e, value: _date, target: { value: _date, name: props.name } };
+    const event = {
+      ...e,
+      value: _date,
+      target: { value: _date, name: props.name },
+    };
     props.onChange(event);
   };
 
@@ -111,17 +115,19 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
         dateFormat="mm/dd/yy"
         onChange={(e) => onChange(e)}
         iconPos={props.iconPos}
-        footerTemplate={() => (props.showTime &&
-          <ManualInputTime
-            hour={hour}
-            minute={minute}
-            handleHourChange={handleHourChange}
-            handleMinuteChange={handleMinuteChange}
-            ampm={ampm}
-            toggleAmPmChange={toggleAmPmChange}
-          />
-        )
-        } />
+        footerTemplate={() =>
+          props.showTime && (
+            <ManualInputTime
+              hour={hour}
+              minute={minute}
+              handleHourChange={handleHourChange}
+              handleMinuteChange={handleMinuteChange}
+              ampm={ampm}
+              toggleAmPmChange={toggleAmPmChange}
+            />
+          )
+        }
+      />
       <CustomToast
         onHide={() => setShowFutureDateToast(false)}
         showToast={showFutureDateToast}
@@ -142,7 +148,7 @@ const ManualInputTime: FC<ManualInputTimeProps> = ({
   toggleAmPmChange,
 }) => {
   return (
-    <div className="flex justify-evenly w-[12rem] mx-auto items-center">
+    <div className="flex justify-evenly w-48 mx-auto items-center">
       <CustomInputNumber
         value={hour < 1 ? 12 : hour}
         step={1}
@@ -152,16 +158,14 @@ const ManualInputTime: FC<ManualInputTimeProps> = ({
         min={0}
         max={12}
         prefix={hour && hour < 10 && "0"}
-        incrementButtonIcon={<CustomImage
-          src={ArrowUp}
-          className="cursor-pointer"
-        />}
-        decrementButtonIcon={<CustomImage
-          src={ArrowDown}
-          className="cursor-pointer"
-        />
+        incrementButtonIcon={
+          <CustomImage src={ArrowUp} className="cursor-pointer" />
         }
-      /> :
+        decrementButtonIcon={
+          <CustomImage src={ArrowDown} className="cursor-pointer" />
+        }
+      />{" "}
+      :
       <CustomInputNumber
         value={minute}
         onValueChange={(e) => handleMinuteChange(e)}
@@ -171,17 +175,15 @@ const ManualInputTime: FC<ManualInputTimeProps> = ({
         min={0}
         max={59}
         prefix={minute < 10 && "0"}
-        incrementButtonIcon={<CustomImage
-          src={ArrowUp}
-          className="cursor-pointer"
-        />}
-        decrementButtonIcon={<CustomImage
-          src={ArrowDown}
-          className="cursor-pointer"
-        />
+        incrementButtonIcon={
+          <CustomImage src={ArrowUp} className="cursor-pointer" />
         }
-      />:
-      <div className="ampm-comp px-[1rem] min-w-[4rem] pt-4">
+        decrementButtonIcon={
+          <CustomImage src={ArrowDown} className="cursor-pointer" />
+        }
+      />
+      :
+      <div className="ampm-comp px-4 min-w-[4rem] pt-0.8r">
         <CustomImage
           src={ArrowUp}
           className="cursor-pointer"
@@ -194,7 +196,7 @@ const ManualInputTime: FC<ManualInputTimeProps> = ({
           onClick={toggleAmPmChange}
         />
       </div>
-    </div >
+    </div>
   );
 };
 export default CustomCalendar;

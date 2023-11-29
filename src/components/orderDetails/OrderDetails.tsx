@@ -173,14 +173,14 @@ const OrderDetails: React.FC = () => {
     <Loader className="h-full" />
   ) : Object.keys(orderData).length > 0 ? (
     <div id="orderDetailsComp">
-      <div className="flex sm:hidden border-b border-solid border-black-300 h-[44px] items-center px-[14px] py-[24px]">
+      <div className="flex sm:hidden border-b border-solid border-black-300 h-44p items-center px-3.5 py-6">
         <CustomImage
-          className="h-[13px]"
+          className="h-13"
           src={RightArrowIcon}
           alt="Search"
           onClick={() => navigate(-1)}
         />
-        <span className="text-gray-300 text-center mx-auto text-[14px]">
+        <span className="text-gray-300 text-center mx-auto text-sm">
           Order #{orderId}
         </span>
       </div>
@@ -190,7 +190,7 @@ const OrderDetails: React.FC = () => {
             {ORDER_DETAILS}
           </span>
           <span
-            className="justify-end flex items-center !text-[12px] font-normal cursor-pointer !bg-black-100 sm:!bg-inherit"
+            className="justify-end flex items-center !text-xs font-normal cursor-pointer !bg-black-100 sm:!bg-inherit"
             onClick={showPromotions}
           >
             <CustomIcon
@@ -205,7 +205,7 @@ const OrderDetails: React.FC = () => {
         </div>
         <div className="flexColWrapper sm:gap-y-0 sm:grid-cols-2 ">
           <div className="flexWrapper justify-start bg-black-200 rounded-t-md">
-            <span className="w-auto sm:w-1/5 flex items-center min-w-[4.5rem]">
+            <span className="w-auto sm:w-1/5 flex items-center min-w-4.5r">
               {ORDER}
               <CustomIcon
                 className="ml-2 cursor-pointer"
@@ -221,7 +221,7 @@ const OrderDetails: React.FC = () => {
             </span>
           </div>
           <div className="flexWrapper bg-black-200 ">
-            <span className="w-auto sm:w-1/5 font-light min-w-[4.5rem]">
+            <span className="w-auto sm:w-1/5 font-light min-w-4.5r">
               {ORDER_TOTAL}
             </span>
             <span className="w-auto sm:w-4/5 font-medium">
@@ -231,7 +231,7 @@ const OrderDetails: React.FC = () => {
         </div>
         <div className="flexColWrapper sm:gap-y-0 sm:grid-cols-2 bg-black-200 ">
           <div className="flexWrapper">
-            <span className="w-auto sm:w-1/5 font-light min-w-[4.5rem]">
+            <span className="w-auto sm:w-1/5 font-light min-w-4.5r">
               {SUBMITTED}
             </span>
             <span className="w-auto sm:w-4/5 font-medium">
@@ -239,7 +239,7 @@ const OrderDetails: React.FC = () => {
             </span>
           </div>
           <div className="flexWrapper">
-            <span className="w-auto sm:w-1/5 font-light min-w-[4.5rem]">
+            <span className="w-auto sm:w-1/5 font-light min-w-4.5r">
               {CHANNEL}
             </span>
             <span className="w-auto sm:w-4/5 font-medium">
@@ -249,7 +249,7 @@ const OrderDetails: React.FC = () => {
         </div>
         <div className="flexColWrapper sm:gap-y-0 sm:grid-cols-2 bg-black-200  rounded-b-md">
           <div className="flexWrapper">
-            <span className="w-auto sm:w-1/5 font-light min-w-[4.5rem]">
+            <span className="w-auto sm:w-1/5 font-light min-w-4.5r">
               {LOCALE}
             </span>
             <span className="w-auto sm:w-4/5 font-medium">
@@ -257,7 +257,7 @@ const OrderDetails: React.FC = () => {
             </span>
           </div>
           <div className="flexBlockWrapper py-1 px-4 sm:p-0 border-none">
-            <span className="w-auto sm:w-1/5 min-w-[4.5rem]">{ORDER_TYPE}</span>
+            <span className="w-auto sm:w-1/5 min-w-4.5r">{ORDER_TYPE}</span>
             <span className="w-auto sm:w-4/5 font-medium">&nbsp;&nbsp;-</span>
           </div>
         </div>
@@ -268,13 +268,13 @@ const OrderDetails: React.FC = () => {
             {STATUS_ACROSS}
           </span>
           <div className="flexBlockWrapper rounded-t-md border-t-0 py-1 px-4 sm:p-0 sm:border-t border-solid border-black-300 bg-black-200">
-            <span className="w-auto sm:w-1/6 min-w-[4.5rem]">{ATG}</span>
+            <span className="w-auto sm:w-1/6 min-w-4.5r">{ATG}</span>
             <span className="w-auto sm:w-5/6 font-medium">
               {`${orderData?.status} - ${orderData?.sephOrderStatus}`}
             </span>
           </div>
           <div className="flexBlockWrapper border-t filterCardWrapper">
-            <span className="w-auto sm:w-1/6 flex items-center min-w-[4.5rem]">
+            <span className="w-auto sm:w-1/6 flex items-center min-w-4.5r">
               {OMS}
               <CustomIcon
                 className="ml-2 cursor-pointer"
@@ -290,7 +290,7 @@ const OrderDetails: React.FC = () => {
             </span>
           </div>
           <div className="flexBlockWrapper rounded-b-md border-t filterCardWrapper">
-            <span className="w-auto sm:w-1/6 min-w-[4.5rem]">{WMS}</span>
+            <span className="w-auto sm:w-1/6 min-w-4.5r">{WMS}</span>
             <span className="w-auto sm:w-5/6 font-medium"></span>
           </div>
         </div>
@@ -299,7 +299,7 @@ const OrderDetails: React.FC = () => {
             {CUSTOMER_INFO}
           </span>
           <div className="flexBlockWrapper border-t-0 sm:border-t filterCardWrapper rounded-t-md">
-            <span className="w-auto sm:w-1/6 min-w-[4.5rem]">{NAME}</span>
+            <span className="w-auto sm:w-1/6 min-w-4.5r">{NAME}</span>
             <span className="w-auto sm:w-5/6 font-medium">
               {formatName(
                 `${orderData?.customerInfo?.firstName} ${orderData?.customerInfo?.lastName}`,
@@ -307,7 +307,7 @@ const OrderDetails: React.FC = () => {
             </span>
           </div>
           <div className="flexBlockWrapper border-t filterCardWrapper">
-            <span className="w-auto sm:w-1/6 min-w-[4.5rem]">{EMAIL}</span>
+            <span className="w-auto sm:w-1/6 min-w-4.5r">{EMAIL}</span>
             <span
               className="w-auto sm:w-5/6 font-medium whitespace-nowrap text-ellipsis overflow-hidden"
               title={orderData?.customerInfo?.email}
@@ -316,7 +316,7 @@ const OrderDetails: React.FC = () => {
             </span>
           </div>
           <div className="flexBlockWrapper border-t filterCardWrapper rounded-b-md">
-            <span className="w-auto sm:w-1/6 min-w-[4.5rem]">{BITIER}</span>
+            <span className="w-auto sm:w-1/6 min-w-4.5r">{BITIER}</span>
             <span className="w-auto sm:w-5/6 font-medium">
               {orderData?.customerInfo?.biTier}
             </span>
@@ -335,7 +335,7 @@ const OrderDetails: React.FC = () => {
           </span>
           {itemTableDataSliced.length > 0 && (
             <span
-              className="w-1/4 sm:hidden justify-end flex items-center !text-[12px] font-normal cursor-pointer !bg-black-100 sm:!bg-inherit"
+              className="w-1/4 sm:hidden justify-end flex items-center !text-xs font-normal cursor-pointer !bg-black-100 sm:!bg-inherit"
               onClick={() => setItemInformationPopup(true)}
             >
               {VIEW_ALL}
@@ -377,22 +377,22 @@ const OrderDetails: React.FC = () => {
 
       <div className="gridNoGapRounded mb-4 p-0 sm:p-4 sm:py-4 sm:px-6 sm:bg-black-200">
         <div className="!bg-black-100 sm:!bg-inherit">
-          <span className="block w-[100%] !text-lg font-bold !bg-black-100 sm:!bg-inherit">
+          <span className="block w-full !text-lg font-bold !bg-black-100 sm:!bg-inherit">
             {PAYMENT_INFO}
           </span>
         </div>
         <div className="flexColWrapper gap-y-0 grid-cols-2">
           <div className="flexWrapper justify-start bg-black-200 rounded-t-md">
-            <span className="w-auto mr-3.5 sm:mr-0 sm:w-[35%]">
+            <span className="w-auto mr-3.5 sm:mr-0 sm:w-35pr">
               {PAYMENT_TYPE}
             </span>
-            <span className="w-auto sm:w-[65%] font-medium text-right sm:text-left">
+            <span className="w-auto sm:w-65pr font-medium text-right sm:text-left">
               {orderData?.paymentInfo?.[0].paymentType} -{" "}
               {orderData?.paymentInfo?.[0].paymentCardType.toUpperCase()}
             </span>
           </div>
           <div className="flexWrapper bg-black-200">
-            <span className="w-auto sm:w-1/5 min-w-[4.5rem]">{AMOUNT}</span>
+            <span className="w-auto sm:w-1/5 min-w-4.5r">{AMOUNT}</span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.paymentInfo?.[0].amount}
             </span>
@@ -400,8 +400,8 @@ const OrderDetails: React.FC = () => {
         </div>
         <div className="flexColWrapper gap-y-0 grid-cols-2">
           <div className="flexWrapper bg-black-200 rounded-b-md border-none">
-            <span className="w-auto sm:w-[35%]">{STATUS}</span>
-            <span className="w-auto sm:w-[65%] font-medium">
+            <span className="w-auto sm:w-35pr">{STATUS}</span>
+            <span className="w-auto sm:w-65pr font-medium">
               {orderData?.paymentInfo?.[0].status}
             </span>
           </div>

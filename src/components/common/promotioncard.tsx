@@ -16,7 +16,7 @@ const PromotionCard: FC<Props> = ({ promotion }) => {
         <div className="flex items-center px-4 pt-4 pb-2 border-solid border-b border-b-black-400">
           <CustomImage src={CheckCircle} alt="promotion" />
           <span
-            className="text-gray-300 text-[14px] leading-[17px] pl-4 uppercase font-medium whitespace-nowrap text-ellipsis overflow-hidden w-[15rem] sm:w-[20rem]"
+            className="text-gray-300 text-sm leading-17 pl-4 uppercase font-medium whitespace-nowrap text-ellipsis overflow-hidden w-60 sm:w-80"
             title={promotion.claimableId}
           >
             {promotion.claimableId}
@@ -46,7 +46,7 @@ const InfoField = ({
   className?: string;
 }) => {
   return (
-    <div className="block text-[12px] font-normal max-w-[10rem] min-w-[7rem]">
+    <div className="block text-xs font-normal max-w-[10rem] min-w-[7rem]">
       <div className={`text-gray-400 ${className}`}>{title}</div>
       <div
         className={`text-gray-300 whitespace-nowrap text-ellipsis overflow-hidden ${className}`}
