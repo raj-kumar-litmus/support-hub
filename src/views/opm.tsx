@@ -45,19 +45,19 @@ import openNewPageIcon from "../assets/open_in_new.svg";
 import refreshIcon from "../assets/refresh_icon.svg";
 import { fetchData } from "../utils/fetchUtil";
 import {
-  CHANNELS,
-  DURATIONS,
+  OPM_CHANNELS,
   PAYMENT_TYPES,
   LABELS,
   INPUT_TYPES,
-  TITLE,
+  PAGE_TITLES,
   LOCALE_OPTIONS,
-  HOME_PAGE_REFERSH_DURATION,
-  MM_DD_YYYY_HH_MM,
+  DASHBOARD_LABELS,
+  DATE_AND_TIME_FORMATS,
   CHART_TABS,
   OPM_CHART_DEFAULT,
   SCREEN_WIDTH,
-  NO_OF_ORDERS,
+  CHART_LABELS,
+  DURATIONS,
 } from "../constants/appConstants";
 import { submitOnEnter } from "../components/utils/Utils";
 import { URL_OPM } from "../constants/apiConstants";
@@ -104,7 +104,7 @@ const OPM: React.FC = () => {
   const DEFAULT = {
     duration: 10,
     starttime: "",
-    channel: CHANNELS.All,
+    channel: OPM_CHANNELS.All,
     promocode: "",
     paymentType: PAYMENT_TYPES.All,
     country: "",
@@ -114,7 +114,7 @@ const OPM: React.FC = () => {
     {
       type: INPUT_TYPES.dropdown,
       name: "period",
-      label: LABELS.duration,
+      label: LABELS.DURATION,
       icon: SandGlassIcon,
       cardIcon: GreyHourGlassIcon,
       value: {
@@ -129,7 +129,7 @@ const OPM: React.FC = () => {
     {
       type: INPUT_TYPES.time,
       name: "date",
-      label: LABELS.date,
+      label: LABELS.DATE,
       value: getFormattedPSTDate(),
       showTime: true,
       cardIcon: GreyCalendarIcon,
@@ -138,22 +138,22 @@ const OPM: React.FC = () => {
     {
       type: INPUT_TYPES.dropdown,
       name: "channel",
-      label: LABELS.channel,
+      label: LABELS.CHANNEL,
       icon: ChannelIcon,
       cardIcon: GreyChannelIcon,
       value: {
         name: "All",
         code: "",
       },
-      options: Object.keys(CHANNELS).map((e) => ({
+      options: Object.keys(OPM_CHANNELS).map((e) => ({
         name: e,
-        code: CHANNELS[e],
+        code: OPM_CHANNELS[e],
       })),
     },
     {
       type: INPUT_TYPES.dropdown,
       name: "locale",
-      label: LABELS.locale,
+      label: LABELS.LOCALE,
       icon: LocaleIcon,
       cardIcon: GreyGlobeIcon,
       value: {
@@ -168,7 +168,7 @@ const OPM: React.FC = () => {
     {
       type: INPUT_TYPES.dropdown,
       name: "payment",
-      label: LABELS.payment,
+      label: LABELS.PAYMENT,
       icon: PaymentIcon,
       cardIcon: GreyCardIcon,
       value: {
@@ -183,7 +183,7 @@ const OPM: React.FC = () => {
     {
       type: INPUT_TYPES.text,
       name: "promocode",
-      label: LABELS.promoCode,
+      label: LABELS.PROMOCODE,
       imgsrc: PromoCodeIcon,
       cardIcon: GreyPromoIcon,
       value: "",
@@ -214,7 +214,7 @@ const OPM: React.FC = () => {
       `${URL_OPM}?period=${
         location.pathname.includes("opm")
           ? DEFAULT.duration
-          : HOME_PAGE_REFERSH_DURATION
+        : DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION
       }&starttime=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${
         DEFAULT.promocode
       }&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`,
@@ -239,7 +239,7 @@ const OPM: React.FC = () => {
         labels: xAxisLabels,
         datasets: [
           {
-            label: NO_OF_ORDERS,
+            label: CHART_LABELS.NO_OF_ORDERS,
             data: dataArr,
             borderColor: "#599DF5",
             pointStyle: "circle",
@@ -251,7 +251,7 @@ const OPM: React.FC = () => {
         labels: xAxisLabels,
         datasets: [
           {
-            label: NO_OF_ORDERS,
+            label: CHART_LABELS.NO_OF_ORDERS,
             data: dataArr,
             borderColor: "#599DF5",
             backgroundColor: "#599DF5",
@@ -405,7 +405,7 @@ const OPM: React.FC = () => {
         <div className="w-full xl:w-1/2 bg-black-200 rounded-lg px-4 lg:px-6 py-4">
           <div className="flex justify-between items-center relative mb-2 sm:mb-4 lg:mb-2 xl:mb-4">
             <span className="text-gray-200 font-bold text-lg font-helvetica">
-              {TITLE.OPM}
+              {PAGE_TITLES.OPM}
             </span>
             <div className="flex items-center">
               <CustomTab
@@ -438,7 +438,7 @@ const OPM: React.FC = () => {
           </div>
           {tabValue === 0 ? (
             <BarChartComp
-              title={TITLE.OPM}
+              title={PAGE_TITLES.OPM}
               options={getChartConfig()}
               data={barChartData}
               className="border-0 w-full h-64"
@@ -446,7 +446,7 @@ const OPM: React.FC = () => {
             />
           ) : (
             <LineChart
-              title={TITLE.OPM}
+                title={PAGE_TITLES.OPM}
               className="border-0 w-full h-64"
               options={getChartConfig()}
               data={data}
@@ -457,7 +457,7 @@ const OPM: React.FC = () => {
       )}
       {!IS_FULLSCREEN && location.pathname.includes("opm") && (
         <div className="flex justify-between items-start">
-          <p className="font-bold text-gray-200">{TITLE.OPM}</p>
+          <p className="font-bold text-gray-200">{PAGE_TITLES.OPM}</p>
           {width < SCREEN_WIDTH.SM && (
             <CustomImage
               src={FilterIcon}
@@ -498,7 +498,7 @@ const OPM: React.FC = () => {
                           containerclassname="calendarOpmComparison ml-2.5 lg:w-10w lg:w-12w xl:w-14w sm:-mr-1"
                           titleclassname="top-5"
                           imageclassname="h-5 w-5 relative top-7 left-0.5w z-1"
-                          placeholder={MM_DD_YYYY_HH_MM}
+                          placeholder={DATE_AND_TIME_FORMATS.MM_DD_YYYY_HH_MM}
                           title={form.label}
                           showTime={form.showTime}
                           iconPos={form.iconPos || "left"}
@@ -531,7 +531,7 @@ const OPM: React.FC = () => {
               <CustomButton
                 id="page-btn-submit"
                 btnclassname="w-full"
-                label={LABELS.submit}
+                label={LABELS.SUBMIT}
                 isDisabled={disabled}
                 isRounded={true}
                 onClick={submit}
@@ -604,7 +604,7 @@ const OPM: React.FC = () => {
                     );
                   })}
                   <CustomButton
-                    label={LABELS.submit}
+                      label={LABELS.SUBMIT}
                     isDisabled={disabled}
                     isRounded={true}
                     className="submitBtnMobile opmPopUp col-span-full"
@@ -642,7 +642,7 @@ const OPM: React.FC = () => {
             ))}
           {!disabled && !IS_FULLSCREEN && (
             <CustomButton
-              label={LABELS.reset}
+              label={LABELS.RESET}
               severity="secondary"
               className="resetFilters text-xs text-gray-300"
               isTextButton={true}
@@ -690,12 +690,12 @@ const OPM: React.FC = () => {
                 className={`opm-page-chart-container ${
                   IS_FULLSCREEN ? "opm-page-chart-container-rotated" : ""
                 }`}
-                title={TITLE.OPM}
+                  title={PAGE_TITLES.OPM}
                 isFullScreen={IS_FULLSCREEN}
               />
             ) : (
               <LineChart
-                title={TITLE.OPM}
+                    title={PAGE_TITLES.OPM}
                 isFullScreen={IS_FULLSCREEN}
                 className={`opm-page-chart-container ${
                   IS_FULLSCREEN ? "opm-page-chart-container-rotated" : ""

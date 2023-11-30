@@ -6,17 +6,8 @@ import OpmComparison from "../views/opmComparison";
 import { URL_OPM } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
 import {
-  HOME_PAGE_REFERSH_DURATION,
-  LASTDAY,
-  TODAY,
-  DIFFERENCE,
-  REFRESHTIME,
-  DASHBOARD,
-  AVG_ORDERS_PER_MIN,
-  TOTAL_NO_OF_ORDERS,
-  LAST_MIN_OPM,
-  AVG_OPM_COMPARISON,
-  TOTAL_ORDER_COMPARISON,
+  DASHBOARD_LABELS,
+  PAGE_TITLES,
   SCREEN_WIDTH,
 } from "../constants/appConstants";
 import useScreenSize from "../hooks/useScreenSize";
@@ -79,12 +70,12 @@ const ComparisonCards = ({
   return (
     <div className="flex">
       <div className="flex flex-col pr-1 sm:pr-2 justify-between">
-        <span className="text-10">{TODAY}</span>
+        <span className="text-10">{DASHBOARD_LABELS.TODAY}</span>
         <span className="text-gray-200 text-xl">{kFormatter(today) || 0}</span>
       </div>
       <div className="border border-r border-black-400 h-10 m-auto"></div>
       <div className="flex flex-col px-1 sm:px-2 justify-between">
-        <span className="text-10">{LASTDAY}</span>
+        <span className="text-10">{DASHBOARD_LABELS.LASTDAY}</span>
         <span className="text-gray-200 text-xl">
           {kFormatter(lastDay) || 0}
         </span>
@@ -100,7 +91,7 @@ const ComparisonCards = ({
               : "text-gray-400"
           } text-10`}
         >
-          {DIFFERENCE}
+          {DASHBOARD_LABELS.DIFFERENCE}
         </span>
         <div className="flex">
           <span
@@ -144,7 +135,7 @@ const HomePage = () => {
   const fetchOPMData = async (url, date) => {
     try {
       const opmData = await fetchData(
-        `${url}?period=${HOME_PAGE_REFERSH_DURATION}&starttime=${getFormattedPSTDate(
+        `${url}?period=${DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION}&starttime=${getFormattedPSTDate(
           date,
         )}`,
         {},
@@ -154,7 +145,7 @@ const HomePage = () => {
         0,
       );
       setTotalOPM(totalOrders);
-      setAvgOPM(Math.round(totalOrders / HOME_PAGE_REFERSH_DURATION));
+      setAvgOPM(Math.round(totalOrders / DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION));
       setLastMinOPM(opmData[opmData.length - 1]["orderCount"]);
     } catch (err) {
       console.log("Error occured while fetching data", err);
@@ -164,7 +155,7 @@ const HomePage = () => {
   const fetchCompData = async (url, date) => {
     try {
       const opmData = await fetchData(
-        `${url}?period=${HOME_PAGE_REFERSH_DURATION}&starttime=${getFormattedPSTDate(
+        `${url}?period=${DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION}&starttime=${getFormattedPSTDate(
           date,
         )}`,
         {},
@@ -174,7 +165,7 @@ const HomePage = () => {
         0,
       );
       setLastDayTotalOPM(totalOrders);
-      setLastDayAvgOPM(Math.round(totalOrders / HOME_PAGE_REFERSH_DURATION));
+      setLastDayAvgOPM(Math.round(totalOrders / DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION));
     } catch (err) {
       console.log("Error occured while fetching data", err);
     }
@@ -202,7 +193,7 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => setCanShow(!canShow), REFRESHTIME);
+    const timer = setTimeout(() => setCanShow(!canShow), DASHBOARD_LABELS.REFRESHTIME);
     return () => clearTimeout(timer);
   });
 
@@ -217,11 +208,11 @@ const HomePage = () => {
           <div className="flex sm:flex-row justify-between mb-4">
             <div className="flex items-center font-helvetica">
               <span className="text-lg text-gray-200 font-bold mr-4">
-                {DASHBOARD}
+                  {PAGE_TITLES.DASHBOARD}
               </span>
               <CustomImage src={infoIcon} />
               <span className="text-xs text-gray-400 ml-2">
-                Last {HOME_PAGE_REFERSH_DURATION} min data
+                  Last {DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION} min data
               </span>
             </div>
             <div className="flex items-center font-helvetica">
@@ -243,7 +234,7 @@ const HomePage = () => {
               <HomeCard
                 title={
                   <CardTitle
-                    title={AVG_ORDERS_PER_MIN}
+                        title={DASHBOARD_LABELS.AVG_ORDERS_PER_MIN}
                     icon={avgOrdersPerMinIcon}
                   />
                 }
@@ -252,7 +243,7 @@ const HomePage = () => {
               <HomeCard
                 title={
                   <CardTitle
-                    title={TOTAL_NO_OF_ORDERS}
+                        title={DASHBOARD_LABELS.TOTAL_NO_OF_ORDERS}
                     icon={totalNoOfOrdersIcon}
                   />
                 }
@@ -261,7 +252,7 @@ const HomePage = () => {
               <HomeCard
                 title={
                   <CardTitle
-                    title={LAST_MIN_OPM}
+                        title={DASHBOARD_LABELS.LAST_MIN_OPM}
                     icon={lastMinOpmIcon}
                     classname={"card-title"}
                   />
@@ -270,7 +261,7 @@ const HomePage = () => {
               />
               <HomeCard
                 title={
-                  <CardTitle title={AVG_OPM_COMPARISON} icon={avgOpmcompIcon} />
+                      <CardTitle title={DASHBOARD_LABELS.AVG_OPM_COMPARISON} icon={avgOpmcompIcon} />
                 }
                 value={
                   <ComparisonCards today={avgOPM} lastDay={lastDayAvgOPM} />
@@ -279,7 +270,7 @@ const HomePage = () => {
               <HomeCard
                 title={
                   <CardTitle
-                    title={TOTAL_ORDER_COMPARISON}
+                        title={DASHBOARD_LABELS.TOTAL_ORDER_COMPARISON}
                     icon={totalOrderCompIcon}
                   />
                 }

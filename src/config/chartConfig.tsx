@@ -10,10 +10,9 @@ import {
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import {
   SESSIONS_CHART_DEFAULT,
-  TOTAL_ORDERS_PER_MINUTE,
+  CHART_LABELS,
   CHART,
-  TODAY,
-  YESTERDAY,
+  DASHBOARD_LABELS,
   OPM_COMPARISON_CHART_STYLES,
   OPM_COMP_CHART_DEFAULT,
   OPM_CHART_DEFAULT,
@@ -174,7 +173,7 @@ export const OPM_OPTIONS = (isMobile: boolean, showDataLabels = false) => ({
   plugins: {
     title: {
       display: true,
-      text: TOTAL_ORDERS_PER_MINUTE,
+      text: CHART_LABELS.TOTAL_ORDERS_PER_MINUTE,
       position: "bottom",
       align: "center",
       color: "#FAF9F6",
@@ -251,7 +250,7 @@ export const OPM_BAR_CHART_OPTIONS = (
       ...existingBarChartOptions.plugins,
       title: {
         display: true,
-        text: TOTAL_ORDERS_PER_MINUTE,
+        text: CHART_LABELS.TOTAL_ORDERS_PER_MINUTE,
         position: "bottom",
         align: "center",
         color: "#FAF9F6",
@@ -488,7 +487,7 @@ export const OPM_COMPARISON_OPTIONS_HOME = ({
           ...options.plugins.legend.labels,
           generateLabels: () => {
             return Object.keys(apiResponse).map((_, index) => ({
-              text: index === 0 ? TODAY : YESTERDAY,
+              text: index === 0 ? DASHBOARD_LABELS.TODAY : DASHBOARD_LABELS.YESTERDAY,
               fillStyle:
                 index === 0
                   ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR
@@ -612,7 +611,7 @@ export const OPM_COMPARISON_BAR_OPTIONS_HOME = ({
           ...options.plugins.legend.labels,
           generateLabels: () => {
             return Object.keys(apiResponse).map((_, index) => ({
-              text: index === 0 ? TODAY : YESTERDAY,
+              text: index === 0 ? DASHBOARD_LABELS.TODAY : DASHBOARD_LABELS.YESTERDAY,
               fillStyle:
                 index === 0
                   ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR

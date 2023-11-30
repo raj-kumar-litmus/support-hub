@@ -46,19 +46,18 @@ import GreyChannelIcon from "../assets/channel-grey.svg";
 import refreshIcon from "../assets/refresh_icon.svg";
 import { submitOnEnter } from "../components/utils/Utils";
 import {
-  CHANNELS,
-  DURATIONS,
+  OPM_CHANNELS,
   LABELS,
-  TITLE,
+  PAGE_TITLES,
   INPUT_TYPES,
-  HOME_PAGE_REFERSH_DURATION,
-  MM_DD_YYYY_HH_MM,
-  TOTAL_ORDERS_PER_MINUTE,
+  DASHBOARD_LABELS,
+  DATE_AND_TIME_FORMATS,
+  CHART_LABELS,
   CHART_TABS,
   OPM_COMPARISON_CHART_STYLES,
   OPM_CHART_DEFAULT,
   SCREEN_WIDTH,
-  NO_OF_ORDERS,
+  DURATIONS,
 } from "../constants/appConstants";
 import { URL_OPM_COMPARISON } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
@@ -131,7 +130,7 @@ const OpmComparison: React.FC = () => {
     {
       type: INPUT_TYPES.dropdown,
       name: "period",
-      label: LABELS.duration,
+      label: LABELS.DURATION,
       icon: SandGlassIcon,
       cardIcon: GreyHourGlassIcon,
       value: {
@@ -146,7 +145,7 @@ const OpmComparison: React.FC = () => {
     {
       type: INPUT_TYPES.time,
       name: "startDate",
-      label: LABELS.startDate,
+      label: LABELS.STARTDATE,
       showTime: true,
       cardIcon: GreyCalendarIcon,
       value: new Date(DEFAULT.startTimeOne),
@@ -155,7 +154,7 @@ const OpmComparison: React.FC = () => {
     {
       type: INPUT_TYPES.time,
       name: "endDate",
-      label: LABELS.endDate,
+      label: LABELS.ENDDATE,
       cardIcon: GreyCalendarIcon,
       showTime: false,
       value: new Date(DEFAULT.startDateTwo),
@@ -164,16 +163,16 @@ const OpmComparison: React.FC = () => {
     {
       type: INPUT_TYPES.dropdown,
       name: "channel",
-      label: LABELS.channel,
+      label: LABELS.CHANNEL,
       icon: ChannelIcon,
       cardIcon: GreyChannelIcon,
       value: {
         name: "All",
         code: "",
       },
-      options: Object.keys(CHANNELS).map((e) => ({
+      options: Object.keys(OPM_CHANNELS).map((e) => ({
         name: e,
-        code: CHANNELS[e],
+        code: OPM_CHANNELS[e],
       })),
     },
   ];
@@ -188,7 +187,7 @@ const OpmComparison: React.FC = () => {
       `${URL_OPM_COMPARISON}?period=${
         location.pathname.includes("opm")
           ? DEFAULT.duration
-          : HOME_PAGE_REFERSH_DURATION
+        : DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION
       }&startTimeOne=${startTimeOne}&startDateTwo=${startDateTwo}&channel=${
         DEFAULT.channel
       }`,
@@ -271,7 +270,7 @@ const OpmComparison: React.FC = () => {
           Object.keys(apiResponse)?.map((e, index) => ({
             data: apiResponse?.[e].map((e) => Number(e.orderCount)),
             backgroundColor: "white",
-            label: NO_OF_ORDERS,
+            label: CHART_LABELS.NO_OF_ORDERS,
             index,
             borderColor:
               index === 0
@@ -286,7 +285,7 @@ const OpmComparison: React.FC = () => {
           apiResponse &&
           Object.keys(apiResponse)?.map((e, index) => ({
             data: apiResponse?.[e].map((e) => Number(e.orderCount)),
-            label: NO_OF_ORDERS,
+            label: CHART_LABELS.NO_OF_ORDERS,
             backgroundColor:
               index === 0
                 ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR
@@ -416,7 +415,7 @@ const OpmComparison: React.FC = () => {
         <div className="w-full xl:w-1/2 bg-black-200 rounded-lg px-4 lg:px-6 py-4">
           <div className="flex justify-between items-center relative mb-2 sm:mb-4 lg:mb-2 xl:mb-4">
             <span className="text-gray-200 font-bold text-lg font-helvetica">
-              {TITLE.OPM_COMPARISON}
+              {PAGE_TITLES.OPM_COMPARISON}
             </span>
             <div className="flex items-center">
               <CustomTab
@@ -449,7 +448,7 @@ const OpmComparison: React.FC = () => {
           </div>
           {tabValue === 0 ? (
             <BarChartComp
-              title={TITLE.OPM_COMPARISON}
+              title={PAGE_TITLES.OPM_COMPARISON}
               options={getChartConfig()}
               data={barChartData}
               className="border-0 w-full h-64"
@@ -457,7 +456,7 @@ const OpmComparison: React.FC = () => {
             />
           ) : (
             <LineChart
-              title={TITLE.OPM_COMPARISON}
+                title={PAGE_TITLES.OPM_COMPARISON}
               className="border-0 w-full h-64"
               options={getChartConfig()}
               data={data}
@@ -467,7 +466,7 @@ const OpmComparison: React.FC = () => {
           )}
           <div className="text-xs text-gray-300 flex justify-center mt-3 sm:mt-[-1.65rem] mb-2 sm:mb-0">
             <div className="w-auto font-helvetica">
-              {TOTAL_ORDERS_PER_MINUTE}
+              {CHART_LABELS.TOTAL_ORDERS_PER_MINUTE}
             </div>
           </div>
         </div>
@@ -476,7 +475,7 @@ const OpmComparison: React.FC = () => {
         <div className={`${isLoading ? "h-4/5" : ""}`}>
           {!IS_FULLSCREEN && location.pathname.includes("opmcomparison") && (
             <div className="flex justify-between items-start">
-              <p className="font-bold text-gray-200">{TITLE.OPM_COMPARISON}</p>
+              <p className="font-bold text-gray-200">{PAGE_TITLES.OPM_COMPARISON}</p>
               {width < SCREEN_WIDTH.SM && (
                 <CustomImage
                   src={FilterIcon}
@@ -526,7 +525,7 @@ const OpmComparison: React.FC = () => {
                             titleclassname="top-5"
                             imageclassname="h-5 w-5 relative top-7 left-0.5w z-1"
                             title={form.label}
-                            placeholder={MM_DD_YYYY_HH_MM}
+                            placeholder={DATE_AND_TIME_FORMATS.MM_DD_YYYY_HH_MM}
                             showTime={form.showTime}
                             iconPos={form.iconPos || "left"}
                             imgsrc={form.imgsrc}
@@ -560,7 +559,7 @@ const OpmComparison: React.FC = () => {
                   })}
                   <CustomButton
                     id="page-btn-submit"
-                    label={LABELS.submit}
+                    label={LABELS.SUBMIT}
                     isDisabled={disabled}
                     isRounded={true}
                     className="ml-auto  self-end relative "
@@ -636,7 +635,7 @@ const OpmComparison: React.FC = () => {
                         );
                       })}
                       <CustomButton
-                        label={LABELS.submit}
+                          label={LABELS.SUBMIT}
                         isDisabled={disabled}
                         isRounded={true}
                         className="submitBtnMobile opmPopUp col-span-full"
@@ -677,7 +676,7 @@ const OpmComparison: React.FC = () => {
                 ))}
               {!disabled && !IS_FULLSCREEN && (
                 <CustomButton
-                  label={LABELS.reset}
+                  label={LABELS.RESET}
                   severity="secondary"
                   className="resetFilters text-xs text-gray-300"
                   isTextButton={true}
@@ -709,7 +708,7 @@ const OpmComparison: React.FC = () => {
                 />
                 {tabValue === 0 ? (
                   <BarChartComp
-                    title={TITLE.OPM_COMPARISON}
+                      title={PAGE_TITLES.OPM_COMPARISON}
                     isFullScreen={IS_FULLSCREEN}
                     className={`opm-comparison-page-chart-container ${
                       IS_FULLSCREEN
@@ -721,7 +720,7 @@ const OpmComparison: React.FC = () => {
                   />
                 ) : (
                   <LineChart
-                    title={TITLE.OPM_COMPARISON}
+                        title={PAGE_TITLES.OPM_COMPARISON}
                     isFullScreen={IS_FULLSCREEN}
                     className={`opm-comparison-page-chart-container ${
                       IS_FULLSCREEN
@@ -738,7 +737,7 @@ const OpmComparison: React.FC = () => {
                   }`}
                 >
                   <div className="w-auto font-helvetica">
-                    {TOTAL_ORDERS_PER_MINUTE}
+                      {CHART_LABELS.TOTAL_ORDERS_PER_MINUTE}
                   </div>
                 </div>
               </div>

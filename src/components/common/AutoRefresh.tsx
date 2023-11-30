@@ -5,6 +5,7 @@ import CustomInputNumber from "./CustomInputNumber";
 import CustomToast from "./CustomToast";
 import CustomImage from "./customimage";
 import InfoIcon from "../../assets/info.svg";
+import { LABELS } from "../../constants/appConstants";
 
 interface AutoRefreshProps {
   getData(): any;
@@ -76,7 +77,7 @@ const AutoRefresh = (props: AutoRefreshProps) => {
           checked={showPollingForm}
           onClick={onCheckHandler}
           containerclassname={props.checkBoxContainerClassname}
-          label="Auto Refresh"
+          label={LABELS.AUTO_REFRESH}
           labelclassname={props.checkBoxLabelClassname}
         />
         {showPollingForm && (

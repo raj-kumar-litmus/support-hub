@@ -3,6 +3,7 @@ import CustomImage from "./customimage";
 import { IPromotion } from "../../@types/promotion";
 import CheckCircle from "../../assets/check_circle.svg";
 import CustomCard from "./customcard";
+import { ORDER_DETAILS_LABELS } from "../../constants/appConstants";
 
 type Props = {
   promotion: IPromotion;
@@ -25,9 +26,9 @@ const PromotionCard: FC<Props> = ({ promotion }) => {
       }
     >
       <div className="flex p-0 justify-between">
-        <InfoField title="Promotion" data={promotion.promotionId} />
+        <InfoField title={ORDER_DETAILS_LABELS.PROMOTION} data={promotion.promotionId} />
         <InfoField
-          title="Discount Amount"
+          title={ORDER_DETAILS_LABELS.DISCOUNT_AMOUNT}
           data={Number(promotion.discAmt).toFixed(2)}
           className="text-right"
         />
