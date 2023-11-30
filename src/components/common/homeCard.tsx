@@ -13,7 +13,7 @@ interface HomeCardProps {
 
 const HomeCard: FC<HomeCardProps> = ({ title, value }) => {
   return (
-    <Card title={title} className="home-card bg-[#22262C] text-[#898A8D]">
+    <Card title={title} className="home-card bg-black-200 text-gray-400">
       <>{value}</>
     </Card>
   );

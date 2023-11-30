@@ -6,6 +6,7 @@ import SidePaneList from "./common/sidepanelist";
 import { MENU_LIST } from "./utils/Utils";
 import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
+import useScreenSize from "../hooks/useScreenSize";
 
 type Props = {
   showSidePane: boolean;
@@ -20,7 +21,9 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
   const [selectedMenu, setSelectedMenu] = useState<number>(0);
   const location = useLocation();
   const IS_FULLSCREEN = location?.pathname.includes("fullscreen");
+  const IS_ORDER_DETAILS = location?.pathname.includes("order-details");
   const navigate = useNavigate();
+  const { width } = useScreenSize();
 
   useEffect(() => {
     setOpenSearchField(false);
@@ -58,7 +61,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
         <div
           className={`flex flex-col sm:flex-row ${
             IS_FULLSCREEN ? "" : "mt-[3.5rem]"
-          } ml-[0] bg-[#1C1C20]`}
+          } ml-[0] bg-black-200`}
         >
           {showSidePane && (
             <SidePaneList
@@ -70,7 +73,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
           {showSidePane && (
             <div
               className={`${
-                showSidePaneGrid ? "bg-[#1C1C20]  min-h-[calc(100vh-56px)]" : ""
+                showSidePaneGrid ? "bg-black-200  min-h-[calc(100vh-56px)]" : ""
               } flex w-full sm:hidden`}
               onClick={() => setShowSidePaneGrid(false)}
             >
@@ -96,7 +99,9 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
           <div
             className={`${showSidePaneGrid ? "hidden" : "block"} 
               ${IS_FULLSCREEN ? "h-[100vh]" : "h-[calc(100vh-56px)]"} 
-              w-full sm:ml-[25vw] md:ml-[27vw] lg:ml-[21vw] overflow-y-auto p-[20px] sm:pl-[2.5vw] sm-py-[28px] bg-[#161A1D]`}
+              w-full sm:ml-[25vw] md:ml-[27vw] lg:ml-[21vw] overflow-y-auto p-[20px] sm:pl-[2.5vw] sm-py-[28px] bg-black-100
+              ${width < 640 && IS_ORDER_DETAILS ? "pt-0" : ""}
+              `}
           >
             {appContent}
           </div>

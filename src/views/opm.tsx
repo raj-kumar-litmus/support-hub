@@ -367,9 +367,9 @@ const OPM: React.FC = () => {
         <Loader className="!p-0 w-[40vw] m-auto" />
       )}
       {location.pathname.includes("home") && data && !isLoading && (
-        <div className="w-full lg:w-[49%] bg-[#22262C] p-0 rounded-lg">
+        <div className="w-full lg:w-[49%] bg-black-200 p-0 rounded-lg">
           <div className="flex justify-between items-center relative top-[3vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
-            <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
+            <span className="text-gray-200 font-bold text-lg font-helvetica">
               {TITLE.OPM}
             </span>
             <div className="flex items-center">
@@ -416,7 +416,7 @@ const OPM: React.FC = () => {
       )}
       {!IS_FULLSCREEN && location.pathname.includes("opm") && (
         <div className="flex justify-between items-start">
-          <p className="font-bold w-[50vw] text-[#F2F2F2] w-[50vw] lg:w-[30vw] sm:ml-[2.5vw] md:ml-[1.5vw] lg:ml-[1vw]">
+          <p className="font-bold w-[50vw] text-gray-200 w-[50vw] lg:w-[30vw] sm:ml-[2.5vw] md:ml-[1.5vw] lg:ml-[1vw]">
             {TITLE.OPM}
           </p>
           {width < 640 && (
@@ -433,9 +433,7 @@ const OPM: React.FC = () => {
         <>
           {width > 640 ? (
             <>
-              <form
-                className="lg:flex md:gap-[0.15rem] opmFilters sm:grid sm:grid-cols-3 lg:ml-[0.5rem] sm:mb-4"
-              >
+              <form className="lg:flex md:gap-[0.15rem] opmFilters sm:grid sm:grid-cols-3 lg:ml-[0.5rem] sm:mb-4">
                 {formFields.map((form, index) => {
                   return (
                     <div
@@ -605,7 +603,7 @@ const OPM: React.FC = () => {
             <CustomButton
               label={LABELS.reset}
               severity="secondary"
-              className="resetFilters text-[12px] text-[#575353]"
+              className="resetFilters text-[12px] text-gray-300"
               isTextButton={true}
               onClick={() => setFormFields(DEFAULT_FORM_FIELDS)}
             />
@@ -619,7 +617,7 @@ const OPM: React.FC = () => {
           startPollingHandler={startPollingHandler}
           inputClassname="w-[60vw] sm:w-[38vw] md:w-[24vw]"
           inputContainerClassname="w-[38vw] md:w-[24vw]"
-          checkBoxLabelClassname="text-white text-[12px] ml-[0.5vw]"
+          checkBoxLabelClassname="text-white-500 text-[12px] ml-[0.5vw]"
           checkBoxContainerClassname="flex autoRefreshCheckBox sm:ml-[2.5vw] md:ml-[1vw] md:ml-[1.5vw] lg:ml-[1.25vw] items-center mt-[3vh] md:mt-[0]"
         />
       )}

@@ -326,9 +326,9 @@ const OpmComparison: React.FC = () => {
         <Loader className="!p-0 w-[40vw] m-auto" />
       )}
       {location.pathname.includes("home") && !isLoading && data && (
-        <div className="w-full lg:w-[49%] bg-[#22262C] p-0 rounded-lg">
+        <div className="w-full lg:w-[49%] bg-black-200 p-0 rounded-lg">
           <div className="flex justify-between sm:mb-3 items-center relative top-[3vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
-            <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
+            <span className="text-gray-200 font-bold text-lg font-helvetica">
               {TITLE.OPM_COMPARISON}
             </span>
             <div className="flex items-center">
@@ -362,9 +362,9 @@ const OpmComparison: React.FC = () => {
             IS_FULLSCREEN ? "" : "sm:mx-4"
           }`}
         >
-          {!IS_FULLSCREEN && location.pathname.includes("opmcomparison") && (
+          {!IS_FULLSCREEN && location.pathname.includes("opm-comparison") && (
             <div className="flex justify-between items-start ml-[1vw] md:ml-[6vw] mr-[0] md:mr-[6vw] sm:ml-[1vw] sm:mr-0  lg:ml-0">
-              <p className="font-bold w-[50vw] text-[#F2F2F2] w-[50vw] lg:w-[30vw] sm:ml-[-1vw] md:ml-[-6vw] lg:ml-[0]">
+              <p className="font-bold w-[50vw] text-gray-200 w-[50vw] lg:w-[30vw] sm:ml-[-1vw] md:ml-[-6vw] lg:ml-[0]">
                 {TITLE.OPM_COMPARISON}
               </p>
               {width < 640 && (
@@ -562,7 +562,7 @@ const OpmComparison: React.FC = () => {
                 <CustomButton
                   label={LABELS.reset}
                   severity="secondary"
-                  className="resetFilters text-[12px] text-[#575353]"
+                  className="resetFilters text-[12px] text-gray-300"
                   isTextButton={true}
                   onClick={() => setFormFields(DEFAULT_FORM_FIELDS)}
                 />

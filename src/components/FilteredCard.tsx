@@ -20,10 +20,7 @@ const FilteredCard: React.FC<Props> = ({
     <CustomButton id={label} className="filteredCard">
       <CustomImage id={label} src={leftIcon} width="12" height="12" />
       <span id={label}>{content}</span>
-      <CustomImage
-        src={CrossIcon}
-        onClick={() => onClickHandler(label)}
-      />
+      <CustomImage src={CrossIcon} onClick={() => onClickHandler(label)} />
     </CustomButton>
   );
 };
