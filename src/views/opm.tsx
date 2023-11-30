@@ -15,7 +15,7 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 
 import { ModalEnums, ChartData, ChartOptions } from "../@types/supportHub";
 import useScreenSize from "../hooks/useScreenSize";
-import CustomDropdown from "../components/DropDown";
+ import CustomDropdown from "../components/DropDown";
 import CustomInputText from "../components/InputText";
 import CustomCalendar from "../components/common/CustomCalendar";
 import CustomButton from "../components/Button";
@@ -472,31 +472,31 @@ const OPM: React.FC = () => {
         <>
           {width > SCREEN_WIDTH.SM ? (
             <>
-              <form className="lg:flex md:gap-[0.15rem] opmFilters sm:grid sm:grid-cols-3 lg:ml-[0.5rem] sm:mb-4">
+              <form id="custom-hover" className="lg:flex sm:gap-4 opmFilters  sm:grid sm:grid-cols-3 lg:ml-2 sm:mb-4">
                 {formFields.map((form, index) => {
                   return (
                     <div
-                      className="flex justify-center items-center"
+                      className="flex flex-1"
                       key={index}
                     >
                       {form.type === INPUT_TYPES.text && (
                         <CustomInputText
-                          containerclassname="relative top-[2px] md:left-[-0.2vw] lg:left-[-9px]"
                           value={form.value}
                           name={form.name}
                           label={form.label}
                           icon={form.imgsrc}
                           placeholder={form.label}
-                          imageclassname="relative left-[25px] z-[1]"
+                          className="h-[39px]"
+                          imageclassname="!top-[1.9rem]"
+                          containerClassName="lg:max-w-[8rem]"
                           onChange={(event) => handleFormChange(event)}
-                          className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px] sm:w-[20vw] lg:w-[11vw]"
                         />
                       )}
                       {form.type === INPUT_TYPES.time && (
                         <CustomCalendar
                           name={form.name}
-                          containerclassname="calendarOpmComparison ml-[10px] lg:w-[10vw] lg:w-[12vw] xl:w-[14vw] sm:mr-[-0.25rem]"
-                          titleclassname="top-5"
+                          titleclassname="top-[1.25rem]"
+                          containerclassname="lg:min-w-[11rem]"
                           imageclassname="h-[20px] w-[20px] relative top-[1.75rem] left-[0.5vw] z-[1]"
                           placeholder={MM_DD_YYYY_HH_MM}
                           title={form.label}
@@ -513,9 +513,9 @@ const OPM: React.FC = () => {
                         <CustomDropdown
                           value={form.value}
                           name={form.name}
+                          //containerclassname="min-w-[9rem]"
                           onChange={(e) => handleFormChange(e)}
-                          containerclassname="sm:w-[20vw] lg:!w-[11vw]"
-                          imageclassname="relative left-[25px] z-[1]"
+                          imageclassname="z-[1]"
                           dropdownIcon={<CustomImage src={ArrowDownIcon} />}
                           icon={form.icon}
                           options={form.options}
@@ -541,74 +541,85 @@ const OPM: React.FC = () => {
           ) : (
             <>
               <CustomDialog
-                header="Filters"
-                visible={visible}
-                // className="!bg-slate-700 filtersModal opmFiltersMobile h-[450px] w-[100vw]"
-                className="!bg-[#22262C] filtersModal filtersModal-popup opmFiltersMobile"
-                onHide={onModalCloseHandler}
-                closeIcon={<CustomImage src={WhiteCrossIcon} />}
-              >
-                <form
-                  className="grid grid-cols-2 grid-rows-3 gap-x-5 gap-y-5"
-                  onSubmit={submit}
-                >
-                  {formFields.map((form, index) => {
-                    return (
-                      <React.Fragment key={index}>
-                        {form.type === INPUT_TYPES.text && (
-                          <CustomInputText
-                            containerclassname="w-[45vw] mobileInput"
-                            value={form.value}
-                            name={form.name}
-                            label={form.label}
-                            icon={form.imgsrc}
-                            imageclassname="relative left-[12px] md:left-[25px] z-[1]"
-                            placeholder={form.label}
-                            onChange={(event) => handleFormChange(event)}
-                            className="border rounded-[8px] border-solid border-slate-300 border-1 h-[40px]"
-                          />
-                        )}
-                        {form.type === INPUT_TYPES.time && (
-                          <CustomCalendar
-                            name={form.name}
-                            containerclassname="opmFiltersMobileCalendar"
-                            titleclassname="left-[1vw] md:left-[0] top-5"
-                            imageclassname="h-[20px] w-[20px] relative top-[1.75rem] md:top-[3vh] left-[3.5vw] z-[1]"
-                            title={form.label}
-                            showTime={form.showTime}
-                            iconPos={form.iconPos || "left"}
-                            imgsrc={form.imgsrc}
-                            onChange={(event) => handleFormChange(event)}
-                            value={form.value}
-                            maxDate={form.name === "date" ? new Date() : null}
-                          />
-                        )}
-                        {form.type === INPUT_TYPES.dropdown && (
-                          <CustomDropdown
-                            value={form.value}
-                            name={form.name}
-                            dropdownIcon={<CustomImage src={DropDownIcon} />}
-                            onChange={(e) => handleFormChange(e)}
-                            containerclassname="w-[44vw]"
-                            imageclassname="relative left-[25px] z-[1]"
-                            icon={form.icon}
-                            options={form.options}
-                            label={form.label}
-                            optionLabel="name"
-                            placeholder=""
-                          />
-                        )}
-                      </React.Fragment>
-                    );
-                  })}
-                  <CustomButton
-                    label={LABELS.submit}
-                    isDisabled={disabled}
-                    isRounded={true}
-                    className="submitBtnMobile opmPopUp col-span-full"
-                  />
-                </form>
-              </CustomDialog>
+                    header="Filters"
+                    visible={visible}
+                    className="!bg-black-200 filtersModal filtersModal-popup opmFiltersMobile"
+                    onHide={onModalCloseHandler}
+                    closeIcon={<CustomImage src={WhiteCrossIcon} />}
+                  >
+                    <form   className="grid grid-cols-[repeat(auto-fill,minmax(159px,1fr))] gap-x-2 gap-y-5" onSubmit={submit}>
+                      
+                       
+                        {formFields.map((form) => {
+                          return (
+                            <>
+                              {form.type === INPUT_TYPES.text && (
+                                <CustomInputText
+                                containerclassname={`${width > 479 ? 'w-[11rem]':'w-[43vw]'}`}
+                                  value={form.value}
+                                  label={form.label}
+                                  name={form.label}
+                                  icon={form.imgsrc}
+                                  placeholder={form.label}
+                                  onChange={(event) => handleFormChange(event)}
+                                  className="h-[39px]"
+                                />
+                              )}
+                              {form.type === INPUT_TYPES.time && (
+                               
+                                  <CustomCalendar
+                                    name={form.name}
+                                     containerclassname="opmFiltersMobileCalendar"
+                                    imageclassname="h-[20px] w-[20px] top-[1.75rem] md:top-[3vh] left-[2vw] z-[1]"
+                                    title={form.label}
+                                    showTime={form.showTime}
+                                    iconPos={form.iconPos || "left"}
+                                    imgsrc={form.imgsrc}
+                                    onChange={(event) =>
+                                      handleFormChange(event)
+                                    }
+                                    value={form.value}
+                                    maxDate={
+                                      form.name === "startDate" ||
+                                      form.name === "endDate"
+                                        ? new Date()
+                                        : null
+                                    }
+                                  />
+                               
+                              )}
+                              {form.type === INPUT_TYPES.dropdown && (
+                               
+                                  <CustomDropdown
+                                    value={form.value}
+                                    name={form.name}
+                                    dropdownIcon={
+                                      <CustomImage src={ArrowDownIcon} />
+                                    }
+                                    onChange={(e) => handleFormChange(e)}
+                                   
+                                    imageclassname="z-[1]"
+                                    icon={form.icon}
+                                    options={form.options}
+                                    label={form.label}
+                                    optionLabel="name"
+                                    placeholder=""
+                                  />
+                               
+                              )}
+                            </>
+                          );
+                        })}
+                      
+
+                      <CustomButton
+                        label={LABELS.submit}
+                        isDisabled={disabled}
+                        isRounded={true}
+                        className="submitBtnMobile opmPopUp col-span-full"
+                      />
+                    </form>
+                  </CustomDialog>
             </>
           )}
         </>

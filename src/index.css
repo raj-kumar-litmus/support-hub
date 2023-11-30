@@ -61,6 +61,24 @@
   @apply h-[13px] rotate-180;
 }
 
+.home-sessions {
+  @apply pt-[3rem] pb-[4rem] sm:py-8;
+}
+
+#custom-hover .p-button,
+.p-dialog .p-button {
+  @apply bg-gray-900 border-gray-400 text-gray-400;
+}
+
+#custom-hover .p-inputtext,
+.p-dialog .p-inputtext {
+  @apply  border-none bg-gray-900 rounded-r-lg;
+}
+
+#custom-hover .p-dropdown {
+  @apply border-none bg-gray-900 rounded-lg;
+}
+
 #bar-chart {
   @apply m-0 bg-black-100;
 }
@@ -80,16 +98,16 @@
 #bar-chart .p-button,
 .p-dialog .p-button {
   @apply bg-gray-900 border-gray-400 text-gray-400;
-}
+} 
 
-#bar-chart .p-button:focus,
+ #bar-chart .p-button:focus,
 .p-dialog .p-button:focus {
   @apply shadow-none;
 }
 
 #bar-chart .p-inputtext,
-.p-dialog .p-inputtext {
-  @apply p-2 pl-0 border-none bg-gray-900 rounded-r-lg;
+#barchart .p-dialog .p-inputtext {
+  @apply py-2 border-none bg-gray-900 rounded-r-lg;
 }
 
 #bar-chart .p-inputtext:enabled:focus,
@@ -119,8 +137,9 @@
   @apply border-none rounded-lg;
 }
 
+
 #bar-chart .p-dropdown {
-  @apply border-none bg-gray-900 rounded-lg;
+  @apply !border-none bg-gray-900 rounded-lg;
 }
 
 #page-btn-submit.p-button,
@@ -146,7 +165,7 @@
 }
 
 #modal-section .p-dialog-content {
-  @apply px-4 pt-6 pb-0 bg-black-200;
+  @apply px-4 pb-0 !bg-black-200;
 }
 
 #modal-section .p-dialog-header {
@@ -175,7 +194,7 @@ button.p-button-secondary {
   @apply pt-[20px];
 }
 .opmFilters .p-dropdown-label {
-  @apply pt-[7px];
+  @apply pt-[8px];
 }
 .opmFilters .p-dropdown {
   @apply h-[38px];
@@ -188,7 +207,7 @@ button.p-button-secondary {
 }
 .opmFiltersMobile.p-dialog .p-dialog-header,
 .opmFiltersMobile.p-dialog .p-dialog-content {
-  @apply bg-[#1C1C20] border border-solid border-[#30343B] px-[1vw];
+  @apply bg-black-200 border border-solid border-[#30343B] pl-3 pr-3;
 }
 .opmFiltersMobile.p-dialog {
   @apply m-0;
@@ -212,7 +231,7 @@ button.p-button-secondary {
   @apply relative left-[10px];
 }
 .opmFiltersMobileCalendar span.p-calendar {
-  @apply relative left-[8px] h-[39px];
+  @apply relative  h-[41px];
 }
 .opmFiltersMobile .p-dropdown .p-dropdown-trigger {
   @apply w-[4vw] relative right-[14px];
@@ -268,6 +287,7 @@ button.p-button-secondary {
   @apply shadow-none;
 }
 .p-inputtext:enabled:focus,
+.p-dropdown,
 .p-inputtext:focus,
 .p-inputtext:enabled:hover,
 .p-dropdown:hover,
@@ -312,7 +332,7 @@ button.p-button-secondary {
   @apply text-white-700 font-normal;
 }
 .inputContainer .p-inputtext {
-  @apply w-[38vw] h-[37px];
+  @apply  h-[37px];
 }
 .opmFilters .p-inputtext {
   @apply text-white-700;
@@ -397,7 +417,7 @@ button.p-button-secondary {
   @apply bg-transparent !shadow-none;
 }
 .custom-popup.p-dialog {
-  @apply absolute max-h-[63vh] 480:max-h-[528px] max-[480px]:w-full w-[390px] max-[480px]:!bottom-0 ;
+  @apply absolute max-h-[63vh] 480:max-h-[528px] max-[480px]:w-full w-[390px] max-[480px]:!bottom-0;
 }
 .p-dialog-mask.p-component-overlay {
   @apply backdrop-contrast-[.85];
@@ -432,22 +452,18 @@ button.p-button-secondary {
 .popup-button .p-button {
   @apply !shadow-none !border-none;
 }
-
 .p-dialog-content::-webkit-scrollbar-thumb {
   @apply bg-gray-900 rounded-full;
 }
-
 .custom-popup .p-dialog-content {
   @apply pl-[24px] mr-[10px] pr-[14px] bg-black-200;
 }
 .custom-popup.lineitem-popup .p-dialog-content {
   @apply bg-black-100;
 }
-
 .p-dialog {
   @apply bg-black-200;
 }
-
 .p-dialog-content::-webkit-scrollbar {
   @apply w-1;
 }
@@ -499,7 +515,7 @@ button.p-button-secondary {
   @apply !bg-gray-900 border border-solid border-gray-900;
 }
 .opmFilters .p-calendar .p-inputtext {
-  @apply pl-[2.6vw] md:w-[20vw] lg:w-[12vw];
+  @apply pl-[2.6vw];
 }
 .opmComparisonFilters .p-calendar .p-inputtext {
   @apply md:w-[9vw] lg:w-[12vw];
@@ -624,13 +640,13 @@ hr.horizontalLine.blue {
   @apply pl-[2.5vw];
 }
 .calendarSessions span input {
-  @apply !pl-[6.5vw] md:!pl-[2.5vw];
+  @apply !pl-[2.2rem];
 }
 .calendarOpm span input {
   @apply !pl-[6.5vw] md:!pl-[2.5vw];
 }
 .opmFiltersMobileCalendar span input {
-  @apply !pl-[7vw];
+  @apply !pl-[7vw] border rounded-md;
 }
 
 /* Order Details */
@@ -960,4 +976,19 @@ hr.horizontalLine.blue {
 }
 .p-toast-message-content .p-image img {
   @apply max-w-max;
+}
+.opmFilters .p-dropdown:hover,
+.opmFilters .p-inputtext:hover {
+  @apply border-0;
+}
+.label-position .p-inputtext{
+  @apply pl-8
+}
+
+.p-dropdown-panel ::-webkit-scrollbar-thumb {
+  @apply !bg-black-200;
+}
+
+.p-dropdown-panel{
+  @apply bg-gray-900;
 }

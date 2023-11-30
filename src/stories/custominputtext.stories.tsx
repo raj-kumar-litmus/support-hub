@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CustomInputText from "../components/common/custominputtext";
+import CustomInputText from "../components/InputText";
 
 const meta = {
   title: "Stories/custominputtext",

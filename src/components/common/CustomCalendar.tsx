@@ -94,16 +94,18 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
   }, [hour, minute, ampm, event]);
 
   return (
-    <div className={`flex flex-col self-end ${props.containerclassname}`}>
+    <div className={`relative ${props.containerclassname} w-full self-end`}>
       <div
-        className={`text-xs font-medium pb-1 text-gray-400 relative ${props.titleclassname}`}
+        className={`text-xs font-medium pb-1 text-gray-400 relative w-full ${props.titleclassname}`}
       >
         {props.title}
       </div>
-      <img className={props.imageclassname} src={props.imgsrc} />
-      <Calendar
+      <img className={`absolute ${props.imageclassname}`} src={props.imgsrc} />
+      <Calendar    
+       
         {...props}
         readOnlyInput
+        className="w-full"
         showTime={props.showTime || false}
         hourFormat={props.hourFormat || "12"}
         placeholder={props.placeholder}

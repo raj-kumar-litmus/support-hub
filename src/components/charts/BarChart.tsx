@@ -43,7 +43,7 @@ import {
 import { fetchData } from "../../utils/fetchUtil";
 import FilteredCard from "../FilteredCard";
 import CustomCalendar from "../common/CustomCalendar";
-import CustomDropdown from "../common/CustomDropdown";
+import CustomDropdown from "../DropDown";
 import CustomIcon from "../common/CustomIcon";
 import CustomTab from "../common/customtab";
 import Loader from "../loader";
@@ -88,7 +88,7 @@ const BarChart = () => {
       value: "all",
       iconSrc: ChannelIcon,
       options: CHANNEL_LIST,
-    },
+    }, 
   ];
   const [formFields, setFormFields] = useState(DEFAULT_FORM_FIELDS);
   const [disabled, setDisabled] = useState(true);
@@ -320,7 +320,7 @@ const BarChart = () => {
             </div>
           </div>
           {showFilters && (
-            <div className="basis-full justify-between pb-0 items-end hidden sm:block lg:flex">
+            <div className="justify-between items-end hidden sm:block lg:flex">
               <div className="flex justify-start pb-4 items-end">
                 {formFields.map((form, index) => {
                   return (
@@ -331,7 +331,7 @@ const BarChart = () => {
                           title={form.title}
                           containerclassname="calendarSessions"
                           titleclassname="top-5"
-                          imageclassname="h-[20px] w-[20px] relative top-[1.75rem] left-[0.5vw] z-[1]"
+                          imageclassname="h-[20px] w-[20px] relative top-[1.75rem] left-[0.75vw] z-[1]"
                           showTime
                           timeOnly={form.name === "time"}
                           placeholder={MM_DD_YYYY_HH_MM}
@@ -350,16 +350,16 @@ const BarChart = () => {
                       {form.type === "dropdown" && (
                         <CustomDropdown
                           name={form.name}
-                          title={form.title}
+                          label={form.title}
+                          containerclassname="!min-w-[9rem]"
                           value={form.value}
+                          imageclassname="z-[1]"
                           onChange={(event) => handleFormChange(event)}
+                          dropdownIcon={<CustomImage src={ArrowDownIcon}/>}
                           options={form.options}
                           optionLabel={"label"}
-                          placeholder={""}
-                          showIcon={true}
-                          showLeftIcon={true}
-                          iconSrc={form.iconSrc}
-                          iconAlt={`${form.name}-icon`}
+                          placeholder=""
+                          icon={form.iconSrc} 
                         />
                       )}
                     </div>
@@ -493,7 +493,7 @@ const BarChart = () => {
                       showTime
                       containerclassname="calendarSessions"
                       titleclassname="top-5"
-                      imageclassname="h-[20px] w-[20px] relative top-[1.75rem] md:top-[3vh] left-[0.5vw] z-[1]"
+                      imageclassname="h-[20px] w-[20px] relative top-[2rem] md:top-[3vh] left-[2vw] z-[1]"
                       placeholder={DD_MM_YYYY}
                       value={form.value}
                       onChange={(event) => handleFormChange(event)}
@@ -518,15 +518,18 @@ const BarChart = () => {
                       name={form.name}
                       title={form.title}
                       value={form.value}
+                      imageclassname="top-[0.8rem] z-[1]"
                       onChange={(event) => handleFormChange(event)}
                       options={form.options}
                       optionLabel={"label"}
                       placeholder={""}
-                      showIcon={false}
-                      iconSrc={form.iconSrc}
-                      iconAlt={`${form.name}-icon`}
-                      className="w-full"
+                      dropdownIcon={
+                        <CustomImage src={ArrowDownIcon} />
+                      }
+                      icon={form.iconSrc}
+                      
                     />
+                     
                   </div>
                 );
               })}

@@ -12,7 +12,7 @@ import {
   Legend,
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-
+ 
 import {
   ModalEnums,
   ChartData,
@@ -20,21 +20,21 @@ import {
   OpmComparisonType,
 } from "../@types/supportHub";
 import useScreenSize from "../hooks/useScreenSize";
-
+ 
 import CustomDropdown from "../components/DropDown";
 import CustomInputText from "../components/InputText";
 import CustomCalendar from "../components/common/CustomCalendar";
 import CustomButton from "../components/Button";
+import CustomDialog from "../components/common/customdialog";
 import LineChart from "../components/LineChart";
 import FilteredCard from "../components/FilteredCard";
 import CustomImage from "../components/common/customimage";
-import CustomDialog from "../components/common/customdialog";
 import Loader from "../components/loader";
-
+ 
 import WhiteCrossIcon from "../assets/white_cross.svg";
 import DropDownIcon from "../assets/dropdownIcon.svg";
 import ArrowDownIcon from "../assets/arrown_down_white.svg";
-
+ 
 import FilterIcon from "../assets/filter.svg";
 import ChannelIcon from "../assets/channel.svg";
 import SandGlassIcon from "../assets/sandglass.svg";
@@ -78,7 +78,7 @@ import {
 } from "../config/chartConfig";
 import CustomTab from "../components/common/customtab";
 import BarChartComp from "../components/BarChartComp";
-
+ 
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -90,7 +90,7 @@ ChartJS.register(
   Legend,
   ChartDataLabels,
 );
-
+ 
 const OpmComparison: React.FC = () => {
   const [showFilters, setShowFilters] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
@@ -99,11 +99,11 @@ const OpmComparison: React.FC = () => {
     null,
   );
   const [counter, setCounter] = useState<number>(0);
-
+ 
   const { width } = useScreenSize();
   const navigate = useNavigate();
   const IS_FULLSCREEN = location?.pathname.includes("fullscreen");
-
+ 
   const DEFAULT = {
     duration: 10,
     startTimeOne: getFormattedPSTDate(), // 10 minutes ago.
@@ -112,7 +112,7 @@ const OpmComparison: React.FC = () => {
     ).toLocaleDateString("en-US"),
     channel: "",
   };
-
+ 
   const [url, setUrl] = useState<string | null>(null);
   const [options, setOptions] = useState<null | ChartOptions>(null);
   const [barChartoptions, setBarChartOptions] = useState<null | ChartOptions>(
@@ -125,7 +125,7 @@ const OpmComparison: React.FC = () => {
   const [disabled, setDisabled] = useState(true);
   const [tabValue, setTabValue] = useState<number>(0);
   const [maxOPM, setMaxOPM] = useState<number>(OPM_CHART_DEFAULT.MAX);
-
+ 
   const { hideLoader } = useContext(LoaderContext) as LoaderContextType;
   const DEFAULT_FORM_FIELDS = [
     {
@@ -178,7 +178,7 @@ const OpmComparison: React.FC = () => {
     },
   ];
   const [formFields, setFormFields] = useState(DEFAULT_FORM_FIELDS);
-
+ 
   useEffect(() => {
     const startTimeOne = getFormattedPSTDate(null, DEFAULT.duration);
     const startDateTwo = new Date(
@@ -194,12 +194,12 @@ const OpmComparison: React.FC = () => {
       }`,
     );
   }, [counter]);
-
+ 
   useEffect(() => {
     const removeEventListener = submitOnEnter(submit);
     return removeEventListener;
   }, []);
-
+ 
   const handleFormChange = (event) => {
     const data = [...formFields];
     const val = event.target.name || event.value.name;
@@ -213,13 +213,13 @@ const OpmComparison: React.FC = () => {
     setShowFilteredCards(true);
     setFormFields(data);
   };
-
+ 
   const removeFormEntry = (label) => {
     const data = [...formFields];
     data.find((e) => e.name === label).value = null;
     setFormFields(data);
   };
-
+ 
   const submit = (event) => {
     event.preventDefault();
     let str = ``;
@@ -242,7 +242,7 @@ const OpmComparison: React.FC = () => {
     setUrl(`${URL_OPM_COMPARISON}?${str}`);
     if (showFilters && width < SCREEN_WIDTH.SM) setShowFilters(false);
   };
-
+ 
   useEffect(() => {
     if (apiResponse) {
       const canvas = document.getElementById("myChart");
@@ -263,7 +263,7 @@ const OpmComparison: React.FC = () => {
           OPM_CHART_DEFAULT.STEP_SIZE +
           OPM_CHART_DEFAULT.STEP_SIZE,
       );
-
+ 
       setData({
         labels: xAxisLabels,
         datasets:
@@ -342,7 +342,7 @@ const OpmComparison: React.FC = () => {
       );
     }
   }, [apiResponse]);
-
+ 
   const getData = async () => {
     try {
       setIsLoading(true);
@@ -356,17 +356,17 @@ const OpmComparison: React.FC = () => {
       console.log(`Error occured while fetching ${url}`);
     }
   };
-
+ 
   useEffect(() => {
     (async () => {
       await getData();
     })();
   }, [url]);
-
+ 
   useEffect(() => {
     setDisabled(formFields.map((e) => e.value).filter(Boolean).length === 0);
   }, [formFields]);
-
+ 
   const onFilterClickHandler = () => {
     setShowFilters(!showFilters);
     if (width < SCREEN_WIDTH.SM) {
@@ -374,12 +374,12 @@ const OpmComparison: React.FC = () => {
       setVisible(true);
     }
   };
-
+ 
   const onModalCloseHandler = () => {
     setVisible(false);
     setShowFilters(!showFilters);
   };
-
+ 
   const getChartConfig = () => {
     let customChartConfig = null;
     if (tabValue === 0) {
@@ -398,15 +398,15 @@ const OpmComparison: React.FC = () => {
     }
     return customChartConfig;
   };
-
+ 
   const handleOPMCompExpandClick = () => {
     navigate("/opmcomparison");
   };
-
+ 
   const handleOPMCompRefreshBtnClick = () => {
     setCounter(counter + 1);
   };
-
+ 
   return (
     <>
       {location.pathname.includes("home") && isLoading && (
@@ -495,7 +495,8 @@ const OpmComparison: React.FC = () => {
             <>
               {width > SCREEN_WIDTH.SM ? (
                 <form
-                  className="flex gap-[0.5vw] sm:gap-[0.8vw] opmFilters opmComparisonFilters"
+                id="custom-hover"
+                  className="flex gap-4 opmFilters opmComparisonFilters"
                   onSubmit={submit}
                 >
                   {formFields.map((form, index) => {
@@ -503,57 +504,47 @@ const OpmComparison: React.FC = () => {
                       <React.Fragment key={index}>
                         {form.type === "text" && (
                           <CustomInputText
-                            containerclassname="relative top-[2px] md:left-[-0.2vw] lg:left-[-9px]"
                             value={form.value}
                             name={form.label}
                             placeholder={form.label}
                             onChange={(event) => handleFormChange(event)}
-                            className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px] w-[8vw] lg:w-[10vw]"
                           />
                         )}
                         {form.type === "time" && (
-                          <CustomCalendar
-                            name={form.name}
-                            containerclassname={`calendarOpmComparison ${
-                              form.name === "startDate"
-                                ? "md:!w-[18vw] lg:w-[14vw]"
-                                : ""
-                            } ${
-                              form.name === "endDate"
-                                ? "md:!w-[11vw] lg:!w-[12vw]"
-                                : ""
-                            } `}
-                            titleclassname="top-5"
-                            imageclassname="h-[20px] w-[20px] relative top-[1.75rem] left-[0.5vw] z-[1]"
-                            title={form.label}
-                            placeholder={MM_DD_YYYY_HH_MM}
-                            showTime={form.showTime}
-                            iconPos={form.iconPos || "left"}
-                            imgsrc={form.imgsrc}
-                            onChange={(event) => handleFormChange(event)}
-                            value={form.value}
-                            maxDate={
-                              form.name === "startDate" ||
-                              form.name === "endDate"
-                                ? CURRENT_PST_DATE
-                                : null
-                            }
-                          />
+                           <CustomCalendar
+                           name={form.name}
+                           titleclassname="top-[1.25rem]"
+                           containerclassname="lg:max-w-[11rem]"
+                           imageclassname="h-[20px] w-[20px] relative top-[1.75rem] left-[0.75vw] z-[1]"
+                           title={form.label}
+                           placeholder={MM_DD_YYYY_HH_MM}
+                           showTime={form.showTime}
+                           iconPos={form.iconPos || "left"}
+                           imgsrc={form.imgsrc}
+                           onChange={(event) => handleFormChange(event)}
+                           value={form.value}
+                           maxDate={
+                             form.name === "startDate" ||
+                             form.name === "endDate"
+                               ? CURRENT_PST_DATE
+                               : null
+                           }
+                         />
                         )}
                         {form.type === "dropdown" && (
-                          <CustomDropdown
-                            name={form.name}
-                            value={form.value}
-                            containerclassname="opmComparionInput"
-                            onChange={(e) => handleFormChange(e)}
-                            imageclassname="relative left-[25px] z-[1]"
-                            dropdownIcon={<CustomImage src={ArrowDownIcon} />}
-                            icon={form.icon}
-                            options={form.options}
-                            label={form.label}
-                            optionLabel="name"
-                            placeholder=""
-                          />
+                         <CustomDropdown
+                         name={form.name}
+                         value={form.value}
+                         containerclassname="max-w-[8rem]"
+                         onChange={(e) => handleFormChange(e)}
+                         imageclassname="z-[1]"
+                         dropdownIcon={<CustomImage src={ArrowDownIcon} />}
+                         icon={form.icon}
+                         options={form.options}
+                         label={form.label}
+                         optionLabel="name"
+                         placeholder=""
+                       />
                         )}
                       </React.Fragment>
                     );
@@ -571,12 +562,12 @@ const OpmComparison: React.FC = () => {
                   <CustomDialog
                     header="Filters"
                     visible={visible}
-                    className="!bg-slate-900 filtersModal filtersModal-popup opmFiltersMobile"
+                    className="!bg-slate-900 filtersModal filtersModal-popup opmFiltersMobile "
                     onHide={onModalCloseHandler}
                     closeIcon={<CustomImage src={WhiteCrossIcon} />}
-                  >
+                    >
                     <form
-                      className="grid grid-cols-2 grid-rows-3 gap-x-5 gap-y-5"
+                      className="grid grid-cols-2 grid-rows-3 gap-x-3 gap-y-5"
                       onSubmit={submit}
                     >
                       {formFields.map((form, index) => {
@@ -596,8 +587,8 @@ const OpmComparison: React.FC = () => {
                               <CustomCalendar
                                 name={form.name}
                                 containerclassname="opmFiltersMobileCalendar"
-                                imageclassname="h-[20px] w-[20px] relative top-[1.75rem] md:top-[3vh] left-[3.5vw] z-[1]"
-                                titleclassname="left-[2vw] md:left-[0] top-5"
+                                imageclassname="h-[20px] w-[20px] relative top-[1.75rem] md:top-[3vh] left-[2vw] z-[1]"
+                                titleclassname="top-5"
                                 title={form.label}
                                 showTime={form.showTime}
                                 iconPos={form.iconPos || "left"}
@@ -617,11 +608,10 @@ const OpmComparison: React.FC = () => {
                                 value={form.value}
                                 name={form.name}
                                 dropdownIcon={
-                                  <CustomImage src={DropDownIcon} />
+                                  <CustomImage src={ArrowDownIcon} />
                                 }
                                 onChange={(e) => handleFormChange(e)}
-                                containerclassname="w-[44vw]"
-                                imageclassname="relative left-[25px] z-[1]"
+                                imageclassname="z-[1]"
                                 icon={form.icon}
                                 options={form.options}
                                 label={form.label}
@@ -748,5 +738,5 @@ const OpmComparison: React.FC = () => {
     </>
   );
 };
-
+ 
 export default OpmComparison;

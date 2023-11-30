@@ -2,8 +2,8 @@ import { FC, KeyboardEvent } from "react";
 import HeaderSearch from "../../assets/headersearch.svg";
 import CustomButton from "../Button";
 import CustomImage from "./customimage";
-import CustomInputText from "./custominputtext";
-
+import CustomInputText from "../InputText";
+ 
 type Props = {
   showSearchButton?: boolean;
   openSearchField?: boolean;
@@ -15,7 +15,7 @@ type Props = {
   placeholder: string;
   className?: string;
 };
-
+ 
 const SearchBar: FC<Props> = ({
   showSearchButton,
   openSearchField,
@@ -30,13 +30,6 @@ const SearchBar: FC<Props> = ({
   return (
     <div className="block">
       <span className="search-input p-input-icon-left hidden sm:block">
-        {!hideIcon && (
-          <CustomImage
-            src={HeaderSearch}
-            alt="Search"
-            className="absolute left-5 bottom-3"
-          />
-        )}
         <CustomInputText
           type="text"
           className={`w-[15.6rem] h-[2.5rem] !rounded-full focus:outline-none  bg-gray-900 text-gray-300 placeholder:text-gray-300 placeholder:font-helvetica placeholder:font-normal !shadow-none !border-none ${className}`}
@@ -44,6 +37,8 @@ const SearchBar: FC<Props> = ({
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
           onKeyDown={(e) => onSearch(e)}
+          icon={HeaderSearch}
+          imageclassname="!top-3 left-4"
         />
       </span>
       {showSearchButton && (
@@ -58,5 +53,5 @@ const SearchBar: FC<Props> = ({
     </div>
   );
 };
-
+ 
 export default SearchBar;

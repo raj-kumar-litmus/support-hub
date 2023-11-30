@@ -1,12 +1,12 @@
 import { FC, KeyboardEvent } from "react";
-import CustomInputText from "./custominputtext";
-
+import CustomInputText from "../InputText";
+ 
 type Props = {
   searchValue: string;
   setSearchValue: (a: string) => void;
   onSearch: (e: KeyboardEvent<HTMLInputElement>) => void;
 };
-
+ 
 const SearchField: FC<Props> = ({ searchValue, setSearchValue, onSearch }) => {
   return (
     <div className="flex sm:hidden h-[56px] bg-black-200 border-solid border-b border-gray-900 border-1 px-5 py-[9px] absolute top-[56px] w-full z-50">
@@ -21,5 +21,6 @@ const SearchField: FC<Props> = ({ searchValue, setSearchValue, onSearch }) => {
     </div>
   );
 };
-
+ 
 export default SearchField;
+ 
