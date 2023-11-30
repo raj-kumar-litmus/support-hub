@@ -20,6 +20,8 @@ export const fetchData = async (
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error while fetching data:", error);
+    if (error.message === "Failed to fetch") {
+      window.location.replace("/connectivity-issues");
+    }
   }
 };

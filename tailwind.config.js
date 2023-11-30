@@ -65,7 +65,11 @@ export default {
           100: "#FDA44F",
         },
       },
+      maxWidth: {
+        200: "200px",
+      },
       spacing: {
+        // height, width, margin, apdding.
         7: "7px",
         13: "13px",
         18: "18px",
@@ -84,6 +88,7 @@ export default {
       },
       borderRadius: {
         8: "8px",
+        12: "12px",
       },
       fontSize: {
         14: "14px",

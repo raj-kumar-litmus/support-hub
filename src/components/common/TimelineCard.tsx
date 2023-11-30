@@ -21,7 +21,7 @@ const TimelineCard: React.FC<CardProps> = ({
           {orderTime}
         </span>
       </div>
-      <div className="relative max-w-[200px] flex justify-center  bottom-[3%] flex-col left-[10%] ">
+      <div className="relative max-w-200 flex justify-center  bottom-[3%] flex-col left-[10%] ">
         <span className="text-gray-300 text-sm text-left leading-[22px] font-bold">
           {statusName}
         </span>

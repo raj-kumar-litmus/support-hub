@@ -1,6 +1,6 @@
 import { FC } from "react";
 import CustomImage from "./customimage";
-import { IPromotion } from "../../@types/promotion";
+import { IPromotion } from "../../@types/OrderDetails";
 import CheckCircle from "../../assets/check_circle.svg";
 import CustomCard from "./customcard";
 
@@ -16,7 +16,7 @@ const PromotionCard: FC<Props> = ({ promotion }) => {
         <div className="flex items-center px-4 pt-4 pb-2 border-solid border-b border-b-black-400">
           <CustomImage src={CheckCircle} alt="promotion" />
           <span
-            className="text-gray-300 text-[14px] leading-[17px] pl-4 uppercase font-medium whitespace-nowrap text-ellipsis overflow-hidden w-[15rem] sm:w-[20rem]"
+            className="text-gray-300 text-[14px] leading-[17px] pl-4 uppercase font-medium whitespace-nowrap hover:whitespace-normal text-ellipsis overflow-hidden hover:overflow-visible w-[15rem] sm:w-[20rem] hover:h-auto"
             title={promotion.claimableId}
           >
             {promotion.claimableId}
