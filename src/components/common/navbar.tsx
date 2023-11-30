@@ -79,7 +79,7 @@ const Navbar: FC<Props> = ({
           <CustomImage
             src={QuickLinksIcon}
             onClick={() => setShowQuickLinks(!showQuickLinks)}
-            className="cursor-pointer h-[24px] w-[24px] right-[4rem] top-[18px] sm:right-[40px] absolute"
+            className="cursor-pointer h-[24px] w-[24px] right-[4rem] top-[1.1rem] sm:right-[2.5rem] absolute"
           />
         )}
         <div className="sm:mr-[3rem]">
@@ -95,7 +95,7 @@ const Navbar: FC<Props> = ({
           />
         </div>
       </div>
-      {!showSidePaneGrid && showQuickLinks && <QuickLinks />}
+      {!showSidePaneGrid && showQuickLinks && <QuickLinks showQuickLinks={showQuickLinks} setShowQuickLinks={setShowQuickLinks} />}
     </div>
   );
 };
