@@ -1,24 +1,20 @@
 import { Calendar } from "primereact/calendar";
-import { InputNumberValueChangeEvent } from "primereact/inputnumber";
 import { FC, useEffect, useState } from "react";
 import CustomImage from "./customimage";
 import CustomToast from "./CustomToast";
 import CustomInputNumber from "./CustomInputNumber";
 import ArrowDown from "../../assets/arrow_down.svg";
 import ArrowUp from "../../assets/arrow_up.svg";
-import { CustomCalendarProps } from "../../@types/BarChart";
-import { AM_PM_OPTIONS, CALENDAR_TOAST_MESSAGE } from "../../constants/appConstants";
+import {
+  CustomCalendarProps,
+  ManualInputTimeProps,
+} from "../../@types/components/commonTypes";
+import {
+  AM_PM_OPTIONS,
+  CALENDAR_TOAST_MESSAGE,
+} from "../../constants/appConstants";
 import { CURRENT_PST_DATE } from "../../utils/dateTimeUtil";
 import { convert12to24Hour, convert24to12Hour } from "../utils/Utils";
-
-type ManualInputTimeProps = {
-  hour: number;
-  minute: number;
-  handleHourChange: (e: InputNumberValueChangeEvent) => void;
-  handleMinuteChange: (e: InputNumberValueChangeEvent) => void;
-  ampm: string;
-  toggleAmPmChange: (e) => void;
-};
 
 const CustomCalendar: FC<CustomCalendarProps> = (props) => {
   const [hour, setHour] = useState<number>();
@@ -54,16 +50,20 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
     _date.setHours(_hour);
     _date.setMinutes(minute);
     setShowFutureDateToast(false);
-    if (props.maxDate && (_date > props.maxDate)) {
+    if (props.maxDate && _date > props.maxDate) {
       setShowFutureDateToast(true);
       setHour(convert24to12Hour(CURRENT_PST_DATE.getHours()).hour12);
       setMinute(CURRENT_PST_DATE.getMinutes());
       setAmPm(convert24to12Hour(CURRENT_PST_DATE.getHours()).ampm);
-      setDate(CURRENT_PST_DATE)
+      setDate(CURRENT_PST_DATE);
       return;
     }
     setDate(_date);
-    const event = { ...e, value: _date, target: { value: _date, name: props.name } };
+    const event = {
+      ...e,
+      value: _date,
+      target: { value: _date, name: props.name },
+    };
     props.onChange(event);
   };
 
@@ -111,17 +111,19 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
         dateFormat="mm/dd/yy"
         onChange={(e) => onChange(e)}
         iconPos={props.iconPos}
-        footerTemplate={() => (props.showTime &&
-          <ManualInputTime
-            hour={hour}
-            minute={minute}
-            handleHourChange={handleHourChange}
-            handleMinuteChange={handleMinuteChange}
-            ampm={ampm}
-            toggleAmPmChange={toggleAmPmChange}
-          />
-        )
-        } />
+        footerTemplate={() =>
+          props.showTime && (
+            <ManualInputTime
+              hour={hour}
+              minute={minute}
+              handleHourChange={handleHourChange}
+              handleMinuteChange={handleMinuteChange}
+              ampm={ampm}
+              toggleAmPmChange={toggleAmPmChange}
+            />
+          )
+        }
+      />
       <CustomToast
         onHide={() => setShowFutureDateToast(false)}
         showToast={showFutureDateToast}
@@ -133,68 +135,57 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
   );
 };
 
-const ManualInputTime: FC<ManualInputTimeProps> = ({
-  hour,
-  minute,
-  handleHourChange,
-  handleMinuteChange,
-  ampm,
-  toggleAmPmChange,
-}) => {
+const ManualInputTime: FC<ManualInputTimeProps> = (props) => {
   return (
     <div className="flex justify-evenly w-[12rem] mx-auto items-center">
       <CustomInputNumber
-        value={hour < 1 ? 12 : hour}
+        value={props.hour < 1 ? 12 : props.hour}
         step={1}
-        onValueChange={(e) => handleHourChange(e)}
+        onValueChange={(e) => props.handleHourChange(e)}
         showButtons
         buttonLayout="vertical"
         min={0}
         max={12}
-        prefix={hour && hour < 10 && "0"}
-        incrementButtonIcon={<CustomImage
-          src={ArrowUp}
-          className="cursor-pointer"
-        />}
-        decrementButtonIcon={<CustomImage
-          src={ArrowDown}
-          className="cursor-pointer"
-        />
+        prefix={props.hour && props.hour < 10 && "0"}
+        incrementButtonIcon={
+          <CustomImage src={ArrowUp} className="cursor-pointer" />
         }
-      /> :
+        decrementButtonIcon={
+          <CustomImage src={ArrowDown} className="cursor-pointer" />
+        }
+      />{" "}
+      :
       <CustomInputNumber
-        value={minute}
-        onValueChange={(e) => handleMinuteChange(e)}
+        value={props.minute}
+        onValueChange={(e) => props.handleMinuteChange(e)}
         showButtons
         buttonLayout="vertical"
         step={1}
         min={0}
         max={59}
-        prefix={minute < 10 && "0"}
-        incrementButtonIcon={<CustomImage
-          src={ArrowUp}
-          className="cursor-pointer"
-        />}
-        decrementButtonIcon={<CustomImage
-          src={ArrowDown}
-          className="cursor-pointer"
-        />
+        prefix={props.minute < 10 && "0"}
+        incrementButtonIcon={
+          <CustomImage src={ArrowUp} className="cursor-pointer" />
         }
-      />:
+        decrementButtonIcon={
+          <CustomImage src={ArrowDown} className="cursor-pointer" />
+        }
+      />
+      :
       <div className="ampm-comp px-[1rem] min-w-[4rem] pt-4">
         <CustomImage
           src={ArrowUp}
           className="cursor-pointer"
-          onClick={toggleAmPmChange}
+          onClick={props.toggleAmPmChange}
         />
-        <div className="my-[0.3rem] text-base">{ampm}</div>
+        <div className="my-[0.3rem] text-base">{props.ampm}</div>
         <CustomImage
           src={ArrowDown}
           className="cursor-pointer"
-          onClick={toggleAmPmChange}
+          onClick={props.toggleAmPmChange}
         />
       </div>
-    </div >
+    </div>
   );
 };
 export default CustomCalendar;

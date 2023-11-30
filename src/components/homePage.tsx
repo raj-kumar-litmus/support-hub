@@ -38,39 +38,29 @@ import { LoaderContext, LoaderContextType } from "../context/loaderContext";
 import { getFormattedPSTDate } from "../utils/dateTimeUtil";
 import { fetchData } from "../utils/fetchUtil";
 
-const CardTitle = ({
-  title,
-  icon,
-  classname = "",
-}: {
-  title: string;
-  icon: any;
-  classname?: string;
-}) => {
+const CardTitle = (props: { title: string; icon: any; classname?: string }) => {
+  const { classname = "" } = props;
   return (
     <div className={`${classname} flex justify-between`}>
-      <h6>{title}</h6>
-      <CustomImage src={icon} />
+      <h6>{props.title}</h6>
+      <CustomImage src={props.icon} />
     </div>
   );
 };
 
-const OPMCards = ({ value }: { value: number }) => {
+const OPMCards = (props: { value: number }) => {
   return (
     <div className="flex items-end">
-      <span className="text-2xl text-gray-200">{value}</span>
+      <span className="text-2xl text-gray-200">{props.value}</span>
     </div>
   );
 };
 
-const ComparisonCards = ({
-  today,
-  lastDay,
-}: {
+const ComparisonCards = (props: {
   today: number;
   lastDay: number;
 }) => {
-  const difference = lastDay - today || 0;
+  const difference = props.lastDay - props.today || 0;
   const kFormatter = (num) => {
     return Math.abs(num) > 999
       ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(0) + "k"
@@ -80,13 +70,13 @@ const ComparisonCards = ({
     <div className="flex">
       <div className="flex flex-col pr-1 sm:pr-2 justify-between">
         <span className="text-[10px]">{TODAY}</span>
-        <span className="text-gray-200 text-xl">{kFormatter(today) || 0}</span>
+        <span className="text-gray-200 text-xl">{kFormatter(props.today) || 0}</span>
       </div>
       <div className="border border-r border-black-400 h-[2.5rem] m-auto"></div>
       <div className="flex flex-col px-1 sm:px-2 justify-between">
         <span className="text-[10px]">{LASTDAY}</span>
         <span className="text-gray-200 text-xl">
-          {kFormatter(lastDay) || 0}
+          {kFormatter(props.lastDay) || 0}
         </span>
       </div>
       <div className="border border-r border-black-400 h-[2.5rem] m-auto"></div>
@@ -136,7 +126,7 @@ const HomePage = () => {
   const [refreshTime, setRefreshTime] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { showGlobalLoader, hideLoader } = useContext(
-    LoaderContext,
+    LoaderContext
   ) as LoaderContextType;
 
   const { width } = useScreenSize();
@@ -145,13 +135,13 @@ const HomePage = () => {
     try {
       const opmData = await fetchData(
         `${url}?period=${HOME_PAGE_REFERSH_DURATION}&starttime=${getFormattedPSTDate(
-          date,
+          date
         )}`,
-        {},
+        {}
       );
       const totalOrders = opmData.reduce(
         (acc, obj) => acc + parseInt(obj.orderCount),
-        0,
+        0
       );
       setTotalOPM(totalOrders);
       setAvgOPM(Math.round(totalOrders / HOME_PAGE_REFERSH_DURATION));
@@ -165,13 +155,13 @@ const HomePage = () => {
     try {
       const opmData = await fetchData(
         `${url}?period=${HOME_PAGE_REFERSH_DURATION}&starttime=${getFormattedPSTDate(
-          date,
+          date
         )}`,
-        {},
+        {}
       );
       const totalOrders = opmData.reduce(
         (acc, obj) => acc + parseInt(obj.orderCount),
-        0,
+        0
       );
       setLastDayTotalOPM(totalOrders);
       setLastDayAvgOPM(Math.round(totalOrders / HOME_PAGE_REFERSH_DURATION));

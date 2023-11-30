@@ -1,11 +1,6 @@
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
-import { CommerceItemData } from "../../@types/OrderDetails";
-import { DCOpenOrders } from "../../@types/dcOpenOrders";
-
-type TableProps = {
-  tableData: DCOpenOrders[] | CommerceItemData[];
-};
+import { TableProps } from "../../@types/components/commonTypes";
 
 const Table = (props: TableProps) => {
   const keyArray = Object.keys(props.tableData[0])?.map((key) => key);

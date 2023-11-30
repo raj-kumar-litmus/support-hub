@@ -1,14 +1,7 @@
 import { InputNumber, InputNumberProps } from "primereact/inputnumber";
+import { CustomInputNumberProps } from "../../@types/components/commonTypes";
 
-interface Props extends InputNumberProps {
-  containerclassname?: string;
-  labelclassname?: string;
-  label?: string;
-  incrementButtonIcon?: any;
-  decrementButtonIcon?: any;
-}
-
-const CustomInputNumber = (props: Props) => (
+const CustomInputNumber = (props: CustomInputNumberProps) => (
   <div className={props.containerclassname}>
     <InputNumber
       inputId="integeronly"

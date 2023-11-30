@@ -54,7 +54,7 @@ import {
   OmsOrderStatus,
   OrderData,
   IPromotion,
-} from "../../@types/OrderDetails";
+} from "../../@types/pages/OrderDetails";
 import { fetchData } from "../../utils/fetchUtil";
 import { getTableHeaders } from "../utils/Utils";
 

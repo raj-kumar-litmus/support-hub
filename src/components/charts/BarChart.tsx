@@ -18,7 +18,7 @@ import openNewPageIcon from "../../assets/open_in_new.svg";
 import refreshIcon from "../../assets/refresh_icon.svg";
 import SandGlassIcon from "../../assets/sandglass.svg";
 import CalendarIcon from "../../assets/white_calendar.svg";
-import { ChartData, SessionData } from "../../@types/BarChart";
+import { ChartData, SessionData } from "../../@types/pages/Sessions";
 import { BAR_CHART_OPTIONS } from "../../config/chartConfig";
 import { URL_SESSIONS } from "../../constants/apiConstants";
 import {

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { CustomIconProps } from "../../@types/BarChart";
+import { CustomIconProps } from "../../@types/components/commonTypes";
 
 const CustomIcon: FC<CustomIconProps> = (props) => (
   <img {...props} style={{ width: props.width, height: props.height }} />

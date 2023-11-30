@@ -39,7 +39,7 @@ import {
   ChartOptions,
   ModalEnums,
   OpmComparisonType,
-} from "../@types/supportHub";
+} from "../@types/pages/opmCharts";
 import { submitOnEnter } from "../components/utils/Utils";
 import {
   OPM_COMPARISON_BAR_OPTIONS,
@@ -64,7 +64,8 @@ import {
   SCREEN_WIDTH,
   NO_OF_ORDERS,
 } from "../constants/appConstants";
-import { LoaderContext, LoaderContextType } from "../context/loaderContext";
+import { LoaderContext } from "../context/loaderContext";
+import { LoaderContextType } from "../@types/components/commonTypes";
 import {
   CURRENT_PST_DATE,
   DATE_TIME_FORMAT_3,

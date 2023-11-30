@@ -1,20 +1,11 @@
 import { Card } from "primereact/card";
 import { FC } from "react";
+import { HomeCardProps } from "../../@types/components/commonTypes";
 
-type Props = {
-  title: string;
-  icon: string;
-};
-
-interface HomeCardProps {
-  title: FC<Props>;
-  value: FC;
-}
-
-const HomeCard: FC<HomeCardProps> = ({ title, value }) => {
+const HomeCard: FC<HomeCardProps> = (props) => {
   return (
-    <Card title={title} className="home-card bg-black-200 text-gray-400">
-      <>{value}</>
+    <Card title={props.title} className="home-card bg-black-200 text-gray-400">
+      <>{props.value}</>
     </Card>
   );
 };

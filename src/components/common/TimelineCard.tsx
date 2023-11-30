@@ -1,16 +1,8 @@
 import React from "react";
+import { TimelineCardProps } from "../../@types/components/commonTypes";
 
-interface CardProps {
-  date: string;
-  statusName: string;
-  statusDescription: string;
-}
-const TimelineCard: React.FC<CardProps> = ({
-  date,
-  statusName,
-  statusDescription,
-}) => {
-  const [orderDate, orderTime] = date.split(" ");
+const TimelineCard: React.FC<TimelineCardProps> = (props) => {
+  const [orderDate, orderTime] = props.date.split(" ");
   return (
     <div className="flex flex-row  h-[75px] w-[342px] font-helvetica bg-black-300 rounded-lg mt-3">
       <div className=" !w-28 flex justify-center items-center flex-col">
@@ -23,13 +15,13 @@ const TimelineCard: React.FC<CardProps> = ({
       </div>
       <div className="relative max-w-[200px] flex justify-center  bottom-[3%] flex-col left-[10%] ">
         <span className="text-gray-300 text-sm text-left leading-[22px] font-bold">
-          {statusName}
+          {props.statusName}
         </span>
         <div
-          title={statusDescription}
+          title={props.statusDescription}
           className="h-auto text-gray-400 text-xs text-left font-normal line-clamp-1  text-ellipsis overflow-hidden"
         >
-          {statusDescription}
+          {props.statusDescription}
         </div>
       </div>
     </div>

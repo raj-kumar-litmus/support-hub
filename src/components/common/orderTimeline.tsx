@@ -1,13 +1,9 @@
 import React from "react";
 import TimelineCard from "./TimelineCard";
 import Stepper from "./TimelineStepper";
-import { orderTimeline } from "../../@types/OrderDetails";
+import { TimelineProps } from "../../@types/pages/OrderDetails";
 
-interface TimelineProps {
-  orderMap: orderTimeline;
-}
-
-const Timeline: React.FC<TimelineProps> = ({ orderMap }) => {
+const Timeline: React.FC<TimelineProps> = (props) => {
   const getStatusDate = (dateX: string) => {
     const year = dateX.substring(0, 4);
     const month = dateX.substring(4, 6);
@@ -22,9 +18,9 @@ const Timeline: React.FC<TimelineProps> = ({ orderMap }) => {
 
   return (
     <div className="  flex flex-col items-center">
-      {Object.keys(orderMap).map((timestamp, index) => {
-        const orderDetails = orderMap[timestamp][0];
-        const isLast = index === Object.keys(orderMap).length - 1;
+      {Object.keys(props.orderMap).map((timestamp, index) => {
+        const orderDetails = props.orderMap[timestamp][0];
+        const isLast = index === Object.keys(props.orderMap).length - 1;
 
         return (
           <div key={timestamp}>

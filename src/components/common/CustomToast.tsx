@@ -1,18 +1,8 @@
-import { Toast, ToastProps } from "primereact/toast";
+import { Toast } from "primereact/toast";
 import { useEffect, useRef } from "react";
+import { CustomToastProps } from "../../@types/components/commonTypes";
 
-interface Props extends ToastProps {
-  showToast?: boolean;
-  severity?: string;
-  summary?: string;
-  detail?: string;
-  life?: number;
-  closable?: boolean;
-  messageIcon?: any;
-  className?: string;
-}
-
-const CustomToast = (props: Props) => {
+const CustomToast = (props: CustomToastProps) => {
   const ref = useRef(null);
 
   useEffect(() => {

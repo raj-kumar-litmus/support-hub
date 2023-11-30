@@ -16,16 +16,7 @@ import RotateIcon from "../assets/rotate.svg";
 import CustomImage from "./common/customimage";
 import { SCREEN_WIDTH } from "../constants/appConstants";
 import { increaseLegendSpacing } from "./utils/Utils";
-
-interface Props {
-  options: ChartOptions<"bar"> | any;
-  data: ChartData<"bar">;
-  className?: string;
-  defaultClasses?: boolean;
-  title: string;
-  isFullScreen?: boolean;
-  plugins?: boolean;
-}
+import { BarChartCompProps } from "../@types/components/commonTypes";
 
 ChartJS.register(
   CategoryScale,
@@ -33,19 +24,11 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend,
+  Legend
 );
 
-const BarChartComp = ({
-  title,
-  options,
-  data,
-  className,
-  defaultClasses,
-  isFullScreen = false,
-  plugins,
-}: Props) => {
-  const [rotate, setRotate] = useState<boolean>(isFullScreen);
+const BarChartComp = (props: BarChartCompProps) => {
+  const [rotate, setRotate] = useState<boolean>(props.isFullScreen);
   const { width } = useScreenSize();
   const location = useLocation();
   const navigate = useNavigate();
@@ -60,10 +43,14 @@ const BarChartComp = ({
   };
 
   return (
-    <div className={`${className} ${!defaultClasses && "bg-black-200"}`}>
+    <div
+      className={`${props.className} ${
+        !props.defaultClasses && "bg-black-200"
+      }`}
+    >
       {width < SCREEN_WIDTH.SM && location.pathname.includes("opm") && (
         <div className="flex items-center justify-between mb-4">
-          <p className="text-white-500">{title}</p>
+          <p className="text-white-500">{props.title}</p>
           <div className="flex items-center">
             <div className={`bg-black-400 rounded-full relative p-2`}>
               <CustomImage
@@ -76,14 +63,14 @@ const BarChartComp = ({
           </div>
         </div>
       )}
-      {plugins || width < SCREEN_WIDTH.SM ? (
+      {props.plugins || width < SCREEN_WIDTH.SM ? (
         <Bar
-          options={options}
-          data={data}
+          options={props.options}
+          data={props.data}
           plugins={increaseLegendSpacing(20)}
         />
       ) : (
-        <Bar options={options} data={data} />
+        <Bar options={props.options} data={props.data} />
       )}
     </div>
   );

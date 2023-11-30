@@ -35,12 +35,6 @@ interface Dataset {
   backgroundColor?: any;
 }
 
-// interface CustomLabel {
-//   text?: string | null;
-//   fillStyle?: string;
-//   strokeStyle?: string;
-// }
-
 interface DataPoint {
   timestamp: string;
   orderCount: string;

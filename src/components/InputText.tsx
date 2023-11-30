@@ -1,61 +1,38 @@
 import { InputText } from "primereact/inputtext";
 import React from "react";
+import { CustomInputTextProps } from "../@types/components/commonTypes";
 
-interface Props {
-  onChange: any;
-  value?: string;
-  name?: string;
-  id?: string;
-  icon?: string;
-  imageclassname?: string;
-  label?: string;
-  placeholder?: string;
-  className?: string;
-  containerclassname?: string;
-}
-
-const CustomInputText: React.FC<Props> = ({
-  onChange,
-  value,
-  className,
-  imageclassname,
-  containerclassname,
-  name,
-  label,
-  icon,
-  id,
-  placeholder,
-}) => {
-  return icon ? (
-    <div className={`flex flex-col lg:w-[8vw] ${containerclassname}`}>
+const CustomInputText: React.FC<CustomInputTextProps> = (props) => {
+  return props.icon ? (
+    <div className={`flex flex-col lg:w-[8vw] ${props.containerclassname}`}>
       <label className="labelClass relative mb-[5px] mt-[14px] ml-[1.2vw] sm:ml-[1.25rem] sm:w-[10vw]">
-        {label}
+        {props.label}
       </label>
       <span className="p-input-icon-left flex">
-        <img className={imageclassname} src={icon} />
+        <img className={props.imageclassname} src={props.icon} />
         <InputText
-          value={value}
-          name={name}
-          placeholder={placeholder}
-          onChange={onChange}
-          className={className}
-          id={id}
+          value={props.value}
+          name={props.name}
+          placeholder={props.placeholder}
+          onChange={props.onChange}
+          className={props.className}
+          id={props.id}
           type="text"
         />
       </span>
     </div>
   ) : (
-    <div className={`flex flex-col md:w-[8vw] ${containerclassname}`}>
+    <div className={`flex flex-col md:w-[8vw] ${props.containerclassname}`}>
       <label className="labelClass relative mb-[5px] mt-[14px] ml-[1.2vw]">
-        {label}
+        {props.label}
       </label>
       <InputText
-        value={value}
-        name={name}
-        placeholder={placeholder}
-        onChange={onChange}
-        className={className}
-        id={id}
+        value={props.value}
+        name={props.name}
+        placeholder={props.placeholder}
+        onChange={props.onChange}
+        className={props.className}
+        id={props.id}
         type="text"
       />
     </div>

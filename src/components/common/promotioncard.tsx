@@ -2,14 +2,10 @@ import { FC } from "react";
 import CustomCard from "./customcard";
 import CustomImage from "./customimage";
 import CheckCircle from "../../assets/check_circle.svg";
-import { IPromotion } from "../../@types/OrderDetails";
+import { PromotionCardProps, InfoFieldProps } from "../../@types/pages/OrderDetails";
 import { DISCOUNT_AMOUNT, PROMOTION } from "../../constants/appConstants";
 
-type Props = {
-  promotion: IPromotion;
-};
-
-const PromotionCard: FC<Props> = ({ promotion }) => {
+const PromotionCard: FC<PromotionCardProps> = (props) => {
   return (
     <CustomCard
       className="my-2 promotion-card text-gray-300 bg-black-300 shadow-[0px_2px_6px_#00000033] rounded-lg"
@@ -18,18 +14,18 @@ const PromotionCard: FC<Props> = ({ promotion }) => {
           <CustomImage src={CheckCircle} alt="promotion" />
           <span
             className="text-gray-300 text-[14px] leading-[17px] pl-4 uppercase font-medium whitespace-nowrap text-ellipsis overflow-hidden w-[15rem] sm:w-[20rem]"
-            title={promotion.claimableId}
+            title={props.promotion.claimableId}
           >
-            {promotion.claimableId}
+            {props.promotion.claimableId}
           </span>
         </div>
       }
     >
       <div className="flex p-0 justify-between">
-        <InfoField title={PROMOTION} data={promotion.promotionId} />
+        <InfoField title={PROMOTION} data={props.promotion.promotionId} />
         <InfoField
           title={DISCOUNT_AMOUNT}
-          data={Number(promotion.discAmt).toFixed(2)}
+          data={Number(props.promotion.discAmt).toFixed(2)}
           className="text-right"
         />
       </div>
@@ -37,23 +33,15 @@ const PromotionCard: FC<Props> = ({ promotion }) => {
   );
 };
 
-const InfoField = ({
-  title,
-  data,
-  className,
-}: {
-  title: string;
-  data: string | number;
-  className?: string;
-}) => {
+const InfoField = (props: InfoFieldProps) => {
   return (
     <div className="block text-[12px] font-normal max-w-[10rem] min-w-[7rem]">
-      <div className={`text-gray-400 ${className}`}>{title}</div>
+      <div className={`text-gray-400 ${props.className}`}>{props.title}</div>
       <div
-        className={`text-gray-300 whitespace-nowrap text-ellipsis overflow-hidden ${className}`}
-        title={data.toString()}
+        className={`text-gray-300 whitespace-nowrap text-ellipsis overflow-hidden ${props.className}`}
+        title={props.data.toString()}
       >
-        {data}
+        {props.data}
       </div>
     </div>
   );

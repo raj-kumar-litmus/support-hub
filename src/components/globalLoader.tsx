@@ -1,13 +1,12 @@
 import React from "react";
 import GlobalLoaderIcon from "../assets/loader.gif";
 import CustomImage from "./common/customimage";
+import { LoaderProps } from "../@types/components/commonTypes";
 
-interface LoaderProps {
-  className?: string;
-}
-
-const GlobalLoader: React.FC<LoaderProps> = ({ className }) => {
-  return <CustomImage className={`${className}`} src={GlobalLoaderIcon} />;
+const GlobalLoader: React.FC<LoaderProps> = (props) => {
+  return (
+    <CustomImage className={`${props.className}`} src={GlobalLoaderIcon} />
+  );
 };
 
 export default GlobalLoader;

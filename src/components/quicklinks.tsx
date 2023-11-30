@@ -6,25 +6,14 @@ import CustomImage from "./common/customimage";
 import CustomTab from "./common/customtab";
 import ArrowTop from "../assets/arrow_top.svg";
 import ArrowTopWhite from "../assets/arrow_top_white.svg";
-import { IQuickLink } from "../@types/quicklinks";
-import { QUICK_LINKS, QUICK_LINKS_HEADER, SEE_MORE } from "../constants/appConstants";
+import { QuickLinksProps, QuickLinkBoxProps } from "../@types/pages/quicklinks";
+import {
+  QUICK_LINKS,
+  QUICK_LINKS_HEADER,
+  SEE_MORE,
+} from "../constants/appConstants";
 
-type QuickLinkBoxProps = {
-  link: IQuickLink;
-  hoveredIndex: number;
-  setHoveredIndex: (a: number) => void;
-  index: number;
-};
-
-type QuickLinksProps = {
-  showQuickLinks: boolean;
-  setShowQuickLinks: (a: boolean) => void;
-};
-
-const QuickLinks: FC<QuickLinksProps> = ({
-  showQuickLinks,
-  setShowQuickLinks,
-}) => {
+const QuickLinks: FC<QuickLinksProps> = (props) => {
   const [tabValue, setTabValue] = useState<number>(0);
   const [quickLinks, setQuickLinks] = useState([]);
   const [allQuickLinks, setAllQuickLinks] = useState([]);
@@ -80,8 +69,8 @@ const QuickLinks: FC<QuickLinksProps> = ({
           </div>
         </div>
       }
-      visible={showQuickLinks}
-      onHide={() => setShowQuickLinks(false)}
+      visible={props.showQuickLinks}
+      onHide={() => props.setShowQuickLinks(false)}
       draggable={false}
       resizable={false}
       className="quick-links-popup"
@@ -111,26 +100,21 @@ const QuickLinks: FC<QuickLinksProps> = ({
   );
 };
 
-const QuickLinkBox: FC<QuickLinkBoxProps> = ({
-  link,
-  hoveredIndex,
-  setHoveredIndex,
-  index,
-}) => {
+const QuickLinkBox: FC<QuickLinkBoxProps> = (props) => {
   return (
     <div
       className="link-box flex justify-center cursor-pointer p-1"
-      onClick={() => window.open(link.link, "_blank")}
-      key={link.name}
-      onMouseEnter={() => setHoveredIndex(index)}
-      onMouseLeave={() => setHoveredIndex(null)}
+      onClick={() => window.open(props.link.link, "_blank")}
+      key={props.link.name}
+      onMouseEnter={() => props.setHoveredIndex(props.index)}
+      onMouseLeave={() => props.setHoveredIndex(null)}
     >
       <span className="m-auto text-center font-normal leading-snug">
-        {link.name}
+        {props.link.name}
       </span>
       <CustomImage
         className="h-[13px] self-start mr-2 mt-2"
-        src={index === hoveredIndex ? ArrowTopWhite : ArrowTop}
+        src={props.index === props.hoveredIndex ? ArrowTopWhite : ArrowTop}
       />
     </div>
   );

@@ -61,8 +61,9 @@ import {
   SCREEN_WIDTH,
   NO_OF_ORDERS,
 } from "../constants/appConstants";
-import { LoaderContext, LoaderContextType } from "../context/loaderContext";
-import { ChartData, ChartOptions, ModalEnums } from "../@types/supportHub";
+import { LoaderContext } from "../context/loaderContext";
+import { LoaderContextType } from "../@types/components/commonTypes";
+import { ChartData, ChartOptions, ModalEnums } from "../@types/pages/opmCharts";
 import {
   OPM_BAR_CHART_OPTIONS,
   OPM_BAR_CHART_OPTIONS_HOME,
@@ -87,7 +88,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ChartDataLabels,
+  ChartDataLabels
 );
 
 const OPM: React.FC = () => {
@@ -193,7 +194,7 @@ const OPM: React.FC = () => {
 
   const [options, setOptions] = useState<null | ChartOptions>(null);
   const [barChartoptions, setBarChartOptions] = useState<null | ChartOptions>(
-    null,
+    null
   );
   const [data, setData] = useState<ChartData | null>(null);
   const [barChartData, setBarChartData] = useState<ChartData | null>(null);
@@ -216,7 +217,7 @@ const OPM: React.FC = () => {
           : HOME_PAGE_REFERSH_DURATION
       }&starttime=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${
         DEFAULT.promocode
-      }&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`,
+      }&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`
     );
   }, []);
 
@@ -232,7 +233,7 @@ const OPM: React.FC = () => {
       setMaxOPM(
         Math.round(Math.max(...dataArr) / OPM_CHART_DEFAULT.STEP_SIZE) *
           OPM_CHART_DEFAULT.STEP_SIZE +
-          OPM_CHART_DEFAULT.STEP_SIZE,
+          OPM_CHART_DEFAULT.STEP_SIZE
       );
       setData({
         labels: xAxisLabels,
@@ -271,26 +272,26 @@ const OPM: React.FC = () => {
             ? OPM_OPTIONS_HOME(
                 width < SCREEN_WIDTH.SM,
                 Number(url.split("period=")[1].split("&")[0]) < 16 &&
-                  width > SCREEN_WIDTH.SM,
+                  width > SCREEN_WIDTH.SM
               )
             : OPM_OPTIONS(
                 width < SCREEN_WIDTH.SM,
                 Number(url.split("period=")[1].split("&")[0]) < 16 &&
-                  width > SCREEN_WIDTH.SM,
-              ),
+                  width > SCREEN_WIDTH.SM
+              )
         );
         setBarChartOptions(
           location.pathname.includes("home")
             ? OPM_BAR_CHART_OPTIONS_HOME(
                 width < SCREEN_WIDTH.SM,
                 Number(url.split("period=")[1].split("&")[0]) < 16 &&
-                  width > SCREEN_WIDTH.SM,
+                  width > SCREEN_WIDTH.SM
               )
             : OPM_BAR_CHART_OPTIONS(
                 width < SCREEN_WIDTH.SM,
                 Number(url.split("period=")[1].split("&")[0]) < 16 &&
-                  width > SCREEN_WIDTH.SM,
-              ),
+                  width > SCREEN_WIDTH.SM
+              )
         );
         await getData();
       }
