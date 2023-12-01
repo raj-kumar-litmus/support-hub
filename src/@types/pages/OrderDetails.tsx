@@ -113,3 +113,9 @@ export type ItemInformationsPopUpProps = {
   openItemInformationPopup: boolean;
   setItemInformationPopup: (a: boolean) => void;
 };
+
+export type PromotionsPopupProps = {
+  promotions: IPromotion[];
+  openPromotionsPopup: boolean;
+  setOpenPromotionsPopup: (a: boolean) => void;
+};

@@ -7,7 +7,7 @@ import { DCOpenOrders, orderData } from "../@types/pages/dcOpenOrders";
 import { URL_DC_OPEN_ORDERS } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
 import { getTableHeaders } from "./utils/Utils";
-import { DC_OPEN_ORDERS } from "../constants/appConstants";
+import { PAGE_TITLES } from "../constants/appConstants";
 
 const DcOpenOrders: FC = () => {
   const [tableData, setTableData] = useState<DCOpenOrders[]>([]);
@@ -41,7 +41,7 @@ const DcOpenOrders: FC = () => {
       ) : (
         <div>
           <h3 className="sm:text-lg text-gray-200 font-bold m-3 ml-0 font-helvetica">
-            {DC_OPEN_ORDERS}
+              {PAGE_TITLES.DC_OPEN_ORDERS}
           </h3>
           <div className="hidden sm:block rounded-md">
             {tableData?.length > 0 && (

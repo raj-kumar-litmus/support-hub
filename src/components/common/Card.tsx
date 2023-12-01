@@ -72,7 +72,7 @@ const Card = (props: CardProps) => {
                 {item.key}
               </div>
               <div
-                className={`text-[13px] font-medium text-gray-300 flex h-full items-center ${
+                className={`text-13 font-medium text-gray-300 flex h-full items-center ${
                   props.type === "ORDER_DETAILS_ITEM" ? "justify-center" : ""
                 }`}
               >

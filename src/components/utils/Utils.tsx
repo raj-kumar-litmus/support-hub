@@ -1,30 +1,40 @@
 import DashboardIcon from "../../assets/dashboard.svg";
-import DCOpenOrdersIcon from "../../assets/dcopenorders.svg";
 import OPMIcon from "../../assets/opm.svg";
 import OPMComparisonIcon from "../../assets/opmcomparison.svg";
 import SessionsIcon from "../../assets/sessions.svg";
-import {
-  DASHBOARD,
-  TITLE,
-  SESSIONS,
-  DC_OPEN_ORDERS,
-} from "../../constants/appConstants";
+import DCOpenOrdersIcon from "../../assets/dcopenorders.svg";
+import { PAGE_TITLES } from "../../constants/appConstants";
+
+export const ROUTES = {
+  home: "/home",
+  opm: "/opm",
+  opmComparison: "/opm-comparison",
+  sessions: "/sessions",
+  dcOpenOrders: "/dc-open-orders",
+  fullScreen: "/fullscreen",
+  orderDetails: "/order-details",
+};
 
 export const MENU_LIST = [
-  { id: 1, name: DASHBOARD, icon: DashboardIcon, path: "/home" },
-  { id: 2, name: TITLE.OPM, icon: OPMIcon, path: "/opm" },
+  { id: 1, name: PAGE_TITLES.DASHBOARD, icon: DashboardIcon, path: ROUTES.home },
+  { id: 2, name: PAGE_TITLES.OPM, icon: OPMIcon, path: ROUTES.opm },
   {
     id: 3,
-    name: TITLE.OPM_COMPARISON,
+    name: PAGE_TITLES.OPM_COMPARISON,
     icon: OPMComparisonIcon,
-    path: "/opmcomparison",
+    path: ROUTES.opmComparison,
   },
-  { id: 4, name: SESSIONS, icon: SessionsIcon, path: "/sessions" },
+  {
+    id: 4,
+    name: PAGE_TITLES.SESSIONS,
+    icon: SessionsIcon,
+    path: ROUTES.sessions,
+  },
   {
     id: 5,
-    name: DC_OPEN_ORDERS,
+    name: PAGE_TITLES.DC_OPEN_ORDERS,
     icon: DCOpenOrdersIcon,
-    path: "/dc-open-orders",
+    path: ROUTES.dcOpenOrders,
   },
 ];
 
@@ -39,9 +49,9 @@ const getOrCreateTooltip = (chart, type, tooltip) => {
     type === "opm"
       ? line.setAttribute("class", `horizontalLine opm`)
       : line.setAttribute(
-          "class",
-          `horizontalLine ${index === 0 ? "yellow" : "blue"}`
-        );
+        "class",
+        `horizontalLine ${index === 0 ? "yellow" : "blue"}`,
+      );
   }
 
   if (!tooltipEl) {
@@ -212,9 +222,9 @@ export const submitOnEnter = (callback) => {
 export const increaseLegendSpacing = (customHeight) => [
   {
     id: "increase-legend-spacing",
-    beforeInit(chart) {
+    beforeInit (chart) {
       const originalFit = (chart.legend as any).fit;
-      (chart.legend as any).fit = function fit() {
+      (chart.legend as any).fit = function fit () {
         originalFit.bind(chart.legend)();
         this.height += customHeight;
       };

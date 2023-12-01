@@ -15,8 +15,8 @@ import useScreenSize from "../hooks/useScreenSize";
 import CustomImage from "./common/customimage";
 import RotateIcon from "../assets/rotate.svg";
 import { SCREEN_WIDTH } from "../constants/appConstants";
-import { increaseLegendSpacing } from "./utils/Utils";
 import { LineChartProps } from "../@types/components/commonTypes";
+import { ROUTES, increaseLegendSpacing } from "./utils/Utils";
 
 ChartJS.register(
   CategoryScale,
@@ -36,10 +36,10 @@ function LineChart(props: LineChartProps) {
   const navigate = useNavigate();
 
   const onRotateHandler = () => {
-    if (!location.pathname.includes("fullscreen")) {
-      navigate(`${location.pathname}/fullscreen`);
+    if (!location.pathname.includes(ROUTES.fullScreen)) {
+      navigate(`${location.pathname}${ROUTES.fullScreen}`);
     } else {
-      navigate(location.pathname.split("/fullscreen")[0]);
+      navigate(location.pathname.split(ROUTES.fullScreen)[0]);
     }
     setRotate(!rotate);
   };
@@ -51,8 +51,8 @@ function LineChart(props: LineChartProps) {
       }`}
     >
       {width < SCREEN_WIDTH.SM &&
-        (location.pathname.includes("opm") ||
-          location.pathname.includes("opmcomparison")) && (
+        (location.pathname.includes(ROUTES.opm) ||
+          location.pathname.includes(ROUTES.opmComparison)) && (
           <div className="flex items-center justify-between mb-4">
             <p className="text-white-500">{props.title}</p>
             <div className="flex items-center">

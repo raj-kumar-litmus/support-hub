@@ -210,6 +210,7 @@ export type SidePaneGridProps = {
   selectedMenu: number;
   setSelectedMenu: (a: number) => void;
   showSidePaneGrid: boolean;
+  setShowSidePaneGrid: (hide: boolean) => void;
 };
 
 export type SidePaneListProps = {

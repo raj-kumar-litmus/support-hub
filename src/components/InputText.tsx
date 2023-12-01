@@ -4,8 +4,8 @@ import { CustomInputTextProps } from "../@types/components/commonTypes";
 
 const CustomInputText: React.FC<CustomInputTextProps> = (props) => {
   return props.icon ? (
-    <div className={`flex flex-col lg:w-[8vw] ${props.containerclassname}`}>
-      <label className="labelClass relative mb-[5px] mt-[14px] ml-[1.2vw] sm:ml-[1.25rem] sm:w-[10vw]">
+    <div className={`flex flex-col lg:w-8w ${props.containerclassname}`}>
+      <label className="labelClass relative mb-5p mt-3.5 ml-1.2w sm:ml-5 sm:w-10w">
         {props.label}
       </label>
       <span className="p-input-icon-left flex">
@@ -22,8 +22,8 @@ const CustomInputText: React.FC<CustomInputTextProps> = (props) => {
       </span>
     </div>
   ) : (
-    <div className={`flex flex-col md:w-[8vw] ${props.containerclassname}`}>
-      <label className="labelClass relative mb-[5px] mt-[14px] ml-[1.2vw]">
+    <div className={`flex flex-col md:w-8w ${props.containerclassname}`}>
+      <label className="labelClass relative mb-5p mt-3.5 ml-1.2w">
         {props.label}
       </label>
       <InputText

@@ -1,4 +1,3 @@
-import type { ChartData, ChartOptions } from "chart.js";
 import {
   BarElement,
   CategoryScale,
@@ -15,7 +14,7 @@ import useScreenSize from "../hooks/useScreenSize";
 import RotateIcon from "../assets/rotate.svg";
 import CustomImage from "./common/customimage";
 import { SCREEN_WIDTH } from "../constants/appConstants";
-import { increaseLegendSpacing } from "./utils/Utils";
+import { ROUTES, increaseLegendSpacing } from "./utils/Utils";
 import { BarChartCompProps } from "../@types/components/commonTypes";
 
 ChartJS.register(
@@ -34,10 +33,10 @@ const BarChartComp = (props: BarChartCompProps) => {
   const navigate = useNavigate();
 
   const onRotateHandler = () => {
-    if (!location.pathname.includes("fullscreen")) {
-      navigate(`${location.pathname}/fullscreen`);
+    if (!location.pathname.includes(ROUTES.fullScreen)) {
+      navigate(`${location.pathname}${ROUTES.fullScreen}`);
     } else {
-      navigate(location.pathname.split("/fullscreen")[0]);
+      navigate(location.pathname.split(`${ROUTES.fullScreen}`)[0]);
     }
     setRotate(!rotate);
   };
@@ -48,7 +47,7 @@ const BarChartComp = (props: BarChartCompProps) => {
         !props.defaultClasses && "bg-black-200"
       }`}
     >
-      {width < SCREEN_WIDTH.SM && location.pathname.includes("opm") && (
+      {width < SCREEN_WIDTH.SM && location.pathname.includes(ROUTES.opm) && (
         <div className="flex items-center justify-between mb-4">
           <p className="text-white-500">{props.title}</p>
           <div className="flex items-center">

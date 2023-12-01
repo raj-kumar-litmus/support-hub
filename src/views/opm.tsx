@@ -43,33 +43,31 @@ import refreshIcon from "../assets/refresh_icon.svg";
 import SandGlassIcon from "../assets/sandglass.svg";
 import WhiteCalendarIcon from "../assets/white_calendar.svg";
 import WhiteCrossIcon from "../assets/white_cross.svg";
-import { submitOnEnter } from "../components/utils/Utils";
-import { URL_OPM } from "../constants/apiConstants";
-import {
-  CHANNELS,
-  CHART_TABS,
-  DURATIONS,
-  FILTERS,
-  HOME_PAGE_REFERSH_DURATION,
-  INPUT_TYPES,
-  LABELS,
-  LOCALE_OPTIONS,
-  MM_DD_YYYY_HH_MM,
-  PAYMENT_TYPES,
-  TITLE,
-  OPM_CHART_DEFAULT,
-  SCREEN_WIDTH,
-  NO_OF_ORDERS,
-} from "../constants/appConstants";
-import { LoaderContext } from "../context/loaderContext";
-import { LoaderContextType } from "../@types/components/commonTypes";
-import { ChartData, ChartOptions, ModalEnums } from "../@types/pages/opmCharts";
 import {
   OPM_BAR_CHART_OPTIONS,
   OPM_BAR_CHART_OPTIONS_HOME,
   OPM_OPTIONS,
   OPM_OPTIONS_HOME,
 } from "../config/chartConfig";
+import { URL_OPM } from "../constants/apiConstants";
+import {
+  CHART_LABELS,
+  CHART_TABS,
+  DASHBOARD_LABELS,
+  DATE_AND_TIME_FORMATS,
+  DURATIONS,
+  INPUT_TYPES,
+  LABELS,
+  LOCALE_OPTIONS,
+  OPM_CHANNELS,
+  OPM_CHART_DEFAULT,
+  PAGE_TITLES,
+  PAYMENT_TYPES,
+  SCREEN_WIDTH,
+} from "../constants/appConstants";
+import { LoaderContext } from "../context/loaderContext";
+import { LoaderContextType } from "../@types/components/commonTypes";
+import { ChartData, ChartOptions, ModalEnums } from "../@types/pages/opmCharts";
 import {
   CURRENT_PST_DATE,
   DATE_TIME_FORMAT_3,
@@ -78,6 +76,7 @@ import {
   getFormattedPSTDate,
 } from "../utils/dateTimeUtil";
 import { fetchData } from "../utils/fetchUtil";
+import { ROUTES, submitOnEnter } from "../components/utils/Utils";
 
 ChartJS.register(
   CategoryScale,
@@ -88,7 +87,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ChartDataLabels
+  ChartDataLabels,
 );
 
 const OPM: React.FC = () => {
@@ -99,12 +98,12 @@ const OPM: React.FC = () => {
 
   const { width } = useScreenSize();
   const navigate = useNavigate();
-  const IS_FULLSCREEN = location?.pathname.includes("fullscreen");
+  const IS_FULLSCREEN = location?.pathname.includes(ROUTES.fullScreen);
 
   const DEFAULT = {
     duration: 10,
     starttime: "",
-    channel: CHANNELS.All,
+    channel: OPM_CHANNELS.All,
     promocode: "",
     paymentType: PAYMENT_TYPES.All,
     country: "",
@@ -114,7 +113,7 @@ const OPM: React.FC = () => {
     {
       type: INPUT_TYPES.dropdown,
       name: "period",
-      label: LABELS.duration,
+      label: LABELS.DURATION,
       icon: SandGlassIcon,
       cardIcon: GreyHourGlassIcon,
       value: {
@@ -129,7 +128,7 @@ const OPM: React.FC = () => {
     {
       type: INPUT_TYPES.time,
       name: "date",
-      label: LABELS.date,
+      label: LABELS.DATE,
       value: getFormattedPSTDate(),
       showTime: true,
       cardIcon: GreyCalendarIcon,
@@ -138,22 +137,22 @@ const OPM: React.FC = () => {
     {
       type: INPUT_TYPES.dropdown,
       name: "channel",
-      label: LABELS.channel,
+      label: LABELS.CHANNEL,
       icon: ChannelIcon,
       cardIcon: GreyChannelIcon,
       value: {
         name: "All",
         code: "",
       },
-      options: Object.keys(CHANNELS).map((e) => ({
+      options: Object.keys(OPM_CHANNELS).map((e) => ({
         name: e,
-        code: CHANNELS[e],
+        code: OPM_CHANNELS[e],
       })),
     },
     {
       type: INPUT_TYPES.dropdown,
       name: "locale",
-      label: LABELS.locale,
+      label: LABELS.LOCALE,
       icon: LocaleIcon,
       cardIcon: GreyGlobeIcon,
       value: {
@@ -168,7 +167,7 @@ const OPM: React.FC = () => {
     {
       type: INPUT_TYPES.dropdown,
       name: "payment",
-      label: LABELS.payment,
+      label: LABELS.PAYMENT,
       icon: PaymentIcon,
       cardIcon: GreyCardIcon,
       value: {
@@ -183,7 +182,7 @@ const OPM: React.FC = () => {
     {
       type: INPUT_TYPES.text,
       name: "promocode",
-      label: LABELS.promoCode,
+      label: LABELS.PROMOCODE,
       imgsrc: PromoCodeIcon,
       cardIcon: GreyPromoIcon,
       value: "",
@@ -194,7 +193,7 @@ const OPM: React.FC = () => {
 
   const [options, setOptions] = useState<null | ChartOptions>(null);
   const [barChartoptions, setBarChartOptions] = useState<null | ChartOptions>(
-    null
+    null,
   );
   const [data, setData] = useState<ChartData | null>(null);
   const [barChartData, setBarChartData] = useState<ChartData | null>(null);
@@ -211,13 +210,11 @@ const OPM: React.FC = () => {
 
   useEffect(() => {
     setUrl(
-      `${URL_OPM}?period=${
-        location.pathname.includes("opm")
-          ? DEFAULT.duration
-          : HOME_PAGE_REFERSH_DURATION
-      }&starttime=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${
-        DEFAULT.promocode
-      }&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`
+      `${URL_OPM}?period=${location.pathname.includes(ROUTES.opm)
+        ? DEFAULT.duration
+        : DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION
+      }&starttime=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${DEFAULT.promocode
+      }&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`,
     );
   }, []);
 
@@ -232,14 +229,14 @@ const OPM: React.FC = () => {
       const dataArr = data.map((e) => Number(e.orderCount));
       setMaxOPM(
         Math.round(Math.max(...dataArr) / OPM_CHART_DEFAULT.STEP_SIZE) *
-          OPM_CHART_DEFAULT.STEP_SIZE +
-          OPM_CHART_DEFAULT.STEP_SIZE
+        OPM_CHART_DEFAULT.STEP_SIZE +
+        OPM_CHART_DEFAULT.STEP_SIZE,
       );
       setData({
         labels: xAxisLabels,
         datasets: [
           {
-            label: NO_OF_ORDERS,
+            label: CHART_LABELS.NO_OF_ORDERS,
             data: dataArr,
             borderColor: "#599DF5",
             pointStyle: "circle",
@@ -251,7 +248,7 @@ const OPM: React.FC = () => {
         labels: xAxisLabels,
         datasets: [
           {
-            label: NO_OF_ORDERS,
+            label: CHART_LABELS.NO_OF_ORDERS,
             data: dataArr,
             borderColor: "#599DF5",
             backgroundColor: "#599DF5",
@@ -268,30 +265,30 @@ const OPM: React.FC = () => {
     (async () => {
       if (url) {
         setOptions(
-          location.pathname.includes("home")
+          location.pathname.includes(ROUTES.home)
             ? OPM_OPTIONS_HOME(
-                width < SCREEN_WIDTH.SM,
-                Number(url.split("period=")[1].split("&")[0]) < 16 &&
-                  width > SCREEN_WIDTH.SM
-              )
+              width < SCREEN_WIDTH.SM,
+              Number(url.split("period=")[1].split("&")[0]) < 16 &&
+              width > SCREEN_WIDTH.SM,
+            )
             : OPM_OPTIONS(
-                width < SCREEN_WIDTH.SM,
-                Number(url.split("period=")[1].split("&")[0]) < 16 &&
-                  width > SCREEN_WIDTH.SM
-              )
+              width < SCREEN_WIDTH.SM,
+              Number(url.split("period=")[1].split("&")[0]) < 16 &&
+              width > SCREEN_WIDTH.SM,
+            ),
         );
         setBarChartOptions(
-          location.pathname.includes("home")
+          location.pathname.includes(ROUTES.home)
             ? OPM_BAR_CHART_OPTIONS_HOME(
-                width < SCREEN_WIDTH.SM,
-                Number(url.split("period=")[1].split("&")[0]) < 16 &&
-                  width > SCREEN_WIDTH.SM
-              )
+              width < SCREEN_WIDTH.SM,
+              Number(url.split("period=")[1].split("&")[0]) < 16 &&
+              width > SCREEN_WIDTH.SM,
+            )
             : OPM_BAR_CHART_OPTIONS(
-                width < SCREEN_WIDTH.SM,
-                Number(url.split("period=")[1].split("&")[0]) < 16 &&
-                  width > SCREEN_WIDTH.SM
-              )
+              width < SCREEN_WIDTH.SM,
+              Number(url.split("period=")[1].split("&")[0]) < 16 &&
+              width > SCREEN_WIDTH.SM,
+            ),
         );
         await getData();
       }
@@ -331,6 +328,11 @@ const OPM: React.FC = () => {
     setFormFields(data);
   };
 
+  const resetFormEntry = () => {
+    setFormFields(DEFAULT_FORM_FIELDS);
+    setShowFilteredCards(false);
+  };
+
   const submit = (e) => {
     e.preventDefault();
     let str = ``;
@@ -345,9 +347,8 @@ const OPM: React.FC = () => {
             str += `${e.name}=&`;
             return;
           }
-          str += `${e.name}=${
-            (e.value.code !== undefined && String(e.value.code)) || e.value
-          }&`;
+          str += `${e.name}=${(e.value.code !== undefined && String(e.value.code)) || e.value
+            }&`;
         }
       }
     });
@@ -379,7 +380,7 @@ const OPM: React.FC = () => {
   };
 
   const handleOPMExpandClick = () => {
-    navigate("/opm");
+    navigate(ROUTES.opm);
   };
 
   const handleOPMRefreshBtnClick = () => {
@@ -398,201 +399,133 @@ const OPM: React.FC = () => {
 
   return (
     <>
-      {location.pathname.includes("home") && isLoading && (
-        <Loader className="!p-0 w-[40vw] m-auto min-h-[21rem]" />
-      )}
-      {location.pathname.includes("home") && data && !isLoading && (
-        <div className="w-full xl:w-1/2 bg-black-200 rounded-lg px-4 lg:px-6 py-4">
-          <div className="flex justify-between items-center relative mb-2 sm:mb-4 lg:mb-2 xl:mb-4">
-            <span className="text-gray-200 font-bold text-lg font-helvetica">
-              {TITLE.OPM}
-            </span>
-            <div className="flex items-center">
+      {location.pathname.includes(ROUTES.home) && isLoading && (
+        <Loader className="!p-0 w-40w m-auto min-h-21r" />
+      )
+      }
+      {
+        location.pathname.includes(ROUTES.home) && data && !isLoading && (
+          <div className="w-full xl:w-1/2 bg-black-200 rounded-lg px-4 lg:px-6 py-4">
+            <div className="flex justify-between items-center relative mb-2 md:mb-4 lg:mb-2 xl:mb-4">
+              <span className="text-gray-200 font-bold text-lg font-helvetica">
+                {PAGE_TITLES.OPM}
+              </span>
+              <div className="flex items-center">
+                <CustomTab
+                  className="opm-tabs mr-2 hidden md:block"
+                  tabData={CHART_TABS}
+                  tabValue={tabValue}
+                  setTabValue={setTabValue}
+                />
+                <CustomButton
+                  className="home-refresh-btn"
+                  onClick={handleOPMRefreshBtnClick}
+                >
+                  <CustomImage src={refreshIcon} />
+                </CustomButton>
+                <CustomButton
+                  className="home-expand-btn ml-2"
+                  onClick={handleOPMExpandClick}
+                >
+                  <CustomImage src={openNewPageIcon} />
+                </CustomButton>
+              </div>
+            </div>
+            <div className="flex justify-start items-center relative mb-0 sm:mb-4 lg:mb-1 xl:mb-4 md:hidden">
               <CustomTab
-                className="opm-tabs mr-2 hidden md:block"
+                className="opm-tabs mr-2"
                 tabData={CHART_TABS}
                 tabValue={tabValue}
                 setTabValue={setTabValue}
               />
-              <CustomButton
-                className="home-refresh-btn"
-                onClick={handleOPMRefreshBtnClick}
-              >
-                <CustomImage src={refreshIcon} />
-              </CustomButton>
-              <CustomButton
-                className="home-expand-btn ml-2"
-                onClick={handleOPMExpandClick}
-              >
-                <CustomImage src={openNewPageIcon} />
-              </CustomButton>
             </div>
-          </div>
-          <div className="flex justify-start items-center relative mb-0 sm:mb-4 lg:mb-1 xl:mb-4 md:hidden">
-            <CustomTab
-              className="opm-tabs mr-2"
-              tabData={CHART_TABS}
-              tabValue={tabValue}
-              setTabValue={setTabValue}
-            />
-          </div>
-          {tabValue === 0 ? (
-            <BarChartComp
-              title={TITLE.OPM}
-              options={getChartConfig()}
-              data={barChartData}
-              className="border-0 w-full h-64"
-              defaultClasses={true}
-            />
-          ) : (
-            <LineChart
-              title={TITLE.OPM}
-              className="border-0 w-full h-64"
-              options={getChartConfig()}
-              data={data}
-              defaultClasses={true}
-            />
-          )}
-        </div>
-      )}
-      {!IS_FULLSCREEN && location.pathname.includes("opm") && (
-        <div className="flex justify-between items-start">
-          <p className="font-bold text-gray-200">{TITLE.OPM}</p>
-          {width < SCREEN_WIDTH.SM && (
-            <CustomImage
-              src={FilterIcon}
-              className="self-end"
-              alt="Filter Icon"
-              onClick={onFilterClickHandler}
-            />
-          )}
-        </div>
-      )}
-      {showFilters && location.pathname.includes("opm") && (
-        <>
-          {width > SCREEN_WIDTH.SM ? (
-            <>
-              <form className="lg:flex md:gap-[0.15rem] opmFilters sm:grid sm:grid-cols-3 lg:ml-[0.5rem] sm:mb-4">
-                {formFields.map((form, index) => {
-                  return (
-                    <div
-                      className="flex justify-center items-center"
-                      key={index}
-                    >
-                      {form.type === INPUT_TYPES.text && (
-                        <CustomInputText
-                          containerclassname="relative top-[2px] md:left-[-0.2vw] lg:left-[-9px]"
-                          value={form.value}
-                          name={form.name}
-                          label={form.label}
-                          icon={form.imgsrc}
-                          placeholder={form.label}
-                          imageclassname="relative left-[25px] z-[1]"
-                          onChange={(event) => handleFormChange(event)}
-                          className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px] sm:w-[20vw] lg:w-[11vw]"
-                        />
-                      )}
-                      {form.type === INPUT_TYPES.time && (
-                        <CustomCalendar
-                          name={form.name}
-                          containerclassname="calendarOpmComparison ml-[10px] lg:w-[10vw] lg:w-[12vw] xl:w-[14vw] sm:mr-[-0.25rem]"
-                          titleclassname="top-5"
-                          imageclassname="h-[20px] w-[20px] relative top-[1.75rem] left-[0.5vw] z-[1]"
-                          placeholder={MM_DD_YYYY_HH_MM}
-                          title={form.label}
-                          showTime={form.showTime}
-                          iconPos={form.iconPos || "left"}
-                          imgsrc={form.imgsrc}
-                          onChange={(event) => handleFormChange(event)}
-                          value={form.value}
-                          maxDate={form.name === "date" ? new Date() : null}
-                          dateFormat="dd-MM-yyyy hh:mm"
-                        />
-                      )}
-                      {form.type === INPUT_TYPES.dropdown && (
-                        <CustomDropdown
-                          value={form.value}
-                          name={form.name}
-                          onChange={(e) => handleFormChange(e)}
-                          containerclassname="sm:w-[20vw] lg:!w-[11vw]"
-                          imageclassname="relative left-[25px] z-[1]"
-                          dropdownIcon={<CustomImage src={ArrowDownIcon} />}
-                          icon={form.icon}
-                          options={form.options}
-                          label={form.label}
-                          optionLabel="name"
-                          placeholder=""
-                        />
-                      )}
-                    </div>
-                  );
-                })}
-              </form>
-              <CustomButton
-                id="page-btn-submit"
-                btnclassname="w-full"
-                label={LABELS.submit}
-                isDisabled={disabled}
-                isRounded={true}
-                onClick={submit}
-                className="self-end relative left-[5vw] sm:w-[21vw] md:w-[15vw] lg:w-[10vw] sm:top-[2vh] md:top-[0] sm:left-[2.5vw] md:left-[1.5vw] lg:left-[1vw]"
+            {tabValue === 0 ? (
+              <BarChartComp
+                title={PAGE_TITLES.OPM}
+                options={getChartConfig()}
+                data={barChartData}
+                className="border-0 w-full h-64"
+                defaultClasses={true}
               />
-            </>
-          ) : (
-            <>
-              <CustomModal
-                header={FILTERS}
-                visible={visible}
-                position={position}
-                className="!bg-slate-900 filtersModal opmFiltersMobile h-[450px] w-[100vw]"
-                onHide={onModalCloseHandler}
-                isDraggable={false}
-                closeIcon={<CustomImage src={WhiteCrossIcon} />}
-                isResizable={false}
-              >
-                <form
-                  className="grid grid-cols-2 grid-rows-3 gap-x-5 gap-y-5"
-                  onSubmit={submit}
-                >
+            ) : (
+              <LineChart
+                title={PAGE_TITLES.OPM}
+                className="border-0 w-full h-64"
+                options={getChartConfig()}
+                data={data}
+                defaultClasses={true}
+              />
+            )}
+          </div>
+        )
+      }
+      {
+        !IS_FULLSCREEN && location.pathname.includes(ROUTES.opm) && (
+          <div className="flex justify-between items-start">
+            <p className="font-bold text-gray-200">{PAGE_TITLES.OPM}</p>
+            {width < SCREEN_WIDTH.SM && (
+              <CustomImage
+                src={FilterIcon}
+                className="self-end"
+                alt="Filter Icon"
+                onClick={onFilterClickHandler}
+              />
+            )}
+          </div>
+        )
+      }
+      {
+        showFilters && location.pathname.includes(ROUTES.opm) && (
+          <>
+            {width > SCREEN_WIDTH.SM ? (
+              <>
+                <form className="lg:flex md:gap-[0.15rem] opmFilters sm:grid sm:grid-cols-3 lg:ml-2 sm:mb-4">
                   {formFields.map((form, index) => {
                     return (
-                      <React.Fragment key={index}>
+                      <div
+                        className="flex justify-center items-center"
+                        key={index}
+                      >
                         {form.type === INPUT_TYPES.text && (
                           <CustomInputText
-                            containerclassname="w-[45vw] mobileInput"
+                            containerclassname="relative top-0.5 md:-left-0.2w lg:-left-9p"
                             value={form.value}
                             name={form.name}
                             label={form.label}
                             icon={form.imgsrc}
-                            imageclassname="relative left-[12px] md:left-[25px] z-[1]"
                             placeholder={form.label}
+                            imageclassname="relative left-25 z-1"
                             onChange={(event) => handleFormChange(event)}
-                            className="border rounded-[8px] border-solid border-slate-300 border-1 h-[40px]"
+                            className="border rounded-lg border-solid border-slate-300 border-1 h-38 sm:w-20w lg:w-11w"
                           />
                         )}
                         {form.type === INPUT_TYPES.time && (
                           <CustomCalendar
                             name={form.name}
-                            containerclassname="opmFiltersMobileCalendar"
-                            titleclassname="left-[1vw] md:left-[0] top-5"
-                            imageclassname="h-[20px] w-[20px] relative top-[1.75rem] md:top-[3vh] left-[3.5vw] z-[1]"
+                            containerclassname="calendarOpmComparison ml-2.5 lg:w-10w lg:w-12w xl:w-14w sm:-mr-1"
+                            titleclassname="top-5"
+                            imageclassname="h-5 w-5 relative top-7 left-0.5w z-1"
+                            placeholder={DATE_AND_TIME_FORMATS.MM_DD_YYYY_HH_MM}
                             title={form.label}
                             showTime={form.showTime}
                             iconPos={form.iconPos || "left"}
                             imgsrc={form.imgsrc}
                             onChange={(event) => handleFormChange(event)}
                             value={form.value}
-                            maxDate={form.name === "date" ? new Date() : null}
+                            maxDate={
+                              form.name === "date" ? CURRENT_PST_DATE : null
+                            }
+                            dateFormat="dd-MM-yyyy hh:mm"
                           />
                         )}
                         {form.type === INPUT_TYPES.dropdown && (
                           <CustomDropdown
                             value={form.value}
                             name={form.name}
-                            dropdownIcon={<CustomImage src={DropDownIcon} />}
                             onChange={(e) => handleFormChange(e)}
-                            containerclassname="w-[44vw]"
-                            imageclassname="relative left-[25px] z-[1]"
+                            containerclassname="sm:w-20w lg:!w-11w"
+                            imageclassname="relative left-25 z-1"
+                            dropdownIcon={<CustomImage src={ArrowDownIcon} />}
                             icon={form.icon}
                             options={form.options}
                             label={form.label}
@@ -600,113 +533,193 @@ const OPM: React.FC = () => {
                             placeholder=""
                           />
                         )}
-                      </React.Fragment>
+                      </div>
                     );
                   })}
-                  <CustomButton
-                    label={LABELS.submit}
-                    isDisabled={disabled}
-                    isRounded={true}
-                    className="submitBtnMobile opmPopUp col-span-full"
-                  />
                 </form>
-              </CustomModal>
-            </>
-          )}
-        </>
-      )}
-
-      {location.pathname.includes("opm") && showFilteredCards && (
-        <div
-          className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[0] sm:ml-[5vw] lg:ml-[1rem] ${
-            IS_FULLSCREEN
-              ? "rotate-90 absolute left-[-9vh] top-[45vh] ml-[25vw] w-[70vh] mt-[0]"
-              : `${width < SCREEN_WIDTH.SM ? "portrait" : ""}`
-          }`}
-        >
-          {formFields
-            .filter((e) => e.value)
-            .map((e: any) => (
-              <Fragment key={e.name}>
-                <FilteredCard
-                  label={e.name}
-                  leftIcon={e.cardIcon}
-                  onClickHandler={removeFormEntry}
-                  content={
-                    e.type === "time"
-                      ? formatDate(e.value, DATE_TIME_FORMAT_4)
-                      : e.value.name || e.value
-                  }
+                <CustomButton
+                  id="page-btn-submit"
+                  btnclassname="w-full"
+                  label={LABELS.SUBMIT}
+                  isDisabled={disabled}
+                  isRounded={true}
+                  onClick={submit}
+                  className="self-end relative left-5w sm:w-21w md:w-[15vw] lg:w-10w sm:top-[2vh] md:top-0 sm:left-2.5w md:left-[1.5vw] lg:left-1w"
                 />
-              </Fragment>
-            ))}
-          {!disabled && !IS_FULLSCREEN && (
-            <CustomButton
-              label={LABELS.reset}
-              severity="secondary"
-              className="resetFilters text-[12px] text-gray-300"
-              isTextButton={true}
-              onClick={() => setFormFields(DEFAULT_FORM_FIELDS)}
-            />
-          )}
-        </div>
-      )}
-
-      {!IS_FULLSCREEN && location.pathname.includes("opm") && (
-        <AutoRefresh
-          getData={getData}
-          startPollingHandler={startPollingHandler}
-          inputClassname="w-[60vw] sm:w-[38vw] md:w-[24vw]"
-          inputContainerClassname="w-[38vw] md:w-[24vw]"
-          checkBoxLabelClassname="text-white-500 text-[12px] ml-[0.5vw]"
-          checkBoxContainerClassname="flex autoRefreshCheckBox sm:ml-[2.5vw] md:ml-[1vw] md:ml-[1.5vw] lg:ml-[1.25vw] items-center mt-[3vh] md:mt-[0]"
-        />
-      )}
-      {isLoading && location.pathname.includes("opm") ? (
-        <Loader className="h-[50vh]" />
-      ) : (
-        data &&
-        !isLoading &&
-        location.pathname.includes("opm") && (
-          <div
-            className={`relative h-96 lg:h-[29rem] ${
-              IS_FULLSCREEN ? "rotate-90" : ""
-            }`}
-          >
-            <CustomTab
-              className={`opm-tabs absolute z-10 pt-2 top-2 ${
-                IS_FULLSCREEN
-                  ? "right-[calc(100vh-57rem)]"
-                  : "right-14 sm:right-3 md:right-4 lg:right-6"
-              }`}
-              tabData={CHART_TABS}
-              tabValue={tabValue}
-              setTabValue={setTabValue}
-            />
-            {tabValue === 0 ? (
-              <BarChartComp
-                options={getChartConfig()}
-                data={barChartData}
-                className={`opm-page-chart-container ${
-                  IS_FULLSCREEN ? "opm-page-chart-container-rotated" : ""
-                }`}
-                title={TITLE.OPM}
-                isFullScreen={IS_FULLSCREEN}
-              />
+              </>
             ) : (
-              <LineChart
-                title={TITLE.OPM}
-                isFullScreen={IS_FULLSCREEN}
-                className={`opm-page-chart-container ${
-                  IS_FULLSCREEN ? "opm-page-chart-container-rotated" : ""
-                }`}
-                options={getChartConfig()}
-                data={data}
+              <>
+                <CustomModal
+                  header="Filters"
+                  visible={visible}
+                  position={position}
+                  className="!bg-slate-900 filtersModal opmFiltersMobile h-[450px] w-screen"
+                  onHide={onModalCloseHandler}
+                  isDraggable={false}
+                  closeIcon={<CustomImage src={WhiteCrossIcon} />}
+                  isResizable={false}
+                >
+                  <form
+                    className="grid grid-cols-2 grid-rows-3 gap-x-5 gap-y-5"
+                    onSubmit={submit}
+                  >
+                    {formFields.map((form, index) => {
+                      return (
+                        <React.Fragment key={index}>
+                          {form.type === INPUT_TYPES.text && (
+                            <CustomInputText
+                              containerclassname="w-45w mobileInput"
+                              value={form.value}
+                              name={form.name}
+                              label={form.label}
+                              icon={form.imgsrc}
+                              imageclassname="relative left-3 md:left-25 z-1"
+                              placeholder={form.label}
+                              onChange={(event) => handleFormChange(event)}
+                              className="border rounded-lg border-solid border-slate-300 border-1 h-10	"
+                            />
+                          )}
+                          {form.type === INPUT_TYPES.time && (
+                            <CustomCalendar
+                              name={form.name}
+                              containerclassname="opmFiltersMobileCalendar"
+                              titleclassname="left-1w md:left-0 top-5"
+                              imageclassname="h-5 w-5 relative top-7 md:top-3h left-3.5w z-1"
+                              title={form.label}
+                              showTime={form.showTime}
+                              iconPos={form.iconPos || "left"}
+                              imgsrc={form.imgsrc}
+                              onChange={(event) => handleFormChange(event)}
+                              value={form.value}
+                              maxDate={
+                                form.name === "date" ? CURRENT_PST_DATE : null
+                              }
+                            />
+                          )}
+                          {form.type === INPUT_TYPES.dropdown && (
+                            <CustomDropdown
+                              value={form.value}
+                              name={form.name}
+                              dropdownIcon={<CustomImage src={DropDownIcon} />}
+                              onChange={(e) => handleFormChange(e)}
+                              containerclassname="w-44w"
+                              imageclassname="relative left-25 z-1"
+                              icon={form.icon}
+                              options={form.options}
+                              label={form.label}
+                              optionLabel="name"
+                              placeholder=""
+                            />
+                          )}
+                        </React.Fragment>
+                      );
+                    })}
+                    <CustomButton
+                      label={LABELS.SUBMIT}
+                      isDisabled={disabled}
+                      isRounded={true}
+                      className="submitBtnMobile opmPopUp col-span-full"
+                    />
+                  </form>
+                </CustomModal>
+              </>
+            )}
+          </>
+        )
+      }
+
+      {
+        location.pathname.includes(ROUTES.opm) && showFilteredCards && (
+          <div
+            className={`flex items-center gap-4 mt-2.5 overflow-auto ml-0 sm:ml-5w lg:ml-4 ${IS_FULLSCREEN
+              ? "rotate-90 absolute -left-9h top-45h ml-25w w-70h mt-0"
+              : `${width < SCREEN_WIDTH.SM ? "portrait" : ""}`
+              }`}
+          >
+            {formFields
+              .filter((e) => e.value)
+              .map((e: any) => (
+                <Fragment key={e.name}>
+                  <FilteredCard
+                    label={e.name}
+                    leftIcon={e.cardIcon}
+                    onClickHandler={removeFormEntry}
+                    content={
+                      e.type === "time"
+                        ? formatDate(e.value, DATE_TIME_FORMAT_4)
+                        : e.value.name || e.value
+                    }
+                  />
+                </Fragment>
+              ))}
+            {!disabled && !IS_FULLSCREEN && (
+              <CustomButton
+                label={LABELS.RESET}
+                severity="secondary"
+                className="resetFilters text-xs text-gray-300"
+                isTextButton={true}
+                onClick={() => resetFormEntry()}
               />
             )}
           </div>
         )
-      )}
+      }
+
+      {
+        !IS_FULLSCREEN && location.pathname.includes(ROUTES.opm) && (
+          <AutoRefresh
+            getData={getData}
+            startPollingHandler={startPollingHandler}
+            inputClassname="w-60w sm:w-38w md:w-24w"
+            inputContainerClassname="w-38w md:w-24w"
+            checkBoxLabelClassname="text-white-500 text-xs ml-0.5w"
+            checkBoxContainerClassname="flex autoRefreshCheckBox sm:ml-2.5w md:ml-1w md:ml-[1.5vw] lg:ml-[1.25vw] items-center mt-3h md:mt-0"
+          />
+        )
+      }
+      {
+        isLoading && location.pathname.includes(ROUTES.opm) ? (
+          <Loader className="h-[50vh]" />
+        ) : (
+          data &&
+          !isLoading &&
+          location.pathname.includes(ROUTES.opm) && (
+            <div
+              className={`relative h-96 lg:h-29r ${IS_FULLSCREEN ? "rotate-90" : ""
+                }`}
+            >
+              <CustomTab
+                className={`opm-tabs absolute z-10 pt-2 top-2 ${IS_FULLSCREEN
+                  ? "right-100vh-57r"
+                  : "right-14 sm:right-3 md:right-4 lg:right-6"
+                  }`}
+                tabData={CHART_TABS}
+                tabValue={tabValue}
+                setTabValue={setTabValue}
+              />
+              {tabValue === 0 ? (
+                <BarChartComp
+                  options={getChartConfig()}
+                  data={barChartData}
+                  className={`opm-page-chart-container ${IS_FULLSCREEN ? "opm-page-chart-container-rotated" : ""
+                    }`}
+                  title={PAGE_TITLES.OPM}
+                  isFullScreen={IS_FULLSCREEN}
+                />
+              ) : (
+                <LineChart
+                  title={PAGE_TITLES.OPM}
+                  isFullScreen={IS_FULLSCREEN}
+                  className={`opm-page-chart-container ${IS_FULLSCREEN ? "opm-page-chart-container-rotated" : ""
+                    }`}
+                  options={getChartConfig()}
+                  data={data}
+                />
+              )}
+            </div>
+          )
+        )
+      }
     </>
   );
 };

@@ -102,21 +102,20 @@ const QuickLinks: FC<QuickLinksProps> = (props) => {
 
 const QuickLinkBox: FC<QuickLinkBoxProps> = (props) => {
   return (
-    <div
-      className="link-box flex justify-center cursor-pointer p-1"
+    <a
       onClick={() => window.open(props.link.link, "_blank")}
-      key={props.link.name}
+      className="link-box flex justify-center cursor-pointer p-1"
       onMouseEnter={() => props.setHoveredIndex(props.index)}
       onMouseLeave={() => props.setHoveredIndex(null)}
     >
-      <span className="m-auto text-center font-normal leading-snug">
+      <span className="m-auto text-center font-normal leading-snug px-1">
         {props.link.name}
       </span>
       <CustomImage
-        className="h-[13px] self-start mr-2 mt-2"
+        className="h-13 self-start w-3 mt-2 quick-link-arrow"
         src={props.index === props.hoveredIndex ? ArrowTopWhite : ArrowTop}
       />
-    </div>
+    </a>
   );
 };
 

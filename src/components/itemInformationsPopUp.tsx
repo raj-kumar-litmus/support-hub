@@ -5,12 +5,12 @@ import {
   CommerceItemData,
   ItemInformationsPopUpProps,
 } from "../@types/pages/OrderDetails";
-import { ITEMS_INFO } from "../constants/appConstants";
+import { ORDER_DETAILS_LABELS } from "../constants/appConstants";
 
 const ItemInformationsPopUp: FC<ItemInformationsPopUpProps> = (props) => {
   return (
     <CustomDialog
-      header={ITEMS_INFO}
+      header={ORDER_DETAILS_LABELS.ITEMS_INFO}
       visible={props.openItemInformationPopup}
       onHide={() => props.setItemInformationPopup(false)}
       draggable={false}

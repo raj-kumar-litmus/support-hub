@@ -21,22 +21,14 @@ import trendingUpIcon from "../assets/trend_up.svg";
 import trendingDownIcon from "../assets/trending_down.svg";
 import { URL_OPM } from "../constants/apiConstants";
 import {
-  AVG_OPM_COMPARISON,
-  AVG_ORDERS_PER_MIN,
-  DASHBOARD,
-  DIFFERENCE,
-  HOME_PAGE_REFERSH_DURATION,
-  LASTDAY,
-  LAST_MIN_OPM,
-  REFRESHTIME,
-  TODAY,
-  TOTAL_NO_OF_ORDERS,
-  TOTAL_ORDER_COMPARISON,
+  DASHBOARD_LABELS,
+  PAGE_TITLES,
   SCREEN_WIDTH,
 } from "../constants/appConstants";
-import { LoaderContext, LoaderContextType } from "../context/loaderContext";
+import { LoaderContext } from "../context/loaderContext";
 import { getFormattedPSTDate } from "../utils/dateTimeUtil";
 import { fetchData } from "../utils/fetchUtil";
+import { LoaderContextType } from "../@types/components/commonTypes";
 
 const CardTitle = (props: { title: string; icon: any; classname?: string }) => {
   const { classname = "" } = props;
@@ -56,10 +48,7 @@ const OPMCards = (props: { value: number }) => {
   );
 };
 
-const ComparisonCards = (props: {
-  today: number;
-  lastDay: number;
-}) => {
+const ComparisonCards = (props: { today: number; lastDay: number }) => {
   const difference = props.lastDay - props.today || 0;
   const kFormatter = (num) => {
     return Math.abs(num) > 999
@@ -69,17 +58,19 @@ const ComparisonCards = (props: {
   return (
     <div className="flex">
       <div className="flex flex-col pr-1 sm:pr-2 justify-between">
-        <span className="text-[10px]">{TODAY}</span>
-        <span className="text-gray-200 text-xl">{kFormatter(props.today) || 0}</span>
+        <span className="text-10">{DASHBOARD_LABELS.TODAY}</span>
+        <span className="text-gray-200 text-xl">
+          {kFormatter(props.today) || 0}
+        </span>
       </div>
-      <div className="border border-r border-black-400 h-[2.5rem] m-auto"></div>
+      <div className="border border-r border-black-400 h-10 m-auto"></div>
       <div className="flex flex-col px-1 sm:px-2 justify-between">
-        <span className="text-[10px]">{LASTDAY}</span>
+        <span className="text-10">{DASHBOARD_LABELS.LASTDAY}</span>
         <span className="text-gray-200 text-xl">
           {kFormatter(props.lastDay) || 0}
         </span>
       </div>
-      <div className="border border-r border-black-400 h-[2.5rem] m-auto"></div>
+      <div className="border border-r border-black-400 h-10 m-auto"></div>
       <div className="flex flex-col justify-between pl-1 sm:pl-2">
         <span
           className={`${
@@ -88,9 +79,9 @@ const ComparisonCards = (props: {
               : difference < 0
               ? "text-green-300"
               : "text-gray-400"
-          } text-[10px]`}
+          } text-10`}
         >
-          {DIFFERENCE}
+          {DASHBOARD_LABELS.DIFFERENCE}
         </span>
         <div className="flex">
           <span
@@ -134,9 +125,9 @@ const HomePage = () => {
   const fetchOPMData = async (url, date) => {
     try {
       const opmData = await fetchData(
-        `${url}?period=${HOME_PAGE_REFERSH_DURATION}&starttime=${getFormattedPSTDate(
-          date
-        )}`,
+        `${url}?period=${
+          DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION
+        }&starttime=${getFormattedPSTDate(date)}`,
         {}
       );
       const totalOrders = opmData.reduce(
@@ -144,7 +135,9 @@ const HomePage = () => {
         0
       );
       setTotalOPM(totalOrders);
-      setAvgOPM(Math.round(totalOrders / HOME_PAGE_REFERSH_DURATION));
+      setAvgOPM(
+        Math.round(totalOrders / DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION)
+      );
       setLastMinOPM(opmData[opmData.length - 1]["orderCount"]);
     } catch (err) {
       console.log("Error occured while fetching data", err);
@@ -154,9 +147,9 @@ const HomePage = () => {
   const fetchCompData = async (url, date) => {
     try {
       const opmData = await fetchData(
-        `${url}?period=${HOME_PAGE_REFERSH_DURATION}&starttime=${getFormattedPSTDate(
-          date
-        )}`,
+        `${url}?period=${
+          DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION
+        }&starttime=${getFormattedPSTDate(date)}`,
         {}
       );
       const totalOrders = opmData.reduce(
@@ -164,7 +157,9 @@ const HomePage = () => {
         0
       );
       setLastDayTotalOPM(totalOrders);
-      setLastDayAvgOPM(Math.round(totalOrders / HOME_PAGE_REFERSH_DURATION));
+      setLastDayAvgOPM(
+        Math.round(totalOrders / DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION)
+      );
     } catch (err) {
       console.log("Error occured while fetching data", err);
     }
@@ -192,7 +187,10 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => setCanShow(!canShow), REFRESHTIME);
+    const timer = setTimeout(
+      () => setCanShow(!canShow),
+      DASHBOARD_LABELS.REFRESHTIME
+    );
     return () => clearTimeout(timer);
   });
 
@@ -203,15 +201,15 @@ const HomePage = () => {
           <GlobalLoader />
         </LoaderPortal>
       ) : (
-        <div className="home-page py-[4px] box-border">
+        <div className="home-page py-1 box-border">
           <div className="flex sm:flex-row justify-between mb-4">
             <div className="flex items-center font-helvetica">
               <span className="text-lg text-gray-200 font-bold mr-4">
-                {DASHBOARD}
+                {PAGE_TITLES.DASHBOARD}
               </span>
               <CustomImage src={infoIcon} />
               <span className="text-xs text-gray-400 ml-2">
-                Last {HOME_PAGE_REFERSH_DURATION} min data
+                Last {DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION} min data
               </span>
             </div>
             <div className="flex items-center font-helvetica">
@@ -229,11 +227,11 @@ const HomePage = () => {
           {isLoading ? (
             <Loader className="card-loader-height" />
           ) : (
-            <div className="flex flex-wrap gap-[10px] pb-4 border-b border-b-black-200 card-loader-height font-helvetica ">
+            <div className="flex flex-wrap gap-2.5 pb-4 border-b border-b-black-200 card-loader-height font-helvetica">
               <HomeCard
                 title={
                   <CardTitle
-                    title={AVG_ORDERS_PER_MIN}
+                    title={DASHBOARD_LABELS.AVG_ORDERS_PER_MIN}
                     icon={avgOrdersPerMinIcon}
                   />
                 }
@@ -242,7 +240,7 @@ const HomePage = () => {
               <HomeCard
                 title={
                   <CardTitle
-                    title={TOTAL_NO_OF_ORDERS}
+                    title={DASHBOARD_LABELS.TOTAL_NO_OF_ORDERS}
                     icon={totalNoOfOrdersIcon}
                   />
                 }
@@ -251,7 +249,7 @@ const HomePage = () => {
               <HomeCard
                 title={
                   <CardTitle
-                    title={LAST_MIN_OPM}
+                    title={DASHBOARD_LABELS.LAST_MIN_OPM}
                     icon={lastMinOpmIcon}
                     classname={"card-title"}
                   />
@@ -260,7 +258,10 @@ const HomePage = () => {
               />
               <HomeCard
                 title={
-                  <CardTitle title={AVG_OPM_COMPARISON} icon={avgOpmcompIcon} />
+                  <CardTitle
+                    title={DASHBOARD_LABELS.AVG_OPM_COMPARISON}
+                    icon={avgOpmcompIcon}
+                  />
                 }
                 value={
                   <ComparisonCards today={avgOPM} lastDay={lastDayAvgOPM} />
@@ -269,7 +270,7 @@ const HomePage = () => {
               <HomeCard
                 title={
                   <CardTitle
-                    title={TOTAL_ORDER_COMPARISON}
+                    title={DASHBOARD_LABELS.TOTAL_ORDER_COMPARISON}
                     icon={totalOrderCompIcon}
                   />
                 }
@@ -280,7 +281,7 @@ const HomePage = () => {
             </div>
           )}
 
-          <div className="home-opm-charts flex flex-col xl:flex-row space-y-6 xl:space-y-0 xl:gap-[2%] min-h-[21rem]">
+          <div className="home-opm-charts flex flex-col xl:flex-row space-y-6 xl:space-y-0 xl:gap-[2%] min-h-21r">
             <OPM />
             <OpmComparison />
           </div>

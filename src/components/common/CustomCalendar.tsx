@@ -137,7 +137,7 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
 
 const ManualInputTime: FC<ManualInputTimeProps> = (props) => {
   return (
-    <div className="flex justify-evenly w-[12rem] mx-auto items-center">
+    <div className="flex justify-evenly w-48 mx-auto items-center">
       <CustomInputNumber
         value={props.hour < 1 ? 12 : props.hour}
         step={1}
@@ -172,7 +172,7 @@ const ManualInputTime: FC<ManualInputTimeProps> = (props) => {
         }
       />
       :
-      <div className="ampm-comp px-[1rem] min-w-[4rem] pt-4">
+      <div className="ampm-comp px-4 min-w-[4rem] pt-0.8r">
         <CustomImage
           src={ArrowUp}
           className="cursor-pointer"

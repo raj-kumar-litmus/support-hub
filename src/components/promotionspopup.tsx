@@ -1,19 +1,13 @@
 import { FC } from "react";
 import CustomDialog from "./common/customdialog";
 import PromotionCard from "./common/promotioncard";
-import { IPromotion } from "../@types/pages/OrderDetails";
-import { NO_DATA, PROMOTIONS } from "../constants/appConstants";
-
-type PromotionsPopupProps = {
-  promotions: IPromotion[];
-  openPromotionsPopup: boolean;
-  setOpenPromotionsPopup: (a: boolean) => void;
-};
+import { PromotionsPopupProps } from "../@types/pages/OrderDetails";
+import { ORDER_DETAILS_LABELS } from "../constants/appConstants";
 
 const PromotionsPopup: FC<PromotionsPopupProps> = (props) => {
   return (
     <CustomDialog
-      header={PROMOTIONS}
+      header={ORDER_DETAILS_LABELS.PROMOTIONS}
       visible={props.openPromotionsPopup}
       onHide={() => props.setOpenPromotionsPopup(false)}
       draggable={false}
@@ -25,7 +19,7 @@ const PromotionsPopup: FC<PromotionsPopupProps> = (props) => {
           <PromotionCard key={p.promotionId} promotion={p} />
         ))
       ) : (
-        <div className="text-center">{NO_DATA}</div>
+          <div className="text-center">{ORDER_DETAILS_LABELS.NO_DATA}</div>
       )}
     </CustomDialog>
   );

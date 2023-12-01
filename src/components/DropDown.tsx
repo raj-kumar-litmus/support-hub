@@ -5,11 +5,9 @@ import { CustomDropdownProps } from "../@types/components/commonTypes";
 const CustomDropdown: React.FC<CustomDropdownProps> = (props) => {
   return props.icon ? (
     <div
-      className={`flex flex-col self-end inputContainer w-[10vw] lg:w-[8vw] ${props.containerclassname}`}
+      className={`flex flex-col self-end inputContainer w-10w lg:w-8w ${props.containerclassname}`}
     >
-      <label
-        className={`labelClass relative ml-[18px] ${props.labelclassname}`}
-      >
+      <label className={`labelClass relative ml-18 ${props.labelclassname}`}>
         {props.label}
       </label>
       <span className="flex">
@@ -26,8 +24,8 @@ const CustomDropdown: React.FC<CustomDropdownProps> = (props) => {
       </span>
     </div>
   ) : (
-    <div className="flex flex-col self-end inputContainer md:w-[8vw]">
-      <label className="labelClass relative ml-[18px]">{props.label}</label>
+    <div className="flex flex-col self-end inputContainer md:w-8w">
+      <label className="labelClass relative ml-18">{props.label}</label>
       <Dropdown
         dropdownIcon={props.dropdownIcon}
         value={props.value}
