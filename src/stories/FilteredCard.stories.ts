@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
 import FilteredCard from "../components/FilteredCard";
 import SmallCalendar from "../assets/calendar_small.svg";
 import "../index.css";

@@ -1,5 +1,21 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { Column } from "primereact/column";
+import useScreenSize from "../../hooks/useScreenSize";
+import Loader from "../loader";
+import OrderStatus from "../orderstatus";
+import PromotionsPopup from "../promotionspopup";
+import OrderStatusPopup from "../orderstatuspopup";
+import CustomImage from "../common/customimage";
+import CustomTable from "../common/customtable";
+import CustomIcon from "../common/CustomIcon";
+import Card from "../common/Card";
+import CustomButton from "../Button";
+import ItemInformationsPopUp from "../itemInformationsPopUp";
+import PromotionsIcon from "../../assets/promotions_white.svg";
+import OrderClockIcon from "../../assets/order_clock_white.svg";
+import RightArrowIcon from "../../assets/right_arrow.svg";
+import OmsInfoIcon from "../../assets/oms_info_white.svg";
 import {
   URL_OMS_ORDER_STATUS,
   URL_ORDER_DETAILS,
@@ -7,7 +23,8 @@ import {
   URL_PROMOTIONS,
 } from "../../constants/apiConstants";
 import {
-  ORDER_DETAILS_LABELS, PAGE_TITLES,
+  ORDER_DETAILS_LABELS,
+  PAGE_TITLES,
 } from "../../constants/appConstants";
 import {
   CommerceItem,
@@ -16,31 +33,14 @@ import {
   OmsOrderStatus,
   OrderData,
   IPromotion,
-} from "../../@types/OrderDetails";
-
+} from "../../@types/pages/OrderDetails";
 import { fetchData } from "../../utils/fetchUtil";
-import CustomIcon from "../common/CustomIcon";
-import Card from "../common/Card";
-import PromotionsIcon from "../../assets/promotions_white.svg";
-import OrderClockIcon from "../../assets/order_clock_white.svg";
-import RightArrowIcon from "../../assets/right_arrow.svg";
-import OmsInfoIcon from "../../assets/oms_info_white.svg";
-import Loader from "../loader";
-import OrderStatus from "../orderstatus";
-import PromotionsPopup from "../promotionspopup";
-import OrderStatusPopup from "../orderstatuspopup";
-import CustomImage from "../common/customimage";
 import { getTableHeaders } from "../utils/Utils";
-import CustomTable from "../common/customtable";
-import useScreenSize from "../../hooks/useScreenSize";
-import { Column } from "primereact/column";
-import ItemInformationsPopUp from "../itemInformationsPopUp";
-import CustomButton from "../Button";
 
 const OrderDetails: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [orderData, setOrderData] = useState<OrderData | Record<string, never>>(
-    {},
+    {}
   );
   const [omsOrderStatus, setOmsOrderStatus] = useState<
     OmsOrderStatus | Record<string, never>
@@ -78,7 +78,10 @@ const OrderDetails: React.FC = () => {
       itemTableData.length > ORDER_DETAILS_LABELS.VIEW_ALL_MIN_ORDER_LIST_MOBILE
     ) {
       setItemTableDataSliced(
-        itemTableData.slice(0, ORDER_DETAILS_LABELS.VIEW_ALL_MIN_ORDER_LIST_MOBILE),
+        itemTableData.slice(
+          0,
+          ORDER_DETAILS_LABELS.VIEW_ALL_MIN_ORDER_LIST_MOBILE
+        )
       );
     }
   }, [itemTableData]);
@@ -86,7 +89,7 @@ const OrderDetails: React.FC = () => {
   const getOrderData = async () => {
     const data: OrderData = await fetchData(
       `${URL_ORDER_DETAILS}/${orderId}`,
-      {},
+      {}
     );
     setOrderData(data || {});
     if (data?.commerceItem?.length) {
@@ -99,7 +102,7 @@ const OrderDetails: React.FC = () => {
             "Unit Price": item.priceInfo.listPrice,
             "Total Price": item.priceInfo.rawTotalPrice,
           };
-        },
+        }
       );
       setItemTableData(convertedArray);
     }
@@ -109,7 +112,7 @@ const OrderDetails: React.FC = () => {
   const getOmsOrderStatus = async () => {
     const data: OmsOrderStatus = await fetchData(
       `${URL_OMS_ORDER_STATUS}/${orderId}`,
-      {},
+      {}
     );
     setOmsOrderStatus(data || {});
   };
@@ -117,7 +120,7 @@ const OrderDetails: React.FC = () => {
   const getOmsOrderFlow = async () => {
     const data: OmsOrderFlow = await fetchData(
       `${URL_OMS_ORDER_FLOW}/${orderId}`,
-      {},
+      {}
     );
     setOmsOrderFlow(data || {});
   };
@@ -159,7 +162,7 @@ const OrderDetails: React.FC = () => {
           onClick={() => navigate(-1)}
         />
         <span className="text-gray-300 text-center mx-auto text-sm">
-          Order #{orderId}
+          {ORDER_DETAILS_LABELS.ORDER} #{orderId}
         </span>
       </div>
       <div className="gridNoGapRounded grid-cols-1 mb-4 p-0 sm:py-4 sm:px-6 sm:bg-black-200">
@@ -179,8 +182,8 @@ const OrderDetails: React.FC = () => {
               height="0.75rem"
             />
             {ORDER_DETAILS_LABELS.PROMOTIONS}
-          </CustomButton >
-        </div >
+          </CustomButton>
+        </div>
         <div className="flexColWrapper sm:gap-y-0 sm:grid-cols-2 ">
           <div className="flexWrapper justify-start bg-black-200 rounded-t-md">
             <span className="w-auto sm:w-1/5 flex items-center min-w-4.5r">
@@ -235,18 +238,22 @@ const OrderDetails: React.FC = () => {
             </span>
           </div>
           <div className="flexBlockWrapper py-1 px-4 sm:p-0 border-none">
-            <span className="w-auto sm:w-1/5 min-w-4.5r">{ORDER_DETAILS_LABELS.ORDER_TYPE}</span>
+            <span className="w-auto sm:w-1/5 min-w-4.5r">
+              {ORDER_DETAILS_LABELS.ORDER_TYPE}
+            </span>
             <span className="w-auto sm:w-4/5 font-medium">&nbsp;&nbsp;-</span>
           </div>
         </div>
-      </div >
+      </div>
       <div className="flex flex-col-reverse p-0 sm:grid gap-4 sm:grid-cols-2 mb-4">
         <div className="p-0 sm:py-4 sm:px-6 gridNoGapRounded grid-cols-1 bg-black-100 sm:bg-black-200">
           <span className="!text-lg font-bold bg-black-100 sm:bg-inherit">
             {ORDER_DETAILS_LABELS.STATUS_ACROSS}
           </span>
           <div className="flexBlockWrapper rounded-t-md border-t-0 py-1 px-4 sm:p-0 sm:border-t border-solid border-black-300 bg-black-200">
-            <span className="w-auto sm:w-1/6 min-w-4.5r">{ORDER_DETAILS_LABELS.ATG}</span>
+            <span className="w-auto sm:w-1/6 min-w-4.5r">
+              {ORDER_DETAILS_LABELS.ATG}
+            </span>
             <span className="w-auto sm:w-5/6 font-medium">
               {`${orderData?.status} - ${orderData?.sephOrderStatus}`}
             </span>
@@ -268,7 +275,9 @@ const OrderDetails: React.FC = () => {
             </span>
           </div>
           <div className="flexBlockWrapper rounded-b-md border-t filterCardWrapper">
-            <span className="w-auto sm:w-1/6 min-w-4.5r">{ORDER_DETAILS_LABELS.WMS}</span>
+            <span className="w-auto sm:w-1/6 min-w-4.5r">
+              {ORDER_DETAILS_LABELS.WMS}
+            </span>
             <span className="w-auto sm:w-5/6 font-medium"></span>
           </div>
         </div>
@@ -277,15 +286,19 @@ const OrderDetails: React.FC = () => {
             {ORDER_DETAILS_LABELS.CUSTOMER_INFO}
           </span>
           <div className="flexBlockWrapper border-t-0 sm:border-t filterCardWrapper rounded-t-md">
-            <span className="w-auto sm:w-1/6 min-w-4.5r">{ORDER_DETAILS_LABELS.NAME}</span>
+            <span className="w-auto sm:w-1/6 min-w-4.5r">
+              {ORDER_DETAILS_LABELS.NAME}
+            </span>
             <span className="w-auto sm:w-5/6 font-medium">
               {formatName(
-                `${orderData?.customerInfo?.firstName} ${orderData?.customerInfo?.lastName}`,
+                `${orderData?.customerInfo?.firstName} ${orderData?.customerInfo?.lastName}`
               )}
             </span>
           </div>
           <div className="flexBlockWrapper border-t filterCardWrapper">
-            <span className="w-auto sm:w-1/6 min-w-4.5r">{ORDER_DETAILS_LABELS.EMAIL}</span>
+            <span className="w-auto sm:w-1/6 min-w-4.5r">
+              {ORDER_DETAILS_LABELS.EMAIL}
+            </span>
             <span
               className="w-auto sm:w-5/6 font-medium whitespace-nowrap text-ellipsis overflow-hidden"
               title={orderData?.customerInfo?.email}
@@ -294,7 +307,9 @@ const OrderDetails: React.FC = () => {
             </span>
           </div>
           <div className="flexBlockWrapper border-t filterCardWrapper rounded-b-md">
-            <span className="w-auto sm:w-1/6 min-w-4.5r">{ORDER_DETAILS_LABELS.BITIER}</span>
+            <span className="w-auto sm:w-1/6 min-w-4.5r">
+              {ORDER_DETAILS_LABELS.BITIER}
+            </span>
             <span className="w-auto sm:w-5/6 font-medium">
               {orderData?.customerInfo?.biTier}
             </span>
@@ -304,8 +319,9 @@ const OrderDetails: React.FC = () => {
 
       <div className="gridNoGapRounded grid-cols-1 mb-4 p-0 sm:py-4 sm:px-6 bg-black-100 sm:bg-black-200">
         <div
-          className={`flex justify-between border-none !bg-black-100 sm:!bg-inherit ${IS_MOBILE_SCREEN ? "sticky top-0" : ""
-            }`}
+          className={`flex justify-between border-none !bg-black-100 sm:!bg-inherit ${
+            IS_MOBILE_SCREEN ? "sticky top-0" : ""
+          }`}
         >
           <span className="w-3/4 sm:w-full !text-lg !text-gray-200 font-bold !bg-black-100 sm:!bg-inherit">
             {ORDER_DETAILS_LABELS.ITEMS_INFO}
@@ -342,7 +358,7 @@ const OrderDetails: React.FC = () => {
                   cardData={dataObj}
                   type="ORDER_DETAILS_ITEM"
                 />
-              ),
+              )
             )}
           {itemTableDataSliced.length === 0 &&
             itemTableData?.length > 0 &&
@@ -369,7 +385,9 @@ const OrderDetails: React.FC = () => {
             </span>
           </div>
           <div className="flexWrapper bg-black-200">
-            <span className="w-auto sm:w-1/5 min-w-4.5r">{ORDER_DETAILS_LABELS.AMOUNT}</span>
+            <span className="w-auto sm:w-1/5 min-w-4.5r">
+              {ORDER_DETAILS_LABELS.AMOUNT}
+            </span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.paymentInfo?.[0].amount}
             </span>
@@ -377,7 +395,9 @@ const OrderDetails: React.FC = () => {
         </div>
         <div className="flexColWrapper gap-y-0 grid-cols-2">
           <div className="flexWrapper bg-black-200 rounded-b-md border-none">
-            <span className="w-auto sm:w-35pr">{ORDER_DETAILS_LABELS.STATUS}</span>
+            <span className="w-auto sm:w-35pr">
+              {ORDER_DETAILS_LABELS.STATUS}
+            </span>
             <span className="w-auto sm:w-65pr font-medium">
               {orderData?.paymentInfo?.[0].status}
             </span>
@@ -403,7 +423,7 @@ const OrderDetails: React.FC = () => {
         isOrderStatusVisible={isOrderStatusVisible}
         setIsOrderStatusVisible={setIsOrderStatusVisible}
       />
-    </div >
+    </div>
   ) : (
     <div className="text-md pt-48 text-center text-gray-400 font-semibold">
       {ORDER_DETAILS_LABELS.NO_MATCHING_ORDERS_FOUND}

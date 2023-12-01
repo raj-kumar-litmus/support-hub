@@ -1,9 +1,9 @@
-import { FC } from "react";
 import { Dropdown } from "primereact/dropdown";
-import { CustomDropdownProps } from "../../@types/BarChart";
+import { FC } from "react";
 import CustomIcon from "./CustomIcon";
 import FilterIcon from "../../assets/arrow_filter.svg";
 import ArrowDownIcon from "../../assets/arrowdown.svg";
+import { CustomDropdownProps } from "../../@types/pages/Sessions";
 
 const CustomDropdown: FC<CustomDropdownProps> = (props) => (
   <>

@@ -1,7 +1,7 @@
-import React from "react";
 import { Calendar } from "primereact/calendar";
+import React from "react";
 
-interface Props {
+interface CustomCalendarProps {
   onChange: any;
   placeholder?: string;
   value?: Date | undefined;
@@ -12,26 +12,18 @@ interface Props {
   timeOnly?: boolean;
 }
 
-const CustomCalendar: React.FC<Props> = ({
-  onChange,
-  dateFormat,
-  timeOnly = false,
-  value,
-  icon,
-  showIcon = true,
-  iconPos = "left",
-  placeholder,
-}) => {
+const CustomCalendar: React.FC<CustomCalendarProps> = (props) => {
+  const { timeOnly = false, showIcon = true, iconPos = "left" } = props;
   return (
     <Calendar
       showIcon={showIcon}
       timeOnly={timeOnly}
-      value={value}
-      icon={icon}
+      value={props.value}
+      icon={props.icon}
       iconPos={iconPos}
-      placeholder={placeholder}
-      dateFormat={dateFormat}
-      onChange={onChange}
+      placeholder={props.placeholder}
+      dateFormat={props.dateFormat}
+      onChange={props.onChange}
     />
   );
 };

@@ -1,16 +1,13 @@
 import React from "react";
 import OPM from "../views/opm";
 import OpmComparison from "../views/opmComparison";
+import { ChartProps } from "../@types/components/commonTypes";
 
-interface Props {
-  type: string;
-}
-
-const Chart: React.FC<Props> = ({ type }) => {
+const Chart: React.FC<ChartProps> = (props) => {
   return (
     <>
-      {type === "opm" && <OPM />}
-      {type === "opmcomparison" && <OpmComparison />}
+      {props.type === "opm" && <OPM />}
+      {props.type === "opmcomparison" && <OpmComparison />}
     </>
   );
 };

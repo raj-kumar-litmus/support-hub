@@ -1,24 +1,23 @@
-import { FC } from "react";
-import { IMenu } from "../../@types/menu";
 import { Card } from "primereact/card";
+import { FC } from "react";
 import CustomImage from "./customimage";
+import { MenuCardProps } from "../../@types/components/commonTypes";
 
-type Props = {
-  menu: IMenu;
-  selectedMenu: number;
-  onClick: (a: IMenu) => void;
-};
 
-const MenuCard: FC<Props> = ({ menu, selectedMenu, onClick }) => {
+const MenuCard: FC<MenuCardProps> = (props) => {
   return (
     <Card
       className={`menu-card grid items-center rounded-xl h-[90px] w-[158px] m-2 cursor-pointer text-center bg-black-300 !shadow-none ${
-        selectedMenu === menu.id ? "selected-menu" : ""
+        props.selectedMenu === props.menu.id ? "selected-menu" : ""
       }`}
-      onClick={() => onClick(menu)}
+      onClick={() => props.onClick(props.menu)}
     >
-      <CustomImage className="menu-icon" src={menu.icon} alt="menu.name" />
-      <span className="text-gray-300 text-sm ">{menu.name}</span>
+      <CustomImage
+        className="menu-icon"
+        src={props.menu.icon}
+        alt="menu.name"
+      />
+      <span className="text-gray-300 text-sm ">{props.menu.name}</span>
     </Card>
   );
 };

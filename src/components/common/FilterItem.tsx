@@ -1,6 +1,6 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import CustomIcon from "./CustomIcon";
-import { FilterItemProps } from "../../@types/BarChart";
+import { FilterItemProps } from "../../@types/pages/Sessions";
 
 const FilterItem: FC<FilterItemProps> = (props) => (
   <div className="flex items-baseline text-gray-500 font-normal text-sm ml-0 mr-2 mb-2 px-4 py-1 border border-slate-200 rounded-2xl">

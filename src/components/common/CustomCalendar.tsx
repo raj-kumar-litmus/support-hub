@@ -1,24 +1,20 @@
 import { Calendar } from "primereact/calendar";
-import { InputNumberValueChangeEvent } from "primereact/inputnumber";
 import { FC, useEffect, useState } from "react";
-import { CustomCalendarProps } from "../../@types/BarChart";
+import CustomImage from "./customimage";
+import CustomToast from "./CustomToast";
+import CustomInputNumber from "./CustomInputNumber";
 import ArrowDown from "../../assets/arrow_down.svg";
 import ArrowUp from "../../assets/arrow_up.svg";
-import { AM_PM_OPTIONS } from "../../constants/appConstants";
+import {
+  CustomCalendarProps,
+  ManualInputTimeProps,
+} from "../../@types/components/commonTypes";
+import {
+  AM_PM_OPTIONS,
+  CALENDAR_TOAST_MESSAGE,
+} from "../../constants/appConstants";
 import { CURRENT_PST_DATE } from "../../utils/dateTimeUtil";
 import { convert12to24Hour, convert24to12Hour } from "../utils/Utils";
-import CustomInputNumber from "./CustomInputNumber";
-import CustomToast from "./CustomToast";
-import CustomImage from "./customimage";
-
-type ManualInputTimeProps = {
-  hour: number;
-  minute: number;
-  handleHourChange: (e: InputNumberValueChangeEvent) => void;
-  handleMinuteChange: (e: InputNumberValueChangeEvent) => void;
-  ampm: string;
-  toggleAmPmChange: (e) => void;
-};
 
 const CustomCalendar: FC<CustomCalendarProps> = (props) => {
   const [hour, setHour] = useState<number>();
@@ -132,32 +128,25 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
         onHide={() => setShowFutureDateToast(false)}
         showToast={showFutureDateToast}
         severity="warn"
-        detail="Please don't select a future date and time"
+        detail={CALENDAR_TOAST_MESSAGE}
         position="top-center"
       />
     </div>
   );
 };
 
-const ManualInputTime: FC<ManualInputTimeProps> = ({
-  hour,
-  minute,
-  handleHourChange,
-  handleMinuteChange,
-  ampm,
-  toggleAmPmChange,
-}) => {
+const ManualInputTime: FC<ManualInputTimeProps> = (props) => {
   return (
     <div className="flex justify-evenly w-48 mx-auto items-center">
       <CustomInputNumber
-        value={hour < 1 ? 12 : hour}
+        value={props.hour < 1 ? 12 : props.hour}
         step={1}
-        onValueChange={(e) => handleHourChange(e)}
+        onValueChange={(e) => props.handleHourChange(e)}
         showButtons
         buttonLayout="vertical"
         min={0}
         max={12}
-        prefix={hour && hour < 10 && "0"}
+        prefix={props.hour && props.hour < 10 && "0"}
         incrementButtonIcon={
           <CustomImage src={ArrowUp} className="cursor-pointer" />
         }
@@ -167,14 +156,14 @@ const ManualInputTime: FC<ManualInputTimeProps> = ({
       />{" "}
       :
       <CustomInputNumber
-        value={minute}
-        onValueChange={(e) => handleMinuteChange(e)}
+        value={props.minute}
+        onValueChange={(e) => props.handleMinuteChange(e)}
         showButtons
         buttonLayout="vertical"
         step={1}
         min={0}
         max={59}
-        prefix={minute < 10 && "0"}
+        prefix={props.minute < 10 && "0"}
         incrementButtonIcon={
           <CustomImage src={ArrowUp} className="cursor-pointer" />
         }
@@ -187,13 +176,13 @@ const ManualInputTime: FC<ManualInputTimeProps> = ({
         <CustomImage
           src={ArrowUp}
           className="cursor-pointer"
-          onClick={toggleAmPmChange}
+          onClick={props.toggleAmPmChange}
         />
-        <div className="my-[0.3rem] text-base">{ampm}</div>
+        <div className="my-[0.3rem] text-base">{props.ampm}</div>
         <CustomImage
           src={ArrowDown}
           className="cursor-pointer"
-          onClick={toggleAmPmChange}
+          onClick={props.toggleAmPmChange}
         />
       </div>
     </div>
