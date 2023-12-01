@@ -1,13 +1,15 @@
 import React from "react";
-import { Button } from "primereact/button";
+import { Button, ButtonProps } from "primereact/button";
 
-interface Props {
+interface Props extends ButtonProps {
   className?: string;
   isTextButton?: boolean;
   isDisabled?: boolean;
   isRounded?: boolean;
   id?: string;
+  containerId?: string;
   children?: React.ReactNode;
+  btnclassname?: string;
   severity?:
     | "secondary"
     | "success"
@@ -16,7 +18,6 @@ interface Props {
     | "danger"
     | "help"
     | undefined;
-  onClick?: () => void;
   label?: string;
 }
 
@@ -24,18 +25,21 @@ const CustomButton: React.FC<Props> = ({
   onClick,
   label,
   id,
+  containerId,
   severity,
   isRounded,
   isDisabled,
   className,
+  btnclassname,
   children,
   isTextButton = false,
 }) => {
   return (
-    <div className={className}>
+    <div id={containerId} className={className}>
       <Button
         label={label}
         id={id}
+        className={btnclassname}
         disabled={isDisabled}
         rounded={isRounded}
         onClick={onClick}

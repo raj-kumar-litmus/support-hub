@@ -1,10 +1,12 @@
-import { FC, useState } from "react";
+import { FC, KeyboardEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SephoraLogo from "../../assets/logo.svg";
 import MenuIcon from "../../assets/menu.svg";
+import QuickLinksIcon from "../../assets/Quick Links.svg";
 import SearchBar from "./searchbar";
 import CustomImage from "./customimage";
-import { useNavigate } from "react-router-dom";
-import { MENU_LIST } from "../utils/Utils";
+import { MENU_LIST, ROUTES } from "../utils/Utils";
+import QuickLinks from "../quicklinks";
 
 type Props = {
   showSidePane: boolean;
@@ -26,6 +28,7 @@ const Navbar: FC<Props> = ({
   setSearchValue,
 }) => {
   const navigate = useNavigate();
+  const [showQuickLinks, setShowQuickLinks] = useState<boolean>(false);
 
   const navigateToHome = () => {
     navigate(MENU_LIST[0].path);
@@ -36,43 +39,67 @@ const Navbar: FC<Props> = ({
     setOpenSearchField(false);
   };
 
+  const onSearch = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter" && searchValue.length > 0) {
+      event.preventDefault();
+      navigate(`/${ROUTES.orderDetails}/${searchValue}`);
+    }
+  };
+
   return (
     <div
       className={
-        "py-0 pr-1 sm:px-10 flex items-center border-[#383F47] border-solid border-b justify-between h-[56px] absolute top-0 left-0 w-full z-50 bg-[#1C1C20] sm:bg-[#22262C]"
+        "py-0 pr-1 sm:px-10 flex items-center border-black-300 border-solid border-b justify-between h-14 absolute top-0 left-0 w-full z-50 bg-black-200"
       }
     >
       <div
-        className={`flex pl-4 ${
-          showSidePaneGrid
-            ? "w-[367px] bg-[#26262B] h-[56px] items-center border-[#30343B] border-solid border-b"
+        className={`flex pl-4 ${showSidePaneGrid
+            ? "w-[367px] bg-black-200 h-14 items-center border-black-400 border-solid border-b"
             : "w-auto"
-        }`}
+          }`}
       >
         {showSidePane && (
           <CustomImage
-            className="h-[13px] sm:hidden pr-4 cursor-pointer"
+            className="h-13 sm:hidden pr-4 cursor-pointer"
             src={MenuIcon}
             alt="Menu"
             onClick={toggleShowSidePane}
           />
         )}
         <CustomImage
-          className=" h-[10px] bottom-1 sm:bottom-0 sm:h-auto relative sm:right-5 cursor-pointer"
+          className=" h-2.5 sm:h-auto bottom-2.5 sm:bottom-0 relative sm:right-5 cursor-pointer"
           src={SephoraLogo}
           alt="SEPHORA"
           onClick={navigateToHome}
         />
       </div>
-      <div className="sm:m-auto">
-        <SearchBar
-          showSearchButton={!showSidePaneGrid}
-          setOpenSearchField={setOpenSearchField}
-          openSearchField={openSearchField}
-          searchValue={searchValue}
-          setSearchValue={setSearchValue}
-        />
+      <div>
+        {!showSidePaneGrid && (
+          <CustomImage
+            src={QuickLinksIcon}
+            onClick={() => setShowQuickLinks(!showQuickLinks)}
+            className="cursor-pointer h-6 w-6 right-16 top-[1.1rem] sm:right-10 absolute"
+          />
+        )}
+        <div className="sm:mr-12">
+          {" "}
+          <SearchBar
+            showSearchButton={!showSidePaneGrid}
+            setOpenSearchField={setOpenSearchField}
+            openSearchField={openSearchField}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+            onSearch={onSearch}
+            placeholder="Search Order"
+          />
+        </div>
       </div>
+      {!showSidePaneGrid && showQuickLinks && (
+        <QuickLinks
+          showQuickLinks={showQuickLinks}
+          setShowQuickLinks={setShowQuickLinks}
+        />
+      )}
     </div>
   );
 };

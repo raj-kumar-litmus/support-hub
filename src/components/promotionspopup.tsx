@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { IPromotion } from "../@types/promotion";
+import { IPromotion } from "../@types/OrderDetails";
 import CustomDialog from "./common/customdialog";
 import PromotionCard from "./common/promotioncard";
-import { PROMOTIONS } from "../constants/appConstants";
+import { ORDER_DETAILS_LABELS } from "../constants/appConstants";
 
 type Props = {
   promotions: IPromotion[];
@@ -17,7 +17,7 @@ const PromotionsPopup: FC<Props> = ({
 }) => {
   return (
     <CustomDialog
-      header={PROMOTIONS}
+      header={ORDER_DETAILS_LABELS.PROMOTIONS}
       visible={openPromotionsPopup}
       onHide={() => setOpenPromotionsPopup(false)}
       draggable={false}
@@ -29,7 +29,7 @@ const PromotionsPopup: FC<Props> = ({
           <PromotionCard key={p.promotionId} promotion={p} />
         ))
       ) : (
-        <div className="text-center">No Data</div>
+          <div className="text-center">{ORDER_DETAILS_LABELS.NO_DATA}</div>
       )}
     </CustomDialog>
   );

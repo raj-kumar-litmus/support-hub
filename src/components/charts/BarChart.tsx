@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import { Bar } from "react-chartjs-2";
 import { ChartData, SessionData } from "../../@types/BarChart";
 import ChannelIcon from "../../assets/channel.svg";
@@ -13,27 +13,24 @@ import refreshIcon from "../../assets/refresh_icon.svg";
 import { BAR_CHART_OPTIONS } from "../../config/chartConfig";
 import { URL_SESSIONS } from "../../constants/apiConstants";
 import {
-  CHANNEL,
-  CHANNEL_LIST,
-  DATE,
-  DD_MM_YYYY,
-  DEFAULT_PERIOD,
-  DURATION,
-  HOME_PAGE_REFERSH_DURATION,
-  DURATION_LIST,
-  FILTERS,
-  RESET,
-  SESSIONS,
+  SESSIONS_CHANNEL_LIST,
+  DATE_AND_TIME_FORMATS,
+  LABELS,
+  DASHBOARD_LABELS,
+  PAGE_TITLES,
   SESSIONS_TABS,
-  SUBMIT,
-  TOTAL_SESSIONS_PER_MINUTE,
+  CHART_LABELS,
+  SESSIONS_CHART_DEFAULT,
+  SCREEN_WIDTH,
+  DURATIONS,
 } from "../../constants/appConstants";
 import useScreenSize from "../../hooks/useScreenSize";
 import {
-  DATE_FORMAT_2,
+  CURRENT_PST_DATE,
   DATE_FORMAT_3,
+  DATE_TIME_FORMAT_4,
   formatDate,
-  getLocaleTime,
+  getFormattedPSTDate,
 } from "../../utils/dateTimeUtil";
 import { fetchData } from "../../utils/fetchUtil";
 import FilteredCard from "../FilteredCard";
@@ -44,6 +41,8 @@ import CustomTab from "../common/customtab";
 import Loader from "../loader";
 import CustomImage from "../common/customimage";
 import CustomButton from "../Button";
+import { LoaderContext, LoaderContextType } from "../../context/loaderContext";
+import { ROUTES, increaseLegendSpacing, submitOnEnter } from "../utils/Utils";
 
 const BarChart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -58,34 +57,43 @@ const BarChart = () => {
   const [showFilterPopup, setShowFilterPopup] = useState<boolean>(false);
   const [showFilters, setShowFilters] = useState<boolean>(true);
   const [submitCounter, setSubmitCounter] = useState<number>(0);
-  const [formFields, setFormFields] = useState([
+  const [chartOptions, setChartOptions] = useState<any>(null);
+  const DEFAULT_FORM_FIELDS = [
     {
       type: "dropdown",
       name: "period",
-      title: DURATION,
-      value: "",
+      title: LABELS.DURATION,
+      value: 10,
       iconSrc: SandGlassIcon,
-      options: DURATION_LIST,
+      options: Object.keys(DURATIONS).map((e) => ({
+        label: e,
+        value: DURATIONS[e],
+      })),
     },
     {
       type: "calendar",
       name: "date",
-      title: DATE,
-      value: "",
+      title: LABELS.DATE,
+      value: getFormattedPSTDate(),
       imgsrc: CalendarIcon,
     },
     {
       type: "dropdown",
       name: "channel",
-      title: CHANNEL,
-      value: "",
+      title: LABELS.CHANNEL,
+      value: "all",
       iconSrc: ChannelIcon,
-      options: CHANNEL_LIST,
+      options: SESSIONS_CHANNEL_LIST,
     },
-  ]);
+  ];
+  const [formFields, setFormFields] = useState(DEFAULT_FORM_FIELDS);
   const [disabled, setDisabled] = useState(true);
   const [tabValue, setTabValue] = useState<number>(2);
+  const [maxOPM, setMaxOPM] = useState<number>(SESSIONS_CHART_DEFAULT.MAX);
   const [id, setId] = useState<string>("home-bar-chart");
+  const [showFilteredCards, setShowFilteredCards] = useState<boolean>(false);
+
+  const { hideLoader } = useContext(LoaderContext) as LoaderContextType;
   const { width } = useScreenSize();
   const chartRef = useRef(null);
   const navigate = useNavigate();
@@ -105,10 +113,17 @@ const BarChart = () => {
       azureSecondary.push(parseInt(item.qtsDCSessionsCount));
     });
 
+    const maxValue = Math.max(...azurePrimary, ...azureSecondary);
+    const yMaxRange = SESSIONS_CHART_DEFAULT.STEP_SIZE;
+    setMaxOPM(Math.round(maxValue / yMaxRange) * yMaxRange + yMaxRange);
     setXAxisLabels([...labels]);
     setAzurePrimaryData([...azurePrimary]);
     setAzureSecondaryData([...azureSecondary]);
   }, [sessionData]);
+
+  useEffect(() => {
+    setChartOptions(getChartConfig());
+  }, [maxOPM]);
 
   useEffect(() => {
     const primaryDataset = {
@@ -147,15 +162,13 @@ const BarChart = () => {
 
   const getSessionData = async () => {
     const params = {
-      period: location.pathname.includes("home")
-        ? HOME_PAGE_REFERSH_DURATION
-        : DEFAULT_PERIOD,
+      period: location.pathname.includes(ROUTES.home)
+        ? DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION
+        : DASHBOARD_LABELS.DEFAULT_PERIOD,
       starttime: "",
       channel: "",
     };
     if (!disabled) {
-      let dateString: string = "";
-      let timeString: string = "";
       formFields.forEach((e: any) => {
         if (e.value) {
           switch (e.name) {
@@ -164,50 +177,49 @@ const BarChart = () => {
               params[e.name] = e.value;
               break;
             case "date":
-              dateString = formatDate(e.value, DATE_FORMAT_2);
-              break;
-            case "time":
-              timeString = getLocaleTime(e.value, false);
+              params["starttime"] = getFormattedPSTDate(e.value);
               break;
             default:
               break;
           }
         }
       });
-      let startTimeStr: string = "";
-      if (dateString === "" && timeString === "") {
-        startTimeStr = "";
-      } else {
-        if (dateString === "")
-          dateString = formatDate(new Date(), DATE_FORMAT_2);
-        if (timeString === "") timeString = getLocaleTime(new Date(), false);
-        startTimeStr = `${dateString}T${timeString}`;
-      }
-      params["starttime"] = startTimeStr;
     }
     setIsLoading(true);
     const data = await fetchData(URL_SESSIONS, params);
     setSessionData(data || []);
+    hideLoader();
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    const removeEventListener = submitOnEnter(incrementCounter);
+    return removeEventListener;
+  }, [submitCounter]);
 
   const handleFormChange = (event) => {
     const data = [...formFields];
     const val = event.target.name || event.value.name;
-    if (val === "date" || val === "time") {
+    if (val === "date") {
       const dataItem = data.find((e) => e.name === val);
-      dataItem.value = event.value;
+      dataItem.value = isNaN(event.value) ? CURRENT_PST_DATE : event.value;
     } else {
       const dataItem = data.find((e) => e.name === val);
       dataItem.value = event.target.value;
     }
+    setShowFilteredCards(true);
     setFormFields(data);
   };
 
-  const removeFormEntry = (event) => {
+  const removeFormEntry = (label) => {
     const data = [...formFields];
-    data.find((e) => e.name === event.target.id).value = null;
+    data.find((e) => e.name === label).value = null;
     setFormFields(data);
+  };
+
+  const resetFormEntry = () => {
+    setFormFields(DEFAULT_FORM_FIELDS);
+    setShowFilteredCards(false);
   };
 
   const incrementCounter = () => {
@@ -225,37 +237,45 @@ const BarChart = () => {
     setShowFilterPopup(false);
   };
 
-  const clearAllHandler = () => {
-    const data = [...formFields];
-    data.forEach((e) => (e.value = ""));
-    setFormFields(data);
-  };
-
   const getFilterCardContent = (e) => {
     if (e.type === "calendar") {
-      return e.name === "time"
-        ? getLocaleTime(e.value, true)
-        : e.value.toLocaleDateString("en-US");
+      return `${formatDate(e.value, DATE_TIME_FORMAT_4)}`;
     } else {
       return e.options.find((option) => option.value === e.value).label;
     }
   };
 
   const toggleFilterVisibility = () => {
-    width > 700
+    width > SCREEN_WIDTH.SM
       ? setShowFilters(!showFilters)
       : setShowFilterPopup(!showFilterPopup);
   };
 
-  const getChartConfig = () => {
-    const customChartConfig = { ...BAR_CHART_OPTIONS };
-    if (width > 700) {
+  const getChartConfig = (duration) => {
+    const customChartConfig = {
+      ...BAR_CHART_OPTIONS(
+        (duration ||
+          Number(formFields.find((e) => e.name === "period").value)) < 11 &&
+        width > SCREEN_WIDTH.SM,
+      ),
+    };
+    if (width > SCREEN_WIDTH.SM) {
       customChartConfig.plugins.legend.position = "bottom";
       customChartConfig.plugins.legend.align = "start";
     } else {
       customChartConfig.plugins.legend.position = "top";
       customChartConfig.plugins.legend.align = "start";
     }
+
+    if (width > SCREEN_WIDTH.SM && width <= SCREEN_WIDTH.LG) {
+      customChartConfig.plugins.datalabels.rotation = 270;
+      customChartConfig.plugins.datalabels.anchor = "center";
+      customChartConfig.plugins.datalabels.align = "center";
+    } else {
+      customChartConfig.plugins.datalabels.rotation = 0;
+    }
+    customChartConfig.scales.y.max = maxOPM;
+
     return customChartConfig;
   };
 
@@ -264,7 +284,7 @@ const BarChart = () => {
       <Button
         id="popup-btn-submit"
         className="p-button-rounded"
-        label={SUBMIT}
+        label={LABELS.SUBMIT}
         onClick={onSubmit}
         autoFocus
       />
@@ -272,7 +292,7 @@ const BarChart = () => {
   };
 
   const handleExpandClick = () => {
-    navigate("/sessions");
+    navigate(`/${ROUTES.sessions}`);
   };
 
   const handleOPMCompRefreshBtnClick = () => {
@@ -287,24 +307,23 @@ const BarChart = () => {
 
   return (
     <div id={id}>
-      {location.pathname.includes("sessions") && (
+      {location.pathname.includes(ROUTES.sessions) && (
         <>
-          <div className="flex basis-full justify-between pb-2 items-baseline">
-            <div className="text-lg text-[#F2F2F2] font-bold">{SESSIONS}</div>
-            <div
-              className="cursor-pointer"
-              onClick={() => toggleFilterVisibility()}
-            >
-              <CustomIcon
-                alt="show-filters"
-                src={FilterIcon}
-                width="2rem"
-                height="2rem"
-              />
+          <div className="flex basis-full justify-between pb-0 items-baseline">
+            <div className="text-lg text-gray-200 font-bold">
+              {PAGE_TITLES.SESSIONS}
             </div>
-          </div>
+            <CustomIcon
+              alt="show-filters"
+              src={FilterIcon}
+              width="2rem"
+              height="2rem"
+              className="cursor-pointer sm:hidden"
+              onClick={() => toggleFilterVisibility()}
+            />
+          </div >
           {showFilters && (
-            <div className="basis-full justify-between pb-0 items-center hidden sm:flex">
+            <div className="basis-full justify-between pb-0 items-end hidden sm:block lg:flex">
               <div className="flex justify-start pb-4 items-end">
                 {formFields.map((form, index) => {
                   return (
@@ -314,14 +333,16 @@ const BarChart = () => {
                           name={form.name}
                           title={form.title}
                           containerclassname="calendarSessions"
-                          imageclassname="h-[20px] w-[20px] relative top-[2.8vh] left-[0.5vw] z-[1]"
-                          // showTime={false}
+                          titleclassname="top-5"
+                          imageclassname="h-5 w-5 relative top-7 left-0.5w z-1"
                           showTime
                           timeOnly={form.name === "time"}
-                          placeholder={DD_MM_YYYY}
+                          placeholder={DATE_AND_TIME_FORMATS.MM_DD_YYYY_HH_MM}
                           value={form.value}
                           onChange={(event) => handleFormChange(event)}
-                          maxDate={form.name === "date" ? new Date() : null}
+                          maxDate={
+                            form.name === "date" ? CURRENT_PST_DATE : null
+                          }
                           dateFormat={DATE_FORMAT_3}
                           iconPos={"left"}
                           imgalt={`${form.name}-icon`}
@@ -336,9 +357,10 @@ const BarChart = () => {
                           value={form.value}
                           onChange={(event) => handleFormChange(event)}
                           options={form.options}
-                          optionLabel={"label"}
+                          optionLabel="label"
                           placeholder={""}
                           showIcon={true}
+                          showLeftIcon={true}
                           iconSrc={form.iconSrc}
                           iconAlt={`${form.name}-icon`}
                         />
@@ -349,94 +371,121 @@ const BarChart = () => {
               </div>
               <Button
                 disabled={disabled}
-                label={SUBMIT}
+                label={LABELS.SUBMIT}
                 id="page-btn-submit"
-                className="p-button-rounded min-w-[118px]"
+                className="p-button-rounded min-w-[118px] mb-4"
                 onClick={incrementCounter}
               />
             </div>
           )}
-          <div className="flex gap-2 justify-start flex-wrap pb-6 items-center">
-            {formFields
-              .filter((e) => e.value)
-              .map((e: any) => (
-                <React.Fragment key={e.name}>
-                  <FilteredCard
-                    label={e.name}
-                    leftIcon={e.iconSrc || e.imgsrc}
-                    onClickHandler={removeFormEntry}
-                    content={getFilterCardContent(e)}
-                  />
-                </React.Fragment>
-              ))}
+          {
+            showFilteredCards && (
+              <div className="flex gap-2 justify-start flex-wrap pb-6 items-center">
+                {formFields
+                  .filter((e) => e.value)
+                  .map((e: any) => (
+                    <React.Fragment key={e.name}>
+                      <FilteredCard
+                        label={e.name}
+                        leftIcon={e.iconSrc || e.imgsrc}
+                        onClickHandler={removeFormEntry}
+                        content={getFilterCardContent(e)}
+                      />
+                    </React.Fragment>
+                  ))}
 
-            {!disabled && (
-              <div
-                onClick={clearAllHandler}
-                className="text-[#FAF9F6] font-normal text-xs ml-2 cursor-pointer"
-              >
-                {RESET}
+                {!disabled && (
+                  <CustomButton
+                    label={LABELS.RESET}
+                    severity="secondary"
+                    className="resetFilters text-xs text-white-700 ml-2"
+                    isTextButton={true}
+                    onClick={() => resetFormEntry()}
+                  />
+                )}
               </div>
             )}
-          </div>
         </>
-      )}
-
-      <div className="home-sessions flex justify-center basis-full relative px-3 py-8 sm:px-5 h-64 mb-4 bg-[#22262C] w-[full] h-[22rem] sm:h-[24rem] drop-shadow-md rounded-xl flex-col">
-        {isLoading ? (
-          <Loader className="!p-0 m-auto" />
-        ) : (
-          <>
-            {location.pathname.includes("home") && (
-              <>
-                <div className="flex flex-row justify-between">
-                  <div className="text-[#F2F2F2] text-base sm:text-lg font-bold">
-                    {SESSIONS}
+      )
+      }
+      {isLoading && <Loader className="!p-0 m-auto min-h-24r" />}
+      {
+        !isLoading && (
+          <div
+            className={`${location.pathname.includes(ROUTES.home)
+              ? "home-sessions"
+              : "main-sessions"
+              } flex justify-center relative bg-black-200 h-96 lg:h-29r rounded-lg flex-col min-h-24r`}
+          >
+            <>
+              {location.pathname.includes(ROUTES.home) && (
+                <>
+                  <div className="flex flex-row justify-between mb-2 md:mb-4">
+                    <div className="session-page-title self-center">
+                      {PAGE_TITLES.SESSIONS}
+                    </div >
+                    <div className="flex">
+                      <CustomButton
+                        className="home-refresh-btn"
+                        onClick={handleOPMCompRefreshBtnClick}
+                      >
+                        <CustomImage src={refreshIcon} />
+                      </CustomButton>
+                      <CustomButton
+                        className="home-expand-btn ml-3"
+                        onClick={handleExpandClick}
+                      >
+                        <CustomImage src={openNewPageIcon} />
+                      </CustomButton>
+                    </div>
+                  </div >
+                  <div className="flex justify-start mb-2 md:mb-0 md:justify-center items-center">
+                    <CustomTab
+                      className="custom-tab md:absolute md:top-5 md:right-32"
+                      tabData={SESSIONS_TABS}
+                      tabValue={tabValue}
+                      setTabValue={setTabValue}
+                    />
                   </div>
-                  <div className="flex items-center">
-                    <CustomButton
-                      className="home-refresh-btn"
-                      onClick={handleOPMCompRefreshBtnClick}
-                    >
-                      <CustomImage src={refreshIcon} />
-                    </CustomButton>
-                    <CustomButton
-                      className="home-expand-btn ml-5 pb-[4px]"
-                      onClick={handleExpandClick}
-                    >
-                      <CustomImage src={openNewPageIcon} />
-                    </CustomButton>
-                  </div>
-                </div>
-                <CustomTab
-                  className="sessions-tabs sm:absolute sm:top-[1.25rem] sm:right-[8rem]"
-                  tabData={SESSIONS_TABS}
-                  tabValue={tabValue}
-                  setTabValue={setTabValue}
-                />
-              </>
-            )}
-            {location.pathname.includes("sessions") && (
-              <CustomTab
-                className="sessions-tabs"
-                tabData={SESSIONS_TABS}
-                tabValue={tabValue}
-                setTabValue={setTabValue}
-              />
-            )}
-            {allData.labels.length > 0 && (
-              <Bar ref={chartRef} options={getChartConfig()} data={allData} />
-            )}
-            <div className="text-center text-xs text-[#FAF9F6] -mt-[2px] sm:-mt-[28px]">
-              {TOTAL_SESSIONS_PER_MINUTE}
-            </div>
-          </>
+                </>
+              )
+              }
+              {
+                location.pathname.includes(ROUTES.sessions) && (
+                  <>
+                    <div className="block sm:hidden session-page-title mb-2">
+                      {PAGE_TITLES.SESSIONS}
+                    </div >
+                    <CustomTab
+                      className={`custom-tab ${width < SCREEN_WIDTH.SM ? "!self-start" : ""
+                        }`}
+                      tabData={SESSIONS_TABS}
+                      tabValue={tabValue}
+                      setTabValue={setTabValue}
+                    />
+                  </>
+                )
+              }
+              {
+                allData.labels.length > 0 && chartOptions && (
+                  <Bar
+                    ref={chartRef}
+                    options={chartOptions}
+                    data={allData}
+                    plugins={increaseLegendSpacing(20)}
+                  />
+                )
+              }
+              <div className="text-center text-xs text-gray-300 mt-2 sm:-mt-11">
+                {CHART_LABELS.TOTAL_SESSIONS_PER_MINUTE}
+              </div>
+            </>
+          </div >
         )}
-      </div>
 
       <Dialog
         id="modal-section"
-        header={FILTERS}
+        header={LABELS.FILTERS}
         visible={showFilterPopup}
         footer={renderFooter()}
         onHide={onHide}
@@ -458,12 +507,12 @@ const BarChart = () => {
                       title={form.title}
                       showTime
                       containerclassname="calendarSessions"
-                      imageclassname="h-[20px] w-[20px] relative top-[3vh] left-[0.5vw] z-[1]"
-                      // timeOnly={form.name === "time"}
-                      placeholder={DD_MM_YYYY}
+                      titleclassname="top-5"
+                      imageclassname="h-5 w-5 relative top-7 md:top-3h left-0.5w z-1"
+                      placeholder={DATE_AND_TIME_FORMATS.DD_MM_YYYY}
                       value={form.value}
                       onChange={(event) => handleFormChange(event)}
-                      maxDate={form.name === "date" ? new Date() : null}
+                      maxDate={form.name === "date" ? CURRENT_PST_DATE : null}
                       dateFormat={DATE_FORMAT_3}
                       iconPos={"left"}
                       imgalt={`${form.name}-icon`}
@@ -486,7 +535,7 @@ const BarChart = () => {
                       value={form.value}
                       onChange={(event) => handleFormChange(event)}
                       options={form.options}
-                      optionLabel={"label"}
+                      optionLabel="label"
                       placeholder={""}
                       showIcon={false}
                       iconSrc={form.iconSrc}
@@ -499,7 +548,7 @@ const BarChart = () => {
           </div>
         </div>
       </Dialog>
-    </div>
+    </div >
   );
 };
 

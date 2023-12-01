@@ -12,10 +12,11 @@ import {
 } from "chart.js";
 import type { ChartData, ChartOptions } from "chart.js";
 import { Line } from "react-chartjs-2";
-// import { OpmData, Options } from '../@types/todo';
 import useScreenSize from "../hooks/useScreenSize";
 import RotateIcon from "../assets/rotate.svg";
 import CustomImage from "./common/customimage";
+import { SCREEN_WIDTH } from "../constants/appConstants";
+import { ROUTES, increaseLegendSpacing } from "./utils/Utils";
 
 interface Props {
   options: ChartOptions<"line"> | any;
@@ -23,6 +24,8 @@ interface Props {
   className?: string;
   title: string;
   isFullScreen?: boolean;
+  defaultClasses?: boolean;
+  plugins?: boolean;
 }
 
 ChartJS.register(
@@ -41,6 +44,8 @@ function LineChart({
   data,
   className,
   isFullScreen = false,
+  defaultClasses,
+  plugins,
 }: Props) {
   const [rotate, setRotate] = useState<boolean>(isFullScreen);
   const { width } = useScreenSize();
@@ -48,38 +53,42 @@ function LineChart({
   const navigate = useNavigate();
 
   const onRotateHandler = () => {
-    if (!location.pathname.includes("full-screen")) {
-      navigate(`${location.pathname}/full-screen`);
+    if (!location.pathname.includes(ROUTES.fullScreen)) {
+      navigate(`${location.pathname}/${ROUTES.fullScreen}`);
     } else {
-      navigate(location.pathname.split("/full-screen")[0]);
+      navigate(location.pathname.split(`/${ROUTES.fullScreen}`)[0]);
     }
     setRotate(!rotate);
   };
 
   return (
-    <div
-      className={`${className} ${
-        rotate
-          ? "rotate-90 w-[600px] h-[390px] w-[844px] bg-inherit ml-[-60vw] mt-[22vh]"
-          : "relative ml-[5vw] sm:ml-[1vw] mr-[5vw] sm:mr-[0] md:mr-[0] sm:h-[340px] bg-[#22262C]"
-      }`}
-    >
-      {width < 700 &&
-        (location.pathname.includes("opm") ||
-          location.pathname.includes("opmcomparison")) && (
-          <div className="flex items-center justify-between ml-[20px] mr-[20px] pt-[16px]">
-            <p className="text-white">{title}</p>
-            <div className="bg-[#383F47] w-[30px] h-[30px] rounded-full">
-              <CustomImage
-                src={RotateIcon}
-                className="relative top-[8px] left-[9px]"
-                alt="Filter Icon"
-                onClick={onRotateHandler}
-              />
+    <div className={`${className} ${!defaultClasses && "bg-black-200"}`}>
+      {width < SCREEN_WIDTH.SM &&
+        (location.pathname.includes(ROUTES.opm) ||
+          location.pathname.includes(ROUTES.opmComparison)) && (
+          <div className="flex items-center justify-between mb-4">
+            <p className="text-white-500">{title}</p>
+            <div className="flex items-center">
+              <div className="bg-black-400 rounded-full relative p-2">
+                <CustomImage
+                  src={RotateIcon}
+                  className="relative"
+                  alt="Filter Icon"
+                  onClick={onRotateHandler}
+                />
+              </div>
             </div>
           </div>
         )}
-      <Line options={options} data={data} />
+      {plugins || width < SCREEN_WIDTH.SM ? (
+        <Line
+          options={options}
+          data={data}
+          plugins={increaseLegendSpacing(20)}
+        />
+      ) : (
+        <Line options={options} data={data} />
+      )}
     </div>
   );
 }

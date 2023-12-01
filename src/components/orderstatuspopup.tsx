@@ -1,8 +1,9 @@
 import { Column } from "primereact/column";
 import { FC } from "react";
-import { ORDER_STATUS, ORDER_STATUS_LIST } from "../constants/appConstants";
+import { ORDER_DETAILS_LABELS, ORDER_STATUS_LIST } from "../constants/appConstants";
 import CustomDialog from "./common/customdialog";
 import CustomTable from "./common/customtable";
+import { getTableHeaders } from "./utils/Utils";
 
 type Props = {
   openDialog: boolean;
@@ -10,14 +11,10 @@ type Props = {
 };
 
 const OrderStatusPopup: FC<Props> = ({ openDialog, setOpenDialog }) => {
-  const HEADERS = [
-    { field: "code", header: "Status Code" },
-    { field: "description", header: "Description" },
-  ];
 
   return (
     <CustomDialog
-      header={ORDER_STATUS}
+      header={ORDER_DETAILS_LABELS.ORDER_STATUS}
       visible={openDialog}
       onHide={() => setOpenDialog(false)}
       className="custom-popup"
@@ -30,8 +27,8 @@ const OrderStatusPopup: FC<Props> = ({ openDialog, setOpenDialog }) => {
         stripedRows
         value={ORDER_STATUS_LIST}
         className="custom-table"
-        children={HEADERS.map((h) => (
-          <Column key={h.field} field={h.field} header={h.header}></Column>
+        children={getTableHeaders(ORDER_STATUS_LIST).map((h) => (
+          <Column key={h} field={h} header={h}></Column>
         ))}
       />
     </CustomDialog>

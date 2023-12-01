@@ -1,3 +1,6 @@
+import { CalendarChangeEvent, CalendarProps } from "primereact/calendar";
+import { DropdownProps } from "primereact/dropdown";
+
 export interface SessionData {
   timestamp: string;
   qtsDCSessionsCount: string;
@@ -20,7 +23,7 @@ export interface ChartDataset {
   backgroundColor: string;
 }
 
-export interface CustomCalendarProps {
+export interface CustomCalendarProps extends CalendarProps {
   title?: string;
   placeholder?: string;
   name?: string;
@@ -28,11 +31,10 @@ export interface CustomCalendarProps {
   imageclassname?: string;
   titleclassname?: string;
   showTime?: boolean;
-  hideOnDateTimeSelect?: boolean;
   hourFormat?: "24" | "12";
   selectionMode?: "single" | "range" | "multiple";
   value: string;
-  onChange: (value: Date) => void;
+  onChange: (event: CalendarChangeEvent) => void;
   iconPos: "left" | "right";
   containerclassname?: string;
   imgalt?: string;
@@ -40,16 +42,18 @@ export interface CustomCalendarProps {
   icon?: any;
 }
 
-export interface CustomDropdownProps {
-  title: string;
+export interface CustomDropdownProps extends DropdownProps {
+  title?: string;
   value: number | string;
-  onChange: (value: number | string) => void;
+  // onChange: (value: number | string) => void;
+  name?: string;
   options: DropDownOptions[];
   showIcon?: boolean;
   iconAlt?: string;
   iconSrc?: string;
-  optionLabel: string;
-  placeHolder: string;
+  optionLabel?: string;
+  placeHolder?: string;
+  showLeftIcon?: boolean;
 }
 
 export interface CustomIconProps {

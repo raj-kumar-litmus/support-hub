@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router";
 import {
   Chart as ChartJS,
@@ -44,20 +44,40 @@ import WhiteCalendarIcon from "../assets/white_calendar.svg";
 import GreyCalendarIcon from "../assets/calendar-grey.svg";
 import GreyChannelIcon from "../assets/channel-grey.svg";
 import refreshIcon from "../assets/refresh_icon.svg";
-
+import { ROUTES, submitOnEnter } from "../components/utils/Utils";
 import {
-  OPM_COMPARISON_OPTIONS,
-  OPM_COMPARISON_OPTIONS_HOME,
-  CHANNELS,
-  DURATIONS,
+  OPM_CHANNELS,
   LABELS,
-  TITLE,
+  PAGE_TITLES,
   INPUT_TYPES,
-  HOME_PAGE_REFERSH_DURATION,
+  DASHBOARD_LABELS,
+  DATE_AND_TIME_FORMATS,
+  CHART_LABELS,
+  CHART_TABS,
+  OPM_COMPARISON_CHART_STYLES,
+  OPM_CHART_DEFAULT,
+  SCREEN_WIDTH,
+  DURATIONS,
 } from "../constants/appConstants";
 import { URL_OPM_COMPARISON } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
-import { tenMinutesAgoInCurrentTimeZone } from "../utils/dateTimeUtil";
+import { LoaderContext, LoaderContextType } from "../context/loaderContext";
+import {
+  CURRENT_PST_DATE,
+  DATE_TIME_FORMAT_3,
+  DATE_TIME_FORMAT_4,
+  formatDate,
+  getFormattedPSTDate,
+  getPSTdate,
+} from "../utils/dateTimeUtil";
+import {
+  OPM_COMPARISON_BAR_OPTIONS,
+  OPM_COMPARISON_BAR_OPTIONS_HOME,
+  OPM_COMPARISON_OPTIONS,
+  OPM_COMPARISON_OPTIONS_HOME,
+} from "../config/chartConfig";
+import CustomTab from "../components/common/customtab";
+import BarChartComp from "../components/BarChartComp";
 
 ChartJS.register(
   CategoryScale,
@@ -78,32 +98,40 @@ const OpmComparison: React.FC = () => {
   const [apiResponse, setApiResponse] = useState<null | OpmComparisonType>(
     null,
   );
+  const [counter, setCounter] = useState<number>(0);
 
   const { width } = useScreenSize();
   const navigate = useNavigate();
-  const IS_FULLSCREEN = location?.pathname.includes("full-screen");
+  const IS_FULLSCREEN = location?.pathname.includes(ROUTES.fullScreen);
 
   const DEFAULT = {
     duration: 10,
-    startTimeOne: tenMinutesAgoInCurrentTimeZone(),
-    startDateTwo: new Date(Date.now() - 86400000).toLocaleDateString("en-US"),
+    startTimeOne: getFormattedPSTDate(), // 10 minutes ago.
+    startDateTwo: new Date(
+      new Date(getPSTdate(new Date())).getTime() - 86400000,
+    ).toLocaleDateString("en-US"),
     channel: "",
   };
 
   const [url, setUrl] = useState<string | null>(null);
-
   const [options, setOptions] = useState<null | ChartOptions>(null);
+  const [barChartoptions, setBarChartOptions] = useState<null | ChartOptions>(
+    null,
+  );
   const [data, setData] = useState<ChartData | null>(null);
+  const [barChartData, setBarChartData] = useState<ChartData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showFilteredCards, setShowFilteredCards] = useState<boolean>(false);
-
   const [disabled, setDisabled] = useState(true);
+  const [tabValue, setTabValue] = useState<number>(0);
+  const [maxOPM, setMaxOPM] = useState<number>(OPM_CHART_DEFAULT.MAX);
 
-  const [formFields, setFormFields] = useState([
+  const { hideLoader } = useContext(LoaderContext) as LoaderContextType;
+  const DEFAULT_FORM_FIELDS = [
     {
       type: INPUT_TYPES.dropdown,
       name: "period",
-      label: LABELS.duration,
+      label: LABELS.DURATION,
       icon: SandGlassIcon,
       cardIcon: GreyHourGlassIcon,
       value: {
@@ -118,55 +146,65 @@ const OpmComparison: React.FC = () => {
     {
       type: INPUT_TYPES.time,
       name: "startDate",
-      label: LABELS.startDate,
+      label: LABELS.STARTDATE,
       showTime: true,
       cardIcon: GreyCalendarIcon,
-      value: new Date(Date.now() - 600000),
+      value: new Date(DEFAULT.startTimeOne),
       imgsrc: WhiteCalendarIcon,
     },
     {
       type: INPUT_TYPES.time,
       name: "endDate",
-      label: LABELS.endDate,
+      label: LABELS.ENDDATE,
       cardIcon: GreyCalendarIcon,
       showTime: false,
-      value: new Date(Date.now() - 86400000),
+      value: new Date(DEFAULT.startDateTwo),
       imgsrc: WhiteCalendarIcon,
     },
     {
       type: INPUT_TYPES.dropdown,
       name: "channel",
-      label: LABELS.channel,
+      label: LABELS.CHANNEL,
       icon: ChannelIcon,
       cardIcon: GreyChannelIcon,
       value: {
-        name: "ALL",
+        name: "All",
         code: "",
       },
-      options: Object.keys(CHANNELS).map((e) => ({
+      options: Object.keys(OPM_CHANNELS).map((e) => ({
         name: e,
-        code: CHANNELS[e],
+        code: OPM_CHANNELS[e],
       })),
     },
-  ]);
+  ];
+  const [formFields, setFormFields] = useState(DEFAULT_FORM_FIELDS);
 
   useEffect(() => {
+    const startTimeOne = getFormattedPSTDate(null, DEFAULT.duration);
+    const startDateTwo = new Date(
+      new Date(getPSTdate(new Date())).getTime() - 86400000,
+    ).toLocaleDateString("en-US");
     setUrl(
-      `${URL_OPM_COMPARISON}?period=${
-        location.pathname.includes("opm")
-          ? DEFAULT.duration
-          : HOME_PAGE_REFERSH_DURATION
-      }&startTimeOne=${DEFAULT.startTimeOne}&startDateTwo=${
-        DEFAULT.startDateTwo
-      }&channel=${DEFAULT.channel}`,
+      `${URL_OPM_COMPARISON}?period=${location.pathname.includes(ROUTES.opmComparison)
+        ? DEFAULT.duration
+        : DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION
+      }&startTimeOne=${startTimeOne}&startDateTwo=${startDateTwo}&channel=${DEFAULT.channel
+      }`,
     );
+  }, [counter]);
+
+  useEffect(() => {
+    const removeEventListener = submitOnEnter(submit);
+    return removeEventListener;
   }, []);
 
   const handleFormChange = (event) => {
     const data = [...formFields];
     const val = event.target.name || event.value.name;
-    if (val === "date") {
-      data.find((e) => e.name === val).value = event.value;
+    if (["startDate", "endDate"].includes(val)) {
+      data.find((e) => e.name === val).value = isNaN(event.value)
+        ? CURRENT_PST_DATE
+        : event.value;
     } else {
       data.find((e) => e.name === val).value = event.target.value;
     }
@@ -174,30 +212,38 @@ const OpmComparison: React.FC = () => {
     setFormFields(data);
   };
 
-  const removeFormEntry = (event) => {
+  const removeFormEntry = (label) => {
     const data = [...formFields];
-    data.find((e) => e.name === event.target.id).value = null;
+    data.find((e) => e.name === label).value = null;
     setFormFields(data);
   };
 
-  const submit = (e) => {
-    e.preventDefault();
+  const resetFormEntry = () => {
+    setFormFields(DEFAULT_FORM_FIELDS);
+    setShowFilteredCards(false);
+  };
+
+  const submit = (event) => {
+    event.preventDefault();
     let str = ``;
     formFields.forEach((e: any) => {
       if (e.value) {
         if (e.name === "startDate") {
-          str += `startTimeOne=${e.value.toISOString()}&`;
+          str += `startTimeOne=${formatDate(e.value, DATE_TIME_FORMAT_3)}&`;
+          str += `startTimeOne=${formatDate(e.value, DATE_TIME_FORMAT_3)}&`;
           return;
         }
         if (e.name === "endDate") {
-          str += `startDateTwo=${e.value.toLocaleDateString("en-US")}&`;
+          str += `startDateTwo=${new Date(
+            new Date(getPSTdate(e.value)).getTime() - 86400000,
+          ).toLocaleDateString("en-US")}&`;
           return;
         }
         str += `${e.name}=${String(e.value.code)}&`;
       }
     });
     setUrl(`${URL_OPM_COMPARISON}?${str}`);
-    if (showFilters && width < 700) setShowFilters(false);
+    if (showFilters && width < SCREEN_WIDTH.SM) setShowFilters(false);
   };
 
   useEffect(() => {
@@ -210,39 +256,92 @@ const OpmComparison: React.FC = () => {
         gradient.addColorStop(0, "yellow");
         gradient.addColorStop(1, "white");
       }
+      const xAxisLabels = apiResponse["opmOne"].map((e) => e.timestamp);
+      const allOrderCounts = Object.values(apiResponse).flatMap((opm) =>
+        opm.map((item) => parseInt(item.orderCount)),
+      );
+      const maxValue = Math.max(...allOrderCounts);
+      setMaxOPM(
+        Math.round(maxValue / OPM_CHART_DEFAULT.STEP_SIZE) *
+        OPM_CHART_DEFAULT.STEP_SIZE +
+        OPM_CHART_DEFAULT.STEP_SIZE,
+      );
+
       setData({
-        labels: apiResponse["opmOne"].map((e) => e.timestamp),
+        labels: xAxisLabels,
         datasets:
           apiResponse &&
           Object.keys(apiResponse)?.map((e, index) => ({
-            /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
-            // @ts-ignore
             data: apiResponse?.[e].map((e) => Number(e.orderCount)),
             backgroundColor: "white",
-            label: "No of orders",
+            label: CHART_LABELS.NO_OF_ORDERS,
             index,
-            borderColor: index === 0 ? "#6370FF" : "#FDA44F",
+            borderColor:
+              index === 0
+                ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR
+                : OPM_COMPARISON_CHART_STYLES.SECONDARY_COLOR,
+            borderWidth: 2,
+          })),
+      });
+      setBarChartData({
+        labels: xAxisLabels,
+        datasets:
+          apiResponse &&
+          Object.keys(apiResponse)?.map((e, index) => ({
+            data: apiResponse?.[e].map((e) => Number(e.orderCount)),
+            label: CHART_LABELS.NO_OF_ORDERS,
+            backgroundColor:
+              index === 0
+                ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR
+                : OPM_COMPARISON_CHART_STYLES.SECONDARY_COLOR,
+            borderColor:
+              index === 0
+                ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR
+                : OPM_COMPARISON_CHART_STYLES.SECONDARY_COLOR,
             borderWidth: 2,
           })),
       });
       setOptions(
-        location.pathname.includes("home")
+        location.pathname.includes(ROUTES.home)
           ? OPM_COMPARISON_OPTIONS_HOME({
-              apiResponse,
-              startDate: formFields.find((e) => e.name === "startDate").value,
-              endDate: formFields.find((e) => e.name === "endDate").value,
-              isMobile: width < 700,
-              showDataLabels:
-                Number(url.split("period=")[1].split("&")[0]) < 16,
-            })
+            apiResponse,
+            startDate: formFields.find((e) => e.name === "startDate").value,
+            endDate: formFields.find((e) => e.name === "endDate").value,
+            isMobile: width < SCREEN_WIDTH.SM,
+            showDataLabels:
+              Number(url.split("period=")[1].split("&")[0]) < 11 &&
+              width > SCREEN_WIDTH.SM,
+          })
           : OPM_COMPARISON_OPTIONS({
-              apiResponse,
-              startDate: formFields.find((e) => e.name === "startDate").value,
-              endDate: formFields.find((e) => e.name === "endDate").value,
-              isMobile: width < 700,
-              showDataLabels:
-                Number(url.split("period=")[1].split("&")[0]) < 16,
-            }),
+            apiResponse,
+            startDate: formFields.find((e) => e.name === "startDate").value,
+            endDate: formFields.find((e) => e.name === "endDate").value,
+            isMobile: width < SCREEN_WIDTH.SM,
+            showDataLabels:
+              Number(url.split("period=")[1].split("&")[0]) < 11 &&
+              width > SCREEN_WIDTH.SM,
+          }),
+      );
+      setBarChartOptions(
+        location.pathname.includes(ROUTES.home)
+          ? OPM_COMPARISON_BAR_OPTIONS_HOME({
+            apiResponse,
+            startDate: formFields.find((e) => e.name === "startDate").value,
+            endDate: formFields.find((e) => e.name === "endDate").value,
+            isMobile: width < SCREEN_WIDTH.SM,
+            showDataLabels:
+              Number(url.split("period=")[1].split("&")[0]) < 11 &&
+              width > SCREEN_WIDTH.SM,
+          })
+          : OPM_COMPARISON_BAR_OPTIONS({
+            apiResponse,
+            startDate: formFields.find((e) => e.name === "startDate").value,
+            endDate: formFields.find((e) => e.name === "endDate").value,
+            isMobile: width < SCREEN_WIDTH.SM,
+            showDataLabels:
+              Number(url.split("period=")[1].split("&")[0]) < 11 &&
+              width > SCREEN_WIDTH.SM,
+          }),
       );
     }
   }, [apiResponse]);
@@ -252,18 +351,13 @@ const OpmComparison: React.FC = () => {
       setIsLoading(true);
       if (url) {
         const data = await fetchData(url, {});
+        hideLoader();
         setIsLoading(false);
         setApiResponse(data);
       }
     } catch (err) {
       console.log(`Error occured while fetching ${url}`);
     }
-  };
-
-  const clearAllHandler = () => {
-    const data = [...formFields];
-    data.forEach((e) => (e.value = ""));
-    setFormFields(data);
   };
 
   useEffect(() => {
@@ -278,7 +372,7 @@ const OpmComparison: React.FC = () => {
 
   const onFilterClickHandler = () => {
     setShowFilters(!showFilters);
-    if (width < 700) {
+    if (width < SCREEN_WIDTH.SM) {
       setPosition("bottom");
       setVisible(true);
     }
@@ -290,183 +384,176 @@ const OpmComparison: React.FC = () => {
   };
 
   const getChartConfig = () => {
-    const customChartConfig = { ...options };
-    if (width < 700) {
-      customChartConfig.layout.padding.top = 70;
-      customChartConfig.layout.padding.bottom = 20;
+    let customChartConfig = null;
+    if (tabValue === 0) {
+      customChartConfig = { ...barChartoptions };
+      customChartConfig.scales.y.max = maxOPM;
+      if (width > SCREEN_WIDTH.SM && width <= SCREEN_WIDTH.LG) {
+        customChartConfig.plugins.datalabels.rotation = 270;
+        customChartConfig.plugins.datalabels.anchor = "center";
+        customChartConfig.plugins.datalabels.align = "center";
+      } else {
+        customChartConfig.plugins.datalabels.rotation = 0;
+      }
     } else {
-      customChartConfig.layout.padding.top = 70;
+      customChartConfig = { ...options };
+      customChartConfig.scales.y.max = maxOPM;
     }
     return customChartConfig;
   };
 
   const handleOPMCompExpandClick = () => {
-    navigate("/opm-comparison");
+    navigate(`/${ROUTES.opmComparison}`);
   };
 
   const handleOPMCompRefreshBtnClick = () => {
-    getData();
+    setCounter(counter + 1);
   };
 
   return (
     <>
-      {location.pathname.includes("home") && data && (
-        <div className="w-full sm:w-1/2 bg-[#22262C] p-0 bg-transparent rounded-lg flex flex-col justify-between">
-          <div className="flex justify-between sm:mb-3 items-center relative top-[3vh] sm:top-[6vh] z-[1] ml-[5vw] sm:ml-[2vw] mr-[1vw]">
-            <span className="text-[#F2F2F2] font-bold text-lg font-helvetica">
-              {TITLE.OPM_COMPARISON}
-            </span>
-            <div className="flex items-center">
-              <CustomButton
-                className="home-refresh-btn"
-                onClick={handleOPMCompRefreshBtnClick}
-              >
-                <CustomImage src={refreshIcon} />
-              </CustomButton>
-              <CustomButton
-                className="home-expand-btn mr-2 ml-2 sm:mr-0"
-                onClick={handleOPMCompExpandClick}
-              >
-                <CustomImage src={openNewPageIcon} />
-              </CustomButton>
+      {location.pathname.includes(ROUTES.home) && isLoading && (
+        <Loader className="!p-0 w-40w m-auto min-h-21r" />
+      )
+      }
+      {
+        location.pathname.includes(ROUTES.home) && !isLoading && data && (
+          <div className="w-full xl:w-1/2 bg-black-200 rounded-lg px-4 lg:px-6 py-4">
+            <div className="flex justify-between items-center relative mb-2 md:mb-4 lg:mb-2 xl:mb-4">
+              <span className="text-gray-200 font-bold text-lg font-helvetica">
+                {PAGE_TITLES.OPM_COMPARISON}
+              </span>
+              <div className="flex items-center">
+                <CustomTab
+                  className="opm-tabs mr-2 hidden md:block"
+                  tabData={CHART_TABS}
+                  tabValue={tabValue}
+                  setTabValue={setTabValue}
+                />
+                <CustomButton
+                  className="home-refresh-btn"
+                  onClick={handleOPMCompRefreshBtnClick}
+                >
+                  <CustomImage src={refreshIcon} />
+                </CustomButton>
+                <CustomButton
+                  className="home-expand-btn ml-2"
+                  onClick={handleOPMCompExpandClick}
+                >
+                  <CustomImage src={openNewPageIcon} />
+                </CustomButton>
+              </div>
+            </div>
+            <div className="flex justify-start items-center relative mb-0 sm:mb-4 lg:mb-1 xl:mb-4 md:hidden">
+              <CustomTab
+                className="opm-tabs mr-2"
+                tabData={CHART_TABS}
+                tabValue={tabValue}
+                setTabValue={setTabValue}
+              />
+            </div>
+            {tabValue === 0 ? (
+              <BarChartComp
+                title={PAGE_TITLES.OPM_COMPARISON}
+                options={getChartConfig()}
+                data={barChartData}
+                className="border-0 w-full h-64"
+                defaultClasses={true}
+              />
+            ) : (
+              <LineChart
+                title={PAGE_TITLES.OPM_COMPARISON}
+                className="border-0 w-full h-64"
+                options={getChartConfig()}
+                data={data}
+                defaultClasses={true}
+                plugins={false}
+              />
+            )}
+            <div className="text-xs text-gray-300 flex justify-center mt-3 sm:mt-[-1.65rem] mb-2 sm:mb-0">
+              <div className="w-auto font-helvetica">
+                {CHART_LABELS.TOTAL_ORDERS_PER_MINUTE}
+              </div>
             </div>
           </div>
-          {isLoading ? (
-            <Loader />
-          ) : (
-            <LineChart
-              title="OPM Comparison"
-              className="home-opm-comp border-0 rounded-[10px] w-full sm:w-[89vw] lg:w-full lg:ml-[0] h-[340px] lg:h-[380px] top-[-5vh]"
-              options={getChartConfig()}
-              data={data}
-            />
-          )}
-        </div>
-      )}
-      {!IS_FULLSCREEN && location.pathname.includes("opm-comparison") && (
-        <div className="flex justify-between items-start lg:mb-[2vh] lg:mt-[4vh] ml-[5vw] lg:ml-[3vw] mr-[5vw] lg:mr-[3vw] mt-[3vh]">
-          <p className="font-bold w-[50vw] text-[#F2F2F2] w-[50vw] lg:w-[30vw]">
-            {TITLE.OPM_COMPARISON}
-          </p>
-          {width < 700 && (
-            <CustomImage
-              src={FilterIcon}
-              className="lg:w-[2.34vw] self-end"
-              alt="Filter Icon"
-              onClick={onFilterClickHandler}
-            />
-          )}
-        </div>
-      )}
-      {showFilters && location.pathname.includes("opm-comparison") && (
-        <>
-          {width > 700 ? (
-            <form
-              className="flex gap-[0.5vw] sm:gap-[0.1vw] opmFilters"
-              onSubmit={submit}
-            >
-              {formFields.map((form, index) => {
-                return (
-                  <React.Fragment key={index}>
-                    {form.type === "text" && (
-                      <CustomInputText
-                        containerclassname="lg:relative lg:top-[2px] lg:left-[-9px]"
-                        value={form.value}
-                        name={form.label}
-                        placeholder={form.label}
-                        onChange={(event) => handleFormChange(event)}
-                        className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px] w-[8vw] lg:w-[10vw]"
-                      />
-                    )}
-                    {form.type === "time" && (
-                      <CustomCalendar
-                        name={form.name}
-                        containerclassname="calendarOpmComparison ml-[10px] md:w-[10vw] lg:w-[12vw] xl:w-[14vw]"
-                        titleclassname="top-[2vh]"
-                        imageclassname="h-[20px] w-[20px] relative top-[3vh] left-[0.5vw] z-[1]"
-                        title={form.label}
-                        showTime={form.showTime}
-                        iconPos={form.iconPos || "left"}
-                        imgsrc={form.imgsrc}
-                        onChange={(event) => handleFormChange(event)}
-                        value={form.value}
-                      />
-                    )}
-                    {form.type === "dropdown" && (
-                      <CustomDropdown
-                        value={form.value}
-                        name={form.name}
-                        onChange={(e) => handleFormChange(e)}
-                        imageclassname="relative left-[25px] z-[1]"
-                        dropdownIcon={<CustomImage src={ArrowDownIcon} />}
-                        icon={form.icon}
-                        options={form.options}
-                        label={form.label}
-                        optionLabel="name"
-                        placeholder=""
-                      />
-                    )}
-                  </React.Fragment>
-                );
-              })}
-              <CustomButton
-                label={LABELS.submit}
-                isDisabled={disabled}
-                isRounded={true}
-                className="submitBtnMobile ml-[1vw] self-end relative"
-              />
-            </form>
-          ) : (
+        )
+      }
+      {location.pathname.includes(ROUTES.opmComparison) && (
+        <div className={`${isLoading ? "h-4/5" : ""}`}>
+          {!IS_FULLSCREEN &&
+            location.pathname.includes(ROUTES.opmComparison) && (
+              <div className="flex justify-between items-start">
+                <p className="font-bold text-gray-200">
+                  {PAGE_TITLES.OPM_COMPARISON}
+                </p>
+                {width < SCREEN_WIDTH.SM && (
+                  <CustomImage
+                    src={FilterIcon}
+                    className="self-end"
+                    alt="Filter Icon"
+                    onClick={onFilterClickHandler}
+                  />
+                )}
+              </div>
+            )}
+          {showFilters && location.pathname.includes(ROUTES.opmComparison) && (
             <>
-              <CustomModal
-                header="Filters"
-                visible={visible}
-                position={position}
-                className="!bg-slate-900 filtersModal opmFiltersMobile h-[350px] w-[100vw]"
-                onHide={onModalCloseHandler}
-                isDraggable={false}
-                closeIcon={<CustomImage src={WhiteCrossIcon} />}
-                isResizable={false}
-              >
+              {width > SCREEN_WIDTH.SM ? (
                 <form
-                  className="grid grid-cols-2 grid-rows-3 gap-x-5 gap-y-5"
+                  className="flex gap-0.5w sm:gap-[0.8vw] opmFilters opmComparisonFilters"
                   onSubmit={submit}
                 >
-                  {formFields.map((form) => {
+                  {formFields.map((form, index) => {
                     return (
-                      <>
-                        {form.type === INPUT_TYPES.text && (
+                      <React.Fragment key={index}>
+                        {form.type === "text" && (
                           <CustomInputText
-                            containerclassname="w-[45vw] mobileInput"
+                            containerclassname="relative top-0.5 md:-left-0.2w lg:-left-9p"
                             value={form.value}
                             name={form.label}
                             placeholder={form.label}
                             onChange={(event) => handleFormChange(event)}
-                            className="border rounded-[8px] border-solid border-slate-300 border-1 h-[38px]"
+                            className="border rounded-lg border-solid border-slate-300 border-1 h-38 w-8w lg:w-10w"
                           />
                         )}
-                        {form.type === INPUT_TYPES.time && (
+                        {form.type === "time" && (
                           <CustomCalendar
                             name={form.name}
-                            containerclassname="opmFiltersMobileCalendar"
-                            imageclassname="h-[20px] w-[20px] relative top-[3vh] left-[3.5vw] z-[1]"
-                            titleclassname="left-[1vw] md:left-[0] top-[2.2vh]"
+                            containerclassname={`calendarOpmComparison ${form.name === "startDate"
+                              ? "md:!w-[18vw] lg:w-14w"
+                              : ""
+                              } ${form.name === "endDate"
+                                ? "md:!w-11w lg:!w-12w"
+                                : ""
+                              } ${form.name === "endDate"
+                                ? "md:!w-11w lg:!w-12w"
+                                : ""
+                              } `}
+                            titleclassname="top-5"
+                            imageclassname="h-5 w-5 relative top-7 left-0.5w z-1"
                             title={form.label}
+                            placeholder={DATE_AND_TIME_FORMATS.MM_DD_YYYY_HH_MM}
                             showTime={form.showTime}
                             iconPos={form.iconPos || "left"}
                             imgsrc={form.imgsrc}
                             onChange={(event) => handleFormChange(event)}
                             value={form.value}
+                            maxDate={
+                              form.name === "startDate" ||
+                                form.name === "endDate"
+                                ? CURRENT_PST_DATE
+                                : null
+                            }
                           />
                         )}
-                        {form.type === INPUT_TYPES.dropdown && (
+                        {form.type === "dropdown" && (
                           <CustomDropdown
-                            value={form.value}
                             name={form.name}
-                            dropdownIcon={<CustomImage src={DropDownIcon} />}
+                            value={form.value}
+                            containerclassname="opmComparionInput"
                             onChange={(e) => handleFormChange(e)}
-                            containerclassname="w-[44vw]"
-                            imageclassname="relative left-[25px] z-[1]"
+                            imageclassname="relative left-25 z-1"
+                            dropdownIcon={<CustomImage src={ArrowDownIcon} />}
                             icon={form.icon}
                             options={form.options}
                             label={form.label}
@@ -474,75 +561,192 @@ const OpmComparison: React.FC = () => {
                             placeholder=""
                           />
                         )}
-                      </>
+                      </React.Fragment>
                     );
                   })}
                   <CustomButton
-                    label={LABELS.submit}
+                    id="page-btn-submit"
+                    label={LABELS.SUBMIT}
                     isDisabled={disabled}
                     isRounded={true}
-                    className="submitBtnMobile opmPopUp col-span-full"
+                    className="ml-auto  self-end relative "
                   />
                 </form>
-              </CustomModal>
+              ) : (
+                <>
+                  <CustomModal
+                    header="Filters"
+                    visible={visible}
+                    position={position}
+                    className="!bg-slate-900 filtersModal opmFiltersMobile h-[350px] w-screen"
+                    onHide={onModalCloseHandler}
+                    isDraggable={false}
+                    closeIcon={<CustomImage src={WhiteCrossIcon} />}
+                    isResizable={false}
+                  >
+                    <form
+                      className="grid grid-cols-2 grid-rows-3 gap-x-5 gap-y-5"
+                      onSubmit={submit}
+                    >
+                      {formFields.map((form, index) => {
+                        return (
+                          <React.Fragment key={index}>
+                            {form.type === INPUT_TYPES.text && (
+                              <CustomInputText
+                                containerclassname="w-45w mobileInput"
+                                value={form.value}
+                                name={form.label}
+                                placeholder={form.label}
+                                onChange={(event) => handleFormChange(event)}
+                                className="border rounded-lg border-solid border-slate-300 border-1 h-38"
+                              />
+                            )}
+                            {form.type === INPUT_TYPES.time && (
+                              <CustomCalendar
+                                name={form.name}
+                                containerclassname="opmFiltersMobileCalendar"
+                                imageclassname="h-5 w-5 relative top-7 md:top-3h left-3.5w z-1"
+                                titleclassname="left-[2vw] md:left-0 top-5"
+                                title={form.label}
+                                showTime={form.showTime}
+                                iconPos={form.iconPos || "left"}
+                                imgsrc={form.imgsrc}
+                                onChange={(event) => handleFormChange(event)}
+                                value={form.value}
+                                maxDate={
+                                  form.name === "startDate" ||
+                                    form.name === "endDate"
+                                    ? CURRENT_PST_DATE
+                                    : null
+                                }
+                              />
+                            )}
+                            {form.type === INPUT_TYPES.dropdown && (
+                              <CustomDropdown
+                                value={form.value}
+                                name={form.name}
+                                dropdownIcon={
+                                  <CustomImage src={DropDownIcon} />
+                                }
+                                onChange={(e) => handleFormChange(e)}
+                                containerclassname="w-44w"
+                                imageclassname="relative left-25 z-1"
+                                icon={form.icon}
+                                options={form.options}
+                                label={form.label}
+                                optionLabel="name"
+                                placeholder=""
+                              />
+                            )}
+                          </React.Fragment>
+                        );
+                      })}
+                      <CustomButton
+                        label={LABELS.SUBMIT}
+                        isDisabled={disabled}
+                        isRounded={true}
+                        className="submitBtnMobile opmPopUp col-span-full"
+                      />
+                    </form>
+                  </CustomModal>
+                </>
+              )}
             </>
           )}
-        </>
-      )}
-      {location.pathname.includes("opm-comparison") && (
-        <div
-          className={`flex items-center gap-4 mt-[10px] overflow-scroll ml-[5vw] lg:ml-[0.5vw] ${
-            IS_FULLSCREEN
-              ? "landScape opmComparison rotate-90 absolute left-[40vw] top-[45vh]"
-              : `${width < 700 ? "portrait" : ""}`
-          }`}
-        >
-          {formFields
-            .filter((e) => e.value)
-            .map((e: any) => (
-              <Fragment key={e.name}>
-                <FilteredCard
-                  label={e.name}
-                  leftIcon={e.cardIcon}
-                  onClickHandler={removeFormEntry}
-                  content={
-                    e.type === "time"
-                      ? e.name === "startDate"
-                        ? e.value.toLocaleString("en-US", {
-                            hour12: false,
-                          })
-                        : e.value.toLocaleDateString("en-US")
-                      : e.value.name || e.value
-                  }
+          {location.pathname.includes(ROUTES.opmComparison) &&
+            showFilteredCards && (
+              <div
+                className={`flex items-center gap-4 mt-2.5 overflow-auto ml-5w lg:ml-0 ${IS_FULLSCREEN
+                    ? "landScape opmComparison rotate-90 absolute -left-9h top-45h ml-25w w-70h mt-0"
+                    : `${width < SCREEN_WIDTH.SM ? "portrait" : ""}`
+                  }`}
+              >
+                {formFields
+                  .filter((e) => e.value)
+                  .map((e: any) => (
+                    <Fragment key={e.name}>
+                      <FilteredCard
+                        label={e.name}
+                        leftIcon={e.cardIcon}
+                        onClickHandler={removeFormEntry}
+                        content={
+                          e.type === "time"
+                            ? e.name === "startDate"
+                              ? formatDate(e.value, DATE_TIME_FORMAT_4)
+                              : e.value.toLocaleDateString("en-US")
+                            : e.value.name || e.value
+                        }
+                      />
+                    </Fragment>
+                  ))}
+                {!disabled && !IS_FULLSCREEN && (
+                  <CustomButton
+                    label={LABELS.RESET}
+                    severity="secondary"
+                    className="resetFilters text-xs text-gray-300"
+                    isTextButton={true}
+                    onClick={() => resetFormEntry()}
+                  />
+                )}
+              </div>
+            )}
+          {isLoading && location.pathname.includes(ROUTES.opmComparison) ? (
+            <Loader className="h-full" />
+          ) : (
+            data &&
+            !isLoading &&
+            location.pathname.includes(ROUTES.opmComparison) && (
+              <div
+                className={`relative ${IS_FULLSCREEN ? "rotate-90 h-[23rem]" : "h-[28rem] lg:h-29r"
+                  }`}
+              >
+                <CustomTab
+                  className={`opm-tabs absolute z-10 pt-2  top-2 ${IS_FULLSCREEN
+                    ? "right-100vh-57r"
+                    : "right-14 sm:right-3 md:right-4 lg:right-6"
+                    }`}
+                  tabData={CHART_TABS}
+                  tabValue={tabValue}
+                  setTabValue={setTabValue}
                 />
-              </Fragment>
-            ))}
-          {!disabled && !IS_FULLSCREEN && (
-            <CustomButton
-              label={LABELS.reset}
-              severity="secondary"
-              className="resetFilters text-[12px] text-[#575353]"
-              isTextButton={true}
-              onClick={clearAllHandler}
-            />
-          )}
-        </div>
-      )}
-      {isLoading && location.pathname.includes("opm-comparison") ? (
-        <Loader />
-      ) : (
-        data &&
-        !isLoading &&
-        location.pathname.includes("opm-comparison") && (
-          <LineChart
-            title={TITLE.OPM_COMPARISON}
-            isFullScreen={IS_FULLSCREEN}
-            className="border-0 rounded-[10px] w-[90vw] sm:w-[70vw] lg:w-[75vw] lg:ml-[0] h-[340px] md:h-[340px] lg:h-[62.23vh] mt-[1vh] lg:mt-[3vh]"
-            options={options}
-            data={data}
-          />
-        )
-      )}
+                {tabValue === 0 ? (
+                  <BarChartComp
+                    title={PAGE_TITLES.OPM_COMPARISON}
+                    isFullScreen={IS_FULLSCREEN}
+                    className={`opm-comparison-page-chart-container ${IS_FULLSCREEN
+                      ? "opm-comparison-page-chart-container-rotated"
+                      : ""
+                      }`}
+                    options={getChartConfig()}
+                    data={barChartData}
+                  />
+                ) : (
+                  <LineChart
+                    title={PAGE_TITLES.OPM_COMPARISON}
+                    isFullScreen={IS_FULLSCREEN}
+                    className={`opm-comparison-page-chart-container ${IS_FULLSCREEN
+                      ? "opm-comparison-page-chart-container-rotated"
+                      : ""
+                      }`}
+                    options={getChartConfig()}
+                    data={data}
+                  />
+                )}
+                <div
+                  className={`text-xs text-gray-300 flex justify-center -mt-10 ${IS_FULLSCREEN ? "w-[calc(100vh-5vh)]" : ""
+                    }`}
+                >
+                  <div className="w-auto font-helvetica">
+                    {CHART_LABELS.TOTAL_ORDERS_PER_MINUTE}
+                  </div>
+                </div>
+              </div>
+            )
+          )
+          }
+        </div >
+      )
+      }
     </>
   );
 };

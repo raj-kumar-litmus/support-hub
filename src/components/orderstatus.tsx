@@ -1,21 +1,28 @@
-import React, { FC, useState } from "react";
-import { orderStatus } from "../@types/ordertimeline";
-import Timeline from "./common/orderTimeline";
 import CustomDialog from "./common/customdialog";
+import React from "react";
+import { OmsOrderFlow } from "../@types/OrderDetails";
+import Timeline from "./common/orderTimeline";
+import { ORDER_DETAILS_LABELS } from "../constants/appConstants";
 interface OrderStatusProps {
-  orderStatus: orderStatus;
-  isOrderStatusVisible:boolean;
+  orderStatus: OmsOrderFlow;
+  isOrderStatusVisible: boolean;
   setIsOrderStatusVisible: (a: boolean) => void;
 }
-const OrderStatus: React.FC<OrderStatusProps> = ({orderStatus,isOrderStatusVisible,setIsOrderStatusVisible}) => {
+const OrderStatus: React.FC<OrderStatusProps> = ({
+  orderStatus,
+  isOrderStatusVisible,
+  setIsOrderStatusVisible,
+}) => {
   const orderMap = orderStatus?.orderMap;
   return (
     <div className="block w-screen font-helvetica sm:rounded-lg">
       <CustomDialog
-        header="Order Timeline"
+        header={ORDER_DETAILS_LABELS.ORDER_TIMELINE}
         visible={isOrderStatusVisible}
-        className="orderStatus-dialog bg-[#22262C] flex "
-        onHide={() =>{setIsOrderStatusVisible(false)}}
+        className="orderStatus-dialog bg-black-200 flex "
+        onHide={() => {
+          setIsOrderStatusVisible(false);
+        }}
         draggable={false}
         resizable={false}
         dismissableMask={true}

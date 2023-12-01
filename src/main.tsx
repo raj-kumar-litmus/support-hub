@@ -14,8 +14,9 @@ import App from "./App";
 import Chart from "./components/ChartIndex";
 import "./index.css";
 import OrderDetails from "./components/orderDetails/OrderDetails.js";
-import HomePage from "./components/homePage.js";
 import IncompleteOrders from "./components/IncompleteOrders";
+import HomePage from "./components/homePage";
+import { ROUTES } from "./components/utils/Utils";
 
 // const Loader = lazy(() => import("./components/Loader.tsx"));
 
@@ -25,19 +26,25 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       {/* <Suspense fallback={<Loader />}> */}
       <Suspense>
         <Routes>
-          <Route path="/" element={<Navigate to="/home" />} />
-          <Route path="/home" element={<App appContent={<HomePage />} />} />
+          <Route path="/" element={<Navigate to={ROUTES.home} />} />
           <Route
-            path="/dc-open-orders"
+            path={ROUTES.home}
+            element={<App appContent={<HomePage />} />}
+          />
+          <Route
+            path={ROUTES.dcOpenOrders}
             element={<App appContent={<DcOpenOrders />} />}
           />
-          <Route path="/sessions" element={<App appContent={<BarChart />} />} />
           <Route
-            path="/opm"
+            path={ROUTES.sessions}
+            element={<App appContent={<BarChart />} />}
+          />
+          <Route
+            path={ROUTES.opm}
             element={<App appContent={<Chart type="opm" />} />}
           />
           <Route
-            path="/opm/full-screen"
+            path={`${ROUTES.opm}/${ROUTES.fullScreen}`}
             element={
               <App showNavbar={false} appContent={<Chart type="opm" />} />
             }
@@ -56,7 +63,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             }
           />
           <Route
-            path="/order-details/:orderId"
+            path={`${ROUTES.orderDetails}/:orderId`}
             element={<App appContent={<OrderDetails />} />}
           />
           <Route path="/incomplete-orders"

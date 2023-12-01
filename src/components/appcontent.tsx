@@ -1,10 +1,13 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, KeyboardEvent } from "react";
 import Navbar from "./common/navbar";
 import SearchField from "./common/searchfield";
 import SidePaneGrid from "./common/sidepanegrid";
 import SidePaneList from "./common/sidepanelist";
-import { MENU_LIST } from "./utils/Utils";
+import { MENU_LIST, ROUTES } from "./utils/Utils";
 import { useLocation } from "react-router";
+import { useNavigate } from "react-router-dom";
+import useScreenSize from "../hooks/useScreenSize";
+import { SCREEN_WIDTH } from "../constants/appConstants";
 
 type Props = {
   showSidePane: boolean;
@@ -18,7 +21,10 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [selectedMenu, setSelectedMenu] = useState<number>(0);
   const location = useLocation();
-  const IS_FULLSCREEN = location?.pathname.includes("full-screen");
+  const IS_FULLSCREEN = location?.pathname.includes(ROUTES.fullScreen);
+  const IS_ORDER_DETAILS = location?.pathname.includes(ROUTES.orderDetails);
+  const navigate = useNavigate();
+  const { width } = useScreenSize();
 
   useEffect(() => {
     setOpenSearchField(false);
@@ -31,6 +37,13 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
     )?.id;
     setSelectedMenu(_selectedMenu);
   }, [location?.pathname]);
+
+  const searchOrder = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && searchValue.length > 0) {
+      e.preventDefault();
+      navigate(`/${ROUTES.orderDetails}/${searchValue}`);
+    }
+  };
 
   return (
     <div>
@@ -47,9 +60,8 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
           />
         )}
         <div
-          className={`flex flex-col sm:flex-row ${
-            IS_FULLSCREEN ? "" : "mt-[3.5rem]"
-          } ml-[0] bg-[#1C1C20]`}
+          className={`flex flex-col sm:flex-row ${IS_FULLSCREEN ? "" : "mt-14"
+            } ml-0 bg-black-200`}
         >
           {showSidePane && (
             <SidePaneList
@@ -60,16 +72,15 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
           )}
           {showSidePane && (
             <div
-              className={`${
-                showSidePaneGrid ? "bg-[#1C1C20]  min-h-[calc(100vh-56px)]" : ""
-              } flex w-full sm:hidden`}
-              onClick={() => setShowSidePaneGrid(false)}
+              className={`${showSidePaneGrid ? "bg-black-200  min-h-100vh-56" : ""
+                } flex w-full sm:hidden`}
             >
               <SidePaneGrid
                 menuList={MENU_LIST}
                 selectedMenu={selectedMenu}
                 setSelectedMenu={setSelectedMenu}
                 showSidePaneGrid={showSidePaneGrid}
+                setShowSidePaneGrid={setShowSidePaneGrid}
               />
               {openSearchField && (
                 <div
@@ -78,17 +89,18 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
                   <SearchField
                     searchValue={searchValue}
                     setSearchValue={setSearchValue}
+                    onSearch={searchOrder}
                   />
                 </div>
               )}
             </div>
           )}
           <div
-            className={`w-full ${
-              showSidePaneGrid ? "hidden" : "block"
-            } mr-[2vw] sm:ml-[27vw] lg:ml-[23vw]  ${
-              IS_FULLSCREEN ? "h-[100vh]" : "h-[calc(100vh-56px)]"
-            } overflow-y-auto`}
+            className={`${showSidePaneGrid ? "hidden" : "block"} 
+              ${IS_FULLSCREEN ? "h-screen" : "h-100vh-56"} 
+              w-full sm:ml-25w md:ml-[27vw] lg:ml-21w overflow-y-auto p-5 sm:px-10 bg-black-100
+              ${width < SCREEN_WIDTH.SM && IS_ORDER_DETAILS ? "pt-0" : ""}
+              `}
           >
             {appContent}
           </div>

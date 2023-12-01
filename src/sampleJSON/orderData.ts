@@ -1,9 +1,11 @@
+import { ORDER_DETAILS_LABELS } from "../constants/appConstants";
+
 export const orderDataJSON = {
   orderId: "60577546279",
   submittedDate: "2023-05-05 T 08:03:58 AM",
   orderTotal: "34.77",
   status: "160",
-  sephOrderStatus: "Shipped",
+  sephOrderStatus: ORDER_DETAILS_LABELS.SHIPPED,
   locale: "US",
   originOfOrder: "Web",
   profileId: null,
