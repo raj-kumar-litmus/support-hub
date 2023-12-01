@@ -69,7 +69,6 @@ export const BAR_CHART_OPTIONS = (showDataLabels = false) => ({
           return value;
         }
       },
-      color: "black",
       anchor: "end",
       align: "top",
       font: {

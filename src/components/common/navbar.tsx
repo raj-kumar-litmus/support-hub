@@ -5,7 +5,7 @@ import MenuIcon from "../../assets/menu.svg";
 import QuickLinksIcon from "../../assets/Quick Links.svg";
 import SearchBar from "./searchbar";
 import CustomImage from "./customimage";
-import { MENU_LIST } from "../utils/Utils";
+import { MENU_LIST, ROUTES } from "../utils/Utils";
 import QuickLinks from "../quicklinks";
 
 type Props = {
@@ -42,7 +42,7 @@ const Navbar: FC<Props> = ({
   const onSearch = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && searchValue.length > 0) {
       event.preventDefault();
-      navigate(`/orderDetails/${searchValue}`);
+      navigate(`/${ROUTES.orderDetails}/${searchValue}`);
     }
   };
 
@@ -68,7 +68,7 @@ const Navbar: FC<Props> = ({
           />
         )}
         <CustomImage
-          className=" h-[10px] bottom-1 sm:h-auto relative sm:right-5 cursor-pointer"
+          className=" h-2.5 sm:h-auto bottom-2.5 sm:bottom-0 relative sm:right-5 cursor-pointer"
           src={SephoraLogo}
           alt="SEPHORA"
           onClick={navigateToHome}
@@ -95,7 +95,12 @@ const Navbar: FC<Props> = ({
           />
         </div>
       </div>
-      {!showSidePaneGrid && showQuickLinks && <QuickLinks showQuickLinks={showQuickLinks} setShowQuickLinks={setShowQuickLinks} />}
+      {!showSidePaneGrid && showQuickLinks && (
+        <QuickLinks
+          showQuickLinks={showQuickLinks}
+          setShowQuickLinks={setShowQuickLinks}
+        />
+      )}
     </div>
   );
 };

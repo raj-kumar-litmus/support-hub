@@ -59,7 +59,7 @@ import {
   SCREEN_WIDTH,
   NO_OF_ORDERS,
 } from "../constants/appConstants";
-import { submitOnEnter } from "../components/utils/Utils";
+import { ROUTES, submitOnEnter } from "../components/utils/Utils";
 import { URL_OPM } from "../constants/apiConstants";
 import { LoaderContext, LoaderContextType } from "../context/loaderContext";
 import CustomTab from "../components/common/customtab";
@@ -99,7 +99,7 @@ const OPM: React.FC = () => {
 
   const { width } = useScreenSize();
   const navigate = useNavigate();
-  const IS_FULLSCREEN = location?.pathname.includes("fullscreen");
+  const IS_FULLSCREEN = location?.pathname.includes(ROUTES.fullScreen);
 
   const DEFAULT = {
     duration: 10,
@@ -212,7 +212,7 @@ const OPM: React.FC = () => {
   useEffect(() => {
     setUrl(
       `${URL_OPM}?period=${
-        location.pathname.includes("opm")
+        location.pathname.includes(ROUTES.opm)
           ? DEFAULT.duration
           : HOME_PAGE_REFERSH_DURATION
       }&starttime=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${
@@ -268,7 +268,7 @@ const OPM: React.FC = () => {
     (async () => {
       if (url) {
         setOptions(
-          location.pathname.includes("home")
+          location.pathname.includes(ROUTES.home)
             ? OPM_OPTIONS_HOME(
                 width < SCREEN_WIDTH.SM,
                 Number(url.split("period=")[1].split("&")[0]) < 16 &&
@@ -281,7 +281,7 @@ const OPM: React.FC = () => {
               ),
         );
         setBarChartOptions(
-          location.pathname.includes("home")
+          location.pathname.includes(ROUTES.home)
             ? OPM_BAR_CHART_OPTIONS_HOME(
                 width < SCREEN_WIDTH.SM,
                 Number(url.split("period=")[1].split("&")[0]) < 16 &&
@@ -329,6 +329,11 @@ const OPM: React.FC = () => {
     const data = [...formFields];
     data.find((e) => e.name === label).value = null;
     setFormFields(data);
+  };
+
+  const resetFormEntry = () => {
+    setFormFields(DEFAULT_FORM_FIELDS);
+    setShowFilteredCards(false);
   };
 
   const submit = (e) => {
@@ -379,7 +384,7 @@ const OPM: React.FC = () => {
   };
 
   const handleOPMExpandClick = () => {
-    navigate("/opm");
+    navigate(`/${ROUTES.opm}`);
   };
 
   const handleOPMRefreshBtnClick = () => {
@@ -398,12 +403,12 @@ const OPM: React.FC = () => {
 
   return (
     <>
-      {location.pathname.includes("home") && isLoading && (
+      {location.pathname.includes(ROUTES.home) && isLoading && (
         <Loader className="!p-0 w-[40vw] m-auto min-h-[21rem]" />
       )}
-      {location.pathname.includes("home") && data && !isLoading && (
+      {location.pathname.includes(ROUTES.home) && data && !isLoading && (
         <div className="w-full xl:w-1/2 bg-black-200 rounded-lg px-4 lg:px-6 py-4">
-          <div className="flex justify-between items-center relative mb-2 sm:mb-4 lg:mb-2 xl:mb-4">
+          <div className="flex justify-between items-center relative mb-2 md:mb-4 lg:mb-2 xl:mb-4">
             <span className="text-gray-200 font-bold text-lg font-helvetica">
               {TITLE.OPM}
             </span>
@@ -455,7 +460,7 @@ const OPM: React.FC = () => {
           )}
         </div>
       )}
-      {!IS_FULLSCREEN && location.pathname.includes("opm") && (
+      {!IS_FULLSCREEN && location.pathname.includes(ROUTES.opm) && (
         <div className="flex justify-between items-start">
           <p className="font-bold text-gray-200">{TITLE.OPM}</p>
           {width < SCREEN_WIDTH.SM && (
@@ -468,7 +473,7 @@ const OPM: React.FC = () => {
           )}
         </div>
       )}
-      {showFilters && location.pathname.includes("opm") && (
+      {showFilters && location.pathname.includes(ROUTES.opm) && (
         <>
           {width > SCREEN_WIDTH.SM ? (
             <>
@@ -505,7 +510,9 @@ const OPM: React.FC = () => {
                           imgsrc={form.imgsrc}
                           onChange={(event) => handleFormChange(event)}
                           value={form.value}
-                          maxDate={form.name === "date" ? new Date() : null}
+                          maxDate={
+                            form.name === "date" ? CURRENT_PST_DATE : null
+                          }
                           dateFormat="dd-MM-yyyy hh:mm"
                         />
                       )}
@@ -582,7 +589,9 @@ const OPM: React.FC = () => {
                             imgsrc={form.imgsrc}
                             onChange={(event) => handleFormChange(event)}
                             value={form.value}
-                            maxDate={form.name === "date" ? new Date() : null}
+                            maxDate={
+                              form.name === "date" ? CURRENT_PST_DATE : null
+                            }
                           />
                         )}
                         {form.type === INPUT_TYPES.dropdown && (
@@ -616,7 +625,7 @@ const OPM: React.FC = () => {
         </>
       )}
 
-      {location.pathname.includes("opm") && showFilteredCards && (
+      {location.pathname.includes(ROUTES.opm) && showFilteredCards && (
         <div
           className={`flex items-center gap-4 mt-[10px] overflow-auto ml-[0] sm:ml-[5vw] lg:ml-[1rem] ${
             IS_FULLSCREEN
@@ -646,13 +655,13 @@ const OPM: React.FC = () => {
               severity="secondary"
               className="resetFilters text-[12px] text-gray-300"
               isTextButton={true}
-              onClick={() => setFormFields(DEFAULT_FORM_FIELDS)}
+              onClick={() => resetFormEntry()}
             />
           )}
         </div>
       )}
 
-      {!IS_FULLSCREEN && location.pathname.includes("opm") && (
+      {!IS_FULLSCREEN && location.pathname.includes(ROUTES.opm) && (
         <AutoRefresh
           getData={getData}
           startPollingHandler={startPollingHandler}
@@ -662,12 +671,12 @@ const OPM: React.FC = () => {
           checkBoxContainerClassname="flex autoRefreshCheckBox sm:ml-[2.5vw] md:ml-[1vw] md:ml-[1.5vw] lg:ml-[1.25vw] items-center mt-[3vh] md:mt-[0]"
         />
       )}
-      {isLoading && location.pathname.includes("opm") ? (
+      {isLoading && location.pathname.includes(ROUTES.opm) ? (
         <Loader className="h-[50vh]" />
       ) : (
         data &&
         !isLoading &&
-        location.pathname.includes("opm") && (
+        location.pathname.includes(ROUTES.opm) && (
           <div
             className={`relative h-96 lg:h-[29rem] ${
               IS_FULLSCREEN ? "rotate-90" : ""
