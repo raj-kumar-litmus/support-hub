@@ -8,33 +8,29 @@ type Props = {
   selectedMenu: number;
   setSelectedMenu: (a: number) => void;
   showSidePaneGrid: boolean;
+  setShowSidePaneGrid: (hide: boolean) => void;
 };
 
-const SidePaneGrid: FC<Props> = ({
-  menuList,
-  selectedMenu,
-  setSelectedMenu,
-  showSidePaneGrid,
-}) => {
+const SidePaneGrid: FC<Props> = (props) => {
   const navigate = useNavigate();
 
   const navigateToMenu = (menu: IMenu) => {
-    setSelectedMenu(menu.id);
+    props.setShowSidePaneGrid(false);
+    props.setSelectedMenu(menu.id);
     navigate(menu.path);
   };
 
   return (
     <div
-      className={`transition-all ease-in-out !duration-300 min-h-100vh-56 !w-[367px] ${
-        showSidePaneGrid ? "left-0  right-full" : "-left-[367px] right-0"
-      } drop-shadow absolute z-10 bg-black-200`}
+      className={`transition-all ease-in-out !duration-300 min-h-100vh-56 !w-[367px] ${props.showSidePaneGrid ? "left-0  right-full" : "-left-[367px] right-0"
+        } drop-shadow absolute z-10 bg-black-200`}
     >
       <div className="flex flex-wrap p-1">
-        {menuList.map((menu) => (
+        {props.menuList.map((menu) => (
           <MenuCard
             menu={menu}
             key={menu.id}
-            selectedMenu={selectedMenu}
+            selectedMenu={props.selectedMenu}
             onClick={() => navigateToMenu(menu)}
           />
         ))}

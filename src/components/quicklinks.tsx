@@ -119,21 +119,20 @@ const QuickLinkBox: FC<QuickLinkBoxProps> = ({
   index,
 }) => {
   return (
-    <div
-      className="link-box flex justify-center cursor-pointer p-1"
+    <a
       onClick={() => window.open(link.link, "_blank")}
-      key={link.name}
+      className="link-box flex justify-center cursor-pointer p-1"
       onMouseEnter={() => setHoveredIndex(index)}
       onMouseLeave={() => setHoveredIndex(null)}
     >
-      <span className="m-auto text-center font-normal leading-snug">
+      <span className="m-auto text-center font-normal leading-snug px-1">
         {link.name}
       </span>
       <CustomImage
-        className="h-13 self-start mr-2 mt-2"
+        className="h-13 self-start w-3 mt-2 quick-link-arrow"
         src={index === hoveredIndex ? ArrowTopWhite : ArrowTop}
       />
-    </div>
+    </a>
   );
 };
 

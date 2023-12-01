@@ -308,6 +308,9 @@ button.p-button-secondary {
 .resetFilters span {
   @apply text-white-700 font-normal;
 }
+#bar-chart .resetFilters .p-button {
+  @apply bg-inherit border-none p-0;
+}
 .inputContainer .p-inputtext {
   @apply w-38w h-[37px];
 }
@@ -973,4 +976,16 @@ hr.horizontalLine.blue {
 }
 .p-toast-message-content .p-image img {
   @apply max-w-max;
+}
+.order-details-btn-link .p-button {
+  @apply text-xs text-white-700 border-none p-0 bg-inherit;
+}
+.order-details-btn-link .p-button:focus {
+  @apply shadow-none;
+}
+.order-details-btn-link .p-button:enabled:hover {
+  @apply border-none bg-inherit;
+}
+.quick-link-arrow img{
+  @apply h-7p w-7p;
 }

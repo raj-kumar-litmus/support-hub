@@ -83,25 +83,23 @@ const ComparisonCards = ({
       <div className="border border-r border-black-400 h-10 m-auto"></div>
       <div className="flex flex-col justify-between pl-1 sm:pl-2">
         <span
-          className={`${
-            difference > 0
-              ? "text-pink-100"
-              : difference < 0
+          className={`${difference > 0
+            ? "text-pink-100"
+            : difference < 0
               ? "text-green-300"
               : "text-gray-400"
-          } text-10`}
+            } text-10`}
         >
           {DASHBOARD_LABELS.DIFFERENCE}
         </span>
         <div className="flex">
           <span
-            className={`${
-              difference > 0
-                ? "text-pink-100"
-                : difference < 0
+            className={`${difference > 0
+              ? "text-pink-100"
+              : difference < 0
                 ? "text-green-300"
                 : "text-gray-200"
-            } text-xl`}
+              } text-xl`}
           >
             {Math.abs(difference)}
           </span>
@@ -208,13 +206,13 @@ const HomePage = () => {
           <div className="flex sm:flex-row justify-between mb-4">
             <div className="flex items-center font-helvetica">
               <span className="text-lg text-gray-200 font-bold mr-4">
-                  {PAGE_TITLES.DASHBOARD}
-              </span>
+                {PAGE_TITLES.DASHBOARD}
+              </span >
               <CustomImage src={infoIcon} />
               <span className="text-xs text-gray-400 ml-2">
-                  Last {DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION} min data
+                Last {DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION} min data
               </span>
-            </div>
+            </div >
             <div className="flex items-center font-helvetica">
               {width > SCREEN_WIDTH.SM && !isLoading && (
                 <TimeTracker timeStamp={refreshTime} />
@@ -226,67 +224,68 @@ const HomePage = () => {
                 <CustomImage src={refreshIcon} />
               </CustomButton>
             </div>
-          </div>
-          {isLoading ? (
-            <Loader className="card-loader-height" />
-          ) : (
-            <div className="flex flex-wrap gap-2.5 pb-4 border-b border-b-black-200 card-loader-height">
-              <HomeCard
-                title={
-                  <CardTitle
-                        title={DASHBOARD_LABELS.AVG_ORDERS_PER_MIN}
-                    icon={avgOrdersPerMinIcon}
-                  />
-                }
-                value={<OPMCards value={avgOPM} />}
-              />
-              <HomeCard
-                title={
-                  <CardTitle
-                        title={DASHBOARD_LABELS.TOTAL_NO_OF_ORDERS}
-                    icon={totalNoOfOrdersIcon}
-                  />
-                }
-                value={<OPMCards value={totalOPM} />}
-              />
-              <HomeCard
-                title={
-                  <CardTitle
-                        title={DASHBOARD_LABELS.LAST_MIN_OPM}
-                    icon={lastMinOpmIcon}
-                    classname={"card-title"}
-                  />
-                }
-                value={<OPMCards value={lastMinOPM} />}
-              />
-              <HomeCard
-                title={
-                      <CardTitle title={DASHBOARD_LABELS.AVG_OPM_COMPARISON} icon={avgOpmcompIcon} />
-                }
-                value={
-                  <ComparisonCards today={avgOPM} lastDay={lastDayAvgOPM} />
-                }
-              />
-              <HomeCard
-                title={
-                  <CardTitle
-                        title={DASHBOARD_LABELS.TOTAL_ORDER_COMPARISON}
-                    icon={totalOrderCompIcon}
-                  />
-                }
-                value={
-                  <ComparisonCards today={totalOPM} lastDay={lastDaytotalOPM} />
-                }
-              />
-            </div>
-          )}
+          </div >
+          {
+            isLoading ? (
+              <Loader className="card-loader-height" />
+            ) : (
+              <div className="flex flex-wrap gap-2.5 pb-4 border-b border-b-black-200 card-loader-height">
+                <HomeCard
+                  title={
+                    <CardTitle
+                      title={DASHBOARD_LABELS.AVG_ORDERS_PER_MIN}
+                      icon={avgOrdersPerMinIcon}
+                    />
+                  }
+                  value={< OPMCards value={avgOPM} />}
+                />
+                < HomeCard
+                  title={
+                    < CardTitle
+                      title={DASHBOARD_LABELS.TOTAL_NO_OF_ORDERS}
+                      icon={totalNoOfOrdersIcon}
+                    />
+                  }
+                  value={< OPMCards value={totalOPM} />}
+                />
+                < HomeCard
+                  title={
+                    < CardTitle
+                      title={DASHBOARD_LABELS.LAST_MIN_OPM}
+                      icon={lastMinOpmIcon}
+                      classname={"card-title"}
+                    />
+                  }
+                  value={< OPMCards value={lastMinOPM} />}
+                />
+                < HomeCard
+                  title={
+                    < CardTitle title={DASHBOARD_LABELS.AVG_OPM_COMPARISON} icon={avgOpmcompIcon} />
+                  }
+                  value={
+                    < ComparisonCards today={avgOPM} lastDay={lastDayAvgOPM} />
+                  }
+                />
+                < HomeCard
+                  title={
+                    < CardTitle
+                      title={DASHBOARD_LABELS.TOTAL_ORDER_COMPARISON}
+                      icon={totalOrderCompIcon}
+                    />
+                  }
+                  value={
+                    < ComparisonCards today={totalOPM} lastDay={lastDaytotalOPM} />
+                  }
+                />
+              </div >
+            )}
 
           <div className="home-opm-charts flex flex-col xl:flex-row space-y-6 xl:space-y-0 xl:gap-[2%] min-h-21r">
             <OPM />
             <OpmComparison />
           </div>
           <BarChart />
-        </div>
+        </div >
       )}
     </>
   );
