@@ -693,7 +693,7 @@ hr.horizontalLine.blue {
 }
 
 .home-page .p-card .p-card-title h6 {
-  @apply text-xs leading-[1.125rem] w-3/5 sm:w-3/5 font-helvetica;
+  @apply text-xs font-thin leading-[1.125rem] w-3/5 sm:w-3/5 font-helvetica;
 }
 
 .home-page .p-card .p-card-title .card-title h6 {

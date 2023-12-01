@@ -8,6 +8,7 @@ import {
   Tooltip,
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
+import { externalTooltipHandler } from "../components/utils/Utils";
 import {
   SESSIONS_CHART_DEFAULT,
   CHART_LABELS,
@@ -17,7 +18,6 @@ import {
   OPM_COMP_CHART_DEFAULT,
   OPM_CHART_DEFAULT,
 } from "../constants/appConstants";
-import { externalTooltipHandler } from "../components/utils/Utils";
 
 Chart.register(
   CategoryScale,

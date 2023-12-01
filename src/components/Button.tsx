@@ -1,52 +1,22 @@
+import { Button } from "primereact/button";
 import React from "react";
-import { Button, ButtonProps } from "primereact/button";
+import { CustomButtonProps } from "../@types/components/commonTypes";
 
-interface Props extends ButtonProps {
-  className?: string;
-  isTextButton?: boolean;
-  isDisabled?: boolean;
-  isRounded?: boolean;
-  id?: string;
-  containerId?: string;
-  children?: React.ReactNode;
-  btnclassname?: string;
-  severity?:
-    | "secondary"
-    | "success"
-    | "info"
-    | "warning"
-    | "danger"
-    | "help"
-    | undefined;
-  label?: string;
-}
-
-const CustomButton: React.FC<Props> = ({
-  onClick,
-  label,
-  id,
-  containerId,
-  severity,
-  isRounded,
-  isDisabled,
-  className,
-  btnclassname,
-  children,
-  isTextButton = false,
-}) => {
+const CustomButton: React.FC<CustomButtonProps> = (props) => {
+  const { isTextButton = false } = props;
   return (
-    <div id={containerId} className={className}>
+    <div id={props.containerId} className={props.className}>
       <Button
-        label={label}
-        id={id}
-        className={btnclassname}
-        disabled={isDisabled}
-        rounded={isRounded}
-        onClick={onClick}
-        severity={severity}
+        label={props.label}
+        id={props.id}
+        className={props.btnclassname}
+        disabled={props.isDisabled}
+        rounded={props.isRounded}
+        onClick={props.onClick}
+        severity={props.severity}
         text={isTextButton}
       >
-        {children}
+        {props.children}
       </Button>
     </div>
   );

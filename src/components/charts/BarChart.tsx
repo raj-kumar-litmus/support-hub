@@ -1,15 +1,25 @@
-import { useNavigate } from "react-router";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import React, { useEffect, useRef, useState, useContext } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Bar } from "react-chartjs-2";
-import { ChartData, SessionData } from "../../@types/BarChart";
+import { useNavigate } from "react-router";
+import useScreenSize from "../../hooks/useScreenSize";
+import CustomButton from "../Button";
+import FilteredCard from "../FilteredCard";
+import CustomCalendar from "../common/CustomCalendar";
+import CustomDropdown from "../common/CustomDropdown";
+import CustomIcon from "../common/CustomIcon";
+import CustomImage from "../common/customimage";
+import CustomTab from "../common/customtab";
+import Loader from "../loader";
 import ChannelIcon from "../../assets/channel.svg";
 import FilterIcon from "../../assets/filter-dark.svg";
-import SandGlassIcon from "../../assets/sandglass.svg";
 import openNewPageIcon from "../../assets/open_in_new.svg";
-import CalendarIcon from "../../assets/white_calendar.svg";
 import refreshIcon from "../../assets/refresh_icon.svg";
+import SandGlassIcon from "../../assets/sandglass.svg";
+import CalendarIcon from "../../assets/white_calendar.svg";
+import { ChartData, SessionData } from "../../@types/pages/Sessions";
+import { LoaderContextType } from "../../@types/components/commonTypes";
 import { BAR_CHART_OPTIONS } from "../../config/chartConfig";
 import { URL_SESSIONS } from "../../constants/apiConstants";
 import {
@@ -24,7 +34,7 @@ import {
   SCREEN_WIDTH,
   DURATIONS,
 } from "../../constants/appConstants";
-import useScreenSize from "../../hooks/useScreenSize";
+import { LoaderContext } from "../../context/loaderContext";
 import {
   CURRENT_PST_DATE,
   DATE_FORMAT_3,
@@ -33,15 +43,6 @@ import {
   getFormattedPSTDate,
 } from "../../utils/dateTimeUtil";
 import { fetchData } from "../../utils/fetchUtil";
-import FilteredCard from "../FilteredCard";
-import CustomCalendar from "../common/CustomCalendar";
-import CustomDropdown from "../common/CustomDropdown";
-import CustomIcon from "../common/CustomIcon";
-import CustomTab from "../common/customtab";
-import Loader from "../loader";
-import CustomImage from "../common/customimage";
-import CustomButton from "../Button";
-import { LoaderContext, LoaderContextType } from "../../context/loaderContext";
 import { ROUTES, increaseLegendSpacing, submitOnEnter } from "../utils/Utils";
 
 const BarChart = () => {
@@ -292,7 +293,7 @@ const BarChart = () => {
   };
 
   const handleExpandClick = () => {
-    navigate(`/${ROUTES.sessions}`);
+    navigate(ROUTES.sessions);
   };
 
   const handleOPMCompRefreshBtnClick = () => {

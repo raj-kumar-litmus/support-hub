@@ -1,32 +1,22 @@
-import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import {
-  Chart as ChartJS,
   CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LineElement,
   LinearScale,
   PointElement,
-  LineElement,
   Title,
   Tooltip,
-  Legend,
 } from "chart.js";
-import type { ChartData, ChartOptions } from "chart.js";
+import { useState } from "react";
 import { Line } from "react-chartjs-2";
+import { useLocation, useNavigate } from "react-router-dom";
 import useScreenSize from "../hooks/useScreenSize";
-import RotateIcon from "../assets/rotate.svg";
 import CustomImage from "./common/customimage";
+import RotateIcon from "../assets/rotate.svg";
 import { SCREEN_WIDTH } from "../constants/appConstants";
+import { LineChartProps } from "../@types/components/commonTypes";
 import { ROUTES, increaseLegendSpacing } from "./utils/Utils";
-
-interface Props {
-  options: ChartOptions<"line"> | any;
-  data: ChartData<"line">;
-  className?: string;
-  title: string;
-  isFullScreen?: boolean;
-  defaultClasses?: boolean;
-  plugins?: boolean;
-}
 
 ChartJS.register(
   CategoryScale,
@@ -35,18 +25,11 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend,
+  Legend
 );
 
-function LineChart ({
-  title,
-  options,
-  data,
-  className,
-  isFullScreen = false,
-  defaultClasses,
-  plugins,
-}: Props) {
+function LineChart (props: LineChartProps) {
+  const { isFullScreen = false } = props;
   const [rotate, setRotate] = useState<boolean>(isFullScreen);
   const { width } = useScreenSize();
   const location = useLocation();
@@ -54,20 +37,23 @@ function LineChart ({
 
   const onRotateHandler = () => {
     if (!location.pathname.includes(ROUTES.fullScreen)) {
-      navigate(`${location.pathname}/${ROUTES.fullScreen}`);
+      navigate(`${location.pathname}${ROUTES.fullScreen}`);
     } else {
-      navigate(location.pathname.split(`/${ROUTES.fullScreen}`)[0]);
+      navigate(location.pathname.split(ROUTES.fullScreen)[0]);
     }
     setRotate(!rotate);
   };
 
   return (
-    <div className={`${className} ${!defaultClasses && "bg-black-200"}`}>
+    <div
+      className={`${props.className} ${!props.defaultClasses && "bg-black-200"
+        }`}
+    >
       {width < SCREEN_WIDTH.SM &&
         (location.pathname.includes(ROUTES.opm) ||
           location.pathname.includes(ROUTES.opmComparison)) && (
           <div className="flex items-center justify-between mb-4">
-            <p className="text-white-500">{title}</p>
+            <p className="text-white-500">{props.title}</p>
             <div className="flex items-center">
               <div className="bg-black-400 rounded-full relative p-2">
                 <CustomImage
@@ -80,14 +66,14 @@ function LineChart ({
             </div>
           </div>
         )}
-      {plugins || width < SCREEN_WIDTH.SM ? (
+      {props.plugins || width < SCREEN_WIDTH.SM ? (
         <Line
-          options={options}
-          data={data}
+          options={props.options}
+          data={props.data}
           plugins={increaseLegendSpacing(20)}
         />
       ) : (
-        <Line options={options} data={data} />
+        <Line options={props.options} data={props.data} />
       )}
     </div>
   );

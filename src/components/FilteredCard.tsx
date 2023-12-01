@@ -2,25 +2,22 @@ import React from "react";
 import CrossIcon from "../assets/cross.svg";
 import CustomButton from "./Button";
 import CustomImage from "./common/customimage";
+import { FilteredCardProps } from "../@types/components/commonTypes";
 
-interface Props {
-  content: string;
-  leftIcon?: string;
-  label?: string;
-  onClickHandler: (string) => void;
-}
-
-const FilteredCard: React.FC<Props> = ({
-  content,
-  leftIcon,
-  label,
-  onClickHandler,
-}) => {
+const FilteredCard: React.FC<FilteredCardProps> = (props) => {
   return (
-    <CustomButton id={label} className="filteredCard">
-      <CustomImage id={label} src={leftIcon} width="12" height="12" />
-      <span id={label}>{content}</span>
-      <CustomImage src={CrossIcon} onClick={() => onClickHandler(label)} />
+    <CustomButton id={props.label} className="filteredCard">
+      <CustomImage
+        id={props.label}
+        src={props.leftIcon}
+        width="12"
+        height="12"
+      />
+      <span id={props.label}>{props.content}</span>
+      <CustomImage
+        src={CrossIcon}
+        onClick={() => props.onClickHandler(props.label)}
+      />
     </CustomButton>
   );
 };

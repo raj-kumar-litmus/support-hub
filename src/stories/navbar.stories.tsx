@@ -1,7 +1,7 @@
-import Navbar from "../components/common/navbar";
+import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import type { Meta, StoryObj } from "@storybook/react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
+import Navbar from "../components/common/navbar";
 
 const meta = {
   title: "Stories/navbar",

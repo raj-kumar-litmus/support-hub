@@ -1,17 +1,9 @@
 import { FC } from "react";
-import MenuCard from "./menucard";
-import { IMenu } from "../../@types/menu";
 import { useNavigate } from "react-router-dom";
+import MenuCard from "./menucard";
+import { SidePaneGridProps, IMenu } from "../../@types/components/commonTypes";
 
-type Props = {
-  menuList: Array<IMenu>;
-  selectedMenu: number;
-  setSelectedMenu: (a: number) => void;
-  showSidePaneGrid: boolean;
-  setShowSidePaneGrid: (hide: boolean) => void;
-};
-
-const SidePaneGrid: FC<Props> = (props) => {
+const SidePaneGrid: FC<SidePaneGridProps> = (props) => {
   const navigate = useNavigate();
 
   const navigateToMenu = (menu: IMenu) => {

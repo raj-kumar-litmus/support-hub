@@ -1,12 +1,6 @@
 import { useEffect, useState } from "react";
-import { DCOpenOrders } from "../../@types/dcOpenOrders";
 import useScreenSize from "../../hooks/useScreenSize";
-
-type CardProps = {
-  cardData: DCOpenOrders | CommerceItemData;
-  type: string;
-  key: number;
-};
+import { CardProps } from "../../@types/components/commonTypes";
 
 const Card = (props: CardProps) => {
   const [cardTitle, setCardTitle] = useState(null);

@@ -1,12 +1,7 @@
-import { Checkbox, CheckboxProps } from "primereact/checkbox";
+import { Checkbox } from "primereact/checkbox";
+import { CustomCheckboxProps } from "../../@types/components/commonTypes";
 
-interface Props extends CheckboxProps {
-  containerclassname?: string;
-  labelclassname?: string;
-  label?: string;
-}
-
-const CustomCheckbox = (props: Props) => (
+const CustomCheckbox = (props: CustomCheckboxProps) => (
   <div className={props.containerclassname}>
     <Checkbox onClick={props.onClick} id={props.id || "checkbox"} {...props}>
       {props.children}
