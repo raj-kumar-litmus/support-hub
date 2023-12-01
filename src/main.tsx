@@ -25,35 +25,35 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       {/* <Suspense fallback={<Loader />}> */}
       <Suspense>
         <Routes>
-          <Route path="/" element={<Navigate to={`/${ROUTES.home}`} />} />
+          <Route path="/" element={<Navigate to={ROUTES.home} />} />
           <Route
-            path={`/${ROUTES.home}`}
+            path={ROUTES.home}
             element={<App appContent={<HomePage />} />}
           />
           <Route
-            path={`/${ROUTES.dcOpenOrders}`}
+            path={ROUTES.dcOpenOrders}
             element={<App appContent={<DcOpenOrders />} />}
           />
           <Route
-            path={`/${ROUTES.sessions}`}
+            path={ROUTES.sessions}
             element={<App appContent={<BarChart />} />}
           />
           <Route
-            path={`/${ROUTES.opm}`}
+            path={ROUTES.opm}
             element={<App appContent={<Chart type="opm" />} />}
           />
           <Route
-            path={`/${ROUTES.opm}/${ROUTES.fullScreen}`}
+            path={`${ROUTES.opm}/${ROUTES.fullScreen}`}
             element={
               <App showNavbar={false} appContent={<Chart type="opm" />} />
             }
           />
           <Route
-            path={`/${ROUTES.opmComparison}`}
+            path={ROUTES.opmComparison}
             element={<App appContent={<Chart type="opmcomparison" />} />}
           />
           <Route
-            path={`/${ROUTES.opmComparison}/${ROUTES.fullScreen}`}
+            path={`${ROUTES.opmComparison}/${ROUTES.fullScreen}`}
             element={
               <App
                 showNavbar={false}
@@ -62,7 +62,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             }
           />
           <Route
-            path={`/${ROUTES.orderDetails}/:orderId`}
+            path={`${ROUTES.orderDetails}/:orderId`}
             element={<App appContent={<OrderDetails />} />}
           />
         </Routes>

@@ -13,23 +13,16 @@ import refreshIcon from "../../assets/refresh_icon.svg";
 import { BAR_CHART_OPTIONS } from "../../config/chartConfig";
 import { URL_SESSIONS } from "../../constants/apiConstants";
 import {
-  CHANNEL,
-  CHANNEL_LIST,
-  DATE,
-  DD_MM_YYYY,
-  MM_DD_YYYY_HH_MM,
-  DEFAULT_PERIOD,
-  DURATION,
-  HOME_PAGE_REFERSH_DURATION,
-  DURATION_LIST,
-  FILTERS,
+  SESSIONS_CHANNEL_LIST,
+  DATE_AND_TIME_FORMATS,
+  LABELS,
+  DASHBOARD_LABELS,
+  PAGE_TITLES,
   SESSIONS_TABS,
-  SUBMIT,
-  TOTAL_SESSIONS_PER_MINUTE,
+  CHART_LABELS,
   SESSIONS_CHART_DEFAULT,
   SCREEN_WIDTH,
-  LABELS,
-  TITLE,
+  DURATIONS,
 } from "../../constants/appConstants";
 import useScreenSize from "../../hooks/useScreenSize";
 import {
@@ -69,25 +62,28 @@ const BarChart = () => {
     {
       type: "dropdown",
       name: "period",
-      title: DURATION,
+      title: LABELS.DURATION,
       value: 10,
       iconSrc: SandGlassIcon,
-      options: DURATION_LIST,
+      options: Object.keys(DURATIONS).map((e) => ({
+        label: e,
+        value: DURATIONS[e],
+      })),
     },
     {
       type: "calendar",
       name: "date",
-      title: DATE,
+      title: LABELS.DATE,
       value: getFormattedPSTDate(),
       imgsrc: CalendarIcon,
     },
     {
       type: "dropdown",
       name: "channel",
-      title: CHANNEL,
+      title: LABELS.CHANNEL,
       value: "all",
       iconSrc: ChannelIcon,
-      options: CHANNEL_LIST,
+      options: SESSIONS_CHANNEL_LIST,
     },
   ];
   const [formFields, setFormFields] = useState(DEFAULT_FORM_FIELDS);
@@ -167,8 +163,8 @@ const BarChart = () => {
   const getSessionData = async () => {
     const params = {
       period: location.pathname.includes(ROUTES.home)
-        ? HOME_PAGE_REFERSH_DURATION
-        : DEFAULT_PERIOD,
+        ? DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION
+        : DASHBOARD_LABELS.DEFAULT_PERIOD,
       starttime: "",
       channel: "",
     };
@@ -260,7 +256,7 @@ const BarChart = () => {
       ...BAR_CHART_OPTIONS(
         (duration ||
           Number(formFields.find((e) => e.name === "period").value)) < 11 &&
-          width > SCREEN_WIDTH.SM,
+        width > SCREEN_WIDTH.SM,
       ),
     };
     if (width > SCREEN_WIDTH.SM) {
@@ -288,7 +284,7 @@ const BarChart = () => {
       <Button
         id="popup-btn-submit"
         className="p-button-rounded"
-        label={SUBMIT}
+        label={LABELS.SUBMIT}
         onClick={onSubmit}
         autoFocus
       />
@@ -315,7 +311,7 @@ const BarChart = () => {
         <>
           <div className="flex basis-full justify-between pb-0 items-baseline">
             <div className="text-lg text-gray-200 font-bold">
-              {TITLE.SESSIONS}
+              {PAGE_TITLES.SESSIONS}
             </div>
             <CustomIcon
               alt="show-filters"
@@ -325,7 +321,7 @@ const BarChart = () => {
               className="cursor-pointer sm:hidden"
               onClick={() => toggleFilterVisibility()}
             />
-          </div>
+          </div >
           {showFilters && (
             <div className="basis-full justify-between pb-0 items-end hidden sm:block lg:flex">
               <div className="flex justify-start pb-4 items-end">
@@ -338,10 +334,10 @@ const BarChart = () => {
                           title={form.title}
                           containerclassname="calendarSessions"
                           titleclassname="top-5"
-                          imageclassname="h-[20px] w-[20px] relative top-[1.75rem] left-[0.5vw] z-[1]"
+                          imageclassname="h-5 w-5 relative top-7 left-0.5w z-1"
                           showTime
                           timeOnly={form.name === "time"}
-                          placeholder={MM_DD_YYYY_HH_MM}
+                          placeholder={DATE_AND_TIME_FORMATS.MM_DD_YYYY_HH_MM}
                           value={form.value}
                           onChange={(event) => handleFormChange(event)}
                           maxDate={
@@ -361,7 +357,7 @@ const BarChart = () => {
                           value={form.value}
                           onChange={(event) => handleFormChange(event)}
                           options={form.options}
-                          optionLabel={"label"}
+                          optionLabel="label"
                           placeholder={""}
                           showIcon={true}
                           showLeftIcon={true}
@@ -375,115 +371,121 @@ const BarChart = () => {
               </div>
               <Button
                 disabled={disabled}
-                label={SUBMIT}
+                label={LABELS.SUBMIT}
                 id="page-btn-submit"
                 className="p-button-rounded min-w-[118px] mb-4"
                 onClick={incrementCounter}
               />
             </div>
           )}
-          {showFilteredCards && (
-            <div className="flex gap-2 justify-start flex-wrap pb-6 items-center">
-              {formFields
-                .filter((e) => e.value)
-                .map((e: any) => (
-                  <React.Fragment key={e.name}>
-                    <FilteredCard
-                      label={e.name}
-                      leftIcon={e.iconSrc || e.imgsrc}
-                      onClickHandler={removeFormEntry}
-                      content={getFilterCardContent(e)}
-                    />
-                  </React.Fragment>
-                ))}
+          {
+            showFilteredCards && (
+              <div className="flex gap-2 justify-start flex-wrap pb-6 items-center">
+                {formFields
+                  .filter((e) => e.value)
+                  .map((e: any) => (
+                    <React.Fragment key={e.name}>
+                      <FilteredCard
+                        label={e.name}
+                        leftIcon={e.iconSrc || e.imgsrc}
+                        onClickHandler={removeFormEntry}
+                        content={getFilterCardContent(e)}
+                      />
+                    </React.Fragment>
+                  ))}
 
-              {!disabled && (
-                <CustomButton
-                  label={LABELS.reset}
-                  severity="secondary"
-                  className="resetFilters text-xs text-white-700 ml-2"
-                  isTextButton={true}
-                  onClick={() => resetFormEntry()}
-                />
-              )}
-            </div>
-          )}
+                {!disabled && (
+                  <CustomButton
+                    label={LABELS.RESET}
+                    severity="secondary"
+                    className="resetFilters text-xs text-white-700 ml-2"
+                    isTextButton={true}
+                    onClick={() => resetFormEntry()}
+                  />
+                )}
+              </div>
+            )}
         </>
-      )}
-      {isLoading && <Loader className="!p-0 m-auto min-h-[24rem]" />}
-      {!isLoading && (
-        <div
-          className={`${
-            location.pathname.includes(ROUTES.home)
+      )
+      }
+      {isLoading && <Loader className="!p-0 m-auto min-h-24r" />}
+      {
+        !isLoading && (
+          <div
+            className={`${location.pathname.includes(ROUTES.home)
               ? "home-sessions"
               : "main-sessions"
-          } flex justify-center relative bg-black-200 h-96 lg:h-[29rem] rounded-lg flex-col min-h-[24rem]`}
-        >
-          <>
-            {location.pathname.includes(ROUTES.home) && (
-              <>
-                <div className="flex flex-row justify-between mb-2 md:mb-4">
-                  <div className="session-page-title self-center">
-                    {TITLE.SESSIONS}
+              } flex justify-center relative bg-black-200 h-96 lg:h-29r rounded-lg flex-col min-h-24r`}
+          >
+            <>
+              {location.pathname.includes(ROUTES.home) && (
+                <>
+                  <div className="flex flex-row justify-between mb-2 md:mb-4">
+                    <div className="session-page-title self-center">
+                      {PAGE_TITLES.SESSIONS}
+                    </div >
+                    <div className="flex">
+                      <CustomButton
+                        className="home-refresh-btn"
+                        onClick={handleOPMCompRefreshBtnClick}
+                      >
+                        <CustomImage src={refreshIcon} />
+                      </CustomButton>
+                      <CustomButton
+                        className="home-expand-btn ml-3"
+                        onClick={handleExpandClick}
+                      >
+                        <CustomImage src={openNewPageIcon} />
+                      </CustomButton>
+                    </div>
+                  </div >
+                  <div className="flex justify-start mb-2 md:mb-0 md:justify-center items-center">
+                    <CustomTab
+                      className="custom-tab md:absolute md:top-5 md:right-32"
+                      tabData={SESSIONS_TABS}
+                      tabValue={tabValue}
+                      setTabValue={setTabValue}
+                    />
                   </div>
-                  <div className="flex">
-                    <CustomButton
-                      className="home-refresh-btn"
-                      onClick={handleOPMCompRefreshBtnClick}
-                    >
-                      <CustomImage src={refreshIcon} />
-                    </CustomButton>
-                    <CustomButton
-                      className="home-expand-btn ml-3"
-                      onClick={handleExpandClick}
-                    >
-                      <CustomImage src={openNewPageIcon} />
-                    </CustomButton>
-                  </div>
-                </div>
-                <div className="flex justify-start mb-2 md:mb-0 md:justify-center items-center">
-                  <CustomTab
-                    className="custom-tab md:absolute md:top-5 md:right-32"
-                    tabData={SESSIONS_TABS}
-                    tabValue={tabValue}
-                    setTabValue={setTabValue}
+                </>
+              )
+              }
+              {
+                location.pathname.includes(ROUTES.sessions) && (
+                  <>
+                    <div className="block sm:hidden session-page-title mb-2">
+                      {PAGE_TITLES.SESSIONS}
+                    </div >
+                    <CustomTab
+                      className={`custom-tab ${width < SCREEN_WIDTH.SM ? "!self-start" : ""
+                        }`}
+                      tabData={SESSIONS_TABS}
+                      tabValue={tabValue}
+                      setTabValue={setTabValue}
+                    />
+                  </>
+                )
+              }
+              {
+                allData.labels.length > 0 && chartOptions && (
+                  <Bar
+                    ref={chartRef}
+                    options={chartOptions}
+                    data={allData}
+                    plugins={increaseLegendSpacing(20)}
                   />
-                </div>
-              </>
-            )}
-            {location.pathname.includes(ROUTES.sessions) && (
-              <>
-                <div className="block sm:hidden session-page-title mb-2">
-                  {TITLE.SESSIONS}
-                </div>
-                <CustomTab
-                  className={`custom-tab ${
-                    width < SCREEN_WIDTH.SM ? "!self-start" : ""
-                  }`}
-                  tabData={SESSIONS_TABS}
-                  tabValue={tabValue}
-                  setTabValue={setTabValue}
-                />
-              </>
-            )}
-            {allData.labels.length > 0 && chartOptions && (
-              <Bar
-                ref={chartRef}
-                options={chartOptions}
-                data={allData}
-                plugins={increaseLegendSpacing(20)}
-              />
-            )}
-            <div className="text-center text-xs text-gray-300 mt-2 sm:-mt-11">
-              {TOTAL_SESSIONS_PER_MINUTE}
-            </div>
-          </>
-        </div>
-      )}
+                )
+              }
+              <div className="text-center text-xs text-gray-300 mt-2 sm:-mt-11">
+                {CHART_LABELS.TOTAL_SESSIONS_PER_MINUTE}
+              </div>
+            </>
+          </div >
+        )}
 
       <Dialog
         id="modal-section"
-        header={FILTERS}
+        header={LABELS.FILTERS}
         visible={showFilterPopup}
         footer={renderFooter()}
         onHide={onHide}
@@ -506,8 +508,8 @@ const BarChart = () => {
                       showTime
                       containerclassname="calendarSessions"
                       titleclassname="top-5"
-                      imageclassname="h-[20px] w-[20px] relative top-[1.75rem] md:top-[3vh] left-[0.5vw] z-[1]"
-                      placeholder={DD_MM_YYYY}
+                      imageclassname="h-5 w-5 relative top-7 md:top-3h left-0.5w z-1"
+                      placeholder={DATE_AND_TIME_FORMATS.DD_MM_YYYY}
                       value={form.value}
                       onChange={(event) => handleFormChange(event)}
                       maxDate={form.name === "date" ? CURRENT_PST_DATE : null}
@@ -533,7 +535,7 @@ const BarChart = () => {
                       value={form.value}
                       onChange={(event) => handleFormChange(event)}
                       options={form.options}
-                      optionLabel={"label"}
+                      optionLabel="label"
                       placeholder={""}
                       showIcon={false}
                       iconSrc={form.iconSrc}
@@ -546,7 +548,7 @@ const BarChart = () => {
           </div>
         </div>
       </Dialog>
-    </div>
+    </div >
   );
 };
 

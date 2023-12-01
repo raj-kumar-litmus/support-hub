@@ -5,6 +5,7 @@ import CustomInputNumber from "./CustomInputNumber";
 import CustomToast from "./CustomToast";
 import CustomImage from "./customimage";
 import InfoIcon from "../../assets/info.svg";
+import { LABELS } from "../../constants/appConstants";
 
 interface AutoRefreshProps {
   getData(): any;
@@ -71,16 +72,16 @@ const AutoRefresh = (props: AutoRefreshProps) => {
 
   return (
     <>
-      <div className="md:flex md:gap-[1vw] md:relative md:top-[1vh]">
+      <div className="md:flex md:gap-1w md:relative md:top-[1vh]">
         <CustomCheckbox
           checked={showPollingForm}
           onClick={onCheckHandler}
           containerclassname={props.checkBoxContainerClassname}
-          label="Auto Refresh"
+          label={LABELS.AUTO_REFRESH}
           labelclassname={props.checkBoxLabelClassname}
         />
         {showPollingForm && (
-          <div className="ml-[6vw] sm:ml-[1vw] ml-[1vw] opmFilters items-center">
+          <div className="ml-1w opmFilters items-center">
             <CustomInputNumber
               containerclassname={props.inputContainerClassname}
               min={1}

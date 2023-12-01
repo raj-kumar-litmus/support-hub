@@ -7,6 +7,7 @@ import Loader from "./loader";
 import CustomTable from "./common/customtable";
 import { Column } from "primereact/column";
 import { getTableHeaders } from "./utils/Utils";
+import { PAGE_TITLES } from "../constants/appConstants";
 
 interface orderData {
   country: string;
@@ -47,7 +48,7 @@ const DcOpenOrders: FC = () => {
       ) : (
         <div>
           <h3 className="sm:text-lg text-gray-200 font-bold m-3 ml-0 font-helvetica">
-            DC Open Orders
+              {PAGE_TITLES.DC_OPEN_ORDERS}
           </h3>
           <div className="hidden sm:block rounded-md">
             {tableData?.length > 0 && (
