@@ -4,14 +4,13 @@ import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend,
 } from "chart.js";
 import type { ChartData, ChartOptions } from "chart.js";
-import { Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import useScreenSize from "../hooks/useScreenSize";
 import RotateIcon from "../assets/rotate.svg";
 import CustomImage from "./common/customimage";
@@ -19,34 +18,33 @@ import { SCREEN_WIDTH } from "../constants/appConstants";
 import { increaseLegendSpacing } from "./utils/Utils";
 
 interface Props {
-  options: ChartOptions<"line"> | any;
-  data: ChartData<"line">;
+  options: ChartOptions<"bar"> | any;
+  data: ChartData<"bar">;
   className?: string;
+  defaultClasses?: boolean;
   title: string;
   isFullScreen?: boolean;
-  defaultClasses?: boolean;
   plugins?: boolean;
 }
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend,
 );
 
-function LineChart ({
+const BarChartComp = ({
   title,
   options,
   data,
   className,
-  isFullScreen = false,
   defaultClasses,
+  isFullScreen = false,
   plugins,
-}: Props) {
+}: Props) => {
   const [rotate, setRotate] = useState<boolean>(isFullScreen);
   const { width } = useScreenSize();
   const location = useLocation();
@@ -63,34 +61,32 @@ function LineChart ({
 
   return (
     <div className={`${className} ${!defaultClasses && "bg-black-200"}`}>
-      {width < SCREEN_WIDTH.SM &&
-        (location.pathname.includes("opm") ||
-          location.pathname.includes("opmcomparison")) && (
-          <div className="flex items-center justify-between mb-4">
-            <p className="text-white-500">{title}</p>
-            <div className="flex items-center">
-              <div className="bg-black-400 rounded-full relative p-2">
-                <CustomImage
-                  src={RotateIcon}
-                  className="relative"
-                  alt="Filter Icon"
-                  onClick={onRotateHandler}
-                />
-              </div>
+      {width < SCREEN_WIDTH.SM && location.pathname.includes("opm") && (
+        <div className="flex items-center justify-between mb-4">
+          <p className="text-white-500">{title}</p>
+          <div className="flex items-center">
+            <div className={`bg-black-400 rounded-full relative p-2`}>
+              <CustomImage
+                src={RotateIcon}
+                className="relative"
+                alt="Filter Icon"
+                onClick={onRotateHandler}
+              />
             </div>
           </div>
-        )}
+        </div>
+      )}
       {plugins || width < SCREEN_WIDTH.SM ? (
-        <Line
+        <Bar
           options={options}
           data={data}
           plugins={increaseLegendSpacing(20)}
         />
       ) : (
-        <Line options={options} data={data} />
+        <Bar options={options} data={data} />
       )}
     </div>
   );
-}
+};
 
-export default LineChart;
+export default BarChartComp;

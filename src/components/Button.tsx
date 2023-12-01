@@ -9,6 +9,7 @@ interface Props extends ButtonProps {
   id?: string;
   containerId?: string;
   children?: React.ReactNode;
+  btnclassname?: string;
   severity?:
     | "secondary"
     | "success"
@@ -17,7 +18,6 @@ interface Props extends ButtonProps {
     | "danger"
     | "help"
     | undefined;
-  onClick?: () => void;
   label?: string;
 }
 
@@ -30,6 +30,7 @@ const CustomButton: React.FC<Props> = ({
   isRounded,
   isDisabled,
   className,
+  btnclassname,
   children,
   isTextButton = false,
 }) => {
@@ -38,6 +39,7 @@ const CustomButton: React.FC<Props> = ({
       <Button
         label={label}
         id={id}
+        className={btnclassname}
         disabled={isDisabled}
         rounded={isRounded}
         onClick={onClick}

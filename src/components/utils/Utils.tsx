@@ -73,6 +73,7 @@ export const externalTooltipHandler = (context, type, customPosition?: boolean) 
   // Tooltip Element
   const { chart, tooltip } = context;
   const tooltipEl = getOrCreateTooltip(chart, type, tooltip);
+  tooltipEl.style.zIndex = 20;
   // Hide if no tooltip
   if (tooltip.opacity === 0) {
     tooltipEl.style.opacity = 0;
@@ -82,8 +83,17 @@ export const externalTooltipHandler = (context, type, customPosition?: boolean) 
   // Set Text
   if (tooltip.body) {
     const titleLines = tooltip.title || [];
-    const bodyLines =
-      tooltip.body?.[0]?.lines && tooltip.body[0].lines[0].split(":");
+    let bodyLines = [];
+    if (type === "session" || type === "opm_comp_bar") {
+      tooltip.body.forEach((bodyLineItem) => {
+        if (bodyLineItem.lines) {
+          bodyLines = [...bodyLines, ...bodyLineItem.lines[0].split(":")];
+        }
+      });
+    } else {
+      bodyLines =
+        tooltip.body?.[0]?.lines && tooltip.body[0].lines[0].split(":");
+    }
 
     const tableHead = document.createElement("thead");
 
@@ -91,18 +101,27 @@ export const externalTooltipHandler = (context, type, customPosition?: boolean) 
       const tr = document.createElement("tr");
       const th = document.createElement("th");
       const text = document.createTextNode(title);
-
       th.appendChild(text);
       tr.appendChild(th);
       tableHead.appendChild(tr);
     });
 
     const tableBody = document.createElement("tbody");
+    if (type === "session" || type === "opm_comp_bar") {
+      tableBody.classList.add("session-tooltip-tbody");
+    }
 
     bodyLines.forEach((body, i) => {
       const tr = document.createElement("tr");
       tr.style.backgroundColor = "inherit";
-
+      if (type === "session" || type === "opm_comp_bar") {
+        if (i === 0 || i === 2) {
+          tr.classList.add("session-col-1");
+        } else {
+          tr.classList.add("session-col-2");
+          tr.style.textAlign = "-webkit-right";
+        }
+      }
       const td = document.createElement("td");
       const text = document.createTextNode(body);
 
@@ -137,7 +156,7 @@ export const externalTooltipHandler = (context, type, customPosition?: boolean) 
   }
 };
 
-export const getTableHeaders = (data: Object[]) => {
+export const getTableHeaders = (data: object[]) => {
   const keyArray = Object.keys(data[0])?.map((key) => key);
   return keyArray;
 }
@@ -199,3 +218,54 @@ export const getPieChartTooltip = (context) => {
     tooltipEl.style.pointerEvents = 'none';
   }
 }
+};
+
+export const convert24to12Hour = (hour) => {
+  const convertedHour = parseInt(hour, 10);
+  if (convertedHour === 0) {
+    return { hour12: 0, ampm: "AM" };
+  } else if (convertedHour >= 1 && convertedHour <= 11) {
+    return { hour12: convertedHour, ampm: "AM" };
+  } else if (convertedHour === 12) {
+    return { hour12: 12, ampm: "PM" };
+  } else {
+    return { hour12: convertedHour - 12, ampm: "PM" };
+  }
+};
+
+export const convert12to24Hour = (hour, ampm) => {
+  let convertedHour = parseInt(hour, 10);
+  if (ampm === "PM" && convertedHour < 12) {
+    convertedHour += 12;
+  } else if (ampm === "AM" && convertedHour === 12) {
+    convertedHour = 0;
+  }
+  return convertedHour;
+};
+export const submitOnEnter = (callback) => {
+  const handleGlobalKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      callback(event);
+    }
+  };
+
+  document.addEventListener("keydown", handleGlobalKeyDown);
+
+  return () => {
+    document.removeEventListener("keydown", handleGlobalKeyDown);
+  };
+};
+
+export const increaseLegendSpacing = (customHeight) => [
+  {
+    id: "increase-legend-spacing",
+    beforeInit (chart) {
+      const originalFit = (chart.legend as any).fit;
+      (chart.legend as any).fit = function fit () {
+        originalFit.bind(chart.legend)();
+        this.height += customHeight;
+      };
+    },
+  },
+];

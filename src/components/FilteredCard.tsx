@@ -7,7 +7,7 @@ interface Props {
   content: string;
   leftIcon?: string;
   label?: string;
-  onClickHandler: () => void;
+  onClickHandler: (string) => void;
 }
 
 const FilteredCard: React.FC<Props> = ({
@@ -17,12 +17,10 @@ const FilteredCard: React.FC<Props> = ({
   onClickHandler,
 }) => {
   return (
-    <CustomButton id={label} className="filteredCard" onClick={onClickHandler}>
+    <CustomButton id={label} className="filteredCard">
       <CustomImage id={label} src={leftIcon} width="12" height="12" />
       <span id={label}>{content}</span>
-      <CustomImage
-        src={CrossIcon}
-      />
+      <CustomImage src={CrossIcon} onClick={() => onClickHandler(label)} />
     </CustomButton>
   );
 };

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import HomeCard from "./common/homeCard";
 import CustomImage from "./common/customimage";
 import OPM from "../views/opm";
@@ -11,6 +11,13 @@ import {
   TODAY,
   DIFFERENCE,
   REFRESHTIME,
+  DASHBOARD,
+  AVG_ORDERS_PER_MIN,
+  TOTAL_NO_OF_ORDERS,
+  LAST_MIN_OPM,
+  AVG_OPM_COMPARISON,
+  TOTAL_ORDER_COMPARISON,
+  SCREEN_WIDTH,
 } from "../constants/appConstants";
 import useScreenSize from "../hooks/useScreenSize";
 import TimeTracker from "./timeTracker";
@@ -20,15 +27,28 @@ import totalOrderCompIcon from "../assets/total_order_comp.svg";
 import avgOpmcompIcon from "../assets/avg_opm_comp.svg";
 import lastMinOpmIcon from "../assets/last_min_opm.svg";
 import trendingDownIcon from "../assets/trending_down.svg";
+import trendingUpIcon from "../assets/trend_up.svg";
 import refreshIcon from "../assets/refresh_icon.svg";
 import infoIcon from "../assets/info_icon.svg";
 import BarChart from "./charts/BarChart";
 import Loader from "./loader";
 import CustomButton from "./Button";
+import { LoaderContext, LoaderContextType } from "../context/loaderContext";
+import GlobalLoader from "./globalLoader";
+import LoaderPortal from "./loaderPortal";
+import { getFormattedPSTDate } from "../utils/dateTimeUtil";
 
-const CardTitle = ({ title, icon }: { title: string; icon: any }) => {
+const CardTitle = ({
+  title,
+  icon,
+  classname = "",
+}: {
+  title: string;
+  icon: any;
+  classname?: string;
+}) => {
   return (
-    <div className="flex justify-between">
+    <div className={`${classname} flex justify-between`}>
       <h6>{title}</h6>
       <CustomImage src={icon} />
     </div>
@@ -38,7 +58,7 @@ const CardTitle = ({ title, icon }: { title: string; icon: any }) => {
 const OPMCards = ({ value }: { value: number }) => {
   return (
     <div className="flex items-end">
-      <span className="text-2xl text-[#F2F2F2]">{value}</span>
+      <span className="text-2xl text-gray-200">{value}</span>
     </div>
   );
 };
@@ -51,26 +71,33 @@ const ComparisonCards = ({
   lastDay: number;
 }) => {
   const difference = lastDay - today || 0;
+  const kFormatter = (num) => {
+    return Math.abs(num) > 999
+      ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(0) + "k"
+      : Math.sign(num) * Math.abs(num);
+  };
   return (
     <div className="flex">
       <div className="flex flex-col pr-1 sm:pr-2 justify-between">
         <span className="text-[10px]">{TODAY}</span>
-        <span className="text-[#F2F2F2] text-xl">{today}</span>
+        <span className="text-gray-200 text-xl">{kFormatter(today) || 0}</span>
       </div>
-      <div className="border border-r border-[#383F47] h-[2.5rem] m-auto"></div>
+      <div className="border border-r border-black-400 h-[2.5rem] m-auto"></div>
       <div className="flex flex-col px-1 sm:px-2 justify-between">
         <span className="text-[10px]">{LASTDAY}</span>
-        <span className="text-[#F2F2F2] text-xl">{lastDay}</span>
+        <span className="text-gray-200 text-xl">
+          {kFormatter(lastDay) || 0}
+        </span>
       </div>
-      <div className="border border-r border-[#383F47] h-[2.5rem] m-auto"></div>
+      <div className="border border-r border-black-400 h-[2.5rem] m-auto"></div>
       <div className="flex flex-col justify-between pl-1 sm:pl-2">
         <span
           className={`${
             difference > 0
-              ? "text-[#F16476]"
+              ? "text-pink-100"
               : difference < 0
-              ? "text-[#5CB7ED]"
-              : "text-[#8B8C8F]"
+              ? "text-green-300"
+              : "text-gray-400"
           } text-[10px]`}
         >
           {DIFFERENCE}
@@ -79,18 +106,18 @@ const ComparisonCards = ({
           <span
             className={`${
               difference > 0
-                ? "text-[#F16476]"
+                ? "text-pink-100"
                 : difference < 0
-                ? "text-[#5CB7ED]"
-                : "text-[#F2F2F2]"
+                ? "text-green-300"
+                : "text-gray-200"
             } text-xl`}
           >
-            {difference}
+            {Math.abs(difference)}
           </span>
           {difference !== 0 && (
             <CustomImage
               className="flex ml-2"
-              src={difference > 0 ? trendingDownIcon : trendingDownIcon} // need to change to up icon
+              src={difference > 0 ? trendingDownIcon : trendingUpIcon}
             />
           )}
         </div>
@@ -108,17 +135,20 @@ const HomePage = () => {
   const [lastDaytotalOPM, setLastDayTotalOPM] = useState<number>(0);
   const [refreshTime, setRefreshTime] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { showGlobalLoader, hideLoader } = useContext(
+    LoaderContext,
+  ) as LoaderContextType;
 
   const { width } = useScreenSize();
 
-  const fetchOPMData = async (url) => {
+  const fetchOPMData = async (url, date) => {
     try {
-      setIsLoading(true);
       const opmData = await fetchData(
-        `${url}?period=${HOME_PAGE_REFERSH_DURATION}`,
+        `${url}?period=${HOME_PAGE_REFERSH_DURATION}&starttime=${getFormattedPSTDate(
+          date,
+        )}`,
         {},
       );
-      setIsLoading(false);
       const totalOrders = opmData.reduce(
         (acc, obj) => acc + parseInt(obj.orderCount),
         0,
@@ -133,12 +163,12 @@ const HomePage = () => {
 
   const fetchCompData = async (url, date) => {
     try {
-      setIsLoading(true);
       const opmData = await fetchData(
-        `${url}?period=${HOME_PAGE_REFERSH_DURATION}&date=${date}`,
+        `${url}?period=${HOME_PAGE_REFERSH_DURATION}&starttime=${getFormattedPSTDate(
+          date,
+        )}`,
         {},
       );
-      setIsLoading(false);
       const totalOrders = opmData.reduce(
         (acc, obj) => acc + parseInt(obj.orderCount),
         0,
@@ -150,16 +180,21 @@ const HomePage = () => {
     }
   };
 
-  const getCardsData = () => {
-    fetchOPMData(URL_OPM);
+  const getCardsData = async () => {
+    setIsLoading(true);
     const date = new Date();
+    await fetchOPMData(URL_OPM, date);
     date.setDate(date.getDate() - 1);
-    fetchCompData(URL_OPM, date);
-    setRefreshTime(new Date().getTime());
+    await fetchCompData(URL_OPM, date);
+    await setIsLoading(false);
+    await hideLoader();
+    await setRefreshTime(new Date().getTime());
   };
 
   useEffect(() => {
-    getCardsData();
+    (async () => {
+      await getCardsData();
+    })();
   }, []);
 
   const handleRefreshBtnClick = () => {
@@ -172,89 +207,97 @@ const HomePage = () => {
   });
 
   return (
-    <div className="home-page p-6 box-border">
-      <div className="flex sm:flex-row justify-between mb-4">
-        <div className="flex items-center font-helvetica">
-          <span className="text-lg text-[#F2F2F2] font-bold mr-4">
-            Dashboard
-          </span>
-          <CustomImage src={infoIcon} />
-          <span className="text-xs text-[#8B8C8F] ml-2">
-            Last {HOME_PAGE_REFERSH_DURATION} min data
-          </span>
-        </div>
-        <div className="flex items-center font-helvetica">
-          {width > 700 && <TimeTracker timeStamp={refreshTime} />}
-          <CustomButton
-            className="home-refresh-btn"
-            onClick={handleRefreshBtnClick}
-          >
-            <CustomImage src={refreshIcon} />
-          </CustomButton>
-        </div>
-      </div>
-      {isLoading ? (
-        <Loader />
+    <>
+      {showGlobalLoader ? (
+        <LoaderPortal>
+          <GlobalLoader />
+        </LoaderPortal>
       ) : (
-        <div className="flex flex-wrap gap-[10px]">
-          <HomeCard
-            title={
-              <CardTitle
-                title={"Avg Orders Per Min"}
-                icon={avgOrdersPerMinIcon}
+        <div className="home-page py-[4px] box-border">
+          <div className="flex sm:flex-row justify-between mb-4">
+            <div className="flex items-center font-helvetica">
+              <span className="text-lg text-gray-200 font-bold mr-4">
+                {DASHBOARD}
+              </span>
+              <CustomImage src={infoIcon} />
+              <span className="text-xs text-gray-400 ml-2">
+                Last {HOME_PAGE_REFERSH_DURATION} min data
+              </span>
+            </div>
+            <div className="flex items-center font-helvetica">
+              {width > SCREEN_WIDTH.SM && !isLoading && (
+                <TimeTracker timeStamp={refreshTime} />
+              )}
+              <CustomButton
+                className="home-refresh-btn home-card-refresh-btn"
+                onClick={handleRefreshBtnClick}
+              >
+                <CustomImage src={refreshIcon} />
+              </CustomButton>
+            </div>
+          </div>
+          {isLoading ? (
+            <Loader className="card-loader-height" />
+          ) : (
+            <div className="flex flex-wrap gap-[10px] pb-4 border-b border-b-black-200 card-loader-height">
+              <HomeCard
+                title={
+                  <CardTitle
+                    title={AVG_ORDERS_PER_MIN}
+                    icon={avgOrdersPerMinIcon}
+                  />
+                }
+                value={<OPMCards value={avgOPM} />}
               />
-            }
-            value={<OPMCards value={avgOPM} />}
-            bgColor="#8F8E8E"
-            textColor="#FFFFFF"
-          />
-          <HomeCard
-            title={
-              <CardTitle
-                title={"Total Number of Orders"}
-                icon={totalNoOfOrdersIcon}
+              <HomeCard
+                title={
+                  <CardTitle
+                    title={TOTAL_NO_OF_ORDERS}
+                    icon={totalNoOfOrdersIcon}
+                  />
+                }
+                value={<OPMCards value={totalOPM} />}
               />
-            }
-            value={<OPMCards value={totalOPM} />}
-            bgColor="#BCBBBB"
-            textColor="#FFFFFF"
-          />
-          <HomeCard
-            title={<CardTitle title={"Last min OPM"} icon={lastMinOpmIcon} />}
-            value={<OPMCards value={lastMinOPM} />}
-            bgColor="#E9E8E8"
-            textColor="#FFFFFF"
-          />
-          <HomeCard
-            title={
-              <CardTitle title={"Avg OPM Comparison"} icon={avgOpmcompIcon} />
-            }
-            value={<ComparisonCards today={avgOPM} lastDay={lastDayAvgOPM} />}
-            bgColor="#CCCBCB"
-            textColor="#FFFFFF"
-          />
-          <HomeCard
-            title={
-              <CardTitle
-                title={"Total Order Comparison"}
-                icon={totalOrderCompIcon}
+              <HomeCard
+                title={
+                  <CardTitle
+                    title={LAST_MIN_OPM}
+                    icon={lastMinOpmIcon}
+                    classname={"card-title"}
+                  />
+                }
+                value={<OPMCards value={lastMinOPM} />}
               />
-            }
-            value={
-              <ComparisonCards today={totalOPM} lastDay={lastDaytotalOPM} />
-            }
-            bgColor="#E9E8E8"
-            textColor="#FFFFFF"
-          />
+              <HomeCard
+                title={
+                  <CardTitle title={AVG_OPM_COMPARISON} icon={avgOpmcompIcon} />
+                }
+                value={
+                  <ComparisonCards today={avgOPM} lastDay={lastDayAvgOPM} />
+                }
+              />
+              <HomeCard
+                title={
+                  <CardTitle
+                    title={TOTAL_ORDER_COMPARISON}
+                    icon={totalOrderCompIcon}
+                  />
+                }
+                value={
+                  <ComparisonCards today={totalOPM} lastDay={lastDaytotalOPM} />
+                }
+              />
+            </div>
+          )}
+
+          <div className="home-opm-charts flex flex-col xl:flex-row space-y-6 xl:space-y-0 xl:gap-[2%] min-h-[21rem]">
+            <OPM />
+            <OpmComparison />
+          </div>
+          <BarChart />
         </div>
       )}
-
-      <div className="home-opm-charts flex flex-col mt-6 sm:mt-0 sm:flex-row sm:space-y-0 sm:space-x-4">
-        <OPM />
-        <OpmComparison />
-      </div>
-      <BarChart />
-    </div>
+    </>
   );
 };
 

@@ -40,7 +40,7 @@ const Navbar: FC<Props> = ({
   };
 
   const onSearch = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" && searchValue.length > 0) {
       event.preventDefault();
       navigate(`/orderDetails/${searchValue}`);
     }
@@ -49,13 +49,13 @@ const Navbar: FC<Props> = ({
   return (
     <div
       className={
-        "py-0 pr-1 sm:px-10 flex items-center border-[#292E36] border-solid border-b justify-between h-[56px] absolute top-0 left-0 w-full z-50 bg-[#1C1C20] sm:bg-[#22262C]"
+        "py-0 pr-1 sm:px-10 flex items-center border-black-300 border-solid border-b justify-between h-[56px] absolute top-0 left-0 w-full z-50 bg-black-200"
       }
     >
       <div
         className={`flex pl-4 ${
           showSidePaneGrid
-          ? "w-[367px] bg-[#22262C] h-[56px] items-center border-[#30343B] border-solid border-b"
+            ? "w-[367px] bg-black-200 h-[56px] items-center border-black-400 border-solid border-b"
             : "w-auto"
         }`}
       >
@@ -74,26 +74,28 @@ const Navbar: FC<Props> = ({
           onClick={navigateToHome}
         />
       </div>
-      <div className="sm:m-auto">
-        <CustomImage
-          src={QuickLinksIcon}
-          onClick={() => setShowQuickLinks(!showQuickLinks)}
-          className="cursor-pointer h-[24px] w-[24px] right-[4rem] top-[18px] md:right-[2rem] sm:right-[0.6rem] absolute"
-        />
-        <SearchBar
-          showSearchButton={!showSidePaneGrid}
-          setOpenSearchField={setOpenSearchField}
-          openSearchField={openSearchField}
-          searchValue={searchValue}
-          setSearchValue={setSearchValue}
-          onSearch={onSearch}
-          placeholder="Search Order"
-        />
+      <div>
+        {!showSidePaneGrid && (
+          <CustomImage
+            src={QuickLinksIcon}
+            onClick={() => setShowQuickLinks(!showQuickLinks)}
+            className="cursor-pointer h-[24px] w-[24px] right-[4rem] top-[1.1rem] sm:right-[2.5rem] absolute"
+          />
+        )}
+        <div className="sm:mr-[3rem]">
+          {" "}
+          <SearchBar
+            showSearchButton={!showSidePaneGrid}
+            setOpenSearchField={setOpenSearchField}
+            openSearchField={openSearchField}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+            onSearch={onSearch}
+            placeholder="Search Order"
+          />
+        </div>
       </div>
-      {showQuickLinks &&
-        <QuickLinks
-        />
-      }
+      {!showSidePaneGrid && showQuickLinks && <QuickLinks showQuickLinks={showQuickLinks} setShowQuickLinks={setShowQuickLinks} />}
     </div>
   );
 };

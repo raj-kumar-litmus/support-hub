@@ -14,7 +14,7 @@ import App from "./App";
 import Chart from "./components/ChartIndex";
 import "./index.css";
 import OrderDetails from "./components/orderDetails/OrderDetails.js";
-import HomePage from "./components/homePage.js";
+import HomePage from "./components/homePage";
 import OrderReport from "./components/orderreport";
 
 // const Loader = lazy(() => import("./components/Loader.tsx"));

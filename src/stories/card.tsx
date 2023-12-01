@@ -49,7 +49,7 @@ const Card = (props: CardProps) => {
               quam perferendis esse, cupiditate neque quas!
             </p>
             {props.button && (
-              <button className="bg-blue-400 p-2 text-white rounded-lg mt-3">
+              <button className="bg-blue-400 p-2 text-white-500 rounded-lg mt-3">
                 Click!
               </button>
             )}

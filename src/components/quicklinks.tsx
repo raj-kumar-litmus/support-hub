@@ -1,4 +1,4 @@
-import { FC, KeyboardEvent, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { QUICK_LINKS, QUICK_LINKS_HEADER } from "../constants/appConstants";
 
 import { IQuickLink } from "../@types/quicklinks";
@@ -8,15 +8,21 @@ import useScreenSize from "../hooks/useScreenSize";
 import CustomButton from "./Button";
 import CustomImage from "./common/customimage";
 import CustomTab from "./common/customtab";
+import CustomDialog from "./common/customdialog";
 
-type Props = {
+type QuickLinkBoxProps = {
   link: IQuickLink;
   hoveredIndex: number;
   setHoveredIndex: (a: number) => void;
   index: number;
 };
 
-const QuickLinks = () => {
+type QuickLinksProps = {
+  showQuickLinks: boolean;
+  setShowQuickLinks: (a: boolean) => void;
+};
+
+const QuickLinks: FC<QuickLinksProps> = ({ showQuickLinks, setShowQuickLinks }) => {
   const [tabValue, setTabValue] = useState<number>(0);
   const [quickLinks, setQuickLinks] = useState([]);
   const [allQuickLinks, setAllQuickLinks] = useState([]);
@@ -27,21 +33,25 @@ const QuickLinks = () => {
   const onSeeMoreClick = () => {
     setQuickLinks(allQuickLinks);
     setShowSeeMoreBtn(false);
-  }
+  };
 
   const getQuickLinks = () => {
-    let links = QUICK_LINKS.find(l => l.id === tabValue).links;
+    const links = QUICK_LINKS.find((l) => l.id === tabValue).links;
     setQuickLinks(links);
     setAllQuickLinks(links);
-  }
+  };
 
   useEffect(() => {
     getQuickLinks();
   }, [tabValue]);
 
   useEffect(() => {
-    if (width < 700 && allQuickLinks.length > 0 && !(allQuickLinks.length < 10)) {
-      let _quickLinks = [...allQuickLinks];
+    if (
+      width < 640 &&
+      allQuickLinks.length > 0 &&
+      !(allQuickLinks.length < 10)
+    ) {
+      const _quickLinks = [...allQuickLinks];
       _quickLinks.splice(10);
       setQuickLinks(_quickLinks);
       setShowSeeMoreBtn(true);
@@ -52,10 +62,10 @@ const QuickLinks = () => {
   }, [width, allQuickLinks]);
 
   return (
-    <div className="p-4 sm:px-8 sm:py-6 bg-[#22262C] quick-links absolute top-[56px] sm:left-[25vw] lg:left-[21vw] right-0">
-      <div className="flex flex-wrap justify-between items-center pb-2">
-        <span className="text-[#FAF9F6] pb-2 font-bold">{QUICK_LINKS_HEADER}</span>
-        <div className="flex flex-wrap justify-between m-auto">
+    <CustomDialog
+      header={<div className="flex flex-wrap justify-between items-center">
+        <span className="text-gray-300 font-bold pb-2 sm:p-0">{QUICK_LINKS_HEADER}</span>
+        <div className="flex flex-wrap justify-between m-0 sm:m-auto">
           <CustomTab
             className="custom-tab quick-links-tab"
             tabData={QUICK_LINKS}
@@ -63,8 +73,17 @@ const QuickLinks = () => {
             setTabValue={setTabValue}
           />
         </div>
-      </div>
-      <div className="flex flex-wrap ">
+      </div>}
+      visible={showQuickLinks}
+      onHide={() => setShowQuickLinks(false)}
+      draggable={false}
+      resizable={false}
+      className="quick-links-popup"
+      closable={false}
+      dismissableMask
+      transitionOptions={null}
+    >
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(159px,1fr))] gap-3">
         {quickLinks.map((l, i) =>
           <QuickLinkBox
             link={l}
@@ -74,22 +93,32 @@ const QuickLinks = () => {
             key={i}
           />
         )}
-        {showSeeMoreBtn &&
-          <CustomButton
-            label="See More"
-            onClick={onSeeMoreClick}
-          className="custom-btn block"
-          />
-        }
       </div>
-    </div>
+      {showSeeMoreBtn &&
+        <CustomButton
+          label="See More"
+          onClick={onSeeMoreClick}
+          className="custom-btn text-center quick-link-btn border-white bg-black-100"
+        />
+      }
+    </CustomDialog>
   );
-}
+};
 
-const QuickLinkBox: FC<Props> = ({ link, hoveredIndex, setHoveredIndex, index }) => {
+const QuickLinkBox: FC<QuickLinkBoxProps> = ({
+  link,
+  hoveredIndex,
+  setHoveredIndex,
+  index }) => {
   return (
-    <div className="m-1 link-box flex justify-center cursor-pointer" onClick={() => window.open(link.link, "_blank")} key={link.name} onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)}>
-      <span className="m-auto">
+    <div
+      className="link-box flex justify-center cursor-pointer p-1"
+      onClick={() => window.open(link.link, "_blank")}
+      key={link.name}
+      onMouseEnter={() => setHoveredIndex(index)}
+      onMouseLeave={() => setHoveredIndex(null)}
+    >
+      <span className="m-auto text-center font-normal leading-snug">
         {link.name}
       </span>
       <CustomImage
@@ -97,11 +126,7 @@ const QuickLinkBox: FC<Props> = ({ link, hoveredIndex, setHoveredIndex, index })
         src={index === hoveredIndex ? ArrowTopWhite : ArrowTop}
       />
     </div>
-  )
-}
-
+  );
+};
 
 export default QuickLinks;
-
-
-
