@@ -39,7 +39,7 @@ const SearchBar: FC<Props> = ({
         )}
         <CustomInputText
           type="text"
-          className={`w-[15.6rem] h-[2.5rem] !rounded-full focus:outline-none  bg-gray-900 text-gray-300 placeholder:text-gray-300 placeholder:font-helvetica placeholder:font-normal !shadow-none !border-none ${className}`}
+          className={`w-[15.6rem] h-10 !rounded-full focus:outline-none  bg-gray-900 text-gray-300 placeholder:text-gray-300 placeholder:font-helvetica placeholder:font-normal !shadow-none !border-none ${className}`}
           placeholder={placeholder}
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
@@ -52,7 +52,7 @@ const SearchBar: FC<Props> = ({
           className="search-button"
           onClick={() => setOpenSearchField(!openSearchField)}
         >
-          <CustomImage className="h-[13px]" src={HeaderSearch} alt="Search" />
+          <CustomImage className="h-13" src={HeaderSearch} alt="Search" />
         </CustomButton>
       )}
     </div>

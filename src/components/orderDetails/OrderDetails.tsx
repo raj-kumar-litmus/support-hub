@@ -7,30 +7,7 @@ import {
   URL_PROMOTIONS,
 } from "../../constants/apiConstants";
 import {
-  AMOUNT,
-  ATG,
-  BITIER,
-  CHANNEL,
-  CUSTOMER_INFO,
-  EMAIL,
-  ITEMS_INFO,
-  LOCALE,
-  NAME,
-  NO_MATCHING_ORDERS_FOUND,
-  OMS,
-  ORDER,
-  ORDER_DETAILS,
-  ORDER_TOTAL,
-  ORDER_TYPE,
-  PAYMENT_INFO,
-  PAYMENT_TYPE,
-  PROMOTIONS,
-  STATUS,
-  STATUS_ACROSS,
-  VIEW_ALL,
-  SUBMITTED,
-  VIEW_ALL_MIN_ORDER_LIST_MOBILE,
-  WMS,
+  ORDER_DETAILS_LABELS, PAGE_TITLES,
 } from "../../constants/appConstants";
 import {
   CommerceItem,
@@ -58,6 +35,7 @@ import CustomTable from "../common/customtable";
 import useScreenSize from "../../hooks/useScreenSize";
 import { Column } from "primereact/column";
 import ItemInformationsPopUp from "../itemInformationsPopUp";
+import CustomButton from "../Button";
 
 const OrderDetails: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -97,10 +75,10 @@ const OrderDetails: React.FC = () => {
   useEffect(() => {
     if (
       IS_MOBILE_SCREEN &&
-      itemTableData.length > VIEW_ALL_MIN_ORDER_LIST_MOBILE
+      itemTableData.length > ORDER_DETAILS_LABELS.VIEW_ALL_MIN_ORDER_LIST_MOBILE
     ) {
       setItemTableDataSliced(
-        itemTableData.slice(0, VIEW_ALL_MIN_ORDER_LIST_MOBILE),
+        itemTableData.slice(0, ORDER_DETAILS_LABELS.VIEW_ALL_MIN_ORDER_LIST_MOBILE),
       );
     }
   }, [itemTableData]);
@@ -173,24 +151,24 @@ const OrderDetails: React.FC = () => {
     <Loader className="h-full" />
   ) : Object.keys(orderData).length > 0 ? (
     <div id="orderDetailsComp">
-      <div className="flex sm:hidden border-b border-solid border-black-300 h-[44px] items-center px-[14px] py-[24px]">
+      <div className="flex sm:hidden border-b border-solid border-black-300 h-44p items-center px-3.5 py-6">
         <CustomImage
-          className="h-[13px]"
+          className="h-13"
           src={RightArrowIcon}
           alt="Search"
           onClick={() => navigate(-1)}
         />
-        <span className="text-gray-300 text-center mx-auto text-[14px]">
+        <span className="text-gray-300 text-center mx-auto text-sm">
           Order #{orderId}
         </span>
       </div>
       <div className="gridNoGapRounded grid-cols-1 mb-4 p-0 sm:py-4 sm:px-6 sm:bg-black-200">
         <div className="flex justify-between border-none !bg-black-100 sm:!bg-inherit">
           <span className="w-1/2 !text-lg !text-gray-200 font-bold !bg-black-100 sm:!bg-inherit">
-            {ORDER_DETAILS}
+            {PAGE_TITLES.ORDER_DETAILS}
           </span>
-          <span
-            className="justify-end flex items-center !text-[12px] font-normal cursor-pointer !bg-black-100 sm:!bg-inherit"
+          <CustomButton
+            className="flex justify-end items-center order-details-btn-link"
             onClick={showPromotions}
           >
             <CustomIcon
@@ -200,13 +178,13 @@ const OrderDetails: React.FC = () => {
               width="0.75rem"
               height="0.75rem"
             />
-            {PROMOTIONS}
-          </span>
-        </div>
+            {ORDER_DETAILS_LABELS.PROMOTIONS}
+          </CustomButton >
+        </div >
         <div className="flexColWrapper sm:gap-y-0 sm:grid-cols-2 ">
           <div className="flexWrapper justify-start bg-black-200 rounded-t-md">
-            <span className="w-auto sm:w-1/5 flex items-center min-w-[4.5rem]">
-              {ORDER}
+            <span className="w-auto sm:w-1/5 flex items-center min-w-4.5r">
+              {ORDER_DETAILS_LABELS.ORDER}
               <CustomIcon
                 className="ml-2 cursor-pointer"
                 alt="order-clock-icon"
@@ -221,8 +199,8 @@ const OrderDetails: React.FC = () => {
             </span>
           </div>
           <div className="flexWrapper bg-black-200 ">
-            <span className="w-auto sm:w-1/5 font-light min-w-[4.5rem]">
-              {ORDER_TOTAL}
+            <span className="w-auto sm:w-1/5 font-light min-w-4.5r">
+              {ORDER_DETAILS_LABELS.ORDER_TOTAL}
             </span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.orderTotal}
@@ -231,16 +209,16 @@ const OrderDetails: React.FC = () => {
         </div>
         <div className="flexColWrapper sm:gap-y-0 sm:grid-cols-2 bg-black-200 ">
           <div className="flexWrapper">
-            <span className="w-auto sm:w-1/5 font-light min-w-[4.5rem]">
-              {SUBMITTED}
+            <span className="w-auto sm:w-1/5 font-light min-w-4.5r">
+              {ORDER_DETAILS_LABELS.SUBMITTED}
             </span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.submittedDate}
             </span>
           </div>
           <div className="flexWrapper">
-            <span className="w-auto sm:w-1/5 font-light min-w-[4.5rem]">
-              {CHANNEL}
+            <span className="w-auto sm:w-1/5 font-light min-w-4.5r">
+              {ORDER_DETAILS_LABELS.CHANNEL}
             </span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.originOfOrder}
@@ -249,33 +227,33 @@ const OrderDetails: React.FC = () => {
         </div>
         <div className="flexColWrapper sm:gap-y-0 sm:grid-cols-2 bg-black-200  rounded-b-md">
           <div className="flexWrapper">
-            <span className="w-auto sm:w-1/5 font-light min-w-[4.5rem]">
-              {LOCALE}
+            <span className="w-auto sm:w-1/5 font-light min-w-4.5r">
+              {ORDER_DETAILS_LABELS.LOCALE}
             </span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.locale}
             </span>
           </div>
           <div className="flexBlockWrapper py-1 px-4 sm:p-0 border-none">
-            <span className="w-auto sm:w-1/5 min-w-[4.5rem]">{ORDER_TYPE}</span>
+            <span className="w-auto sm:w-1/5 min-w-4.5r">{ORDER_DETAILS_LABELS.ORDER_TYPE}</span>
             <span className="w-auto sm:w-4/5 font-medium">&nbsp;&nbsp;-</span>
           </div>
         </div>
-      </div>
+      </div >
       <div className="flex flex-col-reverse p-0 sm:grid gap-4 sm:grid-cols-2 mb-4">
         <div className="p-0 sm:py-4 sm:px-6 gridNoGapRounded grid-cols-1 bg-black-100 sm:bg-black-200">
           <span className="!text-lg font-bold bg-black-100 sm:bg-inherit">
-            {STATUS_ACROSS}
+            {ORDER_DETAILS_LABELS.STATUS_ACROSS}
           </span>
           <div className="flexBlockWrapper rounded-t-md border-t-0 py-1 px-4 sm:p-0 sm:border-t border-solid border-black-300 bg-black-200">
-            <span className="w-auto sm:w-1/6 min-w-[4.5rem]">{ATG}</span>
+            <span className="w-auto sm:w-1/6 min-w-4.5r">{ORDER_DETAILS_LABELS.ATG}</span>
             <span className="w-auto sm:w-5/6 font-medium">
               {`${orderData?.status} - ${orderData?.sephOrderStatus}`}
             </span>
           </div>
           <div className="flexBlockWrapper border-t filterCardWrapper">
-            <span className="w-auto sm:w-1/6 flex items-center min-w-[4.5rem]">
-              {OMS}
+            <span className="w-auto sm:w-1/6 flex items-center min-w-4.5r">
+              {ORDER_DETAILS_LABELS.OMS}
               <CustomIcon
                 className="ml-2 cursor-pointer"
                 alt="oms-info-icon"
@@ -290,16 +268,16 @@ const OrderDetails: React.FC = () => {
             </span>
           </div>
           <div className="flexBlockWrapper rounded-b-md border-t filterCardWrapper">
-            <span className="w-auto sm:w-1/6 min-w-[4.5rem]">{WMS}</span>
+            <span className="w-auto sm:w-1/6 min-w-4.5r">{ORDER_DETAILS_LABELS.WMS}</span>
             <span className="w-auto sm:w-5/6 font-medium"></span>
           </div>
         </div>
         <div className="p-0 sm:py-4 sm:px-6 gridNoGapRounded grid-cols-1 bg-black-100 sm:bg-black-200">
           <span className="!text-lg font-bold bg-black-100 sm:bg-inherit">
-            {CUSTOMER_INFO}
+            {ORDER_DETAILS_LABELS.CUSTOMER_INFO}
           </span>
           <div className="flexBlockWrapper border-t-0 sm:border-t filterCardWrapper rounded-t-md">
-            <span className="w-auto sm:w-1/6 min-w-[4.5rem]">{NAME}</span>
+            <span className="w-auto sm:w-1/6 min-w-4.5r">{ORDER_DETAILS_LABELS.NAME}</span>
             <span className="w-auto sm:w-5/6 font-medium">
               {formatName(
                 `${orderData?.customerInfo?.firstName} ${orderData?.customerInfo?.lastName}`,
@@ -307,7 +285,7 @@ const OrderDetails: React.FC = () => {
             </span>
           </div>
           <div className="flexBlockWrapper border-t filterCardWrapper">
-            <span className="w-auto sm:w-1/6 min-w-[4.5rem]">{EMAIL}</span>
+            <span className="w-auto sm:w-1/6 min-w-4.5r">{ORDER_DETAILS_LABELS.EMAIL}</span>
             <span
               className="w-auto sm:w-5/6 font-medium whitespace-nowrap text-ellipsis overflow-hidden"
               title={orderData?.customerInfo?.email}
@@ -316,7 +294,7 @@ const OrderDetails: React.FC = () => {
             </span>
           </div>
           <div className="flexBlockWrapper border-t filterCardWrapper rounded-b-md">
-            <span className="w-auto sm:w-1/6 min-w-[4.5rem]">{BITIER}</span>
+            <span className="w-auto sm:w-1/6 min-w-4.5r">{ORDER_DETAILS_LABELS.BITIER}</span>
             <span className="w-auto sm:w-5/6 font-medium">
               {orderData?.customerInfo?.biTier}
             </span>
@@ -326,20 +304,19 @@ const OrderDetails: React.FC = () => {
 
       <div className="gridNoGapRounded grid-cols-1 mb-4 p-0 sm:py-4 sm:px-6 bg-black-100 sm:bg-black-200">
         <div
-          className={`flex justify-between border-none !bg-black-100 sm:!bg-inherit ${
-            IS_MOBILE_SCREEN ? "sticky top-0" : ""
-          }`}
+          className={`flex justify-between border-none !bg-black-100 sm:!bg-inherit ${IS_MOBILE_SCREEN ? "sticky top-0" : ""
+            }`}
         >
           <span className="w-3/4 sm:w-full !text-lg !text-gray-200 font-bold !bg-black-100 sm:!bg-inherit">
-            {ITEMS_INFO}
+            {ORDER_DETAILS_LABELS.ITEMS_INFO}
           </span>
           {itemTableDataSliced.length > 0 && (
-            <span
-              className="w-1/4 sm:hidden justify-end flex items-center !text-[12px] font-normal cursor-pointer !bg-black-100 sm:!bg-inherit"
+            <CustomButton
+              className="w-1/4 sm:hidden justify-end flex items-center order-details-btn-link"
               onClick={() => setItemInformationPopup(true)}
             >
-              {VIEW_ALL}
-            </span>
+              {ORDER_DETAILS_LABELS.VIEW_ALL}
+            </CustomButton>
           )}
         </div>
         <div className="hidden sm:block rounded-md">
@@ -377,22 +354,22 @@ const OrderDetails: React.FC = () => {
 
       <div className="gridNoGapRounded mb-4 p-0 sm:p-4 sm:py-4 sm:px-6 sm:bg-black-200">
         <div className="!bg-black-100 sm:!bg-inherit">
-          <span className="block w-[100%] !text-lg font-bold !bg-black-100 sm:!bg-inherit">
-            {PAYMENT_INFO}
+          <span className="block w-full !text-lg font-bold !bg-black-100 sm:!bg-inherit">
+            {ORDER_DETAILS_LABELS.PAYMENT_INFO}
           </span>
         </div>
         <div className="flexColWrapper gap-y-0 grid-cols-2">
           <div className="flexWrapper justify-start bg-black-200 rounded-t-md">
-            <span className="w-auto mr-3.5 sm:mr-0 sm:w-[35%]">
-              {PAYMENT_TYPE}
+            <span className="w-auto mr-3.5 sm:mr-0 sm:w-35pr">
+              {ORDER_DETAILS_LABELS.PAYMENT_TYPE}
             </span>
-            <span className="w-auto sm:w-[65%] font-medium text-right sm:text-left">
+            <span className="w-auto sm:w-65pr font-medium text-right sm:text-left">
               {orderData?.paymentInfo?.[0].paymentType} -{" "}
               {orderData?.paymentInfo?.[0].paymentCardType.toUpperCase()}
             </span>
           </div>
           <div className="flexWrapper bg-black-200">
-            <span className="w-auto sm:w-1/5 min-w-[4.5rem]">{AMOUNT}</span>
+            <span className="w-auto sm:w-1/5 min-w-4.5r">{ORDER_DETAILS_LABELS.AMOUNT}</span>
             <span className="w-auto sm:w-4/5 font-medium">
               {orderData?.paymentInfo?.[0].amount}
             </span>
@@ -400,8 +377,8 @@ const OrderDetails: React.FC = () => {
         </div>
         <div className="flexColWrapper gap-y-0 grid-cols-2">
           <div className="flexWrapper bg-black-200 rounded-b-md border-none">
-            <span className="w-auto sm:w-[35%]">{STATUS}</span>
-            <span className="w-auto sm:w-[65%] font-medium">
+            <span className="w-auto sm:w-35pr">{ORDER_DETAILS_LABELS.STATUS}</span>
+            <span className="w-auto sm:w-65pr font-medium">
               {orderData?.paymentInfo?.[0].status}
             </span>
           </div>
@@ -426,10 +403,10 @@ const OrderDetails: React.FC = () => {
         isOrderStatusVisible={isOrderStatusVisible}
         setIsOrderStatusVisible={setIsOrderStatusVisible}
       />
-    </div>
+    </div >
   ) : (
     <div className="text-md pt-48 text-center text-gray-400 font-semibold">
-      {NO_MATCHING_ORDERS_FOUND}
+      {ORDER_DETAILS_LABELS.NO_MATCHING_ORDERS_FOUND}
     </div>
   );
 };

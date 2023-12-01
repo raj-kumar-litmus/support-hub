@@ -24,15 +24,15 @@ const SidePaneList: FC<Props> = ({
   return (
     <div
       className={
-        "fixed left-0 top-[56px] z-10 overflow-x-hidden hidden sm:block sm:w-[25vw] md:w-[27vw] lg:w-[21vw] shadow-slate-200 min-h-[calc(100vh-56px)] bg-black-200 px-2 md:px-6 pt-8 border-black-300 border-solid border-r border-t-2"
+        "fixed left-0 top-14 z-10 overflow-x-hidden hidden sm:block sm:w-25w md:w-[27vw] lg:w-21w shadow-slate-200 min-h-100vh-56 bg-black-200 px-2 md:px-6 pt-8 border-black-300 border-solid border-r border-t-2"
       }
     >
       {menuList.map((menu) => (
-        <div
+        <a
           key={menu.id}
-          className={`flex pl-4 pr-2 py-4 items-center  cursor-pointer h-[44px] mx-auto ${selectedMenu === menu.id
-            ? "bg-black-300 rounded-lg"
-            : "bg-transparent"
+          className={`flex pl-4 pr-2 py-4 items-center cursor-pointer h-11 mx-auto ${selectedMenu === menu.id
+              ? "bg-black-300 rounded-lg"
+              : "bg-transparent"
             }`}
           onClick={() => navigateToMenu(menu)}
         >
@@ -48,7 +48,7 @@ const SidePaneList: FC<Props> = ({
           >
             {menu.name}
           </span>
-        </div>
+        </a>
       ))}
     </div>
   );

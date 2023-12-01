@@ -1,3 +1,5 @@
+import { ORDER_DETAILS_LABELS } from "../constants/appConstants";
+
 export const omsOrderFlowJSON = {
   orderNo: "60577546279",
   orderMap: {
@@ -122,7 +124,7 @@ export const omsOrderFlowJSON = {
         orderDate: "05-05-2023 08:03:58",
         dc: "SDC",
         status: "1400",
-        statusName: "Shipped ",
+        statusName: ORDER_DETAILS_LABELS.SHIPPED,
         statusDescription: "Shipment is shipped",
         shipmentType: null,
       },

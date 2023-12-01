@@ -2,7 +2,7 @@ import { FC } from "react";
 import { CommerceItemData } from "../@types/OrderDetails";
 import Card from "./common/Card";
 import CustomDialog from "./common/customdialog";
-import { ITEMS_INFO } from "../constants/appConstants";
+import { ORDER_DETAILS_LABELS } from "../constants/appConstants";
 
 type Props = {
   lineitems: CommerceItemData[];
@@ -17,7 +17,7 @@ const ItemInformationsPopUp: FC<Props> = ({
 }) => {
   return (
     <CustomDialog
-      header={ITEMS_INFO}
+      header={ORDER_DETAILS_LABELS.ITEMS_INFO}
       visible={openItemInformationPopup}
       onHide={() => setItemInformationPopup(false)}
       draggable={false}

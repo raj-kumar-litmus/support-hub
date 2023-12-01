@@ -16,6 +16,7 @@ import "./index.css";
 import OrderDetails from "./components/orderDetails/OrderDetails.js";
 import HomePage from "./components/homePage";
 import OrderReport from "./components/orderreport";
+import { ROUTES } from "./components/utils/Utils";
 
 // const Loader = lazy(() => import("./components/Loader.tsx"));
 
@@ -25,29 +26,35 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       {/* <Suspense fallback={<Loader />}> */}
       <Suspense>
         <Routes>
-          <Route path="/" element={<Navigate to="/home" />} />
-          <Route path="/home" element={<App appContent={<HomePage />} />} />
+          <Route path="/" element={<Navigate to={ROUTES.home} />} />
           <Route
-            path="/dc-open-orders"
+            path={ROUTES.home}
+            element={<App appContent={<HomePage />} />}
+          />
+          <Route
+            path={ROUTES.dcOpenOrders}
             element={<App appContent={<DcOpenOrders />} />}
           />
-          <Route path="/sessions" element={<App appContent={<BarChart />} />} />
           <Route
-            path="/opm"
+            path={ROUTES.sessions}
+            element={<App appContent={<BarChart />} />}
+          />
+          <Route
+            path={ROUTES.opm}
             element={<App appContent={<Chart type="opm" />} />}
           />
           <Route
-            path="/opm/fullscreen"
+            path={`${ROUTES.opm}/${ROUTES.fullScreen}`}
             element={
               <App showNavbar={false} appContent={<Chart type="opm" />} />
             }
           />
           <Route
-            path="/opmcomparison"
+            path={ROUTES.opmComparison}
             element={<App appContent={<Chart type="opmcomparison" />} />}
           />
           <Route
-            path="/opmcomparison/fullscreen"
+            path={`${ROUTES.opmComparison}/${ROUTES.fullScreen}`}
             element={
               <App
                 showNavbar={false}
@@ -56,11 +63,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             }
           />
           <Route
-            path="/orderDetails/:orderId"
+            path={`${ROUTES.orderDetails}/:orderId`}
             element={<App appContent={<OrderDetails />} />}
           />
           <Route
-            path="/order-report"
+            path={ROUTES.orderReport}
             element={
               <App
                 appContent={<OrderReport />}

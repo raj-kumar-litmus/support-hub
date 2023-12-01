@@ -12,16 +12,16 @@ const TimelineCard: React.FC<CardProps> = ({
 }) => {
   const [orderDate, orderTime] = date.split(" ");
   return (
-    <div className="flex flex-row  h-[75px] w-[342px] font-helvetica bg-black-300 rounded-lg mt-3">
+    <div className="flex flex-row h-75 w-[342px] font-helvetica bg-black-300 rounded-lg mt-3">
       <div className=" !w-28 flex justify-center items-center flex-col">
-        <span className="text-[rgb(250,249,246)] font-normal text-right leading-[12px] text-xs">
+        <span className="text-gray-300 font-normal text-right leading-3 text-xs">
           {orderDate}
         </span>
-        <span className="text-gray-400 mt-1 ml-[-12px] font-bold text-left text-xs">
+        <span className="text-gray-400 mt-1 -ml-3 font-bold text-left text-xs">
           {orderTime}
         </span>
       </div>
-      <div className="relative max-w-[200px] flex justify-center  bottom-[3%] flex-col left-[10%] ">
+      <div className="relative max-w-[200px] flex justify-center  bottom-[3%] flex-col left-[10%]">
         <span className="text-gray-300 text-sm text-left leading-[22px] font-bold">
           {statusName}
         </span>
