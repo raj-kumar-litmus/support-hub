@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { BrowserRouter as Router } from "react-router-dom";
-import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import { BrowserRouter as Router } from "react-router-dom";
 import LineChart from "../components/LineChart";
 
 const meta = {
@@ -54,7 +54,7 @@ export const SingleLineChart: Story = {
       ],
     },
     className:
-      "bg-gray-700 border-0 rounded-[10px] w-[71.7vw] ml-[2.85vw] h-[62.23vh] mt-[3vh]",
+      "bg-gray-700 border-0 rounded-10 w-71.7w ml-2.85w h-62.23h mt-3h",
   },
 };
 
@@ -89,7 +89,7 @@ export const SingleLineChartWithFilledBackground: Story = {
       ],
     },
     className:
-      "bg-gray-700 border-0 rounded-[10px] w-[71.7vw] ml-[2.85vw] h-[62.23vh] mt-[3vh]",
+      "bg-gray-700 border-0 rounded-10 w-71.7w ml-2.85w h-62.23h mt-3h",
   },
 };
 
@@ -133,7 +133,7 @@ export const MultiLineChart: Story = {
       ],
     },
     className:
-      "bg-gray-700 border-0 rounded-[10px] w-[71.7vw] ml-[2.85vw] h-[62.23vh] mt-[3vh]",
+      "bg-gray-700 border-0 rounded-10 w-71.7w ml-2.85w h-62.23h mt-3h",
   },
 };
 
@@ -177,6 +177,6 @@ export const MultiLineChartWithFilledBackGround: Story = {
       ],
     },
     className:
-      "bg-gray-700 border-0 rounded-[10px] w-[71.7vw] ml-[2.85vw] h-[62.23vh] mt-[3vh]",
+      "bg-gray-700 border-0 rounded-10 w-71.7w ml-2.85w h-62.23h mt-3h",
   },
 };

@@ -1,21 +1,10 @@
+import { InputText } from "primereact/inputtext";
 import React from "react";
-import { InputText, InputTextProps } from "primereact/inputtext";
- 
-interface Props extends InputTextProps {
-  onChange: any;
-  value?: string;
-  name?: string;
-  id?: string;
-  icon?: string;
-  label?: string;
-  placeholder?: string;
-  imageclassname?: string | "";
-  containerClassName?: string | "";
-}
- 
-const CustomInputText: React.FC<Props> = (props) => {
+import { CustomInputTextProps } from "../@types/components/commonTypes";
+
+const CustomInputText: React.FC<CustomInputTextProps> = (props) => {
   return (
-    <div className={`flex flex-col w-full relative ${props.containerClassName} self-end `}>
+    <div className={`flex flex-col w-full relative ${props.containerclassname} self-end `}>
       {props.label &&
         <label className="relative text-xs font-medium pb-1 text-gray-400">
           {props.label}

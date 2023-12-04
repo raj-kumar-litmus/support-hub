@@ -1,12 +1,6 @@
 import { useEffect, useState } from "react";
-import { DCOpenOrders } from "../../@types/dcOpenOrders";
 import useScreenSize from "../../hooks/useScreenSize";
-
-type CardProps = {
-  cardData: DCOpenOrders | CommerceItemData;
-  type: string;
-  key: number;
-};
+import { CardProps } from "../../@types/components/commonTypes";
 
 const Card = (props: CardProps) => {
   const [cardTitle, setCardTitle] = useState(null);
@@ -78,7 +72,7 @@ const Card = (props: CardProps) => {
                 {item.key}
               </div>
               <div
-                className={`text-[13px] font-medium text-gray-300 flex h-full items-center ${
+                className={`text-13 font-medium text-gray-300 flex h-full items-center ${
                   props.type === "ORDER_DETAILS_ITEM" ? "justify-center" : ""
                 }`}
               >

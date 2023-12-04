@@ -1,53 +1,32 @@
-import { FC, KeyboardEvent } from "react";
-import HeaderSearch from "../../assets/headersearch.svg";
+import { FC } from "react";
 import CustomButton from "../Button";
 import CustomImage from "./customimage";
 import CustomInputText from "../InputText";
- 
-type Props = {
-  showSearchButton?: boolean;
-  openSearchField?: boolean;
-  setOpenSearchField?: (a: boolean) => void;
-  searchValue: string;
-  setSearchValue: (a: string) => void;
-  hideIcon?: boolean;
-  onSearch: (e: KeyboardEvent<HTMLInputElement>) => void;
-  placeholder: string;
-  className?: string;
-};
- 
-const SearchBar: FC<Props> = ({
-  showSearchButton,
-  openSearchField,
-  setOpenSearchField,
-  searchValue,
-  setSearchValue,
-  hideIcon,
-  onSearch,
-  placeholder,
-  className,
-}) => {
+import HeaderSearch from "../../assets/headersearch.svg";
+import { SearchBarProps } from "../../@types/components/commonTypes";
+
+const SearchBar: FC<SearchBarProps> = (props) => {
   return (
     <div className="block">
       <span className="search-input p-input-icon-left hidden sm:block">
         <CustomInputText
           type="text"
-          className={`w-[15.6rem] h-[2.5rem] !rounded-full focus:outline-none  bg-gray-900 text-gray-300 placeholder:text-gray-300 placeholder:font-helvetica placeholder:font-normal !shadow-none !border-none ${className}`}
-          placeholder={placeholder}
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
-          onKeyDown={(e) => onSearch(e)}
+          className={`w-[15.6rem] h-[2.5rem] !rounded-full focus:outline-none  bg-gray-900 text-gray-300 placeholder:text-gray-300 placeholder:font-helvetica placeholder:font-normal !shadow-none !border-none ${props.className}`}
+          placeholder={props.placeholder}
+          value={props.searchValue}
+          onChange={(e) => props.setSearchValue(e.target.value)}
+          onKeyDown={(e) => props.onSearch(e)}
           icon={HeaderSearch}
           imageclassname="!top-3 left-4"
         />
       </span>
-      {showSearchButton && (
+      {props.showSearchButton && (
         <CustomButton
           isTextButton
           className="search-button"
-          onClick={() => setOpenSearchField(!openSearchField)}
+          onClick={() => props.setOpenSearchField(!props.openSearchField)}
         >
-          <CustomImage className="h-[13px]" src={HeaderSearch} alt="Search" />
+          <CustomImage className="h-13" src={HeaderSearch} alt="Search" />
         </CustomButton>
       )}
     </div>

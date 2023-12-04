@@ -1,10 +1,5 @@
 import { createContext, useState } from "react";
-
-export type LoaderContextType = {
-  showGlobalLoader: boolean;
-  showLoader?: () => void;
-  hideLoader?: () => void;
-};
+import { LoaderContextType } from "../@types/components/commonTypes";
 
 export const LoaderContext = createContext<LoaderContextType | null>(null);
 

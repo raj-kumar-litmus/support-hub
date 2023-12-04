@@ -1,28 +1,21 @@
-import { TabPanel, TabView } from 'primereact/tabview';
-import React, { FC } from 'react';
-import { ITab } from "../../@types/tab";
+import { TabPanel, TabView } from "primereact/tabview";
+import { FC } from "react";
+import { CustomTabProps } from "../../@types/components/commonTypes";
 
-type Props = {
-  tabData: Array<ITab>;
-  className?: string;
-  onTabChange?: React.FormEventHandler<HTMLDivElement>
-  tabValue: number;
-  setTabValue: (value: number) => void;
-
-};
-
-const CustomTab: FC<Props> = ({
-  tabData, className, tabValue, setTabValue
-}) => {
-
+const CustomTab: FC<CustomTabProps> = (props) => {
   return (
-    <TabView className={className} activeIndex={tabValue} onTabChange={(e) => setTabValue(e.index)}>
-      {tabData.length > 0 && tabData.map(tab =>
-        <TabPanel header={tab.header} key={tab.header}>
-          {tab.data && <div>{tab.data}</div>}
-        </TabPanel>
-      )}
+    <TabView
+      className={props.className}
+      activeIndex={props.tabValue}
+      onTabChange={(e) => props.setTabValue(e.index)}
+    >
+      {props.tabData.length > 0 &&
+        props.tabData.map((tab) => (
+          <TabPanel header={tab.header} key={tab.header}>
+            {tab.data && <div>{tab.data}</div>}
+          </TabPanel>
+        ))}
     </TabView>
-  )
-}
+  );
+};
 export default CustomTab;

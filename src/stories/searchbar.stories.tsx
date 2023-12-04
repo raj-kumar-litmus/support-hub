@@ -1,6 +1,6 @@
-import SearchBar from "../components/common/searchbar";
-import { BrowserRouter as Router } from "react-router-dom";
 import type { Meta, StoryObj } from "@storybook/react";
+import { BrowserRouter as Router } from "react-router-dom";
+import SearchBar from "../components/common/searchbar";
 
 const meta = {
   title: "Stories/search-web",

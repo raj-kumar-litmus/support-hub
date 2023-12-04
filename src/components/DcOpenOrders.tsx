@@ -1,19 +1,13 @@
-import { FC, useEffect, useState } from "react";
-import { DCOpenOrders } from "../@types/dcOpenOrders";
-import { fetchData } from "../utils/fetchUtil";
-import { URL_DC_OPEN_ORDERS } from "../constants/apiConstants";
-import Card from "./common/Card";
-import Loader from "./loader";
-import CustomTable from "./common/customtable";
 import { Column } from "primereact/column";
+import { FC, useEffect, useState } from "react";
+import Card from "./common/Card";
+import CustomTable from "./common/customtable";
+import Loader from "./loader";
+import { DCOpenOrders, orderData } from "../@types/pages/dcOpenOrders";
+import { URL_DC_OPEN_ORDERS } from "../constants/apiConstants";
+import { fetchData } from "../utils/fetchUtil";
 import { getTableHeaders } from "./utils/Utils";
-
-interface orderData {
-  country: string;
-  shipNode: string;
-  dcName: string;
-  workableOrders: number;
-}
+import { PAGE_TITLES } from "../constants/appConstants";
 
 const DcOpenOrders: FC = () => {
   const [tableData, setTableData] = useState<DCOpenOrders[]>([]);
@@ -47,7 +41,7 @@ const DcOpenOrders: FC = () => {
       ) : (
         <div>
           <h3 className="sm:text-lg text-gray-200 font-bold m-3 ml-0 font-helvetica">
-            DC Open Orders
+              {PAGE_TITLES.DC_OPEN_ORDERS}
           </h3>
           <div className="hidden sm:block rounded-md">
             {tableData?.length > 0 && (

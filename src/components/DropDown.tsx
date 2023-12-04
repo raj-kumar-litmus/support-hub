@@ -1,69 +1,42 @@
-import React from "react";
 import { Dropdown } from "primereact/dropdown";
+import React from "react";
+import { CustomDropdownProps } from "../@types/components/commonTypes";
 
-interface Props {
-  onChange: any;
-  options: any;
-  icon?: string;
-  dropdownIcon?: any;
-  value?: string;
-  imageclassname?: string;
-  optionLabel: string;
-  label?: string;
-  labelclassname?: string;
-  containerclassname?: string;
-  name?: string;
-  placeholder: string;
-}
-
-const CustomDropdown: React.FC<Props> = ({
-  onChange,
-  options,
-  icon,
-  name,
-  imageclassname,
-  labelclassname,
-  containerclassname,
-  label,
-  value,
-  optionLabel,
-  dropdownIcon,
-  placeholder,
-}) => {
-  return icon ? (
+const CustomDropdown: React.FC<CustomDropdownProps> = (props) => {
+  return props.icon ? (
     <div
-    className={`w-full self-end ${containerclassname}`}
+    className={`w-full self-end ${props.containerclassname}`}
     >
       <label
-       className={`labelClass relative ${labelclassname}`}
+       className={`labelClass relative ${props.labelclassname}`}
        >
-        {label}
+        {props.label}
       </label>
       <div className="flex w-full relative">
-        <img className={`${imageclassname} absolute top-[0.6rem] pl-2.5`} src={icon} />
+        <img className={`${props.imageclassname} absolute top-[0.6rem] pl-2.5`} src={props.icon} />
         <Dropdown      
-          dropdownIcon={dropdownIcon}
-          value={value}
-          name={name}
-          onChange={onChange}
-          options={options}
-          optionLabel={optionLabel}
-          placeholder={placeholder}
+          dropdownIcon={props.dropdownIcon}
+          value={props.value}
+          name={props.name}
+          onChange={props.onChange}
+          options={props.options}
+          optionLabel={props.optionLabel}
+          placeholder={props.placeholder}
           className="w-full label-position"         
         />
       </div>
     </div>
   ) : (
-    <div className="flex flex-col self-end  md:w-[8vw]">
-      <label className="labelClass relative ml-[18px]">{label}</label>
+    <div className="flex flex-col self-end md:w-[8vw]">
+      <label className="labelClass relative ml-[18px]">{props.label}</label>
       <Dropdown
-        dropdownIcon={dropdownIcon}
-        value={value}
-        name={name}
-        onChange={onChange}
-        options={options}
-        optionLabel={optionLabel}
-        placeholder={placeholder}
+        dropdownIcon={props.dropdownIcon}
+        value={props.value}
+        name={props.name}
+        onChange={props.onChange}
+        options={props.options}
+        optionLabel={props.optionLabel}
+        placeholder={props.placeholder}
       />
     </div>
   );

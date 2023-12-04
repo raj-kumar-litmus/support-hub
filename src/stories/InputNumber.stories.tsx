@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
 import CustomInputNumber from "../components/common/CustomInputNumber";
 
 const meta = {
@@ -22,13 +22,13 @@ type Story = StoryObj<typeof meta>;
  */
 export const InputNumber: Story = {
   args: {
-    containerclassname: "w-[38vw] md:w-[24vw]",
+    containerclassname: "w-38w md:w-24w",
     min: 30,
-    inputClassName: "w-[60vw] sm:w-[38vw] md:w-[24vw] !bg-slate-800",
+    inputClassName: "w-60w sm:w-38w md:w-24w !bg-slate-800",
     onChange: () => {},
     placeholder: "Refresh duration starts from 30",
     className:
-      "border rounded-[8px] border-solid border-slate-900 bg-slate-900 border-1 h-[40px]",
+      "border rounded-lg border-solid border-slate-900 bg-slate-900 border-1 h-10	",
   },
 };
 
@@ -38,14 +38,14 @@ export const InputNumber: Story = {
 
 export const InputNumberWithDefaultValue: Story = {
   args: {
-    containerclassname: "w-[38vw] md:w-[24vw]",
+    containerclassname: "w-38w md:w-24w",
     value: 90,
     min: 30,
-    inputClassName: "w-[60vw] sm:w-[38vw] md:w-[24vw] !bg-slate-800",
+    inputClassName: "w-60w sm:w-38w md:w-24w !bg-slate-800",
     onChange: () => {},
     placeholder: "Refresh duration starts from 30",
     className:
-      "border rounded-[8px] border-solid border-slate-900 bg-slate-900 border-1 h-[40px]",
+      "border rounded-lg border-solid border-slate-900 bg-slate-900 border-1 h-10	",
   },
 };
 
@@ -54,24 +54,24 @@ export const InputNumberWithDefaultValue: Story = {
  */
 export const InputNumberWithoutPlaceHolder: Story = {
   args: {
-    containerclassname: "w-[38vw] md:w-[24vw]",
+    containerclassname: "w-38w md:w-24w",
     min: 30,
-    inputClassName: "w-[60vw] sm:w-[38vw] md:w-[24vw] !bg-slate-800",
+    inputClassName: "w-60w sm:w-38w md:w-24w !bg-slate-800",
     onChange: () => {},
     className:
-      "border rounded-[8px] border-solid border-slate-900 bg-slate-900 border-1 h-[40px]",
+      "border rounded-lg border-solid border-slate-900 bg-slate-900 border-1 h-10	",
   },
 };
 
 export const InputNumberDisabled: Story = {
   args: {
-    containerclassname: "w-[38vw] md:w-[24vw]",
+    containerclassname: "w-38w md:w-24w",
     min: 30,
-    inputClassName: "w-[60vw] sm:w-[38vw] md:w-[24vw] !bg-slate-800",
+    inputClassName: "w-60w sm:w-38w md:w-24w !bg-slate-800",
     disabled: true,
     onChange: () => {},
     className:
-      "border rounded-[8px] border-solid border-slate-900 bg-slate-900 border-1 h-[40px]",
+      "border rounded-lg border-solid border-slate-900 bg-slate-900 border-1 h-10	",
   },
 };
 
@@ -80,13 +80,13 @@ export const InputNumberDisabled: Story = {
  */
 export const InputNumberWithStep: Story = {
   args: {
-    containerclassname: "w-[38vw] md:w-[24vw]",
+    containerclassname: "w-38w md:w-24w",
     min: 30,
-    inputClassName: "w-[60vw] sm:w-[38vw] md:w-[24vw] !bg-slate-800",
+    inputClassName: "w-60w sm:w-38w md:w-24w !bg-slate-800",
     step: 15,
     onChange: () => {},
     className:
-      "border rounded-[8px] border-solid border-slate-900 bg-slate-900 border-1 h-[40px]",
+      "border rounded-lg border-solid border-slate-900 bg-slate-900 border-1 h-10	",
   },
 };
 
@@ -95,13 +95,13 @@ export const InputNumberWithStep: Story = {
  */
 export const ReadOnlyInputNumber: Story = {
   args: {
-    containerclassname: "w-[38vw] md:w-[24vw]",
+    containerclassname: "w-38w md:w-24w",
     value: 47,
-    inputClassName: "w-[60vw] sm:w-[38vw] md:w-[24vw] !bg-slate-800",
+    inputClassName: "w-60w sm:w-38w md:w-24w !bg-slate-800",
     readOnly: true,
     onChange: () => {},
     className:
-      "border rounded-[8px] border-solid border-slate-900 bg-slate-900 border-1 h-[40px]",
+      "border rounded-lg border-solid border-slate-900 bg-slate-900 border-1 h-10	",
   },
 };
 
@@ -111,13 +111,13 @@ export const ReadOnlyInputNumber: Story = {
 
 export const InputNumberWithAutoFocus: Story = {
   args: {
-    containerclassname: "w-[38vw] md:w-[24vw]",
+    containerclassname: "w-38w md:w-24w",
     value: 47,
-    inputClassName: "w-[60vw] sm:w-[38vw] md:w-[24vw] !bg-slate-800",
+    inputClassName: "w-60w sm:w-38w md:w-24w !bg-slate-800",
     autoFocus: true,
     onChange: () => {},
     className:
-      "border rounded-[8px] border-solid border-slate-900 bg-slate-900 border-1 h-[40px]",
+      "border rounded-lg border-solid border-slate-900 bg-slate-900 border-1 h-10	",
   },
 };
 
@@ -127,12 +127,12 @@ export const InputNumberWithAutoFocus: Story = {
 
 export const InputNumberWithToolTip: Story = {
   args: {
-    containerclassname: "w-[38vw] md:w-[24vw]",
+    containerclassname: "w-38w md:w-24w",
     value: 4,
-    inputClassName: "w-[60vw] sm:w-[38vw] md:w-[24vw] !bg-slate-800",
+    inputClassName: "w-60w sm:w-38w md:w-24w !bg-slate-800",
     onChange: () => {},
     tooltip: "Your Custom tool tip content",
     className:
-      "border rounded-[8px] border-solid border-slate-900 bg-slate-900 border-1 h-[40px]",
+      "border rounded-lg border-solid border-slate-900 bg-slate-900 border-1 h-10	",
   },
 };
