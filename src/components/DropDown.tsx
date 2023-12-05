@@ -27,8 +27,8 @@ const CustomDropdown: React.FC<CustomDropdownProps> = (props) => {
       </div>
     </div>
   ) : (
-    <div className="flex flex-col self-end md:w-[8vw]">
-      <label className="labelClass relative ml-[18px]">{props.label}</label>
+    <div className="flex flex-col self-end md:w-8w">
+      <label className="labelClass relative ml-18">{props.label}</label>
       <Dropdown
         dropdownIcon={props.dropdownIcon}
         value={props.value}

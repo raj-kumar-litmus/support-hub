@@ -62,7 +62,7 @@
 }
 
 .home-sessions {
-  @apply pt-[3rem] pb-[4rem] sm:py-8;
+  @apply pt-12 pb-16 sm:py-8;
 }
 
 #custom-hover .p-button,
@@ -144,7 +144,7 @@
 
 #page-btn-submit.p-button,
 #popup-btn-submit.p-button {
-  @apply bg-black-100 text-sm px-8 py-2 transition-none border-2 border-gray-300 rounded-[22px];
+  @apply bg-transparent text-sm px-11 py-2 transition-none border-2 border-gray-300 rounded-[22px];
 }
 
 #page-btn-submit.p-button:focus {
@@ -185,7 +185,7 @@ button.p-button-secondary {
   @apply px-2 py-2.5 rounded-t-10 border-b border-b-gray-700 border-solid;
 }
 .filtersModal-popup.p-dialog {
-  @apply absolute max-[639px]:max-h-[calc(100vh-154px)] max-480:w-full w-[390px] max-480:!bottom-0 sm:max-h-[528px];
+  @apply absolute max-sm:max-h-[calc(full-h-154)] max-480:w-full w-390 max-480:!bottom-0 sm:max-h-528;
 }
 .filtersModal .p-dialog-header .p-dialog-title {
   @apply font-normal text-center text-base;
@@ -207,7 +207,7 @@ button.p-button-secondary {
 }
 .opmFiltersMobile.p-dialog .p-dialog-header,
 .opmFiltersMobile.p-dialog .p-dialog-content {
-  @apply bg-black-200 border border-solid border-[#30343B] pl-3 pr-3;
+  @apply bg-black-200 border border-solid border-gray-900 pl-3 pr-3;
 }
 .opmFiltersMobile.p-dialog {
   @apply m-0;
@@ -230,14 +230,11 @@ button.p-button-secondary {
 .opmFiltersMobileCalendar .title {
   @apply relative left-2.5;
 }
-.opmFiltersMobileCalendar span.p-calendar {
-  @apply relative  h-[2.5rem];
-}
 .opmFiltersMobile .p-dropdown .p-dropdown-trigger {
   @apply w-[4vw] relative right-3.5;
 }
 .p-datepicker-trigger {
-  @apply !p-0 border border-solid border-gray-105 border-r-0;
+  @apply !p-0 border border-solid border-gray-105 border-r-0 ;
 }
 .p-datepicker-trigger img {
   @apply w-1/2 h-1/2;
@@ -314,7 +311,7 @@ button.p-button-secondary {
   @apply w-[28vw] sm:w-40w;
 }
 .filteredCard .p-button.p-component {
-  @apply !bg-white-400 !border-black-200 border rounded-[100px] text-gray-400 px-2 py-3 flex justify-evenly items-center;
+  @apply !bg-white-400 !border-black-200 border text-gray-400 px-2 py-3 flex justify-evenly items-center;
 }
 .filteredCard .p-button {
   @apply flex gap-2.5 px-2.5 items-center leading-none border border-solid border-gray-900 rounded rounded-20 h-[26px] text-xs text-gray-400 p-5p bg-transparent;
@@ -347,7 +344,7 @@ button.p-button-secondary {
   @apply pl-[20px]
 } */
 .p-dropdown .p-dropdown-trigger {
-  @apply w-[2vw] relative right-1;
+  @apply w-2w relative right-1;
 }
 .calendarInput .p-calendar {
   @apply w-135;
@@ -356,7 +353,7 @@ button.p-button-secondary {
   @apply ml-1w;
 }
 .mobileInput .p-inputtext {
-  @apply relative w-[43vw] -left-3;
+  @apply relative w-43w -left-3;
 }
 .inputContainer {
   @apply relative -left-2.5;
@@ -395,14 +392,8 @@ button.p-button-secondary {
 .p-dialog-content::-webkit-scrollbar-thumb {
   @apply bg-gray-900 rounded-full;
 }
-.orderStatus-dialog .p-dialog-content {
-  @apply pl-[22px] mr-9p pr-[15px] bg-black-200;
-}
 .p-dialog-content::-webkit-scrollbar {
   @apply w-1;
-}
-.orderStatus-dialog.p-dialog {
-  @apply !absolute max-[639px]:!max-h-[calc(100vh-154px)] min-[390px]:!w-[390px] !w-max max-[390px]:!bottom-0 min-[390px]:!max-h-[490px];
 }
 .p-dialog-mask.p-component-overlay {
   @apply backdrop-brightness-50;
@@ -423,7 +414,7 @@ button.p-button-secondary {
   @apply bg-transparent !shadow-none;
 }
 .custom-popup.p-dialog {
-  @apply absolute max-h-[63vh] 480:max-h-[528px] max-480:w-full w-[390px] max-480:!bottom-0;
+  @apply absolute max-h-[63vh] 480:max-h-528 max-480:w-full w-390 max-480:!bottom-0;
 }
 .p-dialog-mask.p-component-overlay {
   @apply backdrop-contrast-[.85];
@@ -534,7 +525,7 @@ button.p-button-secondary {
   @apply !border-black-800;
 }
 .p-datepicker {
-  @apply rounded-md p-0;
+  @apply rounded-md p-0  !max-w-[340px] ;
 }
 .p-datepicker thead {
   @apply bg-black-300;
@@ -890,13 +881,13 @@ hr.horizontalLine.blue {
   @apply border-0 rounded-lg h-inherit mt-4 pb-14 sm:pb-4 pt-4 sm:pt-12 lg:pt-14 px-4 lg:px-6;
 }
 .opm-page-chart-container-rotated {
-  @apply w-100vh-1.75rem h-[calc(100vw-1rem)] -mt-8 bg-inherit;
+  @apply w-100vh-1.75rem h-[calc(full-w-1rem)] -mt-8 bg-inherit;
 }
 .opm-comparison-page-chart-container {
   @apply border-0 rounded-lg h-inherit mt-4 pb-24 sm:pb-4 pt-4 sm:pt-12 lg:pt-14 px-4 lg:px-6;
 }
 .opm-comparison-page-chart-container-rotated {
-  @apply w-100vh-1.75rem h-[calc(100vw-0rem)] -mt-4 bg-inherit;
+  @apply w-100vh-1.75rem h-full-w -mt-4 bg-inherit;
 }
 .session-tooltip-tbody {
   @apply flex flex-wrap;
@@ -989,7 +980,7 @@ hr.horizontalLine.blue {
   @apply border-0;
 }
 .label-position .p-inputtext{
-  @apply pl-8
+  @apply pl-8 pt-9p
 }
 
 .p-dropdown-panel ::-webkit-scrollbar-thumb {
@@ -1010,4 +1001,7 @@ hr.horizontalLine.blue {
 }
 .quick-link-arrow img{
   @apply h-7p w-7p;
+}
+.p-datepicker table td>span {
+  @apply w-7 h-6
 }

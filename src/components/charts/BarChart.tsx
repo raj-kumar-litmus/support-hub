@@ -283,9 +283,8 @@ const BarChart = () => {
 
   const renderFooter = () => {
     return (
-      <Button
+      <CustomButton
         id="popup-btn-submit"
-        className="p-button-rounded"
         label={LABELS.SUBMIT}
         onClick={onSubmit}
         autoFocus
@@ -358,7 +357,7 @@ const BarChart = () => {
                           label={form.title}
                           containerclassname="!min-w-[9rem]"
                           value={form.value}
-                          imageclassname="z-[1]"
+                          imageclassname="z-1"
                           onChange={(event) => handleFormChange(event)}
                           dropdownIcon={<CustomImage src={ArrowDownIcon}/>}
                           options={form.options}
@@ -371,7 +370,7 @@ const BarChart = () => {
                   );
                 })}
               </div>
-              <Button
+              <CustomButton
                 disabled={disabled}
                 label={LABELS.SUBMIT}
                 id="page-btn-submit"
@@ -532,7 +531,7 @@ const BarChart = () => {
                       name={form.name}
                       title={form.title}
                       value={form.value}
-                      imageclassname="top-[0.8rem] z-[1]"
+                      imageclassname="top-0.8r z-1"
                       onChange={(event) => handleFormChange(event)}
                       options={form.options}
                       optionLabel="label"

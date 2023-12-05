@@ -512,7 +512,7 @@ const OPM: React.FC = () => {
                           imgsrc={form.imgsrc}
                           onChange={(event) => handleFormChange(event)}
                           value={form.value}
-                          maxDate={form.name === "date" ? new Date() : null}
+                          maxDate={ form.name === "date" ? CURRENT_PST_DATE : null}
                           dateFormat="dd-MM-yyyy hh:mm"
                         />
                       )}
@@ -568,7 +568,7 @@ const OPM: React.FC = () => {
                                   icon={form.imgsrc}
                                   placeholder={form.label}
                                   onChange={(event) => handleFormChange(event)}
-                                  className="h-11"
+                                  className="h-10"
                                 />
                               )}
                               {form.type === INPUT_TYPES.time && (
@@ -588,7 +588,7 @@ const OPM: React.FC = () => {
                                     maxDate={
                                       form.name === "startDate" ||
                                       form.name === "endDate"
-                                        ? new Date()
+                                        ? CURRENT_PST_DATE
                                         : null
                                     }
                                   />
@@ -619,6 +619,7 @@ const OPM: React.FC = () => {
                      
  
                       <CustomButton
+                      // id="page-btn-submit"
                         label={LABELS.SUBMIT}
                         isDisabled={disabled}
                         isRounded={true}

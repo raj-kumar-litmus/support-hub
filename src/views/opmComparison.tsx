@@ -516,7 +516,7 @@ const OpmComparison: React.FC = () => {
                            name={form.name}
                            titleclassname="top-1.25r"
                            containerclassname="lg:max-w-[11rem]"
-                           imageclassname="h-5 w-5 relative top-1.75r left-0.75w z-1"
+                           imageclassname="relative top-1.75r left-0.75w z-1"
                            title={form.label}
                            placeholder={DATE_AND_TIME_FORMATS.MM_DD_YYYY_HH_MM}
                            showTime={form.showTime}
@@ -538,7 +538,7 @@ const OpmComparison: React.FC = () => {
                          value={form.value}
                          containerclassname="max-w-[8rem]"
                          onChange={(e) => handleFormChange(e)}
-                         imageclassname="z-[1]"
+                         imageclassname="z-1"
                          dropdownIcon={<CustomImage src={ArrowDownIcon} />}
                          icon={form.icon}
                          options={form.options}
