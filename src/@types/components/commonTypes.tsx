@@ -6,6 +6,7 @@ import {
   InputNumberProps,
   InputNumberValueChangeEvent,
 } from "primereact/inputnumber";
+import { SidebarProps } from "primereact/sidebar";
 import { ToastProps } from "primereact/toast";
 import { FC, KeyboardEvent } from "react";
 import { CommerceItemData } from "../pages/OrderDetails";
@@ -286,4 +287,13 @@ export interface BarChartCompProps {
 
 export interface ChartProps {
   type: string;
+}
+
+export interface CustomSideBarProps extends SidebarProps {
+  visible: boolean;
+  setVisible?: () => void;
+  position: string;
+  title?: string;
+  children?: React.ReactNode;
+  themeClasses?: string;
 }
