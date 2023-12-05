@@ -36,7 +36,7 @@ export const Basic: Story = {
   },
 };
 
-export const SideBarToggleOnBtnClick: Story = () => {
+export const ShowSideBarOnBtnClick: Story = () => {
   const [visible, setVisible] = useState(false);
   const args = {
     position: "right",
@@ -50,12 +50,12 @@ export const SideBarToggleOnBtnClick: Story = () => {
       </p>
     ),
   };
-  const toggleSidebar = () => {
+  const showSideBar = () => {
     setVisible(!visible);
   };
   return (
     <>
-      <CustomButton onClick={toggleSidebar}>Toggle Sidebar</CustomButton>
+      <CustomButton onClick={showSideBar}>Show Sidebar</CustomButton>
       <CustomSideBar {...args} visible={visible} setVisible={setVisible} />
     </>
   );
@@ -114,17 +114,17 @@ export const SideBarWithLightAndDarkBackground: Story = () => {
       </p>
     ),
   };
-  const toggleDarkSidebar = (isDark) => {
+  const showSideBar = (isDark) => {
     setIsDarkTheme(isDark);
     setVisible(!visible);
   };
   return (
     <>
       <div className="flex gap-2">
-        <CustomButton onClick={() => toggleDarkSidebar(false)}>
+        <CustomButton onClick={() => showSideBar(false)}>
           Light Sidebar
         </CustomButton>
-        <CustomButton onClick={() => toggleDarkSidebar(true)}>
+        <CustomButton onClick={() => showSideBar(true)}>
           Dark Sidebar
         </CustomButton>
       </div>
