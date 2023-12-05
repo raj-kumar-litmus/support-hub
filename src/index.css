@@ -1005,3 +1005,26 @@ hr.horizontalLine.blue {
 .p-datepicker table td>span {
   @apply w-7 h-6
 }
+
+/* Custom SideBar */
+.custom-sidebar {
+  @apply !w-45w bg-gray-107 text-gray-106;
+}
+.custom-sidebar.p-sidebar .p-sidebar-header {
+  @apply hidden;
+}
+.custom-sidebar.p-sidebar .p-sidebar-content {
+  @apply relative flex flex-row bg-inherit text-inherit mt-4;
+}
+.custom-sidebar .custom-sidebar-close-btn {
+  @apply fixed [writing-mode:vertical-lr] text-center inset-y-1/2 bg-inherit text-inherit;
+}
+.custom-sidebar .custom-sidebar-close-btn .p-button {
+  @apply bg-inherit text-inherit text-xs border-none !p-4 !pr-2;
+}
+.custom-sidebar .custom-sidebar-close-btn .p-button:focus {
+  @apply shadow-none;
+}
+.custom-sidebar .custom-sidebar-close-btn .p-button:enabled:hover {
+  @apply border-none bg-inherit;
+}
