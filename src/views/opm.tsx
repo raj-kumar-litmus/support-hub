@@ -488,6 +488,7 @@ const OPM: React.FC = () => {
                     >
                       {form.type === INPUT_TYPES.text && (
                         <CustomInputText
+                          type={INPUT_TYPES.text}
                           value={form.value}
                           name={form.name}
                           label={form.label}

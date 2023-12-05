@@ -505,6 +505,7 @@ const OpmComparison: React.FC = () => {
                       <React.Fragment key={index}>
                         {form.type === "text" && (
                           <CustomInputText
+                            type="text"
                             value={form.value}
                             name={form.label}
                             placeholder={form.label}

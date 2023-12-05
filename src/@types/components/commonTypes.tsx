@@ -11,6 +11,7 @@ import { FC, KeyboardEvent } from "react";
 import { CommerceItemData } from "../pages/OrderDetails";
 import { DCOpenOrders } from "../pages/dcOpenOrders";
 import { ModalEnums } from "../pages/opmCharts";
+import { InputTextProps } from "primereact/inputtext";
 
 export type CardProps = {
   cardData: DCOpenOrders | CommerceItemData;
@@ -113,8 +114,7 @@ export interface CustomButtonProps extends ButtonProps {
   label?: string;
 }
 
-export interface CustomInputTextProps {
-  onChange: any;
+export interface CustomInputTextProps extends InputTextProps {
   value?: string;
   name?: string;
   id?: string;
