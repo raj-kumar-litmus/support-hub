@@ -6,6 +6,7 @@ export const PAGE_TITLES = {
   OPM_COMPARISON: "OPM Comparison",
   DC_OPEN_ORDERS: "DC Open Orders",
   ORDER_DETAILS: "Order Details",
+  INCOMPLETE_ORDERS:"Incomplete Orders"
 };
 
 export const DASHBOARD_LABELS = {
@@ -324,3 +325,6 @@ export const SCREEN_WIDTH = {
 export const CALENDAR_TOAST_MESSAGE: string = "Please don't select a future date and time";
 export const SEE_MORE: string = "See More";
 export const QUICK_LINKS_HEADER = "Quick Links";
+export const THRESHOLD_VALUE={
+  INCOMPLETE_ORDERS:700
+}

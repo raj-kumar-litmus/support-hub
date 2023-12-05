@@ -8,6 +8,7 @@ import info from "../assets/oms_info_white.svg";
 import CustomTable from "./common/customtable";
 import { Column } from "primereact/column";
 import statusMessages from "./utils/IncompleteOrdersStatusData";
+import { PAGE_TITLES,THRESHOLD_VALUE } from "../constants/appConstants";
 
 const IncompleteOrder: FC = () => {
   const [showDialog, setShowDialog] = useState<boolean>(false);
@@ -71,7 +72,18 @@ const IncompleteOrder: FC = () => {
     { field: "status455Count", header: "455" },
     { field: "status460Count", header: "460" },
   ];
+  const paymentWiseDataStyle = (rowData, column) => {
+   
+     if (rowData[column?.field] > THRESHOLD_VALUE.INCOMPLETE_ORDERS) {
+      return 'bg-red-600' 
+      // return 'border-4 border-lime-400'
 
+    }
+    //  else if (!rowData[column?.field]) {
+    //   return 'bg-green-800';
+    // } 
+    return '';
+  };
   useEffect(() => {
     setIsLoading(true);
     async function fetchIncompleteOrderdata() {
@@ -93,17 +105,20 @@ const IncompleteOrder: FC = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="w-[95%] ml-7 mt-7">
+        <div>
+           <h3 className="sm:text-lg text-gray-200 font-bold mb-2 font-helvetica">
+              {PAGE_TITLES.INCOMPLETE_ORDERS}
+          </h3>
           <div className="hidden sm:block rounded-md">
             {tableData?.length > 0 && (
               <CustomTable
-                resizableColumns
                 showGridlines
-                stripedRows
+                resizableColumns
                 value={tableData}
                 className="custom-table incomplete-order"
                 children={HEADERS.map((h) => (
                   <Column
+                    // bodyClassName={paymentWiseDataStyle}
                     key={h.field}
                     field={h.field}
                     header={
@@ -120,8 +135,21 @@ const IncompleteOrder: FC = () => {
                         )}
                       </div>
                     }
+                    body={(rowData) => {
+                      const textColor =
+                        rowData[h.field] > THRESHOLD_VALUE.INCOMPLETE_ORDERS
+                            ? "border-2 border-red-500"
+                            //  ? "text-red-600"
+                          : "";
+
+                      return (
+                        <div className={`${textColor}`}>
+                          {rowData[h.field]}
+                        </div>
+                      );
+                    }}
                   >
-                    {" "}
+                    
                   </Column>
                 ))}
               ></CustomTable>
@@ -137,10 +165,10 @@ const IncompleteOrder: FC = () => {
             header="Status Info"
           >
             {dialogData && (
-              <div className="text-gray-300 mt-3 mx-2 block text-left ">
+              <div className="text-gray-300 mt-3 mx-2 block text-left">
                 {dialogData.code && (
-                  <div className="mb-3 ">
-                    <span className="font-bold text-gray-100  ">
+                  <div className="mb-3">
+                    <span className="font-bold text-white ">
                       Status Code:
                     </span>{" "}
                     {dialogData.code}
@@ -151,7 +179,7 @@ const IncompleteOrder: FC = () => {
                 )}
                 {dialogData.nextState && (
                   <div className="mb-3">
-                    <span className="font-bold text-gray-100 ">
+                    <span className="font-bold ">
                       Next state:
                     </span>{" "}
                     {dialogData.nextState}
@@ -160,7 +188,7 @@ const IncompleteOrder: FC = () => {
                 {dialogData.sla && (
                   <div>
                     {" "}
-                    <span className="font-bold text-gray-100  ">SLA: </span>
+                    <span className="font-bold">SLA: </span>
                     {dialogData.sla}
                   </div>
                 )}
