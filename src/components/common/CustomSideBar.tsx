@@ -6,11 +6,11 @@ const CustomSideBar = (props: CustomSideBarProps) => {
   const getCloseBtnLayoutClasses = () => {
     switch (props.position) {
       case "right":
-        return `rotate-180 right-44w`;
+        return `rotate-180 right-50w`;
       case "left":
-        return `left-44w`;
+        return `left-50w`;
       default:
-        return `rotate-180 right-44w`;
+        return `rotate-180 right-50w`;
     }
   };
 
