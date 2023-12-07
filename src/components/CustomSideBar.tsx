@@ -1,6 +1,7 @@
 import { Sidebar } from "primereact/sidebar";
-import { CustomSideBarProps } from "../../@types/components/commonTypes";
-import CustomButton from "../Button";
+import CustomButton from "./Button";
+import { LABELS } from "../constants/appConstants";
+import { CustomSideBarProps } from "../@types/components/commonTypes";
 
 const CustomSideBar = (props: CustomSideBarProps) => {
   const getCloseBtnLayoutClasses = () => {
@@ -30,7 +31,7 @@ const CustomSideBar = (props: CustomSideBarProps) => {
           className={`custom-sidebar-close-btn ${getCloseBtnLayoutClasses()}`}
           onClick={() => props.setVisible(false)}
         >
-          Close
+          {LABELS.CLOSE}
         </CustomButton>
         <div className="flex flex-col">
           {props.title && (
