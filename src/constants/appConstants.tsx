@@ -1,4 +1,3 @@
-
 export const PAGE_TITLES = {
   DASHBOARD: "Dashboard",
   SESSIONS: "Sessions",
@@ -39,7 +38,7 @@ export const DATE_AND_TIME_FORMATS = {
 export const CHART_LABELS = {
   TOTAL_SESSIONS_PER_MINUTE: "Total Sessions per minute",
   TOTAL_ORDERS_PER_MINUTE: "Total Orders Per Minute",
-  NO_OF_ORDERS: "No of Orders"
+  NO_OF_ORDERS: "No of Orders",
 };
 
 export const LABELS = {
@@ -54,7 +53,8 @@ export const LABELS = {
   SUBMIT: "Submit",
   RESET: "Reset",
   AUTO_REFRESH: "Auto Refresh",
-  FILTERS: "Filters"
+  FILTERS: "Filters",
+  CLOSE: "Close",
 };
 
 export const INPUT_TYPES = {
@@ -124,7 +124,10 @@ export const OPM_COMP_CHART_DEFAULT = {
   CATEGORY_PERCENT: 0.9,
 };
 
-export const CHART_TABS = [{ header: CHART_TAB_LABELS.BAR }, { header: CHART_TAB_LABELS.LINE }];
+export const CHART_TABS = [
+  { header: CHART_TAB_LABELS.BAR },
+  { header: CHART_TAB_LABELS.LINE },
+];
 
 export const SESSIONS_TABS = [
   { header: CHART_TAB_LABELS.PRIMARY },
@@ -179,8 +182,8 @@ export const ORDER_DETAILS_LABELS = {
   PROMOTION: "Promotion",
   ORDER_TIMELINE: "Order Timeline",
   NO_DATA: "No Data",
-  ORDER_STATUS: "Order Status"
-}
+  ORDER_STATUS: "Order Status",
+};
 
 export const ORDER_STATUS_LIST = [
   {
@@ -321,6 +324,7 @@ export const SCREEN_WIDTH = {
   XL: 1280,
 };
 
-export const CALENDAR_TOAST_MESSAGE: string = "Please don't select a future date and time";
+export const CALENDAR_TOAST_MESSAGE: string =
+  "Please don't select a future date and time";
 export const SEE_MORE: string = "See More";
 export const QUICK_LINKS_HEADER = "Quick Links";
