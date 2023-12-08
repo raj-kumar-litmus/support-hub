@@ -69,8 +69,8 @@ import {
   formatDate,
   getFormattedPSTDate,
   getPSTdate,
-} from "../utils/dateTimeUtil";
-import { fetchData } from "../utils/fetchUtil";
+} from "../utils/DateTimeUtil";
+import { fetchData } from "../utils/FetchUtil";
 import CustomTab from "../components/common/CustomTab";
 import BarChartComp from "../components/BarChartComp";
 
