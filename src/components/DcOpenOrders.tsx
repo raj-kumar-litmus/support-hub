@@ -5,7 +5,7 @@ import CustomTable from "./common/CustomTable";
 import Loader from "./Loader";
 import { DCOpenOrders, orderData } from "../@types/pages/DcOpenOrders";
 import { URL_DC_OPEN_ORDERS } from "../constants/ApiConstants";
-import { fetchData } from "../utils/fetchUtil";
+import { fetchData } from "../utils/FetchUtil";
 import { getTableHeaders } from "./utils/Utils";
 import { PAGE_TITLES } from "../constants/AppConstants";
 
