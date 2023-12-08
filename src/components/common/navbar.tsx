@@ -1,12 +1,12 @@
 import { FC, KeyboardEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import QuickLinks from "../quicklinks";
-import CustomImage from "./customimage";
-import SearchBar from "./searchbar";
+import CustomImage from "./CustomImage";
+import SearchBar from "./SearchBar";
 import QuickLinksIcon from "../../assets/Quick Links.svg";
 import SephoraLogo from "../../assets/logo.svg";
 import MenuIcon from "../../assets/menu.svg";
-import { NavbarProps } from "../../@types/components/commonTypes";
+import { NavbarProps } from "../../@types/components/CommonTypes";
 import { MENU_LIST, ROUTES } from "../utils/Utils";
 
 const Navbar: FC<NavbarProps> = (props) => {

@@ -1,7 +1,7 @@
 import { FC } from "react";
-import AppContent from "./components/appcontent";
-import { LoaderProvider } from "./context/loaderContext";
-import { AppProps } from "./@types/components/commonTypes";
+import AppContent from "./components/AppContent";
+import { LoaderProvider } from "./context/LoaderContext";
+import { AppProps } from "./@types/components/CommonTypes";
 
 const App: FC<AppProps> = (props) => {
   const { appContent, showSidePane = true, showNavbar = true } = props;

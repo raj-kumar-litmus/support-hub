@@ -1,5 +1,4 @@
-import { Button } from "primereact/button";
-import CustomDialog from "../common/customdialog";
+import CustomDialog from "../common/CustomDialog";
 import React, { useEffect, useRef, useState, useContext } from "react";
 import { Bar } from "react-chartjs-2";
 import { useNavigate } from "react-router";
@@ -9,20 +8,20 @@ import FilteredCard from "../FilteredCard";
 import CustomCalendar from "../common/CustomCalendar";
 import CustomDropdown from "../DropDown";
 import CustomIcon from "../common/CustomIcon";
-import CustomImage from "../common/customimage";
-import CustomTab from "../common/customtab";
-import Loader from "../loader";
+import CustomImage from "../common/CustomImage";
+import CustomTab from "../common/CustomTab";
+import Loader from "../Loader";
 import ChannelIcon from "../../assets/channel.svg";
 import FilterIcon from "../../assets/filter-dark.svg";
-import ArrowDownIcon from "../../assets/arrown_down_white.svg"
+import ArrowDownIcon from "../../assets/arrown_down_white.svg";
 import SandGlassIcon from "../../assets/sandglass.svg";
 import openNewPageIcon from "../../assets/open_in_new.svg";
 import refreshIcon from "../../assets/refresh_icon.svg";
 import CalendarIcon from "../../assets/white_calendar.svg";
 import { ChartData, SessionData } from "../../@types/pages/Sessions";
-import { LoaderContextType } from "../../@types/components/commonTypes";
-import { BAR_CHART_OPTIONS } from "../../config/chartConfig";
-import { URL_SESSIONS } from "../../constants/apiConstants";
+import { LoaderContextType } from "../../@types/components/CommonTypes";
+import { BAR_CHART_OPTIONS } from "../../config/ChartConfig";
+import { URL_SESSIONS } from "../../constants/ApiConstants";
 import {
   SESSIONS_CHANNEL_LIST,
   DATE_AND_TIME_FORMATS,
@@ -34,8 +33,8 @@ import {
   SESSIONS_CHART_DEFAULT,
   SCREEN_WIDTH,
   DURATIONS,
-} from "../../constants/appConstants";
-import { LoaderContext } from "../../context/loaderContext";
+} from "../../constants/AppConstants";
+import { LoaderContext } from "../../context/LoaderContext";
 import {
   CURRENT_PST_DATE,
   DATE_FORMAT_3,
@@ -258,7 +257,7 @@ const BarChart = () => {
       ...BAR_CHART_OPTIONS(
         (duration ||
           Number(formFields.find((e) => e.name === "period").value)) < 11 &&
-        width > SCREEN_WIDTH.SM,
+          width > SCREEN_WIDTH.SM,
       ),
     };
     if (width > SCREEN_WIDTH.SM) {
@@ -322,7 +321,7 @@ const BarChart = () => {
               className="cursor-pointer sm:hidden"
               onClick={() => toggleFilterVisibility()}
             />
-          </div >
+          </div>
           {showFilters && (
             <div className="justify-between items-end hidden sm:block lg:flex">
               <div className="flex justify-start pb-4 items-end">
@@ -359,11 +358,11 @@ const BarChart = () => {
                           value={form.value}
                           imageclassname="z-1"
                           onChange={(event) => handleFormChange(event)}
-                          dropdownIcon={<CustomImage src={ArrowDownIcon}/>}
+                          dropdownIcon={<CustomImage src={ArrowDownIcon} />}
                           options={form.options}
                           optionLabel={"label"}
                           placeholder=""
-                          icon={form.iconSrc} 
+                          icon={form.iconSrc}
                         />
                       )}
                     </div>
@@ -379,110 +378,104 @@ const BarChart = () => {
               />
             </div>
           )}
-          {
-            showFilteredCards && (
-              <div className="flex gap-2 justify-start flex-wrap pb-6 items-center">
-                {formFields
-                  .filter((e) => e.value)
-                  .map((e: any) => (
-                    <React.Fragment key={e.name}>
-                      <FilteredCard
-                        label={e.name}
-                        leftIcon={e.iconSrc || e.imgsrc}
-                        onClickHandler={removeFormEntry}
-                        content={getFilterCardContent(e)}
-                      />
-                    </React.Fragment>
-                  ))}
+          {showFilteredCards && (
+            <div className="flex gap-2 justify-start flex-wrap pb-6 items-center">
+              {formFields
+                .filter((e) => e.value)
+                .map((e: any) => (
+                  <React.Fragment key={e.name}>
+                    <FilteredCard
+                      label={e.name}
+                      leftIcon={e.iconSrc || e.imgsrc}
+                      onClickHandler={removeFormEntry}
+                      content={getFilterCardContent(e)}
+                    />
+                  </React.Fragment>
+                ))}
 
-                {!disabled && (
-                  <CustomButton
-                    label={LABELS.RESET}
-                    severity="secondary"
-                    className="resetFilters text-xs text-white-700 ml-2"
-                    isTextButton={true}
-                    onClick={() => resetFormEntry()}
-                  />
-                )}
-              </div>
-            )}
+              {!disabled && (
+                <CustomButton
+                  label={LABELS.RESET}
+                  severity="secondary"
+                  className="resetFilters text-xs text-white-700 ml-2"
+                  isTextButton={true}
+                  onClick={() => resetFormEntry()}
+                />
+              )}
+            </div>
+          )}
         </>
-      )
-      }
+      )}
       {isLoading && <Loader className="!p-0 m-auto min-h-24r" />}
-      {
-        !isLoading && (
-          <div
-            className={`${location.pathname.includes(ROUTES.home)
+      {!isLoading && (
+        <div
+          className={`${
+            location.pathname.includes(ROUTES.home)
               ? "home-sessions"
               : "main-sessions"
-              } flex justify-center relative bg-black-200 h-96 lg:h-29r rounded-lg flex-col min-h-24r`}
-          >
-            <>
-              {location.pathname.includes(ROUTES.home) && (
-                <>
-                  <div className="flex flex-row justify-between mb-2 md:mb-4">
-                    <div className="session-page-title self-center">
-                      {PAGE_TITLES.SESSIONS}
-                    </div >
-                    <div className="flex">
-                      <CustomButton
-                        className="home-refresh-btn"
-                        onClick={handleOPMCompRefreshBtnClick}
-                      >
-                        <CustomImage src={refreshIcon} />
-                      </CustomButton>
-                      <CustomButton
-                        className="home-expand-btn ml-3"
-                        onClick={handleExpandClick}
-                      >
-                        <CustomImage src={openNewPageIcon} />
-                      </CustomButton>
-                    </div>
-                  </div >
-                  <div className="flex justify-start mb-2 md:mb-0 md:justify-center items-center">
-                    <CustomTab
-                      className="custom-tab md:absolute md:top-5 md:right-32"
-                      tabData={SESSIONS_TABS}
-                      tabValue={tabValue}
-                      setTabValue={setTabValue}
-                    />
+          } flex justify-center relative bg-black-200 h-96 lg:h-29r rounded-lg flex-col min-h-24r`}
+        >
+          <>
+            {location.pathname.includes(ROUTES.home) && (
+              <>
+                <div className="flex flex-row justify-between mb-2 md:mb-4">
+                  <div className="session-page-title self-center">
+                    {PAGE_TITLES.SESSIONS}
                   </div>
-                </>
-              )
-              }
-              {
-                location.pathname.includes(ROUTES.sessions) && (
-                  <>
-                    <div className="block sm:hidden session-page-title mb-2">
-                      {PAGE_TITLES.SESSIONS}
-                    </div >
-                    <CustomTab
-                      className={`custom-tab ${width < SCREEN_WIDTH.SM ? "!self-start" : ""
-                        }`}
-                      tabData={SESSIONS_TABS}
-                      tabValue={tabValue}
-                      setTabValue={setTabValue}
-                    />
-                  </>
-                )
-              }
-              {
-                allData.labels.length > 0 && chartOptions && (
-                  <Bar
-                    ref={chartRef}
-                    options={chartOptions}
-                    data={allData}
-                    plugins={increaseLegendSpacing(20)}
+                  <div className="flex">
+                    <CustomButton
+                      className="home-refresh-btn"
+                      onClick={handleOPMCompRefreshBtnClick}
+                    >
+                      <CustomImage src={refreshIcon} />
+                    </CustomButton>
+                    <CustomButton
+                      className="home-expand-btn ml-3"
+                      onClick={handleExpandClick}
+                    >
+                      <CustomImage src={openNewPageIcon} />
+                    </CustomButton>
+                  </div>
+                </div>
+                <div className="flex justify-start mb-2 md:mb-0 md:justify-center items-center">
+                  <CustomTab
+                    className="custom-tab md:absolute md:top-5 md:right-32"
+                    tabData={SESSIONS_TABS}
+                    tabValue={tabValue}
+                    setTabValue={setTabValue}
                   />
-                )
-              }
-              <div className="text-center text-xs text-gray-300 mt-2 sm:-mt-11">
-                {CHART_LABELS.TOTAL_SESSIONS_PER_MINUTE}
-              </div>
-            </>
-          </div >
-        )}
+                </div>
+              </>
+            )}
+            {location.pathname.includes(ROUTES.sessions) && (
+              <>
+                <div className="block sm:hidden session-page-title mb-2">
+                  {PAGE_TITLES.SESSIONS}
+                </div>
+                <CustomTab
+                  className={`custom-tab ${
+                    width < SCREEN_WIDTH.SM ? "!self-start" : ""
+                  }`}
+                  tabData={SESSIONS_TABS}
+                  tabValue={tabValue}
+                  setTabValue={setTabValue}
+                />
+              </>
+            )}
+            {allData.labels.length > 0 && chartOptions && (
+              <Bar
+                ref={chartRef}
+                options={chartOptions}
+                data={allData}
+                plugins={increaseLegendSpacing(20)}
+              />
+            )}
+            <div className="text-center text-xs text-gray-300 mt-2 sm:-mt-11">
+              {CHART_LABELS.TOTAL_SESSIONS_PER_MINUTE}
+            </div>
+          </>
+        </div>
+      )}
 
       <CustomDialog
         id="modal-section"
@@ -536,13 +529,9 @@ const BarChart = () => {
                       options={form.options}
                       optionLabel="label"
                       placeholder={""}
-                      dropdownIcon={
-                        <CustomImage src={ArrowDownIcon} />
-                      }
+                      dropdownIcon={<CustomImage src={ArrowDownIcon} />}
                       icon={form.iconSrc}
-                      
                     />
-                     
                   </div>
                 );
               })}

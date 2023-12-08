@@ -1,15 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import useScreenSize from "../hooks/useScreenSize";
-import OPM from "../views/opm";
-import OpmComparison from "../views/opmComparison";
+import OPM from "../views/Opm";
+import OpmComparison from "../views/OpmComparison";
 import CustomButton from "./Button";
 import BarChart from "./charts/BarChart";
-import CustomImage from "./common/customimage";
+import CustomImage from "./common/CustomImage";
 import HomeCard from "./common/homeCard";
 import GlobalLoader from "./globalLoader";
-import Loader from "./loader";
-import TimeTracker from "./timeTracker";
-import LoaderPortal from "./loaderPortal";
+import Loader from "./Loader";
+import TimeTracker from "./TimeTracker";
+import LoaderPortal from "./LoaderPortal";
 import avgOpmcompIcon from "../assets/avg_opm_comp.svg";
 import avgOrdersPerMinIcon from "../assets/avg_orders_per_min.svg";
 import infoIcon from "../assets/info_icon.svg";
@@ -19,16 +19,16 @@ import totalNoOfOrdersIcon from "../assets/total_no_of_orders.svg";
 import totalOrderCompIcon from "../assets/total_order_comp.svg";
 import trendingUpIcon from "../assets/trend_up.svg";
 import trendingDownIcon from "../assets/trending_down.svg";
-import { URL_OPM } from "../constants/apiConstants";
+import { URL_OPM } from "../constants/ApiConstants";
 import {
   DASHBOARD_LABELS,
   PAGE_TITLES,
   SCREEN_WIDTH,
-} from "../constants/appConstants";
-import { LoaderContext } from "../context/loaderContext";
+} from "../constants/AppConstants";
+import { LoaderContext } from "../context/LoaderContext";
 import { getFormattedPSTDate } from "../utils/dateTimeUtil";
 import { fetchData } from "../utils/fetchUtil";
-import { LoaderContextType } from "../@types/components/commonTypes";
+import { LoaderContextType } from "../@types/components/CommonTypes";
 
 const CardTitle = (props: { title: string; icon: any; classname?: string }) => {
   const { classname = "" } = props;
@@ -117,7 +117,7 @@ const HomePage = () => {
   const [refreshTime, setRefreshTime] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { showGlobalLoader, hideLoader } = useContext(
-    LoaderContext
+    LoaderContext,
   ) as LoaderContextType;
 
   const { width } = useScreenSize();
@@ -128,15 +128,15 @@ const HomePage = () => {
         `${url}?period=${
           DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION
         }&starttime=${getFormattedPSTDate(date)}`,
-        {}
+        {},
       );
       const totalOrders = opmData.reduce(
         (acc, obj) => acc + parseInt(obj.orderCount),
-        0
+        0,
       );
       setTotalOPM(totalOrders);
       setAvgOPM(
-        Math.round(totalOrders / DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION)
+        Math.round(totalOrders / DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION),
       );
       setLastMinOPM(opmData[opmData.length - 1]["orderCount"]);
     } catch (err) {
@@ -150,15 +150,15 @@ const HomePage = () => {
         `${url}?period=${
           DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION
         }&starttime=${getFormattedPSTDate(date)}`,
-        {}
+        {},
       );
       const totalOrders = opmData.reduce(
         (acc, obj) => acc + parseInt(obj.orderCount),
-        0
+        0,
       );
       setLastDayTotalOPM(totalOrders);
       setLastDayAvgOPM(
-        Math.round(totalOrders / DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION)
+        Math.round(totalOrders / DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION),
       );
     } catch (err) {
       console.log("Error occured while fetching data", err);
@@ -189,7 +189,7 @@ const HomePage = () => {
   useEffect(() => {
     const timer = setTimeout(
       () => setCanShow(!canShow),
-      DASHBOARD_LABELS.REFRESHTIME
+      DASHBOARD_LABELS.REFRESHTIME,
     );
     return () => clearTimeout(timer);
   });

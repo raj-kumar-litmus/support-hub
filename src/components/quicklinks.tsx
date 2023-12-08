@@ -1,17 +1,17 @@
 import { FC, useEffect, useState } from "react";
 import useScreenSize from "../hooks/useScreenSize";
 import CustomButton from "./Button";
-import CustomDialog from "./common/customdialog";
-import CustomImage from "./common/customimage";
-import CustomTab from "./common/customtab";
+import CustomDialog from "./common/CustomDialog";
+import CustomImage from "./common/CustomImage";
+import CustomTab from "./common/CustomTab";
 import ArrowTop from "../assets/arrow_top.svg";
 import ArrowTopWhite from "../assets/arrow_top_white.svg";
-import { QuickLinksProps, QuickLinkBoxProps } from "../@types/pages/quicklinks";
+import { QuickLinksProps, QuickLinkBoxProps } from "../@types/pages/QuickLinks";
 import {
   QUICK_LINKS,
   QUICK_LINKS_HEADER,
   SEE_MORE,
-} from "../constants/appConstants";
+} from "../constants/AppConstants";
 
 const QuickLinks: FC<QuickLinksProps> = (props) => {
   const [tabValue, setTabValue] = useState<number>(0);

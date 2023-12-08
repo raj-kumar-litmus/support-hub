@@ -1,6 +1,6 @@
 import { Card } from "primereact/card";
 import { FC } from "react";
-import { HomeCardProps } from "../../@types/components/commonTypes";
+import { HomeCardProps } from "../../@types/components/CommonTypes";
 
 const HomeCard: FC<HomeCardProps> = (props) => {
   return (

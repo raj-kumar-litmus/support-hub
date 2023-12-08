@@ -12,11 +12,10 @@ import App from "./App";
 import Chart from "./components/ChartIndex";
 import DcOpenOrders from "./components/DcOpenOrders";
 import BarChart from "./components/charts/BarChart";
-import HomePage from "./components/homePage";
+import HomePage from "./components/HomePage";
 import OrderDetails from "./components/orderDetails/OrderDetails.js";
 import { ROUTES } from "./components/utils/Utils";
 import "./index.css";
-
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -66,5 +65,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         </Routes>
       </Suspense>
     </Router>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

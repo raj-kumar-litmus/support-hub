@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useScreenSize from "../../hooks/useScreenSize";
-import { CardProps } from "../../@types/components/commonTypes";
+import { CardProps } from "../../@types/components/CommonTypes";
 
 const Card = (props: CardProps) => {
   const [cardTitle, setCardTitle] = useState(null);

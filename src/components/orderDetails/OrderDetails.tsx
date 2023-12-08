@@ -2,16 +2,16 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Column } from "primereact/column";
 import useScreenSize from "../../hooks/useScreenSize";
-import Loader from "../loader";
-import OrderStatus from "../orderstatus";
-import PromotionsPopup from "../promotionspopup";
-import OrderStatusPopup from "../orderstatuspopup";
-import CustomImage from "../common/customimage";
-import CustomTable from "../common/customtable";
+import Loader from "../Loader";
+import OrderStatus from "../OrderStatus";
+import PromotionsPopup from "../PromotionsPopup";
+import OrderStatusPopup from "../OrderStatusPopup";
+import CustomImage from "../common/CustomImage";
+import CustomTable from "../common/CustomTable";
 import CustomIcon from "../common/CustomIcon";
 import Card from "../common/Card";
 import CustomButton from "../Button";
-import ItemInformationsPopUp from "../itemInformationsPopUp";
+import ItemInformationsPopUp from "../ItemInformationsPopUp";
 import PromotionsIcon from "../../assets/promotions_white.svg";
 import OrderClockIcon from "../../assets/order_clock_white.svg";
 import RightArrowIcon from "../../assets/right_arrow.svg";
@@ -21,11 +21,11 @@ import {
   URL_ORDER_DETAILS,
   URL_OMS_ORDER_FLOW,
   URL_PROMOTIONS,
-} from "../../constants/apiConstants";
+} from "../../constants/ApiConstants";
 import {
   ORDER_DETAILS_LABELS,
   PAGE_TITLES,
-} from "../../constants/appConstants";
+} from "../../constants/AppConstants";
 import {
   CommerceItem,
   CommerceItemData,
@@ -40,7 +40,7 @@ import { getTableHeaders } from "../utils/Utils";
 const OrderDetails: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [orderData, setOrderData] = useState<OrderData | Record<string, never>>(
-    {}
+    {},
   );
   const [omsOrderStatus, setOmsOrderStatus] = useState<
     OmsOrderStatus | Record<string, never>
@@ -80,8 +80,8 @@ const OrderDetails: React.FC = () => {
       setItemTableDataSliced(
         itemTableData.slice(
           0,
-          ORDER_DETAILS_LABELS.VIEW_ALL_MIN_ORDER_LIST_MOBILE
-        )
+          ORDER_DETAILS_LABELS.VIEW_ALL_MIN_ORDER_LIST_MOBILE,
+        ),
       );
     }
   }, [itemTableData]);
@@ -89,7 +89,7 @@ const OrderDetails: React.FC = () => {
   const getOrderData = async () => {
     const data: OrderData = await fetchData(
       `${URL_ORDER_DETAILS}/${orderId}`,
-      {}
+      {},
     );
     setOrderData(data || {});
     if (data?.commerceItem?.length) {
@@ -102,7 +102,7 @@ const OrderDetails: React.FC = () => {
             "Unit Price": item.priceInfo.listPrice,
             "Total Price": item.priceInfo.rawTotalPrice,
           };
-        }
+        },
       );
       setItemTableData(convertedArray);
     }
@@ -112,7 +112,7 @@ const OrderDetails: React.FC = () => {
   const getOmsOrderStatus = async () => {
     const data: OmsOrderStatus = await fetchData(
       `${URL_OMS_ORDER_STATUS}/${orderId}`,
-      {}
+      {},
     );
     setOmsOrderStatus(data || {});
   };
@@ -120,7 +120,7 @@ const OrderDetails: React.FC = () => {
   const getOmsOrderFlow = async () => {
     const data: OmsOrderFlow = await fetchData(
       `${URL_OMS_ORDER_FLOW}/${orderId}`,
-      {}
+      {},
     );
     setOmsOrderFlow(data || {});
   };
@@ -291,7 +291,7 @@ const OrderDetails: React.FC = () => {
             </span>
             <span className="w-auto sm:w-5/6 font-medium">
               {formatName(
-                `${orderData?.customerInfo?.firstName} ${orderData?.customerInfo?.lastName}`
+                `${orderData?.customerInfo?.firstName} ${orderData?.customerInfo?.lastName}`,
               )}
             </span>
           </div>
@@ -358,7 +358,7 @@ const OrderDetails: React.FC = () => {
                   cardData={dataObj}
                   type="ORDER_DETAILS_ITEM"
                 />
-              )
+              ),
             )}
           {itemTableDataSliced.length === 0 &&
             itemTableData?.length > 0 &&

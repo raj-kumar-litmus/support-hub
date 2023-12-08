@@ -1,13 +1,13 @@
 import { Column } from "primereact/column";
 import { FC, useEffect, useState } from "react";
 import Card from "./common/Card";
-import CustomTable from "./common/customtable";
-import Loader from "./loader";
-import { DCOpenOrders, orderData } from "../@types/pages/dcOpenOrders";
-import { URL_DC_OPEN_ORDERS } from "../constants/apiConstants";
+import CustomTable from "./common/CustomTable";
+import Loader from "./Loader";
+import { DCOpenOrders, orderData } from "../@types/pages/DcOpenOrders";
+import { URL_DC_OPEN_ORDERS } from "../constants/ApiConstants";
 import { fetchData } from "../utils/fetchUtil";
 import { getTableHeaders } from "./utils/Utils";
-import { PAGE_TITLES } from "../constants/appConstants";
+import { PAGE_TITLES } from "../constants/AppConstants";
 
 const DcOpenOrders: FC = () => {
   const [tableData, setTableData] = useState<DCOpenOrders[]>([]);
@@ -41,7 +41,7 @@ const DcOpenOrders: FC = () => {
       ) : (
         <div>
           <h3 className="sm:text-lg text-gray-200 font-bold m-3 ml-0 font-helvetica">
-              {PAGE_TITLES.DC_OPEN_ORDERS}
+            {PAGE_TITLES.DC_OPEN_ORDERS}
           </h3>
           <div className="hidden sm:block rounded-md">
             {tableData?.length > 0 && (

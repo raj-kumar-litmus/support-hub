@@ -1,6 +1,6 @@
 import { FC } from "react";
 import CustomInputText from "../InputText";
-import { SearchFieldProps } from "../../@types/components/commonTypes";
+import { SearchFieldProps } from "../../@types/components/CommonTypes";
 
 const SearchField: FC<SearchFieldProps> = (props) => {
   return (
@@ -16,6 +16,5 @@ const SearchField: FC<SearchFieldProps> = (props) => {
     </div>
   );
 };
- 
+
 export default SearchField;
- 

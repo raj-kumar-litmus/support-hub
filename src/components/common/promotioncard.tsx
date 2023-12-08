@@ -1,9 +1,12 @@
 import { FC } from "react";
-import CustomCard from "./customcard";
-import CustomImage from "./customimage";
+import CustomCard from "./CustomCard";
+import CustomImage from "./CustomImage";
 import CheckCircle from "../../assets/check_circle.svg";
-import { PromotionCardProps, InfoFieldProps } from "../../@types/pages/OrderDetails";
-import { ORDER_DETAILS_LABELS } from "../../constants/appConstants";
+import {
+  PromotionCardProps,
+  InfoFieldProps,
+} from "../../@types/pages/OrderDetails";
+import { ORDER_DETAILS_LABELS } from "../../constants/AppConstants";
 
 const PromotionCard: FC<PromotionCardProps> = (props) => {
   return (
@@ -22,7 +25,10 @@ const PromotionCard: FC<PromotionCardProps> = (props) => {
       }
     >
       <div className="flex p-0 justify-between">
-        <InfoField title={ORDER_DETAILS_LABELS.PROMOTION} data={props.promotion.promotionId} />
+        <InfoField
+          title={ORDER_DETAILS_LABELS.PROMOTION}
+          data={props.promotion.promotionId}
+        />
         <InfoField
           title={ORDER_DETAILS_LABELS.DISCOUNT_AMOUNT}
           data={Number(props.promotion.discAmt).toFixed(2)}

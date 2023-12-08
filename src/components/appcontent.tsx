@@ -2,13 +2,13 @@ import { FC, KeyboardEvent, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
 import useScreenSize from "../hooks/useScreenSize";
-import Navbar from "./common/navbar";
-import SearchField from "./common/searchfield";
-import SidePaneGrid from "./common/sidepanegrid";
-import SidePaneList from "./common/sidepanelist";
+import Navbar from "./common/NavBar";
+import SearchField from "./common/SearchField";
+import SidePaneGrid from "./common/SidePaneGrid";
+import SidePaneList from "./common/SidePaneList";
 import { MENU_LIST, ROUTES } from "./utils/Utils";
-import { SCREEN_WIDTH } from "../constants/appConstants";
-import { AppContentProps } from "../@types/components/commonTypes";
+import { SCREEN_WIDTH } from "../constants/AppConstants";
+import { AppContentProps } from "../@types/components/CommonTypes";
 
 const AppContent: FC<AppContentProps> = (props) => {
   const [showSidePaneGrid, setShowSidePaneGrid] = useState<boolean>(false);
@@ -28,7 +28,7 @@ const AppContent: FC<AppContentProps> = (props) => {
 
   useEffect(() => {
     const _selectedMenu = MENU_LIST.find(
-      (menu) => location?.pathname.split("/")[1] == menu.path.split("/")[1]
+      (menu) => location?.pathname.split("/")[1] == menu.path.split("/")[1],
     )?.id;
     setSelectedMenu(_selectedMenu);
   }, [location?.pathname]);
@@ -55,8 +55,9 @@ const AppContent: FC<AppContentProps> = (props) => {
           />
         )}
         <div
-          className={`flex flex-col sm:flex-row ${IS_FULLSCREEN ? "" : "mt-14"
-            } ml-0 bg-black-200`}
+          className={`flex flex-col sm:flex-row ${
+            IS_FULLSCREEN ? "" : "mt-14"
+          } ml-0 bg-black-200`}
         >
           {props.showSidePane && (
             <SidePaneList
@@ -67,8 +68,9 @@ const AppContent: FC<AppContentProps> = (props) => {
           )}
           {props.showSidePane && (
             <div
-              className={`${showSidePaneGrid ? "bg-black-200  min-h-100vh-56" : ""
-                } flex w-full sm:hidden`}
+              className={`${
+                showSidePaneGrid ? "bg-black-200  min-h-100vh-56" : ""
+              } flex w-full sm:hidden`}
             >
               <SidePaneGrid
                 menuList={MENU_LIST}

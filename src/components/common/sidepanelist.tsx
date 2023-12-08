@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import CustomImage from "./customimage";
-import { IMenu, SidePaneListProps } from "../../@types/components/commonTypes";
+import CustomImage from "./CustomImage";
+import { IMenu, SidePaneListProps } from "../../@types/components/CommonTypes";
 
 const SidePaneList: FC<SidePaneListProps> = (props) => {
   const navigate = useNavigate();
@@ -20,10 +20,11 @@ const SidePaneList: FC<SidePaneListProps> = (props) => {
       {props.menuList.map((menu) => (
         <a
           key={menu.id}
-          className={`flex pl-4 pr-2 py-4 items-center cursor-pointer h-11 mx-auto ${props.selectedMenu === menu.id
+          className={`flex pl-4 pr-2 py-4 items-center cursor-pointer h-11 mx-auto ${
+            props.selectedMenu === menu.id
               ? "bg-black-300 rounded-lg"
               : "bg-transparent"
-            }`}
+          }`}
           onClick={() => navigateToMenu(menu)}
         >
           <CustomImage

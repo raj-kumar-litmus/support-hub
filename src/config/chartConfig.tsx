@@ -17,7 +17,7 @@ import {
   OPM_COMPARISON_CHART_STYLES,
   OPM_COMP_CHART_DEFAULT,
   OPM_CHART_DEFAULT,
-} from "../constants/appConstants";
+} from "../constants/AppConstants";
 
 Chart.register(
   CategoryScale,
@@ -486,7 +486,10 @@ export const OPM_COMPARISON_OPTIONS_HOME = ({
           ...options.plugins.legend.labels,
           generateLabels: () => {
             return Object.keys(apiResponse).map((_, index) => ({
-              text: index === 0 ? DASHBOARD_LABELS.TODAY : DASHBOARD_LABELS.YESTERDAY,
+              text:
+                index === 0
+                  ? DASHBOARD_LABELS.TODAY
+                  : DASHBOARD_LABELS.YESTERDAY,
               fillStyle:
                 index === 0
                   ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR
@@ -610,7 +613,10 @@ export const OPM_COMPARISON_BAR_OPTIONS_HOME = ({
           ...options.plugins.legend.labels,
           generateLabels: () => {
             return Object.keys(apiResponse).map((_, index) => ({
-              text: index === 0 ? DASHBOARD_LABELS.TODAY : DASHBOARD_LABELS.YESTERDAY,
+              text:
+                index === 0
+                  ? DASHBOARD_LABELS.TODAY
+                  : DASHBOARD_LABELS.YESTERDAY,
               fillStyle:
                 index === 0
                   ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR

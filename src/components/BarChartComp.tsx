@@ -12,10 +12,10 @@ import { Bar } from "react-chartjs-2";
 import { useLocation, useNavigate } from "react-router-dom";
 import useScreenSize from "../hooks/useScreenSize";
 import RotateIcon from "../assets/rotate.svg";
-import CustomImage from "./common/customimage";
-import { SCREEN_WIDTH } from "../constants/appConstants";
+import CustomImage from "./common/CustomImage";
+import { SCREEN_WIDTH } from "../constants/AppConstants";
 import { ROUTES, increaseLegendSpacing } from "./utils/Utils";
-import { BarChartCompProps } from "../@types/components/commonTypes";
+import { BarChartCompProps } from "../@types/components/CommonTypes";
 
 ChartJS.register(
   CategoryScale,
@@ -23,7 +23,7 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
 const BarChartComp = (props: BarChartCompProps) => {

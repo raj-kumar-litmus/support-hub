@@ -1,6 +1,6 @@
 import { Toast } from "primereact/toast";
 import { useEffect, useRef } from "react";
-import { CustomToastProps } from "../../@types/components/commonTypes";
+import { CustomToastProps } from "../../@types/components/CommonTypes";
 
 const CustomToast = (props: CustomToastProps) => {
   const ref = useRef(null);

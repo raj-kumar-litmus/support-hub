@@ -1,5 +1,5 @@
 import { Checkbox } from "primereact/checkbox";
-import { CustomCheckboxProps } from "../../@types/components/commonTypes";
+import { CustomCheckboxProps } from "../../@types/components/CommonTypes";
 
 const CustomCheckbox = (props: CustomCheckboxProps) => (
   <div className={props.containerclassname}>
