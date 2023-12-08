@@ -1,6 +1,6 @@
 import { FC, KeyboardEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import QuickLinks from "../quicklinks";
+import QuickLinks from "../Quicklinks";
 import CustomImage from "./CustomImage";
 import SearchBar from "./SearchBar";
 import QuickLinksIcon from "../../assets/Quick Links.svg";
