@@ -405,7 +405,7 @@ export const MultiLineCurvyChartWithMultipleLines: Story = {
   },
 };
 
-export const MultiLineDarkBgCurvyLineChart: Story = {
+export const MultiLineDarkBackgroundCurvyLineChart: Story = {
   args: {
     options: {
       responsive: true,

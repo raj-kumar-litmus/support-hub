@@ -185,7 +185,7 @@ button.p-button-secondary {
   @apply px-2 py-2.5 rounded-t-10 border-b border-b-gray-700 border-solid;
 }
 .filtersModal-popup.p-dialog {
-  @apply absolute max-sm:max-h-[calc(full-h-154)] max-480:w-full w-390 max-480:!bottom-0 sm:max-h-528;
+  @apply absolute max-sm:max-h-100vh-154px max-480:w-full w-390 max-480:!bottom-0 sm:max-h-528;
 }
 .filtersModal .p-dialog-header .p-dialog-title {
   @apply font-normal text-center text-base;
@@ -881,7 +881,7 @@ hr.horizontalLine.blue {
   @apply border-0 rounded-lg h-inherit mt-4 pb-14 sm:pb-4 pt-4 sm:pt-12 lg:pt-14 px-4 lg:px-6;
 }
 .opm-page-chart-container-rotated {
-  @apply w-100vh-1.75rem h-[calc(full-w-1rem)] -mt-8 bg-inherit;
+  @apply w-100vh-1.75rem h-100vw-1r -mt-8 bg-inherit;
 }
 .opm-comparison-page-chart-container {
   @apply border-0 rounded-lg h-inherit mt-4 pb-24 sm:pb-4 pt-4 sm:pt-12 lg:pt-14 px-4 lg:px-6;

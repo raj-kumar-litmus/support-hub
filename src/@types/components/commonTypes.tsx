@@ -198,7 +198,7 @@ export type SearchBarProps = {
   onSearch: (e: KeyboardEvent<HTMLInputElement>) => void;
   placeholder: string;
   className?: string;
-  type?:string
+  type?: string;
 };
 
 export type SearchFieldProps = {
@@ -290,10 +290,15 @@ export interface ChartProps {
   type: string;
 }
 
+export enum SideBarPositionEnums {
+  RIGHT = "right",
+  LEFT = "left",
+}
+
 export interface CustomSideBarProps extends SidebarProps {
   visible: boolean;
   setVisible?: () => void;
-  position: string;
+  position: SideBarPositionEnums;
   title?: string;
   children?: React.ReactNode;
   themeClasses?: string;

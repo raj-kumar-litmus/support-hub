@@ -120,7 +120,7 @@ export default {
         "32.5w": "32.5vw",
         "38w": "38vw",
         "40w": "40vw",
-        "43w":"43vw",
+        "43w": "43vw",
         "44w": "44vw",
         "45h": "45vh",
         "45w": "45vw",
@@ -143,6 +143,7 @@ export default {
         "100vh-56": "calc(100vh-56px)",
         "100vh-57r": "calc(100vh-57rem)",
         "100vh-1.75rem": "calc(100vh-1.75rem)",
+        "100vw-1r": "calc(100vw-1rem)",
         inherit: "inherit",
       },
       maxWidth: {},
@@ -150,7 +151,7 @@ export default {
         "4.5r": "4.5rem",
       },
       maxHeight: {
-        528:"528px",
+        528: "528px",
         "100vh-154px": "calc(100vh-154px)",
       },
       minHeight: {
@@ -178,7 +179,7 @@ export default {
     },
     screens: {
       xs: "450px",
-      480:"480px",
+      480: "480px",
       sm: "640px",
       md: "850px",
       lg: "1024px",
