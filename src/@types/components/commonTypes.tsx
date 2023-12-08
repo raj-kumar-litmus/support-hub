@@ -296,10 +296,7 @@ export enum SideBarPositionEnums {
 }
 
 export interface CustomSideBarProps extends SidebarProps {
-  visible: boolean;
   setVisible?: () => void;
-  position: SideBarPositionEnums;
   title?: string;
-  children?: React.ReactNode;
   themeClasses?: string;
 }
