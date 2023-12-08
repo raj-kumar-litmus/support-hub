@@ -73,8 +73,8 @@ import {
   DATE_TIME_FORMAT_4,
   formatDate,
   getFormattedPSTDate,
-} from "../utils/dateTimeUtil";
-import { fetchData } from "../utils/fetchUtil";
+} from "../utils/DateTimeUtil";
+import { fetchData } from "../utils/FetchUtil";
 import { ROUTES, submitOnEnter } from "../components/utils/Utils";
 
 ChartJS.register(
