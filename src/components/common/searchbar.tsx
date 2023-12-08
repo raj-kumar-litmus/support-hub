@@ -1,7 +1,7 @@
 import { FC } from "react";
 import CustomButton from "../Button";
 import CustomImage from "./customimage";
-import CustomInputText from "./custominputtext";
+import CustomInputText from "../InputText";
 import HeaderSearch from "../../assets/headersearch.svg";
 import { SearchBarProps } from "../../@types/components/commonTypes";
 
@@ -9,13 +9,6 @@ const SearchBar: FC<SearchBarProps> = (props) => {
   return (
     <div className="block">
       <span className="search-input p-input-icon-left hidden sm:block">
-        {!props.hideIcon && (
-          <CustomImage
-            src={HeaderSearch}
-            alt="Search"
-            className="absolute left-5 bottom-3"
-          />
-        )}
         <CustomInputText
           type="text"
           className={`w-[15.6rem] h-10 !rounded-full focus:outline-none  bg-gray-900 text-gray-300 placeholder:text-gray-300 placeholder:font-helvetica placeholder:font-normal !shadow-none !border-none ${props.className}`}
@@ -23,6 +16,8 @@ const SearchBar: FC<SearchBarProps> = (props) => {
           value={props.searchValue}
           onChange={(e) => props.setSearchValue(e.target.value)}
           onKeyDown={(e) => props.onSearch(e)}
+          icon={HeaderSearch}
+          imageclassname="!top-3 left-4"
         />
       </span>
       {props.showSearchButton && (
@@ -37,5 +32,5 @@ const SearchBar: FC<SearchBarProps> = (props) => {
     </div>
   );
 };
-
+ 
 export default SearchBar;

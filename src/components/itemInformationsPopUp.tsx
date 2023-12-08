@@ -13,8 +13,6 @@ const ItemInformationsPopUp: FC<ItemInformationsPopUpProps> = (props) => {
       header={ORDER_DETAILS_LABELS.ITEMS_INFO}
       visible={props.openItemInformationPopup}
       onHide={() => props.setItemInformationPopup(false)}
-      draggable={false}
-      resizable={false}
       className="custom-popup lineitem-popup"
     >
       {props.lineitems.length > 0 &&

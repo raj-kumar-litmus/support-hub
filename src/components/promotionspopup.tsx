@@ -10,8 +10,6 @@ const PromotionsPopup: FC<PromotionsPopupProps> = (props) => {
       header={ORDER_DETAILS_LABELS.PROMOTIONS}
       visible={props.openPromotionsPopup}
       onHide={() => props.setOpenPromotionsPopup(false)}
-      draggable={false}
-      resizable={false}
       className="custom-popup"
     >
       {props.promotions?.length > 0 ? (
