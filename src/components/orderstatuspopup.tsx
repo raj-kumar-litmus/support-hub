@@ -20,8 +20,6 @@ const OrderStatusPopup: FC<OrderStatusPopupProps> = (props) => {
       visible={props.openDialog}
       onHide={() => props.setOpenDialog(false)}
       className="custom-popup"
-      draggable={false}
-      resizable={false}
     >
       <CustomTable
         resizableColumns
