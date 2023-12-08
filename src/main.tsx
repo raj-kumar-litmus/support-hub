@@ -14,6 +14,7 @@ import DcOpenOrders from "./components/DcOpenOrders";
 import BarChart from "./components/charts/BarChart";
 import HomePage from "./components/homePage";
 import OrderDetails from "./components/orderDetails/OrderDetails.js";
+import SKULookup from "./components/skuLookup";
 import { ROUTES } from "./components/utils/Utils";
 import "./index.css";
 
@@ -31,6 +32,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route
             path={ROUTES.dcOpenOrders}
             element={<App appContent={<DcOpenOrders />} />}
+          />
+          <Route
+            path={'/sku-lookup'}
+            element={<App appContent={<SKULookup />} />}
           />
           <Route
             path={ROUTES.sessions}

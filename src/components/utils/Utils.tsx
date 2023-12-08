@@ -36,6 +36,12 @@ export const MENU_LIST = [
     icon: DCOpenOrdersIcon,
     path: ROUTES.dcOpenOrders,
   },
+  {
+    id: 6,
+    name: "SKU Lookup",
+    icon: DCOpenOrdersIcon,
+    path: '/sku-lookup',
+  },
 ];
 
 const getOrCreateTooltip = (chart, type, tooltip) => {

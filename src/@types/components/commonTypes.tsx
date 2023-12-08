@@ -198,6 +198,7 @@ export type SearchBarProps = {
   placeholder: string;
   className?: string;
   type?:string
+  hideMobileView?: boolean;
 };
 
 export type SearchFieldProps = {
