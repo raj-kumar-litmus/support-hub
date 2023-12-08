@@ -394,3 +394,51 @@ export const RedAndGreenDoughNut: Story = {
     containerClassName: "bg-gray-700 w-[60vw] h-[80vh]",
   },
 };
+
+export const FullRedAndHalfGreenDoughNut: Story = {
+  args: {
+    options: {
+      responsive: true,
+      cutout: "80%",
+    },
+    data: {
+      datasets: [
+        {
+          label: "My First Dataset",
+          data: [100],
+          weight: 3,
+          backgroundColor: ["#BB723F"],
+          borderColor: "#232323",
+          borderWidth: 0,
+        },
+        {
+          weight: 3,
+          data: [100],
+          borderColor: "#232323",
+          borderWidth: 0,
+          backgroundColor: ["#29292A"],
+        },
+        {
+          label: "My Second Dataset",
+          data: [20, 80],
+          weight: 3,
+          borderColor: "#232323",
+          borderWidth: 0,
+          backgroundColor: ["#31737B", "#424245"],
+        },
+      ],
+    },
+    plugins: [
+      centerText({
+        text: "PRO",
+        fillColor: "#29292A",
+        arcX: 253,
+        arcY: 260,
+        arcRadius: 200,
+        arcStart: 0,
+        arcEnd: 2 * Math.PI,
+      }),
+    ],
+    containerClassName: "bg-gray-700 w-[60vw] h-[80vh]",
+  },
+};

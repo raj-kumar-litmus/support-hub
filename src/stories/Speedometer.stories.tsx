@@ -250,15 +250,47 @@ export const CustomizeFontSizesAndSpacing: Story = {
   },
 };
 
-export const SegmentStopsWithWhitePaddingAndTrafficSignalColors: Story = {
+export const TrafficSignalColors: Story = {
   args: {
     needleHeightRatio: 0.7,
     maxSegmentLabels: 0,
     segments: 3,
     customSegmentStops: [0, 30, 31, 70, 71, 100],
     maxValue: 100,
-    segmentColors: ["green", "white", "#ffff00", "white", "red"],
+    segmentColors: ["green", "#29292A", "#ffff00", "#29292A", "red"],
+    value: 27,
+    needleColor: "#fff",
+    valueTextFontSize: "0px",
+    containerClassName: "bg-[#29292A] h-[30vh]",
+  },
+};
+
+export const GreenSpeedometer: Story = {
+  args: {
+    needleHeightRatio: 0.7,
+    maxSegmentLabels: 0,
+    segments: 3,
+    customSegmentStops: [0, 30, 31, 70, 71, 100],
+    maxValue: 100,
+    segmentColors: ["#336C6C", "#29292A", "#37A6A7", "#29292A", "#3ED9DB"],
+    needleColor: "#fff",
     value: 27,
     valueTextFontSize: "0px",
+    containerClassName: "bg-[#29292A] h-[30vh]",
+  },
+};
+
+export const PurpleSpeedometer: Story = {
+  args: {
+    needleHeightRatio: 0.7,
+    maxSegmentLabels: 0,
+    segments: 3,
+    customSegmentStops: [0, 30, 31, 70, 71, 100],
+    maxValue: 100,
+    segmentColors: ["#55609C", "#29292A", "#697AD1", "#29292A", "#7487EB"],
+    needleColor: "#fff",
+    value: 27,
+    valueTextFontSize: "0px",
+    containerClassName: "bg-[#29292A] h-[30vh]",
   },
 };

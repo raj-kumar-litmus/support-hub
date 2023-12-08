@@ -1,4 +1,3 @@
-import type { ChartData, ChartOptions } from "chart.js";
 import {
   ArcElement,
   CategoryScale,
@@ -11,18 +10,7 @@ import {
   Tooltip,
 } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-
-interface Props {
-  options: ChartOptions<"doughnut"> | any;
-  data: ChartData<"doughnut">;
-  containerClassName?: string;
-  chartClassName?: string;
-  title?: string;
-  isFullScreen?: boolean;
-  defaultClasses?: boolean;
-  plugins?: any;
-  showIndicator?: boolean;
-}
+import { DoughNutChartProps } from "../../@types/components/commonTypes";
 
 ChartJS.register(
   ArcElement,
@@ -35,20 +23,18 @@ ChartJS.register(
   Legend,
 );
 
-const DoughnutChart = (props: Props) => {
-  return (
-    <div
-      className={`${props.containerClassName} cursor-pointer`}
-      onClick={() => alert("Hi there")}
-    >
-      <Doughnut
-        className={props.chartClassName}
-        options={props.options}
-        data={props.data}
-        plugins={props.plugins}
-      />
-    </div>
-  );
-};
+const DoughnutChart = (props: DoughNutChartProps) => (
+  <div
+    className={`${props.containerClassName} cursor-pointer`}
+    onClick={() => alert("Hi there")}
+  >
+    <Doughnut
+      className={props.chartClassName}
+      options={props.options}
+      data={props.data}
+      plugins={props.plugins}
+    />
+  </div>
+);
 
 export default DoughnutChart;
