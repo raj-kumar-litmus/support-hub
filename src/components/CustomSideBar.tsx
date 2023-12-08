@@ -1,17 +1,20 @@
 import { Sidebar } from "primereact/sidebar";
 import CustomButton from "./Button";
 import { LABELS } from "../constants/appConstants";
-import { CustomSideBarProps } from "../@types/components/commonTypes";
+import {
+  CustomSideBarProps,
+  SideBarPositionEnums,
+} from "../@types/components/commonTypes";
 
 const CustomSideBar = (props: CustomSideBarProps) => {
   const getCloseBtnLayoutClasses = () => {
     switch (props.position) {
-      case "right":
-        return `rotate-180 right-50w`;
-      case "left":
-        return `left-50w`;
+      case SideBarPositionEnums.RIGHT:
+        return "rotate-180 right-50w";
+      case SideBarPositionEnums.LEFT:
+        return "left-50w";
       default:
-        return `rotate-180 right-50w`;
+        return "rotate-180 right-50w";
     }
   };
 
