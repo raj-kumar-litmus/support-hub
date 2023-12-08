@@ -6,7 +6,7 @@ import CustomButton from "./Button";
 import BarChart from "./charts/BarChart";
 import CustomImage from "./common/CustomImage";
 import HomeCard from "./common/HomeCard";
-import GlobalLoader from "./globalLoader";
+import GlobalLoader from "./GlobalLoader";
 import Loader from "./Loader";
 import TimeTracker from "./TimeTracker";
 import LoaderPortal from "./LoaderPortal";
