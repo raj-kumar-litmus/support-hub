@@ -34,7 +34,7 @@ import {
   OrderData,
   IPromotion,
 } from "../../@types/pages/OrderDetails";
-import { fetchData } from "../../utils/fetchUtil";
+import { fetchData } from "../../utils/FetchUtil";
 import { getTableHeaders } from "../utils/Utils";
 
 const OrderDetails: React.FC = () => {
