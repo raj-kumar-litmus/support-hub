@@ -9,8 +9,8 @@ import {
 import { ToastProps } from "primereact/toast";
 import { FC, KeyboardEvent } from "react";
 import { CommerceItemData } from "../pages/OrderDetails";
-import { DCOpenOrders } from "../pages/dcOpenOrders";
-import { ModalEnums } from "../pages/opmCharts";
+import { DCOpenOrders } from "../pages/DcOpenOrders";
+import { ModalEnums } from "../pages/OpmCharts";
 import { InputTextProps } from "primereact/inputtext";
 
 export type CardProps = {
@@ -197,7 +197,7 @@ export type SearchBarProps = {
   onSearch: (e: KeyboardEvent<HTMLInputElement>) => void;
   placeholder: string;
   className?: string;
-  type?:string
+  type?: string;
 };
 
 export type SearchFieldProps = {

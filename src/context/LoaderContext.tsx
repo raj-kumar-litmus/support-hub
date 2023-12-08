@@ -1,9 +1,9 @@
 import { createContext, useState } from "react";
-import { LoaderContextType } from "../@types/components/commonTypes";
+import { LoaderContextType } from "../@types/components/CommonTypes";
 
 export const LoaderContext = createContext<LoaderContextType | null>(null);
 
-export const LoaderProvider = ({ children }) => {
+export const LoaderProvider = ({ children }: any) => {
   const [showGlobalLoader, setShowGlobalLoader] = useState<boolean>(true);
 
   const showLoader = () => {

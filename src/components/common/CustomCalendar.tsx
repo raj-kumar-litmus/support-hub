@@ -1,6 +1,6 @@
 import { Calendar } from "primereact/calendar";
 import { FC, useEffect, useState } from "react";
-import CustomImage from "./customimage";
+import CustomImage from "./CustomImage";
 import CustomToast from "./CustomToast";
 import CustomInputNumber from "./CustomInputNumber";
 import ArrowDown from "../../assets/arrow_down.svg";
@@ -8,12 +8,12 @@ import ArrowUp from "../../assets/arrow_up.svg";
 import {
   CustomCalendarProps,
   ManualInputTimeProps,
-} from "../../@types/components/commonTypes";
+} from "../../@types/components/CommonTypes";
 import {
   AM_PM_OPTIONS,
   CALENDAR_TOAST_MESSAGE,
-} from "../../constants/appConstants";
-import { CURRENT_PST_DATE } from "../../utils/dateTimeUtil";
+} from "../../constants/AppConstants";
+import { CURRENT_PST_DATE } from "../../utils/DateTimeUtil";
 import { convert12to24Hour, convert24to12Hour } from "../utils/Utils";
 
 const CustomCalendar: FC<CustomCalendarProps> = (props) => {
@@ -101,8 +101,7 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
         {props.title}
       </div>
       <img className={`absolute ${props.imageclassname}`} src={props.imgsrc} />
-      <Calendar    
-       
+      <Calendar
         {...props}
         readOnlyInput
         className="w-full"

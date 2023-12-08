@@ -1,11 +1,11 @@
 import { Column } from "primereact/column";
 import { FC } from "react";
-import CustomDialog from "./common/customdialog";
-import CustomTable from "./common/customtable";
+import CustomDialog from "./common/CustomDialog";
+import CustomTable from "./common/CustomTable";
 import {
   ORDER_DETAILS_LABELS,
   ORDER_STATUS_LIST,
-} from "../constants/appConstants";
+} from "../constants/AppConstants";
 import { getTableHeaders } from "./utils/Utils";
 
 type OrderStatusPopupProps = {
@@ -27,10 +27,11 @@ const OrderStatusPopup: FC<OrderStatusPopupProps> = (props) => {
         stripedRows
         value={ORDER_STATUS_LIST}
         className="custom-table"
-        children={getTableHeaders(ORDER_STATUS_LIST).map((h) => (
+      >
+        {getTableHeaders(ORDER_STATUS_LIST).map((h) => (
           <Column key={h} field={h} header={h}></Column>
         ))}
-      />
+      </CustomTable>
     </CustomDialog>
   );
 };

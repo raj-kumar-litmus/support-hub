@@ -1,5 +1,5 @@
 import React from "react";
-import { TimelineCardProps } from "../../@types/components/commonTypes";
+import { TimelineCardProps } from "../../@types/components/CommonTypes";
 
 const TimelineCard: React.FC<TimelineCardProps> = (props) => {
   const [orderDate, orderTime] = props.date.split(" ");

@@ -3,9 +3,9 @@ import useInterval from "../../hooks/useInterval";
 import CustomCheckbox from "./CustomCheckBox";
 import CustomInputNumber from "./CustomInputNumber";
 import CustomToast from "./CustomToast";
-import CustomImage from "./customimage";
+import CustomImage from "./CustomImage";
 import InfoIcon from "../../assets/info.svg";
-import { LABELS } from "../../constants/appConstants";
+import { LABELS } from "../../constants/AppConstants";
 
 interface AutoRefreshProps {
   getData(): any;
@@ -53,7 +53,7 @@ const AutoRefresh = (props: AutoRefreshProps) => {
     setAutoRefreshDuration(
       e.value > AUTO_REFRESH_MAX_DURATIONS_MINS
         ? AUTO_REFRESH_MAX_DURATIONS_MINS
-        : e.value
+        : e.value,
     );
     setPollingRefreshDuration(e.value * 60 * 1000);
     if (e.value) {

@@ -1,6 +1,6 @@
 import { TabPanel, TabView } from "primereact/tabview";
 import { FC } from "react";
-import { CustomTabProps } from "../../@types/components/commonTypes";
+import { CustomTabProps } from "../../@types/components/CommonTypes";
 
 const CustomTab: FC<CustomTabProps> = (props) => {
   return (

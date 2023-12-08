@@ -1,4 +1,4 @@
-import { ORDER_DETAILS_LABELS } from "../constants/appConstants";
+import { ORDER_DETAILS_LABELS } from "../constants/AppConstants";
 
 export const orderDataJSON = {
   orderId: "60577546279",

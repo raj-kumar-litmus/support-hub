@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CustomImage from "../components/common/customimage";
+import CustomImage from "../components/common/CustomImage";
 import DashboardIcon from "../assets/dashboard.svg";
 
 const meta = {

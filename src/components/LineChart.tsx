@@ -12,10 +12,10 @@ import { useState } from "react";
 import { Line } from "react-chartjs-2";
 import { useLocation, useNavigate } from "react-router-dom";
 import useScreenSize from "../hooks/useScreenSize";
-import CustomImage from "./common/customimage";
+import CustomImage from "./common/CustomImage";
 import RotateIcon from "../assets/rotate.svg";
-import { SCREEN_WIDTH } from "../constants/appConstants";
-import { LineChartProps } from "../@types/components/commonTypes";
+import { SCREEN_WIDTH } from "../constants/AppConstants";
+import { LineChartProps } from "../@types/components/CommonTypes";
 import { ROUTES, increaseLegendSpacing } from "./utils/Utils";
 
 ChartJS.register(
@@ -25,7 +25,7 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
 function LineChart(props: LineChartProps) {

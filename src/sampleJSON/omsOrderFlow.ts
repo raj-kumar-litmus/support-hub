@@ -1,4 +1,4 @@
-import { ORDER_DETAILS_LABELS } from "../constants/appConstants";
+import { ORDER_DETAILS_LABELS } from "../constants/AppConstants";
 
 export const omsOrderFlowJSON = {
   orderNo: "60577546279",

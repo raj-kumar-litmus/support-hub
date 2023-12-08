@@ -1,7 +1,7 @@
 import React from "react";
 import GlobalLoaderIcon from "../assets/loader.gif";
-import CustomImage from "./common/customimage";
-import { LoaderProps } from "../@types/components/commonTypes";
+import CustomImage from "./common/CustomImage";
+import { LoaderProps } from "../@types/components/CommonTypes";
 
 const GlobalLoader: React.FC<LoaderProps> = (props) => {
   return (
