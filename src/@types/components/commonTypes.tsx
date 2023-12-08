@@ -6,6 +6,7 @@ import {
   InputNumberProps,
   InputNumberValueChangeEvent,
 } from "primereact/inputnumber";
+import { SidebarProps } from "primereact/sidebar";
 import { ToastProps } from "primereact/toast";
 import { FC, KeyboardEvent } from "react";
 import { CommerceItemData } from "../pages/OrderDetails";
@@ -197,7 +198,7 @@ export type SearchBarProps = {
   onSearch: (e: KeyboardEvent<HTMLInputElement>) => void;
   placeholder: string;
   className?: string;
-  type?:string
+  type?: string;
 };
 
 export type SearchFieldProps = {
@@ -287,4 +288,15 @@ export interface BarChartCompProps {
 
 export interface ChartProps {
   type: string;
+}
+
+export enum SideBarPositionEnums {
+  RIGHT = "right",
+  LEFT = "left",
+}
+
+export interface CustomSideBarProps extends SidebarProps {
+  setVisible?: () => void;
+  title?: string;
+  themeClasses?: string;
 }
