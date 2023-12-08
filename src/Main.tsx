@@ -15,7 +15,7 @@ import BarChart from "./components/charts/BarChart";
 import HomePage from "./components/HomePage";
 import OrderDetails from "./components/orderDetails/OrderDetails.js";
 import { ROUTES } from "./components/utils/Utils";
-import "./index.css";
+import "./Index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
