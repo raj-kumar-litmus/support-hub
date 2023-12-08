@@ -1,21 +1,16 @@
-import { FC, useEffect, useState, KeyboardEvent } from "react";
+import { FC, KeyboardEvent, useEffect, useState } from "react";
+import { useLocation } from "react-router";
+import { useNavigate } from "react-router-dom";
+import useScreenSize from "../hooks/useScreenSize";
 import Navbar from "./common/navbar";
 import SearchField from "./common/searchfield";
 import SidePaneGrid from "./common/sidepanegrid";
 import SidePaneList from "./common/sidepanelist";
 import { MENU_LIST, ROUTES } from "./utils/Utils";
-import { useLocation } from "react-router";
-import { useNavigate } from "react-router-dom";
-import useScreenSize from "../hooks/useScreenSize";
 import { SCREEN_WIDTH } from "../constants/appConstants";
+import { AppContentProps } from "../@types/components/commonTypes";
 
-type Props = {
-  showSidePane: boolean;
-  showNavbar: boolean;
-  appContent: any;
-};
-
-const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
+const AppContent: FC<AppContentProps> = (props) => {
   const [showSidePaneGrid, setShowSidePaneGrid] = useState<boolean>(false);
   const [openSearchField, setOpenSearchField] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>("");
@@ -33,7 +28,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
 
   useEffect(() => {
     const _selectedMenu = MENU_LIST.find(
-      (menu) => location?.pathname.split("/")[1] == menu.path.split("/")[1],
+      (menu) => location?.pathname.split("/")[1] == menu.path.split("/")[1]
     )?.id;
     setSelectedMenu(_selectedMenu);
   }, [location?.pathname]);
@@ -41,16 +36,16 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
   const searchOrder = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && searchValue.length > 0) {
       e.preventDefault();
-      navigate(`/${ROUTES.orderDetails}/${searchValue}`);
+      navigate(`${ROUTES.orderDetails}/${searchValue}`);
     }
   };
 
   return (
     <div>
       <div className="h-screen overflow-y-hidden">
-        {showNavbar && (
+        {props.showNavbar && (
           <Navbar
-            showSidePane={showSidePane}
+            showSidePane={props.showSidePane}
             showSidePaneGrid={showSidePaneGrid}
             setShowSidePaneGrid={setShowSidePaneGrid}
             openSearchField={openSearchField}
@@ -63,14 +58,14 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
           className={`flex flex-col sm:flex-row ${IS_FULLSCREEN ? "" : "mt-14"
             } ml-0 bg-black-200`}
         >
-          {showSidePane && (
+          {props.showSidePane && (
             <SidePaneList
               menuList={MENU_LIST}
               selectedMenu={selectedMenu}
               setSelectedMenu={setSelectedMenu}
             />
           )}
-          {showSidePane && (
+          {props.showSidePane && (
             <div
               className={`${showSidePaneGrid ? "bg-black-200  min-h-100vh-56" : ""
                 } flex w-full sm:hidden`}
@@ -102,7 +97,7 @@ const AppContent: FC<Props> = ({ showSidePane, showNavbar, appContent }) => {
               ${width < SCREEN_WIDTH.SM && IS_ORDER_DETAILS ? "pt-0" : ""}
               `}
           >
-            {appContent}
+            {props.appContent}
           </div>
         </div>
       </div>

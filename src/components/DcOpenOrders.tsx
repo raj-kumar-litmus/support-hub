@@ -1,20 +1,13 @@
-import { FC, useEffect, useState } from "react";
-import { DCOpenOrders } from "../@types/dcOpenOrders";
-import { fetchData } from "../utils/fetchUtil";
-import { URL_DC_OPEN_ORDERS } from "../constants/apiConstants";
-import Card from "./common/Card";
-import Loader from "./loader";
-import CustomTable from "./common/customtable";
 import { Column } from "primereact/column";
+import { FC, useEffect, useState } from "react";
+import Card from "./common/Card";
+import CustomTable from "./common/customtable";
+import Loader from "./loader";
+import { DCOpenOrders, orderData } from "../@types/pages/dcOpenOrders";
+import { URL_DC_OPEN_ORDERS } from "../constants/apiConstants";
+import { fetchData } from "../utils/fetchUtil";
 import { getTableHeaders } from "./utils/Utils";
 import { PAGE_TITLES } from "../constants/appConstants";
-
-interface orderData {
-  country: string;
-  shipNode: string;
-  dcName: string;
-  workableOrders: number;
-}
 
 const DcOpenOrders: FC = () => {
   const [tableData, setTableData] = useState<DCOpenOrders[]>([]);

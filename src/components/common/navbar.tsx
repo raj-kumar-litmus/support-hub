@@ -1,32 +1,15 @@
 import { FC, KeyboardEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import QuickLinks from "../quicklinks";
+import CustomImage from "./customimage";
+import SearchBar from "./searchbar";
+import QuickLinksIcon from "../../assets/Quick Links.svg";
 import SephoraLogo from "../../assets/logo.svg";
 import MenuIcon from "../../assets/menu.svg";
-import QuickLinksIcon from "../../assets/Quick Links.svg";
-import SearchBar from "./searchbar";
-import CustomImage from "./customimage";
+import { NavbarProps } from "../../@types/components/commonTypes";
 import { MENU_LIST, ROUTES } from "../utils/Utils";
-import QuickLinks from "../quicklinks";
 
-type Props = {
-  showSidePane: boolean;
-  showSidePaneGrid: boolean;
-  setShowSidePaneGrid: (a: boolean) => void;
-  openSearchField: boolean;
-  setOpenSearchField: (a: boolean) => void;
-  searchValue: string;
-  setSearchValue: (a: string) => void;
-};
-
-const Navbar: FC<Props> = ({
-  showSidePane,
-  showSidePaneGrid,
-  setShowSidePaneGrid,
-  openSearchField,
-  setOpenSearchField,
-  searchValue,
-  setSearchValue,
-}) => {
+const Navbar: FC<NavbarProps> = (props) => {
   const navigate = useNavigate();
   const [showQuickLinks, setShowQuickLinks] = useState<boolean>(false);
 
@@ -35,14 +18,14 @@ const Navbar: FC<Props> = ({
   };
 
   const toggleShowSidePane = () => {
-    setShowSidePaneGrid(!showSidePaneGrid);
-    setOpenSearchField(false);
+    props.setShowSidePaneGrid(!props.showSidePaneGrid);
+    props.setOpenSearchField(false);
   };
 
   const onSearch = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter" && searchValue.length > 0) {
+    if (event.key === "Enter" && props.searchValue.length > 0) {
       event.preventDefault();
-      navigate(`/${ROUTES.orderDetails}/${searchValue}`);
+      navigate(`${ROUTES.orderDetails}/${props.searchValue}`);
     }
   };
 
@@ -53,12 +36,13 @@ const Navbar: FC<Props> = ({
       }
     >
       <div
-        className={`flex pl-4 ${showSidePaneGrid
+        className={`flex pl-4 ${
+          props.showSidePaneGrid
             ? "w-[367px] bg-black-200 h-14 items-center border-black-400 border-solid border-b"
             : "w-auto"
-          }`}
+        }`}
       >
-        {showSidePane && (
+        {props.showSidePane && (
           <CustomImage
             className="h-13 sm:hidden pr-4 cursor-pointer"
             src={MenuIcon}
@@ -74,7 +58,7 @@ const Navbar: FC<Props> = ({
         />
       </div>
       <div>
-        {!showSidePaneGrid && (
+        {!props.showSidePaneGrid && (
           <CustomImage
             src={QuickLinksIcon}
             onClick={() => setShowQuickLinks(!showQuickLinks)}
@@ -84,17 +68,17 @@ const Navbar: FC<Props> = ({
         <div className="sm:mr-12">
           {" "}
           <SearchBar
-            showSearchButton={!showSidePaneGrid}
-            setOpenSearchField={setOpenSearchField}
-            openSearchField={openSearchField}
-            searchValue={searchValue}
-            setSearchValue={setSearchValue}
+            showSearchButton={!props.showSidePaneGrid}
+            setOpenSearchField={props.setOpenSearchField}
+            openSearchField={props.openSearchField}
+            searchValue={props.searchValue}
+            setSearchValue={props.setSearchValue}
             onSearch={onSearch}
             placeholder="Search Order"
           />
         </div>
       </div>
-      {!showSidePaneGrid && showQuickLinks && (
+      {!props.showSidePaneGrid && showQuickLinks && (
         <QuickLinks
           showQuickLinks={showQuickLinks}
           setShowQuickLinks={setShowQuickLinks}

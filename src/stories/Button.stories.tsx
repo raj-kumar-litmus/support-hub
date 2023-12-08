@@ -1,9 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-// import useState from 'storybook-addon-state';
-import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
 import CustomButton from "../components/Button";
-// import { storiesOf } from '@storybook/react';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {

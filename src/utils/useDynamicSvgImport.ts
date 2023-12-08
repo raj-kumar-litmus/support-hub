@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export function useDynamicSvgImport(iconName: string) {
   const importedIconRef = useRef<React.FC<React.SVGProps<SVGElement>>>();

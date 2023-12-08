@@ -1,7 +1,7 @@
-import SidePaneList from "../components/common/sidepanelist";
 import type { Meta, StoryObj } from "@storybook/react";
-import { MENU_LIST } from "../components/utils/Utils";
 import { withRouter } from "storybook-addon-react-router-v6";
+import SidePaneList from "../components/common/sidepanelist";
+import { MENU_LIST } from "../components/utils/Utils";
 
 const meta = {
   title: "Stories/sidepane-web",

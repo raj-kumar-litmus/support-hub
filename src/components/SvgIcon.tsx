@@ -1,12 +1,7 @@
 import { useDynamicSvgImport } from "../utils/useDynamicSvgImport";
+import { SvgIconProps } from "../@types/components/commonTypes";
 
-interface IProps {
-  iconName: string;
-  wrapperStyle?: string;
-  svgProp?: React.SVGProps<SVGSVGElement>;
-}
-
-function SvgIcon(props: IProps) {
+function SvgIcon(props: SvgIconProps) {
   const { iconName, wrapperStyle, svgProp } = props;
   const { loading, SvgIcon } = useDynamicSvgImport(iconName);
 

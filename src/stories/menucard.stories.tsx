@@ -1,6 +1,6 @@
-import DashboardIcon from "../assets/dashboard.svg";
-import MenuCard from "../components/common/menucard";
 import type { Meta, StoryObj } from "@storybook/react";
+import MenuCard from "../components/common/menucard";
+import DashboardIcon from "../assets/dashboard.svg";
 
 const meta = {
   title: "Stories/menucard",

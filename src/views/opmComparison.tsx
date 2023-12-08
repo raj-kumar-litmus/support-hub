@@ -1,49 +1,52 @@
-import React, { Fragment, useEffect, useState, useContext } from "react";
-import { useNavigate } from "react-router";
 import {
-  Chart as ChartJS,
   CategoryScale,
+  Chart as ChartJS,
+  Filler,
+  Legend,
+  LineElement,
   LinearScale,
   PointElement,
-  LineElement,
-  Filler,
   Title,
   Tooltip,
-  Legend,
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-
-import {
-  ModalEnums,
-  ChartData,
-  ChartOptions,
-  OpmComparisonType,
-} from "../@types/supportHub";
+import React, { Fragment, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import useScreenSize from "../hooks/useScreenSize";
-
-import CustomDropdown from "../components/DropDown";
-import CustomInputText from "../components/InputText";
-import CustomCalendar from "../components/common/CustomCalendar";
 import CustomButton from "../components/Button";
-import CustomModal from "../components/Modal";
-import LineChart from "../components/LineChart";
+import CustomDropdown from "../components/DropDown";
 import FilteredCard from "../components/FilteredCard";
+import CustomInputText from "../components/InputText";
+import LineChart from "../components/LineChart";
+import CustomModal from "../components/Modal";
+import CustomCalendar from "../components/common/CustomCalendar";
 import CustomImage from "../components/common/customimage";
 import Loader from "../components/loader";
-
-import WhiteCrossIcon from "../assets/white_cross.svg";
-import DropDownIcon from "../assets/dropdownIcon.svg";
 import ArrowDownIcon from "../assets/arrown_down_white.svg";
-
-import FilterIcon from "../assets/filter.svg";
-import ChannelIcon from "../assets/channel.svg";
-import SandGlassIcon from "../assets/sandglass.svg";
-import GreyHourGlassIcon from "../assets/hourglass-grey.svg";
-import openNewPageIcon from "../assets/open_in_new.svg";
-import WhiteCalendarIcon from "../assets/white_calendar.svg";
+import DropDownIcon from "../assets/dropdownIcon.svg";
+import WhiteCrossIcon from "../assets/white_cross.svg";
 import GreyCalendarIcon from "../assets/calendar-grey.svg";
 import GreyChannelIcon from "../assets/channel-grey.svg";
+import ChannelIcon from "../assets/channel.svg";
+import FilterIcon from "../assets/filter.svg";
+import GreyHourGlassIcon from "../assets/hourglass-grey.svg";
+import openNewPageIcon from "../assets/open_in_new.svg";
 import refreshIcon from "../assets/refresh_icon.svg";
+import SandGlassIcon from "../assets/sandglass.svg";
+import WhiteCalendarIcon from "../assets/white_calendar.svg";
+import {
+  ChartData,
+  ChartOptions,
+  ModalEnums,
+  OpmComparisonType,
+} from "../@types/pages/opmCharts";
+import {
+  OPM_COMPARISON_BAR_OPTIONS,
+  OPM_COMPARISON_BAR_OPTIONS_HOME,
+  OPM_COMPARISON_OPTIONS,
+  OPM_COMPARISON_OPTIONS_HOME,
+} from "../config/chartConfig";
+import { URL_OPM_COMPARISON } from "../constants/apiConstants";
 import { ROUTES, submitOnEnter } from "../components/utils/Utils";
 import {
   OPM_CHANNELS,
@@ -59,9 +62,8 @@ import {
   SCREEN_WIDTH,
   DURATIONS,
 } from "../constants/appConstants";
-import { URL_OPM_COMPARISON } from "../constants/apiConstants";
-import { fetchData } from "../utils/fetchUtil";
-import { LoaderContext, LoaderContextType } from "../context/loaderContext";
+import { LoaderContext } from "../context/loaderContext";
+import { LoaderContextType } from "../@types/components/commonTypes";
 import {
   CURRENT_PST_DATE,
   DATE_TIME_FORMAT_3,
@@ -70,12 +72,7 @@ import {
   getFormattedPSTDate,
   getPSTdate,
 } from "../utils/dateTimeUtil";
-import {
-  OPM_COMPARISON_BAR_OPTIONS,
-  OPM_COMPARISON_BAR_OPTIONS_HOME,
-  OPM_COMPARISON_OPTIONS,
-  OPM_COMPARISON_OPTIONS_HOME,
-} from "../config/chartConfig";
+import { fetchData } from "../utils/fetchUtil";
 import CustomTab from "../components/common/customtab";
 import BarChartComp from "../components/BarChartComp";
 
@@ -88,7 +85,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ChartDataLabels,
+  ChartDataLabels
 );
 
 const OpmComparison: React.FC = () => {
@@ -96,7 +93,7 @@ const OpmComparison: React.FC = () => {
   const [visible, setVisible] = useState<boolean>(false);
   const [position, setPosition] = useState<ModalEnums>("center");
   const [apiResponse, setApiResponse] = useState<null | OpmComparisonType>(
-    null,
+    null
   );
   const [counter, setCounter] = useState<number>(0);
 
@@ -108,7 +105,7 @@ const OpmComparison: React.FC = () => {
     duration: 10,
     startTimeOne: getFormattedPSTDate(), // 10 minutes ago.
     startDateTwo: new Date(
-      new Date(getPSTdate(new Date())).getTime() - 86400000,
+      new Date(getPSTdate(new Date())).getTime() - 86400000
     ).toLocaleDateString("en-US"),
     channel: "",
   };
@@ -182,7 +179,7 @@ const OpmComparison: React.FC = () => {
   useEffect(() => {
     const startTimeOne = getFormattedPSTDate(null, DEFAULT.duration);
     const startDateTwo = new Date(
-      new Date(getPSTdate(new Date())).getTime() - 86400000,
+      new Date(getPSTdate(new Date())).getTime() - 86400000
     ).toLocaleDateString("en-US");
     setUrl(
       `${URL_OPM_COMPARISON}?period=${location.pathname.includes(ROUTES.opmComparison)
@@ -403,7 +400,7 @@ const OpmComparison: React.FC = () => {
   };
 
   const handleOPMCompExpandClick = () => {
-    navigate(`/${ROUTES.opmComparison}`);
+    navigate(ROUTES.opmComparison);
   };
 
   const handleOPMCompRefreshBtnClick = () => {
@@ -575,7 +572,7 @@ const OpmComparison: React.FC = () => {
               ) : (
                 <>
                   <CustomModal
-                    header="Filters"
+                    header={LABELS.FILTERS}
                     visible={visible}
                     position={position}
                     className="!bg-slate-900 filtersModal opmFiltersMobile h-[350px] w-screen"

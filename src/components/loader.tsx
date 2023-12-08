@@ -1,14 +1,13 @@
 import React from "react";
+import { LoaderProps } from "../@types/components/commonTypes";
 
-interface LoaderProps {
-  className?: string;
-}
-
-const Loader: React.FC<LoaderProps> = ({ className }) => {
+const Loader: React.FC<LoaderProps> = (props) => {
   return (
     <div
       aria-label="Loader"
-      className={`${className} flex flex-col justify-center items-center`}
+      className={`${
+        props.className || ""
+      } flex flex-col justify-center items-center`}
     >
       <svg
         version="1.1"
