@@ -1,22 +1,23 @@
 import { Button } from "primereact/button";
-import { Dialog } from "primereact/dialog";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import CustomDialog from "../common/customdialog";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import { Bar } from "react-chartjs-2";
 import { useNavigate } from "react-router";
 import useScreenSize from "../../hooks/useScreenSize";
 import CustomButton from "../Button";
 import FilteredCard from "../FilteredCard";
 import CustomCalendar from "../common/CustomCalendar";
-import CustomDropdown from "../common/CustomDropdown";
+import CustomDropdown from "../DropDown";
 import CustomIcon from "../common/CustomIcon";
 import CustomImage from "../common/customimage";
 import CustomTab from "../common/customtab";
 import Loader from "../loader";
 import ChannelIcon from "../../assets/channel.svg";
 import FilterIcon from "../../assets/filter-dark.svg";
+import ArrowDownIcon from "../../assets/arrown_down_white.svg"
+import SandGlassIcon from "../../assets/sandglass.svg";
 import openNewPageIcon from "../../assets/open_in_new.svg";
 import refreshIcon from "../../assets/refresh_icon.svg";
-import SandGlassIcon from "../../assets/sandglass.svg";
 import CalendarIcon from "../../assets/white_calendar.svg";
 import { ChartData, SessionData } from "../../@types/pages/Sessions";
 import { LoaderContextType } from "../../@types/components/commonTypes";
@@ -282,9 +283,8 @@ const BarChart = () => {
 
   const renderFooter = () => {
     return (
-      <Button
+      <CustomButton
         id="popup-btn-submit"
-        className="p-button-rounded"
         label={LABELS.SUBMIT}
         onClick={onSubmit}
         autoFocus
@@ -324,7 +324,7 @@ const BarChart = () => {
             />
           </div >
           {showFilters && (
-            <div className="basis-full justify-between pb-0 items-end hidden sm:block lg:flex">
+            <div className="justify-between items-end hidden sm:block lg:flex">
               <div className="flex justify-start pb-4 items-end">
                 {formFields.map((form, index) => {
                   return (
@@ -335,7 +335,7 @@ const BarChart = () => {
                           title={form.title}
                           containerclassname="calendarSessions"
                           titleclassname="top-5"
-                          imageclassname="h-5 w-5 relative top-7 left-0.5w z-1"
+                          imageclassname="h-5 w-5 relative top-7 left-0.75w z-1"
                           showTime
                           timeOnly={form.name === "time"}
                           placeholder={DATE_AND_TIME_FORMATS.MM_DD_YYYY_HH_MM}
@@ -354,23 +354,23 @@ const BarChart = () => {
                       {form.type === "dropdown" && (
                         <CustomDropdown
                           name={form.name}
-                          title={form.title}
+                          label={form.title}
+                          containerclassname="!min-w-[9rem]"
                           value={form.value}
+                          imageclassname="z-1"
                           onChange={(event) => handleFormChange(event)}
+                          dropdownIcon={<CustomImage src={ArrowDownIcon}/>}
                           options={form.options}
-                          optionLabel="label"
-                          placeholder={""}
-                          showIcon={true}
-                          showLeftIcon={true}
-                          iconSrc={form.iconSrc}
-                          iconAlt={`${form.name}-icon`}
+                          optionLabel={"label"}
+                          placeholder=""
+                          icon={form.iconSrc} 
                         />
                       )}
                     </div>
                   );
                 })}
               </div>
-              <Button
+              <CustomButton
                 disabled={disabled}
                 label={LABELS.SUBMIT}
                 id="page-btn-submit"
@@ -484,17 +484,14 @@ const BarChart = () => {
           </div >
         )}
 
-      <Dialog
+      <CustomDialog
         id="modal-section"
         header={LABELS.FILTERS}
         visible={showFilterPopup}
         footer={renderFooter()}
         onHide={onHide}
         blockScroll={true}
-        position="bottom"
-        draggable={false}
-        resizable={false}
-        style={{ width: "100vw", margin: 0 }}
+        className="filtersModal-popup"
       >
         <div className="filter-popup-content">
           <div className="flex gap-4 mb-4 w-full">
@@ -509,7 +506,7 @@ const BarChart = () => {
                       showTime
                       containerclassname="calendarSessions"
                       titleclassname="top-5"
-                      imageclassname="h-5 w-5 relative top-7 md:top-3h left-0.5w z-1"
+                      imageclassname="h-5 w-5 relative top-7 md:top-3h left-2w z-1"
                       placeholder={DATE_AND_TIME_FORMATS.DD_MM_YYYY}
                       value={form.value}
                       onChange={(event) => handleFormChange(event)}
@@ -534,22 +531,25 @@ const BarChart = () => {
                       name={form.name}
                       title={form.title}
                       value={form.value}
+                      imageclassname="top-0.8r z-1"
                       onChange={(event) => handleFormChange(event)}
                       options={form.options}
                       optionLabel="label"
                       placeholder={""}
-                      showIcon={false}
-                      iconSrc={form.iconSrc}
-                      iconAlt={`${form.name}-icon`}
-                      className="w-full"
+                      dropdownIcon={
+                        <CustomImage src={ArrowDownIcon} />
+                      }
+                      icon={form.iconSrc}
+                      
                     />
+                     
                   </div>
                 );
               })}
           </div>
         </div>
-      </Dialog>
-    </div >
+      </CustomDialog>
+    </div>
   );
 };
 

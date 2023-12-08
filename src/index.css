@@ -61,6 +61,24 @@
   @apply h-13 rotate-180;
 }
 
+.home-sessions {
+  @apply pt-12 pb-16 sm:py-8;
+}
+
+#custom-hover .p-button,
+.p-dialog .p-button {
+  @apply bg-gray-900 border-gray-400 text-gray-400;
+}
+
+#custom-hover .p-inputtext,
+.p-dialog .p-inputtext {
+  @apply  border-none bg-gray-900 rounded-r-lg;
+}
+
+#custom-hover .p-dropdown {
+  @apply border-none bg-gray-900 rounded-lg;
+}
+
 #bar-chart {
   @apply m-0 bg-black-100;
 }
@@ -80,16 +98,16 @@
 #bar-chart .p-button,
 .p-dialog .p-button {
   @apply bg-gray-900 border-gray-400 text-gray-400;
-}
+} 
 
-#bar-chart .p-button:focus,
+ #bar-chart .p-button:focus,
 .p-dialog .p-button:focus {
   @apply shadow-none;
 }
 
 #bar-chart .p-inputtext,
-.p-dialog .p-inputtext {
-  @apply p-2 pl-0 border-none bg-gray-900 rounded-r-lg;
+#barchart .p-dialog .p-inputtext {
+  @apply py-2 border-none bg-gray-900 rounded-r-lg;
 }
 
 #bar-chart .p-inputtext:enabled:focus,
@@ -119,13 +137,14 @@
   @apply border-none rounded-lg;
 }
 
+
 #bar-chart .p-dropdown {
-  @apply border-none bg-gray-900 rounded-lg;
+  @apply !border-none bg-gray-900 rounded-lg;
 }
 
 #page-btn-submit.p-button,
 #popup-btn-submit.p-button {
-  @apply bg-black-100 text-sm px-8 py-2 transition-none border-2 border-gray-300 rounded-[22px];
+  @apply bg-transparent text-sm px-11 py-2 transition-none border-2 border-gray-300 rounded-[22px];
 }
 
 #page-btn-submit.p-button:focus {
@@ -146,7 +165,7 @@
 }
 
 #modal-section .p-dialog-content {
-  @apply px-4 pt-6 pb-0 bg-black-200;
+  @apply px-4 pb-0 !bg-black-200;
 }
 
 #modal-section .p-dialog-header {
@@ -164,6 +183,9 @@ button.p-button-secondary {
 }
 .filtersModal .p-dialog-header {
   @apply px-2 py-2.5 rounded-t-10 border-b border-b-gray-700 border-solid;
+}
+.filtersModal-popup.p-dialog {
+  @apply absolute max-sm:max-h-[calc(full-h-154)] max-480:w-full w-390 max-480:!bottom-0 sm:max-h-528;
 }
 .filtersModal .p-dialog-header .p-dialog-title {
   @apply font-normal text-center text-base;
@@ -185,7 +207,7 @@ button.p-button-secondary {
 }
 .opmFiltersMobile.p-dialog .p-dialog-header,
 .opmFiltersMobile.p-dialog .p-dialog-content {
-  @apply bg-black-200 border border-solid border-gray-900 pl-[3vw];
+  @apply bg-black-200 border border-solid border-gray-900 pl-3 pr-3;
 }
 .opmFiltersMobile.p-dialog {
   @apply m-0;
@@ -208,14 +230,11 @@ button.p-button-secondary {
 .opmFiltersMobileCalendar .title {
   @apply relative left-2.5;
 }
-.opmFiltersMobileCalendar span.p-calendar {
-  @apply relative left-2 h-[39px];
-}
 .opmFiltersMobile .p-dropdown .p-dropdown-trigger {
   @apply w-[4vw] relative right-3.5;
 }
 .p-datepicker-trigger {
-  @apply !p-0 border border-solid border-gray-105 border-r-0;
+  @apply !p-0 border border-solid border-gray-105 border-r-0 ;
 }
 .p-datepicker-trigger img {
   @apply w-1/2 h-1/2;
@@ -265,6 +284,7 @@ button.p-button-secondary {
   @apply shadow-none;
 }
 .p-inputtext:enabled:focus,
+.p-dropdown,
 .p-inputtext:focus,
 .p-inputtext:enabled:hover,
 .p-dropdown:hover,
@@ -291,7 +311,7 @@ button.p-button-secondary {
   @apply w-[28vw] sm:w-40w;
 }
 .filteredCard .p-button.p-component {
-  @apply !bg-white-400 !border-black-200 border rounded-[100px] text-gray-400 px-2 py-3 flex justify-evenly items-center;
+  @apply !bg-white-400 !border-black-200 border text-gray-400 px-2 py-3 flex justify-evenly items-center;
 }
 .filteredCard .p-button {
   @apply flex gap-2.5 px-2.5 items-center leading-none border border-solid border-gray-900 rounded rounded-20 h-[26px] text-xs text-gray-400 p-5p bg-transparent;
@@ -312,7 +332,7 @@ button.p-button-secondary {
   @apply bg-inherit border-none p-0;
 }
 .inputContainer .p-inputtext {
-  @apply w-38w h-[37px];
+  @apply  h-[2.3rem];
 }
 .opmFilters .p-inputtext {
   @apply text-white-700;
@@ -324,7 +344,7 @@ button.p-button-secondary {
   @apply pl-[20px]
 } */
 .p-dropdown .p-dropdown-trigger {
-  @apply w-[2vw] relative right-1;
+  @apply w-2w relative right-1;
 }
 .calendarInput .p-calendar {
   @apply w-135;
@@ -333,7 +353,7 @@ button.p-button-secondary {
   @apply ml-1w;
 }
 .mobileInput .p-inputtext {
-  @apply relative w-[43vw] -left-3;
+  @apply relative w-43w -left-3;
 }
 .inputContainer {
   @apply relative -left-2.5;
@@ -372,26 +392,11 @@ button.p-button-secondary {
 .p-dialog-content::-webkit-scrollbar-thumb {
   @apply bg-gray-900 rounded-full;
 }
-.orderStatus-dialog .p-dialog-content {
-  @apply pl-[22px] mr-9p pr-[15px] bg-black-200;
-}
 .p-dialog-content::-webkit-scrollbar {
   @apply w-1;
 }
-.orderStatus-dialog.p-dialog {
-  @apply absolute max-[639px]:max-h-100vh-154px min-[390px]:w-390 w-max max-[390px]:!bottom-0 min-[390px]:max-h-[490px];
-}
 .p-dialog-mask.p-component-overlay {
   @apply backdrop-brightness-50;
-}
-.orderStatus-dialog .p-dialog-header {
-  @apply flex items-center p-1.5 bg-black-200  border-b  border-slate-600 text-gray-200 h-[6.3vh];
-}
-.orderStatus-dialog .p-dialog-header .p-dialog-title {
-  @apply text-center  text-base font-helvetica  ml-6;
-}
-.orderStatus-dialog .p-dialog-content {
-  @apply border-gray-900 border-t text-center text-base font-helvetica;
 }
 .backButton .p-button {
   @apply !shadow-none !border-none bg-transparent;
@@ -408,11 +413,8 @@ button.p-button-secondary {
 .backButton .p-button {
   @apply bg-transparent !shadow-none;
 }
-.orderStatus-dialog .p-dialog-header-icon:enabled:hover {
-  @apply !bg-transparent;
-}
 .custom-popup.p-dialog {
-  @apply absolute max-[639px]:max-h-100vh-154px max-[390px]:w-full w-390 max-[390px]:!bottom-0 sm:max-h-[528px];
+  @apply absolute max-h-[63vh] 480:max-h-528 max-480:w-full w-390 max-480:!bottom-0;
 }
 .p-dialog-mask.p-component-overlay {
   @apply backdrop-contrast-[.85];
@@ -447,22 +449,18 @@ button.p-button-secondary {
 .popup-button .p-button {
   @apply !shadow-none !border-none;
 }
-
 .p-dialog-content::-webkit-scrollbar-thumb {
   @apply bg-gray-900 rounded-full;
 }
-
 .custom-popup .p-dialog-content {
   @apply pl-6 mr-2.5 pr-3.5 bg-black-200;
 }
 .custom-popup.lineitem-popup .p-dialog-content {
   @apply bg-black-100;
 }
-
 .p-dialog {
   @apply bg-black-200;
 }
-
 .p-dialog-content::-webkit-scrollbar {
   @apply w-1;
 }
@@ -514,7 +512,7 @@ button.p-button-secondary {
   @apply !bg-gray-900 border border-solid border-gray-900;
 }
 .opmFilters .p-calendar .p-inputtext {
-  @apply pl-[2.6vw] md:w-20w lg:w-12w;
+  @apply pl-1.75r md:w-20w lg:w-12w;
 }
 .opmComparisonFilters .p-calendar .p-inputtext {
   @apply md:w-[9vw] lg:w-12w;
@@ -527,7 +525,7 @@ button.p-button-secondary {
   @apply !border-black-800;
 }
 .p-datepicker {
-  @apply rounded-md p-0;
+  @apply rounded-md p-0  !max-w-[340px] ;
 }
 .p-datepicker thead {
   @apply bg-black-300;
@@ -639,13 +637,13 @@ hr.horizontalLine.blue {
   @apply pl-2.5w;
 }
 .calendarSessions span input {
-  @apply !pl-6.5w md:!pl-2.5w;
+  @apply !pl-[2.2rem];
 }
 .calendarOpm span input {
   @apply !pl-6.5w md:!pl-2.5w;
 }
 .opmFiltersMobileCalendar span input {
-  @apply !pl-[7vw];
+  @apply !pl-[7vw] border rounded-md;
 }
 
 /* Order Details */
@@ -886,13 +884,13 @@ hr.horizontalLine.blue {
   @apply border-0 rounded-lg h-inherit mt-4 pb-14 sm:pb-4 pt-4 sm:pt-12 lg:pt-14 px-4 lg:px-6;
 }
 .opm-page-chart-container-rotated {
-  @apply w-100vh-1.75rem h-[calc(100vw-1rem)] -mt-8 bg-inherit;
+  @apply w-100vh-1.75rem h-[calc(full-w-1rem)] -mt-8 bg-inherit;
 }
 .opm-comparison-page-chart-container {
   @apply border-0 rounded-lg h-inherit mt-4 pb-24 sm:pb-4 pt-4 sm:pt-12 lg:pt-14 px-4 lg:px-6;
 }
 .opm-comparison-page-chart-container-rotated {
-  @apply w-100vh-1.75rem h-[calc(100vw-0rem)] -mt-4 bg-inherit;
+  @apply w-100vh-1.75rem h-full-w -mt-4 bg-inherit;
 }
 .session-tooltip-tbody {
   @apply flex flex-wrap;
@@ -980,6 +978,21 @@ hr.horizontalLine.blue {
 .p-toast-message-content .p-image img {
   @apply max-w-max;
 }
+.opmFilters .p-dropdown:hover,
+.opmFilters .p-inputtext:hover {
+  @apply border-0;
+}
+.label-position .p-inputtext{
+  @apply pl-8 pt-9p
+}
+
+.p-dropdown-panel ::-webkit-scrollbar-thumb {
+  @apply !bg-black-200;
+}
+
+.p-dropdown-panel{
+  @apply bg-gray-900;
+}
 .order-details-btn-link .p-button {
   @apply text-xs text-white-700 border-none p-0 bg-inherit;
 }
@@ -1000,3 +1013,6 @@ hr.horizontalLine.blue {
 .custom-overlay.p-overlaypanel { &:before,   &:after {    
   @apply
   content-none;   }}
+.p-datepicker table td>span {
+  @apply w-7 h-6
+}

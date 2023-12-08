@@ -28,7 +28,6 @@ const QuickLinks: FC<QuickLinksProps> = (props) => {
 
   const getQuickLinks = () => {
     const links = QUICK_LINKS.find((l) => l.id === tabValue).links;
-    setQuickLinks(links);
     setAllQuickLinks(links);
   };
 

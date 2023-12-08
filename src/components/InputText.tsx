@@ -1,42 +1,25 @@
-import { InputText } from "primereact/inputtext";
+import { InputText} from "primereact/inputtext";
 import React from "react";
 import { CustomInputTextProps } from "../@types/components/commonTypes";
 
 const CustomInputText: React.FC<CustomInputTextProps> = (props) => {
-  return props.icon ? (
-    <div className={`flex flex-col lg:w-8w ${props.containerclassname}`}>
-      <label className="labelClass relative mb-5p mt-3.5 ml-1.2w sm:ml-5 sm:w-10w">
-        {props.label}
-      </label>
-      <span className="p-input-icon-left flex">
-        <img className={props.imageclassname} src={props.icon} />
-        <InputText
-          value={props.value}
-          name={props.name}
-          placeholder={props.placeholder}
-          onChange={props.onChange}
-          className={props.className}
-          id={props.id}
-          type="text"
-        />
-      </span>
-    </div>
-  ) : (
-    <div className={`flex flex-col md:w-8w ${props.containerclassname}`}>
-      <label className="labelClass relative mb-5p mt-3.5 ml-1.2w">
-        {props.label}
-      </label>
+  return (
+    <div className={`flex flex-col w-full relative ${props.containerclassname} self-end `}>
+      {props.label &&
+        <label className="relative text-xs font-medium pb-1 text-gray-400">
+          {props.label}
+        </label >
+      }
+      {props.icon &&
+        <img className={`absolute top-8 left-2 ${props.imageclassname}`} src={props.icon} />
+      }
       <InputText
-        value={props.value}
-        name={props.name}
-        placeholder={props.placeholder}
-        onChange={props.onChange}
-        className={props.className}
-        id={props.id}
-        type="text"
+        {...props}
+        className={`${props.icon ? "p-2 pl-8" : ""} ${props.className}`}    
+ 
       />
     </div>
   );
 };
-
+ 
 export default CustomInputText;
