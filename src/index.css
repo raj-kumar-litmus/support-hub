@@ -992,3 +992,11 @@ hr.horizontalLine.blue {
 .quick-link-arrow img{
   @apply h-7p w-7p;
 }
+.custom-overlay .p-overlaypanel-content{
+  @apply border-2 border-[#424245] rounded-lg p-0
+  
+}
+
+.custom-overlay.p-overlaypanel { &:before,   &:after {    
+  @apply
+  content-none;   }}

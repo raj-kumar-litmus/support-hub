@@ -13,6 +13,7 @@ export const ROUTES = {
   dcOpenOrders: "/dc-open-orders",
   fullScreen: "/fullscreen",
   orderDetails: "/order-details",
+  incompleteOrders:"/incomplete-orders"
 };
 
 export const MENU_LIST = [
@@ -38,9 +39,9 @@ export const MENU_LIST = [
   },
   {
     id:9,
-    name: "Incomplete Orders",
+    name: PAGE_TITLES.INCOMPLETE_ORDERS,
     icon:OPMComparisonIcon,
-    path:"/incomplete-orders"
+    path:ROUTES.incompleteOrders
   }
 ];
 

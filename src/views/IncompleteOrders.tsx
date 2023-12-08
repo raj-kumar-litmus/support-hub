@@ -2,12 +2,12 @@ import React, { FC, useEffect, useState } from "react";
 import { fetchData } from "../utils/fetchUtil";
 import { IncompleteOrdersData } from "../@types/IncompleteOrdersData";
 import { URL_INCOMPLETE_ORDERS } from "../constants/apiConstants";
-import CustomDialog from "./common/customdialog";
-import Loader from "./loader";
+import CustomDialog from "../components/common/customdialog";
+import Loader from "../components/loader";
 import info from "../assets/oms_info_white.svg";
-import CustomTable from "./common/customtable";
+import CustomTable from "../components/common/customtable";
 import { Column } from "primereact/column";
-import statusMessages from "./utils/IncompleteOrdersStatusData";
+import statusMessages from "../components/utils/IncompleteOrdersStatusData";
 import { PAGE_TITLES,THRESHOLD_VALUE } from "../constants/appConstants";
 
 const IncompleteOrder: FC = () => {
@@ -109,45 +109,46 @@ const IncompleteOrder: FC = () => {
            <h3 className="sm:text-lg text-gray-200 font-bold mb-2 font-helvetica">
               {PAGE_TITLES.INCOMPLETE_ORDERS}
           </h3>
-          <div className="hidden sm:block rounded-md">
+          <div className="sm:block rounded-md">
             {tableData?.length > 0 && (
               <CustomTable
-                showGridlines
-                resizableColumns
+              showGridlines
+                // resizableColumns
                 value={tableData}
-                className="custom-table incomplete-order"
-                children={HEADERS.map((h) => (
+                className="custom-table"
+                children={HEADERS.map((h,index) => (
                   <Column
                     // bodyClassName={paymentWiseDataStyle}
                     key={h.field}
+                    frozen={index ? false : true}
                     field={h.field}
                     header={
-                      <div className="flex">
+                      <div className="flex -ml-1">
                         {h.header}
                         {h.field !== "date" && (
                           <img
                             src={info}
                             alt="Icon"
                             height="16"
-                            className="w-3 ml-3 cursor-pointer"
+                            className="w-3 ml-2 mr-1 sm:ml-3 cursor-pointer"
                             onClick={() => handleClick(Number(h.header))}
                           />
                         )}
                       </div>
                     }
-                    body={(rowData) => {
-                      const textColor =
-                        rowData[h.field] > THRESHOLD_VALUE.INCOMPLETE_ORDERS
-                            ? "border-2 border-red-500"
-                            //  ? "text-red-600"
-                          : "";
+                    // body={(rowData) => {
+                    //   const textColor =
+                    //     rowData[h.field] > THRESHOLD_VALUE.INCOMPLETE_ORDERS
+                    //         ? "border-2 border-red-500"
+                    //         //  ? "text-red-600"
+                    //       : "";
 
-                      return (
-                        <div className={`${textColor}`}>
-                          {rowData[h.field]}
-                        </div>
-                      );
-                    }}
+                    //   return (
+                    //     <div className={`${textColor}`}>
+                    //       {rowData[h.field]}
+                    //     </div>
+                    //   );
+                    // }}
                   >
                     
                   </Column>
@@ -161,7 +162,7 @@ const IncompleteOrder: FC = () => {
               setShowDialog(false);
               setDialogData(null);
             }}
-            className="orderStatus-dialog"
+            className="custom-popup"
             header="Status Info"
           >
             {dialogData && (
