@@ -1,14 +1,16 @@
 import type { Meta } from "@storybook/react";
-import Table from "./table";
+import { Column } from "primereact/column";
+import CustomTable from "../components/common/customtable";
+import { getTableHeaders } from "../components/utils/Utils";
 
 const meta = {
   title: "Components/Table",
-  component: Table,
+  component: CustomTable,
   tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
   },
-} satisfies Meta<typeof Table>;
+} satisfies Meta<typeof CustomTable>;
 
 export default meta;
 
@@ -33,43 +35,47 @@ const tableData = [
   },
 ];
 
+const children = getTableHeaders(tableData).map((item, index) => (
+  <Column key={index} field={item} header={item}></Column>
+));
+
 export const Default = {
   args: {
-    tableData: tableData,
+    value: tableData,
+    children: children,
   },
 };
 
 export const StripedRows = {
   args: {
-    tableData: tableData,
+    value: tableData,
+    children: children,
     stripedRows: true,
   },
 };
 
 export const TableGrid = {
   args: {
-    tableData: tableData,
+    value: tableData,
+    children: children,
     showGridlines: true,
   },
 };
 
-export const RadioSelection = {
+export const TableWithHeader= {
   args: {
-    tableData: tableData,
-    selectionMode: "radio",
+    value: tableData,
+    children: children,
+    header:'Table Header'
   },
 };
 
-export const CheckboxSelection = {
+export const TableWithFooter= {
   args: {
-    tableData: tableData,
-    selectionMode: "checkbox",
+    value: tableData,
+    children: children,
+    footer:'Table Footer'
   },
 };
 
-export const SortableColumns = {
-  args: {
-    tableData: tableData,
-    sortable: true,
-  },
-};
+
