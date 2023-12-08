@@ -1,6 +1,6 @@
 import { FC } from "react";
 import CustomDialog from "./common/CustomDialog";
-import PromotionCard from "./common/promotioncard";
+import PromotionCard from "./common/PromotionCard";
 import { PromotionsPopupProps } from "../@types/pages/OrderDetails";
 import { ORDER_DETAILS_LABELS } from "../constants/AppConstants";
 
