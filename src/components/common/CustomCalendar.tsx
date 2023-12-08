@@ -13,7 +13,7 @@ import {
   AM_PM_OPTIONS,
   CALENDAR_TOAST_MESSAGE,
 } from "../../constants/AppConstants";
-import { CURRENT_PST_DATE } from "../../utils/dateTimeUtil";
+import { CURRENT_PST_DATE } from "../../utils/DateTimeUtil";
 import { convert12to24Hour, convert24to12Hour } from "../utils/Utils";
 
 const CustomCalendar: FC<CustomCalendarProps> = (props) => {
