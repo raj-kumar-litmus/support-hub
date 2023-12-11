@@ -19,15 +19,15 @@ import totalNoOfOrdersIcon from "../assets/total_no_of_orders.svg";
 import totalOrderCompIcon from "../assets/total_order_comp.svg";
 import trendingUpIcon from "../assets/trend_up.svg";
 import trendingDownIcon from "../assets/trending_down.svg";
-import { URL_OPM } from "../constants/apiConstants";
+import { URL_OPM } from "../helpers/constants/apiConstants";
 import {
   DASHBOARD_LABELS,
   PAGE_TITLES,
   SCREEN_WIDTH,
-} from "../constants/appConstants";
+} from "../helpers/constants/appConstants";
 import { LoaderContext } from "../context/loaderContext";
-import { getFormattedPSTDate } from "../utils/dateTimeUtil";
-import { fetchData } from "../utils/fetchUtil";
+import { getFormattedPSTDate } from "../helpers/utils/dateTimeUtil";
+import { fetchData } from "../helpers/utils/fetchUtil";
 import { LoaderContextType } from "../@types/components/commonTypes";
 
 const CardTitle = (props: { title: string; icon: any; classname?: string }) => {

@@ -5,7 +5,7 @@ import CustomInputNumber from "../atoms/CustomInputNumber";
 import CustomToast from "../atoms/CustomToast";
 import CustomImage from "../atoms/customimage";
 import InfoIcon from "../../assets/info.svg";
-import { LABELS } from "../../constants/appConstants";
+import { LABELS } from "../../helpers/constants/appConstants";
 
 interface AutoRefreshProps {
   getData(): any;

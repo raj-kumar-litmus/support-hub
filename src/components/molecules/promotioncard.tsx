@@ -6,7 +6,7 @@ import {
   PromotionCardProps,
   InfoFieldProps,
 } from "../../@types/pages/OrderDetails";
-import { ORDER_DETAILS_LABELS } from "../../constants/appConstants";
+import { ORDER_DETAILS_LABELS } from "../../helpers/constants/appConstants";
 
 const PromotionCard: FC<PromotionCardProps> = (props) => {
   return (

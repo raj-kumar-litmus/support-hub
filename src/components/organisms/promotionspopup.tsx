@@ -2,7 +2,7 @@ import { FC } from "react";
 import CustomDialog from "../atoms/customdialog";
 import PromotionCard from "../molecules/promotioncard";
 import { PromotionsPopupProps } from "../../@types/pages/OrderDetails";
-import { ORDER_DETAILS_LABELS } from "../../constants/appConstants";
+import { ORDER_DETAILS_LABELS } from "../../helpers/constants/appConstants";
 
 const PromotionsPopup: FC<PromotionsPopupProps> = (props) => {
   return (

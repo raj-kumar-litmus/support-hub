@@ -5,7 +5,7 @@ import {
   CommerceItemData,
   ItemInformationsPopUpProps,
 } from "../../@types/pages/OrderDetails";
-import { ORDER_DETAILS_LABELS } from "../../constants/appConstants";
+import { ORDER_DETAILS_LABELS } from "../../helpers/constants/appConstants";
 
 const ItemInformationsPopUp: FC<ItemInformationsPopUpProps> = (props) => {
   return (

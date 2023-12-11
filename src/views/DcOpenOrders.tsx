@@ -4,10 +4,10 @@ import Card from "../components/atoms/Card";
 import CustomTable from "../components/atoms/customtable";
 import Loader from "../components/atoms/loader";
 import { DCOpenOrders, orderData } from "../@types/pages/dcOpenOrders";
-import { URL_DC_OPEN_ORDERS } from "../constants/apiConstants";
-import { fetchData } from "../utils/fetchUtil";
-import { getTableHeaders } from "../utils/Utils";
-import { PAGE_TITLES } from "../constants/appConstants";
+import { URL_DC_OPEN_ORDERS } from "../helpers/constants/apiConstants";
+import { fetchData } from "../helpers/utils/fetchUtil";
+import { getTableHeaders } from "../helpers/utils/Utils";
+import { PAGE_TITLES } from "../helpers/constants/appConstants";
 
 const DcOpenOrders: FC = () => {
   const [tableData, setTableData] = useState<DCOpenOrders[]>([]);

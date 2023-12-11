@@ -1,4 +1,4 @@
-import { useDynamicSvgImport } from "../../utils/useDynamicSvgImport";
+import { useDynamicSvgImport } from "../../helpers/utils/useDynamicSvgImport";
 import { SvgIconProps } from "../../@types/components/commonTypes";
 
 function SvgIcon(props: SvgIconProps) {
