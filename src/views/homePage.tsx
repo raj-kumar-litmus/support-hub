@@ -1,15 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import useScreenSize from "../hooks/useScreenSize";
-import OPM from "../views/opm";
-import OpmComparison from "../views/opmComparison";
-import CustomButton from "./Button";
-import BarChart from "./charts/BarChart";
-import CustomImage from "./common/customimage";
-import HomeCard from "./common/homeCard";
-import GlobalLoader from "./globalLoader";
-import Loader from "./loader";
-import TimeTracker from "./timeTracker";
-import LoaderPortal from "./loaderPortal";
+import OPM from "./opm";
+import OpmComparison from "./opmComparison";
+import CustomButton from "../components/Button";
+import BarChart from "../components/charts/BarChart";
+import CustomImage from "../components/common/customimage";
+import HomeCard from "../components/common/homeCard";
+import GlobalLoader from "../components/globalLoader";
+import Loader from "../components/loader";
+import TimeTracker from "../components/timeTracker";
+import LoaderPortal from "../components/loaderPortal";
 import avgOpmcompIcon from "../assets/avg_opm_comp.svg";
 import avgOrdersPerMinIcon from "../assets/avg_orders_per_min.svg";
 import infoIcon from "../assets/info_icon.svg";
@@ -117,7 +117,7 @@ const HomePage = () => {
   const [refreshTime, setRefreshTime] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { showGlobalLoader, hideLoader } = useContext(
-    LoaderContext
+    LoaderContext,
   ) as LoaderContextType;
 
   const { width } = useScreenSize();
@@ -128,15 +128,15 @@ const HomePage = () => {
         `${url}?period=${
           DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION
         }&starttime=${getFormattedPSTDate(date)}`,
-        {}
+        {},
       );
       const totalOrders = opmData.reduce(
         (acc, obj) => acc + parseInt(obj.orderCount),
-        0
+        0,
       );
       setTotalOPM(totalOrders);
       setAvgOPM(
-        Math.round(totalOrders / DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION)
+        Math.round(totalOrders / DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION),
       );
       setLastMinOPM(opmData[opmData.length - 1]["orderCount"]);
     } catch (err) {
@@ -150,15 +150,15 @@ const HomePage = () => {
         `${url}?period=${
           DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION
         }&starttime=${getFormattedPSTDate(date)}`,
-        {}
+        {},
       );
       const totalOrders = opmData.reduce(
         (acc, obj) => acc + parseInt(obj.orderCount),
-        0
+        0,
       );
       setLastDayTotalOPM(totalOrders);
       setLastDayAvgOPM(
-        Math.round(totalOrders / DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION)
+        Math.round(totalOrders / DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION),
       );
     } catch (err) {
       console.log("Error occured while fetching data", err);
@@ -189,7 +189,7 @@ const HomePage = () => {
   useEffect(() => {
     const timer = setTimeout(
       () => setCanShow(!canShow),
-      DASHBOARD_LABELS.REFRESHTIME
+      DASHBOARD_LABELS.REFRESHTIME,
     );
     return () => clearTimeout(timer);
   });

@@ -9,14 +9,14 @@ import {
   Routes,
 } from "react-router-dom";
 import App from "./App";
-import Chart from "./components/ChartIndex";
-import DcOpenOrders from "./components/DcOpenOrders";
+import DcOpenOrders from "./views/DcOpenOrders";
 import BarChart from "./components/charts/BarChart";
-import HomePage from "./components/homePage";
-import OrderDetails from "./components/orderDetails/OrderDetails.js";
+import HomePage from "./views/homePage";
+import OrderDetails from "./views/OrderDetails";
+import OPM from "./views/opm";
+import OpmComparison from "./views/opmComparison";
 import { ROUTES } from "./components/utils/Utils";
 import "./index.css";
-
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -36,28 +36,18 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             path={ROUTES.sessions}
             element={<App appContent={<BarChart />} />}
           />
-          <Route
-            path={ROUTES.opm}
-            element={<App appContent={<Chart type="opm" />} />}
-          />
+          <Route path={ROUTES.opm} element={<App appContent={<OPM />} />} />
           <Route
             path={`${ROUTES.opm}${ROUTES.fullScreen}`}
-            element={
-              <App showNavbar={false} appContent={<Chart type="opm" />} />
-            }
+            element={<App showNavbar={false} appContent={<OPM />} />}
           />
           <Route
             path={ROUTES.opmComparison}
-            element={<App appContent={<Chart type="opmcomparison" />} />}
+            element={<App appContent={<OpmComparison />} />}
           />
           <Route
             path={`${ROUTES.opmComparison}${ROUTES.fullScreen}`}
-            element={
-              <App
-                showNavbar={false}
-                appContent={<Chart type="opmcomparison" />}
-              />
-            }
+            element={<App showNavbar={false} appContent={<OpmComparison />} />}
           />
           <Route
             path={`${ROUTES.orderDetails}/:orderId`}
@@ -66,5 +56,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         </Routes>
       </Suspense>
     </Router>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
