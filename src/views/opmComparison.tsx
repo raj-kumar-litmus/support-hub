@@ -511,9 +511,9 @@ const OpmComparison: React.FC = () => {
                         {form.type === "time" && (
                           <CustomCalendar
                             name={form.name}
-                            titleclassname="top-1.25r"
+                            titleclassname="top-1"
                             containerclassname="lg:max-w-[11rem]"
-                            imageclassname="relative top-1.75r left-0.75w z-1"
+                            imageclassname="block w-5 h-18 top-1.75r left-0.5w z-1"
                             title={form.label}
                             placeholder={DATE_AND_TIME_FORMATS.MM_DD_YYYY_HH_MM}
                             showTime={form.showTime}
@@ -585,7 +585,7 @@ const OpmComparison: React.FC = () => {
                               <CustomCalendar
                                 name={form.name}
                                 containerclassname="opmFiltersMobileCalendar"
-                                imageclassname="h-5 w-5 relative top-1.75r md:top-3h left-2w z-1"
+                                imageclassname="relative h-5 w-5 top-8 md:top-3h left-2w z-1"
                                 titleclassname="top-5"
                                 title={form.label}
                                 showTime={form.showTime}

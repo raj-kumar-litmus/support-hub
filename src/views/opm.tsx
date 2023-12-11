@@ -490,16 +490,16 @@ const OPM: React.FC = () => {
                           placeholder={form.label}
                           className="h-39"
                           imageclassname="!top-[1.9rem]"
-                          containerClassName="lg:max-w-[8rem]"
+                          containerclassname="lg:max-w-[8rem]"
                           onChange={(event) => handleFormChange(event)}
                         />
                       )}
                       {form.type === INPUT_TYPES.time && (
                         <CustomCalendar
                           name={form.name}
-                          titleclassname="top-1.25r"
+                          titleclassname="top-1"
                           containerclassname="lg:min-w-11r"
-                          imageclassname="h-5 w-5 relative top-1.75r left-0.5w z-1"
+                          imageclassname="h-5 w-5 block top-1.75r left-0.5w z-1"
                           placeholder={DATE_AND_TIME_FORMATS.MM_DD_YYYY_HH_MM}
                           title={form.label}
                           showTime={form.showTime}
