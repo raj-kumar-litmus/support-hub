@@ -100,7 +100,10 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
       >
         {props.title}
       </div>
-      <img className={`absolute ${props.imageclassname}`} src={props.imgsrc} />
+      <CustomImage
+        src={props.imgsrc}
+        className={`absolute ${props.imageclassname}`}
+      />
       <Calendar
         {...props}
         readOnlyInput

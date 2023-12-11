@@ -1,5 +1,6 @@
 import { InputText } from "primereact/inputtext";
 import React from "react";
+import CustomImage from "./customimage";
 import { CustomInputTextProps } from "../../@types/components/commonTypes";
 
 const CustomInputText: React.FC<CustomInputTextProps> = (props) => {
@@ -13,9 +14,9 @@ const CustomInputText: React.FC<CustomInputTextProps> = (props) => {
         </label>
       )}
       {props.icon && (
-        <img
-          className={`absolute top-8 left-2 ${props.imageclassname}`}
+        <CustomImage
           src={props.icon}
+          className={`absolute top-8 left-2 ${props.imageclassname}`}
         />
       )}
       <InputText
