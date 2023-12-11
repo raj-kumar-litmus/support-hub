@@ -1,13 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router";
 import useScreenSize from "../hooks/useScreenSize";
-import BarChartComp from "../components/BarChartComp";
+import BarChart from "../components/BarChart";
 import CustomButton from "../components/Button";
 import FilteredCard from "../components/FilteredCard";
 import CustomCalendar from "../components/common/CustomCalendar";
 import CustomDropdown from "../components/DropDown";
 import CustomDialog from "../components/common/customdialog";
-import CustomIcon from "../components/common/CustomIcon";
 import CustomImage from "../components/common/customimage";
 import CustomTab from "../components/common/customtab";
 import Loader from "../components/loader";
@@ -90,7 +89,9 @@ const Sessions = () => {
   const [formFields, setFormFields] = useState(DEFAULT_FORM_FIELDS);
   const [disabled, setDisabled] = useState(true);
   const [tabValue, setTabValue] = useState<number>(2);
-  const [maxOPM, setMaxOPM] = useState<number>(SESSIONS_CHART_DEFAULT.MAX);
+  const [maxOPM, setMaxOPM] = useState<number>(
+    SESSIONS_CHART_DEFAULT.STEP_SIZE,
+  );
   const [id, setId] = useState<string>("home-bar-chart");
   const [showFilteredCards, setShowFilteredCards] = useState<boolean>(false);
 
@@ -104,8 +105,8 @@ const Sessions = () => {
 
   useEffect(() => {
     const labels: string[] = [];
-    const azurePrimary: string[] = [];
-    const azureSecondary: string[] = [];
+    const azurePrimary: number[] = [];
+    const azureSecondary: number[] = [];
 
     sessionData.forEach((item) => {
       labels.push(item.timestamp);
@@ -119,6 +120,7 @@ const Sessions = () => {
     setXAxisLabels([...labels]);
     setAzurePrimaryData([...azurePrimary]);
     setAzureSecondaryData([...azureSecondary]);
+    setChartOptions(getChartConfig());
   }, [sessionData]);
 
   useEffect(() => {
@@ -138,13 +140,14 @@ const Sessions = () => {
     };
     let chartData: ChartData = {
       labels: xAxisLabels,
+      datasets: [],
     };
     switch (tabValue) {
       case 0:
-        chartData = { ...chartData, datasets: [primaryDataset] };
+        chartData = { labels: xAxisLabels, datasets: [primaryDataset] };
         break;
       case 1:
-        chartData = { ...chartData, datasets: [secondaryDataset] };
+        chartData = { labels: xAxisLabels, datasets: [secondaryDataset] };
         break;
       case 2:
         chartData = {
@@ -251,11 +254,10 @@ const Sessions = () => {
       : setShowFilterPopup(!showFilterPopup);
   };
 
-  const getChartConfig = (duration) => {
+  const getChartConfig = () => {
     const customChartConfig = {
       ...BAR_CHART_OPTIONS(
-        (duration ||
-          Number(formFields.find((e) => e.name === "period").value)) < 11 &&
+        Number(formFields.find((e) => e.name === "period").value) < 11 &&
           width > SCREEN_WIDTH.SM,
       ),
     };
@@ -274,8 +276,7 @@ const Sessions = () => {
     } else {
       customChartConfig.plugins.datalabels.rotation = 0;
     }
-    customChartConfig.scales.y.max = maxOPM;
-
+    customChartConfig.scales.y["max"] = maxOPM;
     return customChartConfig;
   };
 
@@ -312,12 +313,9 @@ const Sessions = () => {
             <div className="text-lg text-gray-200 font-bold">
               {PAGE_TITLES.SESSIONS}
             </div>
-            <CustomIcon
-              alt="show-filters"
+            <CustomImage
               src={FilterIcon}
-              width="2rem"
-              height="2rem"
-              className="cursor-pointer sm:hidden"
+              className="sm:hidden"
               onClick={() => toggleFilterVisibility()}
             />
           </div>
@@ -337,7 +335,7 @@ const Sessions = () => {
                           showTime
                           timeOnly={form.name === "time"}
                           placeholder={DATE_AND_TIME_FORMATS.MM_DD_YYYY_HH_MM}
-                          value={form.value}
+                          value={form.value.toString()}
                           onChange={(event) => handleFormChange(event)}
                           maxDate={
                             form.name === "date" ? CURRENT_PST_DATE : null
@@ -462,7 +460,7 @@ const Sessions = () => {
               </>
             )}
             {allData.labels.length > 0 && chartOptions && (
-              <BarChartComp
+              <BarChart
                 title={PAGE_TITLES.SESSIONS}
                 options={chartOptions}
                 data={allData}
@@ -504,7 +502,7 @@ const Sessions = () => {
                       titleclassname="top-5"
                       imageclassname="h-5 w-5 relative top-7 md:top-3h left-2w z-1"
                       placeholder={DATE_AND_TIME_FORMATS.DD_MM_YYYY}
-                      value={form.value}
+                      value={form.value.toString()}
                       onChange={(event) => handleFormChange(event)}
                       maxDate={form.name === "date" ? CURRENT_PST_DATE : null}
                       dateFormat={DATE_FORMAT_3}
@@ -525,7 +523,7 @@ const Sessions = () => {
                   <div className="flex-col w-3/6" key={index}>
                     <CustomDropdown
                       name={form.name}
-                      title={form.title}
+                      label={form.title}
                       value={form.value}
                       imageclassname="top-0.8r z-1"
                       onChange={(event) => handleFormChange(event)}

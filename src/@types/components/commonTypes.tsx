@@ -145,7 +145,7 @@ export interface CustomDropdownProps {
   options: any;
   icon?: string;
   dropdownIcon?: any;
-  value?: string;
+  value?: string | number;
   imageclassname?: string;
   optionLabel: string;
   label?: string;
