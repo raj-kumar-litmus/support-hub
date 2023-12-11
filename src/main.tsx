@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 import App from "./App";
 import DcOpenOrders from "./views/DcOpenOrders";
-import BarChart from "./components/charts/BarChart";
+import BarChart from "./components/organisms/BarChart";
 import HomePage from "./views/homePage";
 import OrderDetails from "./views/OrderDetails";
 import OPM from "./views/opm";

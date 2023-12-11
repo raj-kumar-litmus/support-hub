@@ -3,7 +3,7 @@ import useScreenSize from "../hooks/useScreenSize";
 import OPM from "./opm";
 import OpmComparison from "./opmComparison";
 import CustomButton from "../components/atoms/Button";
-import BarChart from "../components/charts/BarChart";
+import BarChart from "../components/organisms/BarChart";
 import CustomImage from "../components/atoms/customimage";
 import HomeCard from "../components/molecules/homeCard";
 import GlobalLoader from "../components/molecules/globalLoader";
