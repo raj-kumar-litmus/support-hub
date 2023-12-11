@@ -4,8 +4,8 @@ import CustomButton from "../atoms/Button";
 import CustomDialog from "../atoms/customdialog";
 import CustomImage from "../atoms/customimage";
 import CustomTab from "../atoms/customtab";
-import ArrowTop from "../assets/arrow_top.svg";
-import ArrowTopWhite from "../assets/arrow_top_white.svg";
+import ArrowTop from "../../assets/arrow_top.svg";
+import ArrowTopWhite from "../../assets/arrow_top_white.svg";
 import {
   QuickLinksProps,
   QuickLinkBoxProps,

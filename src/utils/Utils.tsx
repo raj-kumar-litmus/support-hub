@@ -1,8 +1,8 @@
-import DashboardIcon from "../../assets/dashboard.svg";
-import OPMIcon from "../../assets/opm.svg";
-import OPMComparisonIcon from "../../assets/opmcomparison.svg";
-import SessionsIcon from "../../assets/sessions.svg";
-import DCOpenOrdersIcon from "../../assets/dcopenorders.svg";
+import DashboardIcon from "../assets/dashboard.svg";
+import OPMIcon from "../assets/opm.svg";
+import OPMComparisonIcon from "../assets/opmcomparison.svg";
+import SessionsIcon from "../assets/sessions.svg";
+import DCOpenOrdersIcon from "../assets/dcopenorders.svg";
 import { PAGE_TITLES } from "../constants/appConstants";
 
 export const ROUTES = {

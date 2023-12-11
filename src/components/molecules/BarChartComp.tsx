@@ -11,7 +11,7 @@ import { useState } from "react";
 import { Bar } from "react-chartjs-2";
 import { useLocation, useNavigate } from "react-router-dom";
 import useScreenSize from "../../hooks/useScreenSize";
-import RotateIcon from "../assets/rotate.svg";
+import RotateIcon from "../../assets/rotate.svg";
 import CustomImage from "../atoms/customimage";
 import { SCREEN_WIDTH } from "../../constants/appConstants";
 import { ROUTES, increaseLegendSpacing } from "../../utils/Utils";

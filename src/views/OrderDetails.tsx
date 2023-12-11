@@ -12,10 +12,10 @@ import CustomIcon from "../components/atoms/CustomIcon";
 import Card from "../components/atoms/Card";
 import CustomButton from "../components/atoms/Button";
 import ItemInformationsPopUp from "../components/molecules/itemInformationsPopUp";
-import PromotionsIcon from "../../assets/promotions_white.svg";
-import OrderClockIcon from "../../assets/order_clock_white.svg";
-import RightArrowIcon from "../../assets/right_arrow.svg";
-import OmsInfoIcon from "../../assets/oms_info_white.svg";
+import PromotionsIcon from "../assets/promotions_white.svg";
+import OrderClockIcon from "../assets/order_clock_white.svg";
+import RightArrowIcon from "../assets/right_arrow.svg";
+import OmsInfoIcon from "../assets/oms_info_white.svg";
 import {
   URL_OMS_ORDER_STATUS,
   URL_ORDER_DETAILS,
