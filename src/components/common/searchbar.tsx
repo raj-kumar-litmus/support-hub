@@ -1,6 +1,6 @@
 import { FC } from "react";
 import CustomButton from "../Button";
-import CustomImage from "./customimage";
+import CustomImage from "../atoms/customimage";
 import CustomInputText from "../InputText";
 import HeaderSearch from "../../assets/headersearch.svg";
 import { SearchBarProps } from "../../@types/components/commonTypes";
@@ -32,5 +32,5 @@ const SearchBar: FC<SearchBarProps> = (props) => {
     </div>
   );
 };
- 
+
 export default SearchBar;

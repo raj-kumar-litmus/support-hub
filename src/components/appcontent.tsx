@@ -3,7 +3,7 @@ import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
 import useScreenSize from "../hooks/useScreenSize";
 import Navbar from "./common/navbar";
-import SearchField from "./common/searchfield";
+import SearchField from "./atoms/searchfield";
 import SidePaneGrid from "./common/sidepanegrid";
 import SidePaneList from "./common/sidepanelist";
 import { MENU_LIST, ROUTES } from "../utils/Utils";

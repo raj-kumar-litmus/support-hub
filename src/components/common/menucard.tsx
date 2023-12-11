@@ -1,8 +1,7 @@
 import { Card } from "primereact/card";
 import { FC } from "react";
-import CustomImage from "./customimage";
+import CustomImage from "../atoms/customimage";
 import { MenuCardProps } from "../../@types/components/commonTypes";
-
 
 const MenuCard: FC<MenuCardProps> = (props) => {
   return (

@@ -1,6 +1,6 @@
 import { FC } from "react";
-import Card from "./common/Card";
-import CustomDialog from "./common/customdialog";
+import Card from "./atoms/Card";
+import CustomDialog from "./atoms/customdialog";
 import {
   CommerceItemData,
   ItemInformationsPopUpProps,

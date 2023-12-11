@@ -1,4 +1,4 @@
-import { InputNumber, InputNumberProps } from "primereact/inputnumber";
+import { InputNumber } from "primereact/inputnumber";
 import { CustomInputNumberProps } from "../../@types/components/commonTypes";
 
 const CustomInputNumber = (props: CustomInputNumberProps) => (

@@ -1,4 +1,4 @@
-import CustomDialog from "../common/customdialog";
+import CustomDialog from "../atoms/customdialog";
 import React, { useEffect, useRef, useState, useContext } from "react";
 import { Bar } from "react-chartjs-2";
 import { useNavigate } from "react-router";
@@ -7,9 +7,9 @@ import CustomButton from "../Button";
 import FilteredCard from "../FilteredCard";
 import CustomCalendar from "../common/CustomCalendar";
 import CustomDropdown from "../DropDown";
-import CustomIcon from "../common/CustomIcon";
-import CustomImage from "../common/customimage";
-import CustomTab from "../common/customtab";
+import CustomIcon from "../atoms/CustomIcon";
+import CustomImage from "../atoms/customimage";
+import CustomTab from "../atoms/customtab";
 import Loader from "../loader";
 import ChannelIcon from "../../assets/channel.svg";
 import FilterIcon from "../../assets/filter-dark.svg";

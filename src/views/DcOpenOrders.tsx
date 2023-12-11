@@ -1,7 +1,7 @@
 import { Column } from "primereact/column";
 import { FC, useEffect, useState } from "react";
-import Card from "../components/common/Card";
-import CustomTable from "../components/common/customtable";
+import Card from "../components/atoms/Card";
+import CustomTable from "../components/atoms/customtable";
 import Loader from "../components/loader";
 import { DCOpenOrders, orderData } from "../@types/pages/dcOpenOrders";
 import { URL_DC_OPEN_ORDERS } from "../constants/apiConstants";

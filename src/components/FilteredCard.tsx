@@ -1,7 +1,7 @@
 import React from "react";
 import CrossIcon from "../assets/cross.svg";
 import CustomButton from "./Button";
-import CustomImage from "./common/customimage";
+import CustomImage from "./atoms/customimage";
 import { FilteredCardProps } from "../@types/components/commonTypes";
 
 const FilteredCard: React.FC<FilteredCardProps> = (props) => {

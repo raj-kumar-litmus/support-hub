@@ -18,9 +18,9 @@ import CustomDropdown from "../components/DropDown";
 import FilteredCard from "../components/FilteredCard";
 import CustomInputText from "../components/InputText";
 import LineChart from "../components/LineChart";
-import CustomDialog from "../components/common/customdialog";
+import CustomDialog from "../components/atoms/customdialog";
 import CustomCalendar from "../components/common/CustomCalendar";
-import CustomImage from "../components/common/customimage";
+import CustomImage from "../components/atoms/customimage";
 import Loader from "../components/loader";
 import ArrowDownIcon from "../assets/arrown_down_white.svg";
 import WhiteCrossIcon from "../assets/white_cross.svg";
@@ -71,7 +71,7 @@ import {
   getPSTdate,
 } from "../utils/dateTimeUtil";
 import { fetchData } from "../utils/fetchUtil";
-import CustomTab from "../components/common/customtab";
+import CustomTab from "../components/atoms/customtab";
 import BarChartComp from "../components/BarChartComp";
 
 ChartJS.register(
