@@ -6,7 +6,7 @@ import Loader from "../components/loader";
 import { DCOpenOrders, orderData } from "../@types/pages/dcOpenOrders";
 import { URL_DC_OPEN_ORDERS } from "../constants/apiConstants";
 import { fetchData } from "../utils/fetchUtil";
-import { getTableHeaders } from "../components/utils/Utils";
+import { getTableHeaders } from "../utils/Utils";
 import { PAGE_TITLES } from "../constants/appConstants";
 
 const DcOpenOrders: FC = () => {

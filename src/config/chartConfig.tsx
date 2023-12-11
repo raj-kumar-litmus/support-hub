@@ -8,7 +8,7 @@ import {
   Tooltip,
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import { externalTooltipHandler } from "../components/utils/Utils";
+import { externalTooltipHandler } from "../utils/Utils";
 import {
   SESSIONS_CHART_DEFAULT,
   CHART_LABELS,
@@ -486,7 +486,10 @@ export const OPM_COMPARISON_OPTIONS_HOME = ({
           ...options.plugins.legend.labels,
           generateLabels: () => {
             return Object.keys(apiResponse).map((_, index) => ({
-              text: index === 0 ? DASHBOARD_LABELS.TODAY : DASHBOARD_LABELS.YESTERDAY,
+              text:
+                index === 0
+                  ? DASHBOARD_LABELS.TODAY
+                  : DASHBOARD_LABELS.YESTERDAY,
               fillStyle:
                 index === 0
                   ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR
@@ -610,7 +613,10 @@ export const OPM_COMPARISON_BAR_OPTIONS_HOME = ({
           ...options.plugins.legend.labels,
           generateLabels: () => {
             return Object.keys(apiResponse).map((_, index) => ({
-              text: index === 0 ? DASHBOARD_LABELS.TODAY : DASHBOARD_LABELS.YESTERDAY,
+              text:
+                index === 0
+                  ? DASHBOARD_LABELS.TODAY
+                  : DASHBOARD_LABELS.YESTERDAY,
               fillStyle:
                 index === 0
                   ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR

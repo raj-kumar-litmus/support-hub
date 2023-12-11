@@ -32,7 +32,7 @@ import {
   IPromotion,
 } from "../@types/pages/OrderDetails";
 import { fetchData } from "../utils/fetchUtil";
-import { getTableHeaders } from "../components/utils/Utils";
+import { getTableHeaders } from "../utils/Utils";
 
 const OrderDetails: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);

@@ -15,7 +15,7 @@ import HomePage from "./views/homePage";
 import OrderDetails from "./views/OrderDetails";
 import OPM from "./views/opm";
 import OpmComparison from "./views/opmComparison";
-import { ROUTES } from "./components/utils/Utils";
+import { ROUTES } from "./utils/Utils";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

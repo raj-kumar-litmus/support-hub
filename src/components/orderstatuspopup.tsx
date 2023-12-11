@@ -6,7 +6,7 @@ import {
   ORDER_DETAILS_LABELS,
   ORDER_STATUS_LIST,
 } from "../constants/appConstants";
-import { getTableHeaders } from "./utils/Utils";
+import { getTableHeaders } from "../utils/Utils";
 
 type OrderStatusPopupProps = {
   openDialog: boolean;
@@ -27,10 +27,11 @@ const OrderStatusPopup: FC<OrderStatusPopupProps> = (props) => {
         stripedRows
         value={ORDER_STATUS_LIST}
         className="custom-table"
-        children={getTableHeaders(ORDER_STATUS_LIST).map((h) => (
+      >
+        {getTableHeaders(ORDER_STATUS_LIST).map((h) => (
           <Column key={h} field={h} header={h}></Column>
         ))}
-      />
+      </CustomTable>
     </CustomDialog>
   );
 };

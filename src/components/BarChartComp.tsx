@@ -14,7 +14,7 @@ import useScreenSize from "../hooks/useScreenSize";
 import RotateIcon from "../assets/rotate.svg";
 import CustomImage from "./common/customimage";
 import { SCREEN_WIDTH } from "../constants/appConstants";
-import { ROUTES, increaseLegendSpacing } from "./utils/Utils";
+import { ROUTES, increaseLegendSpacing } from "../utils/Utils";
 import { BarChartCompProps } from "../@types/components/commonTypes";
 
 ChartJS.register(
@@ -23,7 +23,7 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
 const BarChartComp = (props: BarChartCompProps) => {
