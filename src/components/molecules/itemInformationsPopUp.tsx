@@ -1,11 +1,11 @@
 import { FC } from "react";
-import Card from "./atoms/Card";
-import CustomDialog from "./atoms/customdialog";
+import Card from "../atoms/Card";
+import CustomDialog from "../atoms/customdialog";
 import {
   CommerceItemData,
   ItemInformationsPopUpProps,
-} from "../@types/pages/OrderDetails";
-import { ORDER_DETAILS_LABELS } from "../constants/appConstants";
+} from "../../@types/pages/OrderDetails";
+import { ORDER_DETAILS_LABELS } from "../../constants/appConstants";
 
 const ItemInformationsPopUp: FC<ItemInformationsPopUpProps> = (props) => {
   return (

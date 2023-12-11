@@ -1,7 +1,7 @@
 import { FC } from "react";
-import CustomButton from "../Button";
+import CustomButton from "../atoms/Button";
 import CustomImage from "../atoms/customimage";
-import CustomInputText from "../InputText";
+import CustomInputText from "../atoms/InputText";
 import HeaderSearch from "../../assets/headersearch.svg";
 import { SearchBarProps } from "../../@types/components/commonTypes";
 

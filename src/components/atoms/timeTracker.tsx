@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { TimeTrackerProps } from "../@types/pages/dashboard";
+import { TimeTrackerProps } from "../../@types/pages/dashboard";
 
 const TimeTracker = (props: TimeTrackerProps) => {
   const [timeInMin, setTimeInMin] = useState<number>(0);

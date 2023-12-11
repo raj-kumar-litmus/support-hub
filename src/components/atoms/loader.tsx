@@ -1,5 +1,5 @@
 import React from "react";
-import { LoaderProps } from "../@types/components/commonTypes";
+import { LoaderProps } from "../../@types/components/commonTypes";
 
 const Loader: React.FC<LoaderProps> = (props) => {
   return (

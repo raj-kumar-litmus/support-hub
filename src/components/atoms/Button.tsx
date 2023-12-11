@@ -1,6 +1,6 @@
 import { Button } from "primereact/button";
 import React from "react";
-import { CustomButtonProps } from "../@types/components/commonTypes";
+import { CustomButtonProps } from "../../@types/components/commonTypes";
 
 const CustomButton: React.FC<CustomButtonProps> = (props) => {
   const { isTextButton = false } = props;

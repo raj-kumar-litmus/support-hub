@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import CustomButton from "../components/Button";
-import CustomSideBar from "../components/CustomSideBar";
+import CustomButton from "../components/atoms/Button";
+import CustomSideBar from "../components/molecules/CustomSideBar";
 
 const meta = {
   title: "Stories/custom-sidebar",

@@ -11,12 +11,12 @@ import {
 import { useState } from "react";
 import { Line } from "react-chartjs-2";
 import { useLocation, useNavigate } from "react-router-dom";
-import useScreenSize from "../hooks/useScreenSize";
-import CustomImage from "./atoms/customimage";
+import useScreenSize from "../../hooks/useScreenSize";
+import CustomImage from "../atoms/customimage";
 import RotateIcon from "../assets/rotate.svg";
-import { SCREEN_WIDTH } from "../constants/appConstants";
-import { LineChartProps } from "../@types/components/commonTypes";
-import { ROUTES, increaseLegendSpacing } from "../utils/Utils";
+import { SCREEN_WIDTH } from "../../constants/appConstants";
+import { LineChartProps } from "../../@types/components/commonTypes";
+import { ROUTES, increaseLegendSpacing } from "../../utils/Utils";
 
 ChartJS.register(
   CategoryScale,

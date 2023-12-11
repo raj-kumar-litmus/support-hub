@@ -13,15 +13,15 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import useScreenSize from "../hooks/useScreenSize";
-import CustomButton from "../components/Button";
-import CustomDropdown from "../components/DropDown";
-import FilteredCard from "../components/FilteredCard";
-import CustomInputText from "../components/InputText";
-import LineChart from "../components/LineChart";
+import CustomButton from "../components/atoms/Button";
+import CustomDropdown from "../components/atoms/DropDown";
+import FilteredCard from "../components/molecules/FilteredCard";
+import CustomInputText from "../components/atoms/InputText";
+import LineChart from "../components/molecules/LineChart";
 import CustomDialog from "../components/atoms/customdialog";
-import CustomCalendar from "../components/common/CustomCalendar";
+import CustomCalendar from "../components/molecules/CustomCalendar";
 import CustomImage from "../components/atoms/customimage";
-import Loader from "../components/loader";
+import Loader from "../components/atoms/loader";
 import ArrowDownIcon from "../assets/arrown_down_white.svg";
 import WhiteCrossIcon from "../assets/white_cross.svg";
 import GreyCalendarIcon from "../assets/calendar-grey.svg";
@@ -72,7 +72,7 @@ import {
 } from "../utils/dateTimeUtil";
 import { fetchData } from "../utils/fetchUtil";
 import CustomTab from "../components/atoms/customtab";
-import BarChartComp from "../components/BarChartComp";
+import BarChartComp from "../components/molecules/BarChartComp";
 
 ChartJS.register(
   CategoryScale,

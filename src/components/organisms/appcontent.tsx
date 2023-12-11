@@ -1,14 +1,14 @@
 import { FC, KeyboardEvent, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
-import useScreenSize from "../hooks/useScreenSize";
-import Navbar from "./common/navbar";
-import SearchField from "./atoms/searchfield";
-import SidePaneGrid from "./common/sidepanegrid";
-import SidePaneList from "./common/sidepanelist";
-import { MENU_LIST, ROUTES } from "../utils/Utils";
-import { SCREEN_WIDTH } from "../constants/appConstants";
-import { AppContentProps } from "../@types/components/commonTypes";
+import useScreenSize from "../../hooks/useScreenSize";
+import Navbar from "./navbar";
+import SearchField from "../atoms/searchfield";
+import SidePaneGrid from "./sidepanegrid";
+import SidePaneList from "../molecules/sidepanelist";
+import { MENU_LIST, ROUTES } from "../../utils/Utils";
+import { SCREEN_WIDTH } from "../../constants/appConstants";
+import { AppContentProps } from "../../@types/components/commonTypes";
 
 const AppContent: FC<AppContentProps> = (props) => {
   const [showSidePaneGrid, setShowSidePaneGrid] = useState<boolean>(false);
