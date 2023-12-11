@@ -116,6 +116,7 @@ export default {
         "21w": "21vw",
         "24w": "24vw",
         "25w": "25vw",
+        "21r": "21rem",
         "29r": "29rem",
         "32.5w": "32.5vw",
         "38w": "38vw",
@@ -156,6 +157,7 @@ export default {
       },
       minHeight: {
         "100vh-56": "calc(100vh-56px)",
+        "16r": "16rem",
         "21r": "21rem",
         "24r": "24rem",
       },

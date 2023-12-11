@@ -299,4 +299,5 @@ export interface CustomSideBarProps extends SidebarProps {
   setVisible?: () => void;
   title?: string;
   themeClasses?: string;
+  sideBarWidthClass?: string;
 }

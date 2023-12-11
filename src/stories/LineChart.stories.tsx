@@ -525,3 +525,142 @@ export const MultiLineDarkBackgroundCurvyLineChart: Story = {
       "bg-[#29292a] border-2 border-solid border-[#202021] px-6 pt-2 pb-0 rounded-xl w-[46rem] h-96",
   },
 };
+
+export const LineChartWithAnnotation: Story = {
+  args: {
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: false,
+        },
+        title: {
+          display: true,
+          text: "CPU Usage",
+          position: "top",
+          align: "start",
+          color: "#ffffff",
+          font: {
+            size: 18,
+          },
+          padding: {
+            top: 20,
+            bottom: 24,
+          },
+        },
+        datalabels: {
+          display: false,
+        },
+        annotation: {
+          annotations: {
+            line1: {
+              type: "line",
+              yMin: 60,
+              yMax: 60,
+              borderColor: "#974e4e",
+              borderWidth: 4,
+            },
+            line2: {
+              type: "line",
+              yMin: 20,
+              yMax: 20,
+              borderColor: "#326b6b",
+              borderWidth: 4,
+            },
+          },
+        },
+      },
+      scales: {
+        x: {
+          grid: {
+            display: false,
+          },
+          border: {
+            color: "#5c5c5c",
+            width: 1,
+          },
+          title: {
+            display: true,
+            text: "Time Intervals",
+            color: "#ffffff",
+            font: {
+              size: 12,
+              weight: 600,
+            },
+            padding: {
+              top: 12,
+              bottom: 0,
+            },
+          },
+          ticks: {
+            padding: 2,
+          },
+        },
+        y: {
+          display: true,
+          beginAtZero: true,
+          max: 100,
+          stepSize: 6,
+          grid: {
+            drawTicks: true,
+            tickColor: "#29292a",
+            color: "#5c5c5c",
+          },
+          ticks: {
+            display: true,
+            stepSize: 20,
+            count: 6,
+            callback: function (value) {
+              return `${value}%`;
+            },
+          },
+          border: {
+            dash: [1, 5],
+            color: "#29292a",
+          },
+        },
+      },
+      datasets: {
+        line: {
+          pointStyle: false,
+          borderWidth: 3,
+          tension: 0.4,
+        },
+      },
+    },
+    data: {
+      labels: [
+        "10:01",
+        "10:02",
+        "10:03",
+        "10:04",
+        "10:05",
+        "10:06",
+        "10:07",
+        "10:08",
+        "10:09",
+        "10:10",
+      ],
+      datasets: [
+        {
+          data: [20, 20, 40, 60, 30, 60, 40, 40, 20, 20],
+          borderColor: "#e7c203",
+        },
+        {
+          data: [40, 40, 10, 60, 80, 30, 80, 40, 10, 10],
+          borderColor: "#6d7eda",
+        },
+        {
+          data: [20, 20, 40, 40, 80, 90, 30, 30, 20, 20],
+          borderColor: "#3ec2c3",
+        },
+        {
+          data: [10, 10, 30, 30, 50, 50, 20, 20, 10, 10],
+          borderColor: "#f07921",
+        },
+      ],
+    },
+    className:
+      "bg-[#29292a] border-2 border-solid border-[#202021] px-6 pt-2 pb-0 rounded-xl w-[46rem] h-96",
+  },
+};
