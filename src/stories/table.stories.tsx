@@ -2,6 +2,7 @@ import type { Meta } from "@storybook/react";
 import { Column } from "primereact/column";
 import CustomTable from "../components/common/customtable";
 import { getTableHeaders } from "../components/utils/Utils";
+import { useState } from "react";
 
 const meta = {
   title: "Components/Table",
@@ -37,6 +38,10 @@ const tableData = [
 
 const children = getTableHeaders(tableData).map((item, index) => (
   <Column key={index} field={item} header={item}></Column>
+));
+
+const sortableChildren = getTableHeaders(tableData).map((item, index) => (
+  <Column key={index} field={item} header={item} sortable></Column>
 ));
 
 export const Default = {
@@ -75,5 +80,13 @@ export const TableWithFooter = {
     value: tableData,
     children: children,
     footer: "Table Footer",
+  },
+};
+
+export const SorableColumns = {
+  args: {
+    value: tableData,
+    children: sortableChildren,
+    sortMode: "multiple",
   },
 };
