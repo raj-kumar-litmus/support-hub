@@ -2,7 +2,6 @@ import type { Meta } from "@storybook/react";
 import { Column } from "primereact/column";
 import CustomTable from "../components/common/customtable";
 import { getTableHeaders } from "../components/utils/Utils";
-import { useState } from "react";
 
 const meta = {
   title: "Components/Table",
