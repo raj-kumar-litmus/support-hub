@@ -82,7 +82,7 @@ export const TableWithFooter = {
   },
 };
 
-export const SorableColumns = {
+export const SortableColumns = {
   args: {
     value: tableData,
     children: sortableChildren,
