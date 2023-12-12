@@ -62,20 +62,18 @@ export const TableGrid = {
   },
 };
 
-export const TableWithHeader= {
+export const TableWithHeader = {
   args: {
     value: tableData,
     children: children,
-    header:'Table Header'
+    header: "Table Header",
   },
 };
 
-export const TableWithFooter= {
+export const TableWithFooter = {
   args: {
     value: tableData,
     children: children,
-    footer:'Table Footer'
+    footer: "Table Footer",
   },
 };
-
-
