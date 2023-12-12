@@ -558,7 +558,7 @@ const OpmComparison: React.FC = () => {
               ) : (
                 <>
                   <CustomDialog
-                    header="Filters"
+                    header={LABELS.FILTERS}
                     visible={visible}
                     className="!bg-slate-900 filtersModal filtersModal-popup opmFiltersMobile "
                     onHide={onModalCloseHandler}
