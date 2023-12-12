@@ -1031,6 +1031,37 @@ hr.horizontalLine.blue {
 .p-datepicker table td>span {
   @apply w-7 h-6
 }
+.report-tab.p-tabview {
+  @apply w-[335px];
+}
+.p-datatable .p-datatable-tfoot > tr > td {
+  @apply !bg-black-200 text-white-500 border-0 border-black-300 p-3;
+}
+.report-table .p-datatable-tbody tr:last-child td:first-child {
+  @apply rounded-none;
+}
+.report-table .p-datatable-tbody tr:last-child td:last-child {
+  @apply rounded-none;
+}
+.report-table .p-datatable-tfoot tr:last-child td:first-child {
+  @apply rounded-bl-lg;
+}
+.report-table .p-datatable-tfoot tr:last-child td:last-child {
+  @apply rounded-br-lg;
+}
+.channel-table .p-datatable-tbody tr td {
+  @apply max-w-[82px] min-w-[82px];
+}
+.payment-table .p-datatable-thead tr th {
+  @apply py-3 px-[1.7px];
+}
+.summary-card .p-card-content {
+  @apply p-0;
+}
+.summary-card .p-card-body {
+  @apply p-4;
+}
+
 /* Custom SideBar */
 .custom-sidebar {
   @apply bg-gray-107 text-gray-106;

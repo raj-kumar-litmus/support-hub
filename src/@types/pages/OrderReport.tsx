@@ -102,55 +102,15 @@ export interface HourlySlicedOrderData {
   bopisOrdersPlaced: number[];
 }
 
-export interface OrderSummaryTableData {
-  name: string;
-  data: number | string;
-  suffix?: string;
+export interface OrderTableData {
+  [x: string]: number | string;
+  Time: string;
 }
 
-export interface LocaleWiseHourlyOrderTableData {
-  Time: string;
-  "Last Year": number;
-  "Last Month": number;
-  "Last Week": number;
-  "Last Day": number;
-  Today: number;
-  "US Orders": number;
-  "CA Orders": number;
-  "US Sales": number;
-  "CA Sales": number;
-  "Total Sales": number;
+export interface SummaryTableData {
+  [x: string]: number | string | (string | number)[];
 }
 
-export interface ChannelWiseHourlyOrderTableData {
-  Time: string;
-  Today: number;
-  Web: number;
-  "Mobile Web": number;
-  "IPhone App": number;
-  "Android App": number;
-  CSC: number;
-  mPlus: number;
-  JCPenny: number;
-  Instagram: number;
-}
-
-export interface PaymentWiseHourlyOrderTableData {
-  Time: string;
-  Today: number;
-  "Apple Pay": number;
-  Paypal: number;
-  Klarna: number;
-  Giftcard: number;
-  "Store Card": number;
-  "Seph Pay": number;
-  "JCP(D)": number;
-  "Instagram(D)": number;
-  "Google(D)": number;
-  CBVI: number;
-  CBVIT: number;
-  PLCC: number;
-  PLCCT: number;
-  "Private Label": number;
-  "Other CC": number;
+export type HeaderProps = {
+  title: string;
 }
