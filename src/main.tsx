@@ -11,12 +11,11 @@ import {
 import App from "./App";
 import Chart from "./components/ChartIndex";
 import DcOpenOrders from "./components/DcOpenOrders";
-import BarChart from "./components/charts/BarChart";
 import HomePage from "./components/homePage";
 import OrderDetails from "./components/orderDetails/OrderDetails.js";
+import Sessions from "./views/sessions";
 import { ROUTES } from "./components/utils/Utils";
 import "./index.css";
-
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -34,7 +33,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           />
           <Route
             path={ROUTES.sessions}
-            element={<App appContent={<BarChart />} />}
+            element={<App appContent={<Sessions />} />}
           />
           <Route
             path={ROUTES.opm}
@@ -66,5 +65,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         </Routes>
       </Suspense>
     </Router>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

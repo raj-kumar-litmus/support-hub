@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { BrowserRouter as Router } from "react-router-dom";
-import BarChartComp from "../components/BarChartComp";
+import BarChart from "../components/BarChart";
 
 const meta = {
   title: "Components/BarChart",
-  component: BarChartComp,
+  component: BarChart,
   decorators: [
-    (BarChartComp) => (
+    (BarChart) => (
       <Router>
-        <BarChartComp />
+        <BarChart />
       </Router>
     ),
   ],
@@ -16,7 +16,7 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof BarChartComp>;
+} satisfies Meta<typeof BarChart>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -174,6 +174,6 @@ export const BarChartWithCustomGridStyles: Story = {
       ],
     },
     className:
-      "bg-[#29292a] border-2 border-solid border-[#202021] px-6 pt-2 pb-0 rounded-xl w-[46rem] h-96",
+      "bg-black-101 border-2 border-solid border-black-102 px-6 pt-2 pb-0 rounded-xl w-46r h-96",
   },
 };
