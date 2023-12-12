@@ -7,7 +7,7 @@ const LinearGauge = (props: LinearGaugeProps) => (
         (Number(props.propOne) /
           (Number(props.propOne) + Number(props.propTwo))) *
           100,
-      )}%] border-solid border-r-4 border-white h-[${props.height}] ${
+      )}%] border-solid border-r-4 border-black-101 h-[${props.height}] ${
         props.bgColorOne
       }`}
     >

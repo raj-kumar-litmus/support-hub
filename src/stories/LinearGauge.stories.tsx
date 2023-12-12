@@ -25,10 +25,10 @@ type Story = StoryObj<typeof meta>;
 
 export const LinearGaugeOne: Story = {
   args: {
-    propOne: "5796",
-    propTwo: "21555",
-    bgColorOne: "bg-black-400",
-    bgColorTwo: "bg-red-500",
+    propOne: "81",
+    propTwo: "80",
+    bgColorTwo: "bg-red-100",
+    bgColorOne: "bg-blue-300",
     height: "50px",
     containerClassName: "w-[50vw]",
   },
@@ -36,21 +36,10 @@ export const LinearGaugeOne: Story = {
 
 export const LinearGaugeTwo: Story = {
   args: {
-    propOne: "72",
-    propTwo: "69",
-    bgColorOne: "bg-blue-100",
-    bgColorTwo: "bg-green-200",
-    height: "50px",
-    containerClassName: "w-[50vw]",
-  },
-};
-
-export const LinearGaugeThree: Story = {
-  args: {
-    propOne: "50",
-    propTwo: "2",
-    bgColorOne: "bg-pink-100",
-    bgColorTwo: "bg-yellow-100",
+    propOne: "158679",
+    propTwo: "25272",
+    bgColorTwo: "bg-red-100",
+    bgColorOne: "bg-blue-300",
     height: "50px",
     containerClassName: "w-[50vw]",
   },

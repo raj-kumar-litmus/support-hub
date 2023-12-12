@@ -420,6 +420,7 @@ export type PieChartProps = {
 export type SectionTitleProps = {
   title: string;
 };
+
 export interface DoughNutChartProps {
   options: ChartOptions<"doughnut"> | any;
   data: ChartData<"doughnut">;
@@ -474,4 +475,10 @@ export interface LinearGaugeProps {
   bgColorOne: string;
   bgColorTwo: string;
   containerClassName: string;
+}
+
+export interface LabelProps {
+  text?: string;
+  containerClassName?: string;
+  color?: string;
 }
