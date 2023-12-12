@@ -72,7 +72,7 @@
 
 #custom-hover .p-inputtext,
 .p-dialog .p-inputtext {
-  @apply  border-none bg-gray-900 rounded-r-lg;
+  @apply border-none bg-gray-900 rounded-r-lg;
 }
 
 #custom-hover .p-dropdown {
@@ -98,9 +98,8 @@
 #bar-chart .p-button,
 .p-dialog .p-button {
   @apply bg-gray-900 border-gray-400 text-gray-400;
-} 
-
- #bar-chart .p-button:focus,
+}
+#bar-chart .p-button:focus,
 .p-dialog .p-button:focus {
   @apply shadow-none;
 }
@@ -137,7 +136,6 @@
   @apply border-none rounded-lg;
 }
 
-
 #bar-chart .p-dropdown {
   @apply !border-none bg-gray-900 rounded-lg;
 }
@@ -147,12 +145,18 @@
   @apply bg-transparent text-sm px-11 py-2 transition-none border-2 border-gray-300 rounded-[22px];
 }
 
-#page-btn-submit.p-button:focus {
+.opm-btn .p-button, .opm-btn .p-button:enabled:hover {
+  @apply bg-transparent text-sm p-0 transition-none border-2 border-gray-300 rounded-[22px] h-[2.3rem];
+}
+
+#page-btn-submit.p-button:focus,
+.opm-btn .p-button:focus {
   @apply shadow-none;
 }
 
 #page-btn-submit .p-button-label,
-#popup-btn-submit .p-button-label {
+#popup-btn-submit .p-button-label,
+.opm-btn .p-button-label {
   @apply !text-white-500  text-sm font-medium;
 }
 
@@ -234,7 +238,7 @@ button.p-button-secondary {
   @apply w-[4vw] relative right-3.5;
 }
 .p-datepicker-trigger {
-  @apply !p-0 border border-solid border-gray-105 border-r-0 ;
+  @apply !p-0 border border-solid border-gray-105 border-r-0;
 }
 .p-datepicker-trigger img {
   @apply w-1/2 h-1/2;
@@ -291,6 +295,11 @@ button.p-button-secondary {
 .p-dropdown.p-focus {
   @apply !shadow-none !border-none;
 }
+
+.filter-dropdown.p-dropdown:focus {
+@apply !shadow-2px-white;
+}
+
 .p-calendar .p-datepicker-trigger,
 .p-calendar .p-datepicker-trigger:hover {
   @apply !border-transparent bg-transparent text-gray-101;
@@ -332,7 +341,7 @@ button.p-button-secondary {
   @apply bg-inherit border-none p-0;
 }
 .inputContainer .p-inputtext {
-  @apply  h-[2.3rem];
+  @apply h-[2.3rem];
 }
 .opmFilters .p-inputtext {
   @apply text-white-700;
@@ -512,7 +521,7 @@ button.p-button-secondary {
   @apply !bg-gray-900 border border-solid border-gray-900;
 }
 .opmFilters .p-calendar .p-inputtext {
-  @apply pl-1.75r md:w-20w lg:w-12w;
+  @apply pl-1.75r;
 }
 .opmComparisonFilters .p-calendar .p-inputtext {
   @apply md:w-[9vw] lg:w-12w;
@@ -525,7 +534,7 @@ button.p-button-secondary {
   @apply !border-black-800;
 }
 .p-datepicker {
-  @apply rounded-md p-0  !max-w-[340px] ;
+  @apply rounded-md p-0 !max-w-[340px];
 }
 .p-datepicker thead {
   @apply bg-black-300;
@@ -979,15 +988,15 @@ hr.horizontalLine.blue {
 .opmFilters .p-inputtext:hover {
   @apply border-0;
 }
-.label-position .p-inputtext{
-  @apply pl-8 pt-9p
+.label-position .p-inputtext {
+  @apply pl-8 pt-9p;
 }
 
 .p-dropdown-panel ::-webkit-scrollbar-thumb {
   @apply !bg-black-200;
 }
 
-.p-dropdown-panel{
+.p-dropdown-panel {
   @apply bg-gray-900;
 }
 .order-details-btn-link .p-button {
@@ -1001,6 +1010,33 @@ hr.horizontalLine.blue {
 }
 .quick-link-arrow img{
   @apply h-7p w-7p;
+}
+.report-tab.p-tabview {
+  @apply w-[335px];
+}
+.p-datatable .p-datatable-tfoot > tr > td {
+  @apply !bg-[#22262C] text-[#FFFFFF] border-0 border-[#292E36] p-3;
+}
+.report-table .p-datatable-tbody tr:last-child td:first-child {
+  @apply rounded-none;
+}
+.report-table .p-datatable-tbody tr:last-child td:last-child {
+  @apply rounded-none;
+}
+.report-table .p-datatable-tfoot tr:last-child td:first-child {
+  @apply rounded-bl-lg;
+}
+.report-table .p-datatable-tfoot tr:last-child td:last-child {
+  @apply rounded-br-lg;
+}
+.channel-table .p-datatable-tbody tr td {
+  @apply max-w-[82px] min-w-[82px];
+}
+.payment-table .p-datatable-thead tr th {
+  @apply py-[.75rem] px-[1.7px];
+}
+.payment-table .p-datatable-tfoot > tr > td {
+  @apply py-[.75rem] px-[1.7px];
 }
 .p-datepicker table td>span {
   @apply w-7 h-6
@@ -1027,4 +1063,7 @@ hr.horizontalLine.blue {
 }
 .custom-sidebar .custom-sidebar-close-btn .p-button:enabled:hover {
   @apply border-none bg-inherit;
+}
+.custom-sidebar .opm-tabs.p-tabview {
+  @apply top-6;
 }

@@ -13,6 +13,7 @@ import { CommerceItemData } from "../pages/OrderDetails";
 import { DCOpenOrders } from "../pages/dcOpenOrders";
 import { ModalEnums } from "../pages/opmCharts";
 import { InputTextProps } from "primereact/inputtext";
+import { DropdownProps } from "primereact/dropdown";
 
 export type CardProps = {
   cardData: DCOpenOrders | CommerceItemData;
@@ -105,13 +106,13 @@ export interface CustomButtonProps extends ButtonProps {
   children?: React.ReactNode;
   btnclassname?: string;
   severity?:
-    | "secondary"
-    | "success"
-    | "info"
-    | "warning"
-    | "danger"
-    | "help"
-    | undefined;
+  | "secondary"
+  | "success"
+  | "info"
+  | "warning"
+  | "danger"
+  | "help"
+  | undefined;
   label?: string;
 }
 
@@ -129,7 +130,7 @@ export interface CustomInputTextProps extends InputTextProps {
 
 export interface CustomModalProps {
   children?: React.ReactNode;
-  onHide(): void;
+  onHide (): void;
   closeIcon?: any;
   className?: string;
   header: string;
@@ -140,7 +141,7 @@ export interface CustomModalProps {
   isResizable?: boolean;
 }
 
-export interface CustomDropdownProps {
+export interface CustomDropdownProps extends DropdownProps {
   onChange: any;
   options: any;
   icon?: string;
@@ -250,7 +251,7 @@ export interface LoaderProps {
 
 export interface LineChartProps {
   options: ChartOptions<"line"> | any;
-  data: ChartData<"line">;
+  data: ChartData<"line"> | any;
   className?: string;
   title: string;
   isFullScreen?: boolean;
@@ -296,7 +297,43 @@ export enum SideBarPositionEnums {
 }
 
 export interface CustomSideBarProps extends SidebarProps {
-  setVisible?: () => void;
+  setVisible?: (boolean) => void;
   title?: string;
   themeClasses?: string;
 }
+export type HorizontalTableProps = {
+  className?: string;
+  tableClassName?: string;
+  tableHead?: string;
+  // rowClassName?: string;
+  rowHeadClassName?: string;
+  dataClassName?: string;
+  tableHeadClassName?: string;
+  tableData: any[];
+};
+export interface GridData {
+  data: string | number;
+  icon?: any;
+  highlight?: boolean;
+}
+
+export type GridTableProps = {
+  columns: number;
+  data: GridData[] | string[];
+  title?: string;
+  className?: string;
+  onClick?: (string) => void;
+}
+
+export type OrderSummaryCardProps = {
+  cardData: any;
+}
+
+export type InfoFieldProps = {
+  title: string;
+  data: string | number;
+  className?: string;
+  wrapperClassName?: string;
+  titleClassName?: string;
+  dataClassName?: string;
+};

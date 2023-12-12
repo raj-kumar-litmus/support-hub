@@ -22,7 +22,10 @@ const CustomDropdown: React.FC<CustomDropdownProps> = (props) => {
           options={props.options}
           optionLabel={props.optionLabel}
           placeholder={props.placeholder}
-          className="w-full label-position"         
+          className={`w-full label-position ${props.className}`} 
+          id={props.id}
+          focusInputRef={props.focusInputRef}
+          autoFocus={props.autoFocus}
         />
       </div>
     </div>

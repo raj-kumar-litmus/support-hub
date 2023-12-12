@@ -29,6 +29,7 @@ import { LoaderContext } from "../context/loaderContext";
 import { getFormattedPSTDate } from "../utils/dateTimeUtil";
 import { fetchData } from "../utils/fetchUtil";
 import { LoaderContextType } from "../@types/components/commonTypes";
+import { FETCH_TYPES } from "./utils/Utils";
 
 const CardTitle = (props: { title: string; icon: any; classname?: string }) => {
   const { classname = "" } = props;
@@ -73,25 +74,23 @@ const ComparisonCards = (props: { today: number; lastDay: number }) => {
       <div className="border border-r border-black-400 h-10 m-auto"></div>
       <div className="flex flex-col justify-between pl-1 sm:pl-2">
         <span
-          className={`${
-            difference > 0
+          className={`${difference > 0
               ? "text-pink-100"
               : difference < 0
-              ? "text-green-300"
-              : "text-gray-400"
-          } text-10`}
+                ? "text-green-300"
+                : "text-gray-400"
+            } text-10`}
         >
           {DASHBOARD_LABELS.DIFFERENCE}
         </span>
         <div className="flex">
           <span
-            className={`${
-              difference > 0
+            className={`${difference > 0
                 ? "text-pink-100"
                 : difference < 0
-                ? "text-green-300"
-                : "text-gray-200"
-            } text-xl`}
+                  ? "text-green-300"
+                  : "text-gray-200"
+              } text-xl`}
           >
             {Math.abs(difference)}
           </span>
@@ -125,8 +124,7 @@ const HomePage = () => {
   const fetchOPMData = async (url, date) => {
     try {
       const opmData = await fetchData(
-        `${url}?period=${
-          DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION
+        `${url}?period=${DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION
         }&starttime=${getFormattedPSTDate(date)}`,
         {}
       );
@@ -147,8 +145,7 @@ const HomePage = () => {
   const fetchCompData = async (url, date) => {
     try {
       const opmData = await fetchData(
-        `${url}?period=${
-          DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION
+        `${url}?period=${DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION
         }&starttime=${getFormattedPSTDate(date)}`,
         {}
       );
@@ -282,7 +279,7 @@ const HomePage = () => {
           )}
 
           <div className="home-opm-charts flex flex-col xl:flex-row space-y-6 xl:space-y-0 xl:gap-[2%] min-h-21r">
-            <OPM />
+            <OPM fetchType={FETCH_TYPES.HOME} />
             <OpmComparison />
           </div>
           <BarChart />

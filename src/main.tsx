@@ -13,9 +13,11 @@ import Chart from "./components/ChartIndex";
 import DcOpenOrders from "./components/DcOpenOrders";
 import BarChart from "./components/charts/BarChart";
 import HomePage from "./components/homePage";
+import OrderReport from "./views/OrderReport";
 import OrderDetails from "./components/orderDetails/OrderDetails.js";
-import { ROUTES } from "./components/utils/Utils";
+import { FETCH_TYPES, ROUTES } from "./components/utils/Utils";
 import "./index.css";
+import FocusRoom from "./components/FocusRoom";
 
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -38,7 +40,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           />
           <Route
             path={ROUTES.opm}
-            element={<App appContent={<Chart type="opm" />} />}
+            element={<App appContent={<Chart type="opm" fetchType={FETCH_TYPES.OPM} />} />}
           />
           <Route
             path={`${ROUTES.opm}${ROUTES.fullScreen}`}
@@ -62,6 +64,22 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route
             path={`${ROUTES.orderDetails}/:orderId`}
             element={<App appContent={<OrderDetails />} />}
+          />
+          <Route
+            path={ROUTES.orderReport}
+            element={
+              <App
+                appContent={<OrderReport  />}
+              />
+            }
+          />
+          <Route
+            path={ROUTES.focusRoom}
+            element={
+              <App
+                appContent={<FocusRoom />}
+              />
+            }
           />
         </Routes>
       </Suspense>

@@ -13,7 +13,16 @@ export const ROUTES = {
   dcOpenOrders: "/dc-open-orders",
   fullScreen: "/fullscreen",
   orderDetails: "/order-details",
+  orderReport: "/order-report",
+  focusRoom: "/focus-room"
 };
+
+export const FETCH_TYPES = {
+  HOME: "home",
+  OPM: "opm",
+  OPM_COMPARISON: "opm-comparison",
+  SESSIONS: "sessions"
+}
 
 export const MENU_LIST = [
   { id: 1, name: PAGE_TITLES.DASHBOARD, icon: DashboardIcon, path: ROUTES.home },
@@ -36,6 +45,18 @@ export const MENU_LIST = [
     icon: DCOpenOrdersIcon,
     path: ROUTES.dcOpenOrders,
   },
+  {
+    id: 8,
+    name: "Order Report",
+    icon: DashboardIcon,
+    path: ROUTES.orderReport
+  },
+  {
+    id: 9,
+    name: "Focus Room",
+    icon: SessionsIcon,
+    path: ROUTES.focusRoom
+  }
 ];
 
 const getOrCreateTooltip = (chart, type, tooltip) => {
@@ -231,3 +252,9 @@ export const increaseLegendSpacing = (customHeight) => [
     },
   },
 ];
+
+export const kFormatter = (num) => {
+  return Math.abs(num) > 999
+    ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(0) + "K"
+    : Math.sign(num) * Math.abs(num);
+};

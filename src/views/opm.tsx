@@ -10,7 +10,7 @@ import {
   Tooltip,
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import useScreenSize from "../hooks/useScreenSize";
 import CustomButton from "../components/Button";
@@ -67,7 +67,7 @@ import {
 } from "../constants/appConstants";
 import { LoaderContext } from "../context/loaderContext";
 import { LoaderContextType } from "../@types/components/commonTypes";
-import { ChartData, ChartOptions, ModalEnums } from "../@types/pages/opmCharts";
+import { ChartData, ChartOptions, ModalEnums, OPMProps } from "../@types/pages/opmCharts";
 import {
   CURRENT_PST_DATE,
   DATE_TIME_FORMAT_3,
@@ -76,7 +76,7 @@ import {
   getFormattedPSTDate,
 } from "../utils/dateTimeUtil";
 import { fetchData } from "../utils/fetchUtil";
-import { ROUTES, submitOnEnter } from "../components/utils/Utils";
+import { FETCH_TYPES, ROUTES, submitOnEnter } from "../components/utils/Utils";
 
 ChartJS.register(
   CategoryScale,
@@ -90,7 +90,7 @@ ChartJS.register(
   ChartDataLabels,
 );
 
-const OPM: React.FC = () => {
+const OPM: React.FC<OPMProps> = (props) => {
   const [showFilters, setShowFilters] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
   const [position, setPosition] = useState<ModalEnums>("center");
@@ -99,6 +99,7 @@ const OPM: React.FC = () => {
   const { width } = useScreenSize();
   const navigate = useNavigate();
   const IS_FULLSCREEN = location?.pathname.includes(ROUTES.fullScreen);
+  const dropdownRef = useRef(null);
 
   const DEFAULT = {
     duration: 10,
@@ -210,7 +211,7 @@ const OPM: React.FC = () => {
 
   useEffect(() => {
     setUrl(
-      `${URL_OPM}?period=${location.pathname.includes(ROUTES.opm)
+      `${URL_OPM}?period=${props.fetchType === FETCH_TYPES.OPM
         ? DEFAULT.duration
         : DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION
       }&starttime=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${DEFAULT.promocode
@@ -265,7 +266,7 @@ const OPM: React.FC = () => {
     (async () => {
       if (url) {
         setOptions(
-          location.pathname.includes(ROUTES.home)
+          props.fetchType === FETCH_TYPES.HOME
             ? OPM_OPTIONS_HOME(
               width < SCREEN_WIDTH.SM,
               Number(url.split("period=")[1].split("&")[0]) < 16 &&
@@ -278,7 +279,7 @@ const OPM: React.FC = () => {
             ),
         );
         setBarChartOptions(
-          location.pathname.includes(ROUTES.home)
+          props.fetchType === FETCH_TYPES.HOME
             ? OPM_BAR_CHART_OPTIONS_HOME(
               width < SCREEN_WIDTH.SM,
               Number(url.split("period=")[1].split("&")[0]) < 16 &&
@@ -335,6 +336,11 @@ const OPM: React.FC = () => {
 
   const submit = (e) => {
     e.preventDefault();
+    createUrl();
+    if (showFilters && width < SCREEN_WIDTH.SM) setShowFilters(false);
+  };
+
+  const createUrl = () => {
     let str = ``;
     let dateString = "";
     formFields.forEach((e: any) => {
@@ -353,7 +359,6 @@ const OPM: React.FC = () => {
       }
     });
     setUrl(`${URL_OPM}?${str}`);
-    if (showFilters && width < SCREEN_WIDTH.SM) setShowFilters(false);
   };
 
   useEffect(() => {
@@ -397,14 +402,45 @@ const OPM: React.FC = () => {
     })();
   };
 
+  useEffect(() => {
+    console.log(props.filters)
+    if (props.filters) {
+      let data = [...formFields];
+      switch (true) {
+        case props.filters.locale !== undefined:
+          data.find((e) => e.label === LABELS.LOCALE).value = { name: Object.entries(LOCALE_OPTIONS).find(([key, val]) => val === props.filters.locale)[0], code: props.filters.locale };
+          setFormFields(data);
+          break;
+        case props.filters.channel !== undefined:
+          data.find((e) => e.label === LABELS.CHANNEL).value = { name: Object.entries(OPM_CHANNELS).find(([key, val]) => val === props.filters.channel)[0], code: props.filters.channel };
+          setFormFields(data);
+          break;
+        case props.filters.payment !== undefined:
+          data.find((e) => e.label === LABELS.PAYMENT).value = { name: Object.entries(PAYMENT_TYPES).find(([key, val]) => val === props.filters.payment)[0], code: props.filters.payment };
+          setFormFields(data);
+          break;
+        default:
+          console.log('Unknown property');
+          break;
+      }
+      createUrl();
+      // if (dropdownRef.current) {
+      //   dropdownRef.current.focus();
+      // }
+    }
+  }, [props.filters]);
+
+  useEffect(() => {
+    props.filters &&
+      document.getElementById("filter-select")?.focus();
+  }, [data]);
+
   return (
     <>
-      {location.pathname.includes(ROUTES.home) && isLoading && (
+      {props.fetchType === FETCH_TYPES.HOME && isLoading && (
         <Loader className="!p-0 w-40w m-auto min-h-21r" />
-      )
-      }
-      {
-        location.pathname.includes(ROUTES.home) && data && !isLoading && (
+      )} {props.fetchType === FETCH_TYPES.HOME &&
+        data && !isLoading && (
           <div className="w-full xl:w-1/2 bg-black-200 rounded-lg px-4 lg:px-6 py-4">
             <div className="flex justify-between items-center relative mb-2 md:mb-4 lg:mb-2 xl:mb-4">
               <span className="text-gray-200 font-bold text-lg font-helvetica">
@@ -460,7 +496,7 @@ const OPM: React.FC = () => {
         )
       }
       {
-        !IS_FULLSCREEN && location.pathname.includes(ROUTES.opm) && (
+        !IS_FULLSCREEN && props.fetchType === FETCH_TYPES.OPM && (
           <div className="flex justify-between items-start">
             <p className="font-bold text-gray-200">{PAGE_TITLES.OPM}</p>
             {width < SCREEN_WIDTH.SM && (
@@ -475,159 +511,153 @@ const OPM: React.FC = () => {
         )
       }
       {
-        showFilters && location.pathname.includes(ROUTES.opm) && (
+        showFilters && props.fetchType === FETCH_TYPES.OPM && (
           <>
             {width > SCREEN_WIDTH.SM ? (
               <>
-                <form id="custom-hover" className="lg:flex sm:gap-4 opmFilters  sm:grid sm:grid-cols-3  sm:mb-4">
-                {formFields.map((form, index) => {
-                  return (
-                    <div
-                      className="flex flex-1"
-                      key={index}
-                    >
-                      {form.type === INPUT_TYPES.text && (
-                        <CustomInputText
-                          type={INPUT_TYPES.text}
-                          value={form.value}
-                          name={form.name}
-                          label={form.label}
-                          icon={form.imgsrc}
-                          placeholder={form.label}
-                          className="h-39"
-                          imageclassname="!top-[1.9rem]"
-                          containerClassName="lg:max-w-[8rem]"
-                          onChange={(event) => handleFormChange(event)}
-                        />
-                      )}
-                      {form.type === INPUT_TYPES.time && (
-                        <CustomCalendar
-                          name={form.name}
-                          titleclassname="top-1.25r"
-                          containerclassname="lg:min-w-11r"
-                          imageclassname="h-5 w-5 relative top-1.75r left-0.5w z-1"
-                          placeholder={DATE_AND_TIME_FORMATS.MM_DD_YYYY_HH_MM}
-                          title={form.label}
-                          showTime={form.showTime}
-                          iconPos={form.iconPos || "left"}
-                          imgsrc={form.imgsrc}
-                          onChange={(event) => handleFormChange(event)}
-                          value={form.value}
-                          maxDate={ form.name === "date" ? CURRENT_PST_DATE : null}
-                          dateFormat="dd-MM-yyyy hh:mm"
-                        />
-                      )}
-                      {form.type === INPUT_TYPES.dropdown && (
-                        <CustomDropdown
-                          value={form.value}
-                          name={form.name}
-                          onChange={(e) => handleFormChange(e)}
-                          imageclassname="z-1 top-[0.5rem]"
-                          dropdownIcon={<CustomImage src={ArrowDownIcon} />}
-                          icon={form.icon}
-                          options={form.options}
-                          label={form.label}
-                          optionLabel="name"
-                          placeholder=""
-                        />
-                      )}
-                    </div>
-                  );
-                })}
-              </form>
+                <form id="custom-hover" className="lg:flex lg:flex-wrap sm:gap-4 opmFilters  sm:grid sm:grid-cols-3  sm:mb-4">
+                  {formFields.map((form, index) => {
+                    return (
+                      <div
+                        className="flex flex-1"
+                        key={index}
+                      >
+                        {form.type === INPUT_TYPES.text && (
+                          <CustomInputText
+                            type={INPUT_TYPES.text}
+                            value={form.value}
+                            name={form.name}
+                            label={form.label}
+                            icon={form.imgsrc}
+                            placeholder={form.label}
+                            className="h-39"
+                            imageclassname="!top-[1.9rem]"
+                            containerclassname="lg:max-w-[8rem]"
+                            onChange={(event) => handleFormChange(event)}
+                          />
+                        )}
+                        {form.type === INPUT_TYPES.time && (
+                          <CustomCalendar
+                            name={form.name}
+                            titleclassname="top-1.25r"
+                            containerclassname="lg:min-w-11r"
+                            imageclassname="h-5 w-5 relative top-1.75r left-0.5w z-1"
+                            placeholder={DATE_AND_TIME_FORMATS.MM_DD_YYYY_HH_MM}
+                            title={form.label}
+                            showTime={form.showTime}
+                            iconPos={form.iconPos || "left"}
+                            imgsrc={form.imgsrc}
+                            onChange={(event) => handleFormChange(event)}
+                            value={form.value}
+                            maxDate={form.name === "date" ? CURRENT_PST_DATE : null}
+                            dateFormat="dd-MM-yyyy hh:mm"
+                          />
+                        )}
+                        {form.type === INPUT_TYPES.dropdown && (
+                          <CustomDropdown
+                            id={props.filters[form.name] ? "filter-select" : ""}
+                            value={form.value}
+                            name={form.name}
+                            onChange={(e) => handleFormChange(e)}
+                            imageclassname="z-1 top-[0.5rem]"
+                            dropdownIcon={<CustomImage src={ArrowDownIcon} />}
+                            icon={form.icon}
+                            options={form.options}
+                            label={form.label}
+                            optionLabel="name"
+                            placeholder=""
+                            className={props.filters ? "filter-dropdown" : ""}
+                            autoFocus={props.filters[form.name]}
+                            focusInputRef={dropdownRef}
+                          />
+                        )}
+                      </div>
+                    );
+                  })}
+                </form>
                 <CustomButton
-                  id="page-btn-submit"
                   btnclassname="w-full"
                   label={LABELS.SUBMIT}
                   isDisabled={disabled}
                   isRounded={true}
                   onClick={submit}
-                  className="self-end relative left-5w sm:w-21w md:w-15w lg:w-10w sm:top-2h md:top-0 sm:left-2.5w md:left-0 "
+                  className="opm-btn p-button-rounded w-[118px] self-end"
                 />
               </>
             ) : (
               <>
                 <CustomDialog
-                    header="Filters"
-                    visible={visible}
-                    className="!bg-black-200 filtersModal filtersModal-popup opmFiltersMobile"
-                    onHide={onModalCloseHandler}
-                    closeIcon={<CustomImage src={WhiteCrossIcon} />}
-                  >
-                    <form   className="grid grid-cols-[repeat(auto-fill,minmax(159px,1fr))] gap-x-2 gap-y-5" onSubmit={submit}>
-                     
-                       
-                        {formFields.map((form) => {
-                          return (
-                            <>
-                              {form.type === INPUT_TYPES.text && (
-                                <CustomInputText
-                                containerclassname={`${width > 479 ? 'w-11r':'w-43w'}`}
-                                  value={form.value}
-                                  label={form.label}
-                                  name={form.label}
-                                  icon={form.imgsrc}
-                                  placeholder={form.label}
-                                  onChange={(event) => handleFormChange(event)}
-                                  className="h-10"
-                                />
-                              )}
-                              {form.type === INPUT_TYPES.time && (
-                               
-                                  <CustomCalendar
-                                    name={form.name}
-                                     containerclassname="opmFiltersMobileCalendar"
-                                    imageclassname="h-5 w-5 top-[1.9rem] md:top-3h left-2w z-1"
-                                    title={form.label}
-                                    showTime={form.showTime}
-                                    iconPos={form.iconPos || "left"}
-                                    imgsrc={form.imgsrc}
-                                    onChange={(event) =>
-                                      handleFormChange(event)
-                                    }
-                                    value={form.value}
-                                    maxDate={
-                                      form.name === "startDate" ||
-                                      form.name === "endDate"
-                                        ? CURRENT_PST_DATE
-                                        : null
-                                    }
-                                  />
-                               
-                              )}
-                              {form.type === INPUT_TYPES.dropdown && (
-                               
-                                  <CustomDropdown
-                                    value={form.value}
-                                    name={form.name}
-                                    dropdownIcon={
-                                      <CustomImage src={ArrowDownIcon} />
-                                    }
-                                    onChange={(e) => handleFormChange(e)}
-                                   
-                                    imageclassname="top-3.5 z-1"
-                                    icon={form.icon}
-                                    options={form.options}
-                                    label={form.label}
-                                    optionLabel="name"
-                                    placeholder=""
-                                  />
-                               
-                              )}
-                            </>
-                          );
-                        })}
-                     
- 
-                      <CustomButton
+                  header="Filters"
+                  visible={visible}
+                  className="!bg-black-200 filtersModal filtersModal-popup opmFiltersMobile"
+                  onHide={onModalCloseHandler}
+                  closeIcon={<CustomImage src={WhiteCrossIcon} />}
+                >
+                  <form className="grid grid-cols-[repeat(auto-fill,minmax(159px,1fr))] gap-x-2 gap-y-5" onSubmit={submit}>
+                    {formFields.map((form) => {
+                      return (
+                        <>
+                          {form.type === INPUT_TYPES.text && (
+                            <CustomInputText
+                              containerclassname={`${width > 479 ? 'w-11r' : 'w-43w'}`}
+                              value={form.value}
+                              label={form.label}
+                              name={form.label}
+                              icon={form.imgsrc}
+                              placeholder={form.label}
+                              onChange={(event) => handleFormChange(event)}
+                              className="h-10"
+                            />
+                          )}
+                          {form.type === INPUT_TYPES.time && (
+                            <CustomCalendar
+                              name={form.name}
+                              containerclassname="opmFiltersMobileCalendar"
+                              imageclassname="h-5 w-5 top-[1.9rem] md:top-3h left-2w z-1"
+                              title={form.label}
+                              showTime={form.showTime}
+                              iconPos={form.iconPos || "left"}
+                              imgsrc={form.imgsrc}
+                              onChange={(event) =>
+                                handleFormChange(event)
+                              }
+                              value={form.value}
+                              maxDate={
+                                form.name === "startDate" ||
+                                  form.name === "endDate"
+                                  ? CURRENT_PST_DATE
+                                  : null
+                              }
+                            />
+                          )}
+                          {form.type === INPUT_TYPES.dropdown && (
+                            <CustomDropdown
+                              value={form.value}
+                              name={form.name}
+                              dropdownIcon={
+                                <CustomImage src={ArrowDownIcon} />
+                              }
+                              onChange={(e) => handleFormChange(e)}
+                              imageclassname="top-3.5 z-1"
+                              icon={form.icon}
+                              options={form.options}
+                              label={form.label}
+                              optionLabel="name"
+                              placeholder=""
+                            />
+                          )}
+                        </>
+                      );
+                    })}
+                    <CustomButton
                       // id="page-btn-submit"
-                        label={LABELS.SUBMIT}
-                        isDisabled={disabled}
-                        isRounded={true}
-                        className="submitBtnMobile opmPopUp col-span-full"
-                      />
-                    </form>
-                  </CustomDialog>
+                      label={LABELS.SUBMIT}
+                      isDisabled={disabled}
+                      isRounded={true}
+                      className="submitBtnMobile opmPopUp col-span-full"
+                    />
+                  </form>
+                </CustomDialog>
               </>
             )}
           </>
@@ -635,7 +665,7 @@ const OPM: React.FC = () => {
       }
 
       {
-        location.pathname.includes(ROUTES.opm) && showFilteredCards && (
+        props.fetchType === FETCH_TYPES.OPM && showFilteredCards && (
           <div
             className={`flex items-center gap-4 mt-2.5 overflow-auto ml-0 sm:ml-5w lg:ml-4 ${IS_FULLSCREEN
               ? "rotate-90 absolute -left-9h top-45h ml-25w w-70h mt-0"
@@ -672,7 +702,7 @@ const OPM: React.FC = () => {
       }
 
       {
-        !IS_FULLSCREEN && location.pathname.includes(ROUTES.opm) && (
+        !IS_FULLSCREEN && props.fetchType === FETCH_TYPES.OPM && (
           <AutoRefresh
             getData={getData}
             startPollingHandler={startPollingHandler}
@@ -684,12 +714,12 @@ const OPM: React.FC = () => {
         )
       }
       {
-        isLoading && location.pathname.includes(ROUTES.opm) ? (
+        isLoading && props.fetchType === FETCH_TYPES.OPM ? (
           <Loader className="h-[50vh]" />
         ) : (
           data &&
           !isLoading &&
-          location.pathname.includes(ROUTES.opm) && (
+          props.fetchType === FETCH_TYPES.OPM && (
             <div
               className={`relative h-96 lg:h-29r ${IS_FULLSCREEN ? "rotate-90" : ""
                 }`}

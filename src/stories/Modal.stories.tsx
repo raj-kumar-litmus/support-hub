@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "primereact/resources/primereact.min.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
-import CustomModal from "../components/Modal";
+import CustomDialog from "../components/common/customdialog";
 import "../index.css";
 
 const meta = {
   title: "Components/Modal",
-  component: CustomModal,
+  component: CustomDialog,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof CustomModal>;
+} satisfies Meta<typeof CustomDialog>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

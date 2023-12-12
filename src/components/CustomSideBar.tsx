@@ -36,7 +36,7 @@ const CustomSideBar = (props: CustomSideBarProps) => {
         >
           {LABELS.CLOSE}
         </CustomButton>
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full">
           {props.title && (
             <h2 className="m-0 mb-4 text-lg font-bold text-inherit">
               {props.title}

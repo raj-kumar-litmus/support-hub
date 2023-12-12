@@ -19,6 +19,7 @@ export default {
           700: "#161A1D",
           800: "#40444B",
           900: "#25292D",
+          101: "#29292A",
         },
         gray: {
           100: "#00000014",
@@ -37,6 +38,7 @@ export default {
           105: "#ced4da",
           106: "#9E9E9F",
           107: "#1E1E1F",
+          108: "#424245"
         },
         white: {
           100: "#6175FC00",
@@ -46,6 +48,7 @@ export default {
           500: "#FFFFFF",
           600: "#FFFFFF00",
           700: "#E8E8E8",
+          800: "#FBFBFC",
         },
         blue: {
           100: "#0977FF",
@@ -59,13 +62,19 @@ export default {
           100: "#2CB67D",
           200: "#269569",
           300: "#3A9F2D",
+          400: "#729F70"
         },
         teal: {
           100: "#41E2D8",
         },
         yellow: {
           100: "#FDA44F",
+          200: "#CE813A"
         },
+        red: {
+          100: "#D26060",
+          200: "#623737"
+        }
       },
       spacing: {
         "5p": "5px",
@@ -99,6 +108,7 @@ export default {
         "1.75r": "1.75rem",
         "2w": "2vw",
         "2h": "2vh",
+        "2.3r": "2.3rem",
         "2.5w": "2.5vw",
         "2.85w": "2.85vw",
         "3h": "3vh",
@@ -176,6 +186,9 @@ export default {
       lineHeight: {
         17: "17px",
       },
+      boxShadow: {
+        '2px-white': '0 0 0 2px #ffffff',
+      }
     },
     screens: {
       xs: "450px",
