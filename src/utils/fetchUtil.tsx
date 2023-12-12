@@ -2,7 +2,7 @@ const baseURL: string = `${import.meta.env.VITE_BASEURL}`;
 
 export const fetchData = async (
   url: string,
-  params: Record<string, string>,
+  params: Record<string, string | number>,
 ) => {
   const queryString: string = params
     ? Object.keys(params)

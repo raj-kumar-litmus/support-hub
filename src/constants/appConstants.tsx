@@ -54,6 +54,7 @@ export const LABELS = {
   RESET: "Reset",
   AUTO_REFRESH: "Auto Refresh",
   FILTERS: "Filters",
+  CLOSE: "Close",
 };
 
 export const INPUT_TYPES = {

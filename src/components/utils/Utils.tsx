@@ -16,7 +16,12 @@ export const ROUTES = {
 };
 
 export const MENU_LIST = [
-  { id: 1, name: PAGE_TITLES.DASHBOARD, icon: DashboardIcon, path: ROUTES.home },
+  {
+    id: 1,
+    name: PAGE_TITLES.DASHBOARD,
+    icon: DashboardIcon,
+    path: ROUTES.home,
+  },
   { id: 2, name: PAGE_TITLES.OPM, icon: OPMIcon, path: ROUTES.opm },
   {
     id: 3,
@@ -55,9 +60,9 @@ const getOrCreateTooltip = (chart, type, tooltip) => {
     type === "opm"
       ? line.setAttribute("class", `horizontalLine opm`)
       : line.setAttribute(
-        "class",
-        `horizontalLine ${index === 0 ? "yellow" : "blue"}`,
-      );
+          "class",
+          `horizontalLine ${index === 0 ? "yellow" : "blue"}`,
+        );
   }
 
   if (!tooltipEl) {
@@ -85,7 +90,11 @@ const getOrCreateTooltip = (chart, type, tooltip) => {
   return tooltipEl;
 };
 
-export const externalTooltipHandler = (context, type, customPosition) => {
+export const externalTooltipHandler = (
+  context,
+  type,
+  customPosition = false,
+) => {
   // Tooltip Element
   const { chart, tooltip } = context;
   const tooltipEl = getOrCreateTooltip(chart, type, tooltip);
@@ -228,9 +237,9 @@ export const submitOnEnter = (callback) => {
 export const increaseLegendSpacing = (customHeight) => [
   {
     id: "increase-legend-spacing",
-    beforeInit (chart) {
+    beforeInit(chart) {
       const originalFit = (chart.legend as any).fit;
-      (chart.legend as any).fit = function fit () {
+      (chart.legend as any).fit = function fit() {
         originalFit.bind(chart.legend)();
         this.height += customHeight;
       };

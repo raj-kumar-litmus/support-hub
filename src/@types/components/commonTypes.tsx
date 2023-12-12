@@ -6,6 +6,7 @@ import {
   InputNumberProps,
   InputNumberValueChangeEvent,
 } from "primereact/inputnumber";
+import { SidebarProps } from "primereact/sidebar";
 import { ToastProps } from "primereact/toast";
 import { FC, KeyboardEvent } from "react";
 import { CommerceItemData } from "../pages/OrderDetails";
@@ -144,7 +145,7 @@ export interface CustomDropdownProps {
   options: any;
   icon?: string;
   dropdownIcon?: any;
-  value?: string;
+  value?: string | number;
   imageclassname?: string;
   optionLabel: string;
   label?: string;
@@ -288,4 +289,16 @@ export interface BarChartCompProps {
 
 export interface ChartProps {
   type: string;
+}
+
+export enum SideBarPositionEnums {
+  RIGHT = "right",
+  LEFT = "left",
+}
+
+export interface CustomSideBarProps extends SidebarProps {
+  setVisible?: () => void;
+  title?: string;
+  themeClasses?: string;
+  sideBarWidthClass?: string;
 }
