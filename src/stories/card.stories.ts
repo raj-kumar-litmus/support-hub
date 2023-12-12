@@ -19,15 +19,15 @@ const cardData = {
   "Workable Orders": 3562,
 };
 
-export const Default = {
-  args: {},
-};
+// export const Default = {
+//   args: {},
+// };
 
-export const CardWithButton = {
-  args: {
-    button: true,
-  },
-};
+// export const CardWithButton = {
+//   args: {
+//     button: true,
+//   },
+// };
 
 export const DCOpenOrdersCard = {
   args: {
