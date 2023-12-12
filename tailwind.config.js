@@ -35,6 +35,8 @@ export default {
           103: "#979797",
           104: "#B9B9B9",
           105: "#ced4da",
+          106: "#9E9E9F",
+          107: "#1E1E1F",
         },
         white: {
           100: "#6175FC00",
@@ -118,11 +120,12 @@ export default {
         "32.5w": "32.5vw",
         "38w": "38vw",
         "40w": "40vw",
-        "43w":"43vw",
+        "43w": "43vw",
         "44w": "44vw",
         "45h": "45vh",
         "45w": "45vw",
         "50w": "50vw",
+        "51w": "51vw",
         "60w": "60vw",
         "62.23h": "62.23vh",
         "67w": "67vw",
@@ -140,6 +143,7 @@ export default {
         "100vh-56": "calc(100vh-56px)",
         "100vh-57r": "calc(100vh-57rem)",
         "100vh-1.75rem": "calc(100vh-1.75rem)",
+        "100vw-1r": "calc(100vw-1rem)",
         inherit: "inherit",
       },
       maxWidth: {},
@@ -147,7 +151,7 @@ export default {
         "4.5r": "4.5rem",
       },
       maxHeight: {
-        528:"528px",
+        528: "528px",
         "100vh-154px": "calc(100vh-154px)",
       },
       minHeight: {
@@ -175,7 +179,7 @@ export default {
     },
     screens: {
       xs: "450px",
-      480:"480px",
+      480: "480px",
       sm: "640px",
       md: "850px",
       lg: "1024px",
