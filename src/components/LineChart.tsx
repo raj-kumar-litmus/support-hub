@@ -50,7 +50,7 @@ function LineChart(props: LineChartProps) {
     <div
       className={`${props.className} ${
         !props.defaultClasses && "bg-black-200"
-        }`}
+      }`}
     >
       {width < SCREEN_WIDTH.SM &&
         (location.pathname.includes(ROUTES.opm) ||
