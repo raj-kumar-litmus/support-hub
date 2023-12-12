@@ -4,7 +4,7 @@ import CustomButton from "../components/Button";
 import CustomSideBar from "../components/CustomSideBar";
 
 const meta = {
-  title: "Stories/custom-sidebar",
+  title: "Components/CustomSidebar",
   component: CustomSideBar,
   tags: ["autodocs"],
   argTypes: {

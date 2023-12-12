@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Navbar from "../components/common/navbar";
 
 const meta = {
-  title: "Stories/navbar",
+  title: "Components/Navbar",
   component: Navbar,
   decorators: [
     () => (
