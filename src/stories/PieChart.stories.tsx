@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import PieChart from "../components/PieChart";
 
 const meta = {
-  title: "Stories/pie-chart",
+  title: "Components/PieChart",
   component: PieChart,
   tags: ["autodocs"],
 } satisfies Meta<typeof PieChart>;

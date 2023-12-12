@@ -43,7 +43,7 @@ export const MENU_LIST = [
     path: ROUTES.dcOpenOrders,
   },
   {
-    id: 8,
+    id: 6,
     name: "Order Report",
     icon: DashboardIcon,
     path: ROUTES.orderReport
