@@ -286,7 +286,7 @@ export const MultiLineCurvyChartWithTwoLines: Story = {
       ],
     },
     className:
-      "bg-white-500 border-2 border-solid border-[#ededed] px-6 pt-2 pb-0 rounded-xl w-[46rem] h-96",
+      "bg-white-500 border-2 border-solid border-white-800 px-6 pt-2 pb-0 rounded-xl w-46r h-96",
   },
 };
 
@@ -401,7 +401,7 @@ export const MultiLineCurvyChartWithMultipleLines: Story = {
       ],
     },
     className:
-      "bg-white-500 border-2 border-solid border-[#ededed] px-6 pt-2 pb-0 rounded-xl w-[46rem] h-96",
+      "bg-white-500 border-2 border-solid border-white-800 px-6 pt-2 pb-0 rounded-xl w-46r h-96",
   },
 };
 
@@ -522,7 +522,7 @@ export const MultiLineDarkBackgroundCurvyLineChart: Story = {
       ],
     },
     className:
-      "bg-[#29292a] border-2 border-solid border-[#202021] px-6 pt-2 pb-0 rounded-xl w-[46rem] h-96",
+      "bg-black-101 border-2 border-solid border-black-102 px-6 pt-2 pb-0 rounded-xl w-46r h-96",
   },
 };
 
@@ -661,6 +661,6 @@ export const LineChartWithAnnotation: Story = {
       ],
     },
     className:
-      "bg-[#29292a] border-2 border-solid border-[#202021] px-6 pt-2 pb-0 rounded-xl w-[46rem] h-96",
+      "bg-black-101 border-2 border-solid border-black-102 px-6 pt-2 pb-0 rounded-xl w-46r h-96",
   },
 };

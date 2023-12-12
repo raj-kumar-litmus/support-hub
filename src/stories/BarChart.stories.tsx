@@ -174,6 +174,6 @@ export const BarChartWithCustomGridStyles: Story = {
       ],
     },
     className:
-      "bg-[#29292a] border-2 border-solid border-[#202021] px-6 pt-2 pb-0 rounded-xl w-[46rem] h-96",
+      "bg-black-101 border-2 border-solid border-black-102 px-6 pt-2 pb-0 rounded-xl w-46r h-96",
   },
 };

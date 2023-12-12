@@ -27,12 +27,12 @@ const CustomSideBar = (props: CustomSideBarProps) => {
         blockScroll
         className={`custom-sidebar relative ${
           props.themeClasses ? props.themeClasses : ""
-        }  ${props.sideBarWidthClass ? props.sideBarWidthClass : "!w-50w"}`}
+        }  ${props.sideBarWidthClass || "!w-50w"}`}
         showCloseIcon={false}
       >
         <CustomButton
           className={`custom-sidebar-close-btn z-10 ${getCloseBtnLayoutClasses()} ${
-            props.sideBarWidthClass ? props.sideBarWidthClass : "!w-50w"
+            props.sideBarWidthClass || "!w-50w"
           }`}
           onClick={() => props.setVisible(false)}
         >
