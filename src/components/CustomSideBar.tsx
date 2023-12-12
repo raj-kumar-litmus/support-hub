@@ -31,14 +31,14 @@ const CustomSideBar = (props: CustomSideBarProps) => {
         showCloseIcon={false}
       >
         <CustomButton
-          className={`custom-sidebar-close-btn z-10 ${getCloseBtnLayoutClasses()} ${
+          className={`custom-sidebar-close-btn z-0 ${getCloseBtnLayoutClasses()} ${
             props.sideBarWidthClass || "!w-50w"
           }`}
           onClick={() => props.setVisible(false)}
         >
           {LABELS.CLOSE}
         </CustomButton>
-        <div className="flex flex-col z-20">
+        <div className="flex flex-col z-1">
           {props.title && (
             <h2 className="m-0 mb-4 text-lg font-bold text-inherit">
               {props.title}
