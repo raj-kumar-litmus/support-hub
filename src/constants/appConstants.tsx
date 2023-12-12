@@ -341,4 +341,111 @@ export const HOURLY_ORDER_DATA = "Hourly Order Data";
 export const LOCALE_WISE = "Locale Wise";
 export const CHANNEL_WISE = "Channel Wise";
 export const PAYMENT_WISE = "Payment Wise";
-export const REPORT_TABS = [{ header: LOCALE_WISE }, { header: CHANNEL_WISE }, { header: PAYMENT_WISE }]
+export const ORDER_REPORT_CHART_LABELS = {
+  CHANNELWISE_ORDER_LABELS: ["Web", "Mobile Web", "iPhone App", "Android App", "mPlus App", "JCPenny", "Instagram", "CSC"],
+  PAYMENTWISE_ORDER_LABELS: ["Credit Card", "Paypal", "Klarna", "Giftcard", "Private Label Card", "Apple Pay", "JCP Dummy", "Sephora CBVI", "Sephora PLCC", "Sephora CBVIT", "Sephora PLCCT", "Instagram Dummy", "Google Dummy", "Sephora Pay", "Store Credit"],
+  HOURLY_TIMESTAMPS: ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00"]
+};
+
+export const ORDER_REPORT_LABELS = {
+  HOURLY_ORDER_DATA: "Hourly Order Data",
+  HOURLY_ORDER_TREND: "Hourly Order Trend",
+  ORDER_PIE_CHART: "Order Pie Chart",
+  CAD: "CAD",
+  USD: "USD",
+  SUMMARY: "Summary"
+};
+
+export const REPORT_TAB_LABELS = {
+  LOCALE_WISE: "Locale Wise",
+  CHANNEL_WISE: "Channel Wise",
+  PAYMENT_WISE: "Payment Wise"
+};
+
+export const REPORT_TABS = [
+  { header: REPORT_TAB_LABELS.LOCALE_WISE },
+  { header: REPORT_TAB_LABELS.CHANNEL_WISE },
+  { header: REPORT_TAB_LABELS.PAYMENT_WISE }
+];
+
+export const ORDER_SUMMARY_LABELS = {
+  TOTAL_ORDER_COUNT: "Total Order Count",
+  US_ORDER_COUNT: "US Order Count",
+  CA_ORDER_COUNT: "CA Order Count",
+  TOTAL_SALES: "Total Sales",
+  US_SALES: "US Sales",
+  CA_SALES: "CA Sales",
+  TOTAL_SDD_ORDERS_PLACED: "Total SDD Orders Placed",
+  TOTAL_SDD_ORDERS_COMPLETED: "Total SDD Orders Completed",
+  TOTAL_BOPIS_ORDERS_PLACED: "Total BOPIS Orders Placed",
+  AVERAGE_ORDER_VALUE: "Average Order Value",
+  US_AVERAGE_ORDER_VALUE: "US Average Order Value",
+  CA_AVERAGE_ORDER_VALUE: "CA Average Order Value"
+};
+
+export const ORDER_PIE_CHART_LABELS = {
+  CHANNELWISE_ORDER: "Channel wise order",
+  PAYMENTWISE_ORDER: "Payment wise order"
+};
+
+export const HOURLY_TREND_DATA_LABELS = {
+  TODAY: "Today",
+  YESTERDAY: "Yesterday",
+  LAST_WEEK: "Last Week",
+  LAST_MONTH: "Last Month",
+  LAST_YEAR: "Last Year",
+};
+
+export const LOCALEWISE_DATA_LABELS = {
+  LAST_YEAR: "Last Year",
+  LAST_MONTH: "Last Month",
+  LAST_WEEK: "Last Week",
+  LAST_DAY: "Last Day",
+  TODAY: "Today",
+  US_ORDERS: "US Orders",
+  CA_ORDERS: "CA Orders",
+  US_SALES: "US Sales",
+  CA_SALES: "CA Sales",
+  TOTAL_SALES: "Total Sales",
+};
+
+export const CHANNELWISE_DATA_LABELS = {
+  TODAY: "Today",
+  WEB: "Web",
+  MOBILE_WEB: "Mobile Web",
+  IPHONE_APP: "IPhone App",
+  ANDROID_APP: "Android App",
+  CSC: "CSC",
+  MPLUS: "mPlus",
+  JCPENNY: "JCPenny",
+  INSTAGRAM: "Instagram",
+}
+
+export const PAYMENTWISE_DATA_LABELS = {
+  TODAY: "Today",
+  APPLE_PAY: "Apple Pay",
+  PAYPAL: "Paypal",
+  KLARNA: "Klarna",
+  GIFTCARD: "Giftcard",
+  STORE_CARD: "Store Card",
+  SEPH_PAY: "Seph Pay",
+  JCP_DUMMY: "JCP (D)",
+  INSTAGRAM_DUMMY: "Instagram (D)",
+  GOOGLE_DUMMY: "Google (D)",
+  CBVI: "CBVI",
+  CBVIT: "CBVIT",
+  PLCC: "PLCC",
+  PLCCT: "PLCCT",
+  PRIVATE_LABEL: "Private Label",
+  OTHER_CC: "Other CC",
+}
+
+export const ORDER_REPORT_THRESHOLDS = {
+  LOCALEWISE_MIN: 1,
+  LOCALEWISE_MAX: 15000,
+  CHANNELWISE_MIN: 1,
+  CHANNELWISE_MAX: 1000,
+  PAYMENTWISE_MIN: 1,
+  PAYMENTWISE_MAX: 1000
+}
+

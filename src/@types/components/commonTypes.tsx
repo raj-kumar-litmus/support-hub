@@ -250,7 +250,7 @@ export interface LoaderProps {
 
 export interface LineChartProps {
   options: ChartOptions<"line"> | any;
-  data: ChartData<"line">;
+  data: ChartData<"line"> | any;
   className?: string;
   title: string;
   isFullScreen?: boolean;
@@ -301,3 +301,18 @@ export interface CustomSideBarProps extends SidebarProps {
   themeClasses?: string;
   sideBarWidthClass?: string;
 }
+
+export type HorizontalTableProps = {
+  className?: string;
+  tableClassName?: string;
+  tableHead?: string;
+  rowHeadClassName?: string;
+  dataClassName?: string;
+  tableHeadClassName?: string;
+  tableData: any[];
+};
+
+export type OrderSummaryCardProps = {
+  cardData: any;
+};
+
