@@ -91,13 +91,35 @@ export const LOCALE_OPTIONS = {
 export const PAYMENT_TYPES = {
   All: "",
   "Credit Card": "creditCard",
-  " Klarna": "Klarna",
+  "Klarna": "Klarna",
   "Store Credit": "storeCredit",
   "Gift Card": "giftCard",
   PayPal: "payPal",
   JCPenny: "JCPenny",
   "Apple Pay": "Applepay",
 };
+
+export const OPM_CHANNELS_CODE_MAP = {
+  "DSK": "Desktop",
+  "MWB": "Mobile Web",
+  "IPH": "iPhone App",
+  "AND": "Android App",
+  "CSC": "CSC",
+  "MPL": "M Plus",
+  "ZAP": "",
+  "INS": "Instagram"
+};
+
+export const OPM_PAYMENTS_CODE_MAP = {
+  "CC": "Credit Card",
+  "GC": "Gift Card",
+  "ETC": "",
+  "PPL": "PayPal",
+  "KLA": "Klarna",
+  "AFP": "",
+  "SEP": "",
+  "SEPT": ""
+}
 
 export const CHART = {
   FONT_FAMILY: "Arial, sans-serif, Helvetica Neue",
@@ -449,3 +471,7 @@ export const ORDER_REPORT_THRESHOLDS = {
   PAYMENTWISE_MAX: 1000
 }
 
+export const SEVERITY = {
+  LOW: "low",
+  HIGH: "high"
+}

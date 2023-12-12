@@ -312,6 +312,20 @@ export type HorizontalTableProps = {
   tableData: any[];
 };
 
+export interface GridData {
+  data: string | number;
+  icon?: any;
+  highlight?: boolean;
+};
+
+export type GridTableProps = {
+  columns: number;
+  data: GridData[] | string[];
+  title?: string;
+  className?: string;
+  onClick?: (string) => void;
+};
+
 export type OrderSummaryCardProps = {
   cardData: any;
 };
