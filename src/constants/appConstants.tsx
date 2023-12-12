@@ -5,6 +5,7 @@ export const PAGE_TITLES = {
   OPM_COMPARISON: "OPM Comparison",
   DC_OPEN_ORDERS: "DC Open Orders",
   ORDER_DETAILS: "Order Details",
+  SKU_LOOKUP: "SKU Lookup",
 };
 
 export const DASHBOARD_LABELS = {

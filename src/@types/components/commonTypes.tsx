@@ -302,3 +302,16 @@ export interface CustomSideBarProps extends SidebarProps {
   themeClasses?: string;
   sideBarWidthClass?: string;
 }
+export type HorizontalTableProps = {
+  className?: string;
+  tableClassName?: string;
+  tableHead?: string;
+  rowHeadClassName?: string;
+  dataClassName?: string;
+  tableHeadClassName?: string;
+  tableData: any[];
+};
+
+export interface HeaderProps {
+  title: string;
+}
