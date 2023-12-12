@@ -6,6 +6,7 @@ import {
   SKU_LOOKUP_INVENTORY_STATUS,
 } from "../constants/apiConstants";
 import {
+  SCREEN_WIDTH,
   SKU_DETAILS,
   SKU_INVENTORY,
   SKU_PRICE_DETAILS,
@@ -86,9 +87,6 @@ const SKULookup = () => {
   const { width } = useScreenSize();
 
   useEffect(() => {
-  }, [yantriksInventory]);
-
-  useEffect(() => {
     setStatesData();
   }, []);
 
@@ -115,23 +113,29 @@ const SKULookup = () => {
 
     setPriceDetailsTable([
       {
-        [SKU_PRICE_DETAILS.US_LIST_PRICE]: catalog?.listPriceUS || "",
-        [SKU_PRICE_DETAILS.US_SALE_PRICE]: catalog?.salePriceUS || "",
-        [SKU_PRICE_DETAILS.CA_LIST_PRICE]: catalog?.listPriceCA || "",
-        [SKU_PRICE_DETAILS.CA_SALE_PRICE]: catalog?.salePriceCA || "",
+        [SKU_PRICE_DETAILS.US_LIST_PRICE]:
+          catalog?.listPriceUS?.toString() || "",
+        [SKU_PRICE_DETAILS.US_SALE_PRICE]:
+          catalog?.salePriceUS?.toString() || "",
+        [SKU_PRICE_DETAILS.CA_LIST_PRICE]:
+          catalog?.listPriceCA?.toString() || "",
+        [SKU_PRICE_DETAILS.CA_SALE_PRICE]:
+          catalog?.salePriceCA?.toString() || "",
       },
     ]);
 
     setAtgInventory([
       {
         [SKU_INVENTORY.COUNTRY]: catalog?.inventory?.[0]?.country || "",
-        [SKU_INVENTORY.STOCK_LEVEL]: catalog?.inventory?.[0]?.stockLevel || "",
+        [SKU_INVENTORY.STOCK_LEVEL]:
+          catalog?.inventory?.[0]?.stockLevel?.toString() || "",
         [SKU_INVENTORY.ON_HOLD]:
           catalog?.inventory?.[0]?.onHold?.toString() || "",
       },
       {
         [SKU_INVENTORY.COUNTRY]: catalog?.inventory?.[1]?.country || "",
-        [SKU_INVENTORY.STOCK_LEVEL]: catalog?.inventory?.[1]?.stockLevel || "",
+        [SKU_INVENTORY.STOCK_LEVEL]:
+          catalog?.inventory?.[1]?.stockLevel?.toString() || "",
         [SKU_INVENTORY.ON_HOLD]:
           catalog?.inventory?.[1]?.onHold?.toString() || "",
       },
@@ -153,15 +157,12 @@ const SKULookup = () => {
     ]);
   };
 
-  const setYantriksData = (
-    inv: any = {},
-    reset: boolean = false,
-    country: string
-  ) => {
+  const setYantriksData = (inv: any = {}, country: string) => {
     const inventory = {
       [SKU_INVENTORY.COUNTRY]: country || "",
       [SKU_INVENTORY.STOCK_LEVEL]:
-        inv.availabilityByProducts?.[0]?.availabilityDetails?.atp || "",
+        inv.availabilityByProducts?.[0]?.availabilityDetails?.atp?.toString() ||
+        "",
     };
     let firstEmptyCountry = yantriksInventory.findIndex((inventory) => {
       return inventory[SKU_INVENTORY.COUNTRY] == "";
@@ -194,7 +195,7 @@ const SKULookup = () => {
       ).replace(":skuid", skuid);
       const inventoryResponse = await fetchData(inventoryURL, {});
       setIsLoading(false);
-      setYantriksData(inventoryResponse, true, country);
+      setYantriksData(inventoryResponse, country);
     } catch (error) {
       setIsLoading(false);
       console.log("error fetching data ", error);
@@ -223,12 +224,13 @@ const SKULookup = () => {
         <Loader className="h-full" />
       ) : (
         <>
-          {width < 640 ? (
-            <>
+          {width < SCREEN_WIDTH.SM ? (
+            <div className="py-4">
               <SkuCard title={SKU_DETAILS.TITLE} cardData={skuDetailsTable} />
               <SkuCard
                 title={SKU_PRICE_DETAILS.TITLE}
                 cardData={priceDetailsTable}
+                wrapperClass="grid-cols-[repeat(auto-fill,minmax(70px,1fr))]"
               />
               <SkuCard
                 title={SKU_INVENTORY.ATG_INVENTORY}
@@ -239,7 +241,7 @@ const SKULookup = () => {
                 cardData={yantriksInventory}
               />
               <SkuCard title={SKU_PRODUCT_INFO.TITLE} cardData={productInfo} />
-            </>
+            </div>
           ) : (
             <>
               <HorizontalTable
@@ -281,59 +283,64 @@ const SKULookup = () => {
 };
 
 interface SkuCardProps {
-  title: string;
   cardData: any[];
+  title?: string;
+  wrapperClass?: string;
 }
 
 const SkuCard = (props: SkuCardProps) => {
   return (
-    <CustomCard
-      className="sku-lookup-card shadow-lg bg-black-200 w-full m-auto text-gray-300 rounded-lg mb-3 mt-6"
-      header={<div>{props.title}</div>}
-    >
+    <>
+      <Header title={props.title} />
       {props.cardData?.length > 0 &&
         props.cardData?.map((obj, index) => {
           return (
-            <div key={index} className="flex p-0 justify-between">
-              {Object.entries(obj).map(([key, value], i) => (
-                <InfoField
-                  key={i}
-                  title={key}
-                  data={value || "-"}
-                  wrapperClassName={
-                    "flex flex-col justify-between w-[30%] mb-2 min-h-[3rem] gap-[1rem]"
-                  }
-                  dataClassName={"mb-2"}
-                />
-              ))}
-            </div>
+            <CustomCard
+              key={index}
+              className="sku-lookup-card my-1 text-gray-200 bg-black-200 w-full rounded-lg"
+            >
+              <div
+                className={`grid grid-cols-[repeat(auto-fill,minmax(91px,1fr))] gap-2 ${props.wrapperClass}`}
+              >
+                {Object.entries(obj)?.map(
+                  (
+                    [key, value]: [
+                      string,
+                      Array<string | number> | string | number,
+                    ],
+                    i
+                  ) => (
+                    <div key={i}>
+                      <div className="text-gray-400 text-10 min-h-[1.8rem]">
+                        {key}
+                      </div>
+                      <div
+                        className="text-gray-300 text-xs font-medium"
+                        title={value.toString()}
+                      >
+                        {Array.isArray(value) && value?.length
+                          ? value[0] + " " + value[1]
+                          : value}
+                      </div>
+                    </div>
+                  )
+                )}
+              </div>
+            </CustomCard>
           );
         })}
-    </CustomCard>
+    </>
   );
 };
 
-export type InfoFieldProps = {
+interface HeaderProps {
   title: string;
-  data: string | number;
-  className?: string;
-  wrapperClassName?: string;
-  titleClassName?: string;
-  dataClassName?: string;
-};
+}
 
-const InfoField: FC<InfoFieldProps> = (props) => {
+const Header: FC<HeaderProps> = (props) => {
   return (
-    <div className={`text-xs font-normal ${props.wrapperClassName}`}>
-      <div className={`text-gray-400 ${props.titleClassName}`}>
-        {props.title}
-      </div>
-      <div
-        className={`text-gray-300 ${props.dataClassName}`}
-        title={props.data.toString()}
-      >
-        {props.data}
-      </div>
+    <div className="text-gray-400 rounded-lg border border-black-400 p-2 my-2 w-full text-center bg-black-300">
+      {props.title}
     </div>
   );
 };
