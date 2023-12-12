@@ -10,11 +10,11 @@ const CustomSideBar = (props: CustomSideBarProps) => {
   const getCloseBtnLayoutClasses = () => {
     switch (props.position) {
       case SideBarPositionEnums.RIGHT:
-        return "rotate-180 right-50w";
+        return "rotate-180 right-8";
       case SideBarPositionEnums.LEFT:
-        return "left-50w";
+        return "left-8";
       default:
-        return "rotate-180 right-50w";
+        return "rotate-180 right-8";
     }
   };
 
@@ -27,16 +27,18 @@ const CustomSideBar = (props: CustomSideBarProps) => {
         blockScroll
         className={`custom-sidebar relative ${
           props.themeClasses ? props.themeClasses : ""
-        }`}
+        }  ${props.sideBarWidthClass || "!w-50w"}`}
         showCloseIcon={false}
       >
         <CustomButton
-          className={`custom-sidebar-close-btn ${getCloseBtnLayoutClasses()}`}
+          className={`custom-sidebar-close-btn z-0 ${getCloseBtnLayoutClasses()} ${
+            props.sideBarWidthClass || "!w-50w"
+          }`}
           onClick={() => props.setVisible(false)}
         >
           {LABELS.CLOSE}
         </CustomButton>
-        <div className="flex flex-col">
+        <div className="flex flex-col z-1">
           {props.title && (
             <h2 className="m-0 mb-4 text-lg font-bold text-inherit">
               {props.title}

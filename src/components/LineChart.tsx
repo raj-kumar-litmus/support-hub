@@ -8,6 +8,7 @@ import {
   Title,
   Tooltip,
 } from "chart.js";
+import annotationPlugin from "chartjs-plugin-annotation";
 import { useState } from "react";
 import { Line } from "react-chartjs-2";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -25,7 +26,8 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  annotationPlugin,
 );
 
 function LineChart (props: LineChartProps) {

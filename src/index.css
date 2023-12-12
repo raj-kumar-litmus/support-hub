@@ -61,10 +61,6 @@
   @apply h-13 rotate-180;
 }
 
-.home-sessions {
-  @apply pt-12 pb-16 sm:py-8;
-}
-
 #custom-hover .p-button,
 .p-dialog .p-button {
   @apply bg-gray-900 border-gray-400 text-gray-400;
@@ -84,11 +80,11 @@
 }
 
 .home-sessions {
-  @apply pt-[4.5rem] sm:pt-12 md:pt-8 pb-20 sm:pb-12 md:pb-8 px-4 sm:px-6;
+  @apply pt-4 xl:pt-5 pb-4 xl:pb-5 px-4 lg:px-6;
 }
 
 .main-sessions {
-  @apply pt-14 sm:pt-8 xl:pt-6 pb-16 sm:pb-8 px-4 sm:px-6;
+  @apply pt-4 xl:pt-5 pb-4 xl:pb-5 px-4 lg:px-6;
 }
 
 .session-page-title {
@@ -1037,7 +1033,7 @@ hr.horizontalLine.blue {
 }
 /* Custom SideBar */
 .custom-sidebar {
-  @apply !w-51w bg-gray-107 text-gray-106;
+  @apply bg-gray-107 text-gray-106;
 }
 .custom-sidebar.p-sidebar .p-sidebar-header {
   @apply hidden;
@@ -1049,7 +1045,7 @@ hr.horizontalLine.blue {
   @apply fixed [writing-mode:vertical-lr] text-center inset-y-1/2 bg-inherit text-inherit;
 }
 .custom-sidebar .custom-sidebar-close-btn .p-button {
-  @apply bg-inherit text-inherit text-sm border-none !p-4 !pr-2;
+  @apply bg-inherit text-inherit text-sm border-none !p-4 !pr-2 w-inherit flex items-end;
 }
 .custom-sidebar .custom-sidebar-close-btn .p-button:focus {
   @apply shadow-none;

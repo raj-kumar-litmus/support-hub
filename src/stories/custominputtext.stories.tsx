@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import CustomInputText from "../components/InputText";
 
 const meta = {
-  title: "Stories/custominputtext",
+  title: "Components/CustomInputText",
   component: CustomInputText,
   tags: ["autodocs"],
 } satisfies Meta<typeof CustomInputText>;

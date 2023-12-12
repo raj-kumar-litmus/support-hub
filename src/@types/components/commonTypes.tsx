@@ -145,7 +145,7 @@ export interface CustomDropdownProps {
   options: any;
   icon?: string;
   dropdownIcon?: any;
-  value?: string;
+  value?: string | number;
   imageclassname?: string;
   optionLabel: string;
   label?: string;
@@ -299,4 +299,5 @@ export interface CustomSideBarProps extends SidebarProps {
   setVisible?: () => void;
   title?: string;
   themeClasses?: string;
+  sideBarWidthClass?: string;
 }

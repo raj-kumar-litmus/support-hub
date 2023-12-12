@@ -2,7 +2,7 @@ import type { ChartData, ChartOptions } from "chart.js";
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from "chart.js";
 import { FC } from "react";
 import { Pie } from "react-chartjs-2";
-import useScreenSize from "../../hooks/useScreenSize";
+import useScreenSize from "../hooks/useScreenSize";
 
 interface Props {
   options?: ChartOptions<"pie"> | any;
