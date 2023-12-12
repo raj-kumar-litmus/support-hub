@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { OrderSummaryCardProps } from "../@types/components/commonTypes";
 import CustomCard from "./common/customcard";
+import { OrderSummaryCardProps } from "../@types/components/commonTypes";
 
 const OrderSummaryCard: FC<OrderSummaryCardProps> = (props) => {
   return (

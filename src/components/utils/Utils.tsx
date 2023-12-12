@@ -182,68 +182,20 @@ export const externalTooltipHandler = (
   }
 };
 
+export const getChartTooltipPosition = (context, tooltipEl, tooltip) => {
+  const position = context.chart.canvas.getBoundingClientRect();
+  tooltipEl.style.opacity = "1";
+  tooltipEl.style.position = "absolute";
+  tooltipEl.style.left = position.left + tooltip.caretX + "px";
+  tooltipEl.style.top = position.top + tooltip.caretY + "px";
+  tooltipEl.style.padding = tooltip.padding + "px " + tooltip.padding + "px";
+  tooltipEl.style.pointerEvents = "none";
+}
+
 export const getTableHeaders = (data: object[]) => {
   const keyArray = Object.keys(data[0])?.map((key) => key);
   return keyArray;
 }
-
-export const getChartTooltipPosition = (context, tooltipEl, tooltip) => {
-  const position = context.chart.canvas.getBoundingClientRect();
-  tooltipEl.style.opacity = "1";
-  tooltipEl.style.position = 'absolute';
-  tooltipEl.style.left = position.left + tooltip.caretX + 'px';
-  tooltipEl.style.top = position.top + tooltip.caretY + 'px';
-  tooltipEl.style.padding = tooltip.padding + 'px ' + tooltip.padding + 'px';
-  tooltipEl.style.pointerEvents = 'none';
-}
-
-export const getPieChartTooltip = (context) => {
-  {
-    let tooltipEl = document.getElementById('chartjs-tooltip');
-    if (!tooltipEl) {
-      tooltipEl = document.createElement('div');
-      tooltipEl.id = 'chartjs-tooltip';
-      tooltipEl.innerHTML = "<table></table>";
-      document.body.appendChild(tooltipEl);
-    }
-    const tooltipModel = context.tooltip;
-    if (tooltipModel.opacity == 0) {
-      tooltipEl.style.opacity = "0";
-      return;
-    }
-    tooltipEl.classList.remove('above', 'below', 'no-transform');
-    if (tooltipModel.yAlign) {
-      tooltipEl.classList.add(tooltipModel.yAlign);
-    } else {
-      tooltipEl.classList.add('no-transform');
-    }
-    if (tooltipModel.body) {
-      const titleLines = tooltipModel.title || [];
-      const bodyLines = tooltipModel.body[0].lines;
-      let innerHtml = '<table><tbody><tr><td>';
-      bodyLines.forEach(function (body, i) {
-        const colors = tooltipModel.labelColors[0];
-        let style = 'background:' + colors.backgroundColor;
-        style += '; border-radius: 6px';
-        style += '; padding: 5px 10px';
-        style += '; color: #FFFFFF';
-        style += '; font-size: 12px';
-        style += '; font-weight: 600';
-        const span = '<span style="' + style + '">' + titleLines + ":" + body.split(":")[1] + '</span>';
-        innerHtml += span + '</td></tr></tbody></table>';
-      });
-      let tableRoot = tooltipEl.querySelector('table');
-      tableRoot.innerHTML = innerHtml;
-    }
-    const position = context.chart.canvas.getBoundingClientRect();
-    tooltipEl.style.opacity = "1";
-    tooltipEl.style.position = 'absolute';
-    tooltipEl.style.left = position.left + tooltipModel.caretX + 'px';
-    tooltipEl.style.top = position.top + tooltipModel.caretY + 'px';
-    tooltipEl.style.padding = tooltipModel.padding + 'px ' + tooltipModel.padding + 'px';
-    tooltipEl.style.pointerEvents = 'none';
-  }
-};
 
 export const convert24to12Hour = (hour) => {
   const convertedHour = parseInt(hour, 10);

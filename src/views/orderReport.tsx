@@ -3,11 +3,14 @@ import { Column } from "primereact/column";
 import { ColumnGroup } from 'primereact/columngroup';
 import { Row } from 'primereact/row';
 import { FC, useEffect, useState } from "react";
+import useScreenSize from "../hooks/useScreenSize";
 import LineChart from "../components/LineChart";
 import HorizontalTable from "../components/HorizontalTable";
 import CustomTab from "../components/common/customtab";
 import CustomTable from "../components/common/customtable";
 import Loader from "../components/loader";
+import OrderSummaryCard from "../components/OrderSummaryCard";
+import PieChart from "../components/PieChart";
 import { HOURLY_ORDER_TREND_LINE_CHART_OPTION, ORDER_REPORT_PIE_CHART_OPTIONS } from "../config/chartConfig";
 import { URL_HOURLYREPORT } from "../constants/apiConstants";
 import { CHANNELWISE_DATA_LABELS, HOURLY_TREND_DATA_LABELS, LOCALEWISE_DATA_LABELS, ORDER_PIE_CHART_LABELS, ORDER_REPORT_CHART_LABELS, ORDER_REPORT_LABELS, ORDER_REPORT_THRESHOLDS, ORDER_SUMMARY_LABELS, PAYMENTWISE_DATA_LABELS, REPORT_TABS, SCREEN_WIDTH } from "../constants/appConstants";
@@ -15,9 +18,6 @@ import { HeaderProps, OrderReportData, OrderTableData, SummaryTableData } from "
 import { CURRENT_PST_DATE } from "../utils/dateTimeUtil";
 import { fetchData } from "../utils/fetchUtil";
 import { getTableHeaders } from "../components/utils/Utils";
-import OrderSummaryCard from "../components/OrderSummaryCard";
-import useScreenSize from "../hooks/useScreenSize";
-import PieChart from "../components/PieChart";
 
 const OrderReport = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);

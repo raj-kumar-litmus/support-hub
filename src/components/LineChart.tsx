@@ -30,7 +30,7 @@ ChartJS.register(
   annotationPlugin,
 );
 
-function LineChart (props: LineChartProps) {
+function LineChart(props: LineChartProps) {
   const { isFullScreen = false } = props;
   const [rotate, setRotate] = useState<boolean>(isFullScreen);
   const { width } = useScreenSize();
@@ -48,7 +48,8 @@ function LineChart (props: LineChartProps) {
 
   return (
     <div
-      className={`${props.className} ${!props.defaultClasses && "bg-black-200"
+      className={`${props.className} ${
+        !props.defaultClasses && "bg-black-200"
         }`}
     >
       {width < SCREEN_WIDTH.SM &&
