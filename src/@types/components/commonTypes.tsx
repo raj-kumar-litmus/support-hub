@@ -200,7 +200,8 @@ export type SearchBarProps = {
   onSearch: (e: KeyboardEvent<HTMLInputElement>) => void;
   placeholder: string;
   className?: string;
-  type?: string;
+  type?:string
+  hideMobileView?: boolean;
 };
 
 export type SearchFieldProps = {
@@ -252,7 +253,7 @@ export interface LoaderProps {
 
 export interface LineChartProps {
   options: ChartOptions<"line"> | any;
-  data: ChartData<"line">;
+  data: ChartData<"line"> | any;
   className?: string;
   title: string;
   isFullScreen?: boolean;
@@ -325,4 +326,54 @@ export interface ApiWebServerCard {
 
 export interface CustomOverlayProps extends OverlayPanelProps {
   children: ReactNode;
+}
+
+export type HorizontalTableProps = {
+  className?: string;
+  tableClassName?: string;
+  tableHead?: string;
+  rowHeadClassName?: string;
+  dataClassName?: string;
+  tableHeadClassName?: string;
+  tableData: any[];
+};
+
+export interface GridData {
+  data: string | number;
+  icon?: any;
+  highlight?: boolean;
+};
+
+export type GridTableProps = {
+  columns: number;
+  data: GridData[] | string[];
+  title?: string;
+  className?: string;
+  onClick?: (string) => void;
+};
+
+export type OrderSummaryCardProps = {
+  cardData: any;
+};
+
+export type InfoFieldProps = {
+  title: string;
+  data: string | number;
+  className?: string;
+  wrapperClassName?: string;
+  titleClassName?: string;
+  dataClassName?: string;
+};
+
+export type PieChartProps =  {
+  options?: ChartOptions<"pie"> | any;
+  data?: ChartData<"pie"> | any;
+  height?: string;
+  width?: string;
+  xsHeight?: string;
+  xsWidth?: string;
+};
+
+export type SectionTitleProps = {
+  title: string;
 }

@@ -391,6 +391,9 @@ button.p-button-secondary {
 .p-dialog-content::-webkit-scrollbar {
   @apply w-1;
 }
+.orderStatus-dialog.p-dialog {
+  @apply absolute max-[639px]:max-h-100vh-154px min-[390px]:w-390 w-max max-[390px]:!bottom-0 min-[390px]:max-h-[490px];
+}
 .p-dialog-mask.p-component-overlay {
   @apply backdrop-brightness-50;
 }
@@ -995,11 +998,84 @@ hr.horizontalLine.blue {
 .order-details-btn-link .p-button:enabled:hover {
   @apply border-none bg-inherit;
 }
-.quick-link-arrow img{
+.quick-link-arrow img {
   @apply h-7p w-7p;
+}
+.report-tab.p-tabview {
+  width: 335px;
+}
+.p-datatable .p-datatable-tfoot > tr > td {
+  @apply !bg-black-200 text-white-500 border-0 border-black-300 p-3;
+}
+.report-table.p-datatable {
+  @apply w-full;
+}
+.report-table .p-datatable-tbody tr:last-child td:first-child {
+  @apply rounded-none;
+}
+.report-table .p-datatable-tbody tr:last-child td:last-child {
+  @apply rounded-none;
+}
+.report-table .p-datatable-tfoot tr:last-child td:first-child {
+  @apply rounded-bl-lg;
+}
+.report-table .p-datatable-tfoot tr:last-child td:last-child {
+  @apply rounded-br-lg;
+}
+.channel-table .p-datatable-tbody tr td {
+  @apply max-w-[82px] min-w-[82px];
+}
+.payment-table .p-datatable-thead tr th {
+  @apply py-3 px-1.7;
+}
+.payment-table .p-datatable-tfoot > tr > td {
+  @apply py-3 px-1.7;
 }
 .p-datepicker table td>span {
   @apply w-7 h-6
+}
+.grid-table .p-datatable-wrapper {
+  @apply rounded-lg border border-gray-108;
+}
+.grid-table .p-datatable-tbody > tr {
+  @apply bg-black-101;
+}
+.grid-table .p-datatable-tbody > tr > td {
+  @apply text-white-900 font-medium text-xs text-center border border-gray-108 p-0;
+}
+.grid-table .p-datatable-tbody tr:first-child td:first-child {
+  @apply rounded-tl-lg;
+}
+.grid-table .p-datatable-tbody tr:first-child td:last-child {
+  @apply rounded-tr-lg;
+}
+.grid-table .p-datatable-tbody tr:last-child td:first-child {
+  @apply rounded-bl-lg;
+}
+.grid-table .p-datatable-tbody tr:last-child td:last-child {
+  @apply rounded-br-lg;
+}
+.grid-table .p-datatable-table {
+  @apply table-fixed border-separate;
+}
+.grid-table .p-datatable-header {
+  @apply bg-transparent border-none p-0 text-white-900 font-medium text-10 uppercase mb-2;
+}
+.summary-card .p-card-content {
+  @apply p-0;
+}
+.summary-card .p-card-body {
+  @apply p-4;
+}
+
+.sku-lookup .sku-lookup-card .p-card-body {
+  @apply w-full;
+}
+.sku-lookup .sku-lookup-card .p-card-body .p-card-content {
+  @apply p-0;
+}
+.sku-lookup .sku-lookup-card .p-card-header {
+  @apply px-5 pt-5 font-bold;
 }
 
 /* Custom SideBar */

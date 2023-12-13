@@ -13,6 +13,8 @@ export const ROUTES = {
   dcOpenOrders: "/dc-open-orders",
   fullScreen: "/fullscreen",
   orderDetails: "/order-details",
+  orderReport: "/order-report",
+  skuLookup: "/sku-lookup",
 };
 
 export const MENU_LIST = [
@@ -41,6 +43,18 @@ export const MENU_LIST = [
     icon: DCOpenOrdersIcon,
     path: ROUTES.dcOpenOrders,
   },
+  {
+    id: 6,
+    name: PAGE_TITLES.ORDER_REPORT,
+    icon: DashboardIcon,
+    path: ROUTES.orderReport
+  },
+  {
+    id: 7,
+    name: PAGE_TITLES.SKU_LOOKUP,
+    icon: DCOpenOrdersIcon, //todo - change the icon
+    path: ROUTES.skuLookup,
+  },
 ];
 
 const getOrCreateTooltip = (chart, type, tooltip) => {
@@ -54,9 +68,9 @@ const getOrCreateTooltip = (chart, type, tooltip) => {
     type === "opm"
       ? line.setAttribute("class", `horizontalLine opm`)
       : line.setAttribute(
-          "class",
-          `horizontalLine ${index === 0 ? "yellow" : "blue"}`,
-        );
+        "class",
+        `horizontalLine ${index === 0 ? "yellow" : "blue"}`
+      );
   }
 
   if (!tooltipEl) {
@@ -87,7 +101,7 @@ const getOrCreateTooltip = (chart, type, tooltip) => {
 export const externalTooltipHandler = (
   context,
   type,
-  customPosition = false,
+  customPosition = false
 ) => {
   // Tooltip Element
   const { chart, tooltip } = context;
@@ -164,7 +178,6 @@ export const externalTooltipHandler = (
     tableRoot.appendChild(tableHead);
     tableRoot.appendChild(tableBody);
   }
-
   if (customPosition) {
     getChartTooltipPosition(context, tooltipEl, tooltip);
   } else {
@@ -184,12 +197,12 @@ export const getChartTooltipPosition = (context, tooltipEl, tooltip) => {
   tooltipEl.style.top = position.top + tooltip.caretY + "px";
   tooltipEl.style.padding = tooltip.padding + "px " + tooltip.padding + "px";
   tooltipEl.style.pointerEvents = "none";
-};
+}
 
 export const getTableHeaders = (data: object[]) => {
   const keyArray = Object.keys(data[0])?.map((key) => key);
   return keyArray;
-};
+}
 
 export const convert24to12Hour = (hour) => {
   const convertedHour = parseInt(hour, 10);
@@ -231,9 +244,9 @@ export const submitOnEnter = (callback) => {
 export const increaseLegendSpacing = (customHeight) => [
   {
     id: "increase-legend-spacing",
-    beforeInit(chart) {
+    beforeInit (chart) {
       const originalFit = (chart.legend as any).fit;
-      (chart.legend as any).fit = function fit() {
+      (chart.legend as any).fit = function fit () {
         originalFit.bind(chart.legend)();
         this.height += customHeight;
       };
