@@ -3,7 +3,8 @@ import React, { forwardRef } from "react";
 import CustomOverlay from "./CustomOverlay";
 import { CustomOverlayProps } from "../../@types/components/commonTypes";
 
-const CustomOverlayFocusRoom = forwardRef<OverlayPanel, CustomOverlayProps>(( props,ref) => {
+const CustomOverlayFocusRoom = forwardRef<OverlayPanel, CustomOverlayProps>(
+  function OverLay(props, ref) {
     return (
       <CustomOverlay
         className="w-52 bg-black-101 max-h-[185px] rounded-lg custom-overlay mt-1"
@@ -50,7 +51,7 @@ const CustomOverlayFocusRoom = forwardRef<OverlayPanel, CustomOverlayProps>(( pr
         </div>
       </CustomOverlay>
     );
-  }
+  },
 );
 
 export default CustomOverlayFocusRoom;

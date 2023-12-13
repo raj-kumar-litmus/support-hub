@@ -22,7 +22,7 @@ const WebServerCard: React.FC<ApiWebServerCard> = (props) => {
   return (
     <>
       <div
-        className={`mt-1.5 flex flex-row max-w-[198px] h-9 border-2 border-gray-108 text-white-100 rounded-xl cursor-pointer font-helvetica !bg-black-101 
+        className={`mt-1.5 flex flex-row max-w-[198px] h-9 border-2 border-black-103 text-white-100 rounded-xl cursor-pointer font-helvetica !bg-black-101 
          text-sm text-white-500`}
         onClick={(e) => {
           op.current?.toggle(e);
@@ -38,7 +38,7 @@ const WebServerCard: React.FC<ApiWebServerCard> = (props) => {
         </div>
         <div className="m-auto mr-5">{renderPerTotal()}</div>
       </div>
-      {props.showToolTip && <CustomOverlayFocusRoom children {...props} ref={op} />}
+      {props.showToolTip && <CustomOverlayFocusRoom {...props} ref={op} />}
     </>
   );
 };

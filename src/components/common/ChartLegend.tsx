@@ -4,7 +4,7 @@ const ChartLegend = (props: LabelProps) => {
   return (
     <div className={`flex items-center ${props.containerClassName || ""}`}>
       <span
-        className={`h-4 w-4 rounded-[50%] inline-block ${
+        className={`h-4 w-4 rounded-full inline-block ${
           props.circleColor || ""
         }`}
       ></span>

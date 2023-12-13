@@ -11,8 +11,8 @@ import { ToastProps } from "primereact/toast";
 import { OverlayPanelProps } from "primereact/overlaypanel";
 import { FC, KeyboardEvent, ReactNode } from "react";
 import { CommerceItemData } from "../pages/OrderDetails";
-import { DCOpenOrders } from "../pages/dcOpenOrders";
-import { ModalEnums } from "../pages/opmCharts";
+import { DCOpenOrders } from "../pages/DcOpenOrders";
+import { ModalEnums } from "../pages/OpmCharts";
 import { InputTextProps } from "primereact/inputtext";
 
 enum Transition {
@@ -348,17 +348,6 @@ export interface CustomSideBarProps extends SidebarProps {
   themeClasses?: string;
   sideBarWidthClass?: string;
 }
-export interface CustomOverlayProps {
-  header?: string;
-  box1Content?: string;
-  box1Header?: string;
-  box2Content?: string;
-  box2Header?: string;
-  box1Class?: string;
-  box2Class?: string;
-  buttonContent?: string;
-  subHeader?: string;
-}
 export interface ApiWebServerCard {
   title?: string;
   perSecond?: string;
@@ -370,6 +359,15 @@ export interface ApiWebServerCard {
 
 export interface CustomOverlayProps extends OverlayPanelProps {
   children: ReactNode;
+  header?: string;
+  box1Content?: string;
+  box1Header?: string;
+  box2Content?: string;
+  box2Header?: string;
+  box1Class?: string;
+  box2Class?: string;
+  buttonContent?: string;
+  subHeader?: string;
 }
 
 export type HorizontalTableProps = {
