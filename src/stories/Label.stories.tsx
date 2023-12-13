@@ -2,15 +2,15 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
-import Label from "../components/common/Label";
+import ChartLegend from "../components/common/ChartLegend";
 
 const meta: any = {
-  title: "Components/Label",
-  component: Label,
+  title: "Components/ChartLegend",
+  component: ChartLegend,
   decorators: [
-    (Label) => (
+    (ChartLegend) => (
       <Router>
-        <Label />
+        <ChartLegend />
       </Router>
     ),
   ],
@@ -18,23 +18,23 @@ const meta: any = {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof Label>;
+} satisfies Meta<typeof ChartLegend>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const LabelOne: Story = {
+export const ChartLegendOne: Story = {
   args: {
     text: "US",
     containerClassName: "text-red-100",
-    color: "#CE7668",
+    circleColor: "bg-red-100",
   },
 };
 
-export const LabelTwo: Story = {
+export const ChartLegendTwo: Story = {
   args: {
-    text: "CA",
-    containerClassName: "text-red-100",
-    color: "#41E2D8",
+    text: "BOPIS Store Cancellation",
+    containerClassName: "text-[#F1963A]",
+    circleColor: "bg-[#F1963A]",
   },
 };

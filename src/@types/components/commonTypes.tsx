@@ -330,6 +330,7 @@ export interface BarChartCompProps {
   title: string;
   isFullScreen?: boolean;
   plugins?: boolean;
+  plugin: any;
 }
 
 export interface ChartProps {
@@ -481,4 +482,5 @@ export interface LabelProps {
   text?: string;
   containerClassName?: string;
   color?: string;
+  circleColor?: string;
 }
