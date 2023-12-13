@@ -1114,3 +1114,11 @@ hr.horizontalLine.blue {
 .custom-sidebar .opm-tabs.p-tabview {
   @apply top-6;
 }
+.custom-overlay .p-overlaypanel-content{
+  @apply border-2 border-gray-108 rounded-lg p-0
+}
+.custom-overlay.p-overlaypanel:before,
+.custom-overlay.p-overlaypanel:after {    
+  @apply content-none;
+}
+
