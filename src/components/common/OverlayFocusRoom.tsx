@@ -6,7 +6,7 @@ import { CustomOverlayProps } from "../../@types/components/commonTypes";
 const CustomOverlayFocusRoom = forwardRef<OverlayPanel, CustomOverlayProps>(( props,ref) => {
     return (
       <CustomOverlay
-        className="w-52 bg-[#29292A] max-h-[185px] rounded-lg custom-overlay mt-1"
+        className="w-52 bg-black-101 max-h-[185px] rounded-lg custom-overlay mt-1"
         ref={ref}
         appendTo={document.body}
       >
@@ -15,16 +15,16 @@ const CustomOverlayFocusRoom = forwardRef<OverlayPanel, CustomOverlayProps>(( pr
             <div className="text-[15px] font-semibold">{props.header}</div>
           )}
           {props.subHeader && (
-            <span className=" relative bottom-1.5 max-w-[31px] max-h-[5px] text-[11px]">
+            <span className=" relative bottom-1.5 max-w-31 max-h-1.5 text-10">
               {props.subHeader}
             </span>
           )}
           <div className="flex items-center mt-1 mb-4 justify-center gap-2 ">
             {props.box1Content && (
               <div
-                className={`flex flex-col border w-[80px] ${props.box1Class} rounded-lg`}
+                className={`flex flex-col border w-20 ${props.box1Class} rounded-lg`}
               >
-                <span className="ml-3 pt-1 text-[10px]">{props.box1Header}</span>
+                <span className="ml-3 pt-1 text-10">{props.box1Header}</span>
                 <span className="ml-3 relative -top-1 text-xl font-semibold">
                   {props.box1Content}
                 </span>
@@ -32,9 +32,9 @@ const CustomOverlayFocusRoom = forwardRef<OverlayPanel, CustomOverlayProps>(( pr
             )}
             {props.box2Content && (
               <div
-                className={`flex flex-col border w-[80px] ${props.box2Class} rounded-lg`}
+                className={`flex flex-col border w-20 ${props.box2Class} rounded-lg`}
               >
-                <span className="ml-3 pt-1 text-[10px]">{props.box2Header}</span>
+                <span className="ml-3 pt-1 text-10">{props.box2Header}</span>
                 <span className="ml-3 relative -top-1 text-xl font-semibold">
                   {props.box2Content}
                 </span>
@@ -43,7 +43,7 @@ const CustomOverlayFocusRoom = forwardRef<OverlayPanel, CustomOverlayProps>(( pr
           </div>
 
           {props.buttonContent && (
-            <div className="flex items-center h-[34px] justify-center mt-1 text-sm border-[1px] rounded-full border-[#FBFBFC]">
+            <div className="flex items-center h-9 justify-center mt-1 text-sm border-[1px] rounded-full border-[#FBFBFC]">
               <button>{props.buttonContent}</button>
             </div>
           )}

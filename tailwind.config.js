@@ -39,6 +39,7 @@ export default {
           105: "#ced4da",
           106: "#9E9E9F",
           107: "#1E1E1F",
+          108: "#424245"
         },
         white: {
           100: "#6175FC00",
@@ -154,6 +155,7 @@ export default {
       maxWidth: {},
       minWidth: {
         "4.5r": "4.5rem",
+        "31": "31px"
       },
       maxHeight: {
         528: "528px",

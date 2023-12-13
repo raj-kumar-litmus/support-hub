@@ -64,7 +64,7 @@ export const MultipleServerCards: Story = () => {
   };
   return (
     <>
-      <div className="border-2 border-[#424245] w-[46%] h-72 overflow-y-auto">
+      <div className="border-2 border-gray-108 w-[42%] h-72 overflow-y-auto">
         <div className="grid grid-cols-2 ml-3 gap-x-0">
           <WebServerCard {...args}></WebServerCard>
           <WebServerCard {...args}></WebServerCard>
@@ -211,8 +211,8 @@ export const MultipleServerCardsWithOverlay: Story = () => {
   };
   return (
     <>
-      <div className="relative border-2 border-[#424245] top-[25%] left-[25%] w-[46%] h-[75%] overflow-y-auto">
-        <div className="grid grid-cols-2 ml-3 gap-x-0">
+      <div className="relative border-2 border-gray-108 top-[25%] left-[25%] w-[41%] h-[75%] overflow-y-auto">
+        <div className="grid grid-cols-2 ml-2.5 gap-x-0">
           <WebServerCard {...args}></WebServerCard>
           <WebServerCard {...args}></WebServerCard>
           <WebServerCard {...args}></WebServerCard>
