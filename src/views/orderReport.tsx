@@ -29,7 +29,6 @@ import {
   TIMESTAMPS
 } from "../constants/appConstants";
 import {
-  HeaderProps,
   OrderReportData,
   OrderTableData,
   SummaryTableData
@@ -37,6 +36,7 @@ import {
 import { CURRENT_PST_DATE } from "../utils/dateTimeUtil";
 import { fetchData } from "../utils/fetchUtil";
 import { getTableHeaders } from "../components/utils/Utils";
+import SectionTitle from "../components/SectionTitle";
 
 const OrderReport = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -378,7 +378,7 @@ const OrderReport = () => {
     isLoading ?
       <Loader className="m-auto p-0" /> :
       <div>
-        <Header title={ORDER_REPORT_LABELS.SUMMARY} />
+        <SectionTitle title={ORDER_REPORT_LABELS.SUMMARY} />
         {orderSummary?.length > 0 &&
           <>
             {width > SCREEN_WIDTH.SM ?
@@ -394,7 +394,7 @@ const OrderReport = () => {
               )}
           </>
         }
-        <Header title={ORDER_REPORT_LABELS.ORDER_PIE_CHART} />
+        <SectionTitle title={ORDER_REPORT_LABELS.ORDER_PIE_CHART} />
         <div className="order-report-comp block sm:flex overflow-x-auto">
           {channelWiseOrderData &&
             <PieChart
@@ -416,7 +416,7 @@ const OrderReport = () => {
               xsWidth="340"
             />}
         </div>
-        <Header title={ORDER_REPORT_LABELS.HOURLY_ORDER_TREND} />
+        <SectionTitle title={ORDER_REPORT_LABELS.HOURLY_ORDER_TREND} />
         {hourlyOrderTrendData &&
           <LineChart
             title={ORDER_REPORT_LABELS.HOURLY_ORDER_TREND.toUpperCase()}
@@ -424,7 +424,7 @@ const OrderReport = () => {
             data={hourlyOrderTrendData}
             defaultClasses
           />}
-        <Header title={ORDER_REPORT_LABELS.HOURLY_ORDER_DATA} />
+        <SectionTitle title={ORDER_REPORT_LABELS.HOURLY_ORDER_DATA} />
         <CustomTab
           className="report-tab custom-tab"
           tabData={REPORT_TABS}
@@ -475,11 +475,5 @@ const OrderReport = () => {
       </div>
   );
 }
-
-const Header: FC<HeaderProps> = (props) => {
-  return (
-    <div className="text-gray-400 rounded-lg border border-black-400 p-2 my-2 w-full text-center bg-black-300">{props.title}</div>
-  );
-};
 
 export default OrderReport

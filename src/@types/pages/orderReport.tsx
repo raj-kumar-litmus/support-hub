@@ -110,7 +110,3 @@ export interface OrderTableData {
 export interface SummaryTableData {
   [x: string]: number | string | (string | number)[];
 }
-
-export type HeaderProps = {
-  title: string;
-}
