@@ -69,3 +69,12 @@ export interface ChartOptions {
   endDate?: any;
   layout?: any;
 }
+
+export type OPMProps = {
+  fetchType: string;
+  filters?: {
+    locale: string;
+    channel: number;
+    payment: string;
+  }
+}

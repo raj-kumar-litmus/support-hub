@@ -585,7 +585,7 @@ const OpmComparison: React.FC = () => {
                               <CustomCalendar
                                 name={form.name}
                                 containerclassname="opmFiltersMobileCalendar"
-                                imageclassname="h-5 w-5 relative top-1.75r md:top-3h left-2w z-1"
+                                imageclassname="h-5 w-5 relative top-8 md:top-3h left-2w z-1"
                                 titleclassname="top-5"
                                 title={form.label}
                                 showTime={form.showTime}
@@ -609,7 +609,7 @@ const OpmComparison: React.FC = () => {
                                   <CustomImage src={ArrowDownIcon} />
                                 }
                                 onChange={(e) => handleFormChange(e)}
-                                imageclassname="mt-1 z-1"
+                                imageclassname="z-1"
                                 icon={form.icon}
                                 options={form.options}
                                 label={form.label}
@@ -621,10 +621,11 @@ const OpmComparison: React.FC = () => {
                         );
                       })}
                       <CustomButton
+                        btnclassname="w-full"
                         label={LABELS.SUBMIT}
                         isDisabled={disabled}
                         isRounded={true}
-                        className="submitBtnMobile opmPopUp col-span-full"
+                        className="opm-btn p-button-rounded min-w-[160px] col-span-full	m-auto"
                       />
                     </form>
                   </CustomDialog>

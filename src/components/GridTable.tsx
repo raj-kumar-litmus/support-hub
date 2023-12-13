@@ -10,10 +10,10 @@ import { GridTableProps } from "../@types/components/commonTypes";
 const GridTable: FC<GridTableProps> = (props) => {
   const [rowDataList, setRowDataList] = useState<any[]>([]);
 
-  const getSeverityStyles = (data) => {
-    return data.severity === SEVERITY.HIGH ? "text-yellow-200" :
+  const getSeverityStyles = (data) => (
+    data.severity === SEVERITY.HIGH ? "text-yellow-200" :
       "text-green-400"
-  }
+  );
 
   const generateGridData = () => {
     if (props.data?.length > 0) {
@@ -23,10 +23,10 @@ const GridTable: FC<GridTableProps> = (props) => {
       while (a.length > 0) {
         rowData = a.splice(0, props.columns);
         const _data = rowData.map((item, index) => ({
-            [`data${index + 1}`]: item.data,
-            ...(item.highlight && { highlight: item.highlight }),
-            ...(item.severity && { severity: item.severity })
-          }));
+          [`data${index + 1}`]: item.data,
+          ...(item.highlight && { highlight: item.highlight }),
+          ...(item.severity && { severity: item.severity })
+        }));
         gridData.push(_data);
       }
       setRowDataList(gridData);

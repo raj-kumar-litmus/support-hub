@@ -66,7 +66,7 @@ import {
 } from "../constants/appConstants";
 import { LoaderContext } from "../context/loaderContext";
 import { LoaderContextType } from "../@types/components/commonTypes";
-import { ChartData, ChartOptions } from "../@types/pages/opmCharts";
+import { ChartData, ChartOptions, OPMProps } from "../@types/pages/opmCharts";
 import {
   CURRENT_PST_DATE,
   DATE_TIME_FORMAT_3,
@@ -75,7 +75,7 @@ import {
   getFormattedPSTDate,
 } from "../utils/dateTimeUtil";
 import { fetchData } from "../utils/fetchUtil";
-import { ROUTES, submitOnEnter } from "../components/utils/Utils";
+import { FETCH_TYPES, ROUTES, submitOnEnter } from "../components/utils/Utils";
 
 ChartJS.register(
   CategoryScale,
@@ -89,7 +89,7 @@ ChartJS.register(
   ChartDataLabels,
 );
 
-const OPM: React.FC = () => {
+const OPM: React.FC<OPMProps> = (props) => {
   const [showFilters, setShowFilters] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
   const { hideLoader } = useContext(LoaderContext) as LoaderContextType;
@@ -208,10 +208,9 @@ const OPM: React.FC = () => {
 
   useEffect(() => {
     setUrl(
-      `${URL_OPM}?period=${
-        location.pathname.includes(ROUTES.opm)
-          ? DEFAULT.duration
-          : DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION
+      `${URL_OPM}?period=${props.fetchType === FETCH_TYPES.OPM
+        ? DEFAULT.duration
+        : DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION
       }&starttime=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${
         DEFAULT.promocode
       }&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`,
@@ -278,7 +277,7 @@ const OPM: React.FC = () => {
               ),
         );
         setBarChartOptions(
-          location.pathname.includes(ROUTES.home)
+          props.fetchType === FETCH_TYPES.HOME
             ? OPM_BAR_CHART_OPTIONS_HOME(
                 width < SCREEN_WIDTH.SM,
                 Number(url.split("period=")[1].split("&")[0]) < 16 &&
@@ -334,6 +333,11 @@ const OPM: React.FC = () => {
 
   const submit = (e) => {
     e.preventDefault();
+    createUrl();
+    if (showFilters && width < SCREEN_WIDTH.SM) setShowFilters(false);
+  };
+
+  const createUrl = () => {
     let str = ``;
     let dateString = "";
     formFields.forEach((e: any) => {
@@ -397,12 +401,36 @@ const OPM: React.FC = () => {
     })();
   };
 
+  useEffect(() => {
+    if (props.filters && Object.keys(props.filters).length > 0) {
+      const data = [...formFields];
+      switch (true) {
+        case props.filters.locale !== undefined:
+          data.find((e) => e.label === LABELS.LOCALE).value = { name: Object.entries(LOCALE_OPTIONS).find(([key, val]) => val === props.filters.locale)[0], code: props.filters.locale };
+          setFormFields(data);
+          break;
+        case props.filters.channel !== undefined:
+          data.find((e) => e.label === LABELS.CHANNEL).value = { name: Object.entries(OPM_CHANNELS).find(([key, val]) => val === props.filters.channel)[0], code: props.filters.channel };
+          setFormFields(data);
+          break;
+        case props.filters.payment !== undefined:
+          data.find((e) => e.label === LABELS.PAYMENT).value = { name: Object.entries(PAYMENT_TYPES).find(([key, val]) => val === props.filters.payment)[0], code: props.filters.payment };
+          setFormFields(data);
+          break;
+        default:
+          console.log('Unknown property');
+          break;
+      }
+      createUrl();
+    }
+  }, [props.filters]);
+
   return (
     <>
-      {location.pathname.includes(ROUTES.home) && isLoading && (
+      {props.fetchType === FETCH_TYPES.HOME && isLoading && (
         <Loader className="!p-0 w-40w m-auto min-h-21r" />
       )}
-      {location.pathname.includes(ROUTES.home) && data && !isLoading && (
+      {props.fetchType === FETCH_TYPES.HOME && data && !isLoading && (
         <div className="w-full xl:w-1/2 bg-black-200 rounded-lg px-4 lg:px-6 py-4">
           <div className="flex justify-between items-center relative mb-2 md:mb-4 lg:mb-2 xl:mb-4">
             <span className="text-gray-200 font-bold text-lg font-helvetica">
@@ -456,7 +484,7 @@ const OPM: React.FC = () => {
           )}
         </div>
       )}
-      {!IS_FULLSCREEN && location.pathname.includes(ROUTES.opm) && (
+      {!IS_FULLSCREEN && props.fetchType === FETCH_TYPES.OPM && (
         <div className="flex justify-between items-start">
           <p className="font-bold text-gray-200">{PAGE_TITLES.OPM}</p>
           {width < SCREEN_WIDTH.SM && (
@@ -469,17 +497,17 @@ const OPM: React.FC = () => {
           )}
         </div>
       )}
-      {showFilters && location.pathname.includes(ROUTES.opm) && (
+      {showFilters && props.fetchType === FETCH_TYPES.OPM && (
         <>
           {width > SCREEN_WIDTH.SM ? (
             <>
               <form
                 id="custom-hover"
-                className="lg:flex sm:gap-4 opmFilters  sm:grid sm:grid-cols-3  sm:mb-4"
+                className="lg:flex lg:flex-wrap sm:gap-4 opmFilters  sm:grid sm:grid-cols-3  sm:mb-4"
               >
                 {formFields.map((form, index) => {
                   return (
-                    <div className="flex flex-1" key={index}>
+                    <div className="flex flex-1 lg:max-w-[11rem]" key={index}>
                       {form.type === INPUT_TYPES.text && (
                         <CustomInputText
                           type={INPUT_TYPES.text}
@@ -490,7 +518,6 @@ const OPM: React.FC = () => {
                           placeholder={form.label}
                           className="h-39"
                           imageclassname="!top-[1.9rem]"
-                          containerClassName="lg:max-w-[8rem]"
                           onChange={(event) => handleFormChange(event)}
                         />
                       )}
@@ -525,6 +552,8 @@ const OPM: React.FC = () => {
                           label={form.label}
                           optionLabel="name"
                           placeholder=""
+                          className={props.filters && (props.filters[form.name] !== undefined) ? "filter-dropdown" : ""}
+                          autoFocus={props.filters && (props.filters[form.name] !== undefined)}
                         />
                       )}
                     </div>
@@ -532,13 +561,12 @@ const OPM: React.FC = () => {
                 })}
               </form>
               <CustomButton
-                id="page-btn-submit"
                 btnclassname="w-full"
                 label={LABELS.SUBMIT}
                 isDisabled={disabled}
                 isRounded={true}
                 onClick={submit}
-                className="self-end relative left-5w sm:w-21w md:w-15w lg:w-10w sm:top-2h md:top-0 sm:left-2.5w md:left-0 "
+                className="opm-btn p-button-rounded w-[118px] self-end"
               />
             </>
           ) : (
@@ -607,12 +635,12 @@ const OPM: React.FC = () => {
                       </>
                     );
                   })}
-
                   <CustomButton
+                    btnclassname="w-full"
                     label={LABELS.SUBMIT}
                     isDisabled={disabled}
                     isRounded={true}
-                    className="submitBtnMobile opmPopUp col-span-full"
+                    className="opm-btn p-button-rounded min-w-[160px] col-span-full	m-auto"
                   />
                 </form>
               </CustomDialog>
@@ -621,7 +649,7 @@ const OPM: React.FC = () => {
         </>
       )}
 
-      {location.pathname.includes(ROUTES.opm) && showFilteredCards && (
+      {props.fetchType === FETCH_TYPES.OPM && showFilteredCards && (
         <div
           className={`flex items-center gap-4 mt-2.5 overflow-auto ml-0 sm:ml-5w lg:ml-4 ${
             IS_FULLSCREEN
@@ -657,7 +685,7 @@ const OPM: React.FC = () => {
         </div>
       )}
 
-      {!IS_FULLSCREEN && location.pathname.includes(ROUTES.opm) && (
+      {!IS_FULLSCREEN && props.fetchType === FETCH_TYPES.OPM && (
         <AutoRefresh
           getData={getData}
           startPollingHandler={startPollingHandler}
@@ -667,12 +695,12 @@ const OPM: React.FC = () => {
           checkBoxContainerClassname="flex autoRefreshCheckBox sm:ml-2.5w md:ml-1w md:ml-[1.5vw] lg:ml-[1.25vw] items-center mt-3h md:mt-0"
         />
       )}
-      {isLoading && location.pathname.includes(ROUTES.opm) ? (
+      {isLoading && props.fetchType === FETCH_TYPES.OPM ? (
         <Loader className="h-[50vh]" />
       ) : (
         data &&
         !isLoading &&
-        location.pathname.includes(ROUTES.opm) && (
+        props.fetchType === FETCH_TYPES.OPM && (
           <div
             className={`relative h-96 lg:h-29r ${
               IS_FULLSCREEN ? "rotate-90" : ""
