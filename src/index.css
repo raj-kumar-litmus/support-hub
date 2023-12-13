@@ -1007,6 +1007,9 @@ hr.horizontalLine.blue {
 .p-datatable .p-datatable-tfoot > tr > td {
   @apply !bg-black-200 text-white-500 border-0 border-black-300 p-3;
 }
+.report-table.p-datatable {
+  @apply w-full;
+}
 .report-table .p-datatable-tbody tr:last-child td:first-child {
   @apply rounded-none;
 }
