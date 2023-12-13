@@ -330,6 +330,14 @@ export type OrderSummaryCardProps = {
   cardData: any;
 };
 
+export type InfoFieldProps = {
+  title: string;
+  data: string | number;
+  className?: string;
+  wrapperClassName?: string;
+  titleClassName?: string;
+  dataClassName?: string;
+};
 
 export type PieChartProps =  {
   options?: ChartOptions<"pie"> | any;
@@ -338,4 +346,8 @@ export type PieChartProps =  {
   width?: string;
   xsHeight?: string;
   xsWidth?: string;
+};
+
+export type SectionTitleProps = {
+  title: string;
 }
