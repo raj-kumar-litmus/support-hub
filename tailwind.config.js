@@ -50,7 +50,7 @@ export default {
           600: "#FFFFFF00",
           700: "#E8E8E8",
           800: "#EDEDED",
-          900: "#FBFBFC",
+          900: "#FBFBFC"
         },
         blue: {
           100: "#0977FF",
@@ -163,6 +163,7 @@ export default {
       maxWidth: {},
       minWidth: {
         "4.5r": "4.5rem",
+        "31": "31px"
       },
       maxHeight: {
         528: "528px",
