@@ -260,8 +260,7 @@ const OrderReport = () => {
     channelWiseOrderData.cscCount, channelWiseOrderData.mPlusCount, channelWiseOrderData.jcpCount, channelWiseOrderData.instaCount,
     ]
     setChannelWiseTotalData(totalData);
-    const orderData = time.map((t, i) => {
-      return {
+    const orderData = time.map((t, i) => ({
         Time: time[i],
         [CHANNELWISE_DATA_LABELS.TODAY]: checkTableData(historicalOrderData.today[i], time[i]),
         [CHANNELWISE_DATA_LABELS.WEB]: checkTableData(slicedOrderData.webOrderCount[i], time[i]),
@@ -272,8 +271,8 @@ const OrderReport = () => {
         [CHANNELWISE_DATA_LABELS.MPLUS]: checkTableData(slicedOrderData.mPlusOrderCount[i], time[i]),
         [CHANNELWISE_DATA_LABELS.JCPENNY]: checkTableData(slicedOrderData.jcpOrderCount[i], time[i]),
         [CHANNELWISE_DATA_LABELS.INSTAGRAM]: checkTableData(slicedOrderData.instagramOrderCount[i], time[i]),
-      }
-    });
+      })
+    );
     setChannelWiseHourlyOrderData(orderData);
   }
 
@@ -291,8 +290,7 @@ const OrderReport = () => {
     paymentWiseOrderData.pgPLCCT, paymentWiseOrderData.pgOtherPlcc, paymentWiseOrderData.pgOtherCC
     ];
     setPaymentWiseTotalData(totalData);
-    const orderData = time.map((t, i) => {
-      return {
+    const orderData = time.map((t, i) => ({
         Time: time[i],
         [PAYMENTWISE_DATA_LABELS.TODAY]: checkTableData(historicalOrderData.today[i], time[i]),
         [PAYMENTWISE_DATA_LABELS.APPLE_PAY]: checkTableData(slicedOrderData.pgApplePayCount[i], time[i]),
@@ -310,8 +308,8 @@ const OrderReport = () => {
         [PAYMENTWISE_DATA_LABELS.PLCCT]: checkTableData(slicedOrderData.pgPlcctCount[i], time[i]),
         [PAYMENTWISE_DATA_LABELS.PRIVATE_LABEL]: checkTableData(slicedOrderData.pgPrivateLabelCount[i], time[i]),
         [PAYMENTWISE_DATA_LABELS.OTHER_CC]: checkTableData(slicedOrderData.pgOtherCreditCardCount[i], time[i]),
-      }
-    });
+      })
+    );
     setPaymentWiseHourlyOrderData(orderData);
   }
 
