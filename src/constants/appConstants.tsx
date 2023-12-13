@@ -5,6 +5,8 @@ export const PAGE_TITLES = {
   OPM_COMPARISON: "OPM Comparison",
   DC_OPEN_ORDERS: "DC Open Orders",
   ORDER_DETAILS: "Order Details",
+  ORDER_REPORT: "Order Report",
+  SKU_LOOKUP: "SKU Lookup",
 };
 
 export const DASHBOARD_LABELS = {
@@ -352,6 +354,7 @@ export const SEE_MORE: string = "See More";
 export const QUICK_LINKS_HEADER = "Quick Links";
 
 export const TIMESTAMPS = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00"];
+
 export const ORDER_REPORT_CHART_LABELS = {
   CHANNELWISE_ORDER_LABELS: ["Web", "Mobile Web", "iPhone App", "Android App", "mPlus App", "JCPenny", "Instagram", "CSC"],
   PAYMENTWISE_ORDER_LABELS: ["Credit Card", "Paypal", "Klarna", "Giftcard", "Private Label Card", "Apple Pay", "JCP Dummy", "Sephora CBVI", "Sephora PLCC", "Sephora CBVIT", "Sephora PLCCT", "Instagram Dummy", "Google Dummy", "Sephora Pay", "Store Credit"],
@@ -463,3 +466,41 @@ export const SEVERITY = {
   LOW: "low",
   HIGH: "high"
 }
+export const SKU_DETAILS = {
+  TITLE: "SKU Details",
+  SKU: "SKU #",
+  DISPLAY_NAME: "Display Name",
+  BRAND: "Brand",
+  EFFECTIVELY_ACTIVE: "Effectively Active",
+  START_DATE: "Start Date",
+  END_DATE: "End Date",
+  SKU_STATE: "SKU State",
+  RESERVATION_ENABLED: "Reservation Enabled",
+  STORE_ONLY: "Store Only",
+};
+
+export const SKU_PRICE_DETAILS = {
+  TITLE: "Price Details",
+  US_LIST_PRICE: "US List Price",
+  US_SALE_PRICE: "US Sale Price",
+  CA_LIST_PRICE: "CA List Price",
+  CA_SALE_PRICE: "CA Sale Price",
+};
+
+export const SKU_INVENTORY = {
+  ATG_INVENTORY: "ATG Inventory",
+  YANTRIKS_INVENTORY: "Yantriks Inventory",
+  COUNTRY: "Country",
+  STOCK_LEVEL: "Stock Level",
+  ON_HOLD: "On Hold",
+};
+
+export const SKU_PRODUCT_INFO = {
+  TITLE: "Product Information",
+  PRODUCT: "Product #",
+  ACTIVATION_DATE: "Activation Date",
+  END_DATE: "End Date",
+  URL: "URL",
+  EFFECTIVELY_ACTIVE: "Effectively Active",
+  ENABLED: "Enabled",
+};

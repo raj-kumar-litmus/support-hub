@@ -1068,6 +1068,16 @@ hr.horizontalLine.blue {
   @apply p-4;
 }
 
+.sku-lookup .sku-lookup-card .p-card-body {
+  @apply w-full;
+}
+.sku-lookup .sku-lookup-card .p-card-body .p-card-content {
+  @apply p-0;
+}
+.sku-lookup .sku-lookup-card .p-card-header {
+  @apply px-5 pt-5 font-bold;
+}
+
 /* Custom SideBar */
 .custom-sidebar {
   @apply bg-gray-107 text-gray-106;

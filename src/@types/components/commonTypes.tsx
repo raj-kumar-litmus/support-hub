@@ -198,7 +198,8 @@ export type SearchBarProps = {
   onSearch: (e: KeyboardEvent<HTMLInputElement>) => void;
   placeholder: string;
   className?: string;
-  type?: string;
+  type?:string
+  hideMobileView?: boolean;
 };
 
 export type SearchFieldProps = {
