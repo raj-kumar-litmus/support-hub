@@ -301,3 +301,22 @@ export interface CustomSideBarProps extends SidebarProps {
   themeClasses?: string;
   sideBarWidthClass?: string;
 }
+export interface CustomOverlayProps{
+  header?: string;
+  box1Content?: string;
+  box1Header?: string;
+  box2Content?: string;
+  box2Header?: string;
+  box1Class?: string;
+  box2Class?: string;
+  buttonContent?: string;
+  subHeader?: string;
+}
+export interface ApiWebServerCard {
+  title?: string;
+  perSecond?: string;
+  perTotal?: string;
+  cardData?: boolean;
+  bgColor?: boolean;
+  showToolTip?: boolean;
+}
