@@ -420,12 +420,12 @@ export const OPM_COMPARISON_OPTIONS = ({
                     year: "numeric",
                     month: "2-digit",
                     day: "2-digit",
-                  })
+                })
                 : endDate?.toLocaleString("en-US", {
                     year: "numeric",
                     month: "2-digit",
                     day: "2-digit",
-                  }),
+                }),
             fillStyle:
               index === 0
                 ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR
@@ -636,3 +636,66 @@ export const OPM_COMPARISON_BAR_OPTIONS_HOME = ({
     },
   };
 };
+
+export const ORDER_REPORT_PIE_CHART_OPTIONS = {
+  maintainAspectRatio: false,
+  responsive: false,
+  plugins: {
+    legend: {
+      display: true,
+      position: "right",
+      align: "start",
+      labels: {
+        usePointStyle: true,
+        font: {
+          size: 11
+        },
+        color: '#FFFFFF'
+      },
+    },
+    datalabels: {
+      formatter: (value, ctx) => {
+        let sum = 0;
+        const dataArr = ctx.chart.data.datasets[0].data;
+        dataArr.map(data => {
+          sum += data;
+        });
+        const _perc = (value * 100 / sum).toFixed(1);
+        const percentage = Number(_perc) > 5 ? `${_perc}%` : "";
+        return percentage;
+      },
+      font: { weight: 700 },
+      color: "#161A1D",
+
+    },
+    tooltip: {
+      enabled: false,
+      external: (context) => externalTooltipHandler(context, "reportPieChart", true),
+    }
+  },
+};
+
+export const HOURLY_ORDER_TREND_LINE_CHART_OPTION: Chart.ChartOptions = {
+  responsiveness: true,
+  plugins: {
+    legend: {
+      display: true,
+      position: "bottom",
+      align: "center",
+      labels: {
+        usePointStyle: true,
+        font: {
+          size: 11
+        },
+        color: '#FFFFFF'
+      },
+    },
+    datalabels: {
+      display: false,
+    },
+    tooltip: {
+      enabled: false,
+      external: (context) => externalTooltipHandler(context, "reportLineChart", true),
+    },
+  }
+}

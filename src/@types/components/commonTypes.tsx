@@ -251,7 +251,7 @@ export interface LoaderProps {
 
 export interface LineChartProps {
   options: ChartOptions<"line"> | any;
-  data: ChartData<"line">;
+  data: ChartData<"line"> | any;
   className?: string;
   title: string;
   isFullScreen?: boolean;
@@ -302,6 +302,7 @@ export interface CustomSideBarProps extends SidebarProps {
   themeClasses?: string;
   sideBarWidthClass?: string;
 }
+
 export type HorizontalTableProps = {
   className?: string;
   tableClassName?: string;
@@ -312,6 +313,42 @@ export type HorizontalTableProps = {
   tableData: any[];
 };
 
-export interface HeaderProps {
+export interface GridData {
+  data: string | number;
+  icon?: any;
+  highlight?: boolean;
+};
+
+export type GridTableProps = {
+  columns: number;
+  data: GridData[] | string[];
+  title?: string;
+  className?: string;
+  onClick?: (string) => void;
+};
+
+export type OrderSummaryCardProps = {
+  cardData: any;
+};
+
+export type InfoFieldProps = {
+  title: string;
+  data: string | number;
+  className?: string;
+  wrapperClassName?: string;
+  titleClassName?: string;
+  dataClassName?: string;
+};
+
+export type PieChartProps =  {
+  options?: ChartOptions<"pie"> | any;
+  data?: ChartData<"pie"> | any;
+  height?: string;
+  width?: string;
+  xsHeight?: string;
+  xsWidth?: string;
+};
+
+export type SectionTitleProps = {
   title: string;
 }

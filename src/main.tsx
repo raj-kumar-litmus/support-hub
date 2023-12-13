@@ -13,6 +13,7 @@ import Chart from "./components/ChartIndex";
 import DcOpenOrders from "./components/DcOpenOrders";
 import HomePage from "./components/homePage";
 import OrderDetails from "./components/orderDetails/OrderDetails.js";
+import OrderReport from "./views/orderReport";
 import Sessions from "./views/sessions";
 import SkuLookup from "./views/skuLookup";
 import { ROUTES } from "./components/utils/Utils";
@@ -66,6 +67,14 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route
             path={`${ROUTES.orderDetails}/:orderId`}
             element={<App appContent={<OrderDetails />} />}
+          />
+          <Route
+            path={ROUTES.orderReport}
+            element={
+              <App
+                appContent={<OrderReport />}
+              />
+            }
           />
         </Routes>
       </Suspense>
