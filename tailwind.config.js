@@ -79,6 +79,7 @@ export default {
         }
       },
       spacing: {
+        "1.7":"1.7px",
         "5p": "5px",
         "7p": "7px",
         "9p": "9px",

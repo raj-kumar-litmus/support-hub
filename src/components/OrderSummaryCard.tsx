@@ -9,7 +9,7 @@ const OrderSummaryCard: FC<OrderSummaryCardProps> = (props) => {
         {Object.entries(props.cardData)?.map(([key, value]: [string, Array<string | number> | string | number], i) => (
           <div key={i}>
             <div className="text-gray-400 text-10 min-h-[1.8rem]">{key}</div>
-            <div className="text-gray-300 text-base font-medium" title={value.toString()}>{value.length ? value[0] + " " + value[1] : value}</div>
+            <div className="text-gray-300 text-base font-medium" title={value?.toString()}>{value.length>1 ? value[0] + " " + value[1] : value}</div>
           </div>
         ))}
       </div>

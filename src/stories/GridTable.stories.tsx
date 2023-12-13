@@ -10,13 +10,13 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-let gridData = [{ data: "DSK" }, { data: "MWB" }, { data: "IPH" }, { data: "AND" }, { data: "CSC" }, { data: "MPL" }, { data: "ZAP" }, { data: "INS" }];
+const gridData = [{ data: "DSK" }, { data: "MWB" }, { data: "IPH" }, { data: "AND" }, { data: "CSC" }, { data: "MPL" }, { data: "ZAP" }, { data: "INS" }];
 
-let gridData1 = [{ data: "DSK" }, { data: "MWB" }, { data: "IPH" }, { data: "AND" }, { data: "CSC" }, { data: "MPL", highlight: true }, { data: "ZAP" }, { data: "INS" }]
+const gridData1 = [{ data: "DSK" }, { data: "MWB" }, { data: "IPH" }, { data: "AND" }, { data: "CSC" }, { data: "MPL", highlight: true }, { data: "ZAP" }, { data: "INS" }]
 
-let gridData2 = [{ data: "DSK", severity: "low" }, { data: "MWB" }, { data: "IPH" }, { data: "AND" }, { data: "CSC" }, { data: "MPL" }, { data: "ZAP" }, { data: "INS" }]
+const gridData2 = [{ data: "DSK", severity: "low" }, { data: "MWB" }, { data: "IPH" }, { data: "AND" }, { data: "CSC" }, { data: "MPL" }, { data: "ZAP" }, { data: "INS" }]
 
-let gridData3 = [{ data: "DSK" }, { data: "MWB" }, { data: "IPH" }, { data: "AND" }, { data: "CSC" }, { data: "MPL" }, { data: "ZAP", severity: "high" }, { data: "INS" }];
+const gridData3 = [{ data: "DSK" }, { data: "MWB" }, { data: "IPH" }, { data: "AND" }, { data: "CSC" }, { data: "MPL" }, { data: "ZAP", severity: "high" }, { data: "INS" }];
 
 export const Basic: Story = {
   args: {

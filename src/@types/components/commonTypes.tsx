@@ -330,3 +330,12 @@ export type OrderSummaryCardProps = {
   cardData: any;
 };
 
+
+export type PieChartProps =  {
+  options?: ChartOptions<"pie"> | any;
+  data?: ChartData<"pie"> | any;
+  height?: string;
+  width?: string;
+  xsHeight?: string;
+  xsWidth?: string;
+}

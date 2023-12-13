@@ -656,12 +656,12 @@ export const ORDER_REPORT_PIE_CHART_OPTIONS = {
     datalabels: {
       formatter: (value, ctx) => {
         let sum = 0;
-        let dataArr = ctx.chart.data.datasets[0].data;
+        const dataArr = ctx.chart.data.datasets[0].data;
         dataArr.map(data => {
           sum += data;
         });
-        let _perc = (value * 100 / sum).toFixed(1);
-        let percentage = Number(_perc) > 5 ? `${_perc}%` : "";
+        const _perc = (value * 100 / sum).toFixed(1);
+        const percentage = Number(_perc) > 5 ? `${_perc}%` : "";
         return percentage;
       },
       font: { weight: 700 },
