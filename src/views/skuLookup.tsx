@@ -1,4 +1,4 @@
-import { FC, KeyboardEvent, useEffect, useState } from "react";
+import { FC, Fragment, KeyboardEvent, useEffect, useState } from "react";
 import useScreenSize from "../hooks/useScreenSize";
 import CustomCard from "../components/common/customcard";
 import SearchBar from "../components/common/searchbar";
@@ -55,7 +55,7 @@ const HorizontalTable: FC<HorizontalTableProps> = (props) => {
                   ],
                   i
                 ) => (
-                  <>
+                  <Fragment key={i}>
                     <th
                       className={`text-gray-200 ${
                         props.rowHeadClassName || ""
@@ -68,7 +68,7 @@ const HorizontalTable: FC<HorizontalTableProps> = (props) => {
                     >
                       {value}
                     </td>
-                  </>
+                  </Fragment>
                 )
               )}
             </tr>
@@ -78,7 +78,7 @@ const HorizontalTable: FC<HorizontalTableProps> = (props) => {
   );
 };
 
-const SKULookup = () => {
+const SkuLookup = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [skuid, setSkuId] = useState<string>("");
   const [skuDetailsTable, setSkuDetailsTable] = useState<any>({});
@@ -95,11 +95,34 @@ const SKULookup = () => {
       [SKU_INVENTORY.STOCK_LEVEL]: "",
     },
   ]);
+  const [data, setData] = useState<any[]>([
+    [SKU_DETAILS.TITLE, skuDetailsTable],
+    [SKU_PRICE_DETAILS.TITLE, priceDetailsTable],
+    [SKU_INVENTORY.ATG_INVENTORY, atgInventory],
+    [SKU_INVENTORY.YANTRIKS_INVENTORY, yantriksInventory],
+    [SKU_PRODUCT_INFO.TITLE, productInfo],
+  ]);
   const { width } = useScreenSize();
 
   useEffect(() => {
     setStatesData();
   }, []);
+
+  useEffect(() => {
+    setData([
+      [SKU_DETAILS.TITLE, skuDetailsTable],
+      [SKU_PRICE_DETAILS.TITLE, priceDetailsTable],
+      [SKU_INVENTORY.ATG_INVENTORY, atgInventory],
+      [SKU_INVENTORY.YANTRIKS_INVENTORY, yantriksInventory],
+      [SKU_PRODUCT_INFO.TITLE, productInfo],
+    ]);
+  }, [
+    skuDetailsTable,
+    priceDetailsTable,
+    atgInventory,
+    productInfo,
+    yantriksInventory,
+  ]);
 
   const setStatesData = (catalog: any = {}) => {
     setSkuDetailsTable([
@@ -175,9 +198,9 @@ const SKULookup = () => {
         inv.availabilityByProducts?.[0]?.availabilityDetails?.atp?.toString() ||
         "",
     };
-    let firstEmptyCountry = yantriksInventory.findIndex((inventory) => {
-      return inventory[SKU_INVENTORY.COUNTRY] == "";
-    });
+    let firstEmptyCountry = yantriksInventory.findIndex(
+      (inventory) => inventory[SKU_INVENTORY.COUNTRY] == ""
+    );
     yantriksInventory[firstEmptyCountry] = inventory;
     setYantriksInventory([...yantriksInventory]);
   };
@@ -237,54 +260,21 @@ const SKULookup = () => {
         <>
           {width < SCREEN_WIDTH.SM ? (
             <div className="py-4">
-              <SkuCard title={SKU_DETAILS.TITLE} cardData={skuDetailsTable} />
-              <SkuCard
-                title={SKU_PRICE_DETAILS.TITLE}
-                cardData={priceDetailsTable}
-                wrapperClass="grid-cols-[repeat(auto-fill,minmax(70px,1fr))]"
-              />
-              <SkuCard
-                title={SKU_INVENTORY.ATG_INVENTORY}
-                cardData={atgInventory}
-              />
-              <SkuCard
-                title={SKU_INVENTORY.YANTRIKS_INVENTORY}
-                cardData={yantriksInventory}
-              />
-              <SkuCard title={SKU_PRODUCT_INFO.TITLE} cardData={productInfo} />
+              {data?.map((cardData, ind) => (
+                <SkuCard key={ind} title={cardData[0]} cardData={cardData[1]} />
+              ))}
             </div>
           ) : (
             <>
-              <HorizontalTable
-                tableData={skuDetailsTable}
-                tableHead={SKU_DETAILS.TITLE}
-                rowHeadClassName="p-4 text-right font-medium w-[15%] lg:whitespace-nowrap"
-                dataClassName="text-left p-4 border-r border-black-400 min-w-[15%]"
-              />
-              <HorizontalTable
-                tableData={priceDetailsTable}
-                tableHead={SKU_PRICE_DETAILS.TITLE}
-                rowHeadClassName="p-4 text-right font-medium w-[12.5%] lg:whitespace-nowrap"
-                dataClassName="text-left p-4 border-r border-black-400 w-[12.5%]"
-              />
-              <HorizontalTable
-                tableData={atgInventory}
-                tableHead={SKU_INVENTORY.ATG_INVENTORY}
-                rowHeadClassName="p-4 text-right font-medium w-[15%] lg:whitespace-nowrap"
-                dataClassName="text-left p-4 border-r border-black-400 w-[15%]"
-              />
-              <HorizontalTable
-                tableData={yantriksInventory}
-                tableHead={SKU_INVENTORY.YANTRIKS_INVENTORY}
-                rowHeadClassName="p-4 text-right font-medium w-1/4 lg:whitespace-nowrap"
-                dataClassName="text-left p-4 border-r border-black-400 w-1/4"
-              />
-              <HorizontalTable
-                tableData={productInfo}
-                tableHead={SKU_PRODUCT_INFO.TITLE}
-                rowHeadClassName="p-4 text-right font-medium w-[15%] lg:whitespace-nowrap"
-                dataClassName="text-left p-4 border-r border-black-400 w-[15%]"
-              />
+              {data?.map((tableData, ind) => (
+                <HorizontalTable
+                  key={ind}
+                  tableHead={tableData[0]}
+                  tableData={tableData[1]}
+                  rowHeadClassName="p-4 text-right font-medium w-[15%] lg:whitespace-nowrap"
+                  dataClassName="text-left p-4 border-r border-black-400 min-w-[15%]"
+                />
+              ))}
             </>
           )}
         </>
@@ -305,7 +295,9 @@ const SkuCard = (props: SkuCardProps) => {
               className="sku-lookup-card my-1 text-gray-200 bg-black-200 w-full rounded-lg"
             >
               <div
-                className={`grid grid-cols-[repeat(auto-fill,minmax(91px,1fr))] gap-2 ${props.wrapperClass}`}
+                className={`grid grid-cols-[repeat(auto-fill,minmax(91px,1fr))] gap-2 ${
+                  props.wrapperClass || ""
+                }`}
               >
                 {Object.entries(obj)?.map(
                   (
@@ -323,7 +315,7 @@ const SkuCard = (props: SkuCardProps) => {
                         className="text-gray-300 text-xs font-medium"
                         title={value.toString()}
                       >
-                        {Array.isArray(value) && value?.length
+                        {Array.isArray(value) && value?.length > 1
                           ? value[0] + " " + value[1]
                           : value}
                       </div>
@@ -346,4 +338,4 @@ const Header: FC<HeaderProps> = (props) => {
   );
 };
 
-export default SKULookup;
+export default SkuLookup;

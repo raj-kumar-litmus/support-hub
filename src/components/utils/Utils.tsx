@@ -45,7 +45,7 @@ export const MENU_LIST = [
   {
     id: 6,
     name: PAGE_TITLES.SKU_LOOKUP,
-    icon: DCOpenOrdersIcon, //need to change the icon
+    icon: DCOpenOrdersIcon, //todo - change the icon
     path: ROUTES.skuLookup,
   },
 ];
