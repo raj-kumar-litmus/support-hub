@@ -355,9 +355,9 @@ export type SectionTitleProps = {
 }
 
 export type OpmSideBarProps = {
-  localeFilter: string;
-  channelFilter: string;
-  paymentFilter: string;
+  localeFilter?: string;
+  channelFilter?: string;
+  paymentFilter?: string;
   visible: boolean;
   setVisible: (boolean) => void;
 }
