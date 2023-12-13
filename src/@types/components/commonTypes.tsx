@@ -198,7 +198,8 @@ export type SearchBarProps = {
   onSearch: (e: KeyboardEvent<HTMLInputElement>) => void;
   placeholder: string;
   className?: string;
-  type?: string;
+  type?:string
+  hideMobileView?: boolean;
 };
 
 export type SearchFieldProps = {
@@ -300,4 +301,17 @@ export interface CustomSideBarProps extends SidebarProps {
   title?: string;
   themeClasses?: string;
   sideBarWidthClass?: string;
+}
+export type HorizontalTableProps = {
+  className?: string;
+  tableClassName?: string;
+  tableHead?: string;
+  rowHeadClassName?: string;
+  dataClassName?: string;
+  tableHeadClassName?: string;
+  tableData: any[];
+};
+
+export interface HeaderProps {
+  title: string;
 }

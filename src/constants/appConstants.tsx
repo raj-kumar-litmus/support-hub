@@ -5,6 +5,7 @@ export const PAGE_TITLES = {
   OPM_COMPARISON: "OPM Comparison",
   DC_OPEN_ORDERS: "DC Open Orders",
   ORDER_DETAILS: "Order Details",
+  SKU_LOOKUP: "SKU Lookup",
 };
 
 export const DASHBOARD_LABELS = {
@@ -328,3 +329,42 @@ export const CALENDAR_TOAST_MESSAGE: string =
   "Please don't select a future date and time";
 export const SEE_MORE: string = "See More";
 export const QUICK_LINKS_HEADER = "Quick Links";
+
+export const SKU_DETAILS = {
+  TITLE: "SKU Details",
+  SKU: "SKU #",
+  DISPLAY_NAME: "Display Name",
+  BRAND: "Brand",
+  EFFECTIVELY_ACTIVE: "Effectively Active",
+  START_DATE: "Start Date",
+  END_DATE: "End Date",
+  SKU_STATE: "SKU State",
+  RESERVATION_ENABLED: "Reservation Enabled",
+  STORE_ONLY: "Store Only",
+};
+
+export const SKU_PRICE_DETAILS = {
+  TITLE: "Price Details",
+  US_LIST_PRICE: "US List Price",
+  US_SALE_PRICE: "US Sale Price",
+  CA_LIST_PRICE: "CA List Price",
+  CA_SALE_PRICE: "CA Sale Price",
+};
+
+export const SKU_INVENTORY = {
+  ATG_INVENTORY: "ATG Inventory",
+  YANTRIKS_INVENTORY: "Yantriks Inventory",
+  COUNTRY: "Country",
+  STOCK_LEVEL: "Stock Level",
+  ON_HOLD: "On Hold",
+};
+
+export const SKU_PRODUCT_INFO = {
+  TITLE: "Product Information",
+  PRODUCT: "Product #",
+  ACTIVATION_DATE: "Activation Date",
+  END_DATE: "End Date",
+  URL: "URL",
+  EFFECTIVELY_ACTIVE: "Effectively Active",
+  ENABLED: "Enabled",
+};

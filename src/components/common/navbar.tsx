@@ -74,6 +74,7 @@ const Navbar: FC<NavbarProps> = (props) => {
             searchValue={props.searchValue}
             setSearchValue={props.setSearchValue}
             onSearch={onSearch}
+            hideMobileView
             placeholder="Search Order"
           />
         </div>

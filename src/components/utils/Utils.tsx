@@ -13,6 +13,7 @@ export const ROUTES = {
   dcOpenOrders: "/dc-open-orders",
   fullScreen: "/fullscreen",
   orderDetails: "/order-details",
+  skuLookup: "/sku-lookup",
 };
 
 export const MENU_LIST = [
@@ -41,6 +42,12 @@ export const MENU_LIST = [
     icon: DCOpenOrdersIcon,
     path: ROUTES.dcOpenOrders,
   },
+  {
+    id: 6,
+    name: PAGE_TITLES.SKU_LOOKUP,
+    icon: DCOpenOrdersIcon, //todo - change the icon
+    path: ROUTES.skuLookup,
+  },
 ];
 
 const getOrCreateTooltip = (chart, type, tooltip) => {
@@ -55,7 +62,7 @@ const getOrCreateTooltip = (chart, type, tooltip) => {
       ? line.setAttribute("class", `horizontalLine opm`)
       : line.setAttribute(
           "class",
-          `horizontalLine ${index === 0 ? "yellow" : "blue"}`,
+          `horizontalLine ${index === 0 ? "yellow" : "blue"}`
         );
   }
 
@@ -87,7 +94,7 @@ const getOrCreateTooltip = (chart, type, tooltip) => {
 export const externalTooltipHandler = (
   context,
   type,
-  customPosition = false,
+  customPosition = false
 ) => {
   // Tooltip Element
   const { chart, tooltip } = context;
