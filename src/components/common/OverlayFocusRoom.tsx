@@ -43,7 +43,7 @@ const CustomOverlayFocusRoom = forwardRef<OverlayPanel, CustomOverlayProps>(( pr
           </div>
 
           {props.buttonContent && (
-            <div className="flex items-center h-9 justify-center mt-1 text-sm border-[1px] rounded-full border-white-900">
+            <div className="flex items-center h-9 justify-center mt-1 text-sm border rounded-full border-white-900">
               <button>{props.buttonContent}</button>
             </div>
           )}
