@@ -552,7 +552,7 @@ const OPM: React.FC<OPMProps> = (props) => {
                           label={form.label}
                           optionLabel="name"
                           placeholder=""
-                          className={props.filters && (props.filters[form.name] !== undefined) ? "filter-dropdown" : ""}
+                          className={props.filters ? "filter-dropdown" : ""}
                           autoFocus={props.filters && (props.filters[form.name] !== undefined)}
                         />
                       )}
