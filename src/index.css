@@ -1035,13 +1035,13 @@ hr.horizontalLine.blue {
   @apply w-7 h-6
 }
 .grid-table .p-datatable-wrapper {
-  @apply rounded-lg border border-gray-108;
+  @apply rounded-lg border border-black-103;
 }
 .grid-table .p-datatable-tbody > tr {
   @apply bg-black-101;
 }
 .grid-table .p-datatable-tbody > tr > td {
-  @apply text-white-900 font-medium text-xs text-center border border-gray-108 p-0;
+  @apply text-white-900 font-medium text-xs text-center border border-black-103 p-0;
 }
 .grid-table .p-datatable-tbody tr:first-child td:first-child {
   @apply rounded-tl-lg;

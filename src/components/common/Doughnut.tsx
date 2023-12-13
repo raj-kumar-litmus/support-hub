@@ -25,7 +25,7 @@ ChartJS.register(
 
 const DoughnutChart = (props: DoughNutChartProps) => (
   <div
-    className={`${props.containerClassName} cursor-pointer`}
+    className={`${props.containerClassName || ""} cursor-pointer`}
     onClick={() => alert("Hi there")}
   >
     <Doughnut

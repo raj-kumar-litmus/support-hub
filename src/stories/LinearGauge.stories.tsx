@@ -25,8 +25,8 @@ type Story = StoryObj<typeof meta>;
 
 export const LinearGaugeOne: Story = {
   args: {
-    propOne: "81",
-    propTwo: "80",
+    propOne: 81,
+    propTwo: 80,
     bgColorTwo: "bg-red-100",
     bgColorOne: "bg-blue-300",
     height: "50px",
@@ -36,8 +36,8 @@ export const LinearGaugeOne: Story = {
 
 export const LinearGaugeTwo: Story = {
   args: {
-    propOne: "158679",
-    propTwo: "25272",
+    propOne: 158679,
+    propTwo: 25272,
     bgColorTwo: "bg-red-100",
     bgColorOne: "bg-blue-300",
     height: "50px",

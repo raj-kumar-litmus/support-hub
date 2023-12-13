@@ -479,7 +479,7 @@ export interface LinearGaugeProps {
 }
 
 export interface LabelProps {
-  text?: string;
+  text: string;
   containerClassName?: string;
   color?: string;
   circleColor?: string;
