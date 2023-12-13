@@ -111,6 +111,7 @@ export default {
         "1.75r": "1.75rem",
         "2w": "2vw",
         "2h": "2vh",
+        "2.3r": "2.3rem",
         "2.5w": "2.5vw",
         "2.85w": "2.85vw",
         "3h": "3vh",
@@ -120,6 +121,7 @@ export default {
         "8w": "8vw",
         "9h": "9vh",
         "10w": "10vw",
+        "11r": "11rem",
         "11w": "11vw",
         "12w": "12vw",
         "14w": "14vw",
@@ -163,6 +165,7 @@ export default {
       maxWidth: {},
       minWidth: {
         "4.5r": "4.5rem",
+        "11r": "11rem"
       },
       maxHeight: {
         528: "528px",
@@ -191,6 +194,9 @@ export default {
       lineHeight: {
         17: "17px",
       },
+      boxShadow: {
+        '2px-white': '0 0 0 2px #ffffff',
+      }
     },
     screens: {
       xs: "450px",

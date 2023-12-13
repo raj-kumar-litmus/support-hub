@@ -2,6 +2,7 @@ import type { ChartData, ChartOptions } from "chart.js";
 import { ButtonProps } from "primereact/button";
 import { CalendarChangeEvent, CalendarProps } from "primereact/calendar";
 import { CheckboxProps } from "primereact/checkbox";
+import { DropdownProps } from "primereact/dropdown";
 import {
   InputNumberProps,
   InputNumberValueChangeEvent,
@@ -140,7 +141,7 @@ export interface CustomModalProps {
   isResizable?: boolean;
 }
 
-export interface CustomDropdownProps {
+export interface CustomDropdownProps extends DropdownProps {
   onChange: any;
   options: any;
   icon?: string;
@@ -297,7 +298,7 @@ export enum SideBarPositionEnums {
 }
 
 export interface CustomSideBarProps extends SidebarProps {
-  setVisible?: () => void;
+  setVisible?: (boolean) => void;
   title?: string;
   themeClasses?: string;
   sideBarWidthClass?: string;
@@ -351,4 +352,12 @@ export type PieChartProps =  {
 
 export type SectionTitleProps = {
   title: string;
+}
+
+export type OpmSideBarProps = {
+  localeFilter: string;
+  channelFilter: string;
+  paymentFilter: string;
+  visible: boolean;
+  setVisible: (boolean) => void;
 }
