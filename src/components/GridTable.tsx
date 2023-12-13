@@ -22,13 +22,11 @@ const GridTable: FC<GridTableProps> = (props) => {
       const gridData = [];
       while (a.length > 0) {
         rowData = a.splice(0, props.columns);
-        const _data = rowData.map((item, index) => {
-          return ({
+        const _data = rowData.map((item, index) => ({
             [`data${index + 1}`]: item.data,
             ...(item.highlight && { highlight: item.highlight }),
             ...(item.severity && { severity: item.severity })
-          })
-        });
+          }));
         gridData.push(_data);
       }
       setRowDataList(gridData);
