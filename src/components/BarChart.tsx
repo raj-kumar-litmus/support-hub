@@ -23,10 +23,10 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
-const BarChartComp = (props: BarChartCompProps) => {
+const BarChart = (props: BarChartCompProps) => {
   const [rotate, setRotate] = useState<boolean>(props.isFullScreen);
   const { width } = useScreenSize();
   const location = useLocation();
@@ -75,4 +75,4 @@ const BarChartComp = (props: BarChartCompProps) => {
   );
 };
 
-export default BarChartComp;
+export default BarChart;

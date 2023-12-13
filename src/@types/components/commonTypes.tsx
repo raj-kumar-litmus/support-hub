@@ -6,6 +6,7 @@ import {
   InputNumberProps,
   InputNumberValueChangeEvent,
 } from "primereact/inputnumber";
+import { SidebarProps } from "primereact/sidebar";
 import { ToastProps } from "primereact/toast";
 import { FC, KeyboardEvent } from "react";
 import { CommerceItemData } from "../pages/OrderDetails";
@@ -144,7 +145,7 @@ export interface CustomDropdownProps {
   options: any;
   icon?: string;
   dropdownIcon?: any;
-  value?: string;
+  value?: string | number;
   imageclassname?: string;
   optionLabel: string;
   label?: string;
@@ -197,7 +198,7 @@ export type SearchBarProps = {
   onSearch: (e: KeyboardEvent<HTMLInputElement>) => void;
   placeholder: string;
   className?: string;
-  type?:string
+  type?: string;
 };
 
 export type SearchFieldProps = {
@@ -299,4 +300,15 @@ export interface CustomOverlayProps{
   box2Class?: string;
   buttonContent?: string;
   subHeader?: string;
+}
+export enum SideBarPositionEnums {
+  RIGHT = "right",
+  LEFT = "left",
+}
+
+export interface CustomSideBarProps extends SidebarProps {
+  setVisible?: () => void;
+  title?: string;
+  themeClasses?: string;
+  sideBarWidthClass?: string;
 }

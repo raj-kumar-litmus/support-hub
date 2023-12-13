@@ -8,7 +8,6 @@ import PromotionsPopup from "../promotionspopup";
 import OrderStatusPopup from "../orderstatuspopup";
 import CustomImage from "../common/customimage";
 import CustomTable from "../common/customtable";
-import CustomIcon from "../common/CustomIcon";
 import Card from "../common/Card";
 import CustomButton from "../Button";
 import ItemInformationsPopUp from "../itemInformationsPopUp";
@@ -40,7 +39,7 @@ import { getTableHeaders } from "../utils/Utils";
 const OrderDetails: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [orderData, setOrderData] = useState<OrderData | Record<string, never>>(
-    {}
+    {},
   );
   const [omsOrderStatus, setOmsOrderStatus] = useState<
     OmsOrderStatus | Record<string, never>
@@ -80,8 +79,8 @@ const OrderDetails: React.FC = () => {
       setItemTableDataSliced(
         itemTableData.slice(
           0,
-          ORDER_DETAILS_LABELS.VIEW_ALL_MIN_ORDER_LIST_MOBILE
-        )
+          ORDER_DETAILS_LABELS.VIEW_ALL_MIN_ORDER_LIST_MOBILE,
+        ),
       );
     }
   }, [itemTableData]);
@@ -89,7 +88,7 @@ const OrderDetails: React.FC = () => {
   const getOrderData = async () => {
     const data: OrderData = await fetchData(
       `${URL_ORDER_DETAILS}/${orderId}`,
-      {}
+      {},
     );
     setOrderData(data || {});
     if (data?.commerceItem?.length) {
@@ -102,7 +101,7 @@ const OrderDetails: React.FC = () => {
             "Unit Price": item.priceInfo.listPrice,
             "Total Price": item.priceInfo.rawTotalPrice,
           };
-        }
+        },
       );
       setItemTableData(convertedArray);
     }
@@ -112,7 +111,7 @@ const OrderDetails: React.FC = () => {
   const getOmsOrderStatus = async () => {
     const data: OmsOrderStatus = await fetchData(
       `${URL_OMS_ORDER_STATUS}/${orderId}`,
-      {}
+      {},
     );
     setOmsOrderStatus(data || {});
   };
@@ -120,7 +119,7 @@ const OrderDetails: React.FC = () => {
   const getOmsOrderFlow = async () => {
     const data: OmsOrderFlow = await fetchData(
       `${URL_OMS_ORDER_FLOW}/${orderId}`,
-      {}
+      {},
     );
     setOmsOrderFlow(data || {});
   };
@@ -156,7 +155,6 @@ const OrderDetails: React.FC = () => {
     <div id="orderDetailsComp">
       <div className="flex sm:hidden border-b border-solid border-black-300 h-44p items-center px-3.5 py-6">
         <CustomImage
-          className="h-13"
           src={RightArrowIcon}
           alt="Search"
           onClick={() => navigate(-1)}
@@ -174,12 +172,10 @@ const OrderDetails: React.FC = () => {
             className="flex justify-end items-center order-details-btn-link"
             onClick={showPromotions}
           >
-            <CustomIcon
+            <CustomImage
               className="mr-1"
               alt="promotion-icon"
               src={PromotionsIcon}
-              width="0.75rem"
-              height="0.75rem"
             />
             {ORDER_DETAILS_LABELS.PROMOTIONS}
           </CustomButton>
@@ -188,12 +184,11 @@ const OrderDetails: React.FC = () => {
           <div className="flexWrapper justify-start bg-black-200 rounded-t-md">
             <span className="w-auto sm:w-1/5 flex items-center min-w-4.5r">
               {ORDER_DETAILS_LABELS.ORDER}
-              <CustomIcon
-                className="ml-2"
+              <CustomImage
+                className="ml-2 cursor-pointer"
                 alt="order-clock-icon"
                 src={OrderClockIcon}
-                width="1rem"
-                height="1rem"
+                onClick={showOrderTimeline}
               />
             </span>
             <span className="w-auto sm:w-4/5 font-medium self-center">
@@ -260,12 +255,11 @@ const OrderDetails: React.FC = () => {
           <div className="flexBlockWrapper border-t filterCardWrapper">
             <span className="w-auto sm:w-1/6 flex items-center min-w-4.5r">
               {ORDER_DETAILS_LABELS.OMS}
-              <CustomIcon
-                className="ml-2"
+              <CustomImage
+                className="ml-2 cursor-pointer pt-0"
                 alt="oms-info-icon"
                 src={OmsInfoIcon}
-                width="0.85rem"
-                height="0.85rem"
+                onClick={showOmsStatusInfo}
               />
             </span>
             <span className="w-auto sm:w-5/6 font-medium">
@@ -289,7 +283,7 @@ const OrderDetails: React.FC = () => {
             </span>
             <span className="w-auto sm:w-5/6 font-medium">
               {formatName(
-                `${orderData?.customerInfo?.firstName} ${orderData?.customerInfo?.lastName}`
+                `${orderData?.customerInfo?.firstName} ${orderData?.customerInfo?.lastName}`,
               )}
             </span>
           </div>
@@ -356,7 +350,7 @@ const OrderDetails: React.FC = () => {
                   cardData={dataObj}
                   type="ORDER_DETAILS_ITEM"
                 />
-              )
+              ),
             )}
           {itemTableDataSliced.length === 0 &&
             itemTableData?.length > 0 &&
