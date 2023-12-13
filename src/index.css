@@ -1024,3 +1024,11 @@ hr.horizontalLine.blue {
 .custom-sidebar .custom-sidebar-close-btn .p-button:enabled:hover {
   @apply border-none bg-inherit;
 }
+.custom-overlay .p-overlaypanel-content{
+  @apply border-2 border-[#424245] rounded-lg p-0
+}
+.custom-overlay.p-overlaypanel:before,
+.custom-overlay.p-overlaypanel:after {    
+  @apply content-none;
+}
+
