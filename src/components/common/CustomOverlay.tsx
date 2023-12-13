@@ -1,16 +1,4 @@
-// import { OverlayPanel,OverlayPanelProps } from 'primereact/overlaypanel';
-
-// const CustomOverlay = (props:OverlayPanelProps)=>(
-//   <OverlayPanel>
-//     {props.children}
-//   </OverlayPanel>
-// )
-
-// export default CustomOverlay;
-
-
-// CustomOverlay.tsx
-import React, { forwardRef, ReactNode } from 'react';
+import  { forwardRef, ReactNode } from 'react';
 import { OverlayPanel, OverlayPanelProps } from 'primereact/overlaypanel';
 
 interface CustomOverlayProps extends OverlayPanelProps {
@@ -18,7 +6,7 @@ interface CustomOverlayProps extends OverlayPanelProps {
 }
 
 const CustomOverlay = forwardRef<OverlayPanel, CustomOverlayProps>(
-  ({ children, ...rest }, ref,) => {
+  ({ children, ...rest }, ref) => {
     return (
       <OverlayPanel ref={ref} {...rest}>
         {children}
@@ -26,5 +14,4 @@ const CustomOverlay = forwardRef<OverlayPanel, CustomOverlayProps>(
     );
   }
 );
-
 export default CustomOverlay;

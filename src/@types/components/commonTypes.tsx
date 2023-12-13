@@ -288,3 +288,15 @@ export interface BarChartCompProps {
 export interface ChartProps {
   type: string;
 }
+
+export interface CustomOverlayProps{
+  header?: string;
+  box1Content?: string;
+  box1Header?: string;
+  box2Content?: string;
+  box2Header?: string;
+  box1Class?: string;
+  box2Class?: string;
+  buttonContent?: string;
+  subHeader?: string;
+}
