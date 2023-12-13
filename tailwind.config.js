@@ -50,6 +50,8 @@ export default {
           600: "#FFFFFF00",
           700: "#E8E8E8",
           800: "#EDEDED",
+          900: "#FBFBFC"
+
         },
         blue: {
           100: "#0977FF",

@@ -8,11 +8,13 @@ import {
 } from "primereact/inputnumber";
 import { SidebarProps } from "primereact/sidebar";
 import { ToastProps } from "primereact/toast";
-import { FC, KeyboardEvent } from "react";
+import { OverlayPanelProps } from "primereact/overlaypanel";
+import { FC, KeyboardEvent,ReactNode } from "react";
 import { CommerceItemData } from "../pages/OrderDetails";
 import { DCOpenOrders } from "../pages/dcOpenOrders";
 import { ModalEnums } from "../pages/opmCharts";
 import { InputTextProps } from "primereact/inputtext";
+
 
 export type CardProps = {
   cardData: DCOpenOrders | CommerceItemData;
@@ -319,4 +321,8 @@ export interface ApiWebServerCard {
   cardData?: boolean;
   bgColor?: boolean;
   showToolTip?: boolean;
+}
+
+export interface CustomOverlayProps extends OverlayPanelProps {
+  children: ReactNode;
 }

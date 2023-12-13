@@ -1,9 +1,6 @@
-import  { forwardRef, ReactNode } from 'react';
-import { OverlayPanel, OverlayPanelProps } from 'primereact/overlaypanel';
-
-interface CustomOverlayProps extends OverlayPanelProps {
-  children: ReactNode;
-}
+import { OverlayPanel} from 'primereact/overlaypanel';
+import  { forwardRef, } from 'react';
+import { CustomOverlayProps } from '../../@types/components/commonTypes';
 
 const CustomOverlay = forwardRef<OverlayPanel, CustomOverlayProps>(
   ({ children, ...rest }, ref) => {
