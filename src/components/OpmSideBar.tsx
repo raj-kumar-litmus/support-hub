@@ -14,6 +14,7 @@ const OpmSideBar: FC<OpmSideBarProps> = (props) => {
       visible={visible}
       onHide={() => { setVisible(false) }}
       setVisible={setVisible}
+      sideBarWidthClass="!w-80w"
     >
       <OPM
         fetchType={FETCH_TYPES.OPM}

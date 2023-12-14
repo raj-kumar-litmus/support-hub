@@ -486,7 +486,9 @@ const OPM: React.FC<OPMProps> = (props) => {
       )}
       {!IS_FULLSCREEN && props.fetchType === FETCH_TYPES.OPM && (
         <div className="flex justify-between items-start">
-          <p className="font-bold text-gray-200">{PAGE_TITLES.OPM}</p>
+          <p className="font-bold text-gray-200 capitalize">
+            {!props.filters ? PAGE_TITLES.OPM : Object.keys(props.filters)[0]}
+            </p>
           {width < SCREEN_WIDTH.SM && (
             <CustomImage
               src={FilterIcon}
