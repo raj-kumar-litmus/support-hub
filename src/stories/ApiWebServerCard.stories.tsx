@@ -25,7 +25,6 @@ const cardData = {
   perTotal: "51/122",
 };
 
-
 export const Default = {};
 
 export const WithTitle = {
@@ -64,7 +63,7 @@ export const MultipleServerCards: Story = () => {
   };
   return (
     <>
-      <div className="border-2 border-gray-108 w-[42%] h-72 overflow-y-auto">
+      <div className="border-2 border-black-103 w-[42%] h-72 overflow-y-auto">
         <div className="grid grid-cols-2 ml-3 gap-x-0">
           <WebServerCard {...args}></WebServerCard>
           <WebServerCard {...args}></WebServerCard>
@@ -198,7 +197,7 @@ export const MultipleServerCardsWithOverlay: Story = () => {
     title: "atg_webcomserver",
     perSecond: cardData.perSecond,
     perTotal: cardData.perTotal,
-    showToolTip:true,
+    showToolTip: true,
     box1Header: "Active",
     box1Content: "51",
     box1Class: "border-[#0EA67C] text-[#0EA67C]",
@@ -207,11 +206,10 @@ export const MultipleServerCardsWithOverlay: Story = () => {
     box2Content: "122",
     header: cardData.title,
     subHeader: cardData.perSecond,
-    
   };
   return (
     <>
-      <div className="relative border-2 border-gray-108 top-[25%] left-[25%] w-[41%] h-[75%] overflow-y-auto">
+      <div className="relative border-2 border-black-103 top-[25%] left-[25%] w-[41%] h-[75%] overflow-y-auto">
         <div className="grid grid-cols-2 ml-2.5 gap-x-0">
           <WebServerCard {...args}></WebServerCard>
           <WebServerCard {...args}></WebServerCard>
@@ -234,5 +232,3 @@ export const MultipleServerCardsWithOverlay: Story = () => {
     </>
   );
 };
-
-

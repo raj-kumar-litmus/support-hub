@@ -28,8 +28,7 @@ export const Basic: Story = {
         },
       ],
     },
-    options: {
-    },
+    options: {},
   },
 };
 
@@ -60,8 +59,7 @@ export const WithBorderColorAndBorderWidth: Story = {
         },
       ],
     },
-    options: {
-    },
+    options: {},
   },
 };
 
@@ -88,7 +86,7 @@ export const WithFixedWidthAndHeight: Story = {
       responsive: false,
     },
     height: "400px",
-    width: "400px"
+    width: "400px",
   },
 };
 
@@ -182,7 +180,7 @@ export const WithLegendPositionAndBoxWidth: Story = {
           labels: {
             boxWidth: 12,
           },
-          position: 'right'
+          position: "right",
         },
       },
     },
@@ -195,7 +193,7 @@ export const WithCustomDataLabelFontAndFormat: Story = {
       labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
       datasets: [
         {
-          label: 'Votes',
+          label: "Votes",
           data: [12, 19, 3, 5, 2, 3],
           backgroundColor: [
             "rgba(255, 99, 132, 0.8)",
@@ -213,19 +211,18 @@ export const WithCustomDataLabelFontAndFormat: Story = {
       responsive: false,
       plugins: {
         datalabels: {
-          anchor: 'end',
-          align: 'end',
+          anchor: "end",
+          align: "end",
           labels: {
             value: {
-              color: 'blue'
-            }
-          }
-
-        }
+              color: "blue",
+            },
+          },
+        },
       },
     },
-  }
-}
+  },
+};
 
 export const WithCustomTooltip: Story = {
   args: {
@@ -253,17 +250,16 @@ export const WithCustomTooltip: Story = {
         tooltip: {
           callbacks: {
             label: (d) => {
-              const percentage = `${(Number(d.raw) * 100 / 44).toFixed(2)}%`
+              const percentage = `${((Number(d.raw) * 100) / 44).toFixed(2)}%`;
 
-              return percentage
+              return percentage;
             },
           },
         },
       },
     },
-  }
+  },
 };
-
 
 export const WithPadding: Story = {
   args: {
@@ -271,7 +267,7 @@ export const WithPadding: Story = {
       labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
       datasets: [
         {
-          label: 'Votes',
+          label: "Votes",
           data: [12, 19, 3, 5, 2, 3],
           backgroundColor: [
             "rgba(255, 99, 132, 0.8)",
@@ -288,8 +284,8 @@ export const WithPadding: Story = {
       maintainAspectRatio: false,
       responsive: false,
       layout: {
-        padding: 15
+        padding: 15,
       },
     },
-  }
-}
+  },
+};

@@ -177,3 +177,162 @@ export const BarChartWithCustomGridStyles: Story = {
       "bg-black-101 border-2 border-solid border-black-102 px-6 pt-2 pb-0 rounded-xl w-46r h-96",
   },
 };
+
+const drawOuterBorderLines = {
+  id: "drawOuterBorderLines",
+  afterDatasetsDraw: (chart: any, _: any, opts: any) => {
+    const {
+      ctx,
+      chartArea: { top, bottom, left, right },
+      scales: { x, y },
+    } = chart;
+
+    const { color = "#707070", width = "1" } = opts;
+
+    ctx.beginPath();
+
+    ctx.lineWidth = width;
+    ctx.strokeStyle = color;
+
+    ctx.moveTo(x.getPixelForValue(x.start), bottom);
+    ctx.lineTo(x.getPixelForValue(x.start), top);
+
+    ctx.moveTo(x.getPixelForValue(x.end), bottom);
+    ctx.lineTo(x.getPixelForValue(x.end), top);
+
+    ctx.moveTo(left, y.getPixelForValue(-0.5));
+    ctx.lineTo(right, y.getPixelForValue(-0.5));
+
+    ctx.stroke();
+  },
+};
+
+export const HorizontalBarChart: Story = {
+  args: {
+    options: {
+      layout: {
+        padding: {
+          top: 10,
+        },
+      },
+      scales: {
+        y: {
+          display: false,
+        },
+        x: {
+          display: true,
+          grid: {
+            drawTicks: true,
+            tickColor: "#29292a",
+            color: "#5c5c5c",
+            tickMarkLength: 0,
+          },
+          ticks: {
+            color: "#FBFBFC",
+          },
+          border: {
+            dash: [8, 8],
+            color: "#707070",
+          },
+        },
+      },
+      indexAxis: "y",
+      responsive: true,
+      plugins: {
+        legend: {
+          display: false,
+        },
+        tooltip: {
+          enabled: false,
+        },
+        datalabels: {
+          display: true,
+          anchor: "end",
+          align: "end",
+          color: "#fff",
+          font: {
+            size: 16,
+          },
+        },
+      },
+    },
+    data: {
+      labels: [1.1, 2.4, 1.4, 0.4],
+      datasets: [
+        {
+          label: "No of orders",
+          data: [1.1, 2.4, 1.4, 0.4],
+          backgroundColor: ["#F1963A", "#4F73B8", "#08B39E", "#F06549"],
+          barThickness: 40,
+        },
+      ],
+    },
+    plugin: [drawOuterBorderLines],
+    className: "border border-[#707070] w-71.7w ml-2.85w mt-3h",
+  },
+};
+
+export const HorizontalBarChartWithNegativeValues: Story = {
+  args: {
+    options: {
+      layout: {
+        padding: {
+          top: 10,
+        },
+      },
+      scales: {
+        y: {
+          display: false,
+        },
+        x: {
+          display: true,
+          grid: {
+            drawTicks: true,
+            tickColor: "#29292a",
+            color: "#5c5c5c",
+            tickMarkLength: 0,
+          },
+          ticks: {
+            color: "#FBFBFC",
+          },
+          border: {
+            dash: [8, 8],
+            color: "#707070",
+          },
+        },
+      },
+      indexAxis: "y",
+      responsive: true,
+      plugins: {
+        legend: {
+          display: false,
+        },
+        tooltip: {
+          enabled: false,
+        },
+        datalabels: {
+          display: true,
+          anchor: "end",
+          align: "end",
+          color: "#fff",
+          font: {
+            size: 16,
+          },
+        },
+      },
+    },
+    data: {
+      labels: [1.1, 2.4, -1.4, 0.4],
+      datasets: [
+        {
+          label: "No of orders",
+          data: [1.1, 2.3, -1.4, 0.4],
+          backgroundColor: ["#F1963A", "#4F73B8", "#08B39E", "#F06549"],
+          barThickness: 40,
+        },
+      ],
+    },
+    plugin: [drawOuterBorderLines],
+    className: "border border-[#707070] w-71.7w ml-2.85w mt-3h",
+  },
+};

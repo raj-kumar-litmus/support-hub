@@ -9,6 +9,7 @@ import {
 } from "chart.js";
 import { useState } from "react";
 import { Bar } from "react-chartjs-2";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 import { useLocation, useNavigate } from "react-router-dom";
 import useScreenSize from "../hooks/useScreenSize";
 import RotateIcon from "../assets/rotate.svg";
@@ -24,6 +25,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
+  ChartDataLabels,
 );
 
 const BarChart = (props: BarChartCompProps) => {
@@ -69,7 +71,7 @@ const BarChart = (props: BarChartCompProps) => {
           plugins={increaseLegendSpacing(20)}
         />
       ) : (
-        <Bar options={props.options} data={props.data} />
+        <Bar options={props.options} data={props.data} plugins={props.plugin} />
       )}
     </div>
   );
