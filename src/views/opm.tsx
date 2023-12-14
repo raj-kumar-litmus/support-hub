@@ -418,7 +418,7 @@ const OPM: React.FC<OPMProps> = (props) => {
           setFormFields(data);
           break;
         default:
-          console.log('Unknown property');
+          alert('Unknown property');
           break;
       }
       createUrl();
