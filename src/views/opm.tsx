@@ -281,14 +281,18 @@ const OPM: React.FC<OPMProps> = (props) => {
         setBarChartOptions(
           props.fetchType === FETCH_TYPES.HOME
             ? OPM_BAR_CHART_OPTIONS_HOME(
-                width < SCREEN_WIDTH.SM,
-                Number(url.split("period=")[1].split("&")[0]) < 16 &&
-                  width > SCREEN_WIDTH.SM,
+              width < SCREEN_WIDTH.SM,
+              Number(url.split("period=")[1].split("&")[0]) < 16 &&
+              width > SCREEN_WIDTH.SM,
+            ) :
+            props.filters ?
+              OPM_BAR_CHART_OPTIONS_SIDEBAR(
+                width < SCREEN_WIDTH.SM, false
               )
-            : OPM_BAR_CHART_OPTIONS(
+              : OPM_BAR_CHART_OPTIONS(
                 width < SCREEN_WIDTH.SM,
                 Number(url.split("period=")[1].split("&")[0]) < 16 &&
-                  width > SCREEN_WIDTH.SM,
+                width > SCREEN_WIDTH.SM,
               ),
         );
         await getData();
@@ -655,7 +659,7 @@ const OPM: React.FC<OPMProps> = (props) => {
 
       {props.fetchType === FETCH_TYPES.OPM && showFilteredCards && (
         <div
-          className={`flex items-center gap-4 mt-2.5 overflow-auto min-h-[2rem] ${
+          className={`flex items-center gap-4 mt-2.5 overflow-auto min-h-[2.6rem] ${
             IS_FULLSCREEN
               ? "rotate-90 absolute -left-9h top-45h ml-25w w-70h mt-0"
               : `${width < SCREEN_WIDTH.SM ? "portrait" : ""}`
@@ -710,16 +714,16 @@ const OPM: React.FC<OPMProps> = (props) => {
               IS_FULLSCREEN ? "rotate-90" : ""
             }`}
           >
-            <CustomTab
-              className={`opm-tabs absolute z-10 pt-2 top-2 ${
-                IS_FULLSCREEN
+            {!props.filters &&
+              <CustomTab
+                className={`opm-tabs absolute z-10 pt-2 top-2 ${IS_FULLSCREEN
                   ? "right-100vh-57r"
                   : "right-14 sm:right-3 md:right-4 lg:right-6"
-              }`}
-              tabData={CHART_TABS}
-              tabValue={tabValue}
-              setTabValue={setTabValue}
-            />
+                  }`}
+                tabData={CHART_TABS}
+                tabValue={tabValue}
+                setTabValue={setTabValue}
+              />}
             {tabValue === 0 ? (
               <BarChart
                 options={getChartConfig()}
