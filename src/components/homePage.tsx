@@ -26,9 +26,9 @@ import {
   SCREEN_WIDTH,
 } from "../constants/appConstants";
 import { LoaderContext } from "../context/loaderContext";
+import { LoaderContextType } from "../@types/components/commonTypes";
 import { getFormattedPSTDate } from "../utils/dateTimeUtil";
 import { fetchData } from "../utils/fetchUtil";
-import { LoaderContextType } from "../@types/components/commonTypes";
 import { FETCH_TYPES } from "./utils/Utils";
 
 const CardTitle = (props: { title: string; icon: any; classname?: string }) => {

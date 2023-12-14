@@ -264,7 +264,7 @@ const OPM: React.FC<OPMProps> = (props) => {
     (async () => {
       if (url) {
         setOptions(
-          location.pathname.includes(ROUTES.home)
+          props.fetchType === FETCH_TYPES.HOME
             ? OPM_OPTIONS_HOME(
                 width < SCREEN_WIDTH.SM,
                 Number(url.split("period=")[1].split("&")[0]) < 16 &&
@@ -418,7 +418,7 @@ const OPM: React.FC<OPMProps> = (props) => {
           setFormFields(data);
           break;
         default:
-          console.log('Unknown property');
+          alert('Unknown property');
           break;
       }
       createUrl();
