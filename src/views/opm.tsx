@@ -655,7 +655,7 @@ const OPM: React.FC<OPMProps> = (props) => {
 
       {props.fetchType === FETCH_TYPES.OPM && showFilteredCards && (
         <div
-          className={`flex items-center gap-4 mt-2.5 overflow-auto min-h-[2rem] ${
+          className={`flex items-center gap-4 mt-2.5 overflow-auto min-h-[2.6rem] ${
             IS_FULLSCREEN
               ? "rotate-90 absolute -left-9h top-45h ml-25w w-70h mt-0"
               : `${width < SCREEN_WIDTH.SM ? "portrait" : ""}`
