@@ -15,6 +15,7 @@ export const ROUTES = {
   orderDetails: "/order-details",
   orderReport: "/order-report",
   skuLookup: "/sku-lookup",
+  focusRoom: "/focus-room"
 };
 
 export const FETCH_TYPES = {
@@ -62,6 +63,12 @@ export const MENU_LIST = [
     icon: DCOpenOrdersIcon, //todo - change the icon
     path: ROUTES.skuLookup,
   },
+  {
+    id: 9,
+    name: "Focus Room",
+    icon: SessionsIcon,
+    path: ROUTES.focusRoom
+  }
 ];
 
 const getOrCreateTooltip = (chart, type, tooltip) => {
