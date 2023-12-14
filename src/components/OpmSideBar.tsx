@@ -15,6 +15,7 @@ const OpmSideBar: FC<OpmSideBarProps> = (props) => {
       onHide={() => { setVisible(false) }}
       setVisible={setVisible}
       sideBarWidthClass="!w-80w"
+      className="bg-gradient-to-b from-black-104 to-black-105 opm-sidebar"
     >
       <OPM
         fetchType={FETCH_TYPES.OPM}

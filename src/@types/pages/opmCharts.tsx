@@ -33,6 +33,7 @@ interface Dataset {
   borderColor: string;
   borderWidth?: number;
   backgroundColor?: any;
+  borderRadius?: number;
 }
 
 interface DataPoint {

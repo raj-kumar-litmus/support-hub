@@ -293,8 +293,12 @@ button.p-button-secondary {
 .p-dropdown.p-focus {
   @apply !shadow-none !border-none;
 }
-.filter-dropdown.p-dropdown.p-focus {
-@apply !shadow-2px-white;
+#custom-hover.sidebar-filters .p-dropdown.p-focus {
+  @apply !shadow-2px-white;
+}
+#custom-hover.sidebar-filters .p-dropdown,
+#custom-hover.sidebar-filters .p-inputtext {
+  @apply !bg-black-101;
 }
 .p-calendar .p-datepicker-trigger,
 .p-calendar .p-datepicker-trigger:hover {
@@ -1097,7 +1101,7 @@ hr.horizontalLine.blue {
   @apply hidden;
 }
 .custom-sidebar.p-sidebar .p-sidebar-content {
-  @apply relative flex flex-row bg-inherit text-inherit mt-4;
+  @apply relative flex flex-row bg-inherit text-inherit pt-4;
 }
 .custom-sidebar .custom-sidebar-close-btn {
   @apply fixed [writing-mode:vertical-lr] text-center inset-y-1/2 bg-inherit text-inherit;
@@ -1121,4 +1125,6 @@ hr.horizontalLine.blue {
 .custom-overlay.p-overlaypanel:after {    
   @apply content-none;
 }
-
+.opm-sidebar .custom-sidebar-close-btn {
+  @apply text-white-900;
+}
