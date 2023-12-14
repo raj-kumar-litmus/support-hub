@@ -45,6 +45,7 @@ import WhiteCrossIcon from "../assets/white_cross.svg";
 import {
   OPM_BAR_CHART_OPTIONS,
   OPM_BAR_CHART_OPTIONS_HOME,
+  OPM_BAR_CHART_OPTIONS_SIDEBAR,
   OPM_OPTIONS,
   OPM_OPTIONS_HOME,
 } from "../config/chartConfig";
@@ -249,9 +250,10 @@ const OPM: React.FC<OPMProps> = (props) => {
           {
             label: CHART_LABELS.NO_OF_ORDERS,
             data: dataArr,
-            borderColor: "#599DF5",
-            backgroundColor: "#599DF5",
+            borderColor: props.filters ? "transparent" : "#599DF5",
+            backgroundColor: props.filters ? "#708AF4" : "#599DF5",
             borderWidth: 2,
+            borderRadius: props.filters && 12
           },
         ],
       });
@@ -422,6 +424,7 @@ const OPM: React.FC<OPMProps> = (props) => {
           break;
       }
       createUrl();
+      setShowFilteredCards(true);
     }
   }, [props.filters]);
 
@@ -505,7 +508,7 @@ const OPM: React.FC<OPMProps> = (props) => {
             <>
               <form
                 id="custom-hover"
-                className="lg:flex lg:flex-wrap sm:gap-4 opmFilters  sm:grid sm:grid-cols-3  sm:mb-4"
+                className={`lg:flex lg:flex-wrap sm:gap-4 ${props.filters ? "sidebar-filters" : ""} opmFilters sm:grid sm:grid-cols-3  sm:mb-4`}
               >
                 {formFields.map((form, index) => {
                   return (
@@ -554,7 +557,6 @@ const OPM: React.FC<OPMProps> = (props) => {
                           label={form.label}
                           optionLabel="name"
                           placeholder=""
-                          className={props.filters ? "filter-dropdown" : ""}
                           autoFocus={props.filters && (props.filters[form.name] !== undefined)}
                         />
                       )}
@@ -653,7 +655,7 @@ const OPM: React.FC<OPMProps> = (props) => {
 
       {props.fetchType === FETCH_TYPES.OPM && showFilteredCards && (
         <div
-          className={`flex items-center gap-4 mt-2.5 overflow-auto ml-0 sm:ml-5w lg:ml-4 ${
+          className={`flex items-center gap-4 mt-2.5 overflow-auto min-h-[2rem] ${
             IS_FULLSCREEN
               ? "rotate-90 absolute -left-9h top-45h ml-25w w-70h mt-0"
               : `${width < SCREEN_WIDTH.SM ? "portrait" : ""}`
@@ -687,7 +689,7 @@ const OPM: React.FC<OPMProps> = (props) => {
         </div>
       )}
 
-      {!IS_FULLSCREEN && props.fetchType === FETCH_TYPES.OPM && (
+      {!IS_FULLSCREEN && props.fetchType === FETCH_TYPES.OPM && !props.filters && (
         <AutoRefresh
           getData={getData}
           startPollingHandler={startPollingHandler}
@@ -722,9 +724,8 @@ const OPM: React.FC<OPMProps> = (props) => {
               <BarChart
                 options={getChartConfig()}
                 data={barChartData}
-                className={`opm-page-chart-container ${
-                  IS_FULLSCREEN ? "opm-page-chart-container-rotated" : ""
-                }`}
+                className={`opm-page-chart-container ${props.filters ? "!bg-black-101" : ""} ${IS_FULLSCREEN ? "opm-page-chart-container-rotated" : ""
+                  }`}
                 title={PAGE_TITLES.OPM}
                 isFullScreen={IS_FULLSCREEN}
               />

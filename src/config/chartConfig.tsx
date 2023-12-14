@@ -343,6 +343,62 @@ export const OPM_BAR_CHART_OPTIONS_HOME = (
   };
 };
 
+export const OPM_BAR_CHART_OPTIONS_SIDEBAR = (
+  isMobile: boolean,
+  showDataLabels = false,
+) => {
+  const existingBarChartOptions = {
+    ...OPM_BAR_CHART_OPTIONS(isMobile, showDataLabels),
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+        ticks: {
+          color:"#FBFBFC",
+        },
+      },
+      y: {
+        beginAtZero: true,
+        max: OPM_CHART_DEFAULT.MAX,
+        grid: {
+          color: "#2E333B",
+        },
+        border: {
+          dash: [4, 4],
+          display: false
+        },
+        ticks: {
+          color: "#FBFBFC",
+          display: true,
+          stepSize: OPM_CHART_DEFAULT.STEP_SIZE,
+          count: OPM_CHART_DEFAULT.TICK_COUNT,
+          callback: function (value) {
+            if (value >= 1000) {
+              return value / 1000 + "K";
+            } else {
+              return value;
+            }
+          },
+        },
+      },
+    }
+  };
+  return {
+    ...existingBarChartOptions,
+    plugins: {
+      ...existingBarChartOptions.plugins,
+      datalabels: {
+        display: showDataLabels,
+      },
+      tooltip: {
+        enabled: false,
+        external: (_) => externalTooltipHandler(_, "opm_bar"),
+      },
+    },
+  };
+};
+
 //OPM Comparison Charts
 export const OPM_COMPARISON_OPTIONS = ({
   apiResponse,
