@@ -57,6 +57,7 @@ export const LABELS = {
   AUTO_REFRESH: "Auto Refresh",
   FILTERS: "Filters",
   CLOSE: "Close",
+  GO_TO_ORDER_CENTRAL: "Go to Order Central",
 };
 
 export const INPUT_TYPES = {
