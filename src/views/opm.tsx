@@ -93,6 +93,7 @@ ChartJS.register(
 const OPM: React.FC<OPMProps> = (props) => {
   const [showFilters, setShowFilters] = useState<boolean>(true);
   const [visible, setVisible] = useState<boolean>(false);
+  const [initialFocus, setInitialFocus] = useState<boolean>(false);
   const { hideLoader } = useContext(LoaderContext) as LoaderContextType;
 
   const { width } = useScreenSize();
@@ -409,6 +410,8 @@ const OPM: React.FC<OPMProps> = (props) => {
 
   useEffect(() => {
     if (props.filters && Object.keys(props.filters).length > 0) {
+      setInitialFocus(true);
+      setInitialFocus(true);
       const data = [...formFields];
       switch (true) {
         case props.filters.locale !== undefined:
@@ -521,7 +524,8 @@ const OPM: React.FC<OPMProps> = (props) => {
                 <>
                   <form
                     id="custom-hover"
-                    className={`lg:flex lg:flex-wrap sm:gap-4 ${props.filters ? "sidebar-filters" : ""} opmFilters sm:grid sm:grid-cols-3  sm:mb-4`}
+                    className={`lg:flex lg:flex-wrap sm:gap-4 ${props.filters ? "sidebar-filters" : ""}
+                    ${initialFocus ? "initial-focus" : ""} opmFilters sm:grid sm:grid-cols-3  sm:mb-4`}
                   >
                     {formFields.map((form, index) => {
                       return (
@@ -571,6 +575,7 @@ const OPM: React.FC<OPMProps> = (props) => {
                               optionLabel="name"
                               placeholder=""
                               autoFocus={props.filters && (props.filters[form.name] !== undefined)}
+                              onFocus={()=>setInitialFocus(false)}
                             />
                           )}
                         </div>
