@@ -293,7 +293,7 @@ button.p-button-secondary {
 .p-dropdown.p-focus {
   @apply !shadow-none !border-none;
 }
-#custom-hover.sidebar-filters .p-dropdown.p-focus {
+#custom-hover.initial-focus .p-dropdown.p-focus {
   @apply !shadow-2px-white;
 }
 #custom-hover.sidebar-filters .p-dropdown,
