@@ -1137,3 +1137,6 @@ hr.horizontalLine.blue {
 .opm-navigate-btn .p-button-label {
   @apply font-normal;
 }
+.opm-navigate-btn .p-button:enabled:hover {
+  @apply bg-gray-108;
+}
