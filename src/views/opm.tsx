@@ -508,7 +508,7 @@ const OPM: React.FC<OPMProps> = (props) => {
             <CustomButton
               label={LABELS.GO_TO_ORDER_CENTRAL}
               onClick={() => navigate(ROUTES.opm)}
-              className="custom-btn !mr-3 opm-navigate-btn"
+              className="custom-btn opm-navigate-btn !mr-0"
             />
           }
         </div>
