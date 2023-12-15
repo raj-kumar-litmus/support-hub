@@ -1128,3 +1128,9 @@ hr.horizontalLine.blue {
 .opm-sidebar .custom-sidebar-close-btn {
   @apply text-white-900;
 }
+.opm-navigate-btn .p-button {
+  @apply rounded-lg border-none bg-gray-108 w-auto;
+}
+.opm-navigate-btn .p-button-label {
+  @apply font-normal;
+}

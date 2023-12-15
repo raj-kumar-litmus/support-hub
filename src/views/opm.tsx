@@ -492,7 +492,7 @@ const OPM: React.FC<OPMProps> = (props) => {
         </div>
       )}
       {!IS_FULLSCREEN && props.fetchType === FETCH_TYPES.OPM && (
-        <div className="flex justify-between items-start">
+        <div className={`flex justify-between items-start ${props.filters ? "border-b border-gray-108 items-center pb-3 text-lg" : ""}`}>
           <p className="font-bold text-gray-200 capitalize">
             {!props.filters ? PAGE_TITLES.OPM : Object.keys(props.filters)[0]}
             </p>
@@ -504,6 +504,13 @@ const OPM: React.FC<OPMProps> = (props) => {
               onClick={onFilterClickHandler}
             />
           )}
+          {props.filters &&
+            <CustomButton
+              label={LABELS.GO_TO_ORDER_CENTRAL}
+              onClick={() => navigate(ROUTES.opm)}
+              className="custom-btn !mr-3 opm-navigate-btn"
+            />
+          }
         </div>
       )}
       {showFilters && props.fetchType === FETCH_TYPES.OPM && (

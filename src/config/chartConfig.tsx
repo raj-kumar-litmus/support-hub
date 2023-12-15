@@ -362,7 +362,7 @@ export const OPM_BAR_CHART_OPTIONS_SIDEBAR = (
         beginAtZero: true,
         max: OPM_CHART_DEFAULT.MAX,
         grid: {
-          color: "#2E333B",
+          color: "#292E36",
         },
         border: {
           dash: [4, 4],
