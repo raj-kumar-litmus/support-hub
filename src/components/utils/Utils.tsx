@@ -260,3 +260,33 @@ export const increaseLegendSpacing = (customHeight) => [
     },
   },
 ];
+
+export const centerText = ({
+  text = "HELLO WORLD",
+  fillColor = "#F86E6E",
+  textColor = "#fff",
+  arcX = 220,
+  arcY = 230,
+  arcRadius = 200,
+  arcStart = 0,
+  arcEnd = 2 * Math.PI,
+}) => ({
+  id: "centerText",
+  beforeDatasetsDraw(chart) {
+    const { ctx } = chart;
+    ctx.save();
+    const x = chart.getDatasetMeta(0).data[0].x;
+    const y = chart.getDatasetMeta(0).data[0].y;
+
+    ctx.beginPath();
+    ctx.arc(arcX, arcY, arcRadius, arcStart, arcEnd);
+    ctx.fillStyle = fillColor;
+    ctx.fill();
+    ctx.stroke();
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.font = "bold 90px sans-serif";
+    ctx.fillStyle = textColor;
+    ctx.fillText(text, x, y);
+  },
+});

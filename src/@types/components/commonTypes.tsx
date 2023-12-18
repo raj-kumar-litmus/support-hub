@@ -8,11 +8,56 @@ import {
 } from "primereact/inputnumber";
 import { SidebarProps } from "primereact/sidebar";
 import { ToastProps } from "primereact/toast";
-import { FC, KeyboardEvent } from "react";
+import { OverlayPanelProps } from "primereact/overlaypanel";
+import { FC, KeyboardEvent, ReactNode } from "react";
 import { CommerceItemData } from "../pages/OrderDetails";
-import { DCOpenOrders } from "../pages/dcOpenOrders";
-import { ModalEnums } from "../pages/opmCharts";
+import { DCOpenOrders } from "../pages/DcOpenOrders";
+import { ModalEnums } from "../pages/OpmCharts";
 import { InputTextProps } from "primereact/inputtext";
+
+enum Transition {
+  easeLinear = "easeLinear",
+  easeQuadIn = "easeQuadIn",
+  easeQuadOut = "easeQuadOut",
+  easeQuadInOut = "easeQuadInOut",
+  easeCubicIn = "easeCubicIn",
+  easeCubicOut = "easeCubicOut",
+  easeCubicInOut = "easeCubicInOut",
+  easePolyIn = "easePolyIn",
+  easePolyOut = "easePolyOut",
+  easePolyInOut = "easePolyInOut",
+  easeSinIn = "easeSinIn",
+  easeSinOut = "easeSinOut",
+  easeSinInOut = "easeSinInOut",
+  easeExpIn = "easeExpIn",
+  easeExpOut = "easeExpOut",
+  easeExpInOut = "easeExpInOut",
+  easeCircleIn = "easeCircleIn",
+  easeCircleOut = "easeCircleOut",
+  easeCircleInOut = "easeCircleInOut",
+  easeBounceIn = "easeBounceIn",
+  easeBounceOut = "easeBounceOut",
+  easeBounceInOut = "easeBounceInOut",
+  easeBackIn = "easeBackIn",
+  easeBackOut = "easeBackOut",
+  easeBackInOut = "easeBackInOut",
+  easeElasticIn = "easeElasticIn",
+  easeElasticOut = "easeElasticOut",
+  easeElasticInOut = "easeElasticInOut",
+  easeElastic = "easeElastic",
+}
+
+enum CustomSegmentLabelPosition {
+  Outside = "OUTSIDE",
+  Inside = "INSIDE",
+}
+
+type CustomSegmentLabel = {
+  text?: string;
+  position?: CustomSegmentLabelPosition;
+  fontSize?: string;
+  color?: string;
+};
 
 export type CardProps = {
   cardData: DCOpenOrders | CommerceItemData;
@@ -285,6 +330,7 @@ export interface BarChartCompProps {
   title: string;
   isFullScreen?: boolean;
   plugins?: boolean;
+  plugin: any;
 }
 
 export interface ChartProps {
@@ -301,6 +347,27 @@ export interface CustomSideBarProps extends SidebarProps {
   title?: string;
   themeClasses?: string;
   sideBarWidthClass?: string;
+}
+export interface ApiWebServerCard {
+  title?: string;
+  perSecond?: string;
+  perTotal?: string;
+  cardData?: boolean;
+  bgColor?: boolean;
+  showToolTip?: boolean;
+}
+
+export interface CustomOverlayProps extends OverlayPanelProps {
+  children: ReactNode;
+  header?: string;
+  box1Content?: string;
+  box1Header?: string;
+  box2Content?: string;
+  box2Header?: string;
+  box1Class?: string;
+  box2Class?: string;
+  buttonContent?: string;
+  subHeader?: string;
 }
 
 export type HorizontalTableProps = {
@@ -364,4 +431,73 @@ export interface IncompleteOrdersData {
   455?: number;
   460?: number;
   date?: string;
+}
+
+export interface IncompleteOrderDialogData {
+  code: number;
+  message: string;
+  nextState: string;
+  sla: string;
+}
+export interface DoughNutChartProps {
+  options: ChartOptions<"doughnut"> | any;
+  data: ChartData<"doughnut">;
+  containerClassName?: string;
+  chartClassName?: string;
+  title?: string;
+  isFullScreen?: boolean;
+  defaultClasses?: boolean;
+  plugins?: any;
+  showIndicator?: boolean;
+}
+
+export interface SpeedometerProps {
+  containerClassName?: string;
+  value?: number;
+  minValue?: number;
+  maxValue?: number;
+  segments?: number;
+  maxSegmentLabels?: number;
+  forceRender?: boolean;
+  width?: number;
+  height?: number;
+  dimensionUnit?: string;
+  fluidWidth?: boolean;
+  needleColor?: string;
+  startColor?: string;
+  endColor?: string;
+  segmentColors?: string[];
+  needleTransition?: Transition;
+  needleTransitionDuration?: number;
+  needleHeightRatio?: number;
+  ringWidth?: number;
+  textColor?: string;
+  valueFormat?: string;
+  segmentValueFormatter?: (value: string) => string;
+  currentValueText?: string;
+  currentValuePlaceholderStyle?: string;
+  customSegmentStops?: number[];
+  customSegmentLabels?: CustomSegmentLabel[];
+  labelFontSize?: string;
+  valueTextFontSize?: string;
+  valueTextFontWeight?: string;
+  paddingHorizontal?: number;
+  paddingVertical?: number;
+  svgAriaLabel?: string;
+}
+
+export interface LinearGaugeProps {
+  propOne: number;
+  propTwo: number;
+  height: string;
+  bgColorOne: string;
+  bgColorTwo: string;
+  containerClassName: string;
+}
+
+export interface LabelProps {
+  text: string;
+  containerClassName?: string;
+  color?: string;
+  circleColor?: string;
 }
