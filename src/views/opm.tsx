@@ -12,6 +12,7 @@ import {
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { useLocation } from "react-router-dom";
 import useScreenSize from "../hooks/useScreenSize";
 import CustomButton from "../components/Button";
 import CustomDropdown from "../components/DropDown";
@@ -95,11 +96,10 @@ const OPM: React.FC<OPMProps> = (props) => {
   const [visible, setVisible] = useState<boolean>(false);
   const [initialFocus, setInitialFocus] = useState<boolean>(false);
   const { hideLoader } = useContext(LoaderContext) as LoaderContextType;
-
+  const location = useLocation();
   const { width } = useScreenSize();
   const navigate = useNavigate();
   const IS_FULLSCREEN = location?.pathname.includes(ROUTES.fullScreen);
-
   const DEFAULT = {
     duration: 10,
     starttime: "",
@@ -202,6 +202,8 @@ const OPM: React.FC<OPMProps> = (props) => {
   const [tabValue, setTabValue] = useState<number>(0);
   const [maxOPM, setMaxOPM] = useState<number>(OPM_CHART_DEFAULT.MAX);
   const [formFields, setFormFields] = useState(DEFAULT_FORM_FIELDS);
+  const [filterProps, setFilterProps] = useState(null);
+  const { state } = location;
 
   useEffect(() => {
     const removeEventListener = submitOnEnter(submit);
@@ -408,31 +410,61 @@ const OPM: React.FC<OPMProps> = (props) => {
     })();
   };
 
-  useEffect(() => {
-    if (props.filters && Object.keys(props.filters).length > 0) {
+  const filters = formFields.reduce((acc, filter) => {
+    const { name, value } = filter;
+    if (value?.code) {
+      acc[name] = value.code ? value.code : value;
+    } else if (value && !value.name) {
+      acc[name] = value;
+    }
+    return acc;
+  }, {});
+
+  const setFilters = () => {
+  if (filterProps && Object.keys(filterProps).length > 0) {
       setInitialFocus(true);
       const data = [...formFields];
-      switch (true) {
-        case props.filters.locale !== undefined:
-          data.find((e) => e.label === LABELS.LOCALE).value = { name: Object.entries(LOCALE_OPTIONS).find(([key, val]) => val === props.filters.locale)[0], code: props.filters.locale };
-          setFormFields(data);
-          break;
-        case props.filters.channel !== undefined:
-          data.find((e) => e.label === LABELS.CHANNEL).value = { name: Object.entries(OPM_CHANNELS).find(([key, val]) => val === props.filters.channel)[0], code: props.filters.channel };
-          setFormFields(data);
-          break;
-        case props.filters.payment !== undefined:
-          data.find((e) => e.label === LABELS.PAYMENT).value = { name: Object.entries(PAYMENT_TYPES).find(([key, val]) => val === props.filters.payment)[0], code: props.filters.payment };
-          setFormFields(data);
-          break;
-        default:
-          alert('Unknown property');
-          break;
+      if (filterProps.period !== undefined) {
+        const periodValue = { name: Object.entries(DURATIONS).find(([key, val]) => val === filterProps.period)[0], code: filterProps.period };
+        data.find((e) => e.label === LABELS.DURATION).value = periodValue;
       }
+      if (filterProps.locale !== undefined) {
+        const localeValue = { name: Object.entries(LOCALE_OPTIONS).find(([key, val]) => val === filterProps.locale)[0], code: filterProps.locale };
+        data.find((e) => e.label === LABELS.LOCALE).value = localeValue;
+      }
+      if (filterProps.channel !== undefined) {
+        const channelValue = { name: Object.entries(OPM_CHANNELS).find(([key, val]) => val === filterProps.channel)[0], code: filterProps.channel };
+        data.find((e) => e.label === LABELS.CHANNEL).value = channelValue;
+      }
+      if (filterProps.payment !== undefined) {
+        const paymentValue = { name: Object.entries(PAYMENT_TYPES).find(([key, val]) => val === filterProps.payment)[0], code: filterProps.payment };
+        data.find((e) => e.label === LABELS.PAYMENT).value = paymentValue;
+      }
+      if (filterProps.date !== undefined) {
+        data.find((e) => e.label === LABELS.DATE).value = filterProps.date;
+      }
+      if (filterProps.promocode !== undefined) {
+        data.find((e) => e.label === LABELS.PROMOCODE).value = filterProps.promocode;
+      }
+      setFormFields(data);
       createUrl();
       setShowFilteredCards(true);
     }
+  };
+
+  useEffect(() => {
+    state &&
+      setFilterProps(state);
+  }, [state]);
+
+  useEffect(() => {
+    props.filters &&
+      setFilterProps(props.filters);
   }, [props.filters]);
+
+  useEffect(() => {
+    setFilters();
+  }, [filterProps]);
 
   return (
     <>
@@ -509,14 +541,14 @@ const OPM: React.FC<OPMProps> = (props) => {
           {props.filters &&
             <CustomButton
               label={LABELS.GO_TO_ORDER_CENTRAL}
-              onClick={() => navigate(ROUTES.opm)}
+              onClick={() => navigate(ROUTES.opm, { state: filters })}
               className="custom-btn opm-navigate-btn !mr-0"
             />
           }
         </div>
       )}
       {props.fetchType === FETCH_TYPES.OPM &&
-        <div className={`${props.filters?"p-6":""}`}>
+        <div className={`${props.filters ? "p-6" : ""}`}>
           {showFilters && (
             <>
               {width > SCREEN_WIDTH.SM ? (
@@ -574,7 +606,7 @@ const OPM: React.FC<OPMProps> = (props) => {
                               optionLabel="name"
                               placeholder=""
                               autoFocus={props.filters && (props.filters[form.name] !== undefined)}
-                              onFocus={()=>setInitialFocus(false)}
+                              onFocus={() => setInitialFocus(false)}
                             />
                           )}
                         </div>
@@ -714,7 +746,7 @@ const OPM: React.FC<OPMProps> = (props) => {
               checkBoxContainerClassname="flex autoRefreshCheckBox sm:ml-2.5w md:ml-1w md:ml-[1.5vw] lg:ml-[1.25vw] items-center mt-3h md:mt-0"
             />
           )}
-          {isLoading  ? (
+          {isLoading ? (
             <Loader className="h-[50vh]" />
           ) : (
             data &&

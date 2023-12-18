@@ -74,8 +74,11 @@ export interface ChartOptions {
 export type OPMProps = {
   fetchType: string;
   filters?: {
-    locale: string;
-    channel: number;
-    payment: string;
+    locale?: string;
+    channel?: number;
+    payment?: string;
+    period?: number;
+    date?: string;
+    promocode?: string;
   }
 }
