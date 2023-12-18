@@ -13,6 +13,7 @@ import Chart from "./components/ChartIndex";
 import DcOpenOrders from "./components/DcOpenOrders";
 import HomePage from "./components/homePage";
 import OrderDetails from "./components/orderDetails/OrderDetails.js";
+import IncompleteOrder from "./views/incompleteOrders";
 import OrderReport from "./views/orderReport";
 import Sessions from "./views/sessions";
 import SkuLookup from "./views/skuLookup";
@@ -70,14 +71,14 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           />
           <Route
             path={ROUTES.orderReport}
-            element={
-              <App
-                appContent={<OrderReport />}
-              />
-            }
+            element={<App appContent={<OrderReport />} />}
+          />
+          <Route
+            path={ROUTES.incompleteOrders}
+            element={<App appContent={<IncompleteOrder />} />}
           />
         </Routes>
       </Suspense>
     </Router>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

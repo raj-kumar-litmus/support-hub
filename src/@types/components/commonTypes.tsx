@@ -198,7 +198,7 @@ export type SearchBarProps = {
   onSearch: (e: KeyboardEvent<HTMLInputElement>) => void;
   placeholder: string;
   className?: string;
-  type?:string
+  type?: string;
   hideMobileView?: boolean;
 };
 
@@ -317,7 +317,7 @@ export interface GridData {
   data: string | number;
   icon?: any;
   highlight?: boolean;
-};
+}
 
 export type GridTableProps = {
   columns: number;
@@ -340,7 +340,7 @@ export type InfoFieldProps = {
   dataClassName?: string;
 };
 
-export type PieChartProps =  {
+export type PieChartProps = {
   options?: ChartOptions<"pie"> | any;
   data?: ChartData<"pie"> | any;
   height?: string;
@@ -351,4 +351,17 @@ export type PieChartProps =  {
 
 export type SectionTitleProps = {
   title: string;
+};
+export interface IncompleteOrdersData {
+  130?: number;
+  131?: number;
+  132?: number;
+  140?: number;
+  143?: number;
+  144?: number;
+  155?: number;
+  440?: number;
+  455?: number;
+  460?: number;
+  date?: string;
 }

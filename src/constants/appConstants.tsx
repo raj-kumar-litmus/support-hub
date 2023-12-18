@@ -7,6 +7,7 @@ export const PAGE_TITLES = {
   ORDER_DETAILS: "Order Details",
   ORDER_REPORT: "Order Report",
   SKU_LOOKUP: "SKU Lookup",
+  INCOMPLETE_ORDERS: "Incomplete Orders",
 };
 
 export const DASHBOARD_LABELS = {
@@ -93,7 +94,7 @@ export const LOCALE_OPTIONS = {
 export const PAYMENT_TYPES = {
   All: "",
   "Credit Card": "creditCard",
-  "Klarna": "Klarna",
+  Klarna: "Klarna",
   "Store Credit": "storeCredit",
   "Gift Card": "giftCard",
   PayPal: "payPal",
@@ -102,26 +103,26 @@ export const PAYMENT_TYPES = {
 };
 
 export const OPM_CHANNELS_CODE_MAP = {
-  "DSK": "Desktop",
-  "MWB": "Mobile Web",
-  "IPH": "iPhone App",
-  "AND": "Android App",
-  "CSC": "CSC",
-  "MPL": "M Plus",
-  "ZAP": "",
-  "INS": "Instagram"
+  DSK: "Desktop",
+  MWB: "Mobile Web",
+  IPH: "iPhone App",
+  AND: "Android App",
+  CSC: "CSC",
+  MPL: "M Plus",
+  ZAP: "",
+  INS: "Instagram",
 };
 
 export const OPM_PAYMENTS_CODE_MAP = {
-  "CC": "Credit Card",
-  "GC": "Gift Card",
-  "ETC": "",
-  "PPL": "PayPal",
-  "KLA": "Klarna",
-  "AFP": "",
-  "SEP": "",
-  "SEPT": ""
-}
+  CC: "Credit Card",
+  GC: "Gift Card",
+  ETC: "",
+  PPL: "PayPal",
+  KLA: "Klarna",
+  AFP: "",
+  SEP: "",
+  SEPT: "",
+};
 
 export const CHART = {
   FONT_FAMILY: "Arial, sans-serif, Helvetica Neue",
@@ -353,11 +354,62 @@ export const CALENDAR_TOAST_MESSAGE: string =
 export const SEE_MORE: string = "See More";
 export const QUICK_LINKS_HEADER = "Quick Links";
 
-export const TIMESTAMPS = ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00"];
+export const TIMESTAMPS = [
+  "00:00",
+  "01:00",
+  "02:00",
+  "03:00",
+  "04:00",
+  "05:00",
+  "06:00",
+  "07:00",
+  "08:00",
+  "09:00",
+  "10:00",
+  "11:00",
+  "12:00",
+  "13:00",
+  "14:00",
+  "15:00",
+  "16:00",
+  "17:00",
+  "18:00",
+  "19:00",
+  "20:00",
+  "21:00",
+  "22:00",
+  "23:00",
+  "24:00",
+];
 
 export const ORDER_REPORT_CHART_LABELS = {
-  CHANNELWISE_ORDER_LABELS: ["Web", "Mobile Web", "iPhone App", "Android App", "mPlus App", "JCPenny", "Instagram", "CSC"],
-  PAYMENTWISE_ORDER_LABELS: ["Credit Card", "Paypal", "Klarna", "Giftcard", "Private Label Card", "Apple Pay", "JCP Dummy", "Sephora CBVI", "Sephora PLCC", "Sephora CBVIT", "Sephora PLCCT", "Instagram Dummy", "Google Dummy", "Sephora Pay", "Store Credit"],
+  CHANNELWISE_ORDER_LABELS: [
+    "Web",
+    "Mobile Web",
+    "iPhone App",
+    "Android App",
+    "mPlus App",
+    "JCPenny",
+    "Instagram",
+    "CSC",
+  ],
+  PAYMENTWISE_ORDER_LABELS: [
+    "Credit Card",
+    "Paypal",
+    "Klarna",
+    "Giftcard",
+    "Private Label Card",
+    "Apple Pay",
+    "JCP Dummy",
+    "Sephora CBVI",
+    "Sephora PLCC",
+    "Sephora CBVIT",
+    "Sephora PLCCT",
+    "Instagram Dummy",
+    "Google Dummy",
+    "Sephora Pay",
+    "Store Credit",
+  ],
 };
 
 export const ORDER_REPORT_LABELS = {
@@ -366,19 +418,19 @@ export const ORDER_REPORT_LABELS = {
   ORDER_PIE_CHART: "Order Pie Chart",
   CAD: "CAD",
   USD: "USD",
-  SUMMARY: "Summary"
+  SUMMARY: "Summary",
 };
 
 export const REPORT_TAB_LABELS = {
   LOCALE_WISE: "Locale Wise",
   CHANNEL_WISE: "Channel Wise",
-  PAYMENT_WISE: "Payment Wise"
+  PAYMENT_WISE: "Payment Wise",
 };
 
 export const REPORT_TABS = [
   { header: REPORT_TAB_LABELS.LOCALE_WISE },
   { header: REPORT_TAB_LABELS.CHANNEL_WISE },
-  { header: REPORT_TAB_LABELS.PAYMENT_WISE }
+  { header: REPORT_TAB_LABELS.PAYMENT_WISE },
 ];
 
 export const ORDER_SUMMARY_LABELS = {
@@ -393,12 +445,12 @@ export const ORDER_SUMMARY_LABELS = {
   TOTAL_BOPIS_ORDERS_PLACED: "Total BOPIS Orders Placed",
   AVERAGE_ORDER_VALUE: "Average Order Value",
   US_AVERAGE_ORDER_VALUE: "US Average Order Value",
-  CA_AVERAGE_ORDER_VALUE: "CA Average Order Value"
+  CA_AVERAGE_ORDER_VALUE: "CA Average Order Value",
 };
 
 export const ORDER_PIE_CHART_LABELS = {
   CHANNELWISE_ORDER: "Channel wise order",
-  PAYMENTWISE_ORDER: "Payment wise order"
+  PAYMENTWISE_ORDER: "Payment wise order",
 };
 
 export const HOURLY_TREND_DATA_LABELS = {
@@ -432,7 +484,7 @@ export const CHANNELWISE_DATA_LABELS = {
   MPLUS: "mPlus",
   JCPENNY: "JCPenny",
   INSTAGRAM: "Instagram",
-}
+};
 
 export const PAYMENTWISE_DATA_LABELS = {
   TODAY: "Today",
@@ -451,7 +503,7 @@ export const PAYMENTWISE_DATA_LABELS = {
   PLCCT: "PLCCT",
   PRIVATE_LABEL: "Private Label",
   OTHER_CC: "Other CC",
-}
+};
 
 export const ORDER_REPORT_THRESHOLDS = {
   LOCALEWISE_MIN: 1,
@@ -459,13 +511,13 @@ export const ORDER_REPORT_THRESHOLDS = {
   CHANNELWISE_MIN: 1,
   CHANNELWISE_MAX: 1000,
   PAYMENTWISE_MIN: 1,
-  PAYMENTWISE_MAX: 1000
-}
+  PAYMENTWISE_MAX: 1000,
+};
 
 export const SEVERITY = {
   LOW: "low",
-  HIGH: "high"
-}
+  HIGH: "high",
+};
 export const SKU_DETAILS = {
   TITLE: "SKU Details",
   SKU: "SKU #",
@@ -503,4 +555,85 @@ export const SKU_PRODUCT_INFO = {
   URL: "URL",
   EFFECTIVELY_ACTIVE: "Effectively Active",
   ENABLED: "Enabled",
+};
+
+export const STATUS_MESSAGE = {
+  130: {
+    code: 130,
+    message:
+      "Order will be moved to 130 from 105 state once it successfully submitted and authorized. In case the order was submitted when Cybersource was not available, it will be moved to 115 state (or 116 for Klarna orders). As soon as Cybersource is up and payment authorization completed successfully, the order will be moved to 130 state.",
+    nextState: "131 (Fraud Check Requested)",
+    sla: "1 day",
+  },
+  131: {
+    code: 131,
+    message:
+      "Order is moved to the 131 state once sent for fraud review to Forter. An order may be reviewed automatically or manually. Manual review may take up to 5 days dependent on Sephora order traffic.",
+    nextState: "132 (Forter Approved) or 227 (Forter Declined)",
+    sla: "5 days",
+  },
+  132: {
+    code: 132,
+    message:
+      "Order is moved to the 132 state once Sephora receives a successful fraud review from Forter.",
+    nextState: " 140",
+    sla: "1 day",
+  },
+  140: {
+    code: 140,
+    message:
+      "Order is moved to 140 right after Fraud Review is successfully passed. The state indicates that order is ready for fulfillment. Right after the order is moved to the 140 state the JMS message is sent to the scheduler-04 instance to notify that Resolve Fulfillment Hold message can be sent for the order to OMS. OMS will not drop order to warehouse until OMS receives fulfillment hold release message.",
+    nextState: "143 (Partially Released) / 144 (Fully Released)",
+    sla: "1 day",
+  },
+  143: {
+    code: 143,
+    message:
+      "If a part of an order is released to warehouse and rest is pending to be released, order is moved to the 143 state. ATG system updates order with 143 state when release message is received from OMS for some line items in the order. Order can be split into several releases in case of multiple shipping groups or when split shipments are enabled and merchandise items are split into several releases.",
+    nextState:
+      " 144 (Fully Released) / 155 (Partially Shipped) / 160 (Fully Shipped)",
+    sla: "5 days",
+  },
+  144: {
+    code: 144,
+    message:
+      "Order is moved to 144 state once release confirmation is received for all items in the order.",
+    nextState: "155 (Partially Shipped) / 160 (Fully Shipped)",
+    sla: "5 days",
+  },
+  155: {
+    code: 155,
+    message:
+      "Order will be moved to 155 state when shipment confirmation for part of the order is received from OMS.",
+    nextState: " 160 (Fully Shipped)",
+    sla: "5 days",
+  },
+  440: {
+    code: 440,
+    message: "A BOPIS order is moved to 440 when it is ready for fulfillment.",
+    nextState:
+      "455 (Partially Ready For Pickup) / 460 (Fully Ready For Pickup)",
+    sla: "1 day",
+  },
+  455: {
+    code: 455,
+    message: "BOPIS Order is partially ready for pickup.",
+    nextState: " 460 (Fully Ready For Pickup) / 480 (Fully Picked Up)",
+    sla: "5 days",
+  },
+  460: {
+    code: 460,
+    message:
+      "BOPIS Order is fully ready for pickup. Next step is 480 (Fully Picked Up)",
+    nextState: "",
+    sla: "5 days",
+  },
+};
+export const THRESHOLD_VALUE = {
+  INCOMPLETE_ORDERS: 2000,
+};
+export const INCOMPLETE_ORDERS_DIALOG = {
+  statusCode: "Status Code:",
+  sla: "SLA:",
+  nextState: "Next State:",
 };

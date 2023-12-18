@@ -1100,3 +1100,9 @@ hr.horizontalLine.blue {
 .custom-sidebar .custom-sidebar-close-btn .p-button:enabled:hover {
   @apply border-none bg-inherit;
 }
+.incomplete-order-card .p-card-body{
+  @apply !h-full !p-3
+}
+.incomplete-order-card .p-card-content{
+  @apply !h-full p-1
+}
