@@ -17,18 +17,17 @@ import {
   STATUS_MESSAGE,
   INCOMPLETE_ORDERS_DIALOG,
 } from "../constants/appConstants";
-import { IncompleteOrdersData } from "../@types/components/commonTypes";
+import {
+  IncompleteOrdersData,
+  IncompleteOrderDialogData,
+} from "../@types/components/commonTypes";
 import { fetchData } from "../utils/fetchUtil";
 
 const IncompleteOrder: FC = () => {
   const [showDialog, setShowDialog] = useState<boolean>(false);
   const [tableData, setTableData] = useState<IncompleteOrdersData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [dialogData, setDialogData] = useState<
-    | { code: number; message: string; nextState: string; sla: string }
-    | any
-    | null
-  >(null);
+  const [dialogData, setDialogData] = useState<IncompleteOrderDialogData>();
   const { width } = useScreenSize();
   const handleClick = (header: number) => {
     setShowDialog(true);
