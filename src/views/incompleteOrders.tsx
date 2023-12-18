@@ -27,7 +27,9 @@ const IncompleteOrder: FC = () => {
   const [showDialog, setShowDialog] = useState<boolean>(false);
   const [tableData, setTableData] = useState<IncompleteOrdersData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [dialogData, setDialogData] = useState<IncompleteOrderDialogData>();
+  const [dialogData, setDialogData] = useState<
+    IncompleteOrderDialogData | string
+  >();
   const { width } = useScreenSize();
   const handleClick = (header: number) => {
     setShowDialog(true);
@@ -81,7 +83,7 @@ const IncompleteOrder: FC = () => {
     { field: "status455Count", header: "455" },
     { field: "status460Count", header: "460" },
   ];
-  const paymentWiseDataStyle = (rowData, column, value?) => {
+  const ValueWiseCellStyle = (rowData, column, value?) => {
     if (rowData[column?.field] > THRESHOLD_VALUE.INCOMPLETE_ORDERS) {
       return "bg-red-700 rounded";
     }
@@ -127,7 +129,7 @@ const IncompleteOrder: FC = () => {
                     {HEADERS.map((h, index) => (
                       <Column
                         key={h.field}
-                        bodyClassName={paymentWiseDataStyle}
+                        bodyClassName={ValueWiseCellStyle}
                         frozen={index ? false : true}
                         field={h.field}
                         header={
@@ -169,7 +171,7 @@ const IncompleteOrder: FC = () => {
                           .map((key) => (
                             <div
                               key={key}
-                              className={`flex flex-col items-center text-sm ${paymentWiseDataStyle(
+                              className={`flex flex-col items-center text-sm ${ValueWiseCellStyle(
                                 "",
                                 "",
                                 item[key],
