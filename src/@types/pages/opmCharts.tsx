@@ -77,5 +77,8 @@ export type OPMProps = {
     locale: string;
     channel: number;
     payment: string;
+    period: number;
+    date: string;
+    promocode: string;
   }
 }
