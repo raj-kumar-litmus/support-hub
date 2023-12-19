@@ -12,8 +12,8 @@ import { ToastProps } from "primereact/toast";
 import { OverlayPanelProps } from "primereact/overlaypanel";
 import { FC, KeyboardEvent, ReactNode } from "react";
 import { CommerceItemData } from "../pages/OrderDetails";
-import { DCOpenOrders } from "../pages/DcOpenOrders";
-import { ModalEnums } from "../pages/OpmCharts";
+import { DCOpenOrders } from "../pages/dcOpenOrders";
+import { ModalEnums } from "../pages/opmCharts";
 import { InputTextProps } from "primereact/inputtext";
 
 enum Transition {
@@ -488,6 +488,7 @@ export type OpmSideBarProps = {
   localeFilter?: string;
   channelFilter?: string;
   paymentFilter?: string;
+  shipmentFilter?: string;
   visible: boolean;
   setVisible: (boolean) => void;
-}
+};

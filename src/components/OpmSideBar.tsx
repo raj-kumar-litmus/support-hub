@@ -1,11 +1,11 @@
 import CustomSideBar from "../components/CustomSideBar";
 import { FETCH_TYPES } from "../components/utils/Utils";
 import OPM from "../views/opm";
-import { LOCALE_OPTIONS, OPM_CHANNELS, PAYMENT_TYPES } from "../constants/appConstants";
+import { LOCALE_OPTIONS, OPM_CHANNELS, PAYMENT_TYPES, SHIPMENT_TYPES } from "../constants/appConstants";
 import { OpmSideBarProps } from "../@types/components/commonTypes";
 
 const OpmSideBar = (props: OpmSideBarProps) => {
-  const {localeFilter, channelFilter, paymentFilter, visible, setVisible} = props;
+  const {localeFilter, channelFilter, paymentFilter, shipmentFilter, visible, setVisible} = props;
 
   return (
     <CustomSideBar
@@ -21,7 +21,8 @@ const OpmSideBar = (props: OpmSideBarProps) => {
         filters={{
           ...(localeFilter && { locale: LOCALE_OPTIONS[localeFilter] }),
           ...(channelFilter && { channel: OPM_CHANNELS[channelFilter] }),
-          ...(paymentFilter && { payment: PAYMENT_TYPES[paymentFilter] })
+          ...(paymentFilter && { payment: PAYMENT_TYPES[paymentFilter] }),
+          ...(shipmentFilter && { shipment: SHIPMENT_TYPES[shipmentFilter] })
         }} />
     </CustomSideBar>
   );
