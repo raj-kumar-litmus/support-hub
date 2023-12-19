@@ -578,7 +578,7 @@ const OPM: React.FC<OPMProps> = (props) => {
                 <>
                   <form
                     id="custom-hover"
-                    className={`lg:flex lg:flex-wrap sm:gap-4 ${props.filters ? "sidebar-filters" : ""}
+                    className={`lg:flex lg:flex-wrap sm:gap-2 ${props.filters ? "sidebar-filters" : ""}
                     ${initialFocus ? "initial-focus" : ""} opmFilters sm:grid sm:grid-cols-3  sm:mb-4`}
                   >
                     {formFields.map((form, index) => {
@@ -641,7 +641,7 @@ const OPM: React.FC<OPMProps> = (props) => {
                     isDisabled={disabled}
                     isRounded={true}
                     onClick={submit}
-                    className="flex flex-1 opm-btn p-button-rounded max-w-[94px] self-end"
+                    className="flex flex-1 opm-btn p-button-rounded min-w-[94px] max-w-[94px] self-end"
                   />
                   </form>
                   
