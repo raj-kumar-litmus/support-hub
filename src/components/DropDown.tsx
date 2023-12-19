@@ -1,5 +1,6 @@
 import { Dropdown } from "primereact/dropdown";
 import React from "react";
+import CustomImage from "./common/customimage";
 import { CustomDropdownProps } from "../@types/components/commonTypes";
 
 const CustomDropdown: React.FC<CustomDropdownProps> = (props) => {
@@ -20,7 +21,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = (props) => {
         {props.label}
       </label>
       <div className="flex w-full relative">
-        <img className={`${imageclassname} absolute top-[0.6rem] pl-2.5`} src={props.icon} />
+        <CustomImage className={`${imageclassname} absolute top-[0.6rem] pl-2.5`} src={props.icon} />
         <Dropdown
           dropdownIcon={props.dropdownIcon}
           value={props.value}

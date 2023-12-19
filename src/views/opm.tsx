@@ -424,26 +424,26 @@ const OPM: React.FC<OPMProps> = (props) => {
   if (filterProps && Object.keys(filterProps).length > 0) {
       setInitialFocus(true);
       const data = [...formFields];
-      if (filterProps.period !== undefined) {
+      if (filterProps.period) {
         const periodValue = { name: Object.entries(DURATIONS).find(([key, val]) => val === filterProps.period)[0], code: filterProps.period };
         data.find((e) => e.label === LABELS.DURATION).value = periodValue;
       }
-      if (filterProps.locale !== undefined) {
+      if (filterProps.locale) {
         const localeValue = { name: Object.entries(LOCALE_OPTIONS).find(([key, val]) => val === filterProps.locale)[0], code: filterProps.locale };
         data.find((e) => e.label === LABELS.LOCALE).value = localeValue;
       }
-      if (filterProps.channel !== undefined) {
+      if (filterProps.channel) {
         const channelValue = { name: Object.entries(OPM_CHANNELS).find(([key, val]) => val === filterProps.channel)[0], code: filterProps.channel };
         data.find((e) => e.label === LABELS.CHANNEL).value = channelValue;
       }
-      if (filterProps.payment !== undefined) {
+      if (filterProps.payment) {
         const paymentValue = { name: Object.entries(PAYMENT_TYPES).find(([key, val]) => val === filterProps.payment)[0], code: filterProps.payment };
         data.find((e) => e.label === LABELS.PAYMENT).value = paymentValue;
       }
-      if (filterProps.date !== undefined) {
+      if (filterProps.date) {
         data.find((e) => e.label === LABELS.DATE).value = filterProps.date;
       }
-      if (filterProps.promocode !== undefined) {
+      if (filterProps.promocode) {
         data.find((e) => e.label === LABELS.PROMOCODE).value = filterProps.promocode;
       }
       setFormFields(data);
