@@ -26,9 +26,10 @@ import {
   SCREEN_WIDTH,
 } from "../constants/appConstants";
 import { LoaderContext } from "../context/loaderContext";
+import { LoaderContextType } from "../@types/components/commonTypes";
 import { getFormattedPSTDate } from "../utils/dateTimeUtil";
 import { fetchData } from "../utils/fetchUtil";
-import { LoaderContextType } from "../@types/components/commonTypes";
+import { FETCH_TYPES } from "./utils/Utils";
 
 const CardTitle = (props: { title: string; icon: any; classname?: string }) => {
   const { classname = "" } = props;
@@ -282,7 +283,7 @@ const HomePage = () => {
           )}
 
           <div className="home-opm-charts flex flex-col xl:flex-row space-y-6 xl:space-y-0 xl:gap-[2%] min-h-21r">
-            <OPM />
+            <OPM fetchType={FETCH_TYPES.HOME} />
             <OpmComparison />
           </div>
           <Sessions />

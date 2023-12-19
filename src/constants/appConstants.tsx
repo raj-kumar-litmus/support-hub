@@ -57,6 +57,7 @@ export const LABELS = {
   AUTO_REFRESH: "Auto Refresh",
   FILTERS: "Filters",
   CLOSE: "Close",
+  GO_TO_ORDER_CENTRAL: "Go to Order Central",
 };
 
 export const INPUT_TYPES = {
@@ -100,28 +101,6 @@ export const PAYMENT_TYPES = {
   JCPenny: "JCPenny",
   "Apple Pay": "Applepay",
 };
-
-export const OPM_CHANNELS_CODE_MAP = {
-  "DSK": "Desktop",
-  "MWB": "Mobile Web",
-  "IPH": "iPhone App",
-  "AND": "Android App",
-  "CSC": "CSC",
-  "MPL": "M Plus",
-  "ZAP": "",
-  "INS": "Instagram"
-};
-
-export const OPM_PAYMENTS_CODE_MAP = {
-  "CC": "Credit Card",
-  "GC": "Gift Card",
-  "ETC": "",
-  "PPL": "PayPal",
-  "KLA": "Klarna",
-  "AFP": "",
-  "SEP": "",
-  "SEPT": ""
-}
 
 export const CHART = {
   FONT_FAMILY: "Arial, sans-serif, Helvetica Neue",

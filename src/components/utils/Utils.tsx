@@ -17,6 +17,13 @@ export const ROUTES = {
   skuLookup: "/sku-lookup",
 };
 
+export const FETCH_TYPES = {
+  HOME: "home",
+  OPM: "opm",
+  OPM_COMPARISON: "opm-comparison",
+  SESSIONS: "sessions"
+}
+
 export const MENU_LIST = [
   {
     id: 1,

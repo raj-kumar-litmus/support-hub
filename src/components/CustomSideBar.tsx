@@ -7,6 +7,8 @@ import {
 } from "../@types/components/commonTypes";
 
 const CustomSideBar = (props: CustomSideBarProps) => {
+  const { className = "" } = props;
+
   const getCloseBtnLayoutClasses = () => {
     switch (props.position) {
       case SideBarPositionEnums.RIGHT:
@@ -27,7 +29,7 @@ const CustomSideBar = (props: CustomSideBarProps) => {
         blockScroll
         className={`custom-sidebar relative ${
           props.themeClasses ? props.themeClasses : ""
-        }  ${props.sideBarWidthClass || "!w-50w"}`}
+        }  ${props.sideBarWidthClass || "!w-50w"} ${className}`}
         showCloseIcon={false}
       >
         <CustomButton
@@ -38,7 +40,7 @@ const CustomSideBar = (props: CustomSideBarProps) => {
         >
           {LABELS.CLOSE}
         </CustomButton>
-        <div className="flex flex-col z-1">
+        <div className="flex flex-col z-1 w-full">
           {props.title && (
             <h2 className="m-0 mb-4 text-lg font-bold text-inherit">
               {props.title}
