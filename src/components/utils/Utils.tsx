@@ -18,6 +18,13 @@ export const ROUTES = {
   incompleteOrders: "/incomplete-orders",
 };
 
+export const FETCH_TYPES = {
+  HOME: "home",
+  OPM: "opm",
+  OPM_COMPARISON: "opm-comparison",
+  SESSIONS: "sessions",
+};
+
 export const MENU_LIST = [
   {
     id: 1,

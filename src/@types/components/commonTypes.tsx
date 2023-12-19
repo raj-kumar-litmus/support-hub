@@ -2,6 +2,7 @@ import type { ChartData, ChartOptions } from "chart.js";
 import { ButtonProps } from "primereact/button";
 import { CalendarChangeEvent, CalendarProps } from "primereact/calendar";
 import { CheckboxProps } from "primereact/checkbox";
+import { DropdownProps } from "primereact/dropdown";
 import {
   InputNumberProps,
   InputNumberValueChangeEvent,
@@ -11,8 +12,8 @@ import { ToastProps } from "primereact/toast";
 import { OverlayPanelProps } from "primereact/overlaypanel";
 import { FC, KeyboardEvent, ReactNode } from "react";
 import { CommerceItemData } from "../pages/OrderDetails";
-import { DCOpenOrders } from "../pages/DcOpenOrders";
-import { ModalEnums } from "../pages/OpmCharts";
+import { DCOpenOrders } from "../pages/dcOpenOrders";
+import { ModalEnums } from "../pages/opmCharts";
 import { InputTextProps } from "primereact/inputtext";
 
 enum Transition {
@@ -185,7 +186,7 @@ export interface CustomModalProps {
   isResizable?: boolean;
 }
 
-export interface CustomDropdownProps {
+export interface CustomDropdownProps extends DropdownProps {
   onChange: any;
   options: any;
   icon?: string;
@@ -343,7 +344,7 @@ export enum SideBarPositionEnums {
 }
 
 export interface CustomSideBarProps extends SidebarProps {
-  setVisible?: () => void;
+  setVisible?: (boolean) => void;
   title?: string;
   themeClasses?: string;
   sideBarWidthClass?: string;
@@ -501,3 +502,12 @@ export interface LabelProps {
   color?: string;
   circleColor?: string;
 }
+
+export type OpmSideBarProps = {
+  localeFilter?: string;
+  channelFilter?: string;
+  paymentFilter?: string;
+  shipmentFilter?: string;
+  visible: boolean;
+  setVisible: (boolean) => void;
+};

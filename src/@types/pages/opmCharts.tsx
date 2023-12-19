@@ -33,6 +33,7 @@ interface Dataset {
   borderColor: string;
   borderWidth?: number;
   backgroundColor?: any;
+  borderRadius?: number;
 }
 
 interface DataPoint {
@@ -69,3 +70,16 @@ export interface ChartOptions {
   endDate?: any;
   layout?: any;
 }
+
+export type OPMProps = {
+  fetchType: string;
+  filters?: {
+    locale?: string;
+    channel?: number;
+    payment?: string;
+    period?: number;
+    date?: string;
+    promocode?: string;
+    shipment?: string;
+  };
+};
