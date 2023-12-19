@@ -28,7 +28,7 @@ const IncompleteOrder: FC = () => {
   const [tableData, setTableData] = useState<IncompleteOrdersData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [dialogData, setDialogData] = useState<
-    IncompleteOrderDialogData | string
+    IncompleteOrderDialogData | any
   >();
   const { width } = useScreenSize();
   const handleClick = (header: number) => {
