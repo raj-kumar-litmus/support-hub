@@ -43,6 +43,7 @@ import refreshIcon from "../assets/refresh_icon.svg";
 import SandGlassIcon from "../assets/sandglass.svg";
 import WhiteCalendarIcon from "../assets/white_calendar.svg";
 import WhiteCrossIcon from "../assets/white_cross.svg";
+import DCOpenOrders from "../assets/dcopenorders.svg";
 import {
   OPM_BAR_CHART_OPTIONS,
   OPM_BAR_CHART_OPTIONS_HOME,
@@ -62,9 +63,11 @@ import {
   LOCALE_OPTIONS,
   OPM_CHANNELS,
   OPM_CHART_DEFAULT,
+  OPM_SHIPMENT_CODE_MAP,
   PAGE_TITLES,
   PAYMENT_TYPES,
   SCREEN_WIDTH,
+  SHIPMENT_TYPES,
 } from "../constants/appConstants";
 import { LoaderContext } from "../context/loaderContext";
 import { LoaderContextType } from "../@types/components/commonTypes";
@@ -88,7 +91,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ChartDataLabels,
+  ChartDataLabels
 );
 
 const OPM: React.FC<OPMProps> = (props) => {
@@ -180,6 +183,21 @@ const OPM: React.FC<OPMProps> = (props) => {
       })),
     },
     {
+      type: INPUT_TYPES.dropdown,
+      name: "shipment",
+      label: LABELS.SHIPMENT,
+      icon: DCOpenOrders,
+      cardIcon: GreyCardIcon,
+      value: {
+        name: "All",
+        code: "",
+      },
+      options: Object.keys(SHIPMENT_TYPES).map((e) => ({
+        name: e,
+        code: SHIPMENT_TYPES[e],
+      })),
+    },
+    {
       type: INPUT_TYPES.text,
       name: "promocode",
       label: LABELS.PROMOCODE,
@@ -193,7 +211,7 @@ const OPM: React.FC<OPMProps> = (props) => {
 
   const [options, setOptions] = useState<null | ChartOptions>(null);
   const [barChartoptions, setBarChartOptions] = useState<null | ChartOptions>(
-    null,
+    null
   );
   const [data, setData] = useState<ChartData | null>(null);
   const [barChartData, setBarChartData] = useState<ChartData | null>(null);
@@ -212,12 +230,13 @@ const OPM: React.FC<OPMProps> = (props) => {
 
   useEffect(() => {
     setUrl(
-      `${URL_OPM}?period=${props.fetchType === FETCH_TYPES.OPM
-        ? DEFAULT.duration
-        : DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION
+      `${URL_OPM}?period=${
+        props.fetchType === FETCH_TYPES.OPM
+          ? DEFAULT.duration
+          : DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION
       }&starttime=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${
         DEFAULT.promocode
-      }&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`,
+      }&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`
     );
   }, []);
 
@@ -233,7 +252,7 @@ const OPM: React.FC<OPMProps> = (props) => {
       setMaxOPM(
         Math.round(Math.max(...dataArr) / OPM_CHART_DEFAULT.STEP_SIZE) *
           OPM_CHART_DEFAULT.STEP_SIZE +
-          OPM_CHART_DEFAULT.STEP_SIZE,
+          OPM_CHART_DEFAULT.STEP_SIZE
       );
       setData({
         labels: xAxisLabels,
@@ -256,7 +275,7 @@ const OPM: React.FC<OPMProps> = (props) => {
             borderColor: props.filters ? "transparent" : "#599DF5",
             backgroundColor: props.filters ? "#708AF4" : "#599DF5",
             borderWidth: 2,
-            borderRadius: props.filters && 12
+            borderRadius: props.filters && 12,
           },
         ],
       });
@@ -273,13 +292,13 @@ const OPM: React.FC<OPMProps> = (props) => {
             ? OPM_OPTIONS_HOME(
                 width < SCREEN_WIDTH.SM,
                 Number(url.split("period=")[1].split("&")[0]) < 16 &&
-                  width > SCREEN_WIDTH.SM,
+                  width > SCREEN_WIDTH.SM
               )
             : OPM_OPTIONS(
                 width < SCREEN_WIDTH.SM,
                 Number(url.split("period=")[1].split("&")[0]) < 16 &&
-                  width > SCREEN_WIDTH.SM,
-              ),
+                  width > SCREEN_WIDTH.SM
+              )
         );
         setBarChartOptions(
           props.fetchType === FETCH_TYPES.HOME
@@ -295,8 +314,8 @@ const OPM: React.FC<OPMProps> = (props) => {
               : OPM_BAR_CHART_OPTIONS(
                 width < SCREEN_WIDTH.SM,
                 Number(url.split("period=")[1].split("&")[0]) < 16 &&
-                width > SCREEN_WIDTH.SM,
-              ),
+                  width > SCREEN_WIDTH.SM
+              )
         );
         await getData();
       }
@@ -445,6 +464,10 @@ const OPM: React.FC<OPMProps> = (props) => {
       }
       if (filterProps.promocode) {
         data.find((e) => e.label === LABELS.PROMOCODE).value = filterProps.promocode;
+      }
+      if (filterProps.shipment) {
+        const shipmentValue = { name: Object.entries(SHIPMENT_TYPES).find(([key, val]) => val === filterProps.shipment)[0], code: filterProps.shipment };
+        data.find((e) => e.label === LABELS.SHIPMENT).value = shipmentValue;
       }
       setFormFields(data);
       createUrl();
@@ -612,15 +635,16 @@ const OPM: React.FC<OPMProps> = (props) => {
                         </div>
                       );
                     })}
-                  </form>
-                  <CustomButton
+                    <CustomButton
                     btnclassname="w-full"
                     label={LABELS.SUBMIT}
                     isDisabled={disabled}
                     isRounded={true}
                     onClick={submit}
-                    className="opm-btn p-button-rounded w-[118px] self-end"
+                    className="flex flex-1 opm-btn p-button-rounded max-w-[94px] self-end"
                   />
+                  </form>
+                  
                 </>
               ) : (
                 <>

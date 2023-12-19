@@ -80,5 +80,6 @@ export type OPMProps = {
     period?: number;
     date?: string;
     promocode?: string;
+    shipment?: string;
   }
 }
