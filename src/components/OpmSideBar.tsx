@@ -1,11 +1,10 @@
-import { FC } from "react";
 import CustomSideBar from "../components/CustomSideBar";
 import { FETCH_TYPES } from "../components/utils/Utils";
 import OPM from "../views/opm";
 import { LOCALE_OPTIONS, OPM_CHANNELS, PAYMENT_TYPES } from "../constants/appConstants";
 import { OpmSideBarProps } from "../@types/components/commonTypes";
 
-const OpmSideBar: FC<OpmSideBarProps> = (props) => {
+const OpmSideBar = (props: OpmSideBarProps) => {
   const {localeFilter, channelFilter, paymentFilter, visible, setVisible} = props;
 
   return (
