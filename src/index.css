@@ -44,31 +44,22 @@
 .menu-card .p-card-content {
   @apply p-0;
 }
-
 .menu-icon img {
   @apply !h-6 m-auto;
 }
-
 .menu-sm-icon img {
   @apply w-5 h-5;
 }
-
-.selected-menu img {
-  @apply filter invert-12 sepia-9 saturate-682 hue-rotate-201 brightness-88 contrast-88;
-}
-
 .arrow-icon img {
   @apply h-13 rotate-180;
 }
-
 #custom-hover .p-button,
 .p-dialog .p-button {
   @apply bg-gray-900 border-gray-400 text-gray-400;
 }
-
 #custom-hover .p-inputtext,
 .p-dialog .p-inputtext {
-  @apply  border-none bg-gray-900 rounded-r-lg;
+  @apply border-none bg-gray-900 rounded-r-lg;
 }
 
 #custom-hover .p-dropdown {
@@ -94,9 +85,9 @@
 #bar-chart .p-button,
 .p-dialog .p-button {
   @apply bg-gray-900 border-gray-400 text-gray-400;
-} 
+}
 
- #bar-chart .p-button:focus,
+#bar-chart .p-button:focus,
 .p-dialog .p-button:focus {
   @apply shadow-none;
 }
@@ -133,7 +124,6 @@
   @apply border-none rounded-lg;
 }
 
-
 #bar-chart .p-dropdown {
   @apply !border-none bg-gray-900 rounded-lg;
 }
@@ -143,7 +133,8 @@
   @apply bg-transparent text-sm px-11 py-2 transition-none border-2 border-gray-300 rounded-[22px];
 }
 
-.opm-btn .p-button, .opm-btn .p-button:enabled:hover {
+.opm-btn .p-button,
+.opm-btn .p-button:enabled:hover {
   @apply bg-transparent text-sm p-0 transition-none border-2 border-gray-300 rounded-[22px] h-2.3r;
 }
 
@@ -236,7 +227,7 @@ button.p-button-secondary {
   @apply w-[4vw] relative right-3.5;
 }
 .p-datepicker-trigger {
-  @apply !p-0 border border-solid border-gray-105 border-r-0 ;
+  @apply !p-0 border border-solid border-gray-105 border-r-0;
 }
 .p-datepicker-trigger img {
   @apply w-1/2 h-1/2;
@@ -991,8 +982,8 @@ hr.horizontalLine.blue {
 .opmFilters .p-inputtext:hover {
   @apply border-0;
 }
-.label-position .p-inputtext{
-  @apply pt-9p
+.label-position .p-inputtext {
+  @apply pt-9p;
 }
 #modal-section .label-position .p-inputtext {
   @apply pl-8;
@@ -1001,7 +992,7 @@ hr.horizontalLine.blue {
   @apply !bg-black-200;
 }
 
-.p-dropdown-panel{
+.p-dropdown-panel {
   @apply bg-gray-900;
 }
 .order-details-btn-link .p-button {
@@ -1047,7 +1038,7 @@ hr.horizontalLine.blue {
   @apply py-3 px-1.7;
 }
 .p-datepicker table td>span {
-  @apply w-7 h-6
+  @apply w-7 h-6;
 }
 .grid-table .p-datatable-wrapper {
   @apply rounded-lg border border-black-103;
@@ -1115,20 +1106,20 @@ hr.horizontalLine.blue {
 .custom-sidebar .custom-sidebar-close-btn .p-button:enabled:hover {
   @apply border-none bg-inherit;
 }
-.incomplete-order-card .p-card-body{
-  @apply !h-full !p-3
+.incomplete-order-card .p-card-body {
+  @apply !h-full !p-3;
 }
-.incomplete-order-card .p-card-content{
-  @apply !h-full p-1
+.incomplete-order-card .p-card-content {
+  @apply !h-full p-1;
 }
 .custom-sidebar .opm-tabs.p-tabview {
   @apply top-6;
 }
-.custom-overlay .p-overlaypanel-content{
-  @apply border-2 border-black-103 rounded-lg p-0
+.custom-overlay .p-overlaypanel-content {
+  @apply border-2 border-black-103 rounded-lg p-0;
 }
 .custom-overlay.p-overlaypanel:before,
-.custom-overlay.p-overlaypanel:after {    
+.custom-overlay.p-overlaypanel:after {
   @apply content-none;
 }
 .opm-sidebar .custom-sidebar-close-btn {

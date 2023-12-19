@@ -2,7 +2,6 @@ import { Column } from "primereact/column";
 import { FC, useEffect, useState } from "react";
 import useScreenSize from "../hooks/useScreenSize";
 import CustomDialog from "../components/common/customdialog";
-
 import Loader from "../components/loader";
 import CustomCard from "../components/common/customcard";
 import CustomTable from "../components/common/customtable";
