@@ -14,6 +14,7 @@ import DcOpenOrders from "./components/DcOpenOrders";
 import HomePage from "./components/homePage";
 import OrderDetails from "./components/orderDetails/OrderDetails.js";
 import OrderReport from "./views/orderReport";
+import FocusRoom from "./views/focusRoom";
 import Sessions from "./views/sessions";
 import SkuLookup from "./views/skuLookup";
 import { ROUTES } from "./components/utils/Utils";
@@ -76,6 +77,15 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
               />
             }
           />
+          <Route
+            path={ROUTES.focusRoom}
+            element={
+              <App
+                appContent={<FocusRoom />}
+              />
+            }
+          />
+
         </Routes>
       </Suspense>
     </Router>

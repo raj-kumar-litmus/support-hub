@@ -110,6 +110,28 @@ export const SHIPMENT_TYPES = {
   "Same Day Delivery": "SDD",
 };
 
+export const OPM_CHANNELS_CODE_MAP = {
+  "DSK": "Desktop",
+  "MWB": "Mobile Web",
+  "IPH": "iPhone App",
+  "AND": "Android App",
+  "CSC": "CSC",
+  "MPL": "M Plus",
+  "ZAP": "",
+  "INS": "Instagram"
+};
+
+export const OPM_PAYMENTS_CODE_MAP = {
+  "CC": "Credit Card",
+  "GC": "Gift Card",
+  "ETC": "",
+  "PPL": "PayPal",
+  "KLA": "Klarna",
+  "AFP": "",
+  "SEP": "",
+  "SEPT": ""
+}
+
 export const OPM_SHIPMENT_CODE_MAP = {
   "STH": "Ship to Home",
   "BOP": "BOPIS",
