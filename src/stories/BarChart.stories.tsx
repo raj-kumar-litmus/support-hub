@@ -336,3 +336,560 @@ export const HorizontalBarChartWithNegativeValues: Story = {
     className: "border border-[#707070] w-71.7w ml-2.85w mt-3h",
   },
 };
+
+export const StackedBarChart: Story = {
+  args: {
+    data: {
+      labels: ["10:00", "11:00", "12:00",
+        "01:00", "02:00", "03:00"],
+      datasets: [
+        {
+          label: 'Desktop',
+          backgroundColor: "#F1963A",
+          data: [17, 16, 10, 11, 8, 9],
+          borderWidth: 3,
+          barThickness: 30 
+        },
+        {
+          label: 'Iphone',
+          backgroundColor: "#4F73B8",
+          data: [14, 9, 10, 8, 12, 16],
+          borderWidth: 3,
+          barThickness: 30 
+        },
+        {
+          label: 'Mobile Web',
+          backgroundColor: "#08B39E",
+          data: [12, 21, 13, 9, 24, 17],
+          borderWidth: 3,
+          barThickness: 30 
+        },
+        {
+          label: 'Android',
+          backgroundColor: "#e77687",
+          data: [14, 9, 10, 8, 2, 16],
+          borderWidth: 3,
+          barThickness: 30 
+        },
+        {
+          label: 'CSC',
+          backgroundColor: "#5cb7ed",
+          data: [2, 1, 23, 9, 14, 7],
+          borderWidth: 3,
+          barThickness: 30 
+        },
+        {
+          label: 'M Plus',
+          backgroundColor: "#a876e2",
+          data: [12, 2, 13, 19, 24, 7],
+          borderWidth: 3,
+          barThickness: 30 
+        }
+      ],
+    },
+    options: {
+      plugins: {
+        title: {
+          display: true,
+          text: "Total Orders Per Minute",
+          position: "bottom",
+          align: "center",
+          color: "#FFFFFF",
+          font: {
+            weight: 50,
+            size: 12,
+            family: "Arial, sans-serif, Helvetica Neue",
+          },
+          padding: {
+            top: 10,
+            bottom: 10,
+          },
+        },
+        datalabels: {
+          display: false,
+        },
+        legend: {
+          display: true,
+          position: "top",
+          align: "center",
+          fullWidth: false,
+          borderWidth: 0,
+          borderColor: 'rgba(0, 0, 0, 0)',
+          labels: {
+            boxWidth: 4,
+            boxHeight: 4,
+            pointStyle: "circle",
+            usePointStyle: true,
+            generateLabels: function (chart) {
+              var data = chart.data;
+              if (data.labels.length && data.datasets.length) {
+                return data.datasets.map(function (dataset, i) {
+                  return {
+                    text: dataset.label,
+                    fillStyle: dataset.backgroundColor,
+                    fontColor: dataset.backgroundColor,
+                  };
+                });
+              }
+              return [];
+            }
+          }
+        },
+      },
+
+      scales: {
+        x: {
+          stacked: true,
+          grid: {
+            display: false,
+          },
+          ticks: {
+            color: "#FBFBFC",
+            font: {
+              size: 9,
+              family: "Arial, sans-serif, Helvetica Neue",
+            },
+          },
+        },
+        y: {
+          stacked: true,
+          beginAtZero: true,
+          grid: {
+            color: "#495057",
+          },
+          border: {
+            dash: [4, 4],
+            display: false
+          },
+          ticks: {
+            color: "#FBFBFC",
+            display: true,
+            font: {
+              size: 9,
+              family: "Arial, sans-serif, Helvetica Neue",
+            },
+          },
+        },
+      }
+    },
+    className:
+      "bg-black-101 border-2 border-solid border-black-102 px-6 pt-2 pb-0 rounded-xl w-29r h-64",
+  },
+}
+
+
+export const StackedBarChartWithNegativeValue: Story = {
+  args: {
+    data: {
+      labels: ["10:00", "11:00", "12:00",
+        "01:00", "02:00", "03:00"],
+      datasets: [
+        {
+          label: 'Desktop',
+          backgroundColor: "#F1963A",
+          data: [17, 16, 10, 11, -8, -9],
+          borderWidth: 3,
+          barThickness: 30 
+        },
+        {
+          label: 'Iphone',
+          backgroundColor: "#4F73B8",
+          data: [14, 19, -10, 8, 12, 16],
+          borderWidth: 3,
+          barThickness: 30 
+        },
+        {
+          label: 'Mobile Web',
+          backgroundColor: "#08B39E",
+          data: [12, 21, 3, 9, -24, 17],
+          borderWidth: 3,
+          barThickness: 30 
+        },
+        {
+          label: 'Android',
+          backgroundColor: "#e77687",
+          data: [14, -9, 10, 8, -2, 16],
+          borderWidth: 3,
+          barThickness: 30 
+        },
+        {
+          label: 'CSC',
+          backgroundColor: "#5cb7ed",
+          data: [12, 8, 13, 9, 4, 17],
+          borderWidth: 3,
+          barThickness: 30 
+        },
+        {
+          label: 'M Plus',
+          backgroundColor: "#a876e2",
+          data: [12, -21, 13, 9, 24, 17],
+          borderWidth: 3,
+          barThickness: 30 
+        }
+      ],
+    },
+    options: {
+      plugins: {
+        title: {
+          display: true,
+          text: "Total Orders Per Minute",
+          position: "bottom",
+          align: "center",
+          color: "#FFFFFF",
+          font: {
+            weight: 50,
+            size: 12,
+            family: "Arial, sans-serif, Helvetica Neue",
+          },
+          padding: {
+            top: 10,
+            bottom: 10,
+          },
+        },
+        datalabels: {
+          display: false,
+        },
+        legend: {
+          display: true,
+          position: "top",
+          align: "center",
+          fullWidth: false,
+          borderWidth: 0,
+          borderColor: 'rgba(0, 0, 0, 0)',
+          labels: {
+            boxWidth: 4,
+            boxHeight: 4,
+            pointStyle: "circle",
+            usePointStyle: true,
+            generateLabels: function (chart) {
+              var data = chart.data;
+              if (data.labels.length && data.datasets.length) {
+                return data.datasets.map(function (dataset, i) {
+                  return {
+                    text: dataset.label,
+                    fillStyle: dataset.backgroundColor,
+                    fontColor: dataset.backgroundColor,
+                  };
+                });
+              }
+              return [];
+            }
+          }
+        },
+      },
+
+      scales: {
+        x: {
+          stacked: true,
+          grid: {
+            display: false,
+          },
+          ticks: {
+            color: "#FBFBFC",
+            font: {
+              size: 9,
+              family: "Arial, sans-serif, Helvetica Neue",
+            },
+          },
+        },
+        y: {
+          stacked: true,
+          beginAtZero: true,
+          grid: {
+            color: "#495057",
+          },
+          border: {
+            dash: [4, 4],
+            display: false
+          },
+          ticks: {
+            color: "#FBFBFC",
+            display: true,
+            font: {
+              size: 9,
+              family: "Arial, sans-serif, Helvetica Neue",
+            },
+          },
+        },
+      }
+    },
+    className:
+      "bg-black-101 border-2 border-solid border-black-102 px-6 pt-2 pb-0 rounded-xl w-29r h-64",
+  },
+}
+
+export const HorizontalStackedBarChart: Story = {
+  args: {
+    data: {
+      labels: ["10:00", "11:00", "12:00", "01:00", "02:00", "03:00"],
+      datasets: [
+        {
+          label: 'Desktop',
+          backgroundColor: "#F1963A",
+          data: [17, 16, 10, 11, 8, 9],
+          borderWidth: 3,
+          barThickness: 20 
+        },
+        {
+          label: 'Iphone',
+          backgroundColor: "#4F73B8",
+          data: [14, 9, 10, 8, 12, 16],
+          borderWidth: 3,
+          barThickness: 20 
+        },
+        {
+          label: 'Mobile Web',
+          backgroundColor: "#08B39E",
+          data: [12, 21, 13, 9, 24, 17],
+          borderWidth: 3,
+          barThickness: 20 
+        },
+        {
+          label: 'Android',
+          backgroundColor: "#e77687",
+          data: [14, 9, 10, 8, 2, 16],
+          borderWidth: 3,
+          barThickness: 20 
+        },
+        {
+          label: 'CSC',
+          backgroundColor: "#5cb7ed",
+          data: [2, 1, 23, 9, 14, 7],
+          borderWidth: 3,
+          barThickness: 20 
+        },
+        {
+          label: 'M Plus',
+          backgroundColor: "#a876e2",
+          data: [12, 2, 13, 19, 24, 7],
+          borderWidth: 3,
+          barThickness: 20 
+        }
+      ],
+    },
+    options: {
+      indexAxis: 'y',
+      plugins: {
+        title: {
+          display: true,
+          text: "Total Orders Per Minute",
+          position: "bottom",
+          align: "center",
+          color: "#FFFFFF",
+          font: {
+            weight: 50,
+            size: 12,
+            family: "Arial, sans-serif, Helvetica Neue",
+          },
+          padding: {
+            top: 10,
+            bottom: 10,
+          },
+        },
+        datalabels: {
+          display: false,
+        },
+        legend: {
+          display: true,
+          position: "top",
+          align: "center",
+          fullWidth: false,
+          borderWidth: 0,
+          borderColor: 'rgba(0, 0, 0, 0)',
+          labels: {
+            boxWidth: 4,
+            boxHeight: 4,
+            pointStyle: "circle",
+            usePointStyle: true,
+            generateLabels: function (chart) {
+              var data = chart.data;
+              if (data.labels.length && data.datasets.length) {
+                return data.datasets.map(function (dataset, i) {
+                  return {
+                    text: dataset.label,
+                    fillStyle: dataset.backgroundColor,
+                    fontColor: dataset.backgroundColor,
+                  };
+                });
+              }
+              return [];
+            }
+          }
+        },
+      },
+      scales: {
+        x: {
+          stacked: true,
+          beginAtZero: true,
+          grid: {
+            color: "#495057",
+          },
+          border: {
+            dash: [4, 4],
+            display: false
+          },
+          ticks: {
+            color: "#FBFBFC",
+            display: true,
+            font: {
+              size: 9,
+              family: "Arial, sans-serif, Helvetica Neue",
+            },
+          },
+        },
+        y: {
+          stacked: true,
+          grid: {
+            display: false,
+          },
+          ticks: {
+            color: "#FBFBFC",
+            font: {
+              size: 9,
+              family: "Arial, sans-serif, Helvetica Neue",
+            },
+          },
+        },
+      }
+    },
+    className: "bg-black-101 border-2 border-solid border-black-102 px-6 pt-2 pb-0 rounded-xl w-29r h-64",
+  }
+}
+
+
+export const HorizontalStackedBarChartWithNegativeValue: Story = {
+  args: {
+    data: {
+      labels: ["10:00", "11:00", "12:00", "01:00", "02:00", "03:00"],
+      datasets: [
+        {
+          label: 'Desktop',
+          backgroundColor: "#F1963A",
+          data: [-17, -16, -10, -11, 8, 9],
+          borderWidth: 3,
+          barThickness: 20 
+        },
+        {
+          label: 'Iphone',
+          backgroundColor: "#4F73B8",
+          data: [-14, -19, 10, 8, -12, -16],
+          borderWidth: 3,
+          barThickness: 20 
+        },
+        {
+          label: 'Mobile Web',
+          backgroundColor: "#08B39E",
+          data: [-12, -21, -3, -9, 24, -17],
+          borderWidth: 3,
+          barThickness: 20 
+        },
+        {
+          label: 'Android',
+          backgroundColor: "#e77687",
+          data: [-14, 9, -10, -8, 2, -16],
+          borderWidth: 3,
+          barThickness: 20 
+        },
+        {
+          label: 'CSC',
+          backgroundColor: "#5cb7ed",
+          data: [-12, -8, -13, -9, -4, -17],
+          borderWidth: 3,
+          barThickness: 20 
+        },
+        {
+          label: 'M Plus',
+          backgroundColor: "#a876e2",
+          data: [-12, 21, -13, -9, -24, -17],
+          borderWidth: 3,
+          barThickness: 20 
+        }
+      ],
+    },
+    options: {
+      indexAxis: 'y',
+      plugins: {
+        title: {
+          display: true,
+          text: "Total Orders Per Minute",
+          position: "bottom",
+          align: "center",
+          color: "#FFFFFF",
+          font: {
+            weight: 50,
+            size: 12,
+            family: "Arial, sans-serif, Helvetica Neue",
+          },
+          padding: {
+            top: 10,
+            bottom: 10,
+          },
+        },
+        datalabels: {
+          display: false,
+        },
+        legend: {
+          display: true,
+          position: "top",
+          align: "center",
+          fullWidth: false,
+          borderWidth: 0,
+          borderColor: 'rgba(0, 0, 0, 0)',
+          labels: {
+            boxWidth: 4,
+            boxHeight: 4,
+            pointStyle: "circle",
+            usePointStyle: true,
+            generateLabels: function (chart) {
+              var data = chart.data;
+              if (data.labels.length && data.datasets.length) {
+                return data.datasets.map(function (dataset, i) {
+                  return {
+                    text: dataset.label,
+                    fillStyle: dataset.backgroundColor,
+                    fontColor: dataset.backgroundColor,
+                  };
+                });
+              }
+              return [];
+            }
+          }
+        },
+      },
+      scales: {
+        x: {
+          stacked: true,
+          beginAtZero: true,
+          grid: {
+            color: "#495057",
+          },
+          border: {
+            dash: [4, 4],
+            display: false
+          },
+          ticks: {
+            color: "#FBFBFC",
+            font: {
+              size: 9,
+              family: "Arial, sans-serif, Helvetica Neue",
+            },
+          },
+        },
+        y: {
+          stacked: true,
+          grid: {
+            display: false,
+          },
+          ticks: {
+            color: "#FBFBFC",
+            font: {
+              size: 9,
+              family: "Arial, sans-serif, Helvetica Neue",
+            },
+          },
+        },
+      }
+    },
+    className: "bg-black-101 border-2 border-solid border-black-102 px-6 pt-2 pb-0 rounded-xl w-29r h-64",
+  }
+}
