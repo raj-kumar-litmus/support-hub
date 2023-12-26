@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "primereact/button";
-import CustomCard from "../components/common/customcard";
+import CustomCard from "../components/atoms/customcard";
 
 const meta = {
   title: "Components/Card",

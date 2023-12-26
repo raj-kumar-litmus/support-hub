@@ -13,7 +13,7 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 import { useLocation, useNavigate } from "react-router-dom";
 import useScreenSize from "../hooks/useScreenSize";
 import RotateIcon from "../assets/rotate.svg";
-import CustomImage from "./common/customimage";
+import CustomImage from "./atoms/customimage";
 import { SCREEN_WIDTH } from "../constants/appConstants";
 import { ROUTES, increaseLegendSpacing } from "../utils/Utils";
 import { BarChartCompProps } from "../@types/components/commonTypes";

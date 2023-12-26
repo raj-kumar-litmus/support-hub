@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import useInterval from "../../hooks/useInterval";
-import CustomCheckbox from "./CustomCheckBox";
-import CustomInputNumber from "./CustomInputNumber";
-import CustomToast from "./CustomToast";
-import CustomImage from "./customimage";
+import CustomCheckbox from "../atoms/CustomCheckBox";
+import CustomInputNumber from "../atoms/CustomInputNumber";
+import CustomToast from "../atoms/CustomToast";
+import CustomImage from "../atoms/customimage";
 import InfoIcon from "../../assets/info.svg";
 import { LABELS } from "../../constants/appConstants";
 

@@ -1,7 +1,7 @@
 import { Column } from "primereact/column";
 import { FC, useEffect, useState } from "react";
-import CustomImage from "./common/customimage";
-import CustomTable from "./common/customtable";
+import CustomImage from "./atoms/customimage";
+import CustomTable from "./atoms/customtable";
 import FilledCheckCircle from "../assets/filled_check_circle.svg";
 import Warning from "../assets/warning.svg";
 import { SEVERITY } from "../constants/appConstants";

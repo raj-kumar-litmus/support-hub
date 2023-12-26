@@ -1,6 +1,6 @@
 import { FC, Fragment, KeyboardEvent, useEffect, useState } from "react";
 import useScreenSize from "../hooks/useScreenSize";
-import CustomCard from "../components/common/customcard";
+import CustomCard from "../components/atoms/customcard";
 import SearchBar from "../components/common/searchbar";
 import Loader from "../components/loader";
 import {

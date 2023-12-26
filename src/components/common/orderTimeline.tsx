@@ -1,6 +1,6 @@
 import React from "react";
-import TimelineCard from "./TimelineCard";
-import Stepper from "./TimelineStepper";
+import TimelineCard from "../atoms/TimelineCard";
+import Stepper from "../atoms/TimelineStepper";
 import { TimelineProps } from "../../@types/pages/OrderDetails";
 
 const Timeline: React.FC<TimelineProps> = (props) => {

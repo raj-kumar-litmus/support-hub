@@ -4,7 +4,7 @@ import OPM from "./opm";
 import OpmComparison from "./opmComparison";
 import Sessions from "./sessions";
 import CustomButton from "../components/Button";
-import CustomImage from "../components/common/customimage";
+import CustomImage from "../components/atoms/customimage";
 import HomeCard from "../components/common/homeCard";
 import GlobalLoader from "../components/globalLoader";
 import Loader from "../components/loader";

@@ -1,6 +1,6 @@
 import { FC } from "react";
-import CustomCard from "./customcard";
-import CustomImage from "./customimage";
+import CustomCard from "../atoms/customcard";
+import CustomImage from "../atoms/customimage";
 import CheckCircle from "../../assets/check_circle.svg";
 import { PromotionCardProps } from "../../@types/pages/OrderDetails";
 import { ORDER_DETAILS_LABELS } from "../../constants/appConstants";

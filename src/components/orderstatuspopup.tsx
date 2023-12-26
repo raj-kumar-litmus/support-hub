@@ -1,7 +1,7 @@
 import { Column } from "primereact/column";
 import { FC } from "react";
-import CustomDialog from "./common/customdialog";
-import CustomTable from "./common/customtable";
+import CustomDialog from "./atoms/customdialog";
+import CustomTable from "./atoms/customtable";
 import {
   ORDER_DETAILS_LABELS,
   ORDER_STATUS_LIST,

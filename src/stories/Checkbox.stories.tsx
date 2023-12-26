@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "primereact/resources/primereact.min.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
-import CustomCheckbox from "../components/common/CustomCheckBox";
+import CustomCheckbox from "../components/atoms/CustomCheckBox";
 
 const meta = {
   title: "Components/CheckBox",
