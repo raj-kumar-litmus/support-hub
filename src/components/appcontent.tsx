@@ -6,7 +6,7 @@ import Navbar from "./common/navbar";
 import SearchField from "./common/searchfield";
 import SidePaneGrid from "./common/sidepanegrid";
 import SidePaneList from "./common/sidepanelist";
-import { MENU_LIST, ROUTES } from "./utils/Utils";
+import { MENU_LIST, ROUTES } from "../utils/Utils";
 import { SCREEN_WIDTH } from "../constants/appConstants";
 import { AppContentProps } from "../@types/components/commonTypes";
 

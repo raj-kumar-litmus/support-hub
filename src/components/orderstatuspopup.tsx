@@ -6,7 +6,7 @@ import {
   ORDER_DETAILS_LABELS,
   ORDER_STATUS_LIST,
 } from "../constants/appConstants";
-import { getTableHeaders } from "./utils/Utils";
+import { getTableHeaders } from "../utils/Utils";
 
 type OrderStatusPopupProps = {
   openDialog: boolean;

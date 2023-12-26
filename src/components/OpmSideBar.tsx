@@ -1,5 +1,5 @@
 import CustomSideBar from "../components/CustomSideBar";
-import { FETCH_TYPES } from "../components/utils/Utils";
+import { FETCH_TYPES } from "../utils/Utils";
 import OPM from "../views/opm";
 import { LOCALE_OPTIONS, OPM_CHANNELS, PAYMENT_TYPES, SHIPMENT_TYPES } from "../constants/appConstants";
 import { OpmSideBarProps } from "../@types/components/commonTypes";

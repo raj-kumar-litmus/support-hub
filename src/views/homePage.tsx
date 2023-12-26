@@ -1,15 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import useScreenSize from "../hooks/useScreenSize";
-import OPM from "../views/opm";
-import OpmComparison from "../views/opmComparison";
-import Sessions from "../views/sessions";
-import CustomButton from "./Button";
-import CustomImage from "./common/customimage";
-import HomeCard from "./common/homeCard";
-import GlobalLoader from "./globalLoader";
-import Loader from "./loader";
-import TimeTracker from "./timeTracker";
-import LoaderPortal from "./loaderPortal";
+import OPM from "./opm";
+import OpmComparison from "./opmComparison";
+import Sessions from "./sessions";
+import CustomButton from "../components/Button";
+import CustomImage from "../components/common/customimage";
+import HomeCard from "../components/common/homeCard";
+import GlobalLoader from "../components/globalLoader";
+import Loader from "../components/loader";
+import TimeTracker from "../components/timeTracker";
+import LoaderPortal from "../components/loaderPortal";
 import avgOpmcompIcon from "../assets/avg_opm_comp.svg";
 import avgOrdersPerMinIcon from "../assets/avg_orders_per_min.svg";
 import infoIcon from "../assets/info_icon.svg";
@@ -29,7 +29,7 @@ import { LoaderContext } from "../context/loaderContext";
 import { LoaderContextType } from "../@types/components/commonTypes";
 import { getFormattedPSTDate } from "../utils/dateTimeUtil";
 import { fetchData } from "../utils/fetchUtil";
-import { FETCH_TYPES } from "./utils/Utils";
+import { FETCH_TYPES } from "../utils/Utils";
 
 const CardTitle = (props: { title: string; icon: any; classname?: string }) => {
   const { classname = "" } = props;

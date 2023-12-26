@@ -80,7 +80,7 @@ import {
   getFormattedPSTDate,
 } from "../utils/dateTimeUtil";
 import { fetchData } from "../utils/fetchUtil";
-import { FETCH_TYPES, ROUTES, submitOnEnter } from "../components/utils/Utils";
+import { FETCH_TYPES, ROUTES, submitOnEnter } from "../utils/Utils";
 
 ChartJS.register(
   CategoryScale,

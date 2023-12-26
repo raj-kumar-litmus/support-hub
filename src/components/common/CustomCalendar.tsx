@@ -14,7 +14,7 @@ import {
   CALENDAR_TOAST_MESSAGE,
 } from "../../constants/appConstants";
 import { CURRENT_PST_DATE } from "../../utils/dateTimeUtil";
-import { convert12to24Hour, convert24to12Hour } from "../utils/Utils";
+import { convert12to24Hour, convert24to12Hour } from "../../utils/Utils";
 
 const CustomCalendar: FC<CustomCalendarProps> = (props) => {
   const [hour, setHour] = useState<number>();

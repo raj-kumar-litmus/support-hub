@@ -2,7 +2,7 @@ import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import type { Meta, StoryObj } from "@storybook/react";
 import { withRouter } from "storybook-addon-react-router-v6";
 import SidePaneGrid from "../components/common/sidepanegrid";
-import { MENU_LIST } from "../components/utils/Utils";
+import { MENU_LIST } from "../utils/Utils";
 
 const meta = {
   title: "Components/SidepaneMobile",

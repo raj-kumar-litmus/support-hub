@@ -42,7 +42,7 @@ import {
   getFormattedPSTDate,
 } from "../utils/dateTimeUtil";
 import { fetchData } from "../utils/fetchUtil";
-import { ROUTES, submitOnEnter } from "../components/utils/Utils";
+import { ROUTES, submitOnEnter } from "../utils/Utils";
 
 const Sessions = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);

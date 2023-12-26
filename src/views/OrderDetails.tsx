@@ -1,30 +1,30 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Column } from "primereact/column";
-import useScreenSize from "../../hooks/useScreenSize";
-import Loader from "../loader";
-import OrderStatus from "../orderstatus";
-import PromotionsPopup from "../promotionspopup";
-import OrderStatusPopup from "../orderstatuspopup";
-import CustomImage from "../common/customimage";
-import CustomTable from "../common/customtable";
-import Card from "../common/Card";
-import CustomButton from "../Button";
-import ItemInformationsPopUp from "../itemInformationsPopUp";
-import PromotionsIcon from "../../assets/promotions_white.svg";
-import OrderClockIcon from "../../assets/order_clock_white.svg";
-import RightArrowIcon from "../../assets/right_arrow.svg";
-import OmsInfoIcon from "../../assets/oms_info_white.svg";
+import useScreenSize from "../hooks/useScreenSize";
+import Loader from "../components/loader";
+import OrderStatus from "../components/orderstatus";
+import PromotionsPopup from "../components/promotionspopup";
+import OrderStatusPopup from "../components/orderstatuspopup";
+import CustomImage from "../components/common/customimage";
+import CustomTable from "../components/common/customtable";
+import Card from "../components/common/Card";
+import CustomButton from "../components/Button";
+import ItemInformationsPopUp from "../components/itemInformationsPopUp";
+import PromotionsIcon from "../assets/promotions_white.svg";
+import OrderClockIcon from "../assets/order_clock_white.svg";
+import RightArrowIcon from "../assets/right_arrow.svg";
+import OmsInfoIcon from "../assets/oms_info_white.svg";
 import {
   URL_OMS_ORDER_STATUS,
   URL_ORDER_DETAILS,
   URL_OMS_ORDER_FLOW,
   URL_PROMOTIONS,
-} from "../../constants/apiConstants";
+} from "../constants/apiConstants";
 import {
   ORDER_DETAILS_LABELS,
   PAGE_TITLES,
-} from "../../constants/appConstants";
+} from "../constants/appConstants";
 import {
   CommerceItem,
   CommerceItemData,
@@ -32,8 +32,8 @@ import {
   OmsOrderStatus,
   OrderData,
   IPromotion,
-} from "../../@types/pages/OrderDetails";
-import { fetchData } from "../../utils/fetchUtil";
+} from "../@types/pages/OrderDetails";
+import { fetchData } from "../utils/fetchUtil";
 import { getTableHeaders } from "../utils/Utils";
 
 const OrderDetails: React.FC = () => {
