@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import SearchBar from "../components/molecules/searchbar";
 
 const meta = {
-  title: "Stories/search-web",
+  title: "Components/SearchWeb",
   component: SearchBar,
   decorators: [
     () => (

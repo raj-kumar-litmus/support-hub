@@ -8,7 +8,6 @@ import PromotionsPopup from "../components/organisms/promotionspopup";
 import OrderStatusPopup from "../components/molecules/orderstatuspopup";
 import CustomImage from "../components/atoms/customimage";
 import CustomTable from "../components/atoms/customtable";
-import CustomIcon from "../components/atoms/CustomIcon";
 import Card from "../components/atoms/Card";
 import CustomButton from "../components/atoms/Button";
 import ItemInformationsPopUp from "../components/molecules/itemInformationsPopUp";
@@ -156,7 +155,6 @@ const OrderDetails: React.FC = () => {
     <div id="orderDetailsComp">
       <div className="flex sm:hidden border-b border-solid border-black-300 h-44p items-center px-3.5 py-6">
         <CustomImage
-          className="h-13"
           src={RightArrowIcon}
           alt="Search"
           onClick={() => navigate(-1)}
@@ -174,12 +172,10 @@ const OrderDetails: React.FC = () => {
             className="flex justify-end items-center order-details-btn-link"
             onClick={showPromotions}
           >
-            <CustomIcon
+            <CustomImage
               className="mr-1"
               alt="promotion-icon"
               src={PromotionsIcon}
-              width="0.75rem"
-              height="0.75rem"
             />
             {ORDER_DETAILS_LABELS.PROMOTIONS}
           </CustomButton>
@@ -188,12 +184,10 @@ const OrderDetails: React.FC = () => {
           <div className="flexWrapper justify-start bg-black-200 rounded-t-md">
             <span className="w-auto sm:w-1/5 flex items-center min-w-4.5r">
               {ORDER_DETAILS_LABELS.ORDER}
-              <CustomIcon
+              <CustomImage
                 className="ml-2 cursor-pointer"
                 alt="order-clock-icon"
                 src={OrderClockIcon}
-                width="1rem"
-                height="1rem"
                 onClick={showOrderTimeline}
               />
             </span>
@@ -261,12 +255,10 @@ const OrderDetails: React.FC = () => {
           <div className="flexBlockWrapper border-t filterCardWrapper">
             <span className="w-auto sm:w-1/6 flex items-center min-w-4.5r">
               {ORDER_DETAILS_LABELS.OMS}
-              <CustomIcon
-                className="ml-2 cursor-pointer"
+              <CustomImage
+                className="ml-2 cursor-pointer pt-0"
                 alt="oms-info-icon"
                 src={OmsInfoIcon}
-                width="0.85rem"
-                height="0.85rem"
                 onClick={showOmsStatusInfo}
               />
             </span>

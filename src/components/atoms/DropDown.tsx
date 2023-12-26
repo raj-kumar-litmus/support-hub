@@ -1,19 +1,27 @@
 import { Dropdown } from "primereact/dropdown";
 import React from "react";
-import { CustomDropdownProps } from "../../@types/components/commonTypes";
 import CustomImage from "./customimage";
+import { CustomDropdownProps } from "../../@types/components/commonTypes";
 
 const CustomDropdown: React.FC<CustomDropdownProps> = (props) => {
+  const {
+    containerclassname = "",
+    labelclassname = "",
+    imageclassname = "",
+    className = "",
+  } = props;
+
   return props.icon ? (
-    <div className={`w-full self-end ${props.containerclassname}`}>
-      <label className={`labelClass relative ${props.labelclassname}`}>
+    <div
+      className={`w-full self-end ${containerclassname}`}
+    >
+      <label
+        className={`labelClass relative ${labelclassname}`}
+      >
         {props.label}
       </label>
       <div className="flex w-full relative">
-        <CustomImage
-          className={`${props.imageclassname} absolute top-[0.6rem] pl-2.5`}
-          src={props.icon}
-        />
+        <CustomImage className={`${imageclassname} absolute top-[0.6rem] pl-2.5`} src={props.icon} />
         <Dropdown
           dropdownIcon={props.dropdownIcon}
           value={props.value}
@@ -22,7 +30,8 @@ const CustomDropdown: React.FC<CustomDropdownProps> = (props) => {
           options={props.options}
           optionLabel={props.optionLabel}
           placeholder={props.placeholder}
-          className="w-full label-position"
+          className={`w-full label-position ${className}`}
+          {...props}
         />
       </div>
     </div>

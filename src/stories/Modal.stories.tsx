@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "primereact/resources/primereact.min.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
-import CustomModal from "../components/Modal";
+import CustomModal from "../components/common/customdialog";
 import "../index.css";
 
 const meta = {

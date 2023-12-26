@@ -3,7 +3,7 @@ import MenuCard from "../components/molecules/menucard";
 import DashboardIcon from "../assets/dashboard.svg";
 
 const meta = {
-  title: "Stories/menucard",
+  title: "Components/MenuCard",
   component: MenuCard,
   tags: ["autodocs"],
 } satisfies Meta<typeof MenuCard>;

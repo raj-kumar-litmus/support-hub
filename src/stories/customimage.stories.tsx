@@ -3,7 +3,7 @@ import CustomImage from "../components/atoms/customimage";
 import DashboardIcon from "../assets/dashboard.svg";
 
 const meta = {
-  title: "Stories/customimage",
+  title: "Components/CustomImage",
   component: CustomImage,
   tags: ["autodocs"],
 } satisfies Meta<typeof CustomImage>;

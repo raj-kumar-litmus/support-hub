@@ -9,3 +9,8 @@ export const URL_PROMOTIONS: string =
 export const URL_OMS_ORDER_FLOW: string = "/orderflowApp/oms/orderflow/order";
 export const URL_OPM: string = "/supportdashboard/opm";
 export const URL_OPM_COMPARISON: string = "/supportdashboard/compareOPM";
+export const URL_HOURLYREPORT: string = "/supportdashboard/v1/report/hourlyReport";
+export const SKU_LOOKUP_CATALOG: string =
+  "/supportdashboard/v1/catalog/sku/:skuid";
+export const SKU_LOOKUP_INVENTORY_STATUS: string =
+  "/supportdashboard/v1/getInventoryStatus/:country/:skuid";

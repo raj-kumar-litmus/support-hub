@@ -10,9 +10,11 @@ import {
 } from "react-router-dom";
 import App from "./App";
 import DcOpenOrders from "./views/DcOpenOrders";
-import BarChart from "./components/organisms/BarChart";
 import HomePage from "./views/homePage";
-import OrderDetails from "./views/OrderDetails";
+import OrderDetails from "./views/OrderDetails.js";
+import OrderReport from "./views/orderReport";
+import Sessions from "./views/sessions";
+import SkuLookup from "./views/skuLookup";
 import OPM from "./views/opm";
 import OpmComparison from "./views/opmComparison";
 import { ROUTES } from "./helpers/utils/Utils";
@@ -34,7 +36,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           />
           <Route
             path={ROUTES.sessions}
-            element={<App appContent={<BarChart />} />}
+            element={<App appContent={<Sessions />} />}
           />
           <Route path={ROUTES.opm} element={<App appContent={<OPM />} />} />
           <Route
@@ -50,11 +52,19 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             element={<App showNavbar={false} appContent={<OpmComparison />} />}
           />
           <Route
+            path={ROUTES.skuLookup}
+            element={<App appContent={<SkuLookup />} />}
+          />
+          <Route
             path={`${ROUTES.orderDetails}/:orderId`}
             element={<App appContent={<OrderDetails />} />}
+          />
+          <Route
+            path={ROUTES.orderReport}
+            element={<App appContent={<OrderReport />} />}
           />
         </Routes>
       </Suspense>
     </Router>
-  </React.StrictMode>,
+  </React.StrictMode>
 );

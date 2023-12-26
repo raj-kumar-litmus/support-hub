@@ -22,6 +22,8 @@ import CustomDialog from "../components/atoms/customdialog";
 import CustomCalendar from "../components/molecules/CustomCalendar";
 import CustomImage from "../components/atoms/customimage";
 import Loader from "../components/atoms/loader";
+import CustomTab from "../components/atoms/customtab";
+import BarChart from "../components/organisms/BarChart";
 import ArrowDownIcon from "../assets/arrown_down_white.svg";
 import WhiteCrossIcon from "../assets/white_cross.svg";
 import GreyCalendarIcon from "../assets/calendar-grey.svg";
@@ -71,8 +73,6 @@ import {
   getPSTdate,
 } from "../helpers/utils/dateTimeUtil";
 import { fetchData } from "../helpers/utils/fetchUtil";
-import CustomTab from "../components/atoms/customtab";
-import BarChartComp from "../components/molecules/BarChartComp";
 
 ChartJS.register(
   CategoryScale,
@@ -446,7 +446,7 @@ const OpmComparison: React.FC = () => {
             />
           </div>
           {tabValue === 0 ? (
-            <BarChartComp
+            <BarChart
               title={PAGE_TITLES.OPM_COMPARISON}
               options={getChartConfig()}
               data={barChartData}
@@ -511,9 +511,9 @@ const OpmComparison: React.FC = () => {
                         {form.type === "time" && (
                           <CustomCalendar
                             name={form.name}
-                            titleclassname="top-1"
+                            titleclassname="top-1.25r"
                             containerclassname="lg:max-w-[11rem]"
-                            imageclassname="block w-5 h-18 top-1.75r left-0.5w z-1"
+                            imageclassname="relative top-1.75r left-0.75w z-1"
                             title={form.label}
                             placeholder={DATE_AND_TIME_FORMATS.MM_DD_YYYY_HH_MM}
                             showTime={form.showTime}
@@ -558,7 +558,7 @@ const OpmComparison: React.FC = () => {
               ) : (
                 <>
                   <CustomDialog
-                    header="Filters"
+                    header={LABELS.FILTERS}
                     visible={visible}
                     className="!bg-slate-900 filtersModal filtersModal-popup opmFiltersMobile "
                     onHide={onModalCloseHandler}
@@ -585,7 +585,7 @@ const OpmComparison: React.FC = () => {
                               <CustomCalendar
                                 name={form.name}
                                 containerclassname="opmFiltersMobileCalendar"
-                                imageclassname="relative h-5 w-5 top-8 md:top-3h left-2w z-1"
+                                imageclassname="h-5 w-5 relative top-8 md:top-3h left-2w z-1"
                                 titleclassname="top-5"
                                 title={form.label}
                                 showTime={form.showTime}
@@ -609,7 +609,7 @@ const OpmComparison: React.FC = () => {
                                   <CustomImage src={ArrowDownIcon} />
                                 }
                                 onChange={(e) => handleFormChange(e)}
-                                imageclassname="mt-1 z-1"
+                                imageclassname="z-1"
                                 icon={form.icon}
                                 options={form.options}
                                 label={form.label}
@@ -621,10 +621,11 @@ const OpmComparison: React.FC = () => {
                         );
                       })}
                       <CustomButton
+                        btnclassname="w-full"
                         label={LABELS.SUBMIT}
                         isDisabled={disabled}
                         isRounded={true}
-                        className="submitBtnMobile opmPopUp col-span-full"
+                        className="opm-btn p-button-rounded min-w-[160px] col-span-full	m-auto"
                       />
                     </form>
                   </CustomDialog>
@@ -692,7 +693,7 @@ const OpmComparison: React.FC = () => {
                   setTabValue={setTabValue}
                 />
                 {tabValue === 0 ? (
-                  <BarChartComp
+                  <BarChart
                     title={PAGE_TITLES.OPM_COMPARISON}
                     isFullScreen={IS_FULLSCREEN}
                     className={`opm-comparison-page-chart-container ${

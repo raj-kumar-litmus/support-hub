@@ -4,7 +4,7 @@ import SidePaneList from "../components/molecules/sidepanelist";
 import { MENU_LIST } from "../helpers/utils/Utils";
 
 const meta = {
-  title: "Stories/sidepane-web",
+  title: "Components/SidepaneWeb",
   component: SidePaneList,
   decorators: [withRouter],
   tags: ["autodocs"],

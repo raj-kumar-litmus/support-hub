@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import SearchField from "../components/atoms/searchfield";
 
 const meta = {
-  title: "Stories/search-mobile",
+  title: "Components/SearchMobile",
   component: SearchField,
   decorators: [
     () => (

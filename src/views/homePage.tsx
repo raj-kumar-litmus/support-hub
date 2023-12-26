@@ -3,7 +3,6 @@ import useScreenSize from "../hooks/useScreenSize";
 import OPM from "./opm";
 import OpmComparison from "./opmComparison";
 import CustomButton from "../components/atoms/Button";
-import BarChart from "../components/organisms/BarChart";
 import CustomImage from "../components/atoms/customimage";
 import HomeCard from "../components/molecules/homeCard";
 import GlobalLoader from "../components/molecules/globalLoader";
@@ -26,9 +25,10 @@ import {
   SCREEN_WIDTH,
 } from "../helpers/constants/appConstants";
 import { LoaderContext } from "../context/loaderContext";
+import { LoaderContextType } from "../@types/components/commonTypes";
 import { getFormattedPSTDate } from "../helpers/utils/dateTimeUtil";
 import { fetchData } from "../helpers/utils/fetchUtil";
-import { LoaderContextType } from "../@types/components/commonTypes";
+import { FETCH_TYPES } from "../helpers/utils/Utils";
 
 const CardTitle = (props: { title: string; icon: any; classname?: string }) => {
   const { classname = "" } = props;
@@ -282,10 +282,10 @@ const HomePage = () => {
           )}
 
           <div className="home-opm-charts flex flex-col xl:flex-row space-y-6 xl:space-y-0 xl:gap-[2%] min-h-21r">
-            <OPM />
+            <OPM fetchType={FETCH_TYPES.HOME} />
             <OpmComparison />
           </div>
-          <BarChart />
+          <Sessions />
         </div>
       )}
     </>

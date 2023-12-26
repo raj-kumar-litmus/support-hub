@@ -102,12 +102,6 @@ export type PromotionCardProps = {
   promotion: IPromotion;
 };
 
-export type InfoFieldProps = {
-  title: string;
-  data: string | number;
-  className?: string;
-};
-
 export type ItemInformationsPopUpProps = {
   lineitems: CommerceItemData[];
   openItemInformationPopup: boolean;

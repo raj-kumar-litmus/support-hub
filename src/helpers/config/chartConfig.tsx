@@ -343,6 +343,62 @@ export const OPM_BAR_CHART_OPTIONS_HOME = (
   };
 };
 
+export const OPM_BAR_CHART_OPTIONS_SIDEBAR = (
+  isMobile: boolean,
+  showDataLabels = false,
+) => {
+  const existingBarChartOptions = {
+    ...OPM_BAR_CHART_OPTIONS(isMobile, showDataLabels),
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+        ticks: {
+          color:"#FBFBFC",
+        },
+      },
+      y: {
+        beginAtZero: true,
+        max: OPM_CHART_DEFAULT.MAX,
+        grid: {
+          color: "#292E36",
+        },
+        border: {
+          dash: [4, 4],
+          display: false
+        },
+        ticks: {
+          color: "#FBFBFC",
+          display: true,
+          stepSize: OPM_CHART_DEFAULT.STEP_SIZE,
+          count: OPM_CHART_DEFAULT.TICK_COUNT,
+          callback: function (value) {
+            if (value >= 1000) {
+              return value / 1000 + "K";
+            } else {
+              return value;
+            }
+          },
+        },
+      },
+    }
+  };
+  return {
+    ...existingBarChartOptions,
+    plugins: {
+      ...existingBarChartOptions.plugins,
+      datalabels: {
+        display: showDataLabels,
+      },
+      tooltip: {
+        enabled: false,
+        external: (_) => externalTooltipHandler(_, "opm_bar"),
+      },
+    },
+  };
+};
+
 //OPM Comparison Charts
 export const OPM_COMPARISON_OPTIONS = ({
   apiResponse,
@@ -420,12 +476,12 @@ export const OPM_COMPARISON_OPTIONS = ({
                     year: "numeric",
                     month: "2-digit",
                     day: "2-digit",
-                  })
+                })
                 : endDate?.toLocaleString("en-US", {
                     year: "numeric",
                     month: "2-digit",
                     day: "2-digit",
-                  }),
+                }),
             fillStyle:
               index === 0
                 ? OPM_COMPARISON_CHART_STYLES.PRIMARY_COLOR
@@ -642,3 +698,66 @@ export const OPM_COMPARISON_BAR_OPTIONS_HOME = ({
     },
   };
 };
+
+export const ORDER_REPORT_PIE_CHART_OPTIONS = {
+  maintainAspectRatio: false,
+  responsive: false,
+  plugins: {
+    legend: {
+      display: true,
+      position: "right",
+      align: "start",
+      labels: {
+        usePointStyle: true,
+        font: {
+          size: 11
+        },
+        color: '#FFFFFF'
+      },
+    },
+    datalabels: {
+      formatter: (value, ctx) => {
+        let sum = 0;
+        const dataArr = ctx.chart.data.datasets[0].data;
+        dataArr.map(data => {
+          sum += data;
+        });
+        const _perc = (value * 100 / sum).toFixed(1);
+        const percentage = Number(_perc) > 5 ? `${_perc}%` : "";
+        return percentage;
+      },
+      font: { weight: 700 },
+      color: "#161A1D",
+
+    },
+    tooltip: {
+      enabled: false,
+      external: (context) => externalTooltipHandler(context, "reportPieChart", true),
+    }
+  },
+};
+
+export const HOURLY_ORDER_TREND_LINE_CHART_OPTION: Chart.ChartOptions = {
+  responsiveness: true,
+  plugins: {
+    legend: {
+      display: true,
+      position: "bottom",
+      align: "center",
+      labels: {
+        usePointStyle: true,
+        font: {
+          size: 11
+        },
+        color: '#FFFFFF'
+      },
+    },
+    datalabels: {
+      display: false,
+    },
+    tooltip: {
+      enabled: false,
+      external: (context) => externalTooltipHandler(context, "reportLineChart", true),
+    },
+  }
+}

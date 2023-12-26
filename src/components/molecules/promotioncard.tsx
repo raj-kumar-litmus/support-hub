@@ -2,11 +2,9 @@ import { FC } from "react";
 import CustomCard from "../atoms/customcard";
 import CustomImage from "../atoms/customimage";
 import CheckCircle from "../../assets/check_circle.svg";
-import {
-  PromotionCardProps,
-  InfoFieldProps,
-} from "../../@types/pages/OrderDetails";
+import { PromotionCardProps } from "../../@types/pages/OrderDetails";
 import { ORDER_DETAILS_LABELS } from "../../helpers/constants/appConstants";
+import InfoField from "../InfoField";
 
 const PromotionCard: FC<PromotionCardProps> = (props) => {
   return (
@@ -26,30 +24,20 @@ const PromotionCard: FC<PromotionCardProps> = (props) => {
     >
       <div className="flex p-0 justify-between">
         <InfoField
+          wrapperClassName="max-w-[10rem] min-w-[7rem]"
+          dataClassName="whitespace-nowrap text-ellipsis overflow-hidden"
           title={ORDER_DETAILS_LABELS.PROMOTION}
           data={props.promotion.promotionId}
-        />
+           />
         <InfoField
           title={ORDER_DETAILS_LABELS.DISCOUNT_AMOUNT}
           data={Number(props.promotion.discAmt).toFixed(2)}
-          className="text-right"
+          titleClassName="text-right"
+          wrapperClassName="max-w-[10rem] min-w-[7rem]"
+          dataClassName="whitespace-nowrap text-ellipsis overflow-hidden text-right"
         />
       </div>
     </CustomCard>
-  );
-};
-
-const InfoField = (props: InfoFieldProps) => {
-  return (
-    <div className="block text-xs font-normal max-w-[10rem] min-w-[7rem]">
-      <div className={`text-gray-400 ${props.className}`}>{props.title}</div>
-      <div
-        className={`text-gray-300 whitespace-nowrap text-ellipsis overflow-hidden ${props.className}`}
-        title={props.data.toString()}
-      >
-        {props.data}
-      </div>
-    </div>
   );
 };
 

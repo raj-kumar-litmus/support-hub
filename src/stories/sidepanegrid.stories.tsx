@@ -5,7 +5,7 @@ import SidePaneGrid from "../components/organisms/sidepanegrid";
 import { MENU_LIST } from "../helpers/utils/Utils";
 
 const meta = {
-  title: "Stories/sidepane- mobile",
+  title: "Components/SidepaneMobile",
   component: SidePaneGrid,
   parameters: {
     viewport: {
