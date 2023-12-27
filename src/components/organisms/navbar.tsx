@@ -1,8 +1,8 @@
 import { FC, KeyboardEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import QuickLinks from "../quicklinks";
+import QuickLinks from "../molecules/quicklinks";
 import CustomImage from "../atoms/customimage";
-import SearchBar from "./searchbar";
+import SearchBar from "../molecules/searchbar";
 import QuickLinksIcon from "../../assets/Quick Links.svg";
 import SephoraLogo from "../../assets/logo.svg";
 import MenuIcon from "../../assets/menu.svg";

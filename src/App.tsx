@@ -1,5 +1,5 @@
 import { FC } from "react";
-import AppContent from "./components/appcontent";
+import AppContent from "./components/organisms/appcontent";
 import { LoaderProvider } from "./context/loaderContext";
 import { AppProps } from "./@types/components/commonTypes";
 

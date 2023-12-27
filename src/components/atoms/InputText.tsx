@@ -1,6 +1,6 @@
 import { InputText} from "primereact/inputtext";
 import React from "react";
-import { CustomInputTextProps } from "../@types/components/commonTypes";
+import { CustomInputTextProps } from "../../@types/components/commonTypes";
 
 const CustomInputText: React.FC<CustomInputTextProps> = (props) => {
   return (

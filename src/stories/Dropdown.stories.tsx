@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "primereact/resources/primereact.min.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
-import CustomDropdown from "../components/DropDown";
+import CustomDropdown from "../components/atoms/DropDown";
 
 const meta = {
   title: "Components/DropDown",

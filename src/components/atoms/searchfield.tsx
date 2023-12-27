@@ -1,5 +1,5 @@
 import { FC } from "react";
-import CustomInputText from "../InputText";
+import CustomInputText from "./InputText";
 import { SearchFieldProps } from "../../@types/components/commonTypes";
 
 const SearchField: FC<SearchFieldProps> = (props) => {

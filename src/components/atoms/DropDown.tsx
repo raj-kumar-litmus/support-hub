@@ -1,7 +1,7 @@
 import { Dropdown } from "primereact/dropdown";
 import React from "react";
-import CustomImage from "./atoms/customimage";
-import { CustomDropdownProps } from "../@types/components/commonTypes";
+import CustomImage from "./customimage";
+import { CustomDropdownProps } from "../../@types/components/commonTypes";
 
 const CustomDropdown: React.FC<CustomDropdownProps> = (props) => {
   const {

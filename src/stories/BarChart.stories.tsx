@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { BrowserRouter as Router } from "react-router-dom";
-import BarChart from "../components/BarChart";
+import BarChart from "../components/molecules/BarChart";
 
 const meta = {
   title: "Components/BarChart",

@@ -4,11 +4,11 @@ import { ColumnGroup } from 'primereact/columngroup';
 import { Row } from 'primereact/row';
 import { FC, useEffect, useState } from "react";
 import useScreenSize from "../hooks/useScreenSize";
-import LineChart from "../components/LineChart";
+import LineChart from "../components/molecules/LineChart";
 import HorizontalTable from "../components/HorizontalTable";
 import CustomTab from "../components/atoms/customtab";
 import CustomTable from "../components/atoms/customtable";
-import Loader from "../components/loader";
+import Loader from "../components/atoms/loader";
 import OrderSummaryCard from "../components/OrderSummaryCard";
 import PieChart from "../components/PieChart";
 import {

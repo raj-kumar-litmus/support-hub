@@ -1,4 +1,4 @@
-import CustomSideBar from "../components/CustomSideBar";
+import CustomSideBar from "./molecules/CustomSideBar";
 import { FETCH_TYPES } from "../utils/Utils";
 import OPM from "../views/opm";
 import { LOCALE_OPTIONS, OPM_CHANNELS, PAYMENT_TYPES, SHIPMENT_TYPES } from "../constants/appConstants";

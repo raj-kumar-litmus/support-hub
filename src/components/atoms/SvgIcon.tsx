@@ -1,5 +1,5 @@
-import { useDynamicSvgImport } from "../utils/useDynamicSvgImport";
-import { SvgIconProps } from "../@types/components/commonTypes";
+import { useDynamicSvgImport } from "../../utils/useDynamicSvgImport";
+import { SvgIconProps } from "../../@types/components/commonTypes";
 
 function SvgIcon(props: SvgIconProps) {
   const { iconName, wrapperStyle, svgProp } = props;

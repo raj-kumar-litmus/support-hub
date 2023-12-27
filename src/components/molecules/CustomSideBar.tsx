@@ -1,10 +1,10 @@
 import { Sidebar } from "primereact/sidebar";
-import CustomButton from "./Button";
-import { LABELS } from "../constants/appConstants";
+import CustomButton from "../atoms/Button";
+import { LABELS } from "../../constants/appConstants";
 import {
   CustomSideBarProps,
   SideBarPositionEnums,
-} from "../@types/components/commonTypes";
+} from "../../@types/components/commonTypes";
 
 const CustomSideBar = (props: CustomSideBarProps) => {
   const { className = "" } = props;
