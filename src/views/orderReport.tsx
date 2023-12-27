@@ -14,8 +14,8 @@ import PieChart from "../components/PieChart";
 import {
   HOURLY_ORDER_TREND_LINE_CHART_OPTION,
   ORDER_REPORT_PIE_CHART_OPTIONS
-} from "../config/chartConfig";
-import { URL_HOURLYREPORT } from "../constants/apiConstants";
+} from "../helpers/config/chartConfig";
+import { URL_HOURLYREPORT } from "../helpers/constants/apiConstants";
 import {
   CHANNELWISE_DATA_LABELS,
   HOURLY_TREND_DATA_LABELS,
@@ -27,15 +27,15 @@ import {
   REPORT_TABS,
   SCREEN_WIDTH,
   TIMESTAMPS
-} from "../constants/appConstants";
+} from "../helpers/constants/appConstants";
 import {
   OrderReportData,
   OrderTableData,
   SummaryTableData
 } from "../@types/pages/orderReport";
-import { CURRENT_PST_DATE } from "../utils/dateTimeUtil";
-import { fetchData } from "../utils/fetchUtil";
-import { getTableHeaders } from "../utils/Utils";
+import { CURRENT_PST_DATE } from "../helpers/utils/dateTimeUtil";
+import { fetchData } from "../helpers/utils/fetchUtil";
+import { getTableHeaders } from "../helpers/utils/Utils";
 import SectionTitle from "../components/SectionTitle";
 
 const OrderReport = () => {

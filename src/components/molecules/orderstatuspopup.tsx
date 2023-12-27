@@ -5,8 +5,8 @@ import CustomTable from "../atoms/customtable";
 import {
   ORDER_DETAILS_LABELS,
   ORDER_STATUS_LIST,
-} from "../../constants/appConstants";
-import { getTableHeaders } from "../../utils/Utils";
+} from "../../helpers/constants/appConstants";
+import { getTableHeaders } from "../../helpers/utils/Utils";
 
 type OrderStatusPopupProps = {
   openDialog: boolean;

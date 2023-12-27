@@ -16,7 +16,7 @@ import OrderDetails from "./views/OrderDetails.js";
 import OrderReport from "./views/orderReport";
 import Sessions from "./views/sessions";
 import SkuLookup from "./views/skuLookup";
-import { ROUTES } from "./utils/Utils";
+import { ROUTES } from "./helpers/utils/Utils";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

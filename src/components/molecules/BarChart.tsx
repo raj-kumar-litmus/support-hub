@@ -14,8 +14,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useScreenSize from "../../hooks/useScreenSize";
 import RotateIcon from "../../assets/rotate.svg";
 import CustomImage from "../atoms/customimage";
-import { SCREEN_WIDTH } from "../../constants/appConstants";
-import { ROUTES, increaseLegendSpacing } from "../../utils/Utils";
+import { SCREEN_WIDTH } from "../../helpers/constants/appConstants";
+import { ROUTES, increaseLegendSpacing } from "../../helpers/utils/Utils";
 import { BarChartCompProps } from "../../@types/components/commonTypes";
 
 ChartJS.register(

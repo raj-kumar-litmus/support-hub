@@ -6,20 +6,20 @@ import Loader from "../components/atoms/loader";
 import {
   SKU_LOOKUP_CATALOG,
   SKU_LOOKUP_INVENTORY_STATUS,
-} from "../constants/apiConstants";
+} from "../helpers/constants/apiConstants";
 import {
   SCREEN_WIDTH,
   SKU_DETAILS,
   SKU_INVENTORY,
   SKU_PRICE_DETAILS,
   SKU_PRODUCT_INFO,
-} from "../constants/appConstants";
+} from "../helpers/constants/appConstants";
 import {
   HorizontalTableProps,
   HeaderProps,
 } from "../@types/components/commonTypes";
 import { SkuCardProps } from "../@types/pages/skuLookup";
-import { fetchData } from "../utils/fetchUtil";
+import { fetchData } from "../helpers/utils/fetchUtil";
 
 const HorizontalTable: FC<HorizontalTableProps> = (props) => {
   const tableHeadColSpan =

@@ -15,9 +15,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useScreenSize from "../../hooks/useScreenSize";
 import CustomImage from "../atoms/customimage";
 import RotateIcon from "../../assets/rotate.svg";
-import { SCREEN_WIDTH } from "../../constants/appConstants";
+import { SCREEN_WIDTH } from "../../helpers/constants/appConstants";
 import { LineChartProps } from "../../@types/components/commonTypes";
-import { ROUTES, increaseLegendSpacing } from "../../utils/Utils";
+import { ROUTES, increaseLegendSpacing } from "../../helpers/utils/Utils";
 
 ChartJS.register(
   CategoryScale,

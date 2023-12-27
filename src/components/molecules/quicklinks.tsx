@@ -11,7 +11,7 @@ import {
   QUICK_LINKS,
   QUICK_LINKS_HEADER,
   SEE_MORE,
-} from "../../constants/appConstants";
+} from "../../helpers/constants/appConstants";
 
 const QuickLinks: FC<QuickLinksProps> = (props) => {
   const [tabValue, setTabValue] = useState<number>(0);

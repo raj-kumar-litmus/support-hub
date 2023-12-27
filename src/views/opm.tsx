@@ -50,8 +50,8 @@ import {
   OPM_BAR_CHART_OPTIONS_SIDEBAR,
   OPM_OPTIONS,
   OPM_OPTIONS_HOME,
-} from "../config/chartConfig";
-import { URL_OPM } from "../constants/apiConstants";
+} from "../helpers/config/chartConfig";
+import { URL_OPM } from "../helpers/constants/apiConstants";
 import {
   CHART_LABELS,
   CHART_TABS,
@@ -68,7 +68,7 @@ import {
   PAYMENT_TYPES,
   SCREEN_WIDTH,
   SHIPMENT_TYPES,
-} from "../constants/appConstants";
+} from "../helpers/constants/appConstants";
 import { LoaderContext } from "../context/loaderContext";
 import { LoaderContextType } from "../@types/components/commonTypes";
 import { ChartData, ChartOptions, OPMProps } from "../@types/pages/opmCharts";
@@ -78,9 +78,9 @@ import {
   DATE_TIME_FORMAT_4,
   formatDate,
   getFormattedPSTDate,
-} from "../utils/dateTimeUtil";
-import { fetchData } from "../utils/fetchUtil";
-import { FETCH_TYPES, ROUTES, submitOnEnter } from "../utils/Utils";
+} from "../helpers/utils/dateTimeUtil";
+import { fetchData } from "../helpers/utils/fetchUtil";
+import { FETCH_TYPES, ROUTES, submitOnEnter } from "../helpers/utils/Utils";
 
 ChartJS.register(
   CategoryScale,

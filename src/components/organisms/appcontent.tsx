@@ -6,8 +6,8 @@ import Navbar from "./navbar";
 import SearchField from "../atoms/searchfield";
 import SidePaneGrid from "./sidepanegrid";
 import SidePaneList from "../molecules/sidepanelist";
-import { MENU_LIST, ROUTES } from "../../utils/Utils";
-import { SCREEN_WIDTH } from "../../constants/appConstants";
+import { MENU_LIST, ROUTES } from "../../helpers/utils/Utils";
+import { SCREEN_WIDTH } from "../../helpers/constants/appConstants";
 import { AppContentProps } from "../../@types/components/commonTypes";
 
 const AppContent: FC<AppContentProps> = (props) => {

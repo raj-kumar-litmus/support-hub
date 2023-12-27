@@ -20,11 +20,11 @@ import {
   URL_ORDER_DETAILS,
   URL_OMS_ORDER_FLOW,
   URL_PROMOTIONS,
-} from "../constants/apiConstants";
+} from "../helpers/constants/apiConstants";
 import {
   ORDER_DETAILS_LABELS,
   PAGE_TITLES,
-} from "../constants/appConstants";
+} from "../helpers/constants/appConstants";
 import {
   CommerceItem,
   CommerceItemData,
@@ -33,8 +33,8 @@ import {
   OrderData,
   IPromotion,
 } from "../@types/pages/OrderDetails";
-import { fetchData } from "../utils/fetchUtil";
-import { getTableHeaders } from "../utils/Utils";
+import { fetchData } from "../helpers/utils/fetchUtil";
+import { getTableHeaders } from "../helpers/utils/Utils";
 
 const OrderDetails: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);

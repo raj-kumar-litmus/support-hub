@@ -4,7 +4,7 @@ import CustomImage from "./atoms/customimage";
 import CustomTable from "./atoms/customtable";
 import FilledCheckCircle from "../assets/filled_check_circle.svg";
 import Warning from "../assets/warning.svg";
-import { SEVERITY } from "../constants/appConstants";
+import { SEVERITY } from "../helpers/constants/appConstants";
 import { GridTableProps } from "../@types/components/commonTypes";
 
 const GridTable: FC<GridTableProps> = (props) => {

@@ -43,9 +43,9 @@ import {
   OPM_COMPARISON_BAR_OPTIONS_HOME,
   OPM_COMPARISON_OPTIONS,
   OPM_COMPARISON_OPTIONS_HOME,
-} from "../config/chartConfig";
-import { URL_OPM_COMPARISON } from "../constants/apiConstants";
-import { ROUTES, submitOnEnter } from "../utils/Utils";
+} from "../helpers/config/chartConfig";
+import { URL_OPM_COMPARISON } from "../helpers/constants/apiConstants";
+import { ROUTES, submitOnEnter } from "../helpers/utils/Utils";
 import {
   OPM_CHANNELS,
   LABELS,
@@ -59,7 +59,7 @@ import {
   OPM_CHART_DEFAULT,
   SCREEN_WIDTH,
   DURATIONS,
-} from "../constants/appConstants";
+} from "../helpers/constants/appConstants";
 import { LoaderContext } from "../context/loaderContext";
 import { LoaderContextType } from "../@types/components/commonTypes";
 import {
@@ -69,8 +69,8 @@ import {
   formatDate,
   getFormattedPSTDate,
   getPSTdate,
-} from "../utils/dateTimeUtil";
-import { fetchData } from "../utils/fetchUtil";
+} from "../helpers/utils/dateTimeUtil";
+import { fetchData } from "../helpers/utils/fetchUtil";
 import CustomTab from "../components/atoms/customtab";
 import BarChart from "../components/molecules/BarChart";
 

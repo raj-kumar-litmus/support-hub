@@ -1,6 +1,6 @@
 import { Sidebar } from "primereact/sidebar";
 import CustomButton from "../atoms/Button";
-import { LABELS } from "../../constants/appConstants";
+import { LABELS } from "../../helpers/constants/appConstants";
 import {
   CustomSideBarProps,
   SideBarPositionEnums,

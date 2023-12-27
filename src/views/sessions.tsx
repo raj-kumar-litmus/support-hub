@@ -19,8 +19,8 @@ import refreshIcon from "../assets/refresh_icon.svg";
 import CalendarIcon from "../assets/white_calendar.svg";
 import { ChartData, SessionData } from "../@types/pages/Sessions";
 import { LoaderContextType } from "../@types/components/commonTypes";
-import { BAR_CHART_OPTIONS } from "../config/chartConfig";
-import { URL_SESSIONS } from "../constants/apiConstants";
+import { BAR_CHART_OPTIONS } from "../helpers/config/chartConfig";
+import { URL_SESSIONS } from "../helpers/constants/apiConstants";
 import {
   SESSIONS_CHANNEL_LIST,
   DATE_AND_TIME_FORMATS,
@@ -32,7 +32,7 @@ import {
   SESSIONS_CHART_DEFAULT,
   SCREEN_WIDTH,
   DURATIONS,
-} from "../constants/appConstants";
+} from "../helpers/constants/appConstants";
 import { LoaderContext } from "../context/loaderContext";
 import {
   CURRENT_PST_DATE,
@@ -40,9 +40,9 @@ import {
   DATE_TIME_FORMAT_4,
   formatDate,
   getFormattedPSTDate,
-} from "../utils/dateTimeUtil";
-import { fetchData } from "../utils/fetchUtil";
-import { ROUTES, submitOnEnter } from "../utils/Utils";
+} from "../helpers/utils/dateTimeUtil";
+import { fetchData } from "../helpers/utils/fetchUtil";
+import { ROUTES, submitOnEnter } from "../helpers/utils/Utils";
 
 const Sessions = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
