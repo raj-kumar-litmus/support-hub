@@ -1,7 +1,7 @@
 import { OverlayPanel } from "primereact/overlaypanel";
 import React, { useRef } from "react";
-import CustomOverlayFocusRoom from "./common/OverlayFocusRoom";
-import { ApiWebServerCard } from "../@types/components/commonTypes";
+import CustomOverlayFocusRoom from "./OverlayFocusRoom";
+import { ApiWebServerCard } from "../../@types/components/commonTypes";
 
 const WebServerCard: React.FC<ApiWebServerCard> = (props) => {
   const op = useRef<OverlayPanel>(null);

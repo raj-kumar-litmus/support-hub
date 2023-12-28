@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { InfoFieldProps } from "../@types/components/commonTypes";
+import { InfoFieldProps } from "../../@types/components/commonTypes";
 
 const InfoField: FC<InfoFieldProps> = (props) => {
   return (

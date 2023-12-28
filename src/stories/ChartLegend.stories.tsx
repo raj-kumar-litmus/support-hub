@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
-import ChartLegend from "../components/common/ChartLegend";
+import ChartLegend from "../components/atoms/ChartLegend";
 
 const meta: any = {
   title: "Components/ChartLegend",

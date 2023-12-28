@@ -9,7 +9,7 @@ import {
   Routes,
 } from "react-router-dom";
 import App from "./App";
-import Chart from "./components/ChartIndex";
+import Chart from "./components/organisms/ChartIndex";
 import DcOpenOrders from "./views/DcOpenOrders";
 import HomePage from "./views/homePage";
 import OrderDetails from "./views/OrderDetails.js";

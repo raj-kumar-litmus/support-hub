@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import HorizontalTable from "../components/HorizontalTable";
+import HorizontalTable from "../components/atoms/HorizontalTable";
 
 const meta = {
   title: "Components/HorizontalTable",

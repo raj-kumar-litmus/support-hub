@@ -1,6 +1,6 @@
 import { OverlayPanel } from "primereact/overlaypanel";
-import React, { forwardRef } from "react";
-import CustomOverlay from "./CustomOverlay";
+import { forwardRef } from "react";
+import CustomOverlay from "../atoms/CustomOverlay";
 import { CustomOverlayProps } from "../../@types/components/commonTypes";
 
 const CustomOverlayFocusRoom = forwardRef<OverlayPanel, CustomOverlayProps>(

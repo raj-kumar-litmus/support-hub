@@ -5,12 +5,12 @@ import { Row } from 'primereact/row';
 import { FC, useEffect, useState } from "react";
 import useScreenSize from "../hooks/useScreenSize";
 import LineChart from "../components/molecules/LineChart";
-import HorizontalTable from "../components/HorizontalTable";
+import HorizontalTable from "../components/atoms/HorizontalTable";
 import CustomTab from "../components/atoms/customtab";
 import CustomTable from "../components/atoms/customtable";
 import Loader from "../components/atoms/loader";
-import OrderSummaryCard from "../components/OrderSummaryCard";
-import PieChart from "../components/PieChart";
+import OrderSummaryCard from "../components/molecules/OrderSummaryCard";
+import PieChart from "../components/atoms/PieChart";
 import {
   HOURLY_ORDER_TREND_LINE_CHART_OPTION,
   ORDER_REPORT_PIE_CHART_OPTIONS
@@ -36,7 +36,7 @@ import {
 import { CURRENT_PST_DATE } from "../helpers/utils/dateTimeUtil";
 import { fetchData } from "../helpers/utils/fetchUtil";
 import { getTableHeaders } from "../helpers/utils/Utils";
-import SectionTitle from "../components/SectionTitle";
+import SectionTitle from "../components/atoms/SectionTitle";
 
 const OrderReport = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);

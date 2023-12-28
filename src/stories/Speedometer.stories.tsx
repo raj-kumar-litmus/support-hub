@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
-import Speedometer from "../components/common/Speedometer";
+import Speedometer from "../components/atoms/Speedometer";
 
 const meta: any = {
   title: "Components/Speedometer",

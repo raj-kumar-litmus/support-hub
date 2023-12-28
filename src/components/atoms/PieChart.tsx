@@ -1,8 +1,8 @@
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from "chart.js";
 import { FC } from "react";
 import { Pie } from "react-chartjs-2";
-import useScreenSize from "../hooks/useScreenSize";
-import { PieChartProps } from "../@types/components/commonTypes";
+import useScreenSize from "../../hooks/useScreenSize";
+import { PieChartProps } from "../../@types/components/commonTypes";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 

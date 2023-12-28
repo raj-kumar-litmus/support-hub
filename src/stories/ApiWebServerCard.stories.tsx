@@ -1,5 +1,5 @@
 import type { Meta } from "@storybook/react";
-import WebServerCard from "../components/ApiWebServerCard";
+import WebServerCard from "../components/molecules/ApiWebServerCard";
 
 const meta: Meta = {
   title: "Components/ServerCard&Overlay",

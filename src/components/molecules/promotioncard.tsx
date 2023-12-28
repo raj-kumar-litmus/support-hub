@@ -4,7 +4,7 @@ import CustomImage from "../atoms/customimage";
 import CheckCircle from "../../assets/check_circle.svg";
 import { PromotionCardProps } from "../../@types/pages/OrderDetails";
 import { ORDER_DETAILS_LABELS } from "../../helpers/constants/appConstants";
-import InfoField from "../InfoField";
+import InfoField from "./InfoField";
 
 const PromotionCard: FC<PromotionCardProps> = (props) => {
   return (

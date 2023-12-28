@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import GridTable from "../components/GridTable";
+import GridTable from "../components/molecules/GridTable";
 
 const meta = {
   title: "Components/GridTable",

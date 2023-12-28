@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import PieChart from "../components/PieChart";
+import PieChart from "../components/atoms/PieChart";
 
 const meta = {
   title: "Components/PieChart",

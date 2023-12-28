@@ -359,7 +359,7 @@ export interface ApiWebServerCard {
 }
 
 export interface CustomOverlayProps extends OverlayPanelProps {
-  children: ReactNode;
+  children?: ReactNode;
   header?: string;
   box1Content?: string;
   box1Header?: string;

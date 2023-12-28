@@ -1,8 +1,8 @@
 import React from "react";
-import OPM from "../views/opm";
-import OpmComparison from "../views/opmComparison";
-import { ChartProps } from "../@types/components/commonTypes";
-import { FETCH_TYPES } from "../helpers/utils/Utils";
+import OPM from "../../views/opm";
+import OpmComparison from "../../views/opmComparison";
+import { ChartProps } from "../../@types/components/commonTypes";
+import { FETCH_TYPES } from "../../helpers/utils/Utils";
 
 const Chart: React.FC<ChartProps> = (props) => {
   return (
