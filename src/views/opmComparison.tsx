@@ -552,7 +552,7 @@ const OpmComparison: React.FC = () => {
                     label={LABELS.SUBMIT}
                     isDisabled={disabled}
                     isRounded={true}
-                    className="ml-auto  self-end relative "
+                    className="ml-auto self-end relative"
                   />
                 </form>
               ) : (
