@@ -1,12 +1,15 @@
-import { Card } from "primereact/card";
 import { FC } from "react";
+import CustomCard from "../atoms/customcard";
 import { HomeCardProps } from "../../@types/components/commonTypes";
 
 const HomeCard: FC<HomeCardProps> = (props) => {
   return (
-    <Card title={props.title} className="home-card bg-black-200 text-gray-400">
+    <CustomCard
+      title={props.title}
+      className="home-card bg-black-200 text-gray-400"
+    >
       <>{props.value}</>
-    </Card>
+    </CustomCard>
   );
 };
 

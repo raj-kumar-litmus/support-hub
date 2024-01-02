@@ -1,12 +1,11 @@
-import { Card } from "primereact/card";
 import { FC } from "react";
 import CustomImage from "../atoms/customimage";
+import CustomCard from "../atoms/customcard";
 import { MenuCardProps } from "../../@types/components/commonTypes";
-
 
 const MenuCard: FC<MenuCardProps> = (props) => {
   return (
-    <Card
+    <CustomCard
       className={`menu-card grid items-center rounded-xl h-[90px] w-[158px] m-2 cursor-pointer text-center bg-black-300 !shadow-none ${
         props.selectedMenu === props.menu.id ? "selected-menu" : ""
       }`}
@@ -18,7 +17,7 @@ const MenuCard: FC<MenuCardProps> = (props) => {
         alt="menu.name"
       />
       <span className="text-gray-300 text-sm ">{props.menu.name}</span>
-    </Card>
+    </CustomCard>
   );
 };
 
