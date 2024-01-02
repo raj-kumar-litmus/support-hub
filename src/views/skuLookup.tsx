@@ -1,25 +1,22 @@
 import { FC, Fragment, KeyboardEvent, useEffect, useState } from "react";
 import useScreenSize from "../hooks/useScreenSize";
-import CustomCard from "../components/common/customcard";
-import SearchBar from "../components/common/searchbar";
-import Loader from "../components/loader";
+import CustomCard from "../components/atoms/customcard";
+import SearchBar from "../components/molecules/searchbar";
+import Loader from "../components/atoms/loader";
 import {
   SKU_LOOKUP_CATALOG,
   SKU_LOOKUP_INVENTORY_STATUS,
-} from "../constants/apiConstants";
+} from "../helpers/constants/apiConstants";
 import {
   SCREEN_WIDTH,
   SKU_DETAILS,
   SKU_INVENTORY,
   SKU_PRICE_DETAILS,
   SKU_PRODUCT_INFO,
-} from "../constants/appConstants";
-import {
-  HorizontalTableProps,
-  HeaderProps,
-} from "../@types/components/commonTypes";
+} from "../helpers/constants/appConstants";
+import { HorizontalTableProps } from "../@types/components/commonTypes";
 import { SkuCardProps } from "../@types/pages/skuLookup";
-import { fetchData } from "../utils/fetchUtil";
+import { fetchData } from "../helpers/utils/fetchUtil";
 
 const HorizontalTable: FC<HorizontalTableProps> = (props) => {
   const tableHeadColSpan =
@@ -330,7 +327,7 @@ const SkuCard = (props: SkuCardProps) => {
   );
 };
 
-const Header: FC<HeaderProps> = (props) => {
+const Header: FC<{ title: string }> = (props) => {
   return (
     <div className="text-gray-400 rounded-lg border border-black-400 p-2 my-2 w-full text-center bg-black-300">
       {props.title}

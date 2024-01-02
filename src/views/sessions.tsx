@@ -1,15 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router";
 import useScreenSize from "../hooks/useScreenSize";
-import BarChart from "../components/BarChart";
-import CustomButton from "../components/Button";
-import FilteredCard from "../components/FilteredCard";
-import CustomCalendar from "../components/common/CustomCalendar";
-import CustomDropdown from "../components/DropDown";
-import CustomDialog from "../components/common/customdialog";
-import CustomImage from "../components/common/customimage";
-import CustomTab from "../components/common/customtab";
-import Loader from "../components/loader";
+import BarChart from "../components/organisms/BarChart";
+import CustomButton from "../components/atoms/Button";
+import FilteredCard from "../components/molecules/FilteredCard";
+import CustomCalendar from "../components/molecules/CustomCalendar";
+import CustomDropdown from "../components/atoms/DropDown";
+import CustomDialog from "../components/atoms/customdialog";
+import CustomImage from "../components/atoms/customimage";
+import CustomTab from "../components/atoms/customtab";
+import Loader from "../components/atoms/loader";
 import ChannelIcon from "../assets/channel.svg";
 import FilterIcon from "../assets/filter-dark.svg";
 import ArrowDownIcon from "../assets/arrown_down_white.svg";
@@ -19,8 +19,8 @@ import refreshIcon from "../assets/refresh_icon.svg";
 import CalendarIcon from "../assets/white_calendar.svg";
 import { ChartData, SessionData } from "../@types/pages/Sessions";
 import { LoaderContextType } from "../@types/components/commonTypes";
-import { BAR_CHART_OPTIONS } from "../config/chartConfig";
-import { URL_SESSIONS } from "../constants/apiConstants";
+import { BAR_CHART_OPTIONS } from "../helpers/config/chartConfig";
+import { URL_SESSIONS } from "../helpers/constants/apiConstants";
 import {
   SESSIONS_CHANNEL_LIST,
   DATE_AND_TIME_FORMATS,
@@ -32,7 +32,7 @@ import {
   SESSIONS_CHART_DEFAULT,
   SCREEN_WIDTH,
   DURATIONS,
-} from "../constants/appConstants";
+} from "../helpers/constants/appConstants";
 import { LoaderContext } from "../context/loaderContext";
 import {
   CURRENT_PST_DATE,
@@ -40,9 +40,9 @@ import {
   DATE_TIME_FORMAT_4,
   formatDate,
   getFormattedPSTDate,
-} from "../utils/dateTimeUtil";
-import { fetchData } from "../utils/fetchUtil";
-import { ROUTES, submitOnEnter } from "../components/utils/Utils";
+} from "../helpers/utils/dateTimeUtil";
+import { fetchData } from "../helpers/utils/fetchUtil";
+import { ROUTES, submitOnEnter } from "../helpers/utils/Utils";
 
 const Sessions = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -90,7 +90,7 @@ const Sessions = () => {
   const [disabled, setDisabled] = useState(true);
   const [tabValue, setTabValue] = useState<number>(2);
   const [maxOPM, setMaxOPM] = useState<number>(
-    SESSIONS_CHART_DEFAULT.STEP_SIZE,
+    SESSIONS_CHART_DEFAULT.STEP_SIZE
   );
   const [id, setId] = useState<string>("home-bar-chart");
   const [showFilteredCards, setShowFilteredCards] = useState<boolean>(false);
@@ -258,7 +258,7 @@ const Sessions = () => {
     const customChartConfig = {
       ...BAR_CHART_OPTIONS(
         Number(formFields.find((e) => e.name === "period").value) < 11 &&
-          width > SCREEN_WIDTH.SM,
+          width > SCREEN_WIDTH.SM
       ),
     };
     if (width > SCREEN_WIDTH.SM) {
@@ -301,7 +301,7 @@ const Sessions = () => {
 
   useEffect(() => {
     setId(
-      location?.pathname?.includes("sessions") ? "bar-chart" : "home-bar-chart",
+      location?.pathname?.includes("sessions") ? "bar-chart" : "home-bar-chart"
     );
   }, []);
 

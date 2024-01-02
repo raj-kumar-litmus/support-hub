@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "primereact/resources/primereact.min.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
-import CustomCalendar from "../components/common/CustomCalendar";
+import CustomCalendar from "../components/molecules/CustomCalendar";
 
 const meta = {
   title: "Components/Calendar",

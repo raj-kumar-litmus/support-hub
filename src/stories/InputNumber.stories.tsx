@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "primereact/resources/primereact.min.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
-import CustomInputNumber from "../components/common/CustomInputNumber";
+import CustomInputNumber from "../components/atoms/CustomInputNumber";
 
 const meta = {
   title: "Components/InputNumber",
