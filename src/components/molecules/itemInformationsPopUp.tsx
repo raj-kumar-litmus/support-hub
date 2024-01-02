@@ -4,7 +4,7 @@ import CustomDialog from "../atoms/customdialog";
 import {
   CommerceItemData,
   ItemInformationsPopUpProps,
-} from "../../@types/pages/OrderDetails";
+} from "../../@types/pages/orderDetails";
 import { ORDER_DETAILS_LABELS } from "../../helpers/constants/appConstants";
 
 const ItemInformationsPopUp: FC<ItemInformationsPopUpProps> = (props) => {

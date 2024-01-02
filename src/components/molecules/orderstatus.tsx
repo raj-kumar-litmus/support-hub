@@ -1,7 +1,7 @@
 import React from "react";
 import CustomDialog from "../atoms/customdialog";
 import Timeline from "./orderTimeline";
-import { OmsOrderFlow } from "../../@types/pages/OrderDetails";
+import { OmsOrderFlow } from "../../@types/pages/orderDetails";
 import { ORDER_DETAILS_LABELS } from "../../helpers/constants/appConstants";
 interface OrderStatusProps {
   orderStatus: OmsOrderFlow;

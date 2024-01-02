@@ -8,7 +8,7 @@ import {
   Tooltip,
 } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import { externalTooltipHandler } from "../utils/Utils";
+import { externalTooltipHandler } from "../utils/utils";
 import {
   SESSIONS_CHART_DEFAULT,
   CHART_LABELS,

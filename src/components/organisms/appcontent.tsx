@@ -6,7 +6,7 @@ import Navbar from "./navbar";
 import SearchField from "../atoms/searchfield";
 import SidePaneGrid from "./sidepanegrid";
 import SidePaneList from "../molecules/sidepanelist";
-import { MENU_LIST, ROUTES } from "../../helpers/utils/Utils";
+import { MENU_LIST, ROUTES } from "../../helpers/utils/utils";
 import { SCREEN_WIDTH } from "../../helpers/constants/appConstants";
 import { AppContentProps } from "../../@types/components/commonTypes";
 

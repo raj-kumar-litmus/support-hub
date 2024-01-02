@@ -17,7 +17,7 @@ import CustomImage from "../atoms/customimage";
 import RotateIcon from "../../assets/rotate.svg";
 import { SCREEN_WIDTH } from "../../helpers/constants/appConstants";
 import { LineChartProps } from "../../@types/components/commonTypes";
-import { ROUTES, increaseLegendSpacing } from "../../helpers/utils/Utils";
+import { ROUTES, increaseLegendSpacing } from "../../helpers/utils/utils";
 
 ChartJS.register(
   CategoryScale,

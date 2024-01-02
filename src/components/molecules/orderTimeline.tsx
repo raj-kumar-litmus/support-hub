@@ -1,7 +1,7 @@
 import React from "react";
 import TimelineCard from "../atoms/TimelineCard";
 import Stepper from "../atoms/TimelineStepper";
-import { TimelineProps } from "../../@types/pages/OrderDetails";
+import { TimelineProps } from "../../@types/pages/orderDetails";
 
 const Timeline: React.FC<TimelineProps> = (props) => {
   const getStatusDate = (dateX: string) => {

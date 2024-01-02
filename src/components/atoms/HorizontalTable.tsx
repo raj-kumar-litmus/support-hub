@@ -2,7 +2,7 @@ import { FC } from "react";
 import { HorizontalTableProps } from "../../@types/components/commonTypes";
 
 const HorizontalTable: FC<HorizontalTableProps> = (props) => {
-  const tableHeadColSpan = props.tableData?.length > 0 && Object.entries(props.tableData[0]).length * 2;
+  const tableHeadColSpan = props.tableData?.length > 0 && Object.entries(props.tableData[0]).length * 2 || 1;
 
   return (
     <div className="rounded-lg border border-black-400 overflow-x-auto mt-4">

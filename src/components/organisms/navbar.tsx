@@ -7,7 +7,7 @@ import QuickLinksIcon from "../../assets/Quick Links.svg";
 import SephoraLogo from "../../assets/logo.svg";
 import MenuIcon from "../../assets/menu.svg";
 import { NavbarProps } from "../../@types/components/commonTypes";
-import { MENU_LIST, ROUTES } from "../../helpers/utils/Utils";
+import { MENU_LIST, ROUTES } from "../../helpers/utils/utils";
 
 const Navbar: FC<NavbarProps> = (props) => {
   const navigate = useNavigate();

@@ -15,7 +15,7 @@ import useScreenSize from "../../hooks/useScreenSize";
 import CustomImage from "../atoms/customimage";
 import RotateIcon from "../../assets/rotate.svg";
 import { SCREEN_WIDTH } from "../../helpers/constants/appConstants";
-import { ROUTES, increaseLegendSpacing } from "../../helpers/utils/Utils";
+import { ROUTES, increaseLegendSpacing } from "../../helpers/utils/utils";
 import { BarChartCompProps } from "../../@types/components/commonTypes";
 
 ChartJS.register(

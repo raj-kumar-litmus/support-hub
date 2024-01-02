@@ -3,7 +3,7 @@ import CustomCard from "../atoms/customcard";
 import CustomImage from "../atoms/customimage"; 
 import InfoField from "./InfoField";
 import CheckCircle from "../../assets/check_circle.svg";
-import { PromotionCardProps } from "../../@types/pages/OrderDetails";
+import { PromotionCardProps } from "../../@types/pages/orderDetails";
 import { ORDER_DETAILS_LABELS } from "../../helpers/constants/appConstants";
 
 const PromotionCard: FC<PromotionCardProps> = (props) => {

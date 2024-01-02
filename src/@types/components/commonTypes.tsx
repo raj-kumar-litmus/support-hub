@@ -11,7 +11,7 @@ import { SidebarProps } from "primereact/sidebar";
 import { ToastProps } from "primereact/toast";
 import { OverlayPanelProps } from "primereact/overlaypanel";
 import { FC, KeyboardEvent, ReactNode } from "react";
-import { CommerceItemData } from "../pages/OrderDetails";
+import { CommerceItemData } from "../pages/orderDetails";
 import { DCOpenOrders } from "../pages/dcOpenOrders";
 import { ModalEnums } from "../pages/opmCharts";
 import { InputTextProps } from "primereact/inputtext";

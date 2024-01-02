@@ -17,7 +17,7 @@ import SandGlassIcon from "../assets/sandglass.svg";
 import openNewPageIcon from "../assets/open_in_new.svg";
 import refreshIcon from "../assets/refresh_icon.svg";
 import CalendarIcon from "../assets/white_calendar.svg";
-import { ChartData, SessionData } from "../@types/pages/Sessions";
+import { ChartData, SessionData } from "../@types/pages/sessions";
 import { LoaderContextType } from "../@types/components/commonTypes";
 import { BAR_CHART_OPTIONS } from "../helpers/config/chartConfig";
 import { URL_SESSIONS } from "../helpers/constants/apiConstants";
@@ -42,7 +42,7 @@ import {
   getFormattedPSTDate,
 } from "../helpers/utils/dateTimeUtil";
 import { fetchData } from "../helpers/utils/fetchUtil";
-import { ROUTES, submitOnEnter } from "../helpers/utils/Utils";
+import { ROUTES, submitOnEnter } from "../helpers/utils/utils";
 
 const Sessions = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);

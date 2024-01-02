@@ -35,7 +35,7 @@ import {
 } from "../@types/pages/orderReport";
 import { CURRENT_PST_DATE } from "../helpers/utils/dateTimeUtil";
 import { fetchData } from "../helpers/utils/fetchUtil";
-import { getTableHeaders } from "../helpers/utils/Utils";
+import { getTableHeaders } from "../helpers/utils/utils";
 import SectionTitle from "../components/atoms/SectionTitle";
 
 const OrderReport = () => {

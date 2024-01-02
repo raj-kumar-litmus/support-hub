@@ -6,7 +6,7 @@ import Loader from "../components/atoms/loader";
 import { DCOpenOrders, orderData } from "../@types/pages/dcOpenOrders";
 import { URL_DC_OPEN_ORDERS } from "../helpers/constants/apiConstants";
 import { fetchData } from "../helpers/utils/fetchUtil";
-import { getTableHeaders } from "../helpers/utils/Utils";
+import { getTableHeaders } from "../helpers/utils/utils";
 import { PAGE_TITLES } from "../helpers/constants/appConstants";
 
 const DcOpenOrders: FC = () => {

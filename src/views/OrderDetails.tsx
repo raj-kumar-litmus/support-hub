@@ -32,9 +32,9 @@ import {
   OmsOrderStatus,
   OrderData,
   IPromotion,
-} from "../@types/pages/OrderDetails";
+} from "../@types/pages/orderDetails";
 import { fetchData } from "../helpers/utils/fetchUtil";
-import { getTableHeaders } from "../helpers/utils/Utils";
+import { getTableHeaders } from "../helpers/utils/utils";
 
 const OrderDetails: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);

@@ -29,7 +29,7 @@ import { LoaderContext } from "../context/loaderContext";
 import { LoaderContextType } from "../@types/components/commonTypes";
 import { getFormattedPSTDate } from "../helpers/utils/dateTimeUtil";
 import { fetchData } from "../helpers/utils/fetchUtil";
-import { FETCH_TYPES } from "../helpers/utils/Utils";
+import { FETCH_TYPES } from "../helpers/utils/utils";
 
 const CardTitle = (props: { title: string; icon: any; classname?: string }) => {
   const { classname = "" } = props;

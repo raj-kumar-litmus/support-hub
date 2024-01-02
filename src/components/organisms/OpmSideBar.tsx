@@ -7,7 +7,7 @@ import {
   PAYMENT_TYPES,
   SHIPMENT_TYPES,
 } from "../../helpers/constants/appConstants";
-import { FETCH_TYPES } from "../../helpers/utils/Utils";
+import { FETCH_TYPES } from "../../helpers/utils/utils";
 
 const OpmSideBar = (props: OpmSideBarProps) => {
   const {

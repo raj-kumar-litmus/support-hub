@@ -45,7 +45,7 @@ import {
   OPM_COMPARISON_OPTIONS_HOME,
 } from "../helpers/config/chartConfig";
 import { URL_OPM_COMPARISON } from "../helpers/constants/apiConstants";
-import { ROUTES, submitOnEnter } from "../helpers/utils/Utils";
+import { ROUTES, submitOnEnter } from "../helpers/utils/utils";
 import {
   OPM_CHANNELS,
   LABELS,

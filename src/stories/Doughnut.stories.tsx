@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import DoughnutChart from "../components/atoms/Doughnut";
-import { centerText } from "../helpers/utils/Utils";
+import { centerText } from "../helpers/utils/utils";
 
 const meta: any = {
   title: "Components/DoughNutChart",
