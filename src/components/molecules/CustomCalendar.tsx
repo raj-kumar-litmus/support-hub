@@ -1,6 +1,6 @@
 import { Calendar } from "primereact/calendar";
 import { FC, useEffect, useState } from "react";
-import CustomImage from "../atoms/customimage";
+import CustomImage from "../atoms/CustomImage";
 import CustomToast from "../atoms/CustomToast";
 import CustomInputNumber from "../atoms/CustomInputNumber";
 import ArrowDown from "../../assets/arrow_down.svg";

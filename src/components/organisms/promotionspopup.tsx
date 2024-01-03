@@ -1,6 +1,6 @@
 import { FC } from "react";
-import CustomDialog from "../atoms/customdialog";
-import PromotionCard from "../molecules/promotioncard";
+import CustomDialog from "../atoms/CustomDialog";
+import PromotionCard from "../molecules/PromotionCard";
 import { PromotionsPopupProps } from "../../@types/pages/orderDetails";
 import { ORDER_DETAILS_LABELS } from "../../helpers/constants/appConstants";
 

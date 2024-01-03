@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import CustomImage from "../atoms/customimage";
+import CustomImage from "../atoms/CustomImage";
 import { IMenu, SidePaneListProps } from "../../@types/components/commonTypes";
 
 const SidePaneList: FC<SidePaneListProps> = (props) => {

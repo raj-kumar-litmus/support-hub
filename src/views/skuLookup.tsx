@@ -1,8 +1,8 @@
 import { FC, Fragment, KeyboardEvent, useEffect, useState } from "react";
 import useScreenSize from "../hooks/useScreenSize";
-import CustomCard from "../components/atoms/customcard";
-import SearchBar from "../components/molecules/searchbar";
-import Loader from "../components/atoms/loader";
+import CustomCard from "../components/atoms/CustomCard";
+import SearchBar from "../components/molecules/SearchBar";
+import Loader from "../components/atoms/Loader";
 import {
   SKU_LOOKUP_CATALOG,
   SKU_LOOKUP_INVENTORY_STATUS,

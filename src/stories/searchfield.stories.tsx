@@ -1,7 +1,7 @@
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import type { Meta, StoryObj } from "@storybook/react";
 import { BrowserRouter as Router } from "react-router-dom";
-import SearchField from "../components/atoms/searchfield";
+import SearchField from "../components/atoms/SearchField";
 
 const meta = {
   title: "Components/SearchMobile",

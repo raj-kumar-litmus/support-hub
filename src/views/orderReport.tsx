@@ -6,9 +6,9 @@ import { FC, useEffect, useState } from "react";
 import useScreenSize from "../hooks/useScreenSize";
 import LineChart from "../components/molecules/LineChart";
 import HorizontalTable from "../components/atoms/HorizontalTable";
-import CustomTab from "../components/atoms/customtab";
-import CustomTable from "../components/atoms/customtable";
-import Loader from "../components/atoms/loader";
+import CustomTab from "../components/atoms/CustomTab";
+import CustomTable from "../components/atoms/CustomTable";
+import Loader from "../components/atoms/Loader";
 import OrderSummaryCard from "../components/molecules/OrderSummaryCard";
 import PieChart from "../components/atoms/PieChart";
 import {

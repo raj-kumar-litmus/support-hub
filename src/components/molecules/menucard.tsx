@@ -1,6 +1,6 @@
 import { FC } from "react";
-import CustomImage from "../atoms/customimage";
-import CustomCard from "../atoms/customcard";
+import CustomImage from "../atoms/CustomImage";
+import CustomCard from "../atoms/CustomCard";
 import { MenuCardProps } from "../../@types/components/commonTypes";
 
 const MenuCard: FC<MenuCardProps> = (props) => {

@@ -1,5 +1,5 @@
 import React from "react";
-import CustomImage from "../atoms/customimage";
+import CustomImage from "../atoms/CustomImage";
 import GlobalLoaderIcon from "../../assets/loader.gif";
 import { LoaderProps } from "../../@types/components/commonTypes";
 

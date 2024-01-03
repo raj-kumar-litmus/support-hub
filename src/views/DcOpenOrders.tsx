@@ -1,8 +1,8 @@
 import { Column } from "primereact/column";
 import { FC, useEffect, useState } from "react";
 import Card from "../components/atoms/Card";
-import CustomTable from "../components/atoms/customtable";
-import Loader from "../components/atoms/loader";
+import CustomTable from "../components/atoms/CustomTable";
+import Loader from "../components/atoms/Loader";
 import { DCOpenOrders, orderData } from "../@types/pages/dcOpenOrders";
 import { URL_DC_OPEN_ORDERS } from "../helpers/constants/apiConstants";
 import { fetchData } from "../helpers/utils/fetchUtil";

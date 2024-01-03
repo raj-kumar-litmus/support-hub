@@ -1,5 +1,5 @@
 import React from "react";
-import CustomImage from "../atoms/customimage";
+import CustomImage from "../atoms/CustomImage";
 import CustomButton from "../atoms/Button";
 import CrossIcon from "../../assets/cross.svg";
 import { FilteredCardProps } from "../../@types/components/commonTypes";

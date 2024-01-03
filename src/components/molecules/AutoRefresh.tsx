@@ -3,7 +3,7 @@ import useInterval from "../../hooks/useInterval";
 import CustomCheckbox from "../atoms/CustomCheckBox";
 import CustomInputNumber from "../atoms/CustomInputNumber";
 import CustomToast from "../atoms/CustomToast";
-import CustomImage from "../atoms/customimage";
+import CustomImage from "../atoms/CustomImage";
 import InfoIcon from "../../assets/info.svg";
 import { LABELS } from "../../helpers/constants/appConstants";
 

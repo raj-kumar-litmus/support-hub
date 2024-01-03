@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import MenuCard from "../molecules/menucard";
+import MenuCard from "../molecules/MenuCard";
 import { SidePaneGridProps, IMenu } from "../../@types/components/commonTypes";
 
 const SidePaneGrid: FC<SidePaneGridProps> = (props) => {

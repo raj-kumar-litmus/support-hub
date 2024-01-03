@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from "react";
 import useScreenSize from "../../hooks/useScreenSize";
 import CustomButton from "../atoms/Button";
-import CustomDialog from "../atoms/customdialog";
-import CustomImage from "../atoms/customimage";
-import CustomTab from "../atoms/customtab";
+import CustomDialog from "../atoms/CustomDialog";
+import CustomImage from "../atoms/CustomImage";
+import CustomTab from "../atoms/CustomTab";
 import ArrowTop from "../../assets/arrow_top.svg";
 import ArrowTopWhite from "../../assets/arrow_top_white.svg";
 import { QuickLinksProps, QuickLinkBoxProps } from "../../@types/pages/quicklinks";

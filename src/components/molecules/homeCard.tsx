@@ -1,5 +1,5 @@
 import { FC } from "react";
-import CustomCard from "../atoms/customcard";
+import CustomCard from "../atoms/CustomCard";
 import { HomeCardProps } from "../../@types/components/commonTypes";
 
 const HomeCard: FC<HomeCardProps> = (props) => {

@@ -18,10 +18,10 @@ import CustomDropdown from "../components/atoms/DropDown";
 import FilteredCard from "../components/molecules/FilteredCard";
 import CustomInputText from "../components/atoms/InputText";
 import LineChart from "../components/molecules/LineChart";
-import CustomDialog from "../components/atoms/customdialog";
+import CustomDialog from "../components/atoms/CustomDialog";
 import CustomCalendar from "../components/molecules/CustomCalendar";
-import CustomImage from "../components/atoms/customimage";
-import Loader from "../components/atoms/loader";
+import CustomImage from "../components/atoms/CustomImage";
+import Loader from "../components/atoms/Loader";
 import ArrowDownIcon from "../assets/arrown_down_white.svg";
 import WhiteCrossIcon from "../assets/white_cross.svg";
 import GreyCalendarIcon from "../assets/calendar-grey.svg";
@@ -71,7 +71,7 @@ import {
   getPSTdate,
 } from "../helpers/utils/dateTimeUtil";
 import { fetchData } from "../helpers/utils/fetchUtil";
-import CustomTab from "../components/atoms/customtab";
+import CustomTab from "../components/atoms/CustomTab";
 import BarChart from "../components/molecules/BarChart";
 
 ChartJS.register(

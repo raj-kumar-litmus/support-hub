@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import MenuCard from "../components/molecules/menucard";
+import MenuCard from "../components/molecules/MenuCard";
 import DashboardIcon from "../assets/dashboard.svg";
 
 const meta = {
