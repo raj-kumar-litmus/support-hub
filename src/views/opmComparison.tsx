@@ -13,15 +13,15 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import useScreenSize from "../hooks/useScreenSize";
-import CustomButton from "../components/Button";
-import CustomDropdown from "../components/DropDown";
-import FilteredCard from "../components/FilteredCard";
-import CustomInputText from "../components/InputText";
-import LineChart from "../components/LineChart";
-import CustomDialog from "../components/common/customdialog";
-import CustomCalendar from "../components/common/CustomCalendar";
-import CustomImage from "../components/common/customimage";
-import Loader from "../components/loader";
+import CustomButton from "../components/atoms/Button";
+import CustomDropdown from "../components/atoms/DropDown";
+import FilteredCard from "../components/molecules/FilteredCard";
+import CustomInputText from "../components/atoms/InputText";
+import LineChart from "../components/molecules/LineChart";
+import CustomDialog from "../components/atoms/CustomDialog";
+import CustomCalendar from "../components/molecules/CustomCalendar";
+import CustomImage from "../components/atoms/CustomImage";
+import Loader from "../components/atoms/Loader";
 import ArrowDownIcon from "../assets/arrown_down_white.svg";
 import WhiteCrossIcon from "../assets/white_cross.svg";
 import GreyCalendarIcon from "../assets/calendar-grey.svg";
@@ -43,9 +43,9 @@ import {
   OPM_COMPARISON_BAR_OPTIONS_HOME,
   OPM_COMPARISON_OPTIONS,
   OPM_COMPARISON_OPTIONS_HOME,
-} from "../config/chartConfig";
-import { URL_OPM_COMPARISON } from "../constants/apiConstants";
-import { ROUTES, submitOnEnter } from "../components/utils/Utils";
+} from "../helpers/config/chartConfig";
+import { URL_OPM_COMPARISON } from "../helpers/constants/apiConstants";
+import { ROUTES, submitOnEnter } from "../helpers/utils/utils";
 import {
   OPM_CHANNELS,
   LABELS,
@@ -59,7 +59,7 @@ import {
   OPM_CHART_DEFAULT,
   SCREEN_WIDTH,
   DURATIONS,
-} from "../constants/appConstants";
+} from "../helpers/constants/appConstants";
 import { LoaderContext } from "../context/loaderContext";
 import { LoaderContextType } from "../@types/components/commonTypes";
 import {
@@ -69,10 +69,10 @@ import {
   formatDate,
   getFormattedPSTDate,
   getPSTdate,
-} from "../utils/dateTimeUtil";
-import { fetchData } from "../utils/fetchUtil";
-import CustomTab from "../components/common/customtab";
-import BarChart from "../components/BarChart";
+} from "../helpers/utils/dateTimeUtil";
+import { fetchData } from "../helpers/utils/fetchUtil";
+import CustomTab from "../components/atoms/CustomTab";
+import BarChart from "../components/molecules/BarChart";
 
 ChartJS.register(
   CategoryScale,
@@ -513,7 +513,7 @@ const OpmComparison: React.FC = () => {
                             name={form.name}
                             titleclassname="top-1.25r"
                             containerclassname="lg:max-w-[11rem]"
-                            imageclassname="relative top-1.75r left-0.75w z-1"
+                            imageclassname="relative top-1.75r left-[0.55vw] z-1"
                             title={form.label}
                             placeholder={DATE_AND_TIME_FORMATS.MM_DD_YYYY_HH_MM}
                             showTime={form.showTime}
@@ -585,7 +585,7 @@ const OpmComparison: React.FC = () => {
                               <CustomCalendar
                                 name={form.name}
                                 containerclassname="opmFiltersMobileCalendar"
-                                imageclassname="h-5 w-5 relative top-8 md:top-3h left-2w z-1"
+                                imageclassname="h-5 w-5 relative top-7 md:top-3h left-2w z-1"
                                 titleclassname="top-5"
                                 title={form.label}
                                 showTime={form.showTime}
