@@ -1,13 +1,13 @@
 import { Column } from "primereact/column";
 import { FC, useEffect, useState } from "react";
 import useScreenSize from "../hooks/useScreenSize";
-import CustomDialog from "../components/common/customdialog";
-import Loader from "../components/loader";
-import CustomCard from "../components/common/customcard";
-import CustomTable from "../components/common/customtable";
-import CustomImage from "../components/common/customimage";
+import CustomDialog from "../components/atoms/CustomDialog";
+import Loader from "../components/atoms/Loader";
+import CustomCard from "../components/atoms/CustomCard";
+import CustomTable from "../components/atoms/CustomTable";
+import CustomImage from "../components/atoms/CustomImage";
 import info from "../assets/oms_info_white.svg";
-import { URL_INCOMPLETE_ORDERS } from "../constants/apiConstants";
+import { URL_INCOMPLETE_ORDERS } from "../helpers/constants/apiConstants";
 import {
   PAGE_TITLES,
   SCREEN_WIDTH,
@@ -15,12 +15,12 @@ import {
   LABELS,
   STATUS_MESSAGE,
   INCOMPLETE_ORDERS_DIALOG,
-} from "../constants/appConstants";
+} from "../helpers/constants/appConstants";
 import {
   IncompleteOrdersData,
   IncompleteOrderDialogData,
 } from "../@types/components/commonTypes";
-import { fetchData } from "../utils/fetchUtil";
+import { fetchData } from "../helpers/utils/fetchUtil";
 
 const IncompleteOrder: FC = () => {
   const [showDialog, setShowDialog] = useState<boolean>(false);
