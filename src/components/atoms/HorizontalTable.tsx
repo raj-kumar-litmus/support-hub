@@ -15,7 +15,6 @@ const HorizontalTable: FC<HorizontalTableProps> = (props) => {
             className={`text-gray-200 text-center border-b border-black-400 bg-black-100 ${props.tableHeadClassName}`}
           >
             <th colSpan={tableHeadColSpan} className="p-2">
-              {" "}
               {props.tableHead}
             </th>
           </thead>
