@@ -1,25 +1,25 @@
 import { FC, Fragment, KeyboardEvent, useEffect, useState } from "react";
 import useScreenSize from "../hooks/useScreenSize";
-import CustomCard from "../components/common/customcard";
-import SearchBar from "../components/common/searchbar";
-import Loader from "../components/loader";
+import CustomCard from "../components/atoms/CustomCard";
+import SearchBar from "../components/molecules/SearchBar";
+import Loader from "../components/atoms/Loader";
 import {
   SKU_LOOKUP_CATALOG,
   SKU_LOOKUP_INVENTORY_STATUS,
-} from "../constants/apiConstants";
+} from "../helpers/constants/apiConstants";
 import {
   SCREEN_WIDTH,
   SKU_DETAILS,
   SKU_INVENTORY,
   SKU_PRICE_DETAILS,
   SKU_PRODUCT_INFO,
-} from "../constants/appConstants";
+} from "../helpers/constants/appConstants";
 import {
   HorizontalTableProps,
   HeaderProps,
 } from "../@types/components/commonTypes";
 import { SkuCardProps } from "../@types/pages/skuLookup";
-import { fetchData } from "../utils/fetchUtil";
+import { fetchData } from "../helpers/utils/fetchUtil";
 
 const HorizontalTable: FC<HorizontalTableProps> = (props) => {
   const tableHeadColSpan =
@@ -53,7 +53,7 @@ const HorizontalTable: FC<HorizontalTableProps> = (props) => {
                     string,
                     Array<string | number> | string | number,
                   ],
-                  i
+                  i,
                 ) => (
                   <Fragment key={i}>
                     <th
@@ -69,7 +69,7 @@ const HorizontalTable: FC<HorizontalTableProps> = (props) => {
                       {value}
                     </td>
                   </Fragment>
-                )
+                ),
               )}
             </tr>
           ))}
@@ -198,8 +198,8 @@ const SkuLookup = () => {
         inv.availabilityByProducts?.[0]?.availabilityDetails?.atp?.toString() ||
         "",
     };
-    let firstEmptyCountry = yantriksInventory.findIndex(
-      (inventory) => inventory[SKU_INVENTORY.COUNTRY] == ""
+    const firstEmptyCountry = yantriksInventory.findIndex(
+      (inventory) => inventory[SKU_INVENTORY.COUNTRY] == "",
     );
     yantriksInventory[firstEmptyCountry] = inventory;
     setYantriksInventory([...yantriksInventory]);
@@ -225,7 +225,7 @@ const SkuLookup = () => {
     try {
       const inventoryURL = SKU_LOOKUP_INVENTORY_STATUS.replace(
         ":country",
-        country
+        country,
       ).replace(":skuid", skuid);
       const inventoryResponse = await fetchData(inventoryURL, {});
       setIsLoading(false);
@@ -305,7 +305,7 @@ const SkuCard = (props: SkuCardProps) => {
                       string,
                       Array<string | number> | string | number,
                     ],
-                    i
+                    i,
                   ) => (
                     <div key={i}>
                       <div className="text-gray-400 text-10 min-h-[1.8rem]">
@@ -320,7 +320,7 @@ const SkuCard = (props: SkuCardProps) => {
                           : value}
                       </div>
                     </div>
-                  )
+                  ),
                 )}
               </div>
             </CustomCard>
