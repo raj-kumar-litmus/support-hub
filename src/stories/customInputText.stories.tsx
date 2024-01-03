@@ -20,7 +20,7 @@ export const Basic: Story = {
   },
 };
 
-export const onChange: Story = {
+export const OnChange: Story = {
   args: {
     type: "text",
     placeholder: "Input text",
@@ -30,7 +30,7 @@ export const onChange: Story = {
   },
 };
 
-export const smallSizeInputText: Story = {
+export const SmallSizeInputText: Story = {
   args: {
     type: "text",
     placeholder: "small",
@@ -39,7 +39,7 @@ export const smallSizeInputText: Story = {
   },
 };
 
-export const largeSizeInputText: Story = {
+export const LargeSizeInputText: Story = {
   args: {
     type: "text",
     placeholder: "large",
@@ -48,7 +48,7 @@ export const largeSizeInputText: Story = {
   },
 };
 
-export const invalidInput: Story = {
+export const InvalidInput: Story = {
   args: {
     type: "text",
     placeholder: "invalid",
@@ -57,7 +57,7 @@ export const invalidInput: Story = {
   },
 };
 
-export const disabled: Story = {
+export const Disabled: Story = {
   args: {
     type: "text",
     placeholder: "disabled",

@@ -32,7 +32,7 @@ export const Basic: Story = {
     dataClassName: "text-left p-1 sm:p-4 border-r border-black-400",
   },
 };
-export const withTableHead: Story = {
+export const WithTableHead: Story = {
   args: {
     tableHead: "DC Open Orders",
     tableHeadClassName: "p-4",
