@@ -12,16 +12,15 @@ const CustomDropdown: React.FC<CustomDropdownProps> = (props) => {
   } = props;
 
   return props.icon ? (
-    <div
-      className={`w-full self-end ${containerclassname}`}
-    >
-      <label
-        className={`labelClass relative ${labelclassname}`}
-      >
+    <div className={`w-full self-end ${containerclassname}`}>
+      <label className={`labelClass relative ${labelclassname}`}>
         {props.label}
       </label>
       <div className="flex w-full relative">
-        <CustomImage className={`${imageclassname} absolute top-[0.6rem] pl-2.5`} src={props.icon} />
+        <CustomImage
+          className={`${imageclassname} absolute top-[0.6rem] pl-2.5`}
+          src={props.icon}
+        />
         <Dropdown
           dropdownIcon={props.dropdownIcon}
           value={props.value}

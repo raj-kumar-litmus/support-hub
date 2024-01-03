@@ -328,6 +328,7 @@ export const AM_PM_OPTIONS = [
 
 export const SCREEN_WIDTH = {
   XS: 450,
+  ABOVE_XS: 479,
   SM: 640,
   ABOVE_SM: 768,
   MD: 850,
@@ -541,4 +542,10 @@ export const SKU_PRODUCT_INFO = {
   URL: "URL",
   EFFECTIVELY_ACTIVE: "Effectively Active",
   ENABLED: "Enabled",
+};
+
+export const EXCEL_FILE_NAME = {
+  OPM: "OPM",
+  OPM_COMPARISON: "OPM_Comparison",
+  SESSIONS: "Sessions",
 };

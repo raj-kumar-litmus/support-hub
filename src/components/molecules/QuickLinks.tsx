@@ -6,7 +6,10 @@ import CustomImage from "../atoms/CustomImage";
 import CustomTab from "../atoms/CustomTab";
 import ArrowTop from "../../assets/arrow_top.svg";
 import ArrowTopWhite from "../../assets/arrow_top_white.svg";
-import { QuickLinksProps, QuickLinkBoxProps } from "../../@types/pages/quicklinks";
+import {
+  QuickLinksProps,
+  QuickLinkBoxProps,
+} from "../../@types/pages/quicklinks";
 import {
   QUICK_LINKS,
   QUICK_LINKS_HEADER,

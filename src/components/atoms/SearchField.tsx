@@ -16,6 +16,5 @@ const SearchField: FC<SearchFieldProps> = (props) => {
     </div>
   );
 };
- 
+
 export default SearchField;
- 

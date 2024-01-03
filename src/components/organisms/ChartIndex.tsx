@@ -7,7 +7,7 @@ import { FETCH_TYPES } from "../../helpers/utils/utils";
 const Chart: React.FC<ChartProps> = (props) => {
   return (
     <>
-      {props.type === "opm" && <OPM fetchType={FETCH_TYPES.OPM}  />}
+      {props.type === "opm" && <OPM fetchType={FETCH_TYPES.OPM} />}
       {props.type === "opmcomparison" && <OpmComparison />}
     </>
   );

@@ -443,7 +443,7 @@ const OPM: React.FC<OPMProps> = (props) => {
       if (filterProps.period) {
         const periodValue = {
           name: Object.entries(DURATIONS).find(
-            ([key, val]) => val === filterProps.period
+            ([val]) => val === filterProps.period
           )[0],
           code: filterProps.period,
         };
@@ -452,7 +452,7 @@ const OPM: React.FC<OPMProps> = (props) => {
       if (filterProps.locale) {
         const localeValue = {
           name: Object.entries(LOCALE_OPTIONS).find(
-            ([key, val]) => val === filterProps.locale
+            ([val]) => val === filterProps.locale
           )[0],
           code: filterProps.locale,
         };
@@ -461,7 +461,7 @@ const OPM: React.FC<OPMProps> = (props) => {
       if (filterProps.channel) {
         const channelValue = {
           name: Object.entries(OPM_CHANNELS).find(
-            ([key, val]) => val === filterProps.channel
+            ([val]) => val === filterProps.channel
           )[0],
           code: filterProps.channel,
         };
@@ -470,7 +470,7 @@ const OPM: React.FC<OPMProps> = (props) => {
       if (filterProps.payment) {
         const paymentValue = {
           name: Object.entries(PAYMENT_TYPES).find(
-            ([key, val]) => val === filterProps.payment
+            ([val]) => val === filterProps.payment
           )[0],
           code: filterProps.payment,
         };
@@ -486,7 +486,7 @@ const OPM: React.FC<OPMProps> = (props) => {
       if (filterProps.shipment) {
         const shipmentValue = {
           name: Object.entries(SHIPMENT_TYPES).find(
-            ([key, val]) => val === filterProps.shipment
+            ([val]) => val === filterProps.shipment
           )[0],
           code: filterProps.shipment,
         };
@@ -705,7 +705,9 @@ const OPM: React.FC<OPMProps> = (props) => {
                             {form.type === INPUT_TYPES.text && (
                               <CustomInputText
                                 containerclassname={`${
-                                  width > 479 ? "w-11r" : "w-43w"
+                                  width > SCREEN_WIDTH.ABOVE_XS
+                                    ? "w-11r"
+                                    : "w-43w"
                                 }`}
                                 value={form.value}
                                 label={form.label}
