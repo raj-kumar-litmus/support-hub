@@ -14,18 +14,18 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
 import useScreenSize from "../hooks/useScreenSize";
-import CustomButton from "../components/Button";
-import CustomDropdown from "../components/DropDown";
-import FilteredCard from "../components/FilteredCard";
-import CustomInputText from "../components/InputText";
-import LineChart from "../components/LineChart";
-import CustomDialog from "../components/common/customdialog";
-import CustomCalendar from "../components/common/CustomCalendar";
-import CustomImage from "../components/common/customimage";
-import Loader from "../components/loader";
-import BarChart from "../components/BarChart";
-import AutoRefresh from "../components/common/AutoRefresh";
-import CustomTab from "../components/common/customtab";
+import CustomButton from "../components/atoms/Button";
+import CustomDropdown from "../components/atoms/DropDown";
+import FilteredCard from "../components/molecules/FilteredCard";
+import CustomInputText from "../components/atoms/InputText";
+import LineChart from "../components/molecules/LineChart";
+import CustomDialog from "../components/atoms/CustomDialog";
+import CustomCalendar from "../components/molecules/CustomCalendar";
+import CustomImage from "../components/atoms/CustomImage";
+import Loader from "../components/atoms/Loader";
+import BarChart from "../components/molecules/BarChart";
+import AutoRefresh from "../components/molecules/AutoRefresh";
+import CustomTab from "../components/atoms/CustomTab";
 import ArrowDownIcon from "../assets/arrown_down_white.svg";
 import GreyCalendarIcon from "../assets/calendar-grey.svg";
 import GreyChannelIcon from "../assets/channel-grey.svg";
@@ -50,8 +50,8 @@ import {
   OPM_BAR_CHART_OPTIONS_SIDEBAR,
   OPM_OPTIONS,
   OPM_OPTIONS_HOME,
-} from "../config/chartConfig";
-import { URL_OPM } from "../constants/apiConstants";
+} from "../helpers/config/chartConfig";
+import { URL_OPM } from "../helpers/constants/apiConstants";
 import {
   CHART_LABELS,
   CHART_TABS,
@@ -68,7 +68,7 @@ import {
   PAYMENT_TYPES,
   SCREEN_WIDTH,
   SHIPMENT_TYPES,
-} from "../constants/appConstants";
+} from "../helpers/constants/appConstants";
 import { LoaderContext } from "../context/loaderContext";
 import { LoaderContextType } from "../@types/components/commonTypes";
 import { ChartData, ChartOptions, OPMProps } from "../@types/pages/opmCharts";
@@ -78,9 +78,9 @@ import {
   DATE_TIME_FORMAT_4,
   formatDate,
   getFormattedPSTDate,
-} from "../utils/dateTimeUtil";
-import { fetchData } from "../utils/fetchUtil";
-import { FETCH_TYPES, ROUTES, submitOnEnter } from "../components/utils/Utils";
+} from "../helpers/utils/dateTimeUtil";
+import { fetchData } from "../helpers/utils/fetchUtil";
+import { FETCH_TYPES, ROUTES, submitOnEnter } from "../helpers/utils/utils";
 
 ChartJS.register(
   CategoryScale,
