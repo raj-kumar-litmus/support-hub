@@ -4,6 +4,7 @@ import OPMComparisonIcon from "../../assets/opmcomparison.svg";
 import SessionsIcon from "../../assets/sessions.svg";
 import DCOpenOrdersIcon from "../../assets/dcopenorders.svg";
 import { PAGE_TITLES } from "../constants/appConstants";
+import { utils, writeFile } from "xlsx";
 
 export const ROUTES = {
   home: "/home",
@@ -297,3 +298,10 @@ export const centerText = ({
     ctx.fillText(text, x, y);
   },
 });
+
+export const exportToExcel = (data, name) => {
+  const ws = utils.json_to_sheet(data);
+  const wb = utils.book_new();
+  utils.book_append_sheet(wb, ws);
+  writeFile(wb, `${name}.xlsx`);
+};

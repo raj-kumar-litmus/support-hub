@@ -630,3 +630,8 @@ export const INCOMPLETE_ORDERS_DIALOG = {
   sla: "SLA:",
   nextState: "Next State:",
 };
+export const EXCEL_FILE_NAME = {
+  OPM: "OPM",
+  OPM_COMPARISON: "OPM_Comparison",
+  SESSIONS: "Sessions",
+};
