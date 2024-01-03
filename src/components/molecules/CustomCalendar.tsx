@@ -14,7 +14,10 @@ import {
   CALENDAR_TOAST_MESSAGE,
 } from "../../helpers/constants/appConstants";
 import { CURRENT_PST_DATE } from "../../helpers/utils/dateTimeUtil";
-import { convert12to24Hour, convert24to12Hour } from "../../helpers/utils/utils";
+import {
+  convert12to24Hour,
+  convert24to12Hour,
+} from "../../helpers/utils/utils";
 
 const CustomCalendar: FC<CustomCalendarProps> = (props) => {
   const [hour, setHour] = useState<number>();
@@ -104,8 +107,7 @@ const CustomCalendar: FC<CustomCalendarProps> = (props) => {
         src={props.imgsrc}
         className={`absolute ${props.imageclassname}`}
       />
-      <Calendar    
-       
+      <Calendar
         {...props}
         readOnlyInput
         className="w-full"

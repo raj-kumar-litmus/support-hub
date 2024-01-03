@@ -340,51 +340,50 @@ export const HorizontalBarChartWithNegativeValues: Story = {
 export const StackedBarChart: Story = {
   args: {
     data: {
-      labels: ["10:00", "11:00", "12:00",
-        "01:00", "02:00", "03:00"],
+      labels: ["10:00", "11:00", "12:00", "01:00", "02:00", "03:00"],
       datasets: [
         {
-          label: 'Desktop',
+          label: "Desktop",
           backgroundColor: "#F1963A",
           data: [17, 16, 10, 11, 8, 9],
           borderWidth: 3,
-          barThickness: 30 
+          barThickness: 30,
         },
         {
-          label: 'Iphone',
+          label: "Iphone",
           backgroundColor: "#4F73B8",
           data: [14, 9, 10, 8, 12, 16],
           borderWidth: 3,
-          barThickness: 30 
+          barThickness: 30,
         },
         {
-          label: 'Mobile Web',
+          label: "Mobile Web",
           backgroundColor: "#08B39E",
           data: [12, 21, 13, 9, 24, 17],
           borderWidth: 3,
-          barThickness: 30 
+          barThickness: 30,
         },
         {
-          label: 'Android',
+          label: "Android",
           backgroundColor: "#e77687",
           data: [14, 9, 10, 8, 2, 16],
           borderWidth: 3,
-          barThickness: 30 
+          barThickness: 30,
         },
         {
-          label: 'CSC',
+          label: "CSC",
           backgroundColor: "#5cb7ed",
           data: [2, 1, 23, 9, 14, 7],
           borderWidth: 3,
-          barThickness: 30 
+          barThickness: 30,
         },
         {
-          label: 'M Plus',
+          label: "M Plus",
           backgroundColor: "#a876e2",
           data: [12, 2, 13, 19, 24, 7],
           borderWidth: 3,
-          barThickness: 30 
-        }
+          barThickness: 30,
+        },
       ],
     },
     options: {
@@ -414,16 +413,16 @@ export const StackedBarChart: Story = {
           align: "center",
           fullWidth: false,
           borderWidth: 0,
-          borderColor: 'rgba(0, 0, 0, 0)',
+          borderColor: "rgba(0, 0, 0, 0)",
           labels: {
             boxWidth: 4,
             boxHeight: 4,
             pointStyle: "circle",
             usePointStyle: true,
             generateLabels: function (chart) {
-              var data = chart.data;
+              const data = chart.data;
               if (data.labels.length && data.datasets.length) {
-                return data.datasets.map(function (dataset, i) {
+                return data.datasets.map(function (dataset) {
                   return {
                     text: dataset.label,
                     fillStyle: dataset.backgroundColor,
@@ -432,8 +431,8 @@ export const StackedBarChart: Story = {
                 });
               }
               return [];
-            }
-          }
+            },
+          },
         },
       },
 
@@ -459,7 +458,7 @@ export const StackedBarChart: Story = {
           },
           border: {
             dash: [4, 4],
-            display: false
+            display: false,
           },
           ticks: {
             color: "#FBFBFC",
@@ -470,62 +469,60 @@ export const StackedBarChart: Story = {
             },
           },
         },
-      }
+      },
     },
     className:
       "bg-black-101 border-2 border-solid border-black-102 px-6 pt-2 pb-0 rounded-xl w-29r h-64",
   },
-}
-
+};
 
 export const StackedBarChartWithNegativeValue: Story = {
   args: {
     data: {
-      labels: ["10:00", "11:00", "12:00",
-        "01:00", "02:00", "03:00"],
+      labels: ["10:00", "11:00", "12:00", "01:00", "02:00", "03:00"],
       datasets: [
         {
-          label: 'Desktop',
+          label: "Desktop",
           backgroundColor: "#F1963A",
           data: [17, 16, 10, 11, -8, -9],
           borderWidth: 3,
-          barThickness: 30 
+          barThickness: 30,
         },
         {
-          label: 'Iphone',
+          label: "Iphone",
           backgroundColor: "#4F73B8",
           data: [14, 19, -10, 8, 12, 16],
           borderWidth: 3,
-          barThickness: 30 
+          barThickness: 30,
         },
         {
-          label: 'Mobile Web',
+          label: "Mobile Web",
           backgroundColor: "#08B39E",
           data: [12, 21, 3, 9, -24, 17],
           borderWidth: 3,
-          barThickness: 30 
+          barThickness: 30,
         },
         {
-          label: 'Android',
+          label: "Android",
           backgroundColor: "#e77687",
           data: [14, -9, 10, 8, -2, 16],
           borderWidth: 3,
-          barThickness: 30 
+          barThickness: 30,
         },
         {
-          label: 'CSC',
+          label: "CSC",
           backgroundColor: "#5cb7ed",
           data: [12, 8, 13, 9, 4, 17],
           borderWidth: 3,
-          barThickness: 30 
+          barThickness: 30,
         },
         {
-          label: 'M Plus',
+          label: "M Plus",
           backgroundColor: "#a876e2",
           data: [12, -21, 13, 9, 24, 17],
           borderWidth: 3,
-          barThickness: 30 
-        }
+          barThickness: 30,
+        },
       ],
     },
     options: {
@@ -555,16 +552,16 @@ export const StackedBarChartWithNegativeValue: Story = {
           align: "center",
           fullWidth: false,
           borderWidth: 0,
-          borderColor: 'rgba(0, 0, 0, 0)',
+          borderColor: "rgba(0, 0, 0, 0)",
           labels: {
             boxWidth: 4,
             boxHeight: 4,
             pointStyle: "circle",
             usePointStyle: true,
             generateLabels: function (chart) {
-              var data = chart.data;
+              const data = chart.data;
               if (data.labels.length && data.datasets.length) {
-                return data.datasets.map(function (dataset, i) {
+                return data.datasets.map(function (dataset) {
                   return {
                     text: dataset.label,
                     fillStyle: dataset.backgroundColor,
@@ -573,8 +570,8 @@ export const StackedBarChartWithNegativeValue: Story = {
                 });
               }
               return [];
-            }
-          }
+            },
+          },
         },
       },
 
@@ -600,7 +597,7 @@ export const StackedBarChartWithNegativeValue: Story = {
           },
           border: {
             dash: [4, 4],
-            display: false
+            display: false,
           },
           ticks: {
             color: "#FBFBFC",
@@ -611,12 +608,12 @@ export const StackedBarChartWithNegativeValue: Story = {
             },
           },
         },
-      }
+      },
     },
     className:
       "bg-black-101 border-2 border-solid border-black-102 px-6 pt-2 pb-0 rounded-xl w-29r h-64",
   },
-}
+};
 
 export const HorizontalStackedBarChart: Story = {
   args: {
@@ -624,51 +621,51 @@ export const HorizontalStackedBarChart: Story = {
       labels: ["10:00", "11:00", "12:00", "01:00", "02:00", "03:00"],
       datasets: [
         {
-          label: 'Desktop',
+          label: "Desktop",
           backgroundColor: "#F1963A",
           data: [17, 16, 10, 11, 8, 9],
           borderWidth: 3,
-          barThickness: 20 
+          barThickness: 20,
         },
         {
-          label: 'Iphone',
+          label: "Iphone",
           backgroundColor: "#4F73B8",
           data: [14, 9, 10, 8, 12, 16],
           borderWidth: 3,
-          barThickness: 20 
+          barThickness: 20,
         },
         {
-          label: 'Mobile Web',
+          label: "Mobile Web",
           backgroundColor: "#08B39E",
           data: [12, 21, 13, 9, 24, 17],
           borderWidth: 3,
-          barThickness: 20 
+          barThickness: 20,
         },
         {
-          label: 'Android',
+          label: "Android",
           backgroundColor: "#e77687",
           data: [14, 9, 10, 8, 2, 16],
           borderWidth: 3,
-          barThickness: 20 
+          barThickness: 20,
         },
         {
-          label: 'CSC',
+          label: "CSC",
           backgroundColor: "#5cb7ed",
           data: [2, 1, 23, 9, 14, 7],
           borderWidth: 3,
-          barThickness: 20 
+          barThickness: 20,
         },
         {
-          label: 'M Plus',
+          label: "M Plus",
           backgroundColor: "#a876e2",
           data: [12, 2, 13, 19, 24, 7],
           borderWidth: 3,
-          barThickness: 20 
-        }
+          barThickness: 20,
+        },
       ],
     },
     options: {
-      indexAxis: 'y',
+      indexAxis: "y",
       plugins: {
         title: {
           display: true,
@@ -695,16 +692,16 @@ export const HorizontalStackedBarChart: Story = {
           align: "center",
           fullWidth: false,
           borderWidth: 0,
-          borderColor: 'rgba(0, 0, 0, 0)',
+          borderColor: "rgba(0, 0, 0, 0)",
           labels: {
             boxWidth: 4,
             boxHeight: 4,
             pointStyle: "circle",
             usePointStyle: true,
             generateLabels: function (chart) {
-              var data = chart.data;
+              const data = chart.data;
               if (data.labels.length && data.datasets.length) {
-                return data.datasets.map(function (dataset, i) {
+                return data.datasets.map(function (dataset) {
                   return {
                     text: dataset.label,
                     fillStyle: dataset.backgroundColor,
@@ -713,8 +710,8 @@ export const HorizontalStackedBarChart: Story = {
                 });
               }
               return [];
-            }
-          }
+            },
+          },
         },
       },
       scales: {
@@ -726,7 +723,7 @@ export const HorizontalStackedBarChart: Story = {
           },
           border: {
             dash: [4, 4],
-            display: false
+            display: false,
           },
           ticks: {
             color: "#FBFBFC",
@@ -750,12 +747,12 @@ export const HorizontalStackedBarChart: Story = {
             },
           },
         },
-      }
+      },
     },
-    className: "bg-black-101 border-2 border-solid border-black-102 px-6 pt-2 pb-0 rounded-xl w-29r h-64",
-  }
-}
-
+    className:
+      "bg-black-101 border-2 border-solid border-black-102 px-6 pt-2 pb-0 rounded-xl w-29r h-64",
+  },
+};
 
 export const HorizontalStackedBarChartWithNegativeValue: Story = {
   args: {
@@ -763,51 +760,51 @@ export const HorizontalStackedBarChartWithNegativeValue: Story = {
       labels: ["10:00", "11:00", "12:00", "01:00", "02:00", "03:00"],
       datasets: [
         {
-          label: 'Desktop',
+          label: "Desktop",
           backgroundColor: "#F1963A",
           data: [-17, -16, -10, -11, 8, 9],
           borderWidth: 3,
-          barThickness: 20 
+          barThickness: 20,
         },
         {
-          label: 'Iphone',
+          label: "Iphone",
           backgroundColor: "#4F73B8",
           data: [-14, -19, 10, 8, -12, -16],
           borderWidth: 3,
-          barThickness: 20 
+          barThickness: 20,
         },
         {
-          label: 'Mobile Web',
+          label: "Mobile Web",
           backgroundColor: "#08B39E",
           data: [-12, -21, -3, -9, 24, -17],
           borderWidth: 3,
-          barThickness: 20 
+          barThickness: 20,
         },
         {
-          label: 'Android',
+          label: "Android",
           backgroundColor: "#e77687",
           data: [-14, 9, -10, -8, 2, -16],
           borderWidth: 3,
-          barThickness: 20 
+          barThickness: 20,
         },
         {
-          label: 'CSC',
+          label: "CSC",
           backgroundColor: "#5cb7ed",
           data: [-12, -8, -13, -9, -4, -17],
           borderWidth: 3,
-          barThickness: 20 
+          barThickness: 20,
         },
         {
-          label: 'M Plus',
+          label: "M Plus",
           backgroundColor: "#a876e2",
           data: [-12, 21, -13, -9, -24, -17],
           borderWidth: 3,
-          barThickness: 20 
-        }
+          barThickness: 20,
+        },
       ],
     },
     options: {
-      indexAxis: 'y',
+      indexAxis: "y",
       plugins: {
         title: {
           display: true,
@@ -834,16 +831,16 @@ export const HorizontalStackedBarChartWithNegativeValue: Story = {
           align: "center",
           fullWidth: false,
           borderWidth: 0,
-          borderColor: 'rgba(0, 0, 0, 0)',
+          borderColor: "rgba(0, 0, 0, 0)",
           labels: {
             boxWidth: 4,
             boxHeight: 4,
             pointStyle: "circle",
             usePointStyle: true,
             generateLabels: function (chart) {
-              var data = chart.data;
+              const data = chart.data;
               if (data.labels.length && data.datasets.length) {
-                return data.datasets.map(function (dataset, i) {
+                return data.datasets.map(function (dataset) {
                   return {
                     text: dataset.label,
                     fillStyle: dataset.backgroundColor,
@@ -852,8 +849,8 @@ export const HorizontalStackedBarChartWithNegativeValue: Story = {
                 });
               }
               return [];
-            }
-          }
+            },
+          },
         },
       },
       scales: {
@@ -865,7 +862,7 @@ export const HorizontalStackedBarChartWithNegativeValue: Story = {
           },
           border: {
             dash: [4, 4],
-            display: false
+            display: false,
           },
           ticks: {
             color: "#FBFBFC",
@@ -888,8 +885,9 @@ export const HorizontalStackedBarChartWithNegativeValue: Story = {
             },
           },
         },
-      }
+      },
     },
-    className: "bg-black-101 border-2 border-solid border-black-102 px-6 pt-2 pb-0 rounded-xl w-29r h-64",
-  }
-}
+    className:
+      "bg-black-101 border-2 border-solid border-black-102 px-6 pt-2 pb-0 rounded-xl w-29r h-64",
+  },
+};

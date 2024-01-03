@@ -43,5 +43,5 @@ const SearchBar: FC<SearchBarProps> = (props) => {
     </div>
   );
 };
- 
+
 export default SearchBar;

@@ -53,7 +53,7 @@ const HorizontalTable: FC<HorizontalTableProps> = (props) => {
                     string,
                     Array<string | number> | string | number,
                   ],
-                  i
+                  i,
                 ) => (
                   <Fragment key={i}>
                     <th
@@ -69,7 +69,7 @@ const HorizontalTable: FC<HorizontalTableProps> = (props) => {
                       {value}
                     </td>
                   </Fragment>
-                )
+                ),
               )}
             </tr>
           ))}
@@ -198,8 +198,8 @@ const SkuLookup = () => {
         inv.availabilityByProducts?.[0]?.availabilityDetails?.atp?.toString() ||
         "",
     };
-    let firstEmptyCountry = yantriksInventory.findIndex(
-      (inventory) => inventory[SKU_INVENTORY.COUNTRY] == ""
+    const firstEmptyCountry = yantriksInventory.findIndex(
+      (inventory) => inventory[SKU_INVENTORY.COUNTRY] == "",
     );
     yantriksInventory[firstEmptyCountry] = inventory;
     setYantriksInventory([...yantriksInventory]);
@@ -225,7 +225,7 @@ const SkuLookup = () => {
     try {
       const inventoryURL = SKU_LOOKUP_INVENTORY_STATUS.replace(
         ":country",
-        country
+        country,
       ).replace(":skuid", skuid);
       const inventoryResponse = await fetchData(inventoryURL, {});
       setIsLoading(false);
@@ -305,7 +305,7 @@ const SkuCard = (props: SkuCardProps) => {
                       string,
                       Array<string | number> | string | number,
                     ],
-                    i
+                    i,
                   ) => (
                     <div key={i}>
                       <div className="text-gray-400 text-10 min-h-[1.8rem]">
@@ -320,7 +320,7 @@ const SkuCard = (props: SkuCardProps) => {
                           : value}
                       </div>
                     </div>
-                  )
+                  ),
                 )}
               </div>
             </CustomCard>

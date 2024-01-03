@@ -53,7 +53,7 @@ const AutoRefresh = (props: AutoRefreshProps) => {
     setAutoRefreshDuration(
       e.value > AUTO_REFRESH_MAX_DURATIONS_MINS
         ? AUTO_REFRESH_MAX_DURATIONS_MINS
-        : e.value
+        : e.value,
     );
     setPollingRefreshDuration(e.value * 60 * 1000);
     if (e.value) {

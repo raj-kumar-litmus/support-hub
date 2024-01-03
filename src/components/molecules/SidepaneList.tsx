@@ -20,10 +20,11 @@ const SidePaneList: FC<SidePaneListProps> = (props) => {
       {props.menuList.map((menu) => (
         <a
           key={menu.id}
-          className={`flex pl-4 pr-2 py-4 items-center cursor-pointer h-11 mx-auto ${props.selectedMenu === menu.id
+          className={`flex pl-4 pr-2 py-4 items-center cursor-pointer h-11 mx-auto ${
+            props.selectedMenu === menu.id
               ? "bg-black-300 rounded-lg"
               : "bg-transparent"
-            }`}
+          }`}
           onClick={() => navigateToMenu(menu)}
         >
           <CustomImage

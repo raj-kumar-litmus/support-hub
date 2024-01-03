@@ -70,14 +70,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           />
           <Route
             path={ROUTES.orderReport}
-            element={
-              <App
-                appContent={<OrderReport />}
-              />
-            }
+            element={<App appContent={<OrderReport />} />}
           />
         </Routes>
       </Suspense>
     </Router>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

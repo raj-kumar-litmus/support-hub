@@ -9,7 +9,7 @@ const OrderSummaryCard: FC<OrderSummaryCardProps> = (props) => {
         {Object.entries(props.cardData)?.map(
           (
             [key, value]: [string, Array<string | number> | string | number],
-            i
+            i,
           ) => (
             <div key={i}>
               <div className="text-gray-400 text-10 min-h-[1.8rem]">{key}</div>
@@ -20,7 +20,7 @@ const OrderSummaryCard: FC<OrderSummaryCardProps> = (props) => {
                 {value.length > 1 ? value[0] + " " + value[1] : value}
               </div>
             </div>
-          )
+          ),
         )}
       </div>
     </CustomCard>

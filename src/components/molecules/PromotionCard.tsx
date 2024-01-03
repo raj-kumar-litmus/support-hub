@@ -1,6 +1,6 @@
 import { FC } from "react";
 import CustomCard from "../atoms/CustomCard";
-import CustomImage from "../atoms/CustomImage"; 
+import CustomImage from "../atoms/CustomImage";
 import InfoField from "./InfoField";
 import CheckCircle from "../../assets/check_circle.svg";
 import { PromotionCardProps } from "../../@types/pages/orderDetails";
@@ -28,7 +28,7 @@ const PromotionCard: FC<PromotionCardProps> = (props) => {
           dataClassName="whitespace-nowrap text-ellipsis overflow-hidden"
           title={ORDER_DETAILS_LABELS.PROMOTION}
           data={props.promotion.promotionId}
-           />
+        />
         <InfoField
           title={ORDER_DETAILS_LABELS.DISCOUNT_AMOUNT}
           data={Number(props.promotion.discAmt).toFixed(2)}

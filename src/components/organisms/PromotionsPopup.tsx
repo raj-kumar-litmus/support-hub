@@ -17,7 +17,7 @@ const PromotionsPopup: FC<PromotionsPopupProps> = (props) => {
           <PromotionCard key={p.promotionId} promotion={p} />
         ))
       ) : (
-          <div className="text-center">{ORDER_DETAILS_LABELS.NO_DATA}</div>
+        <div className="text-center">{ORDER_DETAILS_LABELS.NO_DATA}</div>
       )}
     </CustomDialog>
   );

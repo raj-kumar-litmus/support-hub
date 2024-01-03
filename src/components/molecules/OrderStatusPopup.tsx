@@ -27,10 +27,11 @@ const OrderStatusPopup: FC<OrderStatusPopupProps> = (props) => {
         stripedRows
         value={ORDER_STATUS_LIST}
         className="custom-table"
-        children={getTableHeaders(ORDER_STATUS_LIST).map((h) => (
+      >
+        {getTableHeaders(ORDER_STATUS_LIST).map((h) => (
           <Column key={h} field={h} header={h}></Column>
         ))}
-      />
+      </CustomTable>
     </CustomDialog>
   );
 };

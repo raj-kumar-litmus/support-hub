@@ -63,7 +63,6 @@ import {
   LOCALE_OPTIONS,
   OPM_CHANNELS,
   OPM_CHART_DEFAULT,
-  OPM_SHIPMENT_CODE_MAP,
   PAGE_TITLES,
   PAYMENT_TYPES,
   SCREEN_WIDTH,
@@ -91,7 +90,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ChartDataLabels
+  ChartDataLabels,
 );
 
 const OPM: React.FC<OPMProps> = (props) => {
@@ -211,7 +210,7 @@ const OPM: React.FC<OPMProps> = (props) => {
 
   const [options, setOptions] = useState<null | ChartOptions>(null);
   const [barChartoptions, setBarChartOptions] = useState<null | ChartOptions>(
-    null
+    null,
   );
   const [data, setData] = useState<ChartData | null>(null);
   const [barChartData, setBarChartData] = useState<ChartData | null>(null);
@@ -236,7 +235,7 @@ const OPM: React.FC<OPMProps> = (props) => {
           : DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION
       }&starttime=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${
         DEFAULT.promocode
-      }&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`
+      }&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`,
     );
   }, []);
 
@@ -252,7 +251,7 @@ const OPM: React.FC<OPMProps> = (props) => {
       setMaxOPM(
         Math.round(Math.max(...dataArr) / OPM_CHART_DEFAULT.STEP_SIZE) *
           OPM_CHART_DEFAULT.STEP_SIZE +
-          OPM_CHART_DEFAULT.STEP_SIZE
+          OPM_CHART_DEFAULT.STEP_SIZE,
       );
       setData({
         labels: xAxisLabels,
@@ -292,30 +291,28 @@ const OPM: React.FC<OPMProps> = (props) => {
             ? OPM_OPTIONS_HOME(
                 width < SCREEN_WIDTH.SM,
                 Number(url.split("period=")[1].split("&")[0]) < 16 &&
-                  width > SCREEN_WIDTH.SM
+                  width > SCREEN_WIDTH.SM,
               )
             : OPM_OPTIONS(
                 width < SCREEN_WIDTH.SM,
                 Number(url.split("period=")[1].split("&")[0]) < 16 &&
-                  width > SCREEN_WIDTH.SM
-              )
+                  width > SCREEN_WIDTH.SM,
+              ),
         );
         setBarChartOptions(
           props.fetchType === FETCH_TYPES.HOME
             ? OPM_BAR_CHART_OPTIONS_HOME(
-              width < SCREEN_WIDTH.SM,
-              Number(url.split("period=")[1].split("&")[0]) < 16 &&
-              width > SCREEN_WIDTH.SM,
-            ) :
-            props.filters ?
-              OPM_BAR_CHART_OPTIONS_SIDEBAR(
-                width < SCREEN_WIDTH.SM, false
-              )
-              : OPM_BAR_CHART_OPTIONS(
                 width < SCREEN_WIDTH.SM,
                 Number(url.split("period=")[1].split("&")[0]) < 16 &&
-                  width > SCREEN_WIDTH.SM
+                  width > SCREEN_WIDTH.SM,
               )
+            : props.filters
+            ? OPM_BAR_CHART_OPTIONS_SIDEBAR(width < SCREEN_WIDTH.SM, false)
+            : OPM_BAR_CHART_OPTIONS(
+                width < SCREEN_WIDTH.SM,
+                Number(url.split("period=")[1].split("&")[0]) < 16 &&
+                  width > SCREEN_WIDTH.SM,
+              ),
         );
         await getData();
       }
@@ -440,33 +437,59 @@ const OPM: React.FC<OPMProps> = (props) => {
   }, {});
 
   const setFilters = () => {
-  if (filterProps && Object.keys(filterProps).length > 0) {
+    if (filterProps && Object.keys(filterProps).length > 0) {
       setInitialFocus(true);
       const data = [...formFields];
       if (filterProps.period) {
-        const periodValue = { name: Object.entries(DURATIONS).find(([key, val]) => val === filterProps.period)[0], code: filterProps.period };
+        const periodValue = {
+          name: Object.entries(DURATIONS).find(
+            ([val]) => val === filterProps.period,
+          )[0],
+          code: filterProps.period,
+        };
         data.find((e) => e.label === LABELS.DURATION).value = periodValue;
       }
       if (filterProps.locale) {
-        const localeValue = { name: Object.entries(LOCALE_OPTIONS).find(([key, val]) => val === filterProps.locale)[0], code: filterProps.locale };
+        const localeValue = {
+          name: Object.entries(LOCALE_OPTIONS).find(
+            ([val]) => val === filterProps.locale,
+          )[0],
+          code: filterProps.locale,
+        };
         data.find((e) => e.label === LABELS.LOCALE).value = localeValue;
       }
       if (filterProps.channel) {
-        const channelValue = { name: Object.entries(OPM_CHANNELS).find(([key, val]) => val === filterProps.channel)[0], code: filterProps.channel };
+        const channelValue = {
+          name: Object.entries(OPM_CHANNELS).find(
+            ([val]) => val === filterProps.channel,
+          )[0],
+          code: filterProps.channel,
+        };
         data.find((e) => e.label === LABELS.CHANNEL).value = channelValue;
       }
       if (filterProps.payment) {
-        const paymentValue = { name: Object.entries(PAYMENT_TYPES).find(([key, val]) => val === filterProps.payment)[0], code: filterProps.payment };
+        const paymentValue = {
+          name: Object.entries(PAYMENT_TYPES).find(
+            ([val]) => val === filterProps.payment,
+          )[0],
+          code: filterProps.payment,
+        };
         data.find((e) => e.label === LABELS.PAYMENT).value = paymentValue;
       }
       if (filterProps.date) {
         data.find((e) => e.label === LABELS.DATE).value = filterProps.date;
       }
       if (filterProps.promocode) {
-        data.find((e) => e.label === LABELS.PROMOCODE).value = filterProps.promocode;
+        data.find((e) => e.label === LABELS.PROMOCODE).value =
+          filterProps.promocode;
       }
       if (filterProps.shipment) {
-        const shipmentValue = { name: Object.entries(SHIPMENT_TYPES).find(([key, val]) => val === filterProps.shipment)[0], code: filterProps.shipment };
+        const shipmentValue = {
+          name: Object.entries(SHIPMENT_TYPES).find(
+            ([val]) => val === filterProps.shipment,
+          )[0],
+          code: filterProps.shipment,
+        };
         data.find((e) => e.label === LABELS.SHIPMENT).value = shipmentValue;
       }
       setFormFields(data);
@@ -476,13 +499,11 @@ const OPM: React.FC<OPMProps> = (props) => {
   };
 
   useEffect(() => {
-    state &&
-      setFilterProps(state);
+    state && setFilterProps(state);
   }, [state]);
 
   useEffect(() => {
-    props.filters &&
-      setFilterProps(props.filters);
+    props.filters && setFilterProps(props.filters);
   }, [props.filters]);
 
   useEffect(() => {
@@ -549,7 +570,13 @@ const OPM: React.FC<OPMProps> = (props) => {
         </div>
       )}
       {!IS_FULLSCREEN && props.fetchType === FETCH_TYPES.OPM && (
-        <div className={`flex justify-between items-start ${props.filters ? "border-b border-gray-108 items-center px-6 pb-3 text-lg" : ""}`}>
+        <div
+          className={`flex justify-between items-start ${
+            props.filters
+              ? "border-b border-gray-108 items-center px-6 pb-3 text-lg"
+              : ""
+          }`}
+        >
           <p className="font-bold text-gray-200 capitalize">
             {!props.filters ? PAGE_TITLES.OPM : Object.keys(props.filters)[0]}
           </p>
@@ -561,16 +588,16 @@ const OPM: React.FC<OPMProps> = (props) => {
               onClick={onFilterClickHandler}
             />
           )}
-          {props.filters &&
+          {props.filters && (
             <CustomButton
               label={LABELS.GO_TO_ORDER_CENTRAL}
               onClick={() => navigate(ROUTES.opm, { state: filters })}
               className="custom-btn opm-navigate-btn !mr-0"
             />
-          }
+          )}
         </div>
       )}
-      {props.fetchType === FETCH_TYPES.OPM &&
+      {props.fetchType === FETCH_TYPES.OPM && (
         <div className={`${props.filters ? "p-6" : ""}`}>
           {showFilters && (
             <>
@@ -578,12 +605,19 @@ const OPM: React.FC<OPMProps> = (props) => {
                 <>
                   <form
                     id="custom-hover"
-                    className={`lg:flex lg:flex-wrap sm:gap-2 ${props.filters ? "sidebar-filters" : ""}
-                    ${initialFocus ? "initial-focus" : ""} opmFilters sm:grid sm:grid-cols-3  sm:mb-4`}
+                    className={`lg:flex lg:flex-wrap sm:gap-2 ${
+                      props.filters ? "sidebar-filters" : ""
+                    }
+                    ${
+                      initialFocus ? "initial-focus" : ""
+                    } opmFilters sm:grid sm:grid-cols-3  sm:mb-4`}
                   >
                     {formFields.map((form, index) => {
                       return (
-                        <div className="flex flex-1 lg:max-w-[11rem]" key={index}>
+                        <div
+                          className="flex flex-1 lg:max-w-[11rem]"
+                          key={index}
+                        >
                           {form.type === INPUT_TYPES.text && (
                             <CustomInputText
                               type={INPUT_TYPES.text}
@@ -603,7 +637,9 @@ const OPM: React.FC<OPMProps> = (props) => {
                               titleclassname="top-1.25r"
                               containerclassname="lg:min-w-11r"
                               imageclassname="h-5 w-5 relative top-1.75r left-0.5w z-1"
-                              placeholder={DATE_AND_TIME_FORMATS.MM_DD_YYYY_HH_MM}
+                              placeholder={
+                                DATE_AND_TIME_FORMATS.MM_DD_YYYY_HH_MM
+                              }
                               title={form.label}
                               showTime={form.showTime}
                               iconPos={form.iconPos || "left"}
@@ -628,7 +664,10 @@ const OPM: React.FC<OPMProps> = (props) => {
                               label={form.label}
                               optionLabel="name"
                               placeholder=""
-                              autoFocus={props.filters && (props.filters[form.name] !== undefined)}
+                              autoFocus={
+                                props.filters &&
+                                props.filters[form.name] !== undefined
+                              }
                               onFocus={() => setInitialFocus(false)}
                             />
                           )}
@@ -636,15 +675,14 @@ const OPM: React.FC<OPMProps> = (props) => {
                       );
                     })}
                     <CustomButton
-                    btnclassname="w-full"
-                    label={LABELS.SUBMIT}
-                    isDisabled={disabled}
-                    isRounded={true}
-                    onClick={submit}
-                    className="flex flex-1 opm-btn p-button-rounded min-w-[94px] max-w-[94px] self-end"
-                  />
+                      btnclassname="w-full"
+                      label={LABELS.SUBMIT}
+                      isDisabled={disabled}
+                      isRounded={true}
+                      onClick={submit}
+                      className="flex flex-1 opm-btn p-button-rounded min-w-[94px] max-w-[94px] self-end"
+                    />
                   </form>
-                  
                 </>
               ) : (
                 <>
@@ -664,8 +702,9 @@ const OPM: React.FC<OPMProps> = (props) => {
                           <>
                             {form.type === INPUT_TYPES.text && (
                               <CustomInputText
-                                containerclassname={`${width > 479 ? "w-11r" : "w-43w"
-                                  }`}
+                                containerclassname={`${
+                                  width > 479 ? "w-11r" : "w-43w"
+                                }`}
                                 value={form.value}
                                 label={form.label}
                                 name={form.label}
@@ -688,7 +727,7 @@ const OPM: React.FC<OPMProps> = (props) => {
                                 value={form.value}
                                 maxDate={
                                   form.name === "startDate" ||
-                                    form.name === "endDate"
+                                  form.name === "endDate"
                                     ? CURRENT_PST_DATE
                                     : null
                                 }
@@ -698,7 +737,9 @@ const OPM: React.FC<OPMProps> = (props) => {
                               <CustomDropdown
                                 value={form.value}
                                 name={form.name}
-                                dropdownIcon={<CustomImage src={ArrowDownIcon} />}
+                                dropdownIcon={
+                                  <CustomImage src={ArrowDownIcon} />
+                                }
                                 onChange={(e) => handleFormChange(e)}
                                 imageclassname="top-3.5 z-1"
                                 icon={form.icon}
@@ -727,10 +768,11 @@ const OPM: React.FC<OPMProps> = (props) => {
 
           {showFilteredCards && (
             <div
-              className={`flex items-center gap-4 mt-2.5 overflow-auto min-h-[2.6rem] ${IS_FULLSCREEN
+              className={`flex items-center gap-4 mt-2.5 overflow-auto min-h-[2.6rem] ${
+                IS_FULLSCREEN
                   ? "rotate-90 absolute -left-9h top-45h ml-25w w-70h mt-0"
                   : `${width < SCREEN_WIDTH.SM ? "portrait" : ""}`
-                }`}
+              }`}
             >
               {formFields
                 .filter((e) => e.value)
@@ -773,28 +815,33 @@ const OPM: React.FC<OPMProps> = (props) => {
           {isLoading ? (
             <Loader className="h-[50vh]" />
           ) : (
-            data &&
-            (
+            data && (
               <div
-                className={`relative h-96 lg:h-29r ${IS_FULLSCREEN ? "rotate-90" : ""
-                  }`}
+                className={`relative h-96 lg:h-29r ${
+                  IS_FULLSCREEN ? "rotate-90" : ""
+                }`}
               >
-                {!props.filters &&
+                {!props.filters && (
                   <CustomTab
-                    className={`opm-tabs absolute z-10 pt-2 top-2 ${IS_FULLSCREEN
-                      ? "right-100vh-57r"
-                      : "right-14 sm:right-3 md:right-4 lg:right-6"
-                      }`}
+                    className={`opm-tabs absolute z-10 pt-2 top-2 ${
+                      IS_FULLSCREEN
+                        ? "right-100vh-57r"
+                        : "right-14 sm:right-3 md:right-4 lg:right-6"
+                    }`}
                     tabData={CHART_TABS}
                     tabValue={tabValue}
                     setTabValue={setTabValue}
-                  />}
+                  />
+                )}
                 {tabValue === 0 ? (
                   <BarChart
                     options={getChartConfig()}
                     data={barChartData}
-                    className={`opm-page-chart-container ${props.filters ? "!bg-black-101" : ""} ${IS_FULLSCREEN ? "opm-page-chart-container-rotated" : ""
-                      }`}
+                    className={`opm-page-chart-container ${
+                      props.filters ? "!bg-black-101" : ""
+                    } ${
+                      IS_FULLSCREEN ? "opm-page-chart-container-rotated" : ""
+                    }`}
                     title={PAGE_TITLES.OPM}
                     isFullScreen={IS_FULLSCREEN}
                   />
@@ -802,8 +849,9 @@ const OPM: React.FC<OPMProps> = (props) => {
                   <LineChart
                     title={PAGE_TITLES.OPM}
                     isFullScreen={IS_FULLSCREEN}
-                    className={`opm-page-chart-container ${IS_FULLSCREEN ? "opm-page-chart-container-rotated" : ""
-                      }`}
+                    className={`opm-page-chart-container ${
+                      IS_FULLSCREEN ? "opm-page-chart-container-rotated" : ""
+                    }`}
                     options={getChartConfig()}
                     data={data}
                   />
@@ -812,7 +860,7 @@ const OPM: React.FC<OPMProps> = (props) => {
             )
           )}
         </div>
-      }
+      )}
     </>
   );
 };

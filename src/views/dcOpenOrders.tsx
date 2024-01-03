@@ -41,7 +41,7 @@ const DcOpenOrders: FC = () => {
       ) : (
         <div>
           <h3 className="sm:text-lg text-gray-200 font-bold m-3 ml-0 font-helvetica">
-              {PAGE_TITLES.DC_OPEN_ORDERS}
+            {PAGE_TITLES.DC_OPEN_ORDERS}
           </h3>
           <div className="hidden sm:block rounded-md">
             {tableData?.length > 0 && (
