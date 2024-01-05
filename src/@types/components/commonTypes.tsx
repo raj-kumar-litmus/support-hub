@@ -420,7 +420,26 @@ export type PieChartProps = {
 export type SectionTitleProps = {
   title: string;
 };
+export interface IncompleteOrdersData {
+  130?: number;
+  131?: number;
+  132?: number;
+  140?: number;
+  143?: number;
+  144?: number;
+  155?: number;
+  440?: number;
+  455?: number;
+  460?: number;
+  date?: string;
+}
 
+export interface IncompleteOrderDialogData {
+  code: number;
+  message: string;
+  nextState: string;
+  sla: string;
+}
 export interface DoughNutChartProps {
   options: ChartOptions<"doughnut"> | any;
   data: ChartData<"doughnut">;

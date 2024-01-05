@@ -35,7 +35,7 @@ const SidePaneList: FC<SidePaneListProps> = (props) => {
             alt="menu.name"
           />
           <span
-            className={`block pl-6  text-sm font-normal  ${
+            className={`block pl-6  text-sm font-semibold ${
               props.selectedMenu === menu.id ? "text-gray-200" : "text-gray-300"
             }`}
           >

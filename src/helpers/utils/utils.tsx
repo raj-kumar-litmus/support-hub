@@ -16,6 +16,7 @@ export const ROUTES = {
   orderDetails: "/order-details",
   orderReport: "/order-report",
   skuLookup: "/sku-lookup",
+  incompleteOrders: "/incomplete-orders",
 };
 
 export const FETCH_TYPES = {
@@ -62,6 +63,12 @@ export const MENU_LIST = [
     name: PAGE_TITLES.SKU_LOOKUP,
     icon: DCOpenOrdersIcon, //todo - change the icon
     path: ROUTES.skuLookup,
+  },
+  {
+    id: 8,
+    name: PAGE_TITLES.INCOMPLETE_ORDERS,
+    icon: DCOpenOrdersIcon, //TODO Change icon
+    path: ROUTES.incompleteOrders,
   },
 ];
 

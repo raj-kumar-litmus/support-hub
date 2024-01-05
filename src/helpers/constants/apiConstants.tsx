@@ -11,6 +11,8 @@ export const URL_OPM: string = "/supportdashboard/opm";
 export const URL_OPM_COMPARISON: string = "/supportdashboard/compareOPM";
 export const URL_HOURLYREPORT: string =
   "/supportdashboard/v1/report/hourlyReport";
+export const URL_INCOMPLETE_ORDERS: string =
+  "/supportdashboard/v1/orders/incomplete";
 export const SKU_LOOKUP_CATALOG: string =
   "/supportdashboard/v1/catalog/sku/:skuid";
 export const SKU_LOOKUP_INVENTORY_STATUS: string =
