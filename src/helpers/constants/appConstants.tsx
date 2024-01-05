@@ -105,15 +105,9 @@ export const PAYMENT_TYPES = {
 
 export const SHIPMENT_TYPES = {
   All: "",
-  "Ship to Home": "STH", // TODO - STH/S2H
-  BOPIS: "BOP",
-  "Same Day Delivery": "SDD",
-};
-
-export const OPM_SHIPMENT_CODE_MAP = {
-  STH: "Ship to Home",
-  BOP: "BOPIS",
-  SDD: "Same Day Delivery",
+  STH: "STH", // TODO - STH/S2H
+  BOP: "BOP",
+  SDD: "SDD",
 };
 
 export const CHART = {
@@ -334,6 +328,7 @@ export const AM_PM_OPTIONS = [
 
 export const SCREEN_WIDTH = {
   XS: 450,
+  ABOVE_XS: 479,
   SM: 640,
   ABOVE_SM: 768,
   MD: 850,

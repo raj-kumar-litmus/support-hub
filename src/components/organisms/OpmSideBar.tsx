@@ -27,7 +27,7 @@ const OpmSideBar = (props: OpmSideBarProps) => {
         setVisible(false);
       }}
       setVisible={setVisible}
-      sideBarWidthClass="!w-80w"
+      sideBarWidthClass="!w-50w"
       className="bg-gradient-to-b from-black-104 to-black-105 opm-sidebar"
     >
       <OPM
