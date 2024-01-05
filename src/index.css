@@ -1037,7 +1037,7 @@ hr.horizontalLine.blue {
 .payment-table .p-datatable-tfoot > tr > td {
   @apply py-3 px-1.7;
 }
-.p-datepicker table td>span {
+.p-datepicker table td > span {
   @apply w-7 h-6;
 }
 .grid-table .p-datatable-wrapper {
@@ -1136,4 +1136,13 @@ hr.horizontalLine.blue {
 }
 .opm-navigate-btn .p-button:enabled:hover {
   @apply bg-gray-108;
+}
+.opm-submit-btn .p-button {
+  @apply !bg-black-100 !border-gray-300;
+}
+.opm-sidebar-submit .p-button {
+  @apply !bg-gray-300 !border-gray-300;
+}
+.opm-sidebar-submit .p-button .p-button-label {
+  @apply !text-[#0C1117];
 }

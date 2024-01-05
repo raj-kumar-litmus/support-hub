@@ -63,10 +63,10 @@ import {
   LOCALE_OPTIONS,
   OPM_CHANNELS,
   OPM_CHART_DEFAULT,
+  SHIPMENT_TYPES,
   PAGE_TITLES,
   PAYMENT_TYPES,
   SCREEN_WIDTH,
-  SHIPMENT_TYPES,
 } from "../helpers/constants/appConstants";
 import { LoaderContext } from "../context/loaderContext";
 import { LoaderContextType } from "../@types/components/commonTypes";
@@ -665,8 +665,7 @@ const OPM: React.FC<OPMProps> = (props) => {
                               optionLabel="name"
                               placeholder=""
                               autoFocus={
-                                props.filters &&
-                                props.filters[form.name] !== undefined
+                                props.filters && props.filters[form.name]
                               }
                               onFocus={() => setInitialFocus(false)}
                             />
@@ -680,7 +679,9 @@ const OPM: React.FC<OPMProps> = (props) => {
                       isDisabled={disabled}
                       isRounded={true}
                       onClick={submit}
-                      className="flex flex-1 opm-btn p-button-rounded min-w-[94px] max-w-[94px] self-end"
+                      className={`${
+                        props.filters ? "opm-sidebar-submit" : "opm-submit-btn"
+                      } flex flex-1 opm-btn p-button-rounded min-w-[94px] max-w-[94px] self-end`}
                     />
                   </form>
                 </>
@@ -703,7 +704,9 @@ const OPM: React.FC<OPMProps> = (props) => {
                             {form.type === INPUT_TYPES.text && (
                               <CustomInputText
                                 containerclassname={`${
-                                  width > 479 ? "w-11r" : "w-43w"
+                                  width > SCREEN_WIDTH.ABOVE_XS
+                                    ? "w-11r"
+                                    : "w-43w"
                                 }`}
                                 value={form.value}
                                 label={form.label}
