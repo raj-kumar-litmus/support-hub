@@ -666,7 +666,7 @@ const OPM: React.FC<OPMProps> = (props) => {
                               placeholder=""
                               autoFocus={
                                 props.filters &&
-                                props.filters[form.name] !== undefined
+                                props.filters[form.name]
                               }
                               onFocus={() => setInitialFocus(false)}
                             />
