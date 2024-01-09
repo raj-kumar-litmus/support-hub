@@ -554,3 +554,25 @@ export const EXCEL_FILE_NAME = {
   OPM_COMPARISON: "OPM_Comparison",
   SESSIONS: "Sessions",
 };
+
+export const OPM_CHANNELS_CODE_MAP = {
+  DSK: "Desktop",
+  MWB: "Mobile Web",
+  IPH: "iPhone App",
+  AND: "Android App",
+  CSC: "CSC",
+  MPL: "M Plus",
+  ZAP: "",
+  INS: "Instagram",
+};
+
+export const OPM_PAYMENTS_CODE_MAP = {
+  CC: "Credit Card",
+  GC: "Gift Card",
+  ETC: "",
+  PPL: "PayPal",
+  KLA: "Klarna",
+  AFP: "",
+  SEP: "",
+  SEPT: "",
+};

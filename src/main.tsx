@@ -18,6 +18,7 @@ import Sessions from "./views/sessions";
 import SkuLookup from "./views/skuLookup";
 import { ROUTES } from "./helpers/utils/utils";
 import "./index.css";
+import FocusRoom from "./views/focusRoom";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -71,6 +72,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route
             path={ROUTES.orderReport}
             element={<App appContent={<OrderReport />} />}
+          />
+          <Route
+            path={ROUTES.focusRoom}
+            element={<App appContent={<FocusRoom />} />}
           />
         </Routes>
       </Suspense>
