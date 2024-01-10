@@ -17,6 +17,8 @@ import OrderDetails from "./views/orderDetails.js";
 import OrderReport from "./views/orderReport";
 import Sessions from "./views/sessions";
 import SkuLookup from "./views/skuLookup";
+import PageNotFound from "./views/pageNotFound";
+import ConnectivityIssues from "./views/connectivityIssues";
 import { ROUTES } from "./helpers/utils/utils";
 import "./index.css";
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -75,24 +77,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             />
             <Route
               path={ROUTES.connectivityIssues}
-              element={
-                <div className="flex flex-col h-[100vh] items-center justify-center bg-black-100 text-white-500">
-                  <h1 className="text-5xl">Could Not Connect</h1>
-                  <p>
-                    We could not establish connection with the APIs. Please
-                    check your VPN or contact the back-end team.
-                  </p>
-                </div>
-              }
+              element={<App appContent={<ConnectivityIssues />} />}
             />
             <Route
               path={ROUTES.pageNotFound}
-              element={
-                <div className="flex flex-col h-[100vh] items-center justify-center bg-black-100 text-white-500">
-                  <h1 className="text-7xl">404</h1>
-                  <p>Page Not Found.</p>
-                </div>
-              }
+              element={<App appContent={<PageNotFound />} />}
             />
             <Route
               path="*"
