@@ -96,7 +96,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             />
             <Route
               path="*"
-              element={<Navigate replace to="/page-not-found" />}
+              element={<Navigate replace to={ROUTES.pageNotFound} />}
             />
           </Routes>
         </Suspense>
