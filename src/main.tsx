@@ -9,7 +9,7 @@ import {
   Routes,
 } from "react-router-dom";
 import App from "./App";
-import NoInternetConnection from "./components/NoInternetConnection";
+import NoInternetConnection from "./views/NoInternetConnection";
 import Chart from "./components/organisms/ChartIndex";
 import DcOpenOrders from "./views/dcOpenOrders";
 import HomePage from "./views/homePage";
