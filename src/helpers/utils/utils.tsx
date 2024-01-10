@@ -16,6 +16,8 @@ export const ROUTES = {
   orderDetails: "/order-details",
   orderReport: "/order-report",
   skuLookup: "/sku-lookup",
+  connectivityIssues: "/connectivity-issues",
+  pageNotFound: "/page-not-found",
 };
 
 export const FETCH_TYPES = {
