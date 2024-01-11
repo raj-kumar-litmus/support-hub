@@ -381,7 +381,7 @@ const OrderDetails: React.FC = () => {
               {ORDER_DETAILS_LABELS.AMOUNT}
             </span>
             <span className="w-auto sm:w-4/5 font-medium">
-              {orderData?.paymentInfo?.[0].amount}
+              {orderData?.paymentInfo?.[0]?.amount}
             </span>
           </div>
         </div>

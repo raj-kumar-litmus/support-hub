@@ -53,7 +53,7 @@ export default {
           600: "#FFFFFF00",
           700: "#E8E8E8",
           800: "#EDEDED",
-          900: "#FBFBFC"
+          900: "#FBFBFC",
         },
         blue: {
           100: "#0977FF",
@@ -167,11 +167,13 @@ export default {
         "100vw-1r": "calc(100vw-1rem)",
         inherit: "inherit",
       },
-      maxWidth: {},
+      maxWidth: {
+        200: "200px",
+      },
       minWidth: {
         "4.5r": "4.5rem",
         "11r": "11rem",
-        "31": "31px"
+        31: "31px",
       },
       maxHeight: {
         528: "528px",
@@ -184,7 +186,9 @@ export default {
         "24r": "24rem",
       },
       borderRadius: {
+        8: "8px",
         10: "10px",
+        12: "12px",
         20: "20px",
       },
       fontSize: {
@@ -201,8 +205,8 @@ export default {
         17: "17px",
       },
       boxShadow: {
-        '2px-white': '0 0 0 2px #ffffff',
-      }
+        "2px-white": "0 0 0 2px #ffffff",
+      },
     },
     screens: {
       xs: "450px",
