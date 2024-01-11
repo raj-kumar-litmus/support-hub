@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import GridTable from "../components/GridTable";
-import { OPM_CHANNELS_CODE_MAP, OPM_PAYMENTS_CODE_MAP } from "../constants/appConstants";
-import OpmSideBar from "../components/OpmSideBar";
+import GridTable from "../components/molecules/GridTable";
+import OpmSideBar from "../components/organisms/OpmSideBar";
+import {
+  OPM_CHANNELS_CODE_MAP,
+  OPM_PAYMENTS_CODE_MAP,
+} from "../helpers/constants/appConstants";
 
-const locale = [
-  { data: "US" },
-  { data: "CA" },
-]
+const locale = [{ data: "US" }, { data: "CA" }];
 
 const channel = [
   { data: "DSK" },
@@ -16,8 +16,8 @@ const channel = [
   { data: "CSC", highlight: true },
   { data: "MPL" },
   { data: "ZAP" },
-  { data: "INS" }
-]
+  { data: "INS" },
+];
 
 const payment = [
   { data: "CC" },
@@ -27,8 +27,8 @@ const payment = [
   { data: "KLA", highlight: true },
   { data: "AFP" },
   { data: "SEP" },
-  { data: "SEPT" }
-]
+  { data: "SEPT" },
+];
 
 const FocusRoom = () => {
   const [visible, setVisible] = useState(false);
@@ -37,8 +37,7 @@ const FocusRoom = () => {
   const [paymentFilter, setPaymentFilter] = useState("");
 
   useEffect(() => {
-    (localeFilter || channelFilter || paymentFilter) &&
-      setVisible(true);
+    (localeFilter || channelFilter || paymentFilter) && setVisible(true);
   }, [localeFilter, channelFilter, paymentFilter]);
 
   useEffect(() => {
@@ -78,6 +77,6 @@ const FocusRoom = () => {
       />
     </div>
   );
-}
+};
 
-export default FocusRoom
+export default FocusRoom;

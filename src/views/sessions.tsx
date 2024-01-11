@@ -1,15 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router";
 import useScreenSize from "../hooks/useScreenSize";
-import BarChart from "../components/BarChart";
-import CustomButton from "../components/Button";
-import FilteredCard from "../components/FilteredCard";
-import CustomCalendar from "../components/common/CustomCalendar";
-import CustomDropdown from "../components/DropDown";
-import CustomDialog from "../components/common/customdialog";
-import CustomImage from "../components/common/customimage";
-import CustomTab from "../components/common/customtab";
-import Loader from "../components/loader";
+import BarChart from "../components/molecules/BarChart";
+import CustomButton from "../components/atoms/Button";
+import FilteredCard from "../components/molecules/FilteredCard";
+import CustomCalendar from "../components/molecules/CustomCalendar";
+import CustomDropdown from "../components/atoms/DropDown";
+import CustomDialog from "../components/atoms/CustomDialog";
+import CustomImage from "../components/atoms/CustomImage";
+import CustomTab from "../components/atoms/CustomTab";
+import Loader from "../components/atoms/Loader";
 import ChannelIcon from "../assets/channel.svg";
 import FilterIcon from "../assets/filter-dark.svg";
 import ArrowDownIcon from "../assets/arrown_down_white.svg";
@@ -17,10 +17,10 @@ import SandGlassIcon from "../assets/sandglass.svg";
 import openNewPageIcon from "../assets/open_in_new.svg";
 import refreshIcon from "../assets/refresh_icon.svg";
 import CalendarIcon from "../assets/white_calendar.svg";
-import { ChartData, SessionData } from "../@types/pages/Sessions";
+import { ChartData, SessionData } from "../@types/pages/sessions";
 import { LoaderContextType } from "../@types/components/commonTypes";
-import { BAR_CHART_OPTIONS } from "../config/chartConfig";
-import { URL_SESSIONS } from "../constants/apiConstants";
+import { BAR_CHART_OPTIONS } from "../helpers/config/chartConfig";
+import { URL_SESSIONS } from "../helpers/constants/apiConstants";
 import {
   SESSIONS_CHANNEL_LIST,
   DATE_AND_TIME_FORMATS,
@@ -32,7 +32,7 @@ import {
   SESSIONS_CHART_DEFAULT,
   SCREEN_WIDTH,
   DURATIONS,
-} from "../constants/appConstants";
+} from "../helpers/constants/appConstants";
 import { LoaderContext } from "../context/loaderContext";
 import {
   CURRENT_PST_DATE,
@@ -40,9 +40,9 @@ import {
   DATE_TIME_FORMAT_4,
   formatDate,
   getFormattedPSTDate,
-} from "../utils/dateTimeUtil";
-import { fetchData } from "../utils/fetchUtil";
-import { ROUTES, submitOnEnter } from "../components/utils/Utils";
+} from "../helpers/utils/dateTimeUtil";
+import { fetchData } from "../helpers/utils/fetchUtil";
+import { ROUTES, submitOnEnter } from "../helpers/utils/utils";
 
 const Sessions = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
