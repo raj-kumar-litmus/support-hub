@@ -165,7 +165,9 @@ export default {
         "100vw-1r": "calc(100vw-1rem)",
         inherit: "inherit",
       },
-      maxWidth: {},
+      maxWidth: {
+        200: "200px",
+      },
       minWidth: {
         "4.5r": "4.5rem",
         "11r": "11rem",
@@ -182,7 +184,9 @@ export default {
         "24r": "24rem",
       },
       borderRadius: {
+        8: "8px",
         10: "10px",
+        12: "12px",
         20: "20px",
       },
       fontSize: {
