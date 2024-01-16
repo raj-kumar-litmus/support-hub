@@ -177,7 +177,160 @@ export const BarChartWithCustomGridStyles: Story = {
       "bg-black-101 border-2 border-solid border-black-102 px-6 pt-2 pb-0 rounded-xl w-46r h-96",
   },
 };
+export const BarChartInSideBar: Story = {
+  args: {
+    options: {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: "Sessions",
+          color: "#ffffff",
+          font: {
+            size: 14,
+          },
+          position: "top",
+          align: "start",
+          padding: 20,
+        },
+        datalabels: {
+          display: false,
+        },
+      },
+      scales: {
+        x: {
+          grid: {
+            display: false,
+          },
+        },
+        y: {
+          display: true,
+          beginAtZero: true,
+          stepSize: 6,
+          grid: {
+            drawTicks: true,
+            tickColor: "#29292a",
+            color: "#5c5c5c",
+          },
+          ticks: {
+            display: true,
+            stepSize: 20,
+            count: 6,
+          },
+          border: {
+            dash: [1, 5],
+            color: "#29292a",
+          },
+        },
+      },
+    },
+    data: {
+      labels: [
+        "10:01",
+        "10:02",
+        "10:03",
+        "10:04",
+        "10:05",
+        "10:06",
+        "10:07",
+        "10:08",
+        "10:09",
+        "10:10",
+      ],
+      datasets: [
+        {
+          label: "Dataset 1",
+          data: [95, 107, 105, 111, 58, 122, 107, 128, 112, 194],
+          backgroundColor: "#0279A8",
+          barPercentage: 0.5,
+        },
+      ],
+    },
+    className:
+      "bg-[#14181E] border-2 border-solid border-black-102 px-6 pt-2 pb-0 rounded-xl w-46r h-96",
+  },
+};
 
+export const MultipleBarChartInSideBar: Story = {
+  args: {
+    options: {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: "Sessions",
+          color: "#ffffff",
+          font: {
+            size: 14,
+          },
+          position: "top",
+          align: "start",
+          padding: 20,
+        },
+        datalabels: {
+          display: false,
+        },
+        legend: {
+          display: false,
+        },
+      },
+      scales: {
+        x: {
+          grid: {
+            display: false,
+          },
+        },
+        y: {
+          display: true,
+          beginAtZero: true,
+          stepSize: 6,
+          grid: {
+            drawTicks: true,
+            tickColor: "#29292a",
+            color: "#5c5c5c",
+          },
+          ticks: {
+            display: true,
+            stepSize: 20,
+            count: 6,
+          },
+          border: {
+            dash: [1, 5],
+            color: "#29292a",
+          },
+        },
+      },
+    },
+    data: {
+      labels: [
+        "10:01",
+        "10:02",
+        "10:03",
+        "10:04",
+        "10:05",
+        "10:06",
+        "10:07",
+        "10:08",
+        "10:09",
+        "10:10",
+      ],
+      datasets: [
+        {
+          label: "Dataset 1",
+          data: [95, 107, 105, 111, 58, 122, 107, 128, 112, 194],
+          backgroundColor: "#0279A8",
+        },
+        {
+          label: "Dataset 2",
+          data: [35, 207, 205, 11, 208, 222, 97, 208, 212, 24],
+          backgroundColor: "#831A1A",
+        },
+      ],
+    },
+    className:
+      "bg-[#14181E] border-2 border-solid border-black-102 px-6 pt-2 pb-0 rounded-xl w-46r h-96",
+  },
+};
 const drawOuterBorderLines = {
   id: "drawOuterBorderLines",
   afterDatasetsDraw: (chart: any, _: any, opts: any) => {
