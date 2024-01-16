@@ -14,6 +14,7 @@ import Chart from "./components/organisms/ChartIndex";
 import DcOpenOrders from "./views/dcOpenOrders";
 import HomePage from "./views/homePage";
 import OrderDetails from "./views/orderDetails.js";
+import IncompleteOrder from "./views/incompleteOrders";
 import OrderReport from "./views/orderReport";
 import Sessions from "./views/sessions";
 import SkuLookup from "./views/skuLookup";
@@ -74,6 +75,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route
               path={ROUTES.orderReport}
               element={<App appContent={<OrderReport />} />}
+            />
+            <Route
+              path={ROUTES.incompleteOrders}
+              element={<App appContent={<IncompleteOrder />} />}
             />
             <Route
               path={ROUTES.connectivityIssues}

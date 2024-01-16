@@ -81,5 +81,5 @@ export type OPMProps = {
     date?: string;
     promocode?: string;
     shipment?: string;
-  }
-}
+  };
+};

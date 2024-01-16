@@ -90,7 +90,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ChartDataLabels
+  ChartDataLabels,
 );
 
 const OPM: React.FC<OPMProps> = (props) => {
@@ -210,7 +210,7 @@ const OPM: React.FC<OPMProps> = (props) => {
 
   const [options, setOptions] = useState<null | ChartOptions>(null);
   const [barChartoptions, setBarChartOptions] = useState<null | ChartOptions>(
-    null
+    null,
   );
   const [data, setData] = useState<ChartData | null>(null);
   const [barChartData, setBarChartData] = useState<ChartData | null>(null);
@@ -235,7 +235,7 @@ const OPM: React.FC<OPMProps> = (props) => {
           : DASHBOARD_LABELS.HOME_PAGE_REFERSH_DURATION
       }&starttime=${DEFAULT.starttime}&channel=${DEFAULT.channel}&promocode=${
         DEFAULT.promocode
-      }&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`
+      }&paymentType=${DEFAULT.paymentType}&country=${DEFAULT.country}`,
     );
   }, []);
 
@@ -251,7 +251,7 @@ const OPM: React.FC<OPMProps> = (props) => {
       setMaxOPM(
         Math.round(Math.max(...dataArr) / OPM_CHART_DEFAULT.STEP_SIZE) *
           OPM_CHART_DEFAULT.STEP_SIZE +
-          OPM_CHART_DEFAULT.STEP_SIZE
+          OPM_CHART_DEFAULT.STEP_SIZE,
       );
       setData({
         labels: xAxisLabels,
@@ -291,28 +291,28 @@ const OPM: React.FC<OPMProps> = (props) => {
             ? OPM_OPTIONS_HOME(
                 width < SCREEN_WIDTH.SM,
                 Number(url.split("period=")[1].split("&")[0]) < 16 &&
-                  width > SCREEN_WIDTH.SM
+                  width > SCREEN_WIDTH.SM,
               )
             : OPM_OPTIONS(
                 width < SCREEN_WIDTH.SM,
                 Number(url.split("period=")[1].split("&")[0]) < 16 &&
-                  width > SCREEN_WIDTH.SM
-              )
+                  width > SCREEN_WIDTH.SM,
+              ),
         );
         setBarChartOptions(
           props.fetchType === FETCH_TYPES.HOME
             ? OPM_BAR_CHART_OPTIONS_HOME(
                 width < SCREEN_WIDTH.SM,
                 Number(url.split("period=")[1].split("&")[0]) < 16 &&
-                  width > SCREEN_WIDTH.SM
+                  width > SCREEN_WIDTH.SM,
               )
             : props.filters
             ? OPM_BAR_CHART_OPTIONS_SIDEBAR(width < SCREEN_WIDTH.SM, false)
             : OPM_BAR_CHART_OPTIONS(
                 width < SCREEN_WIDTH.SM,
                 Number(url.split("period=")[1].split("&")[0]) < 16 &&
-                  width > SCREEN_WIDTH.SM
-              )
+                  width > SCREEN_WIDTH.SM,
+              ),
         );
         await getData();
       }
@@ -443,7 +443,7 @@ const OPM: React.FC<OPMProps> = (props) => {
       if (filterProps.period) {
         const periodValue = {
           name: Object.entries(DURATIONS).find(
-            ([val]) => val === filterProps.period
+            ([val]) => val === filterProps.period,
           )[0],
           code: filterProps.period,
         };
@@ -452,7 +452,7 @@ const OPM: React.FC<OPMProps> = (props) => {
       if (filterProps.locale) {
         const localeValue = {
           name: Object.entries(LOCALE_OPTIONS).find(
-            ([val]) => val === filterProps.locale
+            ([val]) => val === filterProps.locale,
           )[0],
           code: filterProps.locale,
         };
@@ -461,7 +461,7 @@ const OPM: React.FC<OPMProps> = (props) => {
       if (filterProps.channel) {
         const channelValue = {
           name: Object.entries(OPM_CHANNELS).find(
-            ([val]) => val === filterProps.channel
+            ([val]) => val === filterProps.channel,
           )[0],
           code: filterProps.channel,
         };
@@ -470,7 +470,7 @@ const OPM: React.FC<OPMProps> = (props) => {
       if (filterProps.payment) {
         const paymentValue = {
           name: Object.entries(PAYMENT_TYPES).find(
-            ([val]) => val === filterProps.payment
+            ([val]) => val === filterProps.payment,
           )[0],
           code: filterProps.payment,
         };
@@ -486,7 +486,7 @@ const OPM: React.FC<OPMProps> = (props) => {
       if (filterProps.shipment) {
         const shipmentValue = {
           name: Object.entries(SHIPMENT_TYPES).find(
-            ([val]) => val === filterProps.shipment
+            ([val]) => val === filterProps.shipment,
           )[0],
           code: filterProps.shipment,
         };
@@ -665,8 +665,7 @@ const OPM: React.FC<OPMProps> = (props) => {
                               optionLabel="name"
                               placeholder=""
                               autoFocus={
-                                props.filters &&
-                                props.filters[form.name]
+                                props.filters && props.filters[form.name]
                               }
                               onFocus={() => setInitialFocus(false)}
                             />

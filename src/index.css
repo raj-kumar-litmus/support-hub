@@ -44,28 +44,19 @@
 .menu-card .p-card-content {
   @apply p-0;
 }
-
 .menu-icon img {
   @apply !h-6 m-auto;
 }
-
 .menu-sm-icon img {
   @apply w-5 h-5;
 }
-
-.selected-menu img {
-  @apply filter invert-12 sepia-9 saturate-682 hue-rotate-201 brightness-88 contrast-88;
-}
-
 .arrow-icon img {
   @apply h-13 rotate-180;
 }
-
 #custom-hover .p-button,
 .p-dialog .p-button {
   @apply bg-gray-900 border-gray-400 text-gray-400;
 }
-
 #custom-hover .p-inputtext,
 .p-dialog .p-inputtext {
   @apply border-none bg-gray-900 rounded-r-lg;
@@ -1114,6 +1105,12 @@ hr.horizontalLine.blue {
 }
 .custom-sidebar .custom-sidebar-close-btn .p-button:enabled:hover {
   @apply border-none bg-inherit;
+}
+.incomplete-order-card .p-card-body {
+  @apply !h-full !p-3;
+}
+.incomplete-order-card .p-card-content {
+  @apply !h-full p-1;
 }
 .custom-sidebar .opm-tabs.p-tabview {
   @apply top-6;
