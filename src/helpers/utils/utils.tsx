@@ -17,6 +17,7 @@ export const ROUTES = {
   orderReport: "/order-report",
   skuLookup: "/sku-lookup",
   incompleteOrders: "/incomplete-orders",
+  focusRoom: "/focus-room",
   connectivityIssues: "/connectivity-issues",
   pageNotFound: "/page-not-found",
 };

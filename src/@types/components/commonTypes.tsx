@@ -282,6 +282,8 @@ export type AppContentProps = {
   showSidePane: boolean;
   showNavbar: boolean;
   appContent: any;
+  bg?: string;
+  padding?: string;
 };
 
 export interface FilteredCardProps {
@@ -321,6 +323,8 @@ export type AppProps = {
   appContent: any;
   showSidePane?: boolean;
   showNavbar?: boolean;
+  bg?: string;
+  padding?: string;
 };
 
 export interface BarChartCompProps {

@@ -8,6 +8,7 @@ export const PAGE_TITLES = {
   ORDER_REPORT: "Order Report",
   SKU_LOOKUP: "SKU Lookup",
   INCOMPLETE_ORDERS: "Incomplete Orders",
+  FOCUS_ROOM: "Focus Room",
 };
 
 export const DASHBOARD_LABELS = {
