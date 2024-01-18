@@ -1,7 +1,5 @@
 const BopisWidget = () => {
-  return (
-    <div className="bg-black-106 border border-black-108 text-white-900 rounded-12 h-full"></div>
-  );
+  return <div className="focus-room-widget-wrapper"></div>;
 };
 
 export default BopisWidget;

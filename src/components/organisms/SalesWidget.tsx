@@ -1,3 +1,4 @@
+import { FOCUS_ROOM_TITLES } from "../../helpers/constants/appConstants";
 import GridTable from "../molecules/GridTable";
 
 const SalesWidget = () => {
@@ -8,9 +9,9 @@ const SalesWidget = () => {
     { title: "Avg Order", data: "78" },
   ];
   return (
-    <div className="grid bg-black-106 border border-black-108 text-white-900 rounded-12 h-full px-4 pt-1 pb-4">
+    <div className="focus-room-widget-wrapper px-4 pt-1 pb-4">
       <GridTable
-        title="Sales"
+        title={FOCUS_ROOM_TITLES.SALES}
         columns={4}
         data={sales}
         lastUpdatedTime="11:00 PM"
