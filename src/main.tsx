@@ -18,6 +18,7 @@ import IncompleteOrder from "./views/incompleteOrders";
 import OrderReport from "./views/orderReport";
 import Sessions from "./views/sessions";
 import SkuLookup from "./views/skuLookup";
+import FocusRoom from "./views/focusRoom";
 import PageNotFound from "./views/pageNotFound";
 import ConnectivityIssues from "./views/connectivityIssues";
 import { ROUTES } from "./helpers/utils/utils";
@@ -79,6 +80,18 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route
               path={ROUTES.incompleteOrders}
               element={<App appContent={<IncompleteOrder />} />}
+            />
+            <Route
+              path={ROUTES.focusRoom}
+              element={
+                <App
+                  appContent={<FocusRoom />}
+                  showNavbar={false}
+                  showSidePane={false}
+                  bg="bg-black-109"
+                  padding="px-[2.3vw] py-[4vh]"
+                />
+              }
             />
             <Route
               path={ROUTES.connectivityIssues}

@@ -22,6 +22,10 @@ export default {
           103: "#424245",
           104: "#232323",
           105: "#1A1A1B",
+          106: "#14181E",
+          107: "#272C34",
+          108: "#21262D",
+          109: "#0C1117",
         },
         gray: {
           100: "#00000014",
@@ -74,11 +78,13 @@ export default {
         yellow: {
           100: "#FDA44F",
           200: "#CE813A",
+          300: "#CB7F3A",
         },
         red: {
           100: "#D26060",
           200: "#623737",
           300: "#CE7668",
+          400: "#CC5D5E",
         },
       },
       spacing: {
@@ -135,14 +141,16 @@ export default {
         "25w": "25vw",
         "21r": "21rem",
         "29r": "29rem",
-        "46r": "46rem",
+        "31.4w": "31.4vw",
         "32.5w": "32.5vw",
+        "32.8h": "32.8vh",
         "38w": "38vw",
         "40w": "40vw",
         "43w": "43vw",
         "44w": "44vw",
         "45h": "45vh",
         "45w": "45vw",
+        "46r": "46rem",
         "50w": "50vw",
         "51w": "51vw",
         "60w": "60vw",
@@ -190,6 +198,7 @@ export default {
         20: "20px",
       },
       fontSize: {
+        8: "8px",
         10: "10px",
         13: "13px",
       },
@@ -217,7 +226,8 @@ export default {
       "3xl": "2100px",
     },
     fontFamily: {
-      helvetica: "Arial, sans-serif, Helvetica Neue",
+      helvetica: "Helvetica Neue, sans-serif",
+      IBM: "IBM Plex Mono, monospace",
     },
   },
   safelist: [
@@ -321,5 +331,6 @@ export default {
     "w-[98%]",
     "w-[99%]",
     "w-[100%]",
+    { pattern: /grid-cols-./ },
   ],
 };

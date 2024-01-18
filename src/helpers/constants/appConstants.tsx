@@ -8,6 +8,7 @@ export const PAGE_TITLES = {
   ORDER_REPORT: "Order Report",
   SKU_LOOKUP: "SKU Lookup",
   INCOMPLETE_ORDERS: "Incomplete Orders",
+  FOCUS_ROOM: "Focus Room",
 };
 
 export const DASHBOARD_LABELS = {
@@ -503,9 +504,10 @@ export const ORDER_REPORT_THRESHOLDS = {
 };
 
 export const SEVERITY = {
-  LOW: "low",
+  MED: "medium",
   HIGH: "high",
 };
+
 export const SKU_DETAILS = {
   TITLE: "SKU Details",
   SKU: "SKU #",
@@ -629,4 +631,15 @@ export const EXCEL_FILE_NAME = {
   OPM: "OPM",
   OPM_COMPARISON: "OPM_Comparison",
   SESSIONS: "Sessions",
+};
+export const FOCUS_ROOM_TITLES = {
+  LOCALE: "Locale",
+  SHIPMENT: "Shipment",
+  CHANNEL: "Channel",
+  PAYMENT: "Payment",
+  SALES: "Sales",
+  DATABASE: "Database",
+};
+export const FOCUS_ROOM_LABELS = {
+  LAST_UPDATED: "Last Updated ",
 };

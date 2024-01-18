@@ -3,7 +3,7 @@ import OPMIcon from "../../assets/opm.svg";
 import OPMComparisonIcon from "../../assets/opmcomparison.svg";
 import SessionsIcon from "../../assets/sessions.svg";
 import DCOpenOrdersIcon from "../../assets/dcopenorders.svg";
-import { PAGE_TITLES } from "../constants/appConstants";
+import { PAGE_TITLES, SEVERITY } from "../constants/appConstants";
 import { utils, writeFile } from "xlsx";
 
 export const ROUTES = {
@@ -17,6 +17,7 @@ export const ROUTES = {
   orderReport: "/order-report",
   skuLookup: "/sku-lookup",
   incompleteOrders: "/incomplete-orders",
+  focusRoom: "/focus-room",
   connectivityIssues: "/connectivity-issues",
   pageNotFound: "/page-not-found",
 };
@@ -306,4 +307,21 @@ export const exportToExcel = (data, name) => {
   const wb = utils.book_new();
   utils.book_append_sheet(wb, ws);
   writeFile(wb, `${name}.xlsx`);
+};
+
+export const getSeverityStyles = (severity) => {
+  switch (severity) {
+    case SEVERITY.MED: {
+      return {
+        text: "text-yellow-300",
+        boxShadow: "!shadow-[0px_0px_6px_#CB7F3A]",
+      };
+    }
+    case SEVERITY.HIGH: {
+      return {
+        text: "text-red-400",
+        boxShadow: "!shadow-[0px_0px_6px_#CC5D5E]",
+      };
+    }
+  }
 };

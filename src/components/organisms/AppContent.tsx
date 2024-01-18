@@ -56,7 +56,7 @@ const AppContent: FC<AppContentProps> = (props) => {
         )}
         <div
           className={`flex flex-col sm:flex-row ${
-            IS_FULLSCREEN ? "" : "mt-14"
+            IS_FULLSCREEN || !props.showNavbar ? "" : "mt-14"
           } ml-0 bg-black-200`}
         >
           {props.showSidePane && (
@@ -94,8 +94,12 @@ const AppContent: FC<AppContentProps> = (props) => {
           )}
           <div
             className={`${showSidePaneGrid ? "hidden" : "block"} 
-              ${IS_FULLSCREEN ? "h-screen" : "h-100vh-56"} 
-              w-full sm:ml-25w md:ml-[27vw] lg:ml-21w overflow-y-auto p-5 sm:px-10 bg-black-100
+              ${IS_FULLSCREEN || !props.showNavbar ? "h-screen" : "h-100vh-56"} 
+              w-full ${
+                props.showSidePane ? "sm:ml-25w md:ml-[27vw] lg:ml-21w" : ""
+              } overflow-y-auto ${
+                props.padding ? props.padding : "p-5 sm:px-10"
+              } ${props.bg ? props.bg : "bg-black-100"}
               ${width < SCREEN_WIDTH.SM && IS_ORDER_DETAILS ? "pt-0" : ""}
               `}
           >

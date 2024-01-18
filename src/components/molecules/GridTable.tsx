@@ -1,97 +1,63 @@
-import { Column } from "primereact/column";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
+import CustomCard from "../atoms/CustomCard";
 import CustomImage from "../atoms/CustomImage";
-import CustomTable from "../atoms/CustomTable";
-import FilledCheckCircle from "../../assets/filled_check_circle.svg";
-import Warning from "../../assets/warning.svg";
-import { SEVERITY } from "../../helpers/constants/appConstants";
 import { GridTableProps } from "../../@types/components/commonTypes";
+import { getSeverityStyles } from "../../helpers/utils/utils";
+import { FOCUS_ROOM_LABELS } from "../../helpers/constants/appConstants";
 
 const GridTable: FC<GridTableProps> = (props) => {
-  const [rowDataList, setRowDataList] = useState<any[]>([]);
+  const { className = "", dataClassName = "", columns = 1 } = props;
+  const colWidth = `grid-cols-${columns}`;
 
-  const getSeverityStyles = (data) =>
-    data.severity === SEVERITY.HIGH ? "text-yellow-200" : "text-green-400";
+  const handleCardClick = () => {};
 
-  const generateGridData = () => {
-    if (props.data?.length > 0) {
-      const a = props.data.slice();
-      let rowData;
-      const gridData = [];
-      while (a.length > 0) {
-        rowData = a.splice(0, props.columns);
-        const _data = rowData.map((item, index) => ({
-          [`data${index + 1}`]: item.data,
-          ...(item.highlight && { highlight: item.highlight }),
-          ...(item.severity && { severity: item.severity }),
-        }));
-        gridData.push(_data);
-      }
-      setRowDataList(gridData);
-    }
-  };
-
-  useEffect(() => {
-    generateGridData();
-  }, [props.data, props.columns]);
-
-  const header = (
-    <div className="grid-table-header">
-      <span>{props.title}</span>
-    </div>
-  );
+  const emptyCells =
+    props.data.length % columns === 0
+      ? 0
+      : columns - (props.data.length % columns);
 
   return (
-    <CustomTable
-      value={rowDataList}
-      showHeaders={false}
-      header={props.title ? header : ""}
-      className={`grid-table cursor-pointer ${props.className}`}
-    >
-      {Array(props.columns)
-        .fill("")
-        .map((_, columnIndex) => (
-          <Column
-            key={`col${columnIndex + 1}`}
-            field={`data${columnIndex + 1}`}
-            body={(rowData) =>
-              rowData[columnIndex]?.[`data${columnIndex + 1}`] ? (
-                <div
-                  className={`flex justify-center items-center p-2 ${
-                    rowData[columnIndex].severity
-                      ? getSeverityStyles(rowData[columnIndex])
-                      : ""
-                  }`}
-                  onClick={() =>
-                    props.onClick(
-                      rowData[columnIndex]?.[`data${columnIndex + 1}`],
-                    )
-                  }
-                >
-                  {rowData[columnIndex]?.severity && (
-                    <CustomImage
-                      src={
-                        rowData[columnIndex].severity === SEVERITY.HIGH
-                          ? Warning
-                          : FilledCheckCircle
-                      }
-                      className="mr-2 h-3 w-3"
-                    />
-                  )}
-                  {rowData[columnIndex]?.[`data${columnIndex + 1}`]}
-                </div>
-              ) : (
-                "-"
-              )
-            }
-            bodyClassName={(rowData) =>
-              rowData[columnIndex]?.highlight
-                ? "!border !border-red-100 bg-red-200"
-                : ""
-            }
-          />
-        ))}
-    </CustomTable>
+    <div className={`grid-table flex flex-col cursor-pointer ${className}`}>
+      <div className="flex items-center mb-2">
+        <div className="grid-table-header text-10 font-normal font-IBM text-white-900 uppercase">
+          {props.title}
+        </div>
+        {props.lastUpdatedTime && (
+          <div className="text-8 font-IBM ml-4">
+            {FOCUS_ROOM_LABELS.LAST_UPDATED}
+            {props.lastUpdatedTime}
+          </div>
+        )}
+      </div>
+      <div className="flex-grow">
+        <div className={`grid ${colWidth} gap-2 h-full`}>
+          {props.data.map((d, index) => (
+            <CustomCard
+              key={index}
+              className={`grid-card ${
+                d.severity ? getSeverityStyles(d.severity).boxShadow : ""
+              }`}
+              onClick={() => handleCardClick()}
+            >
+              {d?.title && <div className="text-8">{d.title}</div>}
+              <div
+                className={`flex justify-center items-center gap-2 ${
+                  d.severity ? getSeverityStyles(d.severity).text : ""
+                }`}
+              >
+                {d.icon && <CustomImage src={d.icon} className="w-3 h-3" />}
+                {d.data && <div className={`${dataClassName}`}>{d.data}</div>}
+              </div>
+            </CustomCard>
+          ))}
+          {Array.from({ length: emptyCells }).map((_, index) => (
+            <CustomCard key={index} className="grid-card">
+              -
+            </CustomCard>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
 

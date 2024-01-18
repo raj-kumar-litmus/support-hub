@@ -282,6 +282,8 @@ export type AppContentProps = {
   showSidePane: boolean;
   showNavbar: boolean;
   appContent: any;
+  bg?: string;
+  padding?: string;
 };
 
 export interface FilteredCardProps {
@@ -321,6 +323,8 @@ export type AppProps = {
   appContent: any;
   showSidePane?: boolean;
   showNavbar?: boolean;
+  bg?: string;
+  padding?: string;
 };
 
 export interface BarChartCompProps {
@@ -383,16 +387,19 @@ export type HorizontalTableProps = {
 
 export interface GridData {
   data: string | number;
+  title?: string;
   icon?: any;
-  highlight?: boolean;
+  severity?: string;
 }
 
 export type GridTableProps = {
   columns: number;
-  data: GridData[] | string[];
+  data: GridData[];
   title?: string;
   className?: string;
+  dataClassName?: string;
   onClick?: (string) => void;
+  lastUpdatedTime?: string;
 };
 
 export type OrderSummaryCardProps = {
