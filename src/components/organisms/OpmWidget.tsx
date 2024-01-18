@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import GridTable from "../molecules/GridTable";
 import { GridData } from "../../@types/components/commonTypes";
-import { SEVERITY } from "../../helpers/constants/appConstants";
+import {
+  FOCUS_ROOM_TITLES,
+  SEVERITY,
+} from "../../helpers/constants/appConstants";
 import { getSeverityStyles } from "../../helpers/utils/utils";
 
 const OpmWidget = () => {
@@ -66,30 +69,30 @@ const OpmWidget = () => {
 
   return (
     <div
-      className={`bg-black-106 border border-black-108 text-white-900 rounded-12 h-full px-4 pt-1 pb-4 grid grid-cols-2 gap-4 ${
+      className={`focus-room-widget-wrapper px-4 pt-1 pb-4 grid-cols-2 gap-4 ${
         severity ? getSeverityStyles(severity).boxShadow : ""
       }`}
     >
       <GridTable
-        title="Locale"
+        title={FOCUS_ROOM_TITLES.LOCALE}
         columns={2}
         data={locale}
         dataClassName="text-xs"
       />
       <GridTable
-        title="Shipment"
+        title={FOCUS_ROOM_TITLES.SHIPMENT}
         columns={3}
         data={shipment}
         dataClassName="text-xs"
       />
       <GridTable
-        title="Channel"
+        title={FOCUS_ROOM_TITLES.CHANNEL}
         columns={3}
         data={channel}
         dataClassName="text-xs"
       />
       <GridTable
-        title="Payment"
+        title={FOCUS_ROOM_TITLES.PAYMENT}
         columns={3}
         data={payment}
         dataClassName="text-xs"

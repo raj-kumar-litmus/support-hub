@@ -632,3 +632,14 @@ export const EXCEL_FILE_NAME = {
   OPM_COMPARISON: "OPM_Comparison",
   SESSIONS: "Sessions",
 };
+export const FOCUS_ROOM_TITLES = {
+  LOCALE: "Locale",
+  SHIPMENT: "Shipment",
+  CHANNEL: "Channel",
+  PAYMENT: "Payment",
+  SALES: "Sales",
+  DATABASE: "Database",
+};
+export const FOCUS_ROOM_LABELS = {
+  LAST_UPDATED: "Last Updated ",
+};

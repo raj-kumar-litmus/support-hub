@@ -1155,3 +1155,6 @@ hr.horizontalLine.blue {
 .grid-card.p-card .p-card-body {
   @apply p-0;
 }
+.focus-room-widget-wrapper {
+  @apply bg-black-106 border border-black-108 text-white-900 rounded-12 h-full grid;
+}

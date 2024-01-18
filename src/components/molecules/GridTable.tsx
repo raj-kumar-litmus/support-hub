@@ -3,10 +3,11 @@ import CustomCard from "../atoms/CustomCard";
 import CustomImage from "../atoms/CustomImage";
 import { GridTableProps } from "../../@types/components/commonTypes";
 import { getSeverityStyles } from "../../helpers/utils/utils";
+import { FOCUS_ROOM_LABELS } from "../../helpers/constants/appConstants";
 
 const GridTable: FC<GridTableProps> = (props) => {
   const { className = "", dataClassName = "" } = props;
-  const colWidth = `grid-cols-${props.columns}`;
+  const colWidth = `grid-cols-${props.columns}` || "grid-cols-1";
 
   const handleCardClick = () => {};
 
@@ -23,7 +24,8 @@ const GridTable: FC<GridTableProps> = (props) => {
         </div>
         {props.lastUpdatedTime && (
           <div className="text-8 font-IBM ml-4">
-            Last Updated {props.lastUpdatedTime}
+            {FOCUS_ROOM_LABELS.LAST_UPDATED}
+            {props.lastUpdatedTime}
           </div>
         )}
       </div>
