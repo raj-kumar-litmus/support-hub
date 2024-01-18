@@ -6,15 +6,15 @@ import { getSeverityStyles } from "../../helpers/utils/utils";
 import { FOCUS_ROOM_LABELS } from "../../helpers/constants/appConstants";
 
 const GridTable: FC<GridTableProps> = (props) => {
-  const { className = "", dataClassName = "" } = props;
-  const colWidth = `grid-cols-${props.columns}` || "grid-cols-1";
+  const { className = "", dataClassName = "", columns = 1 } = props;
+  const colWidth = `grid-cols-${columns}`;
 
   const handleCardClick = () => {};
 
   const emptyCells =
-    props.data.length % props.columns === 0
+    props.data.length % columns === 0
       ? 0
-      : props.columns - (props.data.length % props.columns);
+      : columns - (props.data.length % columns);
 
   return (
     <div className={`grid-table flex flex-col cursor-pointer ${className}`}>
