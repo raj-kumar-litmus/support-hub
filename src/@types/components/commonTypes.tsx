@@ -387,16 +387,19 @@ export type HorizontalTableProps = {
 
 export interface GridData {
   data: string | number;
+  title?: string;
   icon?: any;
-  highlight?: boolean;
+  severity?: string;
 }
 
 export type GridTableProps = {
   columns: number;
-  data: GridData[] | string[];
+  data: GridData[];
   title?: string;
   className?: string;
+  dataClassName?: string;
   onClick?: (string) => void;
+  lastUpdatedTime?: string;
 };
 
 export type OrderSummaryCardProps = {

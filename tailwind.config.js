@@ -78,11 +78,13 @@ export default {
         yellow: {
           100: "#FDA44F",
           200: "#CE813A",
+          300: "#CB7F3A",
         },
         red: {
           100: "#D26060",
           200: "#623737",
           300: "#CE7668",
+          400: "#CC5D5E",
         },
       },
       spacing: {
@@ -196,6 +198,7 @@ export default {
         20: "20px",
       },
       fontSize: {
+        8: "8px",
         10: "10px",
         13: "13px",
       },
@@ -223,7 +226,8 @@ export default {
       "3xl": "2100px",
     },
     fontFamily: {
-      helvetica: "Arial, sans-serif, Helvetica Neue",
+      helvetica: "Helvetica Neue, sans-serif",
+      IBM: "IBM Plex Mono, monospace",
     },
   },
   safelist: [
@@ -327,5 +331,6 @@ export default {
     "w-[98%]",
     "w-[99%]",
     "w-[100%]",
+    { pattern: /grid-cols-./ },
   ],
 };

@@ -1146,3 +1146,12 @@ hr.horizontalLine.blue {
 .opm-sidebar-submit .p-button .p-button-label {
   @apply !text-[#0C1117];
 }
+.grid-card.p-card {
+  @apply bg-black-106 border border-black-107 rounded-10 shadow-none min-h-[1.3rem] flex justify-center items-center;
+}
+.grid-card.p-card .p-card-content {
+  @apply p-0 text-white-900 font-normal text-xs text-center font-helvetica;
+}
+.grid-card.p-card .p-card-body {
+  @apply p-0;
+}

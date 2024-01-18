@@ -504,9 +504,10 @@ export const ORDER_REPORT_THRESHOLDS = {
 };
 
 export const SEVERITY = {
-  LOW: "low",
+  MED: "medium",
   HIGH: "high",
 };
+
 export const SKU_DETAILS = {
   TITLE: "SKU Details",
   SKU: "SKU #",

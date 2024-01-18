@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import GridTable from "../components/molecules/GridTable";
+import { SEVERITY } from "../helpers/constants/appConstants";
+import Warning from "../assets/warning.svg";
 
 const meta = {
   title: "Components/GridTable",
@@ -27,13 +29,13 @@ const gridData1 = [
   { data: "IPH" },
   { data: "AND" },
   { data: "CSC" },
-  { data: "MPL", highlight: true },
+  { data: "MPL", severity: SEVERITY.HIGH },
   { data: "ZAP" },
   { data: "INS" },
 ];
 
 const gridData2 = [
-  { data: "DSK", severity: "low" },
+  { data: "DSK", severity: SEVERITY.MED, icon: Warning },
   { data: "MWB" },
   { data: "IPH" },
   { data: "AND" },
@@ -50,7 +52,7 @@ const gridData3 = [
   { data: "AND" },
   { data: "CSC" },
   { data: "MPL" },
-  { data: "ZAP", severity: "high" },
+  { data: "ZAP" },
   { data: "INS" },
 ];
 
