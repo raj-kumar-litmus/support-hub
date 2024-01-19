@@ -1,3 +1,4 @@
+import NotificationWidget from "../components/atoms/NotificationWidget";
 import ApiWidget from "../components/organisms/ApiWidget";
 import BopisWidget from "../components/organisms/BopisWidget";
 import CancellationWidget from "../components/organisms/CancellationWidget";
@@ -7,8 +8,8 @@ import MicroservicesWidget from "../components/organisms/MicroservicesWidget";
 import OmsWidget from "../components/organisms/OmsWidget";
 import OpmTimeSeriesWidget from "../components/organisms/OpmTimeSeriesWidget";
 import OpmWidget from "../components/organisms/OpmWidget";
-import SddWidget from "../components/organisms/SddWidget";
 import SalesWidget from "../components/organisms/SalesWidget";
+import SddWidget from "../components/organisms/SddWidget";
 import SkuInventoryWidget from "../components/organisms/SkuInventoryWidget";
 import UfeWidget from "../components/organisms/UfeWidget";
 import VendorsWidget from "../components/organisms/VendorsWidget";
@@ -35,6 +36,9 @@ const FocusRoom = () => {
       </div>
       <div className="col-span-2 space-y-[1.5vh]">
         <div className="h-[29.8vh]">
+          <div className="absolute top-[4vh] right-[2.3vw] h-[7.5vh] w-[4.2vw] flex justify-end bg-black-109 border-b border-l border-black-108 rounded-bl-2xl pb-[1.5vh] pl-[0.6vw]">
+            <NotificationWidget />
+          </div>
           <OpmTimeSeriesWidget />
         </div>
 
