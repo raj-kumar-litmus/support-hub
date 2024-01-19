@@ -313,8 +313,8 @@ export const getSeverityStyles = (severity) => {
   switch (severity) {
     case SEVERITY.MED: {
       return {
-        text: "text-yellow-300",
-        boxShadow: "!shadow-[0px_0px_6px_#CB7F3A]",
+        text: "text-yellow-400",
+        boxShadow: "!shadow-[0px_0px_6px_#CC7F3A]",
       };
     }
     case SEVERITY.HIGH: {

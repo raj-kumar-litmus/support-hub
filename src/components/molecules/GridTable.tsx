@@ -1,6 +1,7 @@
 import { FC } from "react";
 import CustomCard from "../atoms/CustomCard";
 import CustomImage from "../atoms/CustomImage";
+import ScheduleIcon from "../../assets/schedule.svg";
 import { GridTableProps } from "../../@types/components/commonTypes";
 import { getSeverityStyles } from "../../helpers/utils/utils";
 import { FOCUS_ROOM_LABELS } from "../../helpers/constants/appConstants";
@@ -19,11 +20,12 @@ const GridTable: FC<GridTableProps> = (props) => {
   return (
     <div className={`grid-table flex flex-col cursor-pointer ${className}`}>
       <div className="flex items-center mb-2">
-        <div className="grid-table-header text-10 font-normal font-IBM text-white-900 uppercase">
+        <div className="grid-table-header text-10 font-IBM text-white-900 uppercase font-bold">
           {props.title}
         </div>
         {props.lastUpdatedTime && (
-          <div className="text-8 font-IBM ml-4">
+          <div className="flex text-8 font-IBM ml-2 text-gray-103">
+            <CustomImage src={ScheduleIcon} className="mr-2" />
             {FOCUS_ROOM_LABELS.LAST_UPDATED}
             {props.lastUpdatedTime}
           </div>
