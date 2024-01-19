@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import GridTable from "../molecules/GridTable";
 import { GridData } from "../../@types/components/commonTypes";
 import {
@@ -6,39 +6,64 @@ import {
   SEVERITY,
 } from "../../helpers/constants/appConstants";
 import { getSeverityStyles } from "../../helpers/utils/utils";
+import OPMWidgetData from "../../helpers/json/opm_widget.json";
+import CustomOverlayFocusRoom from "../molecules/OverlayFocusRoom";
+import { OverlayPanel } from "primereact/overlaypanel";
 
 const OpmWidget = () => {
   const [severity, setSeverity] = useState("");
+  const [data, setData] = useState<GridData>(null);
+  const [channel, setChannel] = useState<GridData[]>([]);
+  const [locale, setLocale] = useState<GridData[]>([]);
+  const [shipment, setShipment] = useState<GridData[]>([]);
+  const [payment, setPayment] = useState<GridData[]>([]);
+  const [openOverlay, setOpenOverlay] = useState<boolean>(false);
+  const op = useRef<OverlayPanel>(null);
 
-  const locale: GridData[] = [{ data: "US" }, { data: "CA" }];
+  const getGroupedWidgetData = () => {
+    const _locale = OPMWidgetData.widgetDatas
+      .filter((item) => item.category === "Locale")
+      .map((w) => ({
+        data: w.property,
+        description: w.description,
+        severity: w.anomaly ? SEVERITY.HIGH : "",
+      }));
+    const _shipment = OPMWidgetData.widgetDatas
+      .filter((item) => item.category === "Shipment")
+      .map((w) => ({
+        data: w.property,
+        description: w.description,
+        severity: w.anomaly ? SEVERITY.HIGH : "",
+      }));
+    const _channel = OPMWidgetData.widgetDatas
+      .filter((item) => item.category === "Channel")
+      .map((w) => ({
+        data: w.property,
+        description: w.description,
+        severity: w.anomaly ? SEVERITY.HIGH : "",
+      }));
+    const _payment = OPMWidgetData.widgetDatas
+      .filter((item) => item.category === "Payment")
+      .map((w) => ({
+        data: w.property,
+        description: w.description,
+        severity: w.anomaly ? SEVERITY.HIGH : "",
+      }));
+    setLocale(_locale);
+    setShipment(_shipment);
+    setChannel(_channel);
+    setPayment(_payment);
+  };
 
-  const shipment: GridData[] = [
-    { data: "STH" },
-    { data: "BOP" },
-    { data: "SDD", severity: SEVERITY.MED },
-  ];
+  const onGridCardClick = (e, d: GridData) => {
+    setData(d);
+    setOpenOverlay(true);
+    op.current?.toggle(e);
+  };
 
-  const channel: GridData[] = [
-    { data: "DSK", severity: SEVERITY.HIGH },
-    { data: "MWB" },
-    { data: "IPH" },
-    { data: "AND" },
-    { data: "CSC" },
-    { data: "MPL" },
-    { data: "ZAP" },
-    { data: "INS" },
-  ];
-
-  const payment: GridData[] = [
-    { data: "CC" },
-    { data: "GC" },
-    { data: "ETC" },
-    { data: "PPL" },
-    { data: "KLA" },
-    { data: "AFP" },
-    { data: "SEP" },
-    { data: "SEPT" },
-  ];
+  useEffect(() => {
+    getGroupedWidgetData();
+  }, []);
 
   useEffect(() => {
     if (locale) {
@@ -78,12 +103,14 @@ const OpmWidget = () => {
         columns={2}
         data={locale}
         dataClassName="text-xs"
+        onClick={onGridCardClick}
       />
       <GridTable
         title={FOCUS_ROOM_TITLES.SHIPMENT}
         columns={3}
         data={shipment}
         dataClassName="text-xs"
+        onClick={onGridCardClick}
       />
       <GridTable
         title={FOCUS_ROOM_TITLES.CHANNEL}
@@ -97,6 +124,13 @@ const OpmWidget = () => {
         data={payment}
         dataClassName="text-xs"
       />
+      {openOverlay && data && (
+        <CustomOverlayFocusRoom
+          ref={op}
+          header={data.description}
+          buttonContent="View Details"
+        />
+      )}
     </div>
   );
 };

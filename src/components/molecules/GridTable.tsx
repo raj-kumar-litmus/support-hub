@@ -10,7 +10,9 @@ const GridTable: FC<GridTableProps> = (props) => {
   const { className = "", dataClassName = "", columns = 1 } = props;
   const colWidth = `grid-cols-${columns}`;
 
-  const handleCardClick = () => {};
+  const handleCardClick = (e, d) => {
+    props.onClick(e, d);
+  };
 
   const emptyCells =
     props.data.length % columns === 0
@@ -39,7 +41,7 @@ const GridTable: FC<GridTableProps> = (props) => {
               className={`grid-card ${
                 d.severity ? getSeverityStyles(d.severity).boxShadow : ""
               }`}
-              onClick={() => handleCardClick()}
+              onClick={(e) => handleCardClick(e, d)}
             >
               {d?.title && <div className="text-8">{d.title}</div>}
               <div

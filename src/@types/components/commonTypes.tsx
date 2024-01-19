@@ -390,6 +390,7 @@ export interface GridData {
   title?: string;
   icon?: any;
   severity?: string;
+  description?: string;
 }
 
 export type GridTableProps = {
@@ -398,7 +399,7 @@ export type GridTableProps = {
   title?: string;
   className?: string;
   dataClassName?: string;
-  onClick?: (string) => void;
+  onClick?: (event: React.SyntheticEvent, string) => void;
   lastUpdatedTime?: string;
 };
 

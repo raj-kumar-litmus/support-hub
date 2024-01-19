@@ -1,0 +1,130 @@
+{
+  "widgetDatas": [
+    {
+      "category": "Locale",
+      "property": "US",
+      "description": "United States",
+      "anomaly": false
+    },
+    {
+      "category": "Locale",
+      "property": "CA",
+      "description": "Canada",
+      "anomaly": false
+    },
+    {
+      "category": "Shipment",
+      "property": "STH",
+      "description": "STH",
+      "anomaly": false
+    },
+    {
+      "category": "Shipment",
+      "property": "BOP",
+      "description": "BOP",
+      "anomaly": false
+    },
+    {
+      "category": "Shipment",
+      "property": "SDD",
+      "description": "SDD",
+      "anomaly": false
+    },
+    {
+      "category": "Channel",
+      "property": "DSK",
+      "description": "DSK",
+      "anomaly": false
+    },
+    {
+      "category": "Channel",
+      "property": "MWB",
+      "description": "MWB",
+      "anomaly": false
+    },
+    {
+      "category": "Channel",
+      "property": "IPH",
+      "description": "IPH",
+      "anomaly": false
+    },
+    {
+      "category": "Channel",
+      "property": "AND",
+      "description": "AND",
+      "anomaly": false
+    },
+    {
+      "category": "Channel",
+      "property": "CSC",
+      "description": "CSC",
+      "anomaly": false
+    },
+    {
+      "category": "Channel",
+      "property": "MPL",
+      "description": "MPL",
+      "anomaly": false
+    },
+    {
+      "category": "Channel",
+      "property": "ZAP",
+      "description": "ZAP",
+      "anomaly": false
+    },
+    {
+      "category": "Channel",
+      "property": "INS",
+      "description": "INS",
+      "anomaly": false
+    },
+    {
+      "category": "Payment",
+      "property": "CC",
+      "description": "CC",
+      "anomaly": false
+    },
+    {
+      "category": "Payment",
+      "property": "GC",
+      "description": "GC",
+      "anomaly": false
+    },
+    {
+      "category": "Payment",
+      "property": "ETC",
+      "description": "ETC",
+      "anomaly": false
+    },
+    {
+      "category": "Payment",
+      "property": "PPL",
+      "description": "PPL",
+      "anomaly": false
+    },
+    {
+      "category": "Payment",
+      "property": "KLA",
+      "description": "KLA",
+      "anomaly": false
+    },
+    {
+      "category": "Payment",
+      "property": "AFP",
+      "description": "AFP",
+      "anomaly": false
+    },
+    {
+      "category": "Payment",
+      "property": "SEP",
+      "description": "SEP",
+      "anomaly": false
+    },
+    {
+      "category": "Payment",
+      "property": "SEPT",
+      "description": "SEPT",
+      "anomaly": true
+    }
+  ]
+}
