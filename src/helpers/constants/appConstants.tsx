@@ -639,7 +639,13 @@ export const FOCUS_ROOM_TITLES = {
   PAYMENT: "Payment",
   SALES: "Sales",
   DATABASE: "Database",
+  CANCELLATION: "Cancellation",
+  KAFKA: "Kafka",
+  API: "API",
+  UFE: "UFE",
 };
 export const FOCUS_ROOM_LABELS = {
   LAST_UPDATED: "Last Updated ",
+  ERRORS: "Errors",
+  TOTAL_SERVERS: "Total Servers",
 };

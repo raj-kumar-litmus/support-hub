@@ -26,7 +26,7 @@ Chart.register(
   Title,
   Tooltip,
   Legend,
-  ChartDataLabels,
+  ChartDataLabels
 );
 
 //Session Chart
@@ -238,7 +238,7 @@ export const OPM_OPTIONS_HOME = (isMobile: boolean, showDataLabels = false) => {
 
 export const OPM_BAR_CHART_OPTIONS = (
   isMobile: boolean,
-  showDataLabels = false,
+  showDataLabels = false
 ) => {
   const existingBarChartOptions = {
     ...BAR_CHART_OPTIONS(showDataLabels && !isMobile),
@@ -326,7 +326,7 @@ export const OPM_BAR_CHART_OPTIONS = (
 
 export const OPM_BAR_CHART_OPTIONS_HOME = (
   isMobile: boolean,
-  showDataLabels = false,
+  showDataLabels = false
 ) => {
   const existingBarChartOptions = {
     ...OPM_BAR_CHART_OPTIONS(isMobile, showDataLabels),
@@ -345,7 +345,7 @@ export const OPM_BAR_CHART_OPTIONS_HOME = (
 
 export const OPM_BAR_CHART_OPTIONS_SIDEBAR = (
   isMobile: boolean,
-  showDataLabels = false,
+  showDataLabels = false
 ) => {
   const existingBarChartOptions = {
     ...OPM_BAR_CHART_OPTIONS(isMobile, showDataLabels),
@@ -759,6 +759,101 @@ export const HOURLY_ORDER_TREND_LINE_CHART_OPTION: Chart.ChartOptions = {
       enabled: false,
       external: (context) =>
         externalTooltipHandler(context, "reportLineChart", true),
+    },
+  },
+};
+
+export const STACKED_OPM_FOCUSROOM = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    title: {
+      display: true,
+      text: CHART_LABELS.TOTAL_ORDERS_PER_MINUTE,
+      position: "bottom",
+      align: "center",
+      color: "#FFFFFF",
+      font: {
+        weight: 50,
+        size: 10,
+        family: "IBM Plex Mono, Regular",
+      },
+      padding: {
+        top: 10,
+        bottom: 10,
+      },
+    },
+    datalabels: {
+      display: false,
+    },
+    legend: {
+      display: true,
+      position: "top",
+      align: "center",
+      fullWidth: false,
+      borderWidth: 0,
+      borderColor: "rgba(0, 0, 0, 0)",
+      labels: {
+        boxWidth: 4,
+        boxHeight: 4,
+        pointStyle: "circle",
+        usePointStyle: true,
+        generateLabels: function (chart) {
+          const data = chart.data;
+          if (data.labels.length && data.datasets.length) {
+            return data.datasets.map(function (dataset) {
+              return {
+                text: dataset.label,
+                fillStyle: dataset.backgroundColor,
+                fontColor: dataset.backgroundColor,
+              };
+            });
+          }
+          return [];
+        },
+        font: {
+          size: 8,
+          family: "IBM Plex Mono, Medium",
+        },
+        margin: {
+          right: 20,
+        },
+      },
+    },
+  },
+
+  scales: {
+    x: {
+      stacked: true,
+      grid: {
+        display: false,
+      },
+      ticks: {
+        color: "#FBFBFC",
+        font: {
+          size: 9,
+          family: "IBM Plex Mono, Regular",
+        },
+      },
+    },
+    y: {
+      stacked: true,
+      beginAtZero: true,
+      grid: {
+        color: "#495057",
+      },
+      border: {
+        dash: [4, 4],
+        display: false,
+      },
+      ticks: {
+        color: "#FBFBFC",
+        display: true,
+        font: {
+          size: 9,
+          family: "IBM Plex Mono, Regular",
+        },
+      },
     },
   },
 };

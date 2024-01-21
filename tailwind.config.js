@@ -6,6 +6,8 @@ export default {
       colors: {
         pink: {
           100: "#F16476",
+          200: "#CB5D5E",
+          300: "#F86E6E",
         },
         black: {
           100: "#161A1D",
@@ -26,6 +28,7 @@ export default {
           107: "#272C34",
           108: "#21262D",
           109: "#0C1117",
+          110: "#241C22",
         },
         gray: {
           100: "#00000014",
@@ -199,6 +202,7 @@ export default {
         20: "20px",
       },
       fontSize: {
+        6: "6px",
         8: "8px",
         10: "10px",
         13: "13px",
@@ -210,10 +214,12 @@ export default {
         1: "1",
       },
       lineHeight: {
+        "8p": "8px",
         17: "17px",
       },
       boxShadow: {
         "2px-white": "0 0 0 2px #ffffff",
+        "6px-pink": "0px 0px 6px #F86E6E"
       },
     },
     screens: {

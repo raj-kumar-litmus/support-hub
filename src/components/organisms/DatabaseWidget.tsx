@@ -1,6 +1,4 @@
 import GridTable from "../molecules/GridTable";
-import FilledCheckCircle from "../../assets/filled_check_circle_white.svg";
-import Warning from "../../assets/warning.svg";
 import {
   FOCUS_ROOM_TITLES,
   SEVERITY,
@@ -8,12 +6,12 @@ import {
 
 const DatabaseWidget = () => {
   const database = [
-    { data: "SEPHATGP24", icon: FilledCheckCircle },
-    { data: "SEPHATGP25", icon: FilledCheckCircle },
-    { data: "SEPHATGP26", severity: SEVERITY.MED, icon: Warning },
+    { data: "SEPHATGP24" },
+    { data: "SEPHATGP25" },
+    { data: "SEPHATGP26", severity: SEVERITY.MED },
   ];
   return (
-    <div className="focus-room-widget-wrapper px-4 pt-1 pb-4">
+    <div className="focus-room-widget-wrapper px-4 pt-1 pb-2">
       <GridTable
         title={FOCUS_ROOM_TITLES.DATABASE}
         columns={3}

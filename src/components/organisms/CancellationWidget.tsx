@@ -1,4 +1,23 @@
+import GridTable from "../molecules/GridTable";
+import { FOCUS_ROOM_TITLES } from "../../helpers/constants/appConstants";
+
 const CancellationWidget = () => {
-  return <div className="focus-room-widget-wrapper"></div>;
+  const cancellation = [
+    { data: "DC" },
+    { data: "CC" },
+    { data: "SCC" },
+    { data: "FC" },
+    { data: "FIC" },
+  ];
+  return (
+    <div className="focus-room-widget-wrapper px-4 pt-1 pb-4">
+      <GridTable
+        title={FOCUS_ROOM_TITLES.CANCELLATION}
+        columns={5}
+        data={cancellation}
+        dataClassName="text-8"
+      />
+    </div>
+  );
 };
 export default CancellationWidget;
