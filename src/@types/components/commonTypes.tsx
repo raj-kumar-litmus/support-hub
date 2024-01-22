@@ -391,6 +391,7 @@ export interface GridData {
   icon?: any;
   severity?: string;
   description?: string;
+  unClickable?: boolean;
 }
 
 export type GridCardsProps = {

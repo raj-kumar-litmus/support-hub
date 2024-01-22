@@ -2,7 +2,7 @@ import { FC } from "react";
 import CustomCard from "../atoms/CustomCard";
 import CustomImage from "../atoms/CustomImage";
 import ScheduleIcon from "../../assets/schedule.svg";
-import { GridCardsProps } from "../../@types/components/commonTypes";
+import { GridCardsProps, GridData } from "../../@types/components/commonTypes";
 import { getSeverityStyles } from "../../helpers/utils/utils";
 import { FOCUS_ROOM_LABELS } from "../../helpers/constants/appConstants";
 
@@ -10,8 +10,8 @@ const GridCards: FC<GridCardsProps> = (props) => {
   const { className = "", dataClassName = "", columns = 1 } = props;
   const colWidth = `grid-cols-${columns}`;
 
-  const handleCardClick = (e, d) => {
-    props.onClick(e, d);
+  const handleCardClick = (e: React.SyntheticEvent, d: GridData) => {
+    !d.unClickable && props.onClick(e, d);
   };
 
   const emptyCells =
