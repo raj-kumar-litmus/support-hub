@@ -1,14 +1,15 @@
+import { OverlayPanel } from "primereact/overlaypanel";
 import { useEffect, useRef, useState } from "react";
 import GridTable from "../molecules/GridTable";
-import { GridData } from "../../@types/components/commonTypes";
+import CustomOverlayFocusRoom from "../molecules/OverlayFocusRoom";
 import {
   FOCUS_ROOM_TITLES,
   SEVERITY,
 } from "../../helpers/constants/appConstants";
+import { GridData } from "../../@types/components/commonTypes";
+import OPMHealth from "../../helpers/json/opm_health.json";
+import OPMNames from "../../helpers/json/opm_names.json";
 import { getSeverityStyles } from "../../helpers/utils/utils";
-import OPMWidgetData from "../../helpers/json/opm_widget.json";
-import CustomOverlayFocusRoom from "../molecules/OverlayFocusRoom";
-import { OverlayPanel } from "primereact/overlaypanel";
 
 const OpmWidget = () => {
   const [severity, setSeverity] = useState("");
@@ -21,38 +22,57 @@ const OpmWidget = () => {
   const op = useRef<OverlayPanel>(null);
 
   const getGroupedWidgetData = () => {
-    const _locale = OPMWidgetData.widgetDatas
+    const _locale = OPMNames.widgetDatas
       .filter((item) => item.category === "Locale")
       .map((w) => ({
         data: w.property,
         description: w.description,
-        severity: w.anomaly ? SEVERITY.HIGH : "",
       }));
-    const _shipment = OPMWidgetData.widgetDatas
+    const _shipment = OPMNames.widgetDatas
       .filter((item) => item.category === "Shipment")
       .map((w) => ({
         data: w.property,
         description: w.description,
-        severity: w.anomaly ? SEVERITY.HIGH : "",
       }));
-    const _channel = OPMWidgetData.widgetDatas
+    const _channel = OPMNames.widgetDatas
       .filter((item) => item.category === "Channel")
       .map((w) => ({
         data: w.property,
         description: w.description,
-        severity: w.anomaly ? SEVERITY.HIGH : "",
       }));
-    const _payment = OPMWidgetData.widgetDatas
+    const _payment = OPMNames.widgetDatas
       .filter((item) => item.category === "Payment")
       .map((w) => ({
         data: w.property,
         description: w.description,
-        severity: w.anomaly ? SEVERITY.HIGH : "",
       }));
     setLocale(_locale);
     setShipment(_shipment);
     setChannel(_channel);
     setPayment(_payment);
+    getOpmHealth();
+  };
+
+  const getOpmHealth = () => {
+    const setSeverityForCategory = (category) => {
+      category.forEach((item) => {
+        item.severity = anomalyMap[item.data] ? SEVERITY.HIGH : "";
+      });
+
+      if (category.some((item) => item.severity === SEVERITY.HIGH)) {
+        setSeverity(SEVERITY.HIGH);
+      }
+    };
+
+    const anomalyMap = {};
+    OPMHealth.healthStatusList.forEach((item) => {
+      anomalyMap[item.property] = item.anomaly;
+    });
+
+    setSeverityForCategory(locale);
+    setSeverityForCategory(shipment);
+    setSeverityForCategory(channel);
+    setSeverityForCategory(payment);
   };
 
   const onGridCardClick = (e, d: GridData) => {
@@ -66,31 +86,10 @@ const OpmWidget = () => {
   }, []);
 
   useEffect(() => {
-    if (locale) {
-      if (locale.some((item) => item.severity === SEVERITY.HIGH)) {
-        setSeverity(SEVERITY.HIGH);
-        return;
-      }
-    }
-    if (shipment) {
-      if (shipment.some((item) => item.severity === SEVERITY.HIGH)) {
-        setSeverity(SEVERITY.HIGH);
-        return;
-      }
-    }
-    if (channel) {
-      if (channel.some((item) => item.severity === SEVERITY.HIGH)) {
-        setSeverity(SEVERITY.HIGH);
-        return;
-      }
-    }
-    if (payment) {
-      if (payment.some((item) => item.severity === SEVERITY.HIGH)) {
-        setSeverity(SEVERITY.HIGH);
-        return;
-      }
-    }
-  }, [locale, shipment, channel, payment]);
+    getOpmHealth();
+  }, [payment.length]);
+
+  setInterval(getOpmHealth, 60000);
 
   return (
     <div
