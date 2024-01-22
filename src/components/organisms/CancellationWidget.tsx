@@ -1,4 +1,4 @@
-import GridTable from "../molecules/GridTable";
+import GridCards from "../molecules/GridCards";
 import { FOCUS_ROOM_TITLES } from "../../helpers/constants/appConstants";
 
 const CancellationWidget = () => {
@@ -11,7 +11,7 @@ const CancellationWidget = () => {
   ];
   return (
     <div className="focus-room-widget-wrapper px-4 pt-1 pb-4">
-      <GridTable
+      <GridCards
         title={FOCUS_ROOM_TITLES.CANCELLATION}
         columns={5}
         data={cancellation}

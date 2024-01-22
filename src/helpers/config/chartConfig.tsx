@@ -774,13 +774,12 @@ export const STACKED_OPM_FOCUSROOM = {
       align: "center",
       color: "#FFFFFF",
       font: {
-        weight: 50,
         size: 10,
         family: "IBM Plex Mono, Regular",
       },
       padding: {
-        top: 10,
-        bottom: 10,
+        top: 7,
+        bottom: 8,
       },
     },
     datalabels: {
@@ -831,7 +830,7 @@ export const STACKED_OPM_FOCUSROOM = {
       ticks: {
         color: "#FBFBFC",
         font: {
-          size: 9,
+          size: 8,
           family: "IBM Plex Mono, Regular",
         },
       },
@@ -850,7 +849,7 @@ export const STACKED_OPM_FOCUSROOM = {
         color: "#FBFBFC",
         display: true,
         font: {
-          size: 9,
+          size: 8,
           family: "IBM Plex Mono, Regular",
         },
       },

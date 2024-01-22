@@ -102,7 +102,7 @@ const OpmTimeSeriesWidget = () => {
   };
   return (
     <div className="bg-black-106 border border-black-108 rounded-12 h-full relative">
-      <div className="font-IBM font-bold text-10 text-white-900 w-fit absolute top-2 left-2">
+      <div className="font-IBM font-bold text-10 text-white-900 w-fit absolute top-2 left-4">
         {PAGE_TITLES.OPM}
       </div>
       <BarChart
@@ -110,7 +110,7 @@ const OpmTimeSeriesWidget = () => {
         options={STACKED_OPM_FOCUSROOM}
         title="OPM"
         plugin={""}
-        className="bg-black-106 px-6 pt-2 pb-0 rounded-xl h-48"
+        className="bg-black-106 px-4 pt-2 pb-0 rounded-xl h-[11.6rem]"
         defaultClasses={true}
       />
     </div>

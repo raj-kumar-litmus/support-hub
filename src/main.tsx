@@ -89,7 +89,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                   showNavbar={false}
                   showSidePane={false}
                   bg="bg-black-109"
-                  padding="px-[2.3vw] py-[4vh]"
+                  padding="px-2.3w py-4h"
                 />
               }
             />

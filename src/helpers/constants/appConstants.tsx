@@ -648,4 +648,5 @@ export const FOCUS_ROOM_LABELS = {
   LAST_UPDATED: "Last Updated ",
   ERRORS: "Errors",
   TOTAL_SERVERS: "Total Servers",
+  VIEW_DETAILS: "View Details",
 };

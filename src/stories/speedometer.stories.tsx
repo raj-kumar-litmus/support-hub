@@ -315,5 +315,6 @@ export const GradientSpeedometer: Story = {
     needleColor: "white",
     textColor: "transparent",
     needleHeightRatio: 0.1,
+    showGradient: true
   },
 };

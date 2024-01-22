@@ -1,71 +1,92 @@
-import { useEffect, useState } from "react";
-import GridTable from "../molecules/GridTable";
-import { GridData } from "../../@types/components/commonTypes";
+import { OverlayPanel } from "primereact/overlaypanel";
+import { useEffect, useRef, useState } from "react";
+import GridCards from "../molecules/GridCards";
+import CustomOverlayFocusRoom from "../molecules/OverlayFocusRoom";
 import {
+  FOCUS_ROOM_LABELS,
   FOCUS_ROOM_TITLES,
   SEVERITY,
 } from "../../helpers/constants/appConstants";
+import { GridData } from "../../@types/components/commonTypes";
+import OPMHealth from "../../helpers/json/opm_health.json";
+import OPMNames from "../../helpers/json/opm_names.json";
 import { getSeverityStyles } from "../../helpers/utils/utils";
 
 const OpmWidget = () => {
   const [severity, setSeverity] = useState("");
+  const [data, setData] = useState<GridData>(null);
+  const [channel, setChannel] = useState<GridData[]>([]);
+  const [locale, setLocale] = useState<GridData[]>([]);
+  const [shipment, setShipment] = useState<GridData[]>([]);
+  const [payment, setPayment] = useState<GridData[]>([]);
+  const [openOverlay, setOpenOverlay] = useState<boolean>(false);
+  const op = useRef<OverlayPanel>(null);
 
-  const locale: GridData[] = [{ data: "US" }, { data: "CA" }];
+  const getGroupedWidgetData = () => {
+    const _locale = OPMNames.widgetDatas
+      .filter((item) => item.category === FOCUS_ROOM_TITLES.LOCALE)
+      .map((w) => ({
+        data: w.property,
+        description: w.description,
+      }));
+    const _shipment = OPMNames.widgetDatas
+      .filter((item) => item.category === FOCUS_ROOM_TITLES.SHIPMENT)
+      .map((w) => ({
+        data: w.property,
+        description: w.description,
+      }));
+    const _channel = OPMNames.widgetDatas
+      .filter((item) => item.category === FOCUS_ROOM_TITLES.CHANNEL)
+      .map((w) => ({
+        data: w.property,
+        description: w.description,
+      }));
+    const _payment = OPMNames.widgetDatas
+      .filter((item) => item.category === FOCUS_ROOM_TITLES.PAYMENT)
+      .map((w) => ({
+        data: w.property,
+        description: w.description,
+      }));
+    setLocale(_locale);
+    setShipment(_shipment);
+    setChannel(_channel);
+    setPayment(_payment);
+  };
 
-  const shipment: GridData[] = [
-    { data: "STH" },
-    { data: "BOP" },
-    { data: "SDD", severity: SEVERITY.MED },
-  ];
+  const getOpmHealth = () => {
+    const setSeverityForCategory = (category) => {
+      category.forEach((item) => {
+        item.severity = anomalyMap[item.data] ? SEVERITY.HIGH : "";
+      });
+      if (category.some((item) => item.severity === SEVERITY.HIGH)) {
+        setSeverity(SEVERITY.HIGH);
+      }
+    };
+    const anomalyMap = {};
+    OPMHealth.healthStatusList.forEach((item) => {
+      anomalyMap[item.property] = item.anomaly;
+    });
+    setSeverityForCategory(locale);
+    setSeverityForCategory(shipment);
+    setSeverityForCategory(channel);
+    setSeverityForCategory(payment);
+  };
 
-  const channel: GridData[] = [
-    { data: "DSK", severity: SEVERITY.HIGH },
-    { data: "MWB" },
-    { data: "IPH" },
-    { data: "AND" },
-    { data: "CSC" },
-    { data: "MPL" },
-    { data: "ZAP" },
-    { data: "INS" },
-  ];
-
-  const payment: GridData[] = [
-    { data: "CC" },
-    { data: "GC" },
-    { data: "ETC" },
-    { data: "PPL" },
-    { data: "KLA" },
-    { data: "AFP" },
-    { data: "SEP" },
-    { data: "SEPT" },
-  ];
+  const onGridCardClick = (e, d: GridData) => {
+    setData(d);
+    setOpenOverlay(true);
+    op.current?.toggle(e);
+  };
 
   useEffect(() => {
-    if (locale) {
-      if (locale.some((item) => item.severity === SEVERITY.HIGH)) {
-        setSeverity(SEVERITY.HIGH);
-        return;
-      }
-    }
-    if (shipment) {
-      if (shipment.some((item) => item.severity === SEVERITY.HIGH)) {
-        setSeverity(SEVERITY.HIGH);
-        return;
-      }
-    }
-    if (channel) {
-      if (channel.some((item) => item.severity === SEVERITY.HIGH)) {
-        setSeverity(SEVERITY.HIGH);
-        return;
-      }
-    }
-    if (payment) {
-      if (payment.some((item) => item.severity === SEVERITY.HIGH)) {
-        setSeverity(SEVERITY.HIGH);
-        return;
-      }
-    }
-  }, [locale, shipment, channel, payment]);
+    getGroupedWidgetData();
+  }, []);
+
+  useEffect(() => {
+    getOpmHealth();
+  }, [payment.length]);
+
+  setInterval(getOpmHealth, 60000);
 
   return (
     <div
@@ -73,30 +94,41 @@ const OpmWidget = () => {
         severity ? getSeverityStyles(severity).boxShadow : ""
       }`}
     >
-      <GridTable
+      <GridCards
         title={FOCUS_ROOM_TITLES.LOCALE}
         columns={2}
         data={locale}
         dataClassName="text-xs"
+        onClick={onGridCardClick}
       />
-      <GridTable
+      <GridCards
         title={FOCUS_ROOM_TITLES.SHIPMENT}
         columns={3}
         data={shipment}
         dataClassName="text-xs"
+        onClick={onGridCardClick}
       />
-      <GridTable
+      <GridCards
         title={FOCUS_ROOM_TITLES.CHANNEL}
         columns={3}
         data={channel}
         dataClassName="text-xs"
+        onClick={onGridCardClick}
       />
-      <GridTable
+      <GridCards
         title={FOCUS_ROOM_TITLES.PAYMENT}
         columns={3}
         data={payment}
         dataClassName="text-xs"
+        onClick={onGridCardClick}
       />
+      {openOverlay && data && (
+        <CustomOverlayFocusRoom
+          ref={op}
+          header={data.description}
+          buttonContent={FOCUS_ROOM_LABELS.VIEW_DETAILS}
+        />
+      )}
     </div>
   );
 };

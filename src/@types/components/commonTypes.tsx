@@ -390,15 +390,17 @@ export interface GridData {
   title?: string;
   icon?: any;
   severity?: string;
+  description?: string;
+  unClickable?: boolean;
 }
 
-export type GridTableProps = {
+export type GridCardsProps = {
   columns: number;
   data: GridData[];
   title?: string;
   className?: string;
   dataClassName?: string;
-  onClick?: (string) => void;
+  onClick?: (event: React.SyntheticEvent, string) => void;
   lastUpdatedTime?: string;
 };
 
@@ -492,6 +494,7 @@ export interface SpeedometerProps {
   paddingHorizontal?: number;
   paddingVertical?: number;
   svgAriaLabel?: string;
+  showGradient?: boolean;
 }
 
 export interface LinearGaugeProps {

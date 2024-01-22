@@ -1,4 +1,4 @@
-import GridTable from "../molecules/GridTable";
+import GridCards from "../molecules/GridCards";
 import {
   FOCUS_ROOM_TITLES,
   SEVERITY,
@@ -11,8 +11,8 @@ const DatabaseWidget = () => {
     { data: "SEPHATGP26", severity: SEVERITY.MED },
   ];
   return (
-    <div className="focus-room-widget-wrapper px-4 pt-1 pb-2">
-      <GridTable
+    <div className="focus-room-widget-wrapper px-4 pt-1 pb-4">
+      <GridCards
         title={FOCUS_ROOM_TITLES.DATABASE}
         columns={3}
         data={database}

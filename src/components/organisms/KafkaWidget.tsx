@@ -1,4 +1,4 @@
-import GridTable from "../molecules/GridTable";
+import GridCards from "../molecules/GridCards";
 import { FOCUS_ROOM_TITLES } from "../../helpers/constants/appConstants";
 import { useState } from "react";
 import KafkaSideBar from "./KafkaSideBar";
@@ -15,7 +15,7 @@ const KafkaWidget = () => {
   return (
     <>
       <div className="focus-room-widget-wrapper px-4 pt-1 pb-2">
-        <GridTable
+        <GridCards
           title={FOCUS_ROOM_TITLES.KAFKA}
           columns={3}
           data={kafka}
