@@ -1,4 +1,4 @@
-import GridTable from "../molecules/GridTable";
+import GridCards from "../molecules/GridCards";
 import FilledCheckCircle from "../../assets/filled_check_circle_white.svg";
 import Warning from "../../assets/warning.svg";
 import {
@@ -14,7 +14,7 @@ const DatabaseWidget = () => {
   ];
   return (
     <div className="focus-room-widget-wrapper px-4 pt-1 pb-4">
-      <GridTable
+      <GridCards
         title={FOCUS_ROOM_TITLES.DATABASE}
         columns={3}
         data={database}

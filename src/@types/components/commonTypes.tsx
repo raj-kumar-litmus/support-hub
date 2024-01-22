@@ -393,7 +393,7 @@ export interface GridData {
   description?: string;
 }
 
-export type GridTableProps = {
+export type GridCardsProps = {
   columns: number;
   data: GridData[];
   title?: string;

@@ -1,6 +1,6 @@
 import { OverlayPanel } from "primereact/overlaypanel";
 import { useEffect, useRef, useState } from "react";
-import GridTable from "../molecules/GridTable";
+import GridCards from "../molecules/GridCards";
 import CustomOverlayFocusRoom from "../molecules/OverlayFocusRoom";
 import {
   FOCUS_ROOM_TITLES,
@@ -93,27 +93,27 @@ const OpmWidget = () => {
         severity ? getSeverityStyles(severity).boxShadow : ""
       }`}
     >
-      <GridTable
+      <GridCards
         title={FOCUS_ROOM_TITLES.LOCALE}
         columns={2}
         data={locale}
         dataClassName="text-xs"
         onClick={onGridCardClick}
       />
-      <GridTable
+      <GridCards
         title={FOCUS_ROOM_TITLES.SHIPMENT}
         columns={3}
         data={shipment}
         dataClassName="text-xs"
         onClick={onGridCardClick}
       />
-      <GridTable
+      <GridCards
         title={FOCUS_ROOM_TITLES.CHANNEL}
         columns={3}
         data={channel}
         dataClassName="text-xs"
       />
-      <GridTable
+      <GridCards
         title={FOCUS_ROOM_TITLES.PAYMENT}
         columns={3}
         data={payment}

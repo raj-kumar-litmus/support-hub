@@ -2,11 +2,11 @@ import { FC } from "react";
 import CustomCard from "../atoms/CustomCard";
 import CustomImage from "../atoms/CustomImage";
 import ScheduleIcon from "../../assets/schedule.svg";
-import { GridTableProps } from "../../@types/components/commonTypes";
+import { GridCardsProps } from "../../@types/components/commonTypes";
 import { getSeverityStyles } from "../../helpers/utils/utils";
 import { FOCUS_ROOM_LABELS } from "../../helpers/constants/appConstants";
 
-const GridTable: FC<GridTableProps> = (props) => {
+const GridCards: FC<GridCardsProps> = (props) => {
   const { className = "", dataClassName = "", columns = 1 } = props;
   const colWidth = `grid-cols-${columns}`;
 
@@ -65,4 +65,4 @@ const GridTable: FC<GridTableProps> = (props) => {
   );
 };
 
-export default GridTable;
+export default GridCards;
