@@ -319,6 +319,15 @@ export type LoaderContextType = {
   hideLoader?: () => void;
 };
 
+export type FocusRoomContextType = {
+  focusRoomConfig: any; //todo. will be changed once "config" api is ready
+  focusRoomConfigError: boolean;
+};
+
+export type FocusRoomProps = {
+  children: any;
+};
+
 export type AppProps = {
   appContent: any;
   showSidePane?: boolean;
