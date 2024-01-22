@@ -1116,7 +1116,7 @@ hr.horizontalLine.blue {
   @apply top-6;
 }
 .custom-sidebar .custom-sidebar-header {
-  @apply border-b border-b-black-110 px-6 py-5;
+  @apply border-b border-b-black-108 px-6 py-5;
 }
 .custom-sidebar .custom-sidebar-header h2 {
   @apply m-0 text-sm text-white-900;
@@ -1125,7 +1125,7 @@ hr.horizontalLine.blue {
   @apply p-5;
 }
 .custom-sidebar .p-sidebar-content {
-  @apply border-l border-l-black-110;
+  @apply border-l border-l-black-108;
 }
 .custom-overlay .p-overlaypanel-content {
   @apply shadow-none rounded-lg p-0;
@@ -1192,13 +1192,13 @@ hr.horizontalLine.blue {
 }
 .kafka-table .p-datatable-table .p-datatable-thead th,
 .kafka-table .p-datatable-tbody tr.p-row-odd {
-  @apply !bg-black-110 text-white-900;
+  @apply !bg-black-108 text-white-900;
 }
 .kafka-table .p-datatable-tbody .hightlight-rows {
   @apply !bg-black-110 relative !shadow-6px-pink;
 }
 .kafka-table .p-datatable-wrapper {
-  @apply border border-black-110 rounded-10 overflow-visible;
+  @apply border border-black-108 rounded-10 overflow-visible;
 }
 .guage-chart svg {
   @apply !relative !top-[-0.5rem];
