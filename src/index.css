@@ -1,0 +1,1160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#loading div {
+  @apply w-full h-full fixed top-0 left-0 flex justify-center items-center z-[100] bg-black-200 opacity-80;
+}
+.ordersTable .p-datatable-table {
+  @apply text-sm border-separate font-helvetica;
+}
+.ordersTable .p-datatable-tbody tr td {
+  @apply border-gray-102;
+}
+.ordersTable .p-datatable-thead tr th {
+  @apply !bg-black-300 text-gray-200 font-bold p-3 border-0 w-1/4 border-black-300;
+}
+.ordersTable .p-datatable-thead tr th:first-child {
+  @apply rounded-tl-lg;
+}
+.ordersTable .p-datatable-thead tr th:last-child {
+  @apply rounded-tr-lg;
+}
+.ordersTable .p-datatable-tbody tr:last-child td:first-child {
+  @apply rounded-bl-lg;
+}
+.ordersTable .p-datatable-tbody tr:last-child td:last-child {
+  @apply rounded-br-lg;
+}
+.ordersTable .p-datatable-tbody tr {
+  @apply !bg-black-200 text-gray-300;
+}
+.ordersTable .p-datatable-tbody tr.p-row-odd {
+  @apply !bg-black-300 text-gray-300;
+}
+.ordersTable .p-datatable-thead tr th .p-column-header-content {
+  @apply justify-center;
+}
+.ordersTable .p-datatable-tbody tr td {
+  @apply text-center p-3 font-medium border-0;
+}
+.ordersTable .p-datatable-tbody tr td:first-child {
+  @apply font-bold;
+}
+.menu-card .p-card-content {
+  @apply p-0;
+}
+.menu-icon img {
+  @apply !h-6 m-auto;
+}
+.menu-sm-icon img {
+  @apply w-5 h-5;
+}
+.arrow-icon img {
+  @apply h-13 rotate-180;
+}
+#custom-hover .p-button,
+.p-dialog .p-button {
+  @apply bg-gray-900 border-gray-400 text-gray-400;
+}
+#custom-hover .p-inputtext,
+.p-dialog .p-inputtext {
+  @apply border-none bg-gray-900 rounded-r-lg;
+}
+
+#custom-hover .p-dropdown {
+  @apply border-none bg-gray-900 rounded-lg w-full pl-6;
+}
+
+#bar-chart {
+  @apply m-0 bg-black-100;
+}
+
+.home-sessions {
+  @apply pt-4 xl:pt-5 pb-4 xl:pb-5 px-4 lg:px-6;
+}
+
+.main-sessions {
+  @apply pt-4 xl:pt-5 pb-4 xl:pb-5 px-4 lg:px-6;
+}
+
+.session-page-title {
+  @apply text-gray-200 text-lg font-bold font-helvetica;
+}
+
+#bar-chart .p-button,
+.p-dialog .p-button {
+  @apply bg-gray-900 border-gray-400 text-gray-400;
+}
+
+#bar-chart .p-button:focus,
+.p-dialog .p-button:focus {
+  @apply shadow-none;
+}
+
+#bar-chart .p-inputtext,
+#barchart .p-dialog .p-inputtext {
+  @apply py-2 border-none bg-gray-900 rounded-r-lg pl-8;
+}
+
+#bar-chart .p-inputtext:enabled:focus,
+.p-dialog .p-inputtext:enabled:focus {
+  @apply border-transparent shadow-none;
+}
+
+#bar-chart .p-datepicker-trigger,
+.p-dialog .p-datepicker-trigger {
+  @apply border-none;
+}
+
+#bar-chart .p-icon,
+#bar-chart .p-button-label,
+.p-dialog .p-icon,
+.p-dialog .p-button-label {
+  @apply text-gray-103;
+}
+
+#bar-chart .p-button.p-button-icon-only,
+.p-dialog .p-button.p-button-icon-only {
+  @apply p-0 w-12 bg-gray-900 rounded-l-lg;
+}
+
+#bar-chart .p-calendar,
+.p-dialog .p-calendar {
+  @apply border-none rounded-lg;
+}
+
+#bar-chart .p-dropdown {
+  @apply !border-none bg-gray-900 rounded-lg;
+}
+
+#page-btn-submit.p-button,
+#popup-btn-submit.p-button {
+  @apply bg-transparent text-sm px-11 py-2 transition-none border-2 border-gray-300 rounded-[22px];
+}
+
+.opm-btn .p-button,
+.opm-btn .p-button:enabled:hover {
+  @apply bg-transparent text-sm p-0 transition-none border-2 border-gray-300 rounded-[22px] h-2.3r;
+}
+
+#page-btn-submit.p-button:focus,
+.opm-btn .p-button:focus {
+  @apply shadow-none;
+}
+
+#page-btn-submit .p-button-label,
+#popup-btn-submit .p-button-label,
+.opm-btn .p-button-label {
+  @apply !text-white-500  text-sm font-medium;
+}
+
+#modal-section .filter-popup-content .p-dropdown {
+  @apply !bg-gray-900;
+}
+
+#modal-section .filter-popup-content .p-dropdown-trigger {
+  @apply w-6;
+}
+
+#modal-section .p-dialog-content {
+  @apply px-4 pb-0 !bg-black-200;
+}
+
+#modal-section .p-dialog-header {
+  @apply text-center p-4 bg-black-200 text-gray-200 border-solid border-b border-white-500;
+}
+#modal-section .p-dialog-footer {
+  @apply py-4 px-6 text-center bg-black-200;
+}
+
+button.p-button-secondary {
+  @apply text-xs !text-gray-101;
+}
+.p-button.p-button-secondary:enabled:focus {
+  @apply shadow-none;
+}
+.filtersModal .p-dialog-header {
+  @apply px-2 py-2.5 rounded-t-10 border-b border-b-gray-700 border-solid;
+}
+.filtersModal-popup.p-dialog {
+  @apply absolute max-sm:max-h-100vh-154px max-480:w-full w-390 max-480:!bottom-0 sm:max-h-528;
+}
+.filtersModal .p-dialog-header .p-dialog-title {
+  @apply font-normal text-center text-base;
+}
+.filtersModal .p-dialog-content {
+  @apply pt-5;
+}
+.opmFilters .p-dropdown-label {
+  @apply pt-9p;
+}
+.opmFilters .p-dropdown {
+  @apply h-38;
+}
+.opmFilters .p-calendar {
+  @apply h-38;
+}
+.opmFilters .timeInput .p-calendar {
+  @apply w-8w;
+}
+.opmFiltersMobile.p-dialog .p-dialog-header,
+.opmFiltersMobile.p-dialog .p-dialog-content {
+  @apply bg-black-200 border border-solid border-gray-900 pl-3 pr-3;
+}
+.opmFiltersMobile.p-dialog {
+  @apply m-0;
+}
+.opmFiltersMobile .p-dialog-header .p-dialog-title {
+  @apply ml-10w text-white-500;
+}
+.opmFiltersMobile .labelClass {
+  @apply w-100;
+}
+.opmFiltersMobile .p-dropdown {
+  @apply bg-gray-900 border-gray-900 w-full;
+}
+.opmFiltersMobile .p-inputtext {
+  @apply text-white-500;
+}
+.opmFiltersMobile .p-dropdown-label {
+  @apply pl-8;
+}
+.opmFiltersMobileCalendar .title {
+  @apply relative left-2.5;
+}
+.opmFiltersMobile .p-dropdown .p-dropdown-trigger {
+  @apply w-[4vw] relative right-3.5;
+}
+.p-datepicker-trigger {
+  @apply !p-0 border border-solid border-gray-105 border-r-0;
+}
+.p-datepicker-trigger img {
+  @apply w-1/2 h-1/2;
+}
+.p-calendar .p-inputtext {
+  @apply text-13 border-l-0 w-[110%] h-[2.4rem];
+}
+.p-inputtext.p-placeholder {
+  @apply text-13 !text-gray-104;
+}
+.p-inputtext {
+  @apply text-13;
+}
+.submitBtnMobile {
+  @apply text-center mt-5;
+}
+.submitBtnMobile button span {
+  @apply text-sm font-normal;
+}
+.submitBtnMobile button,
+.submitBtnMobile button:hover,
+.submitBtnMobile button:enabled:active {
+  @apply w-20w md:w-10w h-11 text-13 text-white-500  !bg-transparent border border-solid !border-gray-900 items-center;
+}
+.submitBtnMobile button:focus {
+  @apply !shadow-none;
+}
+.submitBtnMobile button:active {
+  @apply !bg-gray-101;
+}
+.p-dialog .p-dialog-header .p-dialog-title {
+  @apply text-base;
+}
+.p-datepicker:not(.p-datepicker-inline) {
+  @apply !bg-black-200 !text-gray-700;
+}
+.p-datepicker:not(.p-datepicker-inline) .p-datepicker-header {
+  @apply !bg-black-200 !text-gray-700;
+}
+.submitBtnMobile.opmPopUp button {
+  @apply w-40 !bg-transparent border border-solid !border-gray-900 rounded-3xl;
+}
+.submitBtnMobile.opmPopUp button span {
+  @apply text-white-500;
+}
+.p-dialog .p-dialog-header .p-dialog-header-icon:focus {
+  @apply shadow-none;
+}
+.p-inputtext:enabled:focus,
+.p-dropdown,
+.p-inputtext:focus,
+.p-inputtext:enabled:hover,
+.p-dropdown:hover,
+.p-dropdown.p-focus {
+  @apply !shadow-none !border-none;
+}
+#custom-hover.initial-focus .p-dropdown.p-focus {
+  @apply !shadow-2px-white;
+}
+#custom-hover.sidebar-filters .p-dropdown,
+#custom-hover.sidebar-filters .p-inputtext {
+  @apply !bg-black-101;
+}
+.p-calendar .p-datepicker-trigger,
+.p-calendar .p-datepicker-trigger:hover {
+  @apply !border-transparent bg-transparent text-gray-101;
+}
+.landScape {
+  @apply w-90h relative top-[50vh] left-[-13vw];
+}
+.landScape.opmComparison {
+  @apply top-[65vh];
+}
+.landScape .filteredCard .p-button.p-component {
+  @apply w-[12vh];
+}
+.landScape.opmComparison .filteredCard .p-button.p-component {
+  @apply w-[15vh];
+}
+.portrait .filteredCard .p-button.p-component {
+  @apply w-[28vw] sm:w-40w;
+}
+.filteredCard .p-button.p-component {
+  @apply !bg-white-400 !border-black-200 border text-gray-400 px-2 py-3 flex justify-evenly items-center;
+}
+.filteredCard .p-button {
+  @apply flex gap-2.5 px-2.5 items-center leading-none border border-solid border-gray-900 rounded rounded-20 h-[26px] text-xs text-gray-400 p-5p bg-transparent;
+}
+.filteredCard .p-button:focus {
+  @apply shadow-none;
+}
+.filteredCard .p-button:hover {
+  @apply bg-transparent text-white-700 !border-gray-900;
+}
+.resetFilters .p-button {
+  @apply !bg-transparent;
+}
+.resetFilters span {
+  @apply text-white-700 font-normal;
+}
+#bar-chart .resetFilters .p-button {
+  @apply bg-inherit border-none p-0;
+}
+.inputContainer .p-inputtext {
+  @apply h-2.3r;
+}
+.opmFilters .p-inputtext {
+  @apply text-white-700;
+}
+.inputContainer span.flex {
+  @apply mt-1;
+}
+/* .channelInput .p-dropdown {
+  @apply pl-[20px]
+} */
+.p-dropdown .p-dropdown-trigger {
+  @apply w-2w relative right-1;
+}
+.calendarInput .p-calendar {
+  @apply w-135;
+}
+.mobileInput .labelClass {
+  @apply ml-1w;
+}
+.mobileInput .p-inputtext {
+  @apply relative w-43w -left-3;
+}
+.inputContainer {
+  @apply relative -left-2.5;
+}
+.opmComparionInput {
+  @apply !relative -left-18 md:!w-11w;
+}
+.dropdownWithIcon .p-dropdown {
+  @apply border-l-transparent rounded-l-none w-135;
+}
+.dropdownWithIcon .p-dropdown:hover,
+.dropdownWithIcon .p-dropdown:not(.p-disabled).p-focus {
+  @apply !border-transparent;
+}
+.dropdownWithIcon img {
+  @apply border border-solid border-gray-900 border-r-transparent rounded-l-md rounded-tr-none left-0.5 pl-5p bg-gray-900;
+}
+.p-inputtext {
+  @apply text-gray-300;
+}
+.p-input-icon-left > .p-inputtext {
+  @apply !pl-8;
+}
+.search-input .p-inputtext {
+  @apply !pl-14;
+}
+.p-calendar-w-btn-left button.p-button {
+  @apply !bg-gray-900 !border-gray-900;
+}
+.p-calendar-w-btn-left .p-inputtext {
+  @apply pl-0 bg-gray-900 border-gray-900;
+}
+.opmFilters .inputContainer .p-dropdown {
+  @apply w-full pl-5;
+}
+.p-dialog-content::-webkit-scrollbar-thumb {
+  @apply bg-gray-900 rounded-full;
+}
+.p-dialog-content::-webkit-scrollbar {
+  @apply w-1;
+}
+.orderStatus-dialog.p-dialog {
+  @apply absolute max-[639px]:max-h-100vh-154px min-[390px]:w-390 w-max max-[390px]:!bottom-0 min-[390px]:max-h-[490px];
+}
+.p-dialog-mask.p-component-overlay {
+  @apply backdrop-brightness-50;
+}
+.backButton .p-button {
+  @apply !shadow-none !border-none bg-transparent;
+}
+.backButton .p-button:focus {
+  @apply bg-transparent !shadow-none;
+}
+.backButton .p-button {
+  @apply bg-gray-400;
+}
+.backButton .p-button:hover {
+  @apply bg-transparent !shadow-none;
+}
+.backButton .p-button {
+  @apply bg-transparent !shadow-none;
+}
+.custom-popup.p-dialog {
+  @apply absolute max-h-[63vh] 480:max-h-528 max-480:w-full w-390 max-480:!bottom-0;
+}
+.p-dialog-mask.p-component-overlay {
+  @apply backdrop-contrast-[.85];
+}
+.custom-popup .p-dialog-header {
+  @apply py-4 text-gray-101 z-10 font-medium bg-black-200 border-black-400 border-solid border-b;
+}
+.custom-popup .p-dialog-content {
+  @apply pt-4 overflow-auto text-white-600 bg-black-200 pl-6 mr-2.5 pr-3.5;
+}
+.custom-popup .p-dialog-title {
+  @apply text-center !text-base !font-medium leading-[19px] text-gray-200;
+}
+.custom-popup .p-dialog-header-icon {
+  @apply text-gray-400;
+}
+.p-dialog-header-icon:enabled:hover {
+  @apply !bg-transparent;
+}
+.p-dialog-header .p-dialog-header-icon:enabled:active {
+  @apply !bg-transparent !shadow-none !border-none;
+}
+.promotion-card .p-card-content {
+  @apply p-0;
+}
+.search-button .p-button:focus {
+  @apply bg-transparent;
+}
+.search-button .p-button {
+  @apply -ml-8 sm:hidden !shadow-none !border-none pl-0;
+}
+.popup-button .p-button {
+  @apply !shadow-none !border-none;
+}
+.p-dialog-content::-webkit-scrollbar-thumb {
+  @apply bg-gray-900 rounded-full;
+}
+.custom-popup .p-dialog-content {
+  @apply pl-6 mr-2.5 pr-3.5 bg-black-200;
+}
+.custom-popup.lineitem-popup .p-dialog-content {
+  @apply bg-black-100;
+}
+.p-dialog {
+  @apply bg-black-200;
+}
+.p-dialog-content::-webkit-scrollbar {
+  @apply w-1;
+}
+.p-button.p-button-text:enabled:active {
+  @apply bg-transparent;
+}
+.p-button.p-button-text:enabled:hover,
+.p-button.p-button-text:not(button):not(a):not(.p-disabled):hover {
+  @apply bg-transparent;
+}
+.custom-table .p-datatable-table {
+  @apply text-sm leading-17 border-separate font-helvetica;
+}
+.custom-table .p-datatable-tbody tr td {
+  @apply border-black-300;
+}
+.custom-table .p-datatable-thead tr th {
+  @apply !bg-black-300 text-white-500  font-bold p-3 border-0 border-black-300;
+}
+.custom-table .p-datatable-thead tr th:first-child {
+  @apply rounded-tl-md;
+}
+.custom-table .p-datatable-thead tr th:last-child {
+  @apply rounded-tr-md;
+}
+.custom-table .p-datatable-tbody tr:last-child td:first-child {
+  @apply rounded-bl-md;
+}
+.custom-table .p-datatable-tbody tr:last-child td:last-child {
+  @apply rounded-br-md;
+}
+.custom-table .p-datatable-tbody tr {
+  @apply !bg-black-200 text-white-500;
+}
+.custom-table .p-datatable-tbody tr.p-row-odd {
+  @apply !bg-black-300 text-white-500;
+}
+.custom-table .p-datatable-thead tr th .p-column-header-content {
+  @apply justify-center;
+}
+.custom-table .p-datatable-tbody tr td {
+  @apply text-center p-3 font-medium border-0;
+}
+.custom-table .p-datatable-tbody tr td:first-child {
+  @apply font-medium;
+}
+.opmFilters .p-dropdown,
+.opmFilters .p-inputtext {
+  @apply !bg-gray-900 border border-solid border-gray-900;
+}
+.opmFilters .p-calendar .p-inputtext {
+  @apply pl-1.75r;
+}
+.opmComparisonFilters .p-calendar .p-inputtext {
+  @apply md:w-[9vw] lg:w-12w;
+}
+.opmFilters .p-dropdown:not(.p-disabled).p-focus {
+  @apply !border-gray-900;
+}
+.opmFilters .p-dropdown:hover,
+.opmFilters .p-inputtext:hover {
+  @apply !border-black-800;
+}
+.p-datepicker {
+  @apply rounded-md p-0 !max-w-[340px];
+}
+.p-datepicker thead {
+  @apply bg-black-300;
+}
+.p-datepicker .p-datepicker-header {
+  @apply border-none pb-0 max-h-10;
+}
+.p-datepicker:not(.p-datepicker-inline),
+.p-datepicker:not(.p-datepicker-inline) .p-datepicker-header {
+  @apply !bg-black-200;
+}
+.p-datepicker .p-datepicker-header .p-datepicker-next,
+.p-datepicker .p-datepicker-header .p-datepicker-prev {
+  @apply text-gray-300;
+}
+.p-datepicker .p-datepicker-header .p-datepicker-next:focus,
+.p-datepicker .p-datepicker-header .p-datepicker-prev:focus {
+  @apply shadow-none;
+}
+.p-datepicker table td > span.p-highlight {
+  @apply text-inherit;
+}
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
+  @apply text-gray-200;
+}
+.p-datepicker table td > span.p-highlight {
+  @apply !bg-black-300 !text-gray-200;
+}
+.p-datepicker table td.p-datepicker-today > span {
+  @apply bg-inherit text-inherit;
+}
+.p-datepicker:not(.p-disabled)
+  table
+  td
+  span:not(.p-highlight):not(.p-disabled):hover,
+.p-datepicker .p-datepicker-header .p-datepicker-next:enabled:hover,
+.p-datepicker .p-datepicker-header .p-datepicker-prev:enabled:hover,
+.p-datepicker:not(.p-disabled)
+  .p-yearpicker
+  .p-yearpicker-year:not(.p-disabled):not(.p-highlight):hover,
+.p-datepicker:not(.p-disabled)
+  .p-monthpicker
+  .p-monthpicker-month:not(.p-disabled):not(.p-highlight):hover,
+.p-datepicker .p-yearpicker .p-yearpicker-year.p-highlight {
+  @apply bg-black-300 text-gray-200;
+}
+.p-datepicker
+  .p-datepicker-header
+  .p-datepicker-title
+  .p-datepicker-month:enabled:hover,
+.p-datepicker
+  .p-datepicker-header
+  .p-datepicker-title
+  .p-datepicker-year:enabled:hover {
+  @apply text-gray-200;
+}
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month,
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year {
+  @apply text-gray-200;
+}
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  @apply bg-gray-900 text-white-500;
+}
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+  @apply bg-gray-900 text-white-500;
+}
+.p-dropdown-panel .p-dropdown-items {
+  @apply p-0;
+}
+.p-dropdown-panel
+  .p-dropdown-items
+  .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
+  @apply bg-black-800 text-white-500;
+}
+.labelClass {
+  @apply text-xs text-gray-400 font-medium;
+}
+.tableToolTip {
+  @apply w-[140px] mr-0;
+}
+.tableToolTip thead tr th {
+  @apply border border-solid border-t-0 border-l-0 border-r-0 border-black-400 pb-2.5;
+}
+.tableToolTip tbody {
+  @apply flex justify-between	pt-5p pb-5p;
+}
+.tableToolTip:after {
+  @apply content-[""] mt-0 mb-0 ml-2 mr-2 inline-block border-[7px] border-solid border-transparent border-t-[8px] border-t-black-900 border-b-0 absolute left-[65px] top-[70px];
+}
+.toolTipEl {
+  @apply z-1 bg-black-900 text-xs text-white-500  opacity-100 pointer-events-none absolute -translate-x-[50%] -translate-y-[120%] text-left rounded-md px-2.5 py-1.5;
+}
+hr.horizontalLine {
+  @apply border-0 rotate-90 relative h-0.5 top-100;
+}
+hr.horizontalLine.opm {
+  background: linear-gradient(to right, #5a9ef5, #5a9ef500);
+}
+hr.horizontalLine.opmComparison {
+  background: linear-gradient(to right, #6370ff, #5a9ef500);
+}
+hr.horizontalLine.yellow {
+  background: linear-gradient(to right, #6370ff, #5a9ef500);
+}
+hr.horizontalLine.blue {
+  background: linear-gradient(to right, #fda44f, #5a9ef500);
+}
+.calendarOpmComparison span input {
+  @apply pl-2.5w;
+}
+.calendarSessions span input {
+  @apply !pl-[2.2rem];
+}
+.calendarOpm span input {
+  @apply !pl-6.5w md:!pl-2.5w;
+}
+.opmFiltersMobileCalendar span input {
+  @apply !pl-[2.2rem] border rounded-md;
+}
+
+/* Order Details */
+#orderDetailsComp {
+  @apply font-helvetica bg-black-100 sm:bg-inherit;
+}
+#orderDetailsComp .grid span {
+  @apply text-sm py-2 text-gray-300 sm:bg-black-200;
+}
+#orderDetailsComp .grid span.p-column-title {
+  @apply text-sm py-2 text-gray-300 bg-inherit;
+}
+.flexBlockWrapper {
+  @apply flex justify-between w-full;
+}
+.flexWrapper {
+  @apply flexBlockWrapper py-1 px-4 sm:p-0 border-b border-solid border-black-300 sm:border-none;
+}
+.flexColWrapper {
+  @apply flex flex-col border-t-0 sm:border-t border-solid border-black-300 sm:grid;
+}
+.gridNoGapRounded {
+  @apply grid gap-y-0 rounded-md;
+}
+.filterCardWrapper {
+  @apply py-1 px-4 sm:p-0 border-solid border-black-300  bg-black-200;
+}
+
+.home-page .p-card {
+  @apply rounded-lg shadow-lg shadow-gray-600 grow w-35pr sm:w-1/4 md:w-[19%];
+}
+
+.home-page .p-card .p-card-body {
+  @apply p-3 sm:!p-4 h-full flex flex-col justify-between;
+}
+
+.home-page .p-card .p-card-body .p-card-content {
+  @apply p-0 !pt-2;
+}
+
+.home-page .p-card .p-card-title h6 {
+  @apply text-xs font-thin leading-[1.125rem] w-3/5 sm:w-3/5 font-helvetica;
+}
+
+.home-page .p-card .p-card-title .card-title h6 {
+  @apply sm:w-2/5;
+}
+.home-opm {
+  @apply sm:mt-6 ml-0 sm:ml-5w;
+}
+.home-opm-comp {
+  @apply ml-0 sm:ml-5w;
+}
+.home-refresh-btn,
+.home-expand-btn {
+  @apply mb-1;
+}
+.home-refresh-btn .p-button {
+  @apply p-[0.54rem] bg-black-300 border-black-300 rounded-full hover:bg-black-300 hover:!border-black-300 active:!border-black-300;
+}
+.home-expand-btn .p-button {
+  @apply bg-transparent border-transparent rounded-full p-0 hover:bg-transparent hover:!border-transparent active:!border-transparent;
+}
+.home-expand-btn .p-button:enabled:hover {
+  @apply border-transparent;
+}
+.home-expand-btn .p-button:focus,
+.home-refresh-btn .p-button:focus {
+  @apply shadow-none;
+}
+.home-card-refresh-btn .p-button {
+  @apply bg-black-200;
+}
+.custom-tab.p-tabview {
+  @apply w-fit h-9 self-end;
+}
+.custom-tab.p-tabview .p-tabview-nav {
+  @apply border-none h-8 bg-black-300;
+}
+.custom-tab.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  @apply bg-black-300 text-gray-400 h-30 rounded-none border-none text-xs font-medium;
+}
+.custom-tab .p-tabview-nav-content {
+  @apply rounded-lg;
+}
+.custom-tab.p-tabview .p-tabview-nav li {
+  @apply bg-black-300;
+}
+.custom-tab.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  @apply bg-gray-200 text-black-200 rounded-lg text-xs font-medium;
+}
+.custom-tab.p-tabview
+  .p-tabview-nav
+  li:not(.p-highlight):not(.p-disabled):hover
+  .p-tabview-nav-link {
+  @apply bg-black-300 text-gray-400;
+}
+.custom-tab.p-accordion .p-accordion-header .p-accordion-header-link,
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  @apply transition-none border-none py-0;
+}
+.custom-tab.p-tabview .p-tabview-panels {
+  @apply hidden;
+}
+.custom-tab.p-tabview
+  .p-tabview-nav
+  li
+  .p-tabview-nav-link:not(.p-disabled):focus {
+  @apply shadow-none;
+}
+.custom-tab .p-tabview .p-tabview-nav .p-tabview-ink-bar {
+  @apply invisible;
+}
+.link-box {
+  @apply w-full h-[50px] text-13 text-white-500  !bg-black-200 border border-black-300 items-center rounded-lg;
+}
+.link-box:hover {
+  @apply border border-gray-200;
+}
+.quick-links-tab.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link,
+.quick-links-tab.p-tabview .p-tabview-nav li {
+  @apply rounded-full mr-1;
+}
+.quick-links-tab.p-tabview .p-tabview-nav {
+  @apply bg-inherit;
+}
+.quick-links-tab.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  @apply text-gray-300 rounded-full mr-1 h-35;
+}
+.quick-links-tab.p-tabview .p-tabview-nav li {
+  @apply bg-transparent;
+}
+.quick-links-tab .p-tabview-nav-content {
+  @apply h-35;
+}
+.quick-links-tab.p-tabview {
+  @apply h-9;
+}
+.custom-btn {
+  @apply mx-auto mt-2;
+}
+.custom-btn .p-button {
+  @apply bg-black-200 border-gray-300 text-gray-300 text-sm rounded-full h-44p w-40 font-normal;
+}
+.custom-btn .p-button:enabled:active,
+.p-button:not(button):not(a):not(.p-disabled):active {
+  @apply bg-transparent shadow-none border-gray-300 border-2;
+}
+.custom-btn .p-button:enabled:hover,
+.p-button:not(button):not(a):not(.p-disabled):hover {
+  @apply bg-transparent shadow-none border-gray-300 border-2;
+}
+.p-datepicker-footer {
+  @apply border-t border-black-300 py-4;
+}
+.p-datepicker-footer .p-inputtext {
+  @apply bg-black-200 text-gray-200 w-12 text-center border-none text-[1.1rem] px-0 py-1;
+}
+.p-datepicker-footer .p-button,
+.p-datepicker-footer .p-button:focus {
+  @apply bg-black-200 border-none shadow-none p-0 text-gray-400;
+}
+.p-datepicker-footer .p-button:not(button):not(a):not(.p-disabled):hover {
+  @apply border-black-300 bg-transparent;
+}
+.p-datepicker-footer .p-dropdown {
+  @apply bg-black-200 pl-0 w-12 sm:w-16 ml-4;
+}
+.p-datepicker .p-timepicker {
+  @apply hidden;
+}
+.custom-btn .p-button:enabled:hover,
+.p-button:not(button):not(a):not(.p-disabled):hover {
+  @apply bg-transparent shadow-none border-gray-300 border-2;
+}
+.home-opm-charts {
+  @apply my-4;
+}
+.order-details-table.p-datatable .p-column-resizer {
+  @apply border-none w-0;
+}
+.order-details-table .p-datatable-tbody tr td {
+  @apply border-none;
+}
+.order-details-table .p-datatable-thead tr th {
+  @apply py-1;
+}
+
+/* OPM tab */
+.opm-tabs .p-tabview-nav-content {
+  @apply rounded-lg;
+}
+.opm-tabs.p-accordion .p-accordion-header .p-accordion-header-link,
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  @apply transition-none border-none py-0;
+}
+.opm-tabs.p-tabview .p-tabview-panels {
+  @apply hidden;
+}
+.opm-tabs.p-tabview {
+  @apply w-fit h-9 self-end;
+}
+.opm-tabs.p-tabview .p-tabview-nav {
+  @apply border-none h-8 bg-black-300;
+}
+.opm-tabs.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  @apply bg-black-300 text-gray-400 h-30 rounded-none border-none text-xs font-medium;
+}
+.opm-tabs.p-tabview .p-tabview-nav li {
+  @apply bg-black-300;
+}
+.opm-tabs.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  @apply bg-gray-200 text-black-200 rounded-lg text-xs font-medium;
+}
+.opm-tabs.p-tabview
+  .p-tabview-nav
+  li
+  .p-tabview-nav-link:not(.p-disabled):focus {
+  @apply shadow-none;
+}
+.opm-tabs.p-tabview
+  .p-tabview-nav
+  li:not(.p-highlight):not(.p-disabled):hover
+  .p-tabview-nav-link {
+  @apply bg-black-300 text-gray-400;
+}
+.opm-tabs.p-accordion .p-accordion-header .p-accordion-header-link,
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  @apply transition-none border-none py-0;
+}
+.opm-tabs .p-tabview {
+  @apply w-[121px] h-9 z-0;
+}
+.opm-page-chart-container {
+  @apply border-0 rounded-lg h-inherit mt-4 pb-14 sm:pb-4 pt-4 sm:pt-12 lg:pt-14 px-4 lg:px-6;
+}
+.opm-page-chart-container-rotated {
+  @apply w-100vh-1.75rem h-100vw-1r -mt-8 bg-inherit;
+}
+.opm-comparison-page-chart-container {
+  @apply border-0 rounded-lg h-inherit mt-4 pb-24 sm:pb-4 pt-4 sm:pt-12 lg:pt-14 px-4 lg:px-6;
+}
+.opm-comparison-page-chart-container-rotated {
+  @apply w-100vh-1.75rem h-full-w -mt-4 bg-inherit;
+}
+.session-tooltip-tbody {
+  @apply flex flex-wrap;
+}
+.session-w-35p-tbody tr.session-col-1 {
+  @apply w-65pr;
+}
+.session-tooltip-tbody tr.session-col-2 {
+  @apply w-35pr text-right;
+}
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus {
+  @apply !shadow-none !border-none;
+}
+.p-checkbox .p-checkbox-box.p-highlight {
+  @apply !border-white-100 !bg-transparent;
+}
+.autoRefreshCheckBox .p-checkbox .p-checkbox-box {
+  @apply w-18 h-18;
+}
+.p-toast {
+  @apply top-[7vh];
+}
+.p-toast-message-info {
+  @apply !bg-green-100 !text-black-700 !border-l-transparent;
+}
+.p-toast-message-content {
+  @apply !border-l-0;
+}
+.p-toast-icon-close-icon {
+  @apply text-black-700 bg-transparent;
+}
+.p-toast-icon-close:hover {
+  @apply !bg-transparent;
+}
+.autoRefreshToast .p-toast-message-icon {
+  @apply !h-0;
+}
+.p-datepicker-footer .p-button:enabled:hover,
+.p-datepicker-footer .p-button:not(button):not(a):not(.p-disabled):hover {
+  @apply bg-transparent text-gray-400;
+}
+.p-datepicker-footer .p-dropdown {
+  @apply !border-none;
+}
+.ampm-comp {
+  text-align: -webkit-center;
+}
+.filteredCard .p-image,
+.filteredCard img {
+  @apply !w-0.8r !h-0.8r max-w-[.8rem];
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-900 rounded-full;
+}
+::-webkit-scrollbar {
+  @apply w-1 h-1;
+}
+.card-loader-height {
+  @apply min-h-[7.188rem] sm:min-h-[17rem] lg:min-h-[16rem] xl:min-h-[9.5rem] 3xl:min-h-[8.5rem];
+}
+.quick-links-popup {
+  @apply bg-black-100 absolute top-14 left-0 sm:left-25w lg:left-21w right-0;
+}
+.quick-links-popup .p-dialog-header {
+  @apply bg-black-100 rounded-none p-5 sm:px-10 pb-0 border border-black-300 border-b-0 border-r-0;
+}
+.quick-links-popup .p-dialog-content {
+  @apply bg-inherit !rounded-none  border border-black-300 border-t-0 border-r-0 p-5 pt-3 sm:pt-5 sm:px-10;
+}
+.quick-link-btn .p-button .p-button-label {
+  @apply text-white-700 text-lg font-normal;
+}
+.p-toast .p-toast-message {
+  @apply m-auto w-95w xs:w-80w sm:w-50w lg:w-40w;
+}
+.p-toast .p-toast-message .p-toast-message-content {
+  @apply flex items-center text-sm;
+}
+.p-toast .p-toast-message .p-toast-message-content .p-toast-detail {
+  @apply mt-0;
+}
+.autoRefreshToast.p-toast .p-toast-icon-close {
+  @apply left-1w md:left-0;
+}
+.p-toast-message-content .p-image img {
+  @apply max-w-max;
+}
+.opmFilters .p-dropdown:hover,
+.opmFilters .p-inputtext:hover {
+  @apply border-0;
+}
+.label-position .p-inputtext {
+  @apply pt-9p;
+}
+#modal-section .label-position .p-inputtext {
+  @apply pl-8;
+}
+.p-dropdown-panel ::-webkit-scrollbar-thumb {
+  @apply !bg-black-200;
+}
+
+.p-dropdown-panel {
+  @apply bg-gray-900;
+}
+.order-details-btn-link .p-button {
+  @apply text-xs text-white-700 border-none p-0 bg-inherit;
+}
+.order-details-btn-link .p-button:focus {
+  @apply shadow-none;
+}
+.order-details-btn-link .p-button:enabled:hover {
+  @apply border-none bg-inherit;
+}
+.quick-link-arrow img {
+  @apply h-7p w-7p;
+}
+.report-tab.p-tabview {
+  width: 335px;
+}
+.p-datatable .p-datatable-tfoot > tr > td {
+  @apply !bg-black-200 text-white-500 border-0 border-black-300 p-3;
+}
+.report-table.p-datatable {
+  @apply w-full;
+}
+.report-table .p-datatable-tbody tr:last-child td:first-child {
+  @apply rounded-none;
+}
+.report-table .p-datatable-tbody tr:last-child td:last-child {
+  @apply rounded-none;
+}
+.report-table .p-datatable-tfoot tr:last-child td:first-child {
+  @apply rounded-bl-lg;
+}
+.report-table .p-datatable-tfoot tr:last-child td:last-child {
+  @apply rounded-br-lg;
+}
+.channel-table .p-datatable-tbody tr td {
+  @apply max-w-[82px] min-w-[82px];
+}
+.payment-table .p-datatable-thead tr th {
+  @apply py-3 px-1.7;
+}
+.payment-table .p-datatable-tfoot > tr > td {
+  @apply py-3 px-1.7;
+}
+.p-datepicker table td > span {
+  @apply w-7 h-6;
+}
+.grid-table .p-datatable-wrapper {
+  @apply rounded-lg border border-black-103;
+}
+.grid-table .p-datatable-tbody > tr {
+  @apply bg-black-101;
+}
+.grid-table .p-datatable-tbody > tr > td {
+  @apply text-white-900 font-medium text-xs text-center border border-black-103 p-0;
+}
+.grid-table .p-datatable-tbody tr:first-child td:first-child {
+  @apply rounded-tl-lg;
+}
+.grid-table .p-datatable-tbody tr:first-child td:last-child {
+  @apply rounded-tr-lg;
+}
+.grid-table .p-datatable-tbody tr:last-child td:first-child {
+  @apply rounded-bl-lg;
+}
+.grid-table .p-datatable-tbody tr:last-child td:last-child {
+  @apply rounded-br-lg;
+}
+.grid-table .p-datatable-table {
+  @apply table-fixed border-separate;
+}
+.grid-table .p-datatable-header {
+  @apply bg-transparent border-none p-0 text-white-900 font-medium text-10 uppercase mb-2;
+}
+.summary-card .p-card-content {
+  @apply p-0;
+}
+.summary-card .p-card-body {
+  @apply p-4;
+}
+
+.sku-lookup .sku-lookup-card .p-card-body {
+  @apply w-full;
+}
+.sku-lookup .sku-lookup-card .p-card-body .p-card-content {
+  @apply p-0;
+}
+.sku-lookup .sku-lookup-card .p-card-header {
+  @apply px-5 pt-5 font-bold;
+}
+
+/* Custom SideBar */
+.custom-sidebar {
+  @apply bg-gray-107 text-gray-106;
+}
+.custom-sidebar.p-sidebar .p-sidebar-header {
+  @apply hidden;
+}
+.custom-sidebar.p-sidebar .p-sidebar-content {
+  @apply relative flex flex-row bg-inherit text-inherit pt-4;
+}
+.custom-sidebar .custom-sidebar-close-btn {
+  @apply fixed [writing-mode:vertical-lr] text-center inset-y-1/2 bg-inherit text-inherit;
+}
+.custom-sidebar .custom-sidebar-close-btn .p-button {
+  @apply bg-inherit text-inherit text-sm border-none !p-4 !pr-2 w-inherit flex items-end;
+}
+.custom-sidebar .custom-sidebar-close-btn .p-button:focus {
+  @apply shadow-none;
+}
+.custom-sidebar .custom-sidebar-close-btn .p-button:enabled:hover {
+  @apply border-none bg-inherit;
+}
+.incomplete-order-card .p-card-body {
+  @apply !h-full !p-3;
+}
+.incomplete-order-card .p-card-content {
+  @apply !h-full p-1;
+}
+.custom-sidebar .opm-tabs.p-tabview {
+  @apply top-6;
+}
+.custom-overlay .p-overlaypanel-content {
+  @apply shadow-none rounded-lg p-0;
+}
+.custom-overlay.p-overlaypanel:before,
+.custom-overlay.p-overlaypanel:after {
+  @apply content-none;
+}
+.opm-sidebar .custom-sidebar-close-btn {
+  @apply text-white-900;
+}
+.opm-sidebar .p-sidebar-content {
+  @apply p-0;
+}
+.opm-navigate-btn .p-button {
+  @apply rounded-lg border-none bg-gray-108 w-auto;
+}
+.opm-navigate-btn .p-button-label {
+  @apply font-normal;
+}
+.opm-navigate-btn .p-button:enabled:hover {
+  @apply bg-gray-108;
+}
+.opm-submit-btn .p-button {
+  @apply !bg-black-100 !border-gray-300;
+}
+.opm-sidebar-submit .p-button {
+  @apply !bg-gray-300 !border-gray-300;
+}
+.opm-sidebar-submit .p-button .p-button-label {
+  @apply !text-[#0C1117];
+}
+.grid-card.p-card {
+  @apply bg-black-106 border border-black-107 rounded-10 shadow-none min-h-[1.3rem] flex justify-center items-center;
+}
+.grid-card.p-card .p-card-content {
+  @apply p-0 text-white-900 font-normal text-xs text-center font-helvetica;
+}
+.grid-card.p-card .p-card-body {
+  @apply p-0;
+}
+.focus-room-widget-wrapper {
+  @apply bg-black-106 border border-black-108 text-white-900 rounded-12 h-full grid;
+}
