@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import GridCards from "../molecules/GridCards";
 import CustomOverlayFocusRoom from "../molecules/OverlayFocusRoom";
 import {
+  FOCUS_ROOM_LABELS,
   FOCUS_ROOM_TITLES,
   SEVERITY,
 } from "../../helpers/constants/appConstants";
@@ -23,25 +24,25 @@ const OpmWidget = () => {
 
   const getGroupedWidgetData = () => {
     const _locale = OPMNames.widgetDatas
-      .filter((item) => item.category === "Locale")
+      .filter((item) => item.category === FOCUS_ROOM_TITLES.LOCALE)
       .map((w) => ({
         data: w.property,
         description: w.description,
       }));
     const _shipment = OPMNames.widgetDatas
-      .filter((item) => item.category === "Shipment")
+      .filter((item) => item.category === FOCUS_ROOM_TITLES.SHIPMENT)
       .map((w) => ({
         data: w.property,
         description: w.description,
       }));
     const _channel = OPMNames.widgetDatas
-      .filter((item) => item.category === "Channel")
+      .filter((item) => item.category === FOCUS_ROOM_TITLES.CHANNEL)
       .map((w) => ({
         data: w.property,
         description: w.description,
       }));
     const _payment = OPMNames.widgetDatas
-      .filter((item) => item.category === "Payment")
+      .filter((item) => item.category === FOCUS_ROOM_TITLES.PAYMENT)
       .map((w) => ({
         data: w.property,
         description: w.description,
@@ -112,18 +113,20 @@ const OpmWidget = () => {
         columns={3}
         data={channel}
         dataClassName="text-xs"
+        onClick={onGridCardClick}
       />
       <GridCards
         title={FOCUS_ROOM_TITLES.PAYMENT}
         columns={3}
         data={payment}
         dataClassName="text-xs"
+        onClick={onGridCardClick}
       />
       {openOverlay && data && (
         <CustomOverlayFocusRoom
           ref={op}
           header={data.description}
-          buttonContent="View Details"
+          buttonContent={FOCUS_ROOM_LABELS.VIEW_DETAILS}
         />
       )}
     </div>

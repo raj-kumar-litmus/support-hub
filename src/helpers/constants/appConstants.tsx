@@ -642,4 +642,5 @@ export const FOCUS_ROOM_TITLES = {
 };
 export const FOCUS_ROOM_LABELS = {
   LAST_UPDATED: "Last Updated ",
+  VIEW_DETAILS: "View Details",
 };
