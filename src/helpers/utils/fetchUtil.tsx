@@ -23,5 +23,6 @@ export const fetchData = async (
     if (error.message === "Failed to fetch") {
       window.location.replace("/connectivity-issues");
     }
+    throw error;
   }
 };
