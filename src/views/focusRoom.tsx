@@ -61,15 +61,15 @@ const FocusRoom = () => {
               <div className="h-11h">
                 <KafkaWidget />
               </div>
-              <div className="h-[8.6vh]">
-                <SkuInventoryWidget />
-              </div>
               <div className="grid grid-cols-2 gap-y-1.5h gap-x-0.6w h-[13.1vh]">
                 <ApiWidget />
                 <UfeWidget />
               </div>
               <div className="h-11h">
                 <DatabaseWidget />
+              </div>
+              <div className="h-[8.6vh]">
+                <SkuInventoryWidget />
               </div>
             </div>
           </div>
