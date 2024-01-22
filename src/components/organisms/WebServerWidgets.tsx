@@ -1,11 +1,7 @@
-import { FOCUS_ROOM_LABELS } from "../../helpers/constants/appConstants";
 import Speedometer from "../atoms/Speedometer";
+import { WebServerWidgetsProps } from "../../@types/pages/focusRoom";
+import { FOCUS_ROOM_LABELS } from "../../helpers/constants/appConstants";
 
-interface WebServerWidgetsProps {
-  title: string;
-  totalServers: number;
-  errorServers: number;
-}
 const WebServerWidgets = (props: WebServerWidgetsProps) => {
   return (
     <div className="bg-black-106 border border-black-108 text-white-900 relative h-fit rounded-12 h-full pb-2">

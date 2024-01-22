@@ -1,7 +1,7 @@
-import GridCards from "../molecules/GridCards";
-import { FOCUS_ROOM_TITLES } from "../../helpers/constants/appConstants";
 import { useState } from "react";
 import KafkaSideBar from "./KafkaSideBar";
+import GridCards from "../molecules/GridCards";
+import { FOCUS_ROOM_TITLES } from "../../helpers/constants/appConstants";
 
 const KafkaWidget = () => {
   const kafka = [{ data: "ATG" }, { data: "BI" }, { data: "DS" }];

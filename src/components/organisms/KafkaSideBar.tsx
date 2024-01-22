@@ -2,6 +2,7 @@ import { Column } from "primereact/column";
 import { getTableHeaders } from "../../helpers/utils/utils";
 import CustomTable from "../atoms/CustomTable";
 import CustomSideBar from "../molecules/CustomSideBar";
+import { FOCUS_ROOM_TITLES } from "../../helpers/constants/appConstants";
 
 const tableData = [
   {
@@ -35,13 +36,13 @@ const KafkaSideBar = (props) => {
 
   const rowClass = (data) => {
     return {
-      "hightlight-rows": data.LAG === "140",    // todo: select rows to be highlighed
+      "hightlight-rows": data.LAG === "140", // todo: select rows to be highlighed
     };
   };
   return (
     <CustomSideBar
       position="right"
-      title="KAFKA"
+      title={FOCUS_ROOM_TITLES.KAFKA}
       visible={visible}
       onHide={() => {
         setVisible(false);
