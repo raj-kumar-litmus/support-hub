@@ -7,13 +7,13 @@ const CustomOverlayFocusRoom = forwardRef<OverlayPanel, CustomOverlayProps>(
   function OverLay(props, ref) {
     return (
       <CustomOverlay
-        className="w-52 bg-black-101 max-h-[185px] rounded-lg custom-overlay mt-1"
+        className="w-52 bg-black-108 max-h-[185px] rounded-lg custom-overlay mt-1"
         ref={ref}
         appendTo={document.body}
       >
-        <div className=" text-white-500 p-4">
+        <div className=" text-white-900 p-4">
           {props.header && (
-            <div className="text-[15px] font-semibold">{props.header}</div>
+            <div className="text-sm font-semibold">{props.header}</div>
           )}
           {props.subHeader && (
             <span className=" relative bottom-1.5 max-w-31 max-h-1.5 text-10">
@@ -44,7 +44,7 @@ const CustomOverlayFocusRoom = forwardRef<OverlayPanel, CustomOverlayProps>(
           </div>
 
           {props.buttonContent && (
-            <div className="flex items-center h-9 justify-center mt-1 text-sm border rounded-full border-white-900">
+            <div className="flex items-center h-9 justify-center mt-1 text-xs rounded-full bg-gray-109">
               <button>{props.buttonContent}</button>
             </div>
           )}

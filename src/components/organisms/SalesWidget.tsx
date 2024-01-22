@@ -1,5 +1,5 @@
 import { FOCUS_ROOM_TITLES } from "../../helpers/constants/appConstants";
-import GridTable from "../molecules/GridTable";
+import GridCards from "../molecules/GridCards";
 
 const SalesWidget = () => {
   const sales = [
@@ -10,7 +10,7 @@ const SalesWidget = () => {
   ];
   return (
     <div className="focus-room-widget-wrapper px-4 pt-1 pb-4">
-      <GridTable
+      <GridCards
         title={FOCUS_ROOM_TITLES.SALES}
         columns={4}
         data={sales}

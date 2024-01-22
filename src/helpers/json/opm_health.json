@@ -1,0 +1,112 @@
+{
+    "lastUpdated": "26-04-2023 21:33",
+    "healthStatusList": [
+      {
+        "category": "Locale",
+        "property": "US",
+        "anomaly": true
+      },
+      {
+        "category": "Locale",
+        "property": "CA",
+        "anomaly": false
+      },
+      {
+        "category": "Shipment",
+        "property": "STH",
+        "anomaly": false
+      },
+      {
+        "category": "Shipment",
+        "property": "BOP",
+        "description": "BOP",
+        "anomaly": false
+      },
+      {
+        "category": "Shipment",
+        "property": "SDD",
+        "anomaly": false
+      },
+      {
+        "category": "Channel",
+        "property": "DSK",
+        "description": "DSK",
+        "anomaly": false
+      },
+      {
+        "category": "Channel",
+        "property": "MWB",
+        "anomaly": false
+      },
+      {
+        "category": "Channel",
+        "property": "IPH",
+        "anomaly": false
+      },
+      {
+        "category": "Channel",
+        "property": "AND",
+        "anomaly": false
+      },
+      {
+        "category": "Channel",
+        "property": "CSC",
+        "anomaly": false
+      },
+      {
+        "category": "Channel",
+        "property": "MPL",
+        "anomaly": false
+      },
+      {
+        "category": "Channel",
+        "property": "ZAP",
+        "anomaly": false
+      },
+      {
+        "category": "Channel",
+        "property": "INS",
+        "anomaly": false
+      },
+      {
+        "category": "Payment",
+        "property": "CC",
+        "anomaly": false
+      },
+      {
+        "category": "Payment",
+        "property": "GC",
+        "anomaly": false
+      },
+      {
+        "category": "Payment",
+        "property": "ETC",
+        "anomaly": false
+      },
+      {
+        "category": "Payment",
+        "property": "PPL",
+        "anomaly": false
+      },
+      {
+        "category": "Payment",
+        "property": "KLA",
+        "anomaly": false
+      },
+      {
+        "category": "Payment",
+        "property": "AFP",
+        "anomaly": false
+      },
+      {
+        "category": "Payment",
+        "property": "SEP",
+        "anomaly": false
+      },
+      {
+        "category": "Payment",
+        "property": "SEPT",
+        "anomaly": true
+      }
+    ]
+  }

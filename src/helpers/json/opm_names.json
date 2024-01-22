@@ -1,0 +1,109 @@
+{
+  "widgetDatas": [
+    {
+      "category": "Locale",
+      "property": "US",
+      "description": "United States"
+    },
+    {
+      "category": "Locale",
+      "property": "CA",
+      "description": "Canada"
+    },
+    {
+      "category": "Shipment",
+      "property": "STH",
+      "description": "STH"
+    },
+    {
+      "category": "Shipment",
+      "property": "BOP",
+      "description": "BOP"
+    },
+    {
+      "category": "Shipment",
+      "property": "SDD",
+      "description": "SDD"
+    },
+    {
+      "category": "Channel",
+      "property": "DSK",
+      "description": "DSK"
+    },
+    {
+      "category": "Channel",
+      "property": "MWB",
+      "description": "MWB"
+    },
+    {
+      "category": "Channel",
+      "property": "IPH",
+      "description": "IPH"
+    },
+    {
+      "category": "Channel",
+      "property": "AND",
+      "description": "AND"
+    },
+    {
+      "category": "Channel",
+      "property": "CSC",
+      "description": "CSC"
+    },
+    {
+      "category": "Channel",
+      "property": "MPL",
+      "description": "MPL"
+    },
+    {
+      "category": "Channel",
+      "property": "ZAP",
+      "description": "ZAP"
+    },
+    {
+      "category": "Channel",
+      "property": "INS",
+      "description": "INS"
+    },
+    {
+      "category": "Payment",
+      "property": "CC",
+      "description": "CC"
+    },
+    {
+      "category": "Payment",
+      "property": "GC",
+      "description": "GC"
+    },
+    {
+      "category": "Payment",
+      "property": "ETC",
+      "description": "ETC"
+    },
+    {
+      "category": "Payment",
+      "property": "PPL",
+      "description": "PPL"
+    },
+    {
+      "category": "Payment",
+      "property": "KLA",
+      "description": "KLA"
+    },
+    {
+      "category": "Payment",
+      "property": "AFP",
+      "description": "AFP"
+    },
+    {
+      "category": "Payment",
+      "property": "SEP",
+      "description": "SEP"
+    },
+    {
+      "category": "Payment",
+      "property": "SEPT",
+      "description": "SEPT"
+    }
+  ]
+}

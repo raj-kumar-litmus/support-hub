@@ -1116,7 +1116,7 @@ hr.horizontalLine.blue {
   @apply top-6;
 }
 .custom-overlay .p-overlaypanel-content {
-  @apply border-2 border-black-103 rounded-lg p-0;
+  @apply shadow-none rounded-lg p-0;
 }
 .custom-overlay.p-overlaypanel:before,
 .custom-overlay.p-overlaypanel:after {

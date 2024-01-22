@@ -2,15 +2,17 @@ import { FC } from "react";
 import CustomCard from "../atoms/CustomCard";
 import CustomImage from "../atoms/CustomImage";
 import ScheduleIcon from "../../assets/schedule.svg";
-import { GridTableProps } from "../../@types/components/commonTypes";
+import { GridCardsProps, GridData } from "../../@types/components/commonTypes";
 import { getSeverityStyles } from "../../helpers/utils/utils";
 import { FOCUS_ROOM_LABELS } from "../../helpers/constants/appConstants";
 
-const GridTable: FC<GridTableProps> = (props) => {
+const GridCards: FC<GridCardsProps> = (props) => {
   const { className = "", dataClassName = "", columns = 1 } = props;
   const colWidth = `grid-cols-${columns}`;
 
-  const handleCardClick = () => {};
+  const handleCardClick = (e: React.SyntheticEvent, d: GridData) => {
+    !d.unClickable && props.onClick(e, d);
+  };
 
   const emptyCells =
     props.data.length % columns === 0
@@ -39,7 +41,7 @@ const GridTable: FC<GridTableProps> = (props) => {
               className={`grid-card ${
                 d.severity ? getSeverityStyles(d.severity).boxShadow : ""
               }`}
-              onClick={() => handleCardClick()}
+              onClick={(e) => handleCardClick(e, d)}
             >
               {d?.title && <div className="text-8">{d.title}</div>}
               <div
@@ -63,4 +65,4 @@ const GridTable: FC<GridTableProps> = (props) => {
   );
 };
 
-export default GridTable;
+export default GridCards;

@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import GridTable from "../components/molecules/GridTable";
+import GridCards from "../components/molecules/GridCards";
 import { SEVERITY } from "../helpers/constants/appConstants";
 import Warning from "../assets/warning.svg";
 
 const meta = {
-  title: "Components/GridTable",
-  component: GridTable,
+  title: "Components/GridCards",
+  component: GridCards,
   tags: ["autodocs"],
-} satisfies Meta<typeof GridTable>;
+} satisfies Meta<typeof GridCards>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -35,7 +35,7 @@ const gridData1 = [
 ];
 
 const gridData2 = [
-  { data: "DSK", severity: SEVERITY.MED, icon: Warning },
+  { data: "DSK", severity: SEVERITY.MED },
   { data: "MWB" },
   { data: "IPH" },
   { data: "AND" },
@@ -46,7 +46,7 @@ const gridData2 = [
 ];
 
 const gridData3 = [
-  { data: "DSK" },
+  { data: "DSK", icon: Warning },
   { data: "MWB" },
   { data: "IPH" },
   { data: "AND" },
@@ -54,6 +54,11 @@ const gridData3 = [
   { data: "MPL" },
   { data: "ZAP" },
   { data: "INS" },
+];
+
+const gridData4 = [
+  { data: "DSK", title: "Desktop" },
+  { data: "MWB", title: "Mobile Web" },
 ];
 
 export const Basic: Story = {
@@ -64,7 +69,7 @@ export const Basic: Story = {
   },
 };
 
-export const WithHighlight: Story = {
+export const WithSeverityHigh: Story = {
   args: {
     columns: 3,
     data: gridData1,
@@ -72,7 +77,7 @@ export const WithHighlight: Story = {
   },
 };
 
-export const WithSeverityLow: Story = {
+export const WithSeverityMedium: Story = {
   args: {
     columns: 3,
     data: gridData2,
@@ -80,10 +85,27 @@ export const WithSeverityLow: Story = {
   },
 };
 
-export const WithSeverityHigh: Story = {
+export const WithIcon: Story = {
   args: {
     columns: 3,
     data: gridData3,
     className: "w-96",
+  },
+};
+
+export const WithTitle: Story = {
+  args: {
+    columns: 2,
+    data: gridData4,
+    className: "w-96",
+  },
+};
+
+export const WithLastUpdatedTime: Story = {
+  args: {
+    columns: 2,
+    data: gridData4,
+    className: "w-96",
+    lastUpdatedTime: "11:00 Am",
   },
 };
