@@ -4,7 +4,7 @@ import { FOCUS_ROOM_LABELS } from "../../helpers/constants/appConstants";
 
 const WebServerWidgets = (props: WebServerWidgetsProps) => {
   return (
-    <div className="bg-black-106 border border-black-108 text-white-900 relative h-fit rounded-12 h-full pb-2">
+    <div className="bg-black-106 border border-black-108 text-white-900 relative h-fit rounded-12 h-full xl:pb-2">
       <div className="grid-table-header text-10 font-IBM text-white-900 uppercase font-bold pt-1 px-4">
         {props.title}
       </div>
@@ -17,7 +17,7 @@ const WebServerWidgets = (props: WebServerWidgetsProps) => {
       <div className="flex items-center">
         <Speedometer
           width={100}
-          height={55}
+          height={50}
           ringWidth={5}
           maxValue={props.totalServers}
           needleColor="transparent"
@@ -28,7 +28,7 @@ const WebServerWidgets = (props: WebServerWidgetsProps) => {
         />
         <div className="vertical-line"></div>
         <div className="font-IBM text-white-900 ml-4">
-          <div className="text-8 leading-5">
+          <div className="text-8 xl:leading-5">
             {FOCUS_ROOM_LABELS.TOTAL_SERVERS}
           </div>
           <div>{props.totalServers}</div>

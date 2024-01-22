@@ -236,6 +236,8 @@ export default {
       md: "850px",
       lg: "1024px",
       xl: "1280px",
+      "above_xl": "1366px",
+      "below_2xl": "1440px",
       "2xl": "1536px",
       "3xl": "2100px",
     },
