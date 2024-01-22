@@ -1,8 +1,8 @@
 import { Column } from "primereact/column";
-import { getTableHeaders } from "../../helpers/utils/utils";
 import CustomTable from "../atoms/CustomTable";
 import CustomSideBar from "../molecules/CustomSideBar";
 import { FOCUS_ROOM_TITLES } from "../../helpers/constants/appConstants";
+import { getTableHeaders } from "../../helpers/utils/utils";
 
 const tableData = [
   {
