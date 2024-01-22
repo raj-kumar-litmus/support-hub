@@ -17,7 +17,7 @@ const DatabaseWidget = () => {
         columns={3}
         data={database}
         dataClassName="text-xs"
-        className="database-widgets"
+        className="widgets-spacing"
       />
     </div>
   );

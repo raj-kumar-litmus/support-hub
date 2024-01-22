@@ -16,6 +16,7 @@ const CancellationWidget = () => {
         columns={5}
         data={cancellation}
         dataClassName="text-xs"
+        className="widgets-spacing"
       />
     </div>
   );
