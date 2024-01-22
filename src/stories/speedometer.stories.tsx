@@ -295,6 +295,24 @@ export const PurpleSpeedometer: Story = {
   },
 };
 
+export const GreenBlackSpeedometer: Story = {
+  args: {
+    maxSegmentLabels: 0,
+    width: 400,
+    height: 200,
+    ringWidth: 17,
+    customSegmentStops: [0, 30, 100],
+    maxValue: 100,
+    segmentColors: ["#0EA67C", "#21262D"],
+    needleColor: "transparent",
+    valueTextFontSize: "0px",
+    containerClassName: "bg-[#14181E] h-[60vh]",
+    value: 27,
+    currentValueText: "Active Value: ${value}",
+    textColor: "red",
+  },
+};
+
 export const GradientSpeedometer: Story = {
   args: {
     value: 50,
@@ -307,14 +325,16 @@ export const GradientSpeedometer: Story = {
       "transparent",
       "url(#gradient-segment-3)",
     ],
-    ringWidth: 20,
-    width: 130,
+    ringWidth: 80,
+    width: 500,
+    height: 1000,
     maxSegmentLabels: 0,
     currentValueText: "",
     maxValue: 100,
     needleColor: "white",
     textColor: "transparent",
-    needleHeightRatio: 0.1,
+    needleHeightRatio: 0.8,
+    containerClassName: "bg-[#29292A] h-[30vh]",
     showGradient: true
   },
 };

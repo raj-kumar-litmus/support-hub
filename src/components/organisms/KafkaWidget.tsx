@@ -19,7 +19,7 @@ const KafkaWidget = () => {
           title={FOCUS_ROOM_TITLES.KAFKA}
           columns={3}
           data={kafka}
-          dataClassName="text-8"
+          dataClassName="text-xs"
           onClick={handleGridClick}
         />
       </div>

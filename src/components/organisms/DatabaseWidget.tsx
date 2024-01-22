@@ -16,7 +16,8 @@ const DatabaseWidget = () => {
         title={FOCUS_ROOM_TITLES.DATABASE}
         columns={3}
         data={database}
-        dataClassName="text-8"
+        dataClassName="text-xs"
+        className="database-widgets"
       />
     </div>
   );

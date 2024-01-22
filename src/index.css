@@ -1203,3 +1203,6 @@ hr.horizontalLine.blue {
 .guage-chart svg {
   @apply !relative !top-[-0.5rem];
 }
+.database-widgets .p-card {
+  @apply p-1.5;
+}

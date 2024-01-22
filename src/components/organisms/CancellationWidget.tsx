@@ -15,7 +15,7 @@ const CancellationWidget = () => {
         title={FOCUS_ROOM_TITLES.CANCELLATION}
         columns={5}
         data={cancellation}
-        dataClassName="text-8"
+        dataClassName="text-xs"
       />
     </div>
   );
