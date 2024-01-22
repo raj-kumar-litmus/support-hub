@@ -50,6 +50,29 @@ const OpmWidget = () => {
     setShipment(_shipment);
     setChannel(_channel);
     setPayment(_payment);
+    getOpmHealth();
+  };
+
+  const getOpmHealth = () => {
+    const setSeverityForCategory = (category) => {
+      category.forEach((item) => {
+        item.severity = anomalyMap[item.data] ? SEVERITY.HIGH : "";
+      });
+
+      if (category.some((item) => item.severity === SEVERITY.HIGH)) {
+        setSeverity(SEVERITY.HIGH);
+      }
+    };
+
+    const anomalyMap = {};
+    OPMHealth.healthStatusList.forEach((item) => {
+      anomalyMap[item.property] = item.anomaly;
+    });
+
+    setSeverityForCategory(locale);
+    setSeverityForCategory(shipment);
+    setSeverityForCategory(channel);
+    setSeverityForCategory(payment);
   };
 
   const getOpmHealth = () => {
