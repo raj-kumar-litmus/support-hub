@@ -344,7 +344,7 @@ export interface BarChartCompProps {
   title: string;
   isFullScreen?: boolean;
   plugins?: boolean;
-  plugin: any;
+  plugin?: any | "";
 }
 
 export interface ChartProps {
