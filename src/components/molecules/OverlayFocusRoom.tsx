@@ -23,30 +23,32 @@ const CustomOverlayFocusRoom = forwardRef<OverlayPanel, CustomOverlayProps>(
               {props.subHeader}
             </span>
           )}
-          <div
-            className={`grid ${colWidth} items-center justify-center gap-2 mt-2`}
-          >
-            {props.boxContent?.map((boxContent, index) => (
-              <div
-                className={`flex flex-col border border-black-107 w-20 px-2 py-1 ${boxClass} rounded-md 
+          {props.boxContent && (
+            <div
+              className={`grid ${colWidth} items-center justify-center gap-2 mt-2`}
+            >
+              {props.boxContent?.map((boxContent, index) => (
+                <div
+                  className={`flex flex-col border border-black-107 w-20 px-2 py-1 ${boxClass} rounded-md 
                 ${
                   boxContent.severity
                     ? getSeverityStyles(boxContent.severity).border
                     : ""
                 }`}
-                key={index}
-              >
-                <span className="text-8 font-proximaNova mb-1">
-                  {boxContent.title}
-                </span>
-                <span className="relative -top-1 text-sm font-IBM font-semibold">
-                  {boxContent.data ? boxContent.data : "-"}
-                </span>
-              </div>
-            ))}
-          </div>
+                  key={index}
+                >
+                  <span className="text-8 font-proximaNova mb-1">
+                    {boxContent.title}
+                  </span>
+                  <span className="relative -top-1 text-sm font-IBM font-semibold">
+                    {boxContent.data ? boxContent.data : "-"}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
           {props.buttonContent && (
-            <div className="flex items-center h-9 justify-center text-xs rounded-full bg-gray-109 mt-3">
+            <div className="flex items-center h-9 justify-center text-xs rounded-full bg-gray-109 mt-2">
               <button>{props.buttonContent}</button>
             </div>
           )}
