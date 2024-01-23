@@ -68,23 +68,8 @@ const FocusRoom = () => {
               <div className="h-11h">
                 <DatabaseWidget />
               </div>
-              <div className="space-y-[1.5vh]">
-                <div className="h-[11vh]">
-                  <CancellationWidget />
-                </div>
-                <div className="h-[11vh]">
-                  <KafkaWidget />
-                </div>
-                <div className="grid grid-cols-2 gap-y-[1.5vh] gap-x-[0.6vw] h-[13.1vh]">
-                  <ApiWidget />
-                  <UfeWidget />
-                </div>
-                <div className="h-[11vh]">
-                  <DatabaseWidget />
-                </div>
-                <div className="h-[8.6vh]">
-                  <SkuInventoryWidget />
-                </div>
+              <div className="h-[8.6vh]">
+                <SkuInventoryWidget />
               </div>
             </div>
           </div>
