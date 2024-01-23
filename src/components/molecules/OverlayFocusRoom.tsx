@@ -11,7 +11,11 @@ const CustomOverlayFocusRoom = forwardRef<OverlayPanel, CustomOverlayProps>(
     return (
       <CustomOverlay
         className={`bg-black-108 rounded-10 custom-overlay my-1 ${
-          columns == 3 ? "w-[17.37rem]" : "w-[11.12rem]"
+          columns == 3
+            ? "w-[17.37rem]"
+            : columns == 2
+            ? "w-[12.25rem]"
+            : "w-[11.12rem]"
         }`}
         ref={ref}
         appendTo={document.body}
@@ -21,7 +25,7 @@ const CustomOverlayFocusRoom = forwardRef<OverlayPanel, CustomOverlayProps>(
             <div className="text-sm font-semibold">{props.header}</div>
           )}
           {props.subHeader && (
-            <span className=" relative bottom-1.5 max-w-31 max-h-1.5 text-10">
+            <span className=" relative bottom-1.5 text-10">
               {props.subHeader}
             </span>
           )}
