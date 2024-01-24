@@ -1,15 +1,31 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import KafkaSideBar from "./KafkaSideBar";
 import GridCards from "../molecules/GridCards";
-import { FOCUS_ROOM_TITLES } from "../../helpers/constants/appConstants";
+import {
+  FOCUS_ROOM_LABELS,
+  FOCUS_ROOM_TITLES,
+} from "../../helpers/constants/appConstants";
+import { GridData } from "../../@types/components/commonTypes";
+import { OverlayPanel } from "primereact/overlaypanel";
+import CustomOverlayFocusRoom from "../molecules/OverlayFocusRoom";
+
+const kafkaRes = [{ category: "ATG" }, { category: "BI" }, { category: "DS" }];
 
 const KafkaWidget = () => {
-  const kafka = [{ data: "ATG" }, { data: "BI" }, { data: "DS" }];
+  const [sideBarVisible, setSideBarVisible] = useState<boolean>(false);
+  const [cardData, setCardData] = useState<GridData>(null);
+  const [openOverlay, setOpenOverlay] = useState<boolean>(false);
+  const op = useRef<OverlayPanel>(null);
 
-  const [visible, setVisible] = useState<boolean>(false);
+  const kafka = kafkaRes.map((obj) => ({
+    data: obj.category,
+  }));
 
-  const handleGridClick = () => {
-    setVisible(true);
+  const handleGridClick = (e, d: GridData) => {
+    // setSideBarVisible(true);
+    setCardData(d);
+    setOpenOverlay(true);
+    op.current?.toggle(e);
   };
 
   return (
@@ -23,7 +39,16 @@ const KafkaWidget = () => {
           onClick={handleGridClick}
         />
       </div>
-      {visible && <KafkaSideBar visible={visible} setVisible={setVisible} />}
+      {sideBarVisible && (
+        <KafkaSideBar visible={sideBarVisible} setVisible={setSideBarVisible} />
+      )}
+      {openOverlay && cardData && (
+        <CustomOverlayFocusRoom
+          ref={op}
+          header={cardData.data}
+          buttonContent={FOCUS_ROOM_LABELS.VIEW_DETAILS}
+        />
+      )}
     </>
   );
 };

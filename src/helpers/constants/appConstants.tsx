@@ -504,6 +504,7 @@ export const ORDER_REPORT_THRESHOLDS = {
 };
 
 export const SEVERITY = {
+  LOW: "low",
   MED: "medium",
   HIGH: "high",
 };

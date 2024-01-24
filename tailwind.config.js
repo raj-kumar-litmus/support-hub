@@ -75,6 +75,7 @@ export default {
           200: "#269569",
           300: "#3A9F2D",
           400: "#729F70",
+          500: "#008080",
         },
         teal: {
           100: "#41E2D8",
@@ -84,6 +85,7 @@ export default {
           200: "#CE813A",
           300: "#CB7F3A",
           400: "#CC7F3A",
+          500: "#F39C12",
         },
         red: {
           100: "#D26060",
@@ -226,7 +228,9 @@ export default {
       },
       boxShadow: {
         "2px-white": "0 0 0 2px #ffffff",
-        "6px-pink": "0px 0px 6px #F86E6E"
+        "6px-pink": "0px 0px 6px #F86E6E",
+        "6px-red": "0 0 6px #CC5D5E",
+        "6px-yellow": "0 0 6px #CC7F3A",
       },
     },
     screens: {
@@ -244,6 +248,7 @@ export default {
     fontFamily: {
       helvetica: "Helvetica Neue, sans-serif",
       IBM: "IBM Plex Mono, monospace",
+      proximaNova: "Proxima Nova, monospace",
     },
   },
   safelist: [
