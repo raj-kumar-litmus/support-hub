@@ -7,10 +7,12 @@ import {
   FOCUS_ROOM_TITLES,
   SEVERITY,
 } from "../../helpers/constants/appConstants";
+import { URL_OPM_HEALTH } from "../../helpers/constants/apiConstants";
 import { GridData } from "../../@types/components/commonTypes";
 import OPMHealth from "../../helpers/json/opm_health.json";
 import OPMNames from "../../helpers/json/opm_names.json";
 import { getSeverityStyles } from "../../helpers/utils/utils";
+import { fetchData } from "../../helpers/utils/fetchUtil";
 
 const OpmWidget = () => {
   const [severity, setSeverity] = useState("");
@@ -19,7 +21,7 @@ const OpmWidget = () => {
   const [locale, setLocale] = useState<GridData[]>([]);
   const [shipment, setShipment] = useState<GridData[]>([]);
   const [payment, setPayment] = useState<GridData[]>([]);
-  const [openOverlay, setOpenOverlay] = useState<boolean>(false);
+  const [opmHealth, setOpmHealth] = useState(null);
   const op = useRef<OverlayPanel>(null);
 
   const getGroupedWidgetData = () => {
@@ -53,7 +55,18 @@ const OpmWidget = () => {
     setPayment(_payment);
   };
 
-  const getOpmHealth = () => {
+  const getOpmHealth = async () => {
+    try {
+      const data = await fetchData(URL_OPM_HEALTH, {});
+      setOpmHealth(data);
+      console.log(opmHealth);
+      getDataWithOpmHealth(data);
+    } catch (error) {
+      console.error("Error while fetching data:", error);
+    }
+  };
+
+  const getDataWithOpmHealth = (healthData) => {
     const setSeverityForCategory = (category) => {
       category.forEach((item) => {
         item.severity = anomalyMap[item.data] ? SEVERITY.HIGH : "";
@@ -63,7 +76,7 @@ const OpmWidget = () => {
       }
     };
     const anomalyMap = {};
-    OPMHealth.healthStatusList.forEach((item) => {
+    healthData.healthStatusList.forEach((item) => {
       anomalyMap[item.property] = item.anomaly;
     });
     setSeverityForCategory(locale);
@@ -72,9 +85,8 @@ const OpmWidget = () => {
     setSeverityForCategory(payment);
   };
 
-  const onGridCardClick = (e, d: GridData) => {
+  const onGridCardClick = (e: React.SyntheticEvent, d: GridData) => {
     setData(d);
-    setOpenOverlay(true);
     op.current?.toggle(e);
   };
 
@@ -83,7 +95,8 @@ const OpmWidget = () => {
   }, []);
 
   useEffect(() => {
-    getOpmHealth();
+    // getOpmHealth();
+    getDataWithOpmHealth(OPMHealth);
   }, [payment.length]);
 
   setInterval(getOpmHealth, 60000);
@@ -108,27 +121,29 @@ const OpmWidget = () => {
         dataClassName="text-xs"
         onClick={onGridCardClick}
       />
-      <GridCards
-        title={FOCUS_ROOM_TITLES.CHANNEL}
-        columns={3}
-        data={channel}
-        dataClassName="text-xs"
-        onClick={onGridCardClick}
-      />
-      <GridCards
-        title={FOCUS_ROOM_TITLES.PAYMENT}
-        columns={3}
-        data={payment}
-        dataClassName="text-xs"
-        onClick={onGridCardClick}
-      />
-      {openOverlay && data && (
-        <CustomOverlayFocusRoom
-          ref={op}
-          header={data.description}
-          buttonContent={FOCUS_ROOM_LABELS.VIEW_DETAILS}
+      <div className="row-span-3">
+        <GridCards
+          title={FOCUS_ROOM_TITLES.CHANNEL}
+          columns={3}
+          data={channel}
+          dataClassName="text-xs"
+          onClick={onGridCardClick}
         />
-      )}
+      </div>
+      <div className="row-span-3">
+        <GridCards
+          title={FOCUS_ROOM_TITLES.PAYMENT}
+          columns={3}
+          data={payment}
+          dataClassName="text-xs"
+          onClick={onGridCardClick}
+        />
+      </div>
+      <CustomOverlayFocusRoom
+        ref={op}
+        header={data?.description}
+        buttonContent={FOCUS_ROOM_LABELS.VIEW_DETAILS}
+      />
     </div>
   );
 };
