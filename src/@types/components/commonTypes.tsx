@@ -344,7 +344,7 @@ export interface BarChartCompProps {
   title: string;
   isFullScreen?: boolean;
   plugins?: boolean;
-  plugin: any;
+  plugin?: any | "";
 }
 
 export interface ChartProps {
@@ -506,6 +506,7 @@ export interface SpeedometerProps {
   paddingHorizontal?: number;
   paddingVertical?: number;
   svgAriaLabel?: string;
+  showGradient?: boolean;
 }
 
 export interface LinearGaugeProps {

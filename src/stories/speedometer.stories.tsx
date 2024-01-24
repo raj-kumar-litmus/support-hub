@@ -335,5 +335,6 @@ export const GradientSpeedometer: Story = {
     textColor: "transparent",
     needleHeightRatio: 0.8,
     containerClassName: "bg-[#29292A] h-[30vh]",
+    showGradient: true
   },
 };

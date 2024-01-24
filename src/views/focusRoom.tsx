@@ -1,5 +1,4 @@
 import NotificationWidget from "../components/atoms/NotificationWidget";
-import ApiWidget from "../components/organisms/ApiWidget";
 import BopisWidget from "../components/organisms/BopisWidget";
 import CancellationWidget from "../components/organisms/CancellationWidget";
 import DatabaseWidget from "../components/organisms/DatabaseWidget";
@@ -11,9 +10,9 @@ import OpmWidget from "../components/organisms/OpmWidget";
 import SalesWidget from "../components/organisms/SalesWidget";
 import SddWidget from "../components/organisms/SddWidget";
 import SkuInventoryWidget from "../components/organisms/SkuInventoryWidget";
-import UfeWidget from "../components/organisms/UfeWidget";
 import VendorsWidget from "../components/organisms/VendorsWidget";
-
+import WebServerWidgets from "../components/organisms/WebServerWidgets";
+import { FOCUS_ROOM_TITLES } from "../helpers/constants/appConstants";
 import { FocusRoomProvider } from "../context/focusRoom";
 
 const FocusRoom = () => {
@@ -62,8 +61,16 @@ const FocusRoom = () => {
                 <KafkaWidget />
               </div>
               <div className="grid grid-cols-2 gap-y-1.5h gap-x-0.6w h-[13.1vh]">
-                <ApiWidget />
-                <UfeWidget />
+                <WebServerWidgets
+                  title={FOCUS_ROOM_TITLES.API}
+                  totalServers={120}
+                  errorServers={24}
+                />
+                <WebServerWidgets
+                  title={FOCUS_ROOM_TITLES.UFE}
+                  totalServers={120}
+                  errorServers={58}
+                />
               </div>
               <div className="h-11h">
                 <DatabaseWidget />
