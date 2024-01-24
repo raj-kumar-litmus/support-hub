@@ -371,17 +371,20 @@ export interface ApiWebServerCard {
   showToolTip?: boolean;
 }
 
+export interface OverlayBox {
+  title: string;
+  data: string;
+  severity?: string;
+}
+
 export interface CustomOverlayProps extends OverlayPanelProps {
   children?: ReactNode;
   header?: string;
-  box1Content?: string;
-  box1Header?: string;
-  box2Content?: string;
-  box2Header?: string;
-  box1Class?: string;
-  box2Class?: string;
+  boxContent?: OverlayBox[];
+  boxClass?: string;
   buttonContent?: string;
-  subHeader?: string;
+  subHeader?: string | ReactNode;
+  columns?: number;
 }
 
 export type HorizontalTableProps = {
@@ -395,7 +398,7 @@ export type HorizontalTableProps = {
 };
 
 export interface GridData {
-  data: string | number;
+  data: string;
   title?: string;
   icon?: any;
   severity?: string;

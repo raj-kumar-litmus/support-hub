@@ -311,16 +311,23 @@ export const exportToExcel = (data, name) => {
 
 export const getSeverityStyles = (severity) => {
   switch (severity) {
-    case SEVERITY.MED: {
-      return {
-        text: "text-yellow-400",
-        boxShadow: "!shadow-[0px_0px_6px_#CC7F3A]",
-      };
-    }
     case SEVERITY.HIGH: {
       return {
         text: "text-red-400",
-        boxShadow: "!shadow-[0px_0px_6px_#CC5D5E]",
+        boxShadow: "!shadow-6px-red",
+        border: "border border-red-400",
+      };
+    }
+    case SEVERITY.MED: {
+      return {
+        text: "text-yellow-400",
+        boxShadow: "!shadow-6px-yellow",
+        border: "border border-yellow-500",
+      };
+    }
+    case SEVERITY.LOW: {
+      return {
+        border: "border border-green-500",
       };
     }
   }
