@@ -4,6 +4,7 @@ import GridCards from "../molecules/GridCards";
 import CustomOverlayFocusRoom from "../molecules/OverlayFocusRoom";
 import { GridData } from "../../@types/components/commonTypes";
 import {
+  FOCUS_ROOM_LABELS,
   FOCUS_ROOM_TITLES,
   SEVERITY,
 } from "../../helpers/constants/appConstants";
@@ -72,7 +73,7 @@ const DatabaseWidget = () => {
   healthSeriesResponse?.results.forEach((element) => {
     boxContent[element.databaseName] = [
       {
-        title: "Total Sessions",
+        title: FOCUS_ROOM_LABELS.TOTAL_SESSIONS,
         data: element.totalSessions,
         severity: healthRes.results?.find(
           (obj) => obj.databaseName == element.databaseName
@@ -81,7 +82,7 @@ const DatabaseWidget = () => {
           : "",
       },
       {
-        title: "Active Sessions",
+        title: FOCUS_ROOM_LABELS.ACTIVE_SESSIONS,
         data: element.activeSessions,
         severity: healthRes.results?.find(
           (obj) => obj.databaseName == element.databaseName
@@ -90,16 +91,14 @@ const DatabaseWidget = () => {
           : "",
       },
       {
-        title: "Response Time",
+        title: FOCUS_ROOM_LABELS.RESPONSE_TIME,
         data: element.roundTripResponseTime,
         severity: "",
       },
     ];
   });
 
-  const onGridCardClick = (e, d: GridData) => {
-    console.log("grid data", d);
-
+  const handleGridClick = (e, d: GridData) => {
     setSelectedDB(d.data);
     op.current?.toggle(e);
   };
@@ -124,16 +123,14 @@ const DatabaseWidget = () => {
         data={database}
         dataClassName="text-xs"
         className="widgets-spacing"
-        onClick={onGridCardClick}
+        onClick={handleGridClick}
       />
-      {selectedDB && (
-        <CustomOverlayFocusRoom
-          ref={op}
-          header={selectedDB}
-          boxContent={boxContent?.[selectedDB]}
-          columns={3}
-        />
-      )}
+      <CustomOverlayFocusRoom
+        ref={op}
+        header={selectedDB}
+        boxContent={boxContent?.[selectedDB]}
+        columns={3}
+      />
     </div>
   );
 };

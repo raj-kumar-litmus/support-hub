@@ -18,7 +18,6 @@ const cancellationRes = [
 
 const CancellationWidget = () => {
   const [cardData, setCardData] = useState<GridData>(null);
-  const [openOverlay, setOpenOverlay] = useState<boolean>(false);
   const op = useRef<OverlayPanel>(null);
 
   const cancellation = cancellationRes.map((obj) => ({
@@ -26,9 +25,8 @@ const CancellationWidget = () => {
     description: obj.description,
   }));
 
-  const onGridCardClick = (e, d: GridData) => {
+  const handleGridClick = (e: React.SyntheticEvent, d: GridData) => {
     setCardData(d);
-    setOpenOverlay(true);
     op.current?.toggle(e);
   };
 
@@ -40,15 +38,13 @@ const CancellationWidget = () => {
         data={cancellation}
         dataClassName="text-xs"
         className="widgets-spacing"
-        onClick={onGridCardClick}
+        onClick={handleGridClick}
       />
-      {openOverlay && cardData && (
-        <CustomOverlayFocusRoom
-          ref={op}
-          header={cardData.description}
-          buttonContent={FOCUS_ROOM_LABELS.VIEW_DETAILS}
-        />
-      )}
+      <CustomOverlayFocusRoom
+        ref={op}
+        header={cardData?.description}
+        buttonContent={FOCUS_ROOM_LABELS.VIEW_DETAILS}
+      />
     </div>
   );
 };

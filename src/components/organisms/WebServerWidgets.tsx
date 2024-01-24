@@ -1,12 +1,32 @@
+import { useEffect, useState } from "react";
+import CustomImage from "../atoms/CustomImage";
 import Speedometer from "../atoms/Speedometer";
+import expandIcon from "../../assets/expand.svg";
 import { WebServerWidgetsProps } from "../../@types/pages/focusRoom";
-import { FOCUS_ROOM_LABELS } from "../../helpers/constants/appConstants";
+import {
+  FOCUS_ROOM_LABELS,
+  SEVERITY,
+} from "../../helpers/constants/appConstants";
+import { getSeverityStyles } from "../../helpers/utils/utils";
+
 
 const WebServerWidgets = (props: WebServerWidgetsProps) => {
+  const [severity, setSeverity] = useState<string>("");
+
+  useEffect(() => {
+    props.errorServers && setSeverity(SEVERITY.HIGH);
+  }, [props.errorServers]);
   return (
-    <div className="bg-black-106 border border-black-108 text-white-900 relative h-fit rounded-12 h-full xl:pb-2">
-      <div className="grid-table-header text-10 font-IBM text-white-900 uppercase font-bold pt-1 px-4">
-        {props.title}
+    <div
+      className={`bg-black-106 border border-black-108 text-white-900 relative h-fit rounded-12 h-full xl:pb-2 ${
+        severity ? getSeverityStyles(severity).boxShadow : ""
+      }`}
+    >
+      <div className="flex justify-between">
+        <div className="grid-table-header text-10 font-IBM text-white-900 uppercase font-bold pt-1 px-4">
+          {props.title}
+        </div>
+        <CustomImage src={expandIcon} className="pt-1.5 pr-4 cursor-pointer" />
       </div>
       <div className="font-IBM w-fit absolute top-10 left-10 text-center">
         <div className="text-pink-200 text-6 leading-8p">
@@ -27,7 +47,7 @@ const WebServerWidgets = (props: WebServerWidgetsProps) => {
           containerClassName="guage-chart"
         />
         <div className="vertical-line"></div>
-        <div className="font-IBM text-white-900 ml-4">
+        <div className="font-IBM text-white-900 ml-4 xl:ml-6">
           <div className="text-8 xl:leading-5">
             {FOCUS_ROOM_LABELS.TOTAL_SERVERS}
           </div>

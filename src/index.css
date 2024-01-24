@@ -1200,7 +1200,7 @@ hr.horizontalLine.blue {
   @apply border border-black-108 rounded-10 overflow-visible;
 }
 .guage-chart svg {
-  @apply !relative !top-[-0.5rem];
+  @apply !relative !bottom-2.5;
 }
 .widgets-spacing .p-card {
   @apply p-1.5;

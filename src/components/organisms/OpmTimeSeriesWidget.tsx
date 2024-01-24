@@ -109,7 +109,7 @@ const OpmTimeSeriesWidget = () => {
         data={data}
         options={STACKED_OPM_FOCUSROOM}
         title={PAGE_TITLES.OPM}
-        className="bg-black-106 px-4 pt-2 pb-0 rounded-xl lg:h-40 above_xl:h-[11.6rem] below_2xl:h-44 3xl:h-64"
+        className="bg-black-106 px-4 pt-2 pb-0 rounded-xl h-[30vh]"
         defaultClasses={true}
       />
     </div>

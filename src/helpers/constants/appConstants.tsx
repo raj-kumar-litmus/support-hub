@@ -650,4 +650,7 @@ export const FOCUS_ROOM_LABELS = {
   ERRORS: "Errors",
   TOTAL_SERVERS: "Total Servers",
   VIEW_DETAILS: "View Details",
+  TOTAL_SESSIONS: "Total Sessions",
+  ACTIVE_SESSIONS: "Active Sessions",
+  RESPONSE_TIME: "Response Time"
 };
