@@ -26,13 +26,6 @@ const DatabaseWidget = () => {
     { title: "Response Time", data: "12", severity: SEVERITY.MED },
   ];
 
-  // const boxContent = [
-  //   { title: "CPU", data: "48.9%", severity: SEVERITY.LOW },
-  //   { title: "Memory", data: "20.4%", severity: SEVERITY.HIGH },
-  //   { title: "Traffic", data: "", severity: SEVERITY.MED },
-  //   { title: "Errors", data: "" },
-  // ];
-
   const onGridCardClick = (e, d: GridData) => {
     setData(d);
     op.current?.toggle(e);
@@ -65,21 +58,6 @@ const DatabaseWidget = () => {
         boxContent={boxContent}
         columns={3}
       />
-      {/* <CustomOverlayFocusRoom
-        ref={op}
-        header={data?.data}
-        subHeader={
-          <div className="flex mt-3">
-            POD{" "}
-            <div className="ml-2 border border-white-500 rounded-full px-2">
-              2/10
-            </div>
-          </div>
-        }
-        boxContent={boxContent}
-        columns={2}
-        buttonContent={FOCUS_ROOM_LABELS.VIEW_DETAILS}
-      /> */}
     </div>
   );
 };
