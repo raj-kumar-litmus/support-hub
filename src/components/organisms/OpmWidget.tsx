@@ -27,30 +27,33 @@ const OpmWidget = () => {
   ) as FocusRoomContextType;
 
   const getGroupedWidgetData = () => {
-    const _locale = focusRoomConfig.opm?.widgetDatas
-      ?.filter((item) => item.category === FOCUS_ROOM_TITLES.LOCALE)
-      .map((w) => ({
-        data: w.property,
-        description: w.description,
-      }));
-    const _shipment = focusRoomConfig.opm?.widgetDatas
-      .filter((item) => item.category === FOCUS_ROOM_TITLES.SHIPMENT)
-      .map((w) => ({
-        data: w.property,
-        description: w.description,
-      }));
-    const _channel = focusRoomConfig.opm?.widgetDatas
-      .filter((item) => item.category === FOCUS_ROOM_TITLES.CHANNEL)
-      .map((w) => ({
-        data: w.property,
-        description: w.description,
-      }));
-    const _payment = focusRoomConfig.opm?.widgetDatas
-      .filter((item) => item.category === FOCUS_ROOM_TITLES.PAYMENT)
-      .map((w) => ({
-        data: w.property,
-        description: w.description,
-      }));
+    const _locale = [];
+    const _shipment = [];
+    const _channel = [];
+    const _payment = [];
+    focusRoomConfig.opm?.widgetDatas?.forEach((item) => {
+      if (item.category === FOCUS_ROOM_TITLES.LOCALE) {
+        _locale.push({
+          data: item.property,
+          description: item.description,
+        });
+      } else if (item.category === FOCUS_ROOM_TITLES.SHIPMENT) {
+        _shipment.push({
+          data: item.property,
+          description: item.description,
+        });
+      } else if (item.category === FOCUS_ROOM_TITLES.CHANNEL) {
+        _channel.push({
+          data: item.property,
+          description: item.description,
+        });
+      } else if (item.category === FOCUS_ROOM_TITLES.PAYMENT) {
+        _payment.push({
+          data: item.property,
+          description: item.description,
+        });
+      }
+    });
     setLocale(_locale);
     setShipment(_shipment);
     setChannel(_channel);
