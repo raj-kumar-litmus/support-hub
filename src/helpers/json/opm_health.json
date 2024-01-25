@@ -2,110 +2,114 @@
     "lastUpdated": "26-04-2023 21:33",
     "healthStatusList": [
       {
-        "category": "Locale",
+        "category": "LOCALE",
         "property": "US",
         "anomaly": true
       },
       {
-        "category": "Locale",
+        "category": "LOCALE",
         "property": "CA",
         "anomaly": false
       },
       {
-        "category": "Shipment",
+        "category": "SHIPMENT",
         "property": "STH",
         "anomaly": false
       },
       {
-        "category": "Shipment",
+        "category": "SHIPMENT",
         "property": "BOP",
         "description": "BOP",
         "anomaly": false
       },
       {
-        "category": "Shipment",
+        "category": "SHIPMENT",
         "property": "SDD",
         "anomaly": false
       },
       {
-        "category": "Channel",
-        "property": "DSK",
-        "description": "DSK",
+        "category": "CHANNEL",
+        "property": "DES",
         "anomaly": false
       },
       {
-        "category": "Channel",
+        "category": "CHANNEL",
         "property": "MWB",
         "anomaly": false
       },
       {
-        "category": "Channel",
+        "category": "CHANNEL",
         "property": "IPH",
         "anomaly": false
       },
       {
-        "category": "Channel",
+        "category": "CHANNEL",
         "property": "AND",
         "anomaly": false
       },
       {
-        "category": "Channel",
+        "category": "CHANNEL",
         "property": "CSC",
         "anomaly": false
       },
       {
-        "category": "Channel",
+        "category": "CHANNEL",
         "property": "MPL",
         "anomaly": false
       },
       {
-        "category": "Channel",
+        "category": "CHANNEL",
         "property": "ZAP",
         "anomaly": false
       },
       {
-        "category": "Channel",
+        "category": "CHANNEL",
         "property": "INS",
         "anomaly": false
       },
       {
-        "category": "Payment",
+        "category": "CHANNEL",
+        "property": "SKL",
+        "anomaly": false
+      },
+      {
+        "category": "PAYMENT",
         "property": "CC",
         "anomaly": false
       },
       {
-        "category": "Payment",
+        "category": "PAYMENT",
         "property": "GC",
         "anomaly": false
       },
       {
-        "category": "Payment",
+        "category": "PAYMENT",
         "property": "ETC",
         "anomaly": false
       },
       {
-        "category": "Payment",
+        "category": "PAYMENT",
         "property": "PPL",
         "anomaly": false
       },
       {
-        "category": "Payment",
+        "category": "PAYMENT",
         "property": "KLA",
         "anomaly": false
       },
       {
-        "category": "Payment",
+        "category": "PAYMENT",
         "property": "AFP",
         "anomaly": false
       },
       {
-        "category": "Payment",
-        "property": "SEP",
+        "category": "PAYMENT",
+        "property": "SCC",
         "anomaly": false
       },
       {
-        "category": "Payment",
-        "property": "SEPT",
+        "category": "PAYMENT",
+        "property": "SC",
         "anomaly": true
       }
     ]

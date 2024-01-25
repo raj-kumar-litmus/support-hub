@@ -14,13 +14,16 @@ const GridCards: FC<GridCardsProps> = (props) => {
     !d.unClickable && props.onClick(e, d);
   };
 
-  const emptyCells =
-    props.data.length % columns === 0
+  const emptyCells = props.data
+    ? props.data.length % columns === 0
       ? 0
-      : columns - (props.data.length % columns);
+      : columns - (props.data.length % columns)
+    : columns;
 
   return (
-    <div className={`grid-table flex flex-col cursor-pointer ${className}`}>
+    <div
+      className={`grid-table flex flex-col cursor-pointer h-full ${className}`}
+    >
       <div className="flex items-center mb-2">
         <div className="grid-table-header text-10 font-IBM text-white-900 uppercase font-bold">
           {props.title}
@@ -35,7 +38,7 @@ const GridCards: FC<GridCardsProps> = (props) => {
       </div>
       <div className="flex-grow">
         <div className={`grid ${colWidth} gap-2 h-full`}>
-          {props.data.map((d, index) => (
+          {props.data?.map((d, index) => (
             <CustomCard
               key={index}
               className={`grid-card ${

@@ -1,15 +1,18 @@
 import { OverlayPanel } from "primereact/overlaypanel";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import GridCards from "../molecules/GridCards";
 import CustomOverlayFocusRoom from "../molecules/OverlayFocusRoom";
+import { FocusRoomContext } from "../../context/focusRoom";
 import {
   FOCUS_ROOM_LABELS,
   FOCUS_ROOM_TITLES,
   SEVERITY,
 } from "../../helpers/constants/appConstants";
-import { GridData } from "../../@types/components/commonTypes";
+import {
+  FocusRoomContextType,
+  GridData,
+} from "../../@types/components/commonTypes";
 import OPMHealth from "../../helpers/json/opm_health.json";
-import OPMNames from "../../helpers/json/opm_names.json";
 import { getSeverityStyles } from "../../helpers/utils/utils";
 
 const OpmWidget = () => {
@@ -19,29 +22,31 @@ const OpmWidget = () => {
   const [locale, setLocale] = useState<GridData[]>([]);
   const [shipment, setShipment] = useState<GridData[]>([]);
   const [payment, setPayment] = useState<GridData[]>([]);
-  const [openOverlay, setOpenOverlay] = useState<boolean>(false);
   const op = useRef<OverlayPanel>(null);
+  const { focusRoomConfig } = useContext(
+    FocusRoomContext
+  ) as FocusRoomContextType;
 
   const getGroupedWidgetData = () => {
-    const _locale = OPMNames.widgetDatas
-      .filter((item) => item.category === FOCUS_ROOM_TITLES.LOCALE)
+    const _locale = focusRoomConfig.opm?.widgetDatas
+      ?.filter((item) => item.category === FOCUS_ROOM_TITLES.LOCALE)
       .map((w) => ({
         data: w.property,
         description: w.description,
       }));
-    const _shipment = OPMNames.widgetDatas
+    const _shipment = focusRoomConfig.opm?.widgetDatas
       .filter((item) => item.category === FOCUS_ROOM_TITLES.SHIPMENT)
       .map((w) => ({
         data: w.property,
         description: w.description,
       }));
-    const _channel = OPMNames.widgetDatas
+    const _channel = focusRoomConfig.opm?.widgetDatas
       .filter((item) => item.category === FOCUS_ROOM_TITLES.CHANNEL)
       .map((w) => ({
         data: w.property,
         description: w.description,
       }));
-    const _payment = OPMNames.widgetDatas
+    const _payment = focusRoomConfig.opm?.widgetDatas
       .filter((item) => item.category === FOCUS_ROOM_TITLES.PAYMENT)
       .map((w) => ({
         data: w.property,
@@ -53,40 +58,41 @@ const OpmWidget = () => {
     setPayment(_payment);
   };
 
-  const getOpmHealth = () => {
+  const getDataWithOpmHealth = (healthData) => {
     const setSeverityForCategory = (category) => {
-      category.forEach((item) => {
+      category?.forEach((item) => {
         item.severity = anomalyMap[item.data] ? SEVERITY.HIGH : "";
       });
-      if (category.some((item) => item.severity === SEVERITY.HIGH)) {
+      if (category?.some((item) => item.severity === SEVERITY.HIGH)) {
         setSeverity(SEVERITY.HIGH);
       }
     };
     const anomalyMap = {};
-    OPMHealth.healthStatusList.forEach((item) => {
+    healthData.healthStatusList.forEach((item) => {
       anomalyMap[item.property] = item.anomaly;
     });
     setSeverityForCategory(locale);
     setSeverityForCategory(shipment);
     setSeverityForCategory(channel);
     setSeverityForCategory(payment);
+    setLocale(locale);
+    setShipment(shipment);
+    setChannel(channel);
+    setPayment(payment);
   };
 
-  const onGridCardClick = (e, d: GridData) => {
+  const onGridCardClick = (e: React.SyntheticEvent, d: GridData) => {
     setData(d);
-    setOpenOverlay(true);
     op.current?.toggle(e);
   };
 
   useEffect(() => {
-    getGroupedWidgetData();
-  }, []);
+    focusRoomConfig && getGroupedWidgetData();
+  }, [focusRoomConfig]);
 
   useEffect(() => {
-    getOpmHealth();
-  }, [payment.length]);
-
-  setInterval(getOpmHealth, 60000);
+    focusRoomConfig && payment.length && getDataWithOpmHealth(OPMHealth);
+  }, [focusRoomConfig, payment?.length]);
 
   return (
     <div
@@ -108,27 +114,29 @@ const OpmWidget = () => {
         dataClassName="text-xs"
         onClick={onGridCardClick}
       />
-      <GridCards
-        title={FOCUS_ROOM_TITLES.CHANNEL}
-        columns={3}
-        data={channel}
-        dataClassName="text-xs"
-        onClick={onGridCardClick}
-      />
-      <GridCards
-        title={FOCUS_ROOM_TITLES.PAYMENT}
-        columns={3}
-        data={payment}
-        dataClassName="text-xs"
-        onClick={onGridCardClick}
-      />
-      {openOverlay && data && (
-        <CustomOverlayFocusRoom
-          ref={op}
-          header={data.description}
-          buttonContent={FOCUS_ROOM_LABELS.VIEW_DETAILS}
+      <div className="row-span-3">
+        <GridCards
+          title={FOCUS_ROOM_TITLES.CHANNEL}
+          columns={3}
+          data={channel}
+          dataClassName="text-xs"
+          onClick={onGridCardClick}
         />
-      )}
+      </div>
+      <div className="row-span-3">
+        <GridCards
+          title={FOCUS_ROOM_TITLES.PAYMENT}
+          columns={3}
+          data={payment}
+          dataClassName="text-xs"
+          onClick={onGridCardClick}
+        />
+      </div>
+      <CustomOverlayFocusRoom
+        ref={op}
+        header={data?.description}
+        buttonContent={FOCUS_ROOM_LABELS.VIEW_DETAILS}
+      />
     </div>
   );
 };

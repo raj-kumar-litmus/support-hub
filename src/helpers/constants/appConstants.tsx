@@ -634,10 +634,10 @@ export const EXCEL_FILE_NAME = {
   SESSIONS: "Sessions",
 };
 export const FOCUS_ROOM_TITLES = {
-  LOCALE: "Locale",
-  SHIPMENT: "Shipment",
-  CHANNEL: "Channel",
-  PAYMENT: "Payment",
+  LOCALE: "LOCALE",
+  SHIPMENT: "SHIPMENT",
+  CHANNEL: "CHANNEL",
+  PAYMENT: "PAYMENT",
   SALES: "Sales",
   DATABASE: "Database",
 };

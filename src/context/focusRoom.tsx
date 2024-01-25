@@ -3,7 +3,8 @@ import {
   FocusRoomContextType,
   FocusRoomProps,
 } from "../@types/components/commonTypes";
-import { fetchData } from "../helpers/utils/fetchUtil";
+import { URL_FOCUS_ROOM_CONFIG } from "../helpers/constants/apiConstants";
+import { fetchFocusRoomData } from "../helpers/utils/fetchUtil";
 
 export const FocusRoomContext = createContext<FocusRoomContextType | null>(
   null,
@@ -17,10 +18,7 @@ export const FocusRoomProvider = ({ children }: FocusRoomProps) => {
   useEffect(() => {
     (async () => {
       try {
-        const data = await fetchData(
-          `https://jsonplaceholder.typicode.com/posts`, //todo. will be changed once "config" api is ready
-          {},
-        );
+        const data = await fetchFocusRoomData(URL_FOCUS_ROOM_CONFIG, {});
         setFocusRoomConfig(data);
       } catch (err) {
         setFocusRoomConfigError(true);

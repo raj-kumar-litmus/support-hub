@@ -17,3 +17,5 @@ export const SKU_LOOKUP_CATALOG: string =
   "/supportdashboard/v1/catalog/sku/:skuid";
 export const SKU_LOOKUP_INVENTORY_STATUS: string =
   "/supportdashboard/v1/getInventoryStatus/:country/:skuid";
+
+export const URL_FOCUS_ROOM_CONFIG = "/AlertNotificationService/v1/config";
