@@ -1,5 +1,5 @@
 import { OverlayPanel } from "primereact/overlaypanel";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import GridCards from "../molecules/GridCards";
 import { GridData } from "../../@types/components/commonTypes";
 import {
@@ -7,21 +7,16 @@ import {
   FOCUS_ROOM_TITLES,
 } from "../../helpers/constants/appConstants";
 import CustomOverlayFocusRoom from "../molecules/OverlayFocusRoom";
-
-const cancellationRes = [
-  { shortName: "DC", description: "DC cancellation(STH orders only)" },
-  { shortName: "CC", description: "Customer Cancellation" },
-  { shortName: "SCC", description: "Scheduled Cancellation" },
-  { shortName: "FC", description: "Fraud Cancellation" },
-  { shortName: "FIC", description: "Free Item Cancellation" },
-];
+import { FocusRoomContext } from "../../context/focusRoom";
 
 const CancellationWidget = () => {
   const [cardData, setCardData] = useState<GridData>(null);
+  const { focusRoomConfig, focusRoomConfigError } =
+    useContext(FocusRoomContext);
   const op = useRef<OverlayPanel>(null);
 
-  const cancellation = cancellationRes.map((obj) => ({
-    data: obj.shortName,
+  const cancellation = focusRoomConfig?.cancellation?.results?.map((obj) => ({
+    data: obj.shortName || "-",
     description: obj.description,
   }));
 

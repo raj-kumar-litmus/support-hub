@@ -17,3 +17,9 @@ export const SKU_LOOKUP_CATALOG: string =
   "/supportdashboard/v1/catalog/sku/:skuid";
 export const SKU_LOOKUP_INVENTORY_STATUS: string =
   "/supportdashboard/v1/getInventoryStatus/:country/:skuid";
+export const URL_FOCUS_ROOM_CONFIG = "/AlertNotificationService/v1/config";
+export const URL_FR_DB_HEALTH_SERIES =
+  "/SharedServicesHealth/v1/shared/database/health-series";
+export const URL_FR_WEBSERVER_HEALTH =
+  "/SharedServicesHealth/v1/shared/webserver/health";
+export const URL_FR_OPM_SERIES = "/OrderMonitorService/v1/opm/series";

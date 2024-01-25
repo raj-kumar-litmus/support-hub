@@ -634,10 +634,10 @@ export const EXCEL_FILE_NAME = {
   SESSIONS: "Sessions",
 };
 export const FOCUS_ROOM_TITLES = {
-  LOCALE: "Locale",
-  SHIPMENT: "Shipment",
-  CHANNEL: "Channel",
-  PAYMENT: "Payment",
+  LOCALE: "LOCALE",
+  SHIPMENT: "SHIPMENT",
+  CHANNEL: "CHANNEL",
+  PAYMENT: "PAYMENT",
   SALES: "Sales",
   DATABASE: "Database",
   CANCELLATION: "Cancellation",
@@ -652,5 +652,10 @@ export const FOCUS_ROOM_LABELS = {
   VIEW_DETAILS: "View Details",
   TOTAL_SESSIONS: "Total Sessions",
   ACTIVE_SESSIONS: "Active Sessions",
-  RESPONSE_TIME: "Response Time"
+  RESPONSE_TIME: "Response Time",
+};
+
+export const FR_OPM_CHART_DEFAULT = {
+  BORDER_WIDTH: 3,
+  BAR_THICKNESS: 20,
 };

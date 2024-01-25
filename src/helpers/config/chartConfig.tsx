@@ -17,6 +17,7 @@ import {
   OPM_COMPARISON_CHART_STYLES,
   OPM_COMP_CHART_DEFAULT,
   OPM_CHART_DEFAULT,
+  FR_OPM_CHART_DEFAULT,
 } from "../constants/appConstants";
 
 Chart.register(
@@ -853,6 +854,12 @@ export const STACKED_OPM_FOCUSROOM = {
           family: "IBM Plex Mono, Regular",
         },
       },
+    },
+  },
+  datasets: {
+    bar: {
+      borderWidth: FR_OPM_CHART_DEFAULT.BORDER_WIDTH,
+      barThickness: FR_OPM_CHART_DEFAULT.BAR_THICKNESS,
     },
   },
 };

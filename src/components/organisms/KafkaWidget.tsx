@@ -1,5 +1,5 @@
 import { OverlayPanel } from "primereact/overlaypanel";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import KafkaSideBar from "./KafkaSideBar";
 import GridCards from "../molecules/GridCards";
 import CustomOverlayFocusRoom from "../molecules/OverlayFocusRoom";
@@ -10,29 +10,28 @@ import {
   SEVERITY,
 } from "../../helpers/constants/appConstants";
 import { getSeverityStyles } from "../../helpers/utils/utils";
-
-const kafkaRes = [
-  { category: "ATG" },
-  { category: "BI", severity: SEVERITY.HIGH },
-  { category: "DS" },
-];
+import { FocusRoomContext } from "../../context/focusRoom";
 
 const KafkaWidget = () => {
   const [sideBarVisible, setSideBarVisible] = useState<boolean>(false);
   const [cardData, setCardData] = useState<GridData>(null);
   const [severity, setSeverity] = useState<string>("");
+  const { focusRoomConfig, focusRoomConfigError } =
+    useContext(FocusRoomContext);
   const op = useRef<OverlayPanel>(null);
 
-  const kafka = kafkaRes.map((obj) => ({
-    data: obj.category,
-    severity: obj.severity || "",
+  const uniqueKafkaNames = [
+    ...new Set(focusRoomConfig?.kafka?.results?.map((item) => item.category)),
+  ];
+  const kafka = uniqueKafkaNames?.sort()?.map((name) => ({
+    data: name || "-",
+    // severity: obj.severity || "",
   }));
-
-  useEffect(() => {
-    if (kafka.some((item) => item.severity === SEVERITY.HIGH)) {
-      setSeverity(SEVERITY.HIGH);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (kafka.some((item) => item.severity === SEVERITY.HIGH)) {
+  //     setSeverity(SEVERITY.HIGH);
+  //   }
+  // }, []);
 
   const handleGridClick = (e: React.SyntheticEvent, d: GridData) => {
     // setSideBarVisible(true);
@@ -51,7 +50,7 @@ const KafkaWidget = () => {
           title={FOCUS_ROOM_TITLES.KAFKA}
           columns={3}
           data={kafka}
-          dataClassName="text-xs"
+          dataClassName="text-xs uppercase"
           onClick={handleGridClick}
         />
       </div>
@@ -60,7 +59,7 @@ const KafkaWidget = () => {
       )}
       <CustomOverlayFocusRoom
         ref={op}
-        header={cardData?.data}
+        header={cardData?.data?.toUpperCase()}
         buttonContent={FOCUS_ROOM_LABELS.VIEW_DETAILS}
       />
     </>
