@@ -12,7 +12,6 @@ import {
   FocusRoomContextType,
   GridData,
 } from "../../@types/components/commonTypes";
-import OPMHealth from "../../helpers/json/opm_health.json";
 import { getSeverityStyles } from "../../helpers/utils/utils";
 
 const OpmWidget = () => {
@@ -58,29 +57,6 @@ const OpmWidget = () => {
     setPayment(_payment);
   };
 
-  const getDataWithOpmHealth = (healthData) => {
-    const setSeverityForCategory = (category) => {
-      category?.forEach((item) => {
-        item.severity = anomalyMap[item.data] ? SEVERITY.HIGH : "";
-      });
-      if (category?.some((item) => item.severity === SEVERITY.HIGH)) {
-        setSeverity(SEVERITY.HIGH);
-      }
-    };
-    const anomalyMap = {};
-    healthData.healthStatusList.forEach((item) => {
-      anomalyMap[item.property] = item.anomaly;
-    });
-    setSeverityForCategory(locale);
-    setSeverityForCategory(shipment);
-    setSeverityForCategory(channel);
-    setSeverityForCategory(payment);
-    setLocale(locale);
-    setShipment(shipment);
-    setChannel(channel);
-    setPayment(payment);
-  };
-
   const onGridCardClick = (e: React.SyntheticEvent, d: GridData) => {
     setData(d);
     op.current?.toggle(e);
@@ -89,10 +65,6 @@ const OpmWidget = () => {
   useEffect(() => {
     focusRoomConfig && getGroupedWidgetData();
   }, [focusRoomConfig]);
-
-  useEffect(() => {
-    focusRoomConfig && payment?.length && getDataWithOpmHealth(OPMHealth);
-  }, [focusRoomConfig, payment?.length]);
 
   return (
     <div
