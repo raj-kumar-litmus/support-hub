@@ -91,7 +91,7 @@ const OpmWidget = () => {
   }, [focusRoomConfig]);
 
   useEffect(() => {
-    focusRoomConfig && payment.length && getDataWithOpmHealth(OPMHealth);
+    focusRoomConfig && payment?.length && getDataWithOpmHealth(OPMHealth);
   }, [focusRoomConfig, payment?.length]);
 
   return (
