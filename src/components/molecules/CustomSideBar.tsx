@@ -42,11 +42,13 @@ const CustomSideBar = (props: CustomSideBarProps) => {
         </CustomButton>
         <div className="flex flex-col z-1 w-full">
           {props.title && (
-            <h2 className="m-0 mb-4 text-lg font-bold text-inherit">
-              {props.title}
-            </h2>
+            <div className="custom-sidebar-header">
+              <h2 className="m-0 mb-4 text-lg font-bold text-inherit">
+                {props.title}
+              </h2>
+            </div>
           )}
-          {props.children}
+          <div className="custom-sidebar-content">{props.children}</div>
         </div>
       </Sidebar>
     </div>

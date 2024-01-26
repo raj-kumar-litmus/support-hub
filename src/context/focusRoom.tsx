@@ -7,7 +7,7 @@ import { URL_FOCUS_ROOM_CONFIG } from "../helpers/constants/apiConstants";
 import { fetchFocusRoomData } from "../helpers/utils/fetchUtil";
 
 export const FocusRoomContext = createContext<FocusRoomContextType | null>(
-  null,
+  null
 );
 
 export const FocusRoomProvider = ({ children }: FocusRoomProps) => {

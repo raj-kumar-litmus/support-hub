@@ -573,7 +573,7 @@ const OPM: React.FC<OPMProps> = (props) => {
         <div
           className={`flex justify-between items-start ${
             props.filters
-              ? "border-b border-gray-108 items-center px-6 pb-3 text-lg"
+              ? "border-b border-gray-108 items-center px-6 pb-3 pt-4 text-lg"
               : ""
           }`}
         >

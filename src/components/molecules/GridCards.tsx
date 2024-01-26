@@ -15,9 +15,9 @@ const GridCards: FC<GridCardsProps> = (props) => {
   };
 
   const emptyCells = props.data
-    ? props.data.length % columns === 0
+    ? props.data?.length % columns === 0
       ? 0
-      : columns - (props.data.length % columns)
+      : columns - (props.data?.length % columns)
     : columns;
 
   return (

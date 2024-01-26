@@ -12,7 +12,7 @@ import { ToastProps } from "primereact/toast";
 import { OverlayPanelProps } from "primereact/overlaypanel";
 import { FC, KeyboardEvent, ReactNode } from "react";
 import { CommerceItemData } from "../pages/orderDetails";
-import { DCOpenOrders } from "../pages/dcOpenOrders";
+import { DCOpenOrders } from "../pages/DcOpenOrders";
 import { ModalEnums } from "../pages/opmCharts";
 import { InputTextProps } from "primereact/inputtext";
 
@@ -344,7 +344,7 @@ export interface BarChartCompProps {
   title: string;
   isFullScreen?: boolean;
   plugins?: boolean;
-  plugin: any;
+  plugin?: any | "";
 }
 
 export interface ChartProps {
@@ -506,6 +506,7 @@ export interface SpeedometerProps {
   paddingHorizontal?: number;
   paddingVertical?: number;
   svgAriaLabel?: string;
+  showGradient?: boolean;
 }
 
 export interface LinearGaugeProps {

@@ -1086,13 +1086,13 @@ hr.horizontalLine.blue {
 
 /* Custom SideBar */
 .custom-sidebar {
-  @apply bg-gray-107 text-gray-106;
+  @apply bg-black-106 text-gray-106;
 }
 .custom-sidebar.p-sidebar .p-sidebar-header {
   @apply hidden;
 }
 .custom-sidebar.p-sidebar .p-sidebar-content {
-  @apply relative flex flex-row bg-inherit text-inherit pt-4;
+  @apply relative flex flex-row bg-inherit text-inherit p-0;
 }
 .custom-sidebar .custom-sidebar-close-btn {
   @apply fixed [writing-mode:vertical-lr] text-center inset-y-1/2 bg-inherit text-inherit;
@@ -1114,6 +1114,18 @@ hr.horizontalLine.blue {
 }
 .custom-sidebar .opm-tabs.p-tabview {
   @apply top-6;
+}
+.custom-sidebar .custom-sidebar-header {
+  @apply border-b border-b-black-108 px-6 py-5;
+}
+.custom-sidebar .custom-sidebar-header h2 {
+  @apply m-0 text-sm text-white-900;
+}
+.custom-sidebar .custom-sidebar-content {
+  @apply p-5;
+}
+.custom-sidebar .p-sidebar-content {
+  @apply border-l border-l-black-108;
 }
 .custom-overlay .p-overlaypanel-content {
   @apply shadow-none rounded-lg p-0;
@@ -1157,4 +1169,39 @@ hr.horizontalLine.blue {
 }
 .focus-room-widget-wrapper {
   @apply bg-black-106 border border-black-108 text-white-900 rounded-12 h-full grid;
+}
+.vertical-line {
+  @apply border border-l border-black-108 h-9;
+}
+.kafka-table .p-datatable-table {
+  @apply border-collapse;
+}
+.kafka-table .p-datatable-table th,
+.kafka-table .p-datatable-table tr {
+  @apply text-10 !text-white-900 font-IBM leading-[18px];
+}
+.kafka-table .p-datatable-thead tr th .p-column-header-content {
+  @apply justify-start;
+}
+.kafka-table .p-datatable-tbody tr td {
+  @apply text-left;
+}
+.kafka-table .p-datatable-tbody tr {
+  @apply !bg-black-106 text-white-900;
+}
+.kafka-table .p-datatable-table .p-datatable-thead th,
+.kafka-table .p-datatable-tbody tr.p-row-odd {
+  @apply !bg-black-108 text-white-900;
+}
+.kafka-table .p-datatable-tbody .hightlight-rows {
+  @apply !bg-black-110 relative !shadow-6px-pink;
+}
+.kafka-table .p-datatable-wrapper {
+  @apply border border-black-108 rounded-10 overflow-visible;
+}
+.guage-chart svg {
+  @apply !relative !bottom-2.5;
+}
+.widgets-spacing .p-card {
+  @apply p-1.5;
 }

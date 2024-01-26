@@ -640,8 +640,22 @@ export const FOCUS_ROOM_TITLES = {
   PAYMENT: "PAYMENT",
   SALES: "Sales",
   DATABASE: "Database",
+  CANCELLATION: "Cancellation",
+  KAFKA: "Kafka",
+  API: "API",
+  UFE: "UFE",
 };
 export const FOCUS_ROOM_LABELS = {
   LAST_UPDATED: "Last Updated ",
+  ERRORS: "Errors",
+  TOTAL_SERVERS: "Total Servers",
   VIEW_DETAILS: "View Details",
+  TOTAL_SESSIONS: "Total Sessions",
+  ACTIVE_SESSIONS: "Active Sessions",
+  RESPONSE_TIME: "Response Time",
+};
+
+export const FR_OPM_CHART_DEFAULT = {
+  BORDER_WIDTH: 3,
+  BAR_THICKNESS: 20,
 };

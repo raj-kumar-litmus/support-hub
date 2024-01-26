@@ -13,7 +13,7 @@ import {
   GridData,
 } from "../../@types/components/commonTypes";
 import { getSeverityStyles } from "../../helpers/utils/utils";
-
+ 
 const OpmWidget = () => {
   const [severity, setSeverity] = useState("");
   const [data, setData] = useState<GridData>(null);
@@ -59,12 +59,11 @@ const OpmWidget = () => {
     setChannel(_channel);
     setPayment(_payment);
   };
-
   const onGridCardClick = (e: React.SyntheticEvent, d: GridData) => {
     setData(d);
     op.current?.toggle(e);
   };
-
+ 
   useEffect(() => {
     focusRoomConfig && getGroupedWidgetData();
   }, [focusRoomConfig]);
@@ -115,5 +114,5 @@ const OpmWidget = () => {
     </div>
   );
 };
-
+ 
 export default OpmWidget;

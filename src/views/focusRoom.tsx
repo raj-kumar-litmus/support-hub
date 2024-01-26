@@ -1,5 +1,4 @@
 import NotificationWidget from "../components/atoms/NotificationWidget";
-import ApiWidget from "../components/organisms/ApiWidget";
 import BopisWidget from "../components/organisms/BopisWidget";
 import CancellationWidget from "../components/organisms/CancellationWidget";
 import DatabaseWidget from "../components/organisms/DatabaseWidget";
@@ -11,9 +10,8 @@ import OpmWidget from "../components/organisms/OpmWidget";
 import SalesWidget from "../components/organisms/SalesWidget";
 import SddWidget from "../components/organisms/SddWidget";
 import SkuInventoryWidget from "../components/organisms/SkuInventoryWidget";
-import UfeWidget from "../components/organisms/UfeWidget";
 import VendorsWidget from "../components/organisms/VendorsWidget";
-
+import WebServerWidgets from "../components/organisms/WebServerWidgets";
 import { FocusRoomProvider } from "../context/focusRoom";
 
 const FocusRoom = () => {
@@ -61,10 +59,11 @@ const FocusRoom = () => {
               <div className="h-11h">
                 <KafkaWidget />
               </div>
-              <div className="grid grid-cols-2 gap-y-1.5h gap-x-0.6w h-[13.1vh]">
-                <ApiWidget />
-                <UfeWidget />
+              <div className="h-[13.1vh]">
+
+                <WebServerWidgets />
               </div>
+             
               <div className="h-11h">
                 <DatabaseWidget />
               </div>
