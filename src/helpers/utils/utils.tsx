@@ -3,7 +3,7 @@ import OPMIcon from "../../assets/opm.svg";
 import OPMComparisonIcon from "../../assets/opmcomparison.svg";
 import SessionsIcon from "../../assets/sessions.svg";
 import DCOpenOrdersIcon from "../../assets/dcopenorders.svg";
-import { PAGE_TITLES, SEVERITY } from "../constants/appConstants";
+import { PAGE_TITLES, SEVERITY,NUMBER_WITH_COMMAS_REGEX} from "../constants/appConstants";
 import { utils, writeFile } from "xlsx";
 
 export const ROUTES = {
@@ -332,3 +332,45 @@ export const getSeverityStyles = (severity) => {
     }
   }
 };
+
+export const numberWithCommas= (number) => {
+  number = Math.round(number * 100) / 100;
+  return number.toString().replace(NUMBER_WITH_COMMAS_REGEX, ",");
+};
+
+export const hunderedkandMilFormatter = (num) => {
+  const absNum = Math.abs(num);
+
+  if (absNum >= 1000000) {
+    return Math.sign(num) * (absNum / 1000000).toFixed(2) + "M";
+  } else if (absNum >= 999999) {
+    return Math.sign(num) * (absNum / 1000).toFixed(2) + "k";
+  } else {
+    return numberWithCommas(num);
+
+  }
+};
+
+export const numberToKandMformatter = (num) => {
+  const absNum = Math.abs(num);
+  
+  if (absNum >= 1000000) {
+    return Math.sign(num) * (absNum / 1000000).toFixed(2) + "M";
+  } else if (absNum >=999) {
+    return Math.sign(num) * (absNum / 1000).toFixed(2) + "k";
+  } 
+  else {
+    return numberWithCommas(num);
+
+  }
+};
+
+export const mapGridDataBopisAndSdd = (data, names) => {
+  return names.map(({ shortName, description}) => {
+    return {
+      title: shortName,
+      data: data[description],
+    };
+  });
+};
+

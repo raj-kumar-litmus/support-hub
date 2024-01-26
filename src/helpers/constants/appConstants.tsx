@@ -644,6 +644,9 @@ export const FOCUS_ROOM_TITLES = {
   KAFKA: "Kafka",
   API: "API",
   UFE: "UFE",
+  BOPIS: "BOPIS",
+  SDD: "SDD",
+  OMS: "OMS",
 };
 export const FOCUS_ROOM_LABELS = {
   LAST_UPDATED: "Last Updated ",
@@ -659,3 +662,18 @@ export const FR_OPM_CHART_DEFAULT = {
   BORDER_WIDTH: 3,
   BAR_THICKNESS: 20,
 };
+
+export const NUMBER_WITH_COMMAS_REGEX = /\B(?=(\d{3})+(?!\d))/g;
+
+export const FOCUS_ROOM_SALES_OVERLAY_CONETENT_DECIDER = {
+  TOTAL_FORECAST: "totalForecast",
+  TOTAL_SALES: "totalSales",
+  TOTAL_ORDERS: "totalOrders",
+  AVERAGE_ORDER_VALUE: "avgOrder",
+};
+
+export const FOCUS_ROOM_SALES_OVERLAY_HEADER_SUFFIX = {
+  USD: "USD",
+};
+
+export const FOCUS_ROOM_BOPIS_SDD_CANCELLATION = "Cancellation";

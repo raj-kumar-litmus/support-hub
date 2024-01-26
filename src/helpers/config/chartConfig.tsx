@@ -27,7 +27,7 @@ Chart.register(
   Title,
   Tooltip,
   Legend,
-  ChartDataLabels
+  ChartDataLabels,
 );
 
 //Session Chart
@@ -239,7 +239,7 @@ export const OPM_OPTIONS_HOME = (isMobile: boolean, showDataLabels = false) => {
 
 export const OPM_BAR_CHART_OPTIONS = (
   isMobile: boolean,
-  showDataLabels = false
+  showDataLabels = false,
 ) => {
   const existingBarChartOptions = {
     ...BAR_CHART_OPTIONS(showDataLabels && !isMobile),
@@ -327,7 +327,7 @@ export const OPM_BAR_CHART_OPTIONS = (
 
 export const OPM_BAR_CHART_OPTIONS_HOME = (
   isMobile: boolean,
-  showDataLabels = false
+  showDataLabels = false,
 ) => {
   const existingBarChartOptions = {
     ...OPM_BAR_CHART_OPTIONS(isMobile, showDataLabels),
@@ -346,7 +346,7 @@ export const OPM_BAR_CHART_OPTIONS_HOME = (
 
 export const OPM_BAR_CHART_OPTIONS_SIDEBAR = (
   isMobile: boolean,
-  showDataLabels = false
+  showDataLabels = false,
 ) => {
   const existingBarChartOptions = {
     ...OPM_BAR_CHART_OPTIONS(isMobile, showDataLabels),
@@ -860,6 +860,25 @@ export const STACKED_OPM_FOCUSROOM = {
     bar: {
       borderWidth: FR_OPM_CHART_DEFAULT.BORDER_WIDTH,
       barThickness: FR_OPM_CHART_DEFAULT.BAR_THICKNESS,
+    },
+  },
+};
+
+export const FOCUS_ROOM_SALES_PIE_CHART = {
+  maintainAspectRatio: false,
+  responsive: false,
+  datasets: {},
+  plugins: {
+    legend: {
+      display: false,
+    },
+    datalabels: {
+      display: false,
+    },
+    tooltip: {
+      enabled: false,
+      external: (context) =>
+        externalTooltipHandler(context, "reportPieChart", true),
     },
   },
 };

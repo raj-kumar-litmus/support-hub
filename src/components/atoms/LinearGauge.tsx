@@ -1,28 +1,30 @@
+import { numberToKandMformatter } from "../../helpers/utils/utils";
 import { LinearGaugeProps } from "../../@types/components/commonTypes";
 
-const LinearGauge = (props: LinearGaugeProps) => (
-  <div className={`flex ${props.containerClassName}`}>
-    <span
-      className={`flex items-center justify-center rounded-l-3xl w-[${Math.round(
-        (Number(props.propOne) /
-          (Number(props.propOne) + Number(props.propTwo))) *
-          100,
-      )}%] border-solid border-r-4 border-black-101 h-[${props.height}] ${
-        props.bgColorOne
-      }`}
+const LinearGauge = (props: LinearGaugeProps) => {
+  const total = Number(props.propOne) + Number(props.propTwo);
+  const widthPropOne =
+    total === 0 ? 50 : Math.round((Number(props.propOne) / total) * 100);
+  const widthPropTwo =
+    total === 0 ? 50 : Math.round((Number(props.propTwo) / total) * 100);
+  return (
+    <div
+      className={`flex ${props.containerClassName}`}
     >
-      {Number(props.propOne)}
-    </span>
-    <span
-      className={`flex items-center justify-center rounded-r-3xl w-[${Math.round(
-        (Number(props.propTwo) /
-          (Number(props.propOne) + Number(props.propTwo))) *
-          100,
-      )}%] h-[${props.height}] ${props.bgColorTwo}`}
-    >
-      {Number(props.propTwo)}
-    </span>
-  </div>
-);
+      <span
+        className={`flex items-center justify-center rounded-l-3xl w-[${widthPropOne}%] border-solid border-r-4 border-black-101 h-[${props.height}] ${props.bgColorOne}`}
+        title={`${props.propOne}`}
+      >
+        {props.formatter ? numberToKandMformatter(props.propOne) : props.propOne}
+      </span>
+      <span
+        className={`flex items-center justify-center rounded-r-3xl w-[${widthPropTwo}%] h-[${props.height}] ${props.bgColorTwo}`}
+        title={`${props.propTwo}`}
+      >
+        {props.formatter ? numberToKandMformatter(props.propTwo) : props.propTwo}
+      </span>
+    </div>
+  );
+};
 
 export default LinearGauge;

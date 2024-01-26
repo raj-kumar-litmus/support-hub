@@ -15,7 +15,7 @@ const CustomOverlayFocusRoom = forwardRef<OverlayPanel, CustomOverlayProps>(
             ? "w-[17.37rem]"
             : columns == 2
             ? "w-[12.25rem]"
-            : "w-[11.12rem]"
+            : "w-[12.12rem]"
         }`}
         ref={ref}
         appendTo={document.body}
@@ -58,6 +58,7 @@ const CustomOverlayFocusRoom = forwardRef<OverlayPanel, CustomOverlayProps>(
               <button>{props.buttonContent}</button>
             </div>
           )}
+          {props.children}
         </div>
       </CustomOverlay>
     );
