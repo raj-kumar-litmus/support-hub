@@ -70,12 +70,17 @@ export const NoLabels: Story = {
   args: {
     options: {
       responsive: true,
+      plugins: {
+        tooltip: {
+          enabled: false,
+        },
+      },
     },
     data: {
       datasets: [
         {
           label: "My First Dataset",
-          data: [300, 50],
+          data: [300, 70],
           backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
         },
       ],
@@ -241,20 +246,20 @@ export const RedDoughNut: Story = {
   args: {
     options: {
       responsive: true,
-      cutout: "60%",
+      cutout: "80%",
     },
     data: {
       datasets: [
         {
           label: "My First Dataset",
           data: [100],
-          weight: 5,
+          weight: 3,
           backgroundColor: ["#F86E6E"],
           borderColor: "#232323",
           borderWidth: 0,
         },
         {
-          weight: 5,
+          weight: 3,
           data: [100],
           borderColor: "#232323",
           borderWidth: 0,
@@ -263,29 +268,24 @@ export const RedDoughNut: Story = {
         {
           label: "My Second Dataset",
           data: [100],
-          weight: 5,
+          weight: 3,
           borderColor: "#232323",
           borderWidth: 0,
-          backgroundColor: ["#623737"],
-        },
-        {
-          weight: 5,
-          data: [100],
-          borderColor: "#232323",
-          borderWidth: 0,
-          backgroundColor: ["#29292A"],
+          backgroundColor: ["#F86E6E"],
         },
       ],
     },
     plugins: [
       centerText({
         text: "FOO",
-        fillColor: "#F86E6E",
-        arcX: 253,
-        arcY: 260,
-        arcRadius: 200,
+        fillColor: "#29292A",
+        arcX: 373,
+        arcY: 380,
+        arcRadius: 300,
         arcStart: 0,
         arcEnd: 2 * Math.PI,
+        activePods: 14,
+        totalPods: 16,
       }),
     ],
     containerClassName: "bg-gray-700 w-[60vw] h-[80vh]",
@@ -336,9 +336,9 @@ export const GreenDoughNut: Story = {
       centerText({
         text: "BAR",
         fillColor: "#0EA67C",
-        arcX: 253,
-        arcY: 260,
-        arcRadius: 200,
+        arcX: 373,
+        arcY: 380,
+        arcRadius: 300,
         arcStart: 0,
         arcEnd: 2 * Math.PI,
       }),
@@ -384,9 +384,9 @@ export const RedAndGreenDoughNut: Story = {
       centerText({
         text: "JER",
         fillColor: "#29292A",
-        arcX: 253,
-        arcY: 260,
-        arcRadius: 200,
+        arcX: 373,
+        arcY: 380,
+        arcRadius: 300,
         arcStart: 0,
         arcEnd: 2 * Math.PI,
       }),
@@ -432,13 +432,50 @@ export const FullRedAndHalfGreenDoughNut: Story = {
       centerText({
         text: "PRO",
         fillColor: "#29292A",
-        arcX: 253,
-        arcY: 260,
-        arcRadius: 200,
+        arcX: 373,
+        arcY: 380,
+        arcRadius: 300,
         arcStart: 0,
         arcEnd: 2 * Math.PI,
+        activePods: 10,
+        totalPods: 16,
       }),
     ],
+    containerClassName: "bg-gray-700 w-[60vw] h-[80vh]",
+  },
+};
+
+export const DisabledDoughNut: Story = {
+  args: {
+    options: {
+      responsive: true,
+      cutout: "80%",
+    },
+    data: {
+      datasets: [
+        {
+          label: "My First Dataset",
+          data: [100],
+          weight: 3,
+          backgroundColor: ["#3E4249"],
+          borderColor: "#232323",
+          borderWidth: 0,
+        },
+      ],
+    },
+    plugins: [
+      centerText({
+        text: "CXS",
+        fillColor: "#3E4249",
+        arcX: 373,
+        arcY: 380,
+        arcRadius: 300,
+        arcStart: 0,
+        arcEnd: 2 * Math.PI,
+        isDisabledDoughNut: true,
+      }),
+    ],
+    isDisabledDoughNut: true,
     containerClassName: "bg-gray-700 w-[60vw] h-[80vh]",
   },
 };

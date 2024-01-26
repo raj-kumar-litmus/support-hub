@@ -26,9 +26,10 @@ ChartJS.register(
 const DoughnutChart = (props: DoughNutChartProps) => (
   <div
     className={`${props.containerClassName || ""} cursor-pointer`}
-    onClick={() => alert("Hi there")}
+    onClick={(e) => props.onClickHandler(e)}
   >
     <Doughnut
+      redraw={true}
       className={props.chartClassName}
       options={props.options}
       data={props.data}

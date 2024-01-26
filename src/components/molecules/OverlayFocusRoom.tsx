@@ -22,7 +22,9 @@ const CustomOverlayFocusRoom = forwardRef<OverlayPanel, CustomOverlayProps>(
       >
         <div className=" text-white-900 p-4">
           {props.header && (
-            <div className="text-sm font-semibold">{props.header}</div>
+            <div className="text-sm font-semibold capitalize">
+              {props.header}
+            </div>
           )}
           {props.subHeader && (
             <span className=" relative bottom-1.5 text-10">
@@ -35,7 +37,9 @@ const CustomOverlayFocusRoom = forwardRef<OverlayPanel, CustomOverlayProps>(
             >
               {props.boxContent?.map((boxContent, index) => (
                 <div
-                  className={`flex flex-col border border-black-107 w-20 px-2 py-1 ${boxClass} rounded-md 
+                  className={`flex flex-col border border-black-107 w-20 px-2 py-1 ${boxClass} ${
+                    boxContent.boxClass
+                  } rounded-md 
                 ${
                   boxContent.severity
                     ? getSeverityStyles(boxContent.severity).border

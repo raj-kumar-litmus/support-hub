@@ -2,8 +2,8 @@ const baseURL: string = `${import.meta.env.VITE_BASEURL}`;
 const focusRoomBaseURL: string = `${import.meta.env.VITE_FOCUSROOM_BASEURL}`;
 
 export const fetchData = async (
-  url: string,
-  params: Record<string, string | number>,
+  url: string = "",
+  params: Record<string, string | number> = {},
 ) => {
   const queryString: string = params
     ? Object.keys(params)
