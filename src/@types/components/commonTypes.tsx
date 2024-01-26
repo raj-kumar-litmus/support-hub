@@ -406,6 +406,7 @@ export interface GridData {
   description?: string;
   unClickable?: boolean;
   lastUpdated?:string
+
 }
 
 export type GridCardsProps = {
@@ -417,6 +418,7 @@ export type GridCardsProps = {
   onClick?: (event: React.SyntheticEvent, string) => void;
   lastUpdatedTime?: string;
   formatNumber?:boolean;
+
 };
 
 export type OrderSummaryCardProps = {
