@@ -3,7 +3,7 @@ import OPMIcon from "../../assets/opm.svg";
 import OPMComparisonIcon from "../../assets/opmcomparison.svg";
 import SessionsIcon from "../../assets/sessions.svg";
 import DCOpenOrdersIcon from "../../assets/dcopenorders.svg";
-import { PAGE_TITLES, SEVERITY,NUMBER_WITH_COMMAS_REGEX } from "../constants/appConstants";
+import { PAGE_TITLES, SEVERITY,NUMBER_WITH_COMMAS_REGEX} from "../constants/appConstants";
 import { utils, writeFile } from "xlsx";
 
 export const ROUTES = {
