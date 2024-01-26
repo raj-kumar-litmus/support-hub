@@ -1,10 +1,10 @@
-import { FC } from "react";
+import { FC} from "react";
 import CustomCard from "../atoms/CustomCard";
 import CustomImage from "../atoms/CustomImage";
 import ScheduleIcon from "../../assets/schedule.svg";
 import { GridCardsProps, GridData } from "../../@types/components/commonTypes";
-import { getSeverityStyles } from "../../helpers/utils/utils";
-import { FOCUS_ROOM_LABELS } from "../../helpers/constants/appConstants";
+import { getSeverityStyles,hunderedkandMilFormatter,numberWithCommas } from "../../helpers/utils/utils";
+import { FOCUS_ROOM_LABELS ,} from "../../helpers/constants/appConstants";
 
 const GridCards: FC<GridCardsProps> = (props) => {
   const { className = "", dataClassName = "", columns = 1 } = props;
@@ -53,8 +53,11 @@ const GridCards: FC<GridCardsProps> = (props) => {
                 }`}
               >
                 {d.icon && <CustomImage src={d.icon} className="w-3 h-3" />}
-                {d.data && <div className={`${dataClassName}`}>{d.data}</div>}
+                 {d.data && <div className={`${dataClassName}`}>{ typeof d.data === "number"
+                    ? props.formatNumber? hunderedkandMilFormatter(d.data):numberWithCommas(d.data)
+                    : d.data}</div>}
               </div>
+            
             </CustomCard>
           ))}
           {Array.from({ length: emptyCells }).map((_, index) => (

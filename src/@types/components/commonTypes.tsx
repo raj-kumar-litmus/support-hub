@@ -375,6 +375,7 @@ export interface OverlayBox {
   title: string;
   data: string;
   severity?: string;
+  description?:string
 }
 
 export interface CustomOverlayProps extends OverlayPanelProps {
@@ -404,6 +405,7 @@ export interface GridData {
   severity?: string;
   description?: string;
   unClickable?: boolean;
+  lastUpdated?:string
 }
 
 export type GridCardsProps = {
@@ -414,6 +416,7 @@ export type GridCardsProps = {
   dataClassName?: string;
   onClick?: (event: React.SyntheticEvent, string) => void;
   lastUpdatedTime?: string;
+  formatNumber?:boolean;
 };
 
 export type OrderSummaryCardProps = {
@@ -510,12 +513,13 @@ export interface SpeedometerProps {
 }
 
 export interface LinearGaugeProps {
-  propOne: number;
-  propTwo: number;
+  propOne: number| string;
+  propTwo: number | string;
   height: string;
   bgColorOne: string;
   bgColorTwo: string;
   containerClassName: string;
+  formatter?:boolean
 }
 
 export interface LabelProps {

@@ -2,13 +2,13 @@ import { LabelProps } from "../../@types/components/commonTypes";
 
 const ChartLegend = (props: LabelProps) => {
   return (
-    <div className={`flex items-center ${props.containerClassName || ""}`}>
+    <div className={`flex items-center text-xs ${props.containerClassName || ""}`}>
       <span
-        className={`h-4 w-4 rounded-full inline-block ${
+        className={`h-2 w-2 rounded-full inline-block ${
           props.circleColor || ""
         }`}
       ></span>
-      <span className="pl-2">{props.text}</span>
+      <span className="pl-1 ">{props.text}</span>
     </div>
   );
 };

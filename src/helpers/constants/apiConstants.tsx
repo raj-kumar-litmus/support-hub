@@ -23,3 +23,9 @@ export const URL_FR_DB_HEALTH_SERIES =
 export const URL_FR_WEBSERVER_HEALTH =
   "/SharedServicesHealth/v1/shared/webserver/health";
 export const URL_FR_OPM_SERIES = "/OrderMonitorService/v1/opm/series";
+export const URL_FOCUS_ROOM_SALES_DATA =
+  "/DownStreamHealthService/v1/downstream/sales/data";
+export const URL_FOCUS_ROOM_BOPIS_DATA =
+  "/DownStreamHealthService/v1/downstream/bopis/data";
+export const URL_FOCUS_ROOM_SDD_DATA =
+  "/DownStreamHealthService/v1/downstream/sdd/data";
