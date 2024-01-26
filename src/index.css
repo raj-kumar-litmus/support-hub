@@ -1205,3 +1205,18 @@ hr.horizontalLine.blue {
 .widgets-spacing .p-card {
   @apply p-1.5;
 }
+.microServicesPopUp .p-dialog-header, .microServicesPopUp .p-dialog-content {
+  @apply !bg-black-106
+}
+.microServicesPopUp .p-dialog-header {
+  @apply border-b border-b-gray-110 border-solid h-[6vh];
+}
+.microServices-doughnut-container {
+  @apply grid grid-cols-6;
+}
+.microServices-doughnut-popup-container {
+  @apply grid grid-cols-10;
+}
+.microServices-doughnut-container::-webkit-scrollbar, .microServices-doughnut-popup-container::-webkit-scrollbar {
+  display: none;
+}

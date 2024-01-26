@@ -49,6 +49,7 @@ export default {
           107: "#1E1E1F",
           108: "#333437",
           109: "#3E4249",
+          110: "#1D2229",
         },
         white: {
           100: "#6175FC00",
@@ -65,7 +66,7 @@ export default {
           100: "#0977FF",
           200: "#6370FF",
           300: "#4861D5",
-          400: "#747C92"
+          400: "#747C92",
         },
         lavendar: {
           100: "#6370FF66",
@@ -77,6 +78,7 @@ export default {
           300: "#3A9F2D",
           400: "#729F70",
           500: "#008080",
+          501: "#0EA67C",
         },
         teal: {
           100: "#41E2D8",
@@ -93,7 +95,7 @@ export default {
           200: "#623737",
           300: "#CE7668",
           400: "#CC5D5E",
-          500: '#E0576A'
+          500: "#E0576A",
         },
       },
       spacing: {
@@ -211,6 +213,7 @@ export default {
         10: "10px",
         12: "12px",
         20: "20px",
+        100: "100px",
       },
       fontSize: {
         6: "6px",
@@ -234,6 +237,7 @@ export default {
         "6px-red": "0 0 6px #CC5D5E",
         "6px-yellow": "0 0 6px #CC7F3A",
       },
+      visibility: ["group-hover"],
     },
     screens: {
       xs: "450px",
@@ -242,8 +246,8 @@ export default {
       md: "850px",
       lg: "1024px",
       xl: "1280px",
-      "above_xl": "1366px",
-      "below_2xl": "1440px",
+      above_xl: "1366px",
+      below_2xl: "1440px",
       "2xl": "1536px",
       "3xl": "2100px",
     },

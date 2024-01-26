@@ -656,6 +656,12 @@ export const FOCUS_ROOM_LABELS = {
   TOTAL_SESSIONS: "Total Sessions",
   ACTIVE_SESSIONS: "Active Sessions",
   RESPONSE_TIME: "Response Time",
+  MICRO_SERVICES: "MICRO SERVICES",
+  POD: "POD",
+  CPU: "CPU",
+  Memory: "Memory",
+  Hide: "Hide",
+  Search: "Search",
 };
 
 export const FR_OPM_CHART_DEFAULT = {

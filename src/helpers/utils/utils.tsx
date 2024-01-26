@@ -281,9 +281,17 @@ export const centerText = ({
   arcRadius = 200,
   arcStart = 0,
   arcEnd = 2 * Math.PI,
+  isDisabledDoughNut = false,
+  activePods = 0,
+  totalPods = 0,
 }) => ({
   id: "centerText",
   beforeDatasetsDraw(chart) {
+    let warningIcon;
+    if (isDisabledDoughNut) {
+      warningIcon = new Image();
+      warningIcon.src = `data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMS41ODIiIGhlaWdodD0iMTAiIHZpZXdCb3g9IjAgMCAxMS41ODIgMTAiPgogIDxwYXRoIGlkPSJ3YXJuaW5nX0ZJTEwxX3dnaHQzMDBfR1JBRDBfb3BzejI0IiBkPSJNNzQuNjE4LTgzMGw1Ljc5MS0xMEw4Ni4yLTgzMFptNS43OTEtMS41MzlhLjQ0Ni40NDYsMCwwLDAsLjMyOS0uMTMzLjQ0Ni40NDYsMCwwLDAsLjEzMy0uMzI5LjQ0Ny40NDcsMCwwLDAtLjEzMy0uMzI5LjQ0Ny40NDcsMCwwLDAtLjMyOS0uMTMzLjQ0Ny40NDcsMCwwLDAtLjMyOS4xMzMuNDQ3LjQ0NywwLDAsMC0uMTMzLjMyOS40NDYuNDQ2LDAsMCwwLC4xMzMuMzI5QS40NDYuNDQ2LDAsMCwwLDgwLjQwOS04MzEuNTM2Wm0tLjQyOS0xLjQ5NGguODU3di0yLjg1N2gtLjg1N1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC03NC42MTggODM5Ljk5NykiIGZpbGw9IiNmYmZiZmMiLz4KPC9zdmc+Cg==`;
+    }
     const { ctx } = chart;
     ctx.save();
     const x = chart.getDatasetMeta(0).data[0].x;
@@ -296,9 +304,18 @@ export const centerText = ({
     ctx.stroke();
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.font = "bold 90px sans-serif";
+    ctx.font = "12px Helvetica";
     ctx.fillStyle = textColor;
-    ctx.fillText(text, x, y);
+    ctx.fillText(text, x - 1, y - 5);
+
+    if (!isDisabledDoughNut) {
+      ctx.font = "8px Helvetica";
+      ctx.fillText(`${activePods}/${totalPods}`, x, y + 10);
+    }
+
+    if (isDisabledDoughNut && warningIcon.complete) {
+      ctx.drawImage(warningIcon, x - 5, y + 5, 10, 10);
+    }
   },
 });
 

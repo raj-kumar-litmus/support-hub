@@ -372,6 +372,7 @@ export interface ApiWebServerCard {
 }
 
 export interface OverlayBox {
+  boxClass?: string;
   title: string;
   data: string;
   severity?: string;
@@ -469,11 +470,30 @@ export interface DoughNutChartProps {
   data: ChartData<"doughnut">;
   containerClassName?: string;
   chartClassName?: string;
+  onClickHandler?: (_) => void;
   title?: string;
   isFullScreen?: boolean;
   defaultClasses?: boolean;
+  isDisabledDoughNut?: boolean;
   plugins?: any;
   showIndicator?: boolean;
+}
+
+export interface MicroserviceHealth {
+  anomalyFlag: boolean;
+  time: string;
+  minReplica: null;
+  maxReplica: null;
+  serviceInfo: {
+    name: string;
+    instance: string;
+    activePods: number;
+  };
+  cpu: number;
+  memory: number;
+  traffic: number;
+  errorRate: number;
+  goldenSignal: number;
 }
 
 export interface SpeedometerProps {

@@ -29,3 +29,5 @@ export const URL_FOCUS_ROOM_BOPIS_DATA =
   "/DownStreamHealthService/v1/downstream/bopis/data";
 export const URL_FOCUS_ROOM_SDD_DATA =
   "/DownStreamHealthService/v1/downstream/sdd/data";
+export const URL_FOCUS_ROOM_MICROSERVICE_HEALTH =
+  "/OrgServiceHealthMonitor/v1/microservice/health";
