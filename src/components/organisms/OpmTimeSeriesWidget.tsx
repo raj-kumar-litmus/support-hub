@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { STACKED_OPM_FOCUSROOM } from "../../helpers/config/chartConfig";
 import { URL_FR_OPM_SERIES } from "../../helpers/constants/apiConstants";
 import {
+  CHANNELWISE_DATA_LABELS,
   PAGE_TITLES,
   REFRESH_TIME_INTERVAL_FOCUS_ROOM,
 } from "../../helpers/constants/appConstants";
@@ -17,48 +18,48 @@ const OpmTimeSeriesWidget = () => {
     const labelsArray = responseData?.map((obj) => obj.timeStamp);
     const desktop = responseData?.map((obj) => obj.channelWiseOPM.default || 0);
     const iphoneApp = responseData?.map(
-      (obj) => obj.channelWiseOPM["iphoneAppV2.0"] || 0,
+      (obj) => obj.channelWiseOPM["iphoneAppV2.0"] || 0
     );
-    // const mobileWeb = responseData?.map(
-    //   (obj) => obj.channelWiseOPM["iphoneAppV2.0"] || 0   //mobileweb
-    // );
+    const mobileWeb = responseData?.map(
+      (obj) => obj.channelWiseOPM.mobileWeb || 0
+    );
     const android = responseData?.map(
-      (obj) => obj.channelWiseOPM.androidNativeApp || 0,
+      (obj) => obj.channelWiseOPM.androidNativeApp || 0
     );
-    // const csc = responseData?.map(
-    //   (obj) => obj.channelWiseOPM.csc || 0    // csc data
-    // );
+    const csc = responseData?.map(
+      (obj) => obj.channelWiseOPM.contactCenter || 0
+    );
     const others = responseData?.map((obj) => obj.channelWiseOPM.Others || 0);
     const data = {
       labels: labelsArray,
       datasets: [
         {
-          label: "Desktop",
+          label: CHANNELWISE_DATA_LABELS.DESKTOP,
           backgroundColor: "#5F4B8B",
           data: desktop,
         },
         {
-          label: "iPhone App",
+          label: CHANNELWISE_DATA_LABELS.IPHONE,
           backgroundColor: "#EC935F",
           data: iphoneApp,
         },
-        // {
-        //   label: "Web",
-        //   backgroundColor: "#A8C696",
-        //   data: mobileWeb,
-        // },
         {
-          label: "Android",
+          label: CHANNELWISE_DATA_LABELS.WEB,
+          backgroundColor: "#A8C696",
+          data: mobileWeb,
+        },
+        {
+          label: CHANNELWISE_DATA_LABELS.ANDROID,
           backgroundColor: "#00A18A",
           data: android,
         },
-        // {
-        //   label: "CSC",
-        //   backgroundColor: "#0279A8",
-        //   data: csc,
-        // },
         {
-          label: "Others",
+          label: CHANNELWISE_DATA_LABELS.CSC,
+          backgroundColor: "#0279A8",
+          data: csc,
+        },
+        {
+          label: CHANNELWISE_DATA_LABELS.OTHERS,
           backgroundColor: "#6E8A9E",
           data: others,
         },

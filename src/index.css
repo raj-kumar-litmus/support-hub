@@ -1121,9 +1121,6 @@ hr.horizontalLine.blue {
 .custom-sidebar .custom-sidebar-header h2 {
   @apply m-0 text-sm text-white-900;
 }
-.custom-sidebar .custom-sidebar-content {
-  @apply p-5;
-}
 .custom-sidebar .p-sidebar-content {
   @apply border-l border-l-black-108;
 }
@@ -1200,12 +1197,13 @@ hr.horizontalLine.blue {
   @apply border border-black-108 rounded-10 overflow-visible;
 }
 .guage-chart svg {
-  @apply !relative !bottom-2.5;
+  @apply !relative !bottom-[1.2vh];
 }
 .widgets-spacing .p-card {
   @apply p-1.5;
 }
-.microServicesPopUp .p-dialog-header, .microServicesPopUp .p-dialog-content {
+.microServicesPopUp .p-dialog-header,
+.microServicesPopUp .p-dialog-content {
   @apply !bg-black-106;
 }
 .microServicesPopUp .p-dialog-header {
@@ -1220,6 +1218,7 @@ hr.horizontalLine.blue {
 .microServices-doughnut-popup-container {
   @apply grid grid-cols-10;
 }
-.microServices-doughnut-container::-webkit-scrollbar, .microServices-doughnut-popup-container::-webkit-scrollbar {
+.microServices-doughnut-container::-webkit-scrollbar,
+.microServices-doughnut-popup-container::-webkit-scrollbar {
   display: none;
 }
