@@ -11,27 +11,32 @@ import { getSeverityStyles } from "../../helpers/utils/utils";
 
 const ApiUfeWidgets = (props: WebServerWidgetsProps) => {
   const [severity, setSeverity] = useState<string>("");
+  const [hover, setHover] = useState<boolean>(false);
 
   // useEffect(() => {
   //   props.errorServers && setSeverity(SEVERITY.HIGH);
   // }, [props.errorServers]);
   return (
     <div
-      className={`bg-black-106 border border-black-108 text-white-900 relative h-fit rounded-12 h-full xl:pb-2 ${
+      className={`bg-black-106 border border-black-108 text-white-900 relative rounded-12 h-full ${
         severity ? getSeverityStyles(severity).boxShadow : ""
       }`}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
     >
-      <div className="flex justify-between items-end">
+      <div className="flex justify-between items-end mb-[0.8vh]">
         <div className="grid-table-header text-10 font-IBM text-white-900 uppercase font-bold pt-1 px-4 relative top-0.5">
           {props.title}
         </div>
-        <CustomImage
-          src={expandIcon}
-          className="mt-[1vh] mx-[1vw] cursor-pointer"
-        />
+        {hover && (
+          <CustomImage
+            src={expandIcon}
+            className="mt-[1vh] mx-[1vw] cursor-pointer"
+          />
+        )}
       </div>
-      <div className="font-IBM w-fit absolute top-10 left-10 text-center">
-        <div className="text-pink-200 text-6 leading-8p">
+      <div className="font-IBM w-fit absolute top-12 left-10 text-center">
+        <div className="text-pink-200 text-6 leading-6p">
           {FOCUS_ROOM_LABELS.ERRORS}
         </div>
         <div className="text-xs text-white-900">{props.errorServers}</div>
@@ -44,11 +49,7 @@ const ApiUfeWidgets = (props: WebServerWidgetsProps) => {
           maxValue={props?.totalServers}
           needleColor="transparent"
           textColor="transparent"
-          customSegmentStops={[
-            0,
-            props?.errorServers,
-            props?.totalServers,
-          ]}
+          customSegmentStops={[0, props?.errorServers, props?.totalServers]}
           segmentColors={["#CB5D5E", "#3E4249"]}
           containerClassName="guage-chart"
         />

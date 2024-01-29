@@ -465,10 +465,14 @@ export const LOCALEWISE_DATA_LABELS = {
 
 export const CHANNELWISE_DATA_LABELS = {
   TODAY: "Today",
+  DESKTOP: "Desktop",
+  IPHONE: "iPhone App",
+  ANDROID: "Android",
   WEB: "Web",
   MOBILE_WEB: "Mobile Web",
   IPHONE_APP: "IPhone App",
   ANDROID_APP: "Android App",
+  OTHERS: "Others",
   CSC: "CSC",
   MPLUS: "mPlus",
   JCPENNY: "JCPenny",

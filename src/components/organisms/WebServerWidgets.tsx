@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
+import ApiUfeWidgets from "./ApiUfeWidgets";
 import { URL_FR_WEBSERVER_HEALTH } from "../../helpers/constants/apiConstants";
 import {
   FOCUS_ROOM_TITLES,
   REFRESH_TIME_INTERVAL_FOCUS_ROOM,
 } from "../../helpers/constants/appConstants";
 import { fetchFocusRoomData } from "../../helpers/utils/fetchUtil";
-import ApiUfeWidgets from "./ApiUfeWidgets";
 
 const WebServerWidgets = () => {
   const [widgetData, setWidgetData] = useState(null);
@@ -22,7 +22,6 @@ const WebServerWidgets = () => {
             errorServers: data.serverErrorCount,
           },
         };
-
         setWidgetData((prev) => ({ ...prev, ...serverData }));
       });
     } catch (err) {
@@ -39,9 +38,7 @@ const WebServerWidgets = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-2 gap-y-1.5h gap-x-0.6w">
-      {/* {widgetData && (
-        <> */}
+    <div className="grid grid-cols-2 gap-x-0.6w h-full">
       {widgetData && widgetData[FOCUS_ROOM_TITLES.API] && (
         <ApiUfeWidgets
           title={FOCUS_ROOM_TITLES.API}
@@ -56,9 +53,6 @@ const WebServerWidgets = () => {
           errorServers={widgetData[FOCUS_ROOM_TITLES.UFE]?.errorServers}
         />
       )}
-
-      {/* </>
-      )} */}
     </div>
   );
 };

@@ -231,7 +231,7 @@ export default {
         1: "1",
       },
       lineHeight: {
-        "8p": "8px",
+        "6p": "6px",
         17: "17px",
       },
       boxShadow: {
@@ -249,8 +249,6 @@ export default {
       md: "850px",
       lg: "1024px",
       xl: "1280px",
-      above_xl: "1366px",
-      below_2xl: "1440px",
       "2xl": "1536px",
       "3xl": "2100px",
     },

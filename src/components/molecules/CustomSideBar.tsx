@@ -48,7 +48,7 @@ const CustomSideBar = (props: CustomSideBarProps) => {
               </h2>
             </div>
           )}
-          <div className="custom-sidebar-content">{props.children}</div>
+          <div className="p-5">{props.children}</div>
         </div>
       </Sidebar>
     </div>
