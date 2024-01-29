@@ -13,13 +13,13 @@ const Header = (props) => {
       </p>
       <p className="text-white-900 font-thin">{props.msCount}</p>
       <CustomInputText
-        placeholder={FOCUS_ROOM_LABELS.Search}
+        placeholder={FOCUS_ROOM_LABELS.SEARCH}
         value={props.searchResult}
         onChange={(e) => props.setSearchResult(e)}
         className="!rounded-100 h-[4vh] bg-black-106 font-helvetica"
         containerclassname="!w-[13vw] ml-auto mr-[1vw]"
       />
-      <p className="text-white-900 text-xs">{FOCUS_ROOM_LABELS.Hide}</p>
+      <p className="text-white-900 text-xs">{FOCUS_ROOM_LABELS.HIDE}</p>
       <CustomImage
         src={HideIcon}
         className="flex items-center cursor-pointer"

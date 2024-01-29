@@ -3,7 +3,11 @@ import OPMIcon from "../../assets/opm.svg";
 import OPMComparisonIcon from "../../assets/opmcomparison.svg";
 import SessionsIcon from "../../assets/sessions.svg";
 import DCOpenOrdersIcon from "../../assets/dcopenorders.svg";
-import { PAGE_TITLES, SEVERITY,NUMBER_WITH_COMMAS_REGEX} from "../constants/appConstants";
+import {
+  PAGE_TITLES,
+  SEVERITY,
+  NUMBER_WITH_COMMAS_REGEX,
+} from "../constants/appConstants";
 import { utils, writeFile } from "xlsx";
 
 export const ROUTES = {
@@ -273,6 +277,8 @@ export const increaseLegendSpacing = (customHeight) => [
 ];
 
 export const centerText = ({
+  screenWidth = 1366,
+  screenHeight = 768,
   text = "HELLO WORLD",
   fillColor = "#F86E6E",
   textColor = "#fff",
@@ -284,6 +290,7 @@ export const centerText = ({
   isDisabledDoughNut = false,
   activePods = 0,
   totalPods = 0,
+  isPopUp,
 }) => ({
   id: "centerText",
   beforeDatasetsDraw(chart) {
@@ -306,15 +313,24 @@ export const centerText = ({
     ctx.textBaseline = "middle";
     ctx.font = "12px Helvetica";
     ctx.fillStyle = textColor;
-    ctx.fillText(text, x - 1, y - 5);
+    ctx.fillText(
+      text,
+      isPopUp ? screenWidth / 42 : screenWidth / 40,
+      isPopUp ? screenHeight / 21 : screenHeight / 20,
+    );
 
     if (!isDisabledDoughNut) {
       ctx.font = "8px Helvetica";
-      ctx.fillText(`${activePods}/${totalPods}`, x, y + 10);
+      //35.5, 40.5
+      ctx.fillText(
+        `${activePods}/${totalPods}`,
+        isPopUp ? screenWidth / 41 : screenWidth / 38.5,
+        isPopUp ? screenHeight / 16 : screenHeight / 15,
+      );
     }
 
     if (isDisabledDoughNut && warningIcon.complete) {
-      ctx.drawImage(warningIcon, x - 5, y + 5, 10, 10);
+      ctx.drawImage(warningIcon, screenWidth / 45, screenHeight / 17, 10, 10);
     }
   },
 });
@@ -350,7 +366,7 @@ export const getSeverityStyles = (severity) => {
   }
 };
 
-export const numberWithCommas= (number) => {
+export const numberWithCommas = (number) => {
   number = Math.round(number * 100) / 100;
   return number.toString().replace(NUMBER_WITH_COMMAS_REGEX, ",");
 };
@@ -364,26 +380,23 @@ export const hunderedkandMilFormatter = (num) => {
     return Math.sign(num) * (absNum / 1000).toFixed(2) + "k";
   } else {
     return numberWithCommas(num);
-
   }
 };
 
 export const numberToKandMformatter = (num) => {
   const absNum = Math.abs(num);
-  
+
   if (absNum >= 1000000) {
     return Math.sign(num) * (absNum / 1000000).toFixed(2) + "M";
-  } else if (absNum >=999) {
+  } else if (absNum >= 999) {
     return Math.sign(num) * (absNum / 1000).toFixed(2) + "k";
-  } 
-  else {
+  } else {
     return numberWithCommas(num);
-
   }
 };
 
 export const mapGridDataBopisAndSdd = (data, names) => {
-  return names.map(({ shortName, description}) => {
+  return names.map(({ shortName, description }) => {
     return {
       title: shortName,
       data: data[description],

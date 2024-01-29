@@ -659,9 +659,10 @@ export const FOCUS_ROOM_LABELS = {
   MICRO_SERVICES: "MICRO SERVICES",
   POD: "POD",
   CPU: "CPU",
-  Memory: "Memory",
-  Hide: "Hide",
-  Search: "Search",
+  MEMORY: "Memory",
+  TRAFFIC: "Traffic",
+  HIDE: "Hide",
+  SEARCH: "Search",
 };
 
 export const FR_OPM_CHART_DEFAULT = {
@@ -683,3 +684,8 @@ export const FOCUS_ROOM_SALES_OVERLAY_HEADER_SUFFIX = {
 };
 
 export const FOCUS_ROOM_BOPIS_SDD_CANCELLATION = "Cancellation";
+
+export const REFRESH_TIME_INTERVAL_FOCUS_ROOM = {
+  FIFTEEN_MINS: 900000,
+  ONE_MIN: 60000,
+};

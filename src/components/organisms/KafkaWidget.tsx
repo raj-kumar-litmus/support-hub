@@ -1,37 +1,46 @@
 import { OverlayPanel } from "primereact/overlaypanel";
 import { useContext, useEffect, useRef, useState } from "react";
-import KafkaSideBar from "./KafkaSideBar";
-import GridCards from "../molecules/GridCards";
-import CustomOverlayFocusRoom from "../molecules/OverlayFocusRoom";
 import { GridData } from "../../@types/components/commonTypes";
+import { FocusRoomContext } from "../../context/focusRoom";
 import {
   FOCUS_ROOM_LABELS,
   FOCUS_ROOM_TITLES,
   SEVERITY,
 } from "../../helpers/constants/appConstants";
 import { getSeverityStyles } from "../../helpers/utils/utils";
-import { FocusRoomContext } from "../../context/focusRoom";
+import GridCards from "../molecules/GridCards";
+import CustomOverlayFocusRoom from "../molecules/OverlayFocusRoom";
+import KafkaSideBar from "./KafkaSideBar";
 
 const KafkaWidget = () => {
   const [sideBarVisible, setSideBarVisible] = useState<boolean>(false);
   const [cardData, setCardData] = useState<GridData>(null);
+  const [kafka, setKafka] = useState<any>(null);
   const [severity, setSeverity] = useState<string>("");
   const { focusRoomConfig, focusRoomConfigError } =
     useContext(FocusRoomContext);
   const op = useRef<OverlayPanel>(null);
 
-  const uniqueKafkaNames = [
-    ...new Set(focusRoomConfig?.kafka?.results?.map((item) => item.category)),
-  ];
-  const kafka = uniqueKafkaNames?.sort()?.map((name) => ({
-    data: name || "-",
-    // severity: obj.severity || "",
-  }));
   // useEffect(() => {
   //   if (kafka.some((item) => item.severity === SEVERITY.HIGH)) {
   //     setSeverity(SEVERITY.HIGH);
   //   }
   // }, []);
+
+  useEffect(() => {
+    setKafka(
+      [
+        ...new Set(
+          focusRoomConfig?.kafka?.results?.map((item) => item.category),
+        ),
+      ]
+        ?.sort()
+        ?.map((name) => ({
+          data: name || "-",
+          // severity: obj.severity || "",
+        })),
+    );
+  }, [focusRoomConfig]);
 
   const handleGridClick = (e: React.SyntheticEvent, d: GridData) => {
     // setSideBarVisible(true);

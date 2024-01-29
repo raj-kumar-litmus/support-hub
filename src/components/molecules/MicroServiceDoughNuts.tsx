@@ -1,16 +1,19 @@
-import DoughnutChart from "../atoms/Doughnut";
-import { centerText } from "../../helpers/utils/utils";
+import { Fragment } from "react";
 import { FOCUS_ROOM_MICROSERVICES_DOUGH_NUT_CHART_OPTIONS } from "../../helpers/config/chartConfig";
+import { centerText } from "../../helpers/utils/utils";
+import useScreenSize from "../../hooks/useScreenSize";
+import DoughnutChart from "../atoms/Doughnut";
 
 const MicroServiceDoughNuts = (props) => {
+  const { width, height } = useScreenSize();
   return (
     <>
       {props.microservices &&
         Array.isArray(props.microservices) &&
         props.microservices.map((e) => (
-          <>
+          <Fragment key={e.serviceInfo?.instance}>
             <DoughnutChart
-              containerClassName="h-[75px] flex justify-center"
+              containerClassName="h-75 flex justify-center"
               data={{
                 datasets: [
                   {
@@ -48,17 +51,20 @@ const MicroServiceDoughNuts = (props) => {
               options={FOCUS_ROOM_MICROSERVICES_DOUGH_NUT_CHART_OPTIONS}
               plugins={[
                 centerText({
+                  screenWidth: width,
+                  screenHeight: height,
                   text: e.serviceInfo?.name,
                   fillColor:
                     e.cpu === 0 || e.memory === 0 ? "#3E4249" : "#0C1117",
-                  arcX: props.isPopUp ? 30 : 34,
-                  arcY: 38,
-                  arcRadius: props.isPopUp ? 24 : 27,
+                  arcX: props.isPopUp ? width / 40 : width / 39,
+                  arcY: width / 36,
+                  arcRadius: props.isPopUp ? width / 58 : width / 50,
                   arcStart: 0,
                   arcEnd: 2 * Math.PI,
                   activePods: e.serviceInfo?.activePods,
                   totalPods: e.serviceInfo?.maxReplica || 0,
                   isDisabledDoughNut: e.cpu === 0 || e.memory === 0,
+                  isPopUp: props.isPopUp,
                 }),
               ]}
               isDisabledDoughNut={e.cpu === 0 || e.memory === 0}
@@ -82,7 +88,7 @@ const MicroServiceDoughNuts = (props) => {
                 props.op.current?.toggle(_);
               }}
             />
-          </>
+          </Fragment>
         ))}
     </>
   );

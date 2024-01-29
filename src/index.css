@@ -1206,10 +1206,13 @@ hr.horizontalLine.blue {
   @apply p-1.5;
 }
 .microServicesPopUp .p-dialog-header, .microServicesPopUp .p-dialog-content {
-  @apply !bg-black-106
+  @apply !bg-black-106;
 }
 .microServicesPopUp .p-dialog-header {
-  @apply border-b border-b-gray-110 border-solid h-[6vh];
+  @apply border-b border-b-gray-110 border-solid h-6h;
+}
+.microServicesPopUp .p-dialog-content {
+  @apply !p-0;
 }
 .microServices-doughnut-container {
   @apply grid grid-cols-6;
