@@ -1,20 +1,20 @@
-import { useState, useEffect, useRef, useContext } from "react";
-import GridCards from "../molecules/GridCards";
-import CustomOverlayFocusRoom from "../molecules/OverlayFocusRoom";
-import Loader from "../atoms/Loader";
+import { useContext, useEffect, useRef, useState } from "react";
+import {
+  FocusRoomContextType,
+  GridData,
+} from "../../@types/components/commonTypes";
 import { FocusRoomContext } from "../../context/focusRoom";
 import {
   FOCUS_ROOM_LABELS,
   FOCUS_ROOM_TITLES,
 } from "../../helpers/constants/appConstants";
-import {
-  GridData,
-  FocusRoomContextType,
-} from "../../@types/components/commonTypes";
+import Loader from "../atoms/Loader";
+import GridCards from "../molecules/GridCards";
+import CustomOverlayFocusRoom from "../molecules/OverlayFocusRoom";
 
 const OmsWidget = () => {
   const { focusRoomConfig } = useContext(
-    FocusRoomContext
+    FocusRoomContext,
   ) as FocusRoomContextType;
 
   const op = useRef(null);
@@ -37,10 +37,10 @@ const OmsWidget = () => {
         return {
           data: item.shortName,
           description: item.description,
-      };
-       });
+        };
+      });
       setMappedOmsData(mappedOmsData);
-      setIsLoading(false)
+      setIsLoading(false);
     }
   }, [OmsNames]);
 
@@ -51,31 +51,23 @@ const OmsWidget = () => {
   };
 
   return (
-    <>
-      {isLoading ? (
-        <Loader className="h-full" />
-      ) : (
-        <div
-          className={"focus-room-widget-wrapper px-4 pt-1 pb-4"}
-        >
-          {mappedOmsData && (
-            <GridCards
-              title={FOCUS_ROOM_TITLES.OMS}
-              columns={5}
-              data={mappedOmsData}
-              dataClassName="text-xs font- helvetica"
-              onClick={onGridCardClick}
-            />
-          )}
-
-          <CustomOverlayFocusRoom
-            header={currentTitle}
-            buttonContent={buttonContent}
-            ref={op}
-          />
-        </div>
+    <div className={"focus-room-widget-wrapper px-4 pt-1 pb-4"}>
+      {mappedOmsData && !isLoading && (
+        <GridCards
+          title={FOCUS_ROOM_TITLES.OMS}
+          columns={5}
+          data={mappedOmsData}
+          dataClassName="text-xs"
+          onClick={onGridCardClick}
+        />
       )}
-    </>
+      {isLoading && <Loader />}
+      <CustomOverlayFocusRoom
+        header={currentTitle}
+        buttonContent={buttonContent}
+        ref={op}
+      />
+    </div>
   );
 };
 
