@@ -21,7 +21,6 @@ const CustomSideBar = (props: CustomSideBarProps) => {
   };
 
   return (
-    <div className="card flex justify-content-center">
       <Sidebar
         visible={props.visible}
         position={props.position}
@@ -51,7 +50,6 @@ const CustomSideBar = (props: CustomSideBarProps) => {
           <div className="p-5">{props.children}</div>
         </div>
       </Sidebar>
-    </div>
   );
 };
 
