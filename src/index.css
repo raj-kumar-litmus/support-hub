@@ -1227,3 +1227,9 @@ hr.horizontalLine.blue {
 .centered {
   @apply h-full w-full flex items-center justify-center;
 }
+.overlay-btn .p-button,
+.overlay-btn .p-button:enabled:active,
+.overlay-btn .p-button:focus,
+.overlay-btn .p-button:enabled:hover {
+  @apply bg-transparent border-none shadow-none;
+}

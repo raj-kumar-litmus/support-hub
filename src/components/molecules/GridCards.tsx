@@ -24,7 +24,7 @@ const GridCards: FC<GridCardsProps> = (props) => {
     <div
       className={`grid-table flex flex-col cursor-pointer h-full ${className}`}
     >
-      <div className="flex items-center mb-2">
+      <div className="flex items-center mb-1.5">
         <div className="grid-table-header text-10 font-IBM text-white-900 uppercase font-bold">
           {props.title}
         </div>

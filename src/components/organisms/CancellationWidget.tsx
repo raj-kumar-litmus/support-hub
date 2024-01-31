@@ -36,7 +36,7 @@ const CancellationWidget = () => {
   }, [focusRoomConfig]);
 
   return (
-    <div className="focus-room-widget-wrapper px-4 pt-1 pb-4">
+    <div className="focus-room-widget-wrapper px-4 pt-1.5 pb-4">
       {isLoading && <Loader className="!h-4/5" />}
       {!isLoading && cancellation && (
         <GridCards

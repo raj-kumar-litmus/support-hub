@@ -41,6 +41,8 @@ const DatabaseWidget = () => {
   const [boxContent, setBoxContent] = useState(null);
   const [database, setDataBase] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isOverlayLoading, setIsOverlayLoading] = useState<boolean>(false);
+  const [overlayApiError, setOverlayApiError] = useState<boolean>(false);
   const { focusRoomConfig, focusRoomConfigError } =
     useContext(FocusRoomContext);
   const op = useRef<OverlayPanel>(null);
@@ -81,6 +83,7 @@ const DatabaseWidget = () => {
 
   const fetchDBHealthSeriesData = async () => {
     try {
+      setIsOverlayLoading(true);
       const healthSeriesResponse = await fetchFocusRoomData(
         URL_FR_DB_HEALTH_SERIES,
         {}
@@ -114,8 +117,9 @@ const DatabaseWidget = () => {
         ];
       });
       setBoxContent(popupData);
+      setIsOverlayLoading(false);
     } catch (err) {
-      console.log("Error fetching database data", err);
+      setOverlayApiError(true);
     }
   };
 
@@ -136,7 +140,7 @@ const DatabaseWidget = () => {
   return (
     <>
       <div
-        className={`focus-room-widget-wrapper px-4 pt-1 pb-4 ${
+        className={`focus-room-widget-wrapper px-4 pt-1.5 pb-4 ${
           severity ? getSeverityStyles(severity).boxShadow : ""
         }`}
       >
@@ -157,6 +161,8 @@ const DatabaseWidget = () => {
             header={selectedDB}
             boxContent={boxContent?.[selectedDB]}
             columns={3}
+            isOverlayLoading={isOverlayLoading}
+            overlayApiError={overlayApiError}
           />
         )}
       </div>

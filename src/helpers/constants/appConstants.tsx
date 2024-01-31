@@ -700,6 +700,8 @@ export const ERRORS = {
   API_TIMED_OUT_MESSAGE: "The API has timed out",
   CONFIG_API_TIMED_OUT_MESSAGE:
     "The Configuration API has timed out. Please check your VPN or contact the Engineering Back-End team.",
+  SERVICE_ERROR_MESSAGE:
+    "The service is currently unavailable. Please try again later.",
   TYPE: {
     ABORT: "AbortError",
   },
