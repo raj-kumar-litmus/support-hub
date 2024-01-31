@@ -78,7 +78,7 @@ const KafkaWidget = () => {
   return (
     <>
       <div
-        className={`focus-room-widget-wrapper px-4 pt-1 pb-2 ${
+        className={`focus-room-widget-wrapper px-4 pt-1.5 pb-4 ${
           severity ? getSeverityStyles(severity).boxShadow : ""
         }`}
       >
@@ -89,6 +89,7 @@ const KafkaWidget = () => {
             columns={3}
             data={kafka}
             dataClassName="text-xs uppercase"
+            className="widgets-spacing"
             onClick={handleGridClick}
           />
         )}
@@ -100,7 +101,7 @@ const KafkaWidget = () => {
         ref={op}
         header={cardData?.data?.toUpperCase()}
         buttonContent={FOCUS_ROOM_LABELS.VIEW_DETAILS}
-        // onClick={getDetails}
+        // onButtonClick={getDetails}
       />
     </>
   );

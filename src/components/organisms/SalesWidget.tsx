@@ -137,7 +137,7 @@ const SalesWidget = () => {
   };
 
   return (
-    <div className="focus-room-widget-wrapper px-4 pt-1 pb-4">
+    <div className="focus-room-widget-wrapper px-4 pt-1.5 pb-4">
       {mappedSalesNames && !isLoading && (
         <GridCards
           title={FOCUS_ROOM_TITLES.SALES}

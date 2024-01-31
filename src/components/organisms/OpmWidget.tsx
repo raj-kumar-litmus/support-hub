@@ -87,7 +87,7 @@ const OpmWidget = () => {
 
   return (
     <div
-      className={`focus-room-widget-wrapper px-4 pt-1 pb-4 ${
+      className={`focus-room-widget-wrapper px-4 pt-1.5 pb-4 ${
         isLoading ? "" : "grid-cols-2 gap-4"
       } ${severity ? getSeverityStyles(severity).boxShadow : ""}`}
     >

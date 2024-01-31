@@ -3,6 +3,7 @@ import { STACKED_OPM_FOCUSROOM } from "../../helpers/config/chartConfig";
 import { URL_FR_OPM_SERIES } from "../../helpers/constants/apiConstants";
 import {
   CHANNELWISE_DATA_LABELS,
+  ERRORS,
   PAGE_TITLES,
   TIME_INTERVAL,
 } from "../../helpers/constants/appConstants";
@@ -13,6 +14,7 @@ import BarChart from "../molecules/BarChart";
 const OpmTimeSeriesWidget = () => {
   const [chartData, setChartData] = useState(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [apiError, setApiError] = useState<boolean>(false);
 
   const createDataSets = (responseData) => {
     const labelsArray = responseData?.map((obj) => obj.timeStamp);
@@ -74,7 +76,7 @@ const OpmTimeSeriesWidget = () => {
       const opmResponse = await fetchFocusRoomData(URL_FR_OPM_SERIES, {});
       createDataSets(opmResponse?.results);
     } catch (err) {
-      console.log("Error fetching time series data", err);
+      setApiError(true);
     } finally {
       setIsLoading(false);
     }
@@ -90,7 +92,13 @@ const OpmTimeSeriesWidget = () => {
 
   return (
     <div className="bg-black-106 border border-black-108 rounded-12 h-full relative">
-      {chartData && !isLoading && (
+      {isLoading && !apiError && <Loader />}
+      {apiError && (
+        <p className="centered text-white-900 text-xs font-IBM">
+          {ERRORS.SERVICE_ERROR_MESSAGE}
+        </p>
+      )}
+      {chartData && !isLoading && !apiError && (
         <>
           <div className="font-IBM font-bold text-10 text-white-900 w-fit absolute top-2 left-4">
             {PAGE_TITLES.OPM}
@@ -104,7 +112,6 @@ const OpmTimeSeriesWidget = () => {
           />
         </>
       )}
-      {isLoading && <Loader />}
     </div>
   );
 };

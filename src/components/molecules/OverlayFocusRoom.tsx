@@ -1,8 +1,11 @@
 import { OverlayPanel } from "primereact/overlaypanel";
 import { forwardRef } from "react";
+import Loader from "../atoms/Loader";
+import CustomButton from "../atoms/Button";
 import CustomOverlay from "../atoms/CustomOverlay";
 import { CustomOverlayProps } from "../../@types/components/commonTypes";
 import { getSeverityStyles } from "../../helpers/utils/utils";
+import { ERRORS } from "../../helpers/constants/appConstants";
 
 const CustomOverlayFocusRoom = forwardRef<OverlayPanel, CustomOverlayProps>(
   function OverLay(props, ref) {
@@ -31,42 +34,56 @@ const CustomOverlayFocusRoom = forwardRef<OverlayPanel, CustomOverlayProps>(
               {props.subHeader}
             </span>
           )}
-          {props.boxContent && (
-            <div
-              className={`grid ${colWidth} items-center justify-center gap-2 mt-2`}
-            >
-              {props.boxContent?.map((boxContent, index) => (
-                <div
-                  className={`flex flex-col border border-black-107 w-20 px-2 py-1 ${boxClass} ${
-                    boxContent.boxClass
-                  } rounded-md 
+          {props.isOverlayLoading && !props.overlayApiError && (
+            <Loader className="!h-54" />
+          )}
+          {props.overlayApiError && (
+            <p className="centered text-center text-white-900 text-10 font-IBM mt-3">
+              {ERRORS.SERVICE_ERROR_MESSAGE}
+            </p>
+          )}
+          {!props.isOverlayLoading &&
+            !props.overlayApiError &&
+            props.boxContent && (
+              <div
+                className={`grid ${colWidth} items-center justify-center gap-2 mt-2`}
+              >
+                {props.boxContent?.map((boxContent, index) => (
+                  <div
+                    className={`flex flex-col border border-black-107 w-20 px-2 py-1 ${boxClass} ${
+                      boxContent.boxClass
+                    } rounded-md 
                 ${
                   boxContent.severity
                     ? getSeverityStyles(boxContent.severity).border
                     : ""
                 }`}
-                  key={index}
-                >
-                  <span className="text-8 font-proximaNova mb-1">
-                    {boxContent.title}
-                  </span>
-                  <span className="relative -top-1 text-sm font-IBM font-semibold">
-                    {boxContent.data ? boxContent.data : "-"}
-                  </span>
-                </div>
-              ))}
-            </div>
-          )}
+                    key={index}
+                  >
+                    <span className="text-8 font-proximaNova mb-1">
+                      {boxContent.title}
+                    </span>
+                    <span className="relative -top-1 text-sm font-IBM font-semibold">
+                      {boxContent.data ? boxContent.data : "-"}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
           {props.buttonContent && (
-            <div className="flex items-center h-9 justify-center text-xs rounded-full bg-gray-109 mt-2">
-              <button>{props.buttonContent}</button>
-            </div>
+            <CustomButton
+              className="overlay-btn flex items-center h-9 justify-center rounded-full bg-gray-109 mt-2"
+              btnclassname="font-helvetica text-xs text-white-900"
+              onClick={props.onButtonClick}
+            >
+              {props.buttonContent}
+            </CustomButton>
           )}
           {props.children}
         </div>
       </CustomOverlay>
     );
-  },
+  }
 );
 
 export default CustomOverlayFocusRoom;

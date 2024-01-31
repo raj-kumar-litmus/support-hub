@@ -10,7 +10,7 @@ import {
 import { SidebarProps } from "primereact/sidebar";
 import { ToastProps } from "primereact/toast";
 import { OverlayPanelProps } from "primereact/overlaypanel";
-import { FC, KeyboardEvent, ReactNode } from "react";
+import { FC, KeyboardEvent, MouseEventHandler, ReactNode } from "react";
 import { CommerceItemData } from "../pages/orderDetails";
 import { DCOpenOrders } from "../pages/DcOpenOrders";
 import { ModalEnums } from "../pages/opmCharts";
@@ -378,7 +378,9 @@ export interface CustomOverlayProps extends OverlayPanelProps {
   buttonContent?: string;
   subHeader?: string | ReactNode;
   columns?: number;
-  onClick?: (a: string) => void;
+  isOverlayLoading?: boolean;
+  overlayApiError?: boolean;
+  onButtonClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
 export type HorizontalTableProps = {
