@@ -55,7 +55,7 @@ const MicroServiceDoughNuts = (props) => {
                           borderWidth: 0,
                         },
                         {
-                          weight: 3,
+                          weight: 10,
                           data: [100],
                           borderColor: e?.cpu === 0 ? "transparent" : "#232323",
                           borderWidth: 0,
