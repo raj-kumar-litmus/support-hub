@@ -1,8 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import {
-  FocusRoomContextType,
-  GridData,
-} from "../../@types/components/commonTypes";
+import { GridData } from "../../@types/components/commonTypes";
+import { FocusRoomContextType } from "../../@types/pages/focusRoom";
 import { FocusRoomContext } from "../../context/focusRoom";
 import {
   FOCUS_ROOM_LABELS,

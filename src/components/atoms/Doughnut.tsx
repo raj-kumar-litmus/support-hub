@@ -29,7 +29,6 @@ const DoughnutChart = (props: DoughNutChartProps) => (
     onClick={(e) => props.onClickHandler(e)}
   >
     <Doughnut
-      redraw={true}
       className={props.chartClassName}
       options={props.options}
       data={props.data}

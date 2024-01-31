@@ -10,16 +10,13 @@ import {
   FOCUS_ROOM_BOPIS_SDD_CANCELLATION,
   FOCUS_ROOM_LABELS,
   FOCUS_ROOM_TITLES,
-  REFRESH_TIME_INTERVAL_FOCUS_ROOM,
+  TIME_INTERVAL,
 } from "../../helpers/constants/appConstants";
 import { fetchFocusRoomData } from "../../helpers/utils/fetchUtil";
 
+import { GridData } from "../../@types/components/commonTypes";
+import { FocusRoomContextType } from "../../@types/pages/focusRoom";
 import { mapGridDataBopisAndSdd } from "../../helpers/utils/utils";
-
-import {
-  FocusRoomContextType,
-  GridData,
-} from "../../@types/components/commonTypes";
 
 const SalesWidget = () => {
   const { focusRoomConfig } = useContext(
@@ -55,7 +52,7 @@ const SalesWidget = () => {
     getData();
     const intervalId = setInterval(() => {
       getData();
-    }, REFRESH_TIME_INTERVAL_FOCUS_ROOM.FIFTEEN_MINS);
+    }, TIME_INTERVAL.FIFTEEN_MINS);
     return () => clearInterval(intervalId);
   }, []);
 

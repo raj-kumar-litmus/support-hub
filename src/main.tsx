@@ -9,20 +9,22 @@ import {
   Routes,
 } from "react-router-dom";
 import App from "./App";
-import NoInternetConnection from "./views/noInternetConnection";
 import Chart from "./components/organisms/ChartIndex";
-import DcOpenOrders from "./views/dcOpenOrders";
-import HomePage from "./views/homePage";
-import OrderDetails from "./views/orderDetails.js";
-import IncompleteOrder from "./views/incompleteOrders";
-import OrderReport from "./views/orderReport";
-import Sessions from "./views/sessions";
-import SkuLookup from "./views/skuLookup";
-import FocusRoom from "./views/focusRoom";
-import PageNotFound from "./views/pageNotFound";
-import ConnectivityIssues from "./views/connectivityIssues";
+import { FocusRoomProvider } from "./context/focusRoom";
 import { ROUTES } from "./helpers/utils/utils";
 import "./index.css";
+import ConnectivityIssues from "./views/connectivityIssues";
+import DcOpenOrders from "./views/dcOpenOrders";
+import FocusRoom from "./views/focusRoom";
+import HomePage from "./views/homePage";
+import IncompleteOrder from "./views/incompleteOrders";
+import NoInternetConnection from "./views/noInternetConnection";
+import OrderDetails from "./views/orderDetails.js";
+import OrderReport from "./views/orderReport";
+import PageNotFound from "./views/pageNotFound";
+import Sessions from "./views/sessions";
+import SkuLookup from "./views/skuLookup";
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <NoInternetConnection>
@@ -85,7 +87,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
               path={ROUTES.focusRoom}
               element={
                 <App
-                  appContent={<FocusRoom />}
+                  appContent={
+                    <FocusRoomProvider>
+                      <FocusRoom />
+                    </FocusRoomProvider>
+                  }
                   showNavbar={false}
                   showSidePane={false}
                   bg="bg-black-109"
@@ -109,5 +115,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         </Suspense>
       </Router>
     </NoInternetConnection>
+    ,
   </React.StrictMode>,
 );

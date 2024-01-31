@@ -1222,3 +1222,6 @@ hr.horizontalLine.blue {
 .microServices-doughnut-popup-container::-webkit-scrollbar {
   display: none;
 }
+.centered {
+  @apply h-full w-full flex items-center justify-center;
+}

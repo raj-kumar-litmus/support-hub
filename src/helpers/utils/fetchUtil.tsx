@@ -1,3 +1,5 @@
+import { TIME_INTERVAL } from "../constants/appConstants";
+
 const baseURL: string = `${import.meta.env.VITE_BASEURL}`;
 const focusRoomBaseURL: string = `${import.meta.env.VITE_FOCUSROOM_BASEURL}`;
 
@@ -13,6 +15,11 @@ export const fetchData = async (
         )
         .join("&")
     : "";
+  const controller = new AbortController();
+  const timeoutId = setTimeout(
+    () => controller.abort(),
+    TIME_INTERVAL.API_TIME_OUT,
+  );
   try {
     const response = await fetch(`${baseURL}${url}${queryString}`);
     if (!response.ok) {
@@ -25,6 +32,8 @@ export const fetchData = async (
       window.location.replace("/connectivity-issues");
     }
     throw error;
+  } finally {
+    clearTimeout(timeoutId);
   }
 };
 
@@ -40,8 +49,16 @@ export const fetchFocusRoomData = async (
         )
         .join("&")
     : "";
+  const controller = new AbortController();
+  const timeoutId = setTimeout(
+    () => controller.abort(),
+    TIME_INTERVAL.API_TIME_OUT,
+  );
+
   try {
-    const response = await fetch(`${focusRoomBaseURL}${url}${queryString}`);
+    const response = await fetch(`${focusRoomBaseURL}${url}${queryString}`, {
+      signal: controller.signal,
+    });
     if (!response.ok) {
       throw new Error("Error in Network Response");
     }
@@ -52,5 +69,7 @@ export const fetchFocusRoomData = async (
       window.location.replace("/connectivity-issues");
     }
     throw error;
+  } finally {
+    clearTimeout(timeoutId);
   }
 };

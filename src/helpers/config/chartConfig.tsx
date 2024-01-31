@@ -886,6 +886,9 @@ export const FOCUS_ROOM_SALES_PIE_CHART = {
 export const FOCUS_ROOM_MICROSERVICES_DOUGH_NUT_CHART_OPTIONS = {
   responsive: true,
   cutout: "80%",
+  animation: {
+    duration: 0,
+  },
   plugins: {
     tooltip: {
       enabled: false,
