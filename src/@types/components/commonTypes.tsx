@@ -379,6 +379,7 @@ export interface CustomOverlayProps extends OverlayPanelProps {
   subHeader?: string | ReactNode;
   columns?: number;
   isOverlayLoading?: boolean;
+  width?:string;
   overlayApiError?: boolean;
   onButtonClick?: MouseEventHandler<HTMLButtonElement>;
 }
@@ -399,8 +400,8 @@ export interface GridData {
   icon?: any;
   severity?: string;
   description?: string;
-  unClickable?: boolean;
-  lastUpdated?: string;
+  noDecimal?: boolean;
+  lastUpdated?:string
 }
 
 export type GridCardsProps = {
@@ -534,6 +535,7 @@ export interface LinearGaugeProps {
   bgColorTwo: string;
   containerClassName: string;
   formatter?: boolean;
+  noDecimal?:boolean
 }
 
 export interface LabelProps {
@@ -551,3 +553,4 @@ export type OpmSideBarProps = {
   visible: boolean;
   setVisible: (boolean) => void;
 };
+
