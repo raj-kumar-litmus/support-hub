@@ -7,20 +7,12 @@ import {
   FOCUS_ROOM_LABELS,
   SEVERITY,
 } from "../../helpers/constants/appConstants";
-import { getSeverityStyles } from "../../helpers/utils/utils";
 
 const ApiUfeWidgets = (props: WebServerWidgetsProps) => {
-  const [severity, setSeverity] = useState<string>("");
   const [hover, setHover] = useState<boolean>(false);
 
-  // useEffect(() => {
-  //   props.errorServers && setSeverity(SEVERITY.HIGH);
-  // }, [props.errorServers]);
   return (
     <div
-      className={`bg-black-106 border border-black-108 text-white-900 relative rounded-12 h-full ${
-        severity ? getSeverityStyles(severity).boxShadow : ""
-      }`}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >

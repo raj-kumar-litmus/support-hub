@@ -376,7 +376,7 @@ export interface OverlayBox {
   title: string;
   data: string;
   severity?: string;
-  description?:string
+  description?: string;
 }
 
 export interface CustomOverlayProps extends OverlayPanelProps {
@@ -387,6 +387,7 @@ export interface CustomOverlayProps extends OverlayPanelProps {
   buttonContent?: string;
   subHeader?: string | ReactNode;
   columns?: number;
+  onClick?: (a: string) => void;
 }
 
 export type HorizontalTableProps = {
@@ -406,7 +407,7 @@ export interface GridData {
   severity?: string;
   description?: string;
   unClickable?: boolean;
-  lastUpdated?:string
+  lastUpdated?: string;
 }
 
 export type GridCardsProps = {
@@ -417,7 +418,7 @@ export type GridCardsProps = {
   dataClassName?: string;
   onClick?: (event: React.SyntheticEvent, string) => void;
   lastUpdatedTime?: string;
-  formatNumber?:boolean;
+  formatNumber?: boolean;
 };
 
 export type OrderSummaryCardProps = {
@@ -533,13 +534,13 @@ export interface SpeedometerProps {
 }
 
 export interface LinearGaugeProps {
-  propOne: number| string;
+  propOne: number | string;
   propTwo: number | string;
   height: string;
   bgColorOne: string;
   bgColorTwo: string;
   containerClassName: string;
-  formatter?:boolean
+  formatter?: boolean;
 }
 
 export interface LabelProps {

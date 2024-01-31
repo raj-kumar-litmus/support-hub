@@ -1,5 +1,8 @@
 import { OverlayPanel } from "primereact/overlaypanel";
 import { useContext, useEffect, useRef, useState } from "react";
+import Loader from "../atoms/Loader";
+import GridCards from "../molecules/GridCards";
+import CustomOverlayFocusRoom from "../molecules/OverlayFocusRoom";
 import { GridData } from "../../@types/components/commonTypes";
 import { FocusRoomContext } from "../../context/focusRoom";
 import { URL_FR_DB_HEALTH_SERIES } from "../../helpers/constants/apiConstants";
@@ -10,8 +13,6 @@ import {
 } from "../../helpers/constants/appConstants";
 import { fetchFocusRoomData } from "../../helpers/utils/fetchUtil";
 import { getSeverityStyles } from "../../helpers/utils/utils";
-import GridCards from "../molecules/GridCards";
-import CustomOverlayFocusRoom from "../molecules/OverlayFocusRoom";
 
 const healthRes = {
   lastFetchedTime: "26-09-2024 12:10: 44:35",
@@ -39,6 +40,7 @@ const DatabaseWidget = () => {
   const [severity, setSeverity] = useState("");
   const [boxContent, setBoxContent] = useState(null);
   const [database, setDataBase] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { focusRoomConfig, focusRoomConfigError } =
     useContext(FocusRoomContext);
   const op = useRef<OverlayPanel>(null);
@@ -53,31 +55,35 @@ const DatabaseWidget = () => {
   // }));
 
   useEffect(() => {
-    setBoxContent(
-      focusRoomConfig?.database?.results?.map((data) => ({
-        [data.shortName]: [
-          {
-            title: FOCUS_ROOM_LABELS.TOTAL_SESSIONS,
-          },
-          {
-            title: FOCUS_ROOM_LABELS.ACTIVE_SESSIONS,
-          },
-          { title: FOCUS_ROOM_LABELS.RESPONSE_TIME },
-        ],
-      })),
-    );
-    setDataBase(
-      focusRoomConfig?.database?.results.map((obj) => ({
-        data: obj.shortName,
-      })),
-    );
+    setIsLoading(true);
+    if (focusRoomConfig) {
+      setBoxContent(
+        focusRoomConfig?.database?.results?.map((data) => ({
+          [data.shortName]: [
+            {
+              title: FOCUS_ROOM_LABELS.TOTAL_SESSIONS,
+            },
+            {
+              title: FOCUS_ROOM_LABELS.ACTIVE_SESSIONS,
+            },
+            { title: FOCUS_ROOM_LABELS.RESPONSE_TIME },
+          ],
+        }))
+      );
+      setDataBase(
+        focusRoomConfig?.database?.results.map((obj) => ({
+          data: obj.shortName,
+        }))
+      );
+      setIsLoading(false);
+    }
   }, [focusRoomConfig]);
 
   const fetchDBHealthSeriesData = async () => {
     try {
       const healthSeriesResponse = await fetchFocusRoomData(
         URL_FR_DB_HEALTH_SERIES,
-        {},
+        {}
       );
       const popupData = {};
       healthSeriesResponse?.results.forEach((element) => {
@@ -134,14 +140,17 @@ const DatabaseWidget = () => {
           severity ? getSeverityStyles(severity).boxShadow : ""
         }`}
       >
-        <GridCards
-          title={FOCUS_ROOM_TITLES.DATABASE}
-          columns={3}
-          data={database}
-          dataClassName="text-xs"
-          className="widgets-spacing"
-          onClick={handleGridClick}
-        />
+        {isLoading && <Loader className="!h-4/5" />}
+        {!isLoading && database && (
+          <GridCards
+            title={FOCUS_ROOM_TITLES.DATABASE}
+            columns={3}
+            data={database}
+            dataClassName="text-xs"
+            className="widgets-spacing"
+            onClick={handleGridClick}
+          />
+        )}
         {boxContent && (
           <CustomOverlayFocusRoom
             ref={op}
