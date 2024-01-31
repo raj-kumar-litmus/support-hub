@@ -887,7 +887,7 @@ export const FOCUS_ROOM_MICROSERVICES_DOUGH_NUT_CHART_OPTIONS = ({
   hasHighCpuOrMemory = false,
 }) => ({
   responsive: true,
-  cutout: hasHighCpuOrMemory ? "95%" : "80%",
+  cutout: hasHighCpuOrMemory ? "95%" : "75%",
   animation: {
     duration: 0,
   },

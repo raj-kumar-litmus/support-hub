@@ -26,6 +26,7 @@ const MicroservicesWidget = () => {
   const [msCount, setMsCount] = useState(0);
   const [overLayData, setOverLayData] = useState<any>(null);
   const [apiTimedOut, setApiTimedOut] = useState<boolean>(false);
+  const [apiError, setApiError] = useState<boolean>(false);
 
   const onPopUpHideHandler = () => {
     setShowPopUp(false);
@@ -61,6 +62,8 @@ const MicroservicesWidget = () => {
       console.log("Error while fetching data: ", err);
       if (err.name === ERRORS.TYPE.ABORT) {
         setApiTimedOut(true);
+      } else {
+        setApiError(true);
       }
     } finally {
       setIsLoading(false);
@@ -109,7 +112,12 @@ const MicroservicesWidget = () => {
       {apiTimedOut && (
         <p className="centered">{ERRORS.API_TIMED_OUT_MESSAGE}</p>
       )}
-      {!isLoading && !apiTimedOut && (
+      {!isLoading && apiError && (
+        <p className="centered font-IBM text-13">
+          {ERRORS.SERVICE_ERROR_MESSAGE}
+        </p>
+      )}
+      {!isLoading && !apiTimedOut && !apiError && (
         <>
           <div className="flex gap-5 items-center h-25 font-IBM px-1w py-2h">
             <p className="font-bold text-10">
