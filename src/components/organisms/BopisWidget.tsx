@@ -16,7 +16,6 @@ import { fetchFocusRoomData } from "../../helpers/utils/fetchUtil";
 
 import { GridData } from "../../@types/components/commonTypes";
 import { FocusRoomContextType } from "../../@types/pages/focusRoom";
-import { mapGridDataBopisAndSdd } from "../../helpers/utils/utils";
 
 const SalesWidget = () => {
   const { focusRoomConfig } = useContext(
@@ -30,7 +29,17 @@ const SalesWidget = () => {
   const [mappedBopisData, setMappedBopisData] = useState<GridData>(null);
   const [buttonContent, setButtonContent] = useState<string>("");
 
-  useEffect(() => {
+  const mapGridDataBopis = (data, names) => {
+    return names.map(({ shortName, description}) => {
+      return {
+        title: shortName,
+        data: data[description],
+        noDecimal:true
+      };
+    });
+  };
+ 
+ useEffect(() => {
     if (Array.isArray(focusRoomConfig?.bopis?.results)) {
       setBopisNames(focusRoomConfig.bopis.results);
     }
@@ -58,7 +67,7 @@ const SalesWidget = () => {
 
   useEffect(() => {
     if (bopisData && bopisNames) {
-      setMappedBopisData(mapGridDataBopisAndSdd(bopisData, bopisNames));
+      setMappedBopisData(mapGridDataBopis(bopisData, bopisNames));
     }
   }, [bopisData, bopisNames]);
 
@@ -78,7 +87,7 @@ const SalesWidget = () => {
           columns={4}
           data={mappedBopisData}
           lastUpdatedTime={bopisData.lastUpdated}
-          dataClassName="text-sm font-IBM"
+          dataClassName="text-15 font-IBM"
           onClick={handleTitleClick}
         />
       )}
@@ -92,4 +101,4 @@ const SalesWidget = () => {
   );
 };
 
-export default SalesWidget;
+export default BopisWidget;

@@ -18,3 +18,18 @@ export type FocusRoomContextType = {
 export type FocusRoomProps = {
   children: any;
 };
+
+export type FocusRoomSalesProps ={
+  totalForecast?:string,
+  totalSales?:string,
+  totalOrders?:string,
+  avgOrder?:string,
+  total?:string,
+  noDecimal?:boolean,
+  suffix?:string,
+  us?:string,
+  ca?:string,
+  legendOne?:string,
+  legendTwo?:string
+  lastUpdated?:string
+}

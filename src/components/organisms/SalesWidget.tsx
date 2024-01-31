@@ -1,6 +1,5 @@
-import { toUpper } from "lodash";
 import { OverlayPanel } from "primereact/overlaypanel";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 
 import { FocusRoomContext } from "../../context/focusRoom";
 import ChartLegend from "../atoms/ChartLegend";
@@ -9,16 +8,16 @@ import Loader from "../atoms/Loader";
 import GridCards from "../molecules/GridCards";
 import CustomOverlayFocusRoom from "../molecules/OverlayFocusRoom";
 
+import { GridData } from "../../@types/components/commonTypes";
 import {
-  CustomOverlayProps,
-  GridData,
-  OverlayBox,
-} from "../../@types/components/commonTypes";
-import { FocusRoomContextType } from "../../@types/pages/focusRoom";
+  FocusRoomContextType,
+  FocusRoomSalesProps,
+} from "../../@types/pages/focusRoom";
 import { URL_FOCUS_ROOM_SALES_DATA } from "../../helpers/constants/apiConstants";
 import {
   FOCUS_ROOM_SALES_OVERLAY_CONETENT_DECIDER,
   FOCUS_ROOM_SALES_OVERLAY_HEADER_SUFFIX,
+  FOCUS_ROOM_BOPIS_SALES_TOTAL_ORDERS,
   FOCUS_ROOM_TITLES,
   TIME_INTERVAL,
 } from "../../helpers/constants/appConstants";
@@ -28,13 +27,13 @@ import { numberWithCommas } from "../../helpers/utils/utils";
 
 const SalesWidget = () => {
   const { focusRoomConfig } = useContext(
-    FocusRoomContext,
+    FocusRoomContext
   ) as FocusRoomContextType;
   const op = useRef<OverlayPanel>(null);
-  const [salesData, setSalesData] = useState<GridData>(null);
+  const [salesData, setSalesData] = useState<FocusRoomSalesProps>(null);
   const [salesNames, setSalesNames] = useState<[]>([]);
-  const [mappedSalesNames, setMappedSalesNames] = useState<OverlayBox>();
-  const [overlayData, setOverlayData] = useState<CustomOverlayProps>(null);
+  const [mappedSalesNames, setMappedSalesNames] = useState<any>();
+  const [overlayData, setOverlayData] = useState<FocusRoomSalesProps>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -47,11 +46,15 @@ const SalesWidget = () => {
     return (
       Array.isArray(names) &&
       names.map(({ shortName, description }) => {
-        return {
+        const GridData: GridData = {
           title: shortName,
           data: data[description]?.total,
           description: description,
         };
+        if (shortName === FOCUS_ROOM_BOPIS_SALES_TOTAL_ORDERS) {
+          GridData.noDecimal = true;
+        }
+        return GridData;
       })
     );
   };
@@ -120,6 +123,7 @@ const SalesWidget = () => {
           ...partialOVerlayData,
           legendOne: Object.keys(salesData?.totalOrders)[2],
           legendTwo: Object.keys(salesData?.totalOrders)[1],
+          noDecimal: true,
         });
         break;
 
@@ -132,7 +136,6 @@ const SalesWidget = () => {
         });
         break;
     }
-
     op.current?.toggle(e);
   };
 
@@ -144,47 +147,49 @@ const SalesWidget = () => {
           columns={4}
           data={mappedSalesNames}
           lastUpdatedTime={salesData?.lastUpdated}
-          dataClassName="text-sm font-IBM"
+          dataClassName="text-15 font-IBM"
           onClick={handleTitleClick}
           formatNumber
         />
       )}
 
-      <CustomOverlayFocusRoom ref={op}>
-        <>
-          <div className="text-center font-IBM">
-            <div className="text-xl">
-              {numberWithCommas(overlayData?.total)}{" "}
-              {overlayData?.suffix && (
-                <span className="text-sm">{overlayData?.suffix}</span>
-              )}{" "}
-            </div>
-            {overlayData && (
+      <CustomOverlayFocusRoom ref={op} width="w-[15rem]">
+        {overlayData && (
+          <>
+            <div className="text-center font-IBM">
+              <div className="text-xl flex justify-center items-center gap-2">
+                {numberWithCommas(overlayData?.total, overlayData?.noDecimal)}
+                {overlayData?.suffix && (
+                  <span className="text-sm">{overlayData?.suffix}</span>
+                )}
+              </div>
+
               <LinearGauge
-                containerClassName="flex mt-2 items-center w-40 text-10"
+                containerClassName="flex mt-2 items-center justify-center w-full text-10"
                 height="13px"
-                propOne={overlayData.us}
-                propTwo={overlayData.ca}
+                propOne={overlayData?.us}
+                propTwo={overlayData?.ca}
+                noDecimal={overlayData?.noDecimal}
                 bgColorOne="bg-red-500"
                 bgColorTwo="bg-blue-300"
                 formatter
               />
-            )}
-          </div>
+            </div>
 
-          <div className="flex items-center justify-center mt-2.5 gap-3">
-            <ChartLegend
-              text={toUpper(overlayData?.legendOne)}
-              circleColor="bg-red-500"
-              containerClassName={"text-red-500"}
-            />
-            <ChartLegend
-              text={toUpper(overlayData?.legendTwo)}
-              circleColor={"bg-blue-500"}
-              containerClassName={"text-blue-500"}
-            />
-          </div>
-        </>
+            <div className="flex items-center justify-center mt-2.5 gap-3">
+              <ChartLegend
+                text={(overlayData?.legendOne).toUpperCase()}
+                circleColor="bg-red-500"
+                containerClassName="text-red-500"
+              />
+              <ChartLegend
+                text={(overlayData?.legendTwo).toUpperCase()}
+                circleColor="bg-blue-500"
+                containerClassName="text-blue-500"
+              />
+            </div>
+          </>
+        )}
       </CustomOverlayFocusRoom>
       {isLoading && <Loader />}
     </div>

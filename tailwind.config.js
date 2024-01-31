@@ -226,6 +226,7 @@ export default {
         8: "8px",
         10: "10px",
         13: "13px",
+        15: "15px"
       },
       opacity: {
         0.11: "0.11",

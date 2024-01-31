@@ -13,13 +13,15 @@ const CustomOverlayFocusRoom = forwardRef<OverlayPanel, CustomOverlayProps>(
     const colWidth = `grid-cols-${columns}`;
     return (
       <CustomOverlay
-        className={`bg-black-108 rounded-10 custom-overlay my-1 ${
-          columns == 3
-            ? "w-[17.37rem]"
-            : columns == 2
-            ? "w-[12.25rem]"
-            : "w-[12.12rem]"
-        }`}
+      className={`bg-black-108 rounded-10 custom-overlay my-1 ${
+        props.width
+          ? `${props.width}`
+          : columns === 3
+          ? "w-[17.37rem]"
+          : columns === 2
+          ? "w-[12.25rem]"
+          : "w-[12.12rem]"
+      }`}
         ref={ref}
         appendTo={document.body}
       >

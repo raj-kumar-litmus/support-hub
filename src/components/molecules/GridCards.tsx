@@ -3,7 +3,7 @@ import CustomCard from "../atoms/CustomCard";
 import CustomImage from "../atoms/CustomImage";
 import ScheduleIcon from "../../assets/schedule.svg";
 import { GridCardsProps, GridData } from "../../@types/components/commonTypes";
-import { getSeverityStyles,hunderedkandMilFormatter,numberWithCommas } from "../../helpers/utils/utils";
+import { getSeverityStyles,kAndMilFormatter,numberWithCommas } from "../../helpers/utils/utils";
 import { FOCUS_ROOM_LABELS ,} from "../../helpers/constants/appConstants";
 
 const GridCards: FC<GridCardsProps> = (props) => {
@@ -42,7 +42,7 @@ const GridCards: FC<GridCardsProps> = (props) => {
             <CustomCard
               key={index}
               className={`grid-card ${
-                d.severity ? getSeverityStyles(d.severity).boxShadow : ""
+                d.severity ? getSeverityStyles(d?.severity).boxShadow : ""
               }`}
               onClick={(e) => handleCardClick(e, d)}
             >
@@ -54,7 +54,7 @@ const GridCards: FC<GridCardsProps> = (props) => {
               >
                 {d.icon && <CustomImage src={d.icon} className="w-3 h-3" />}
                  {d.data && <div className={`${dataClassName}`}>{ typeof d.data === "number"
-                    ? props.formatNumber? hunderedkandMilFormatter(d.data):numberWithCommas(d.data)
+                    ? props.formatNumber? kAndMilFormatter(d?.data,false,d?.noDecimal):numberWithCommas(d.data,d?.noDecimal)
                     : d.data}</div>}
               </div>
             

@@ -674,7 +674,7 @@ export const FR_OPM_CHART_DEFAULT = {
   BAR_THICKNESS: 20,
 };
 
-export const NUMBER_WITH_COMMAS_REGEX = /\B(?=(\d{3})+(?!\d))/g;
+export const NUMBER_WITH_COMMAS_REGEX_US = /\B(?=(\d{3})+(?!\d))/g;
 
 export const FOCUS_ROOM_SALES_OVERLAY_CONETENT_DECIDER = {
   TOTAL_FORECAST: "totalForecast",
@@ -688,6 +688,7 @@ export const FOCUS_ROOM_SALES_OVERLAY_HEADER_SUFFIX = {
 };
 
 export const FOCUS_ROOM_BOPIS_SDD_CANCELLATION = "Cancellation";
+export const FOCUS_ROOM_BOPIS_SALES_TOTAL_ORDERS= "Total Orders"
 
 export const TIME_INTERVAL = {
   FIFTEEN_MINS: 900000,

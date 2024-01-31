@@ -1,8 +1,9 @@
 import { OverlayPanel } from "primereact/overlaypanel";
 import { useContext, useEffect, useRef, useState } from "react";
-import { GridData } from "../../@types/components/commonTypes";
-import { FocusRoomContextType } from "../../@types/pages/focusRoom";
 import { FocusRoomContext } from "../../context/focusRoom";
+import Loader from "../atoms/Loader";
+import GridCards from "../molecules/GridCards";
+import CustomOverlayFocusRoom from "../molecules/OverlayFocusRoom";
 import { URL_FOCUS_ROOM_SDD_DATA } from "../../helpers/constants/apiConstants";
 import {
   FOCUS_ROOM_BOPIS_SDD_CANCELLATION,
@@ -11,14 +12,13 @@ import {
   TIME_INTERVAL,
 } from "../../helpers/constants/appConstants";
 import { fetchFocusRoomData } from "../../helpers/utils/fetchUtil";
-import { mapGridDataBopisAndSdd } from "../../helpers/utils/utils";
-import Loader from "../atoms/Loader";
-import GridCards from "../molecules/GridCards";
-import CustomOverlayFocusRoom from "../molecules/OverlayFocusRoom";
 
-const SalesWidget = () => {
+import { GridData } from "../../@types/components/commonTypes";
+import { FocusRoomContextType } from "../../@types/pages/focusRoom";
+
+const SddWidget = () => {
   const { focusRoomConfig } = useContext(
-    FocusRoomContext,
+    FocusRoomContext
   ) as FocusRoomContextType;
   const op = useRef<OverlayPanel>(null);
   const [sddData, setSddData] = useState<GridData>(null);
@@ -37,6 +37,15 @@ const SalesWidget = () => {
         anomaly: false,
       },
     ],
+  };
+  const mapGridDataSdd = (data, names) => {
+    return names.map(({ shortName, description }) => {
+      return {
+        title: shortName,
+        data: data[description],
+        noDecimal: true,
+      };
+    });
   };
 
   const getData = async () => {
@@ -68,7 +77,7 @@ const SalesWidget = () => {
 
   useEffect(() => {
     if (sddData && sddNames) {
-      setMappedSddData(mapGridDataBopisAndSdd(sddData, sddNames));
+      setMappedSddData(mapGridDataSdd(sddData, sddNames));
     }
   }, [sddData, sddNames]);
 
@@ -89,7 +98,7 @@ const SalesWidget = () => {
             columns={4}
             data={mappedSddData}
             lastUpdatedTime={sddData.lastUpdated}
-            dataClassName="text-sm font-IBM"
+            dataClassName="text-15 font-IBM"
             onClick={handleTitleClick}
           />
         )}
@@ -104,4 +113,4 @@ const SalesWidget = () => {
   );
 };
 
-export default SalesWidget;
+export default SddWidget;
