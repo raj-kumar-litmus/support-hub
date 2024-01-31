@@ -33,47 +33,59 @@ const MicroServiceDoughNuts = (props) => {
                 props.isPopUp ? "h-[87px]" : ""
               }`}
               data={{
-                datasets: [
-                  {
-                    data: [e.cpu, 100 - e.cpu],
-                    weight: 3,
-                    backgroundColor:
-                      e?.cpu === 0
-                        ? ["transparent", "transparent"]
-                        : ["#0EA67C", "#21262D"],
-                    borderColor: "#232323",
-                    borderWidth: 0,
-                  },
-                  {
-                    weight: 3,
-                    data: [100],
-                    borderColor: "#232323",
-                    borderWidth: 0,
-                    backgroundColor:
-                      e?.cpu === 0 || e?.memory === 0
-                        ? ["transparent"]
-                        : ["#29292A"],
-                  },
-                  {
-                    data: [e.memory, 100 - e.memory],
-                    weight: 3,
-                    borderColor: "#232323",
-                    borderWidth: 0,
-                    backgroundColor:
-                      e?.memory === 0
-                        ? ["transparent", "transparent"]
-                        : ["#CD8A51", "transparent"],
-                  },
-                ],
+                datasets:
+                  e.cpu === 100 || e.memory === 100
+                    ? [
+                        {
+                          data: [100],
+                          weight: 3,
+                          backgroundColor: ["#B23A3A"],
+                          borderWidth: 0,
+                        },
+                      ]
+                    : [
+                        {
+                          data: [e.cpu, 100 - e.cpu],
+                          weight: 6,
+                          backgroundColor:
+                            e?.cpu === 0
+                              ? ["transparent", "transparent"]
+                              : ["#CD8A51", "#21262D"],
+                          borderColor: e?.cpu === 0 ? "transparent" : "#232323",
+                          borderWidth: 0,
+                        },
+                        {
+                          weight: 3,
+                          data: [100],
+                          borderColor: e?.cpu === 0 ? "transparent" : "#232323",
+                          borderWidth: 0,
+                          backgroundColor:
+                            e?.cpu === 0 || e?.memory === 0
+                              ? ["transparent"]
+                              : ["#14181E"],
+                        },
+                        {
+                          data: [e.memory, 100 - e.memory],
+                          weight: 6,
+                          borderColor: e?.cpu === 0 ? "transparent" : "#232323",
+                          borderWidth: 0,
+                          backgroundColor:
+                            e?.memory === 0
+                              ? ["transparent", "transparent"]
+                              : ["#008080", "#14181E"],
+                        },
+                      ],
               }}
-              options={FOCUS_ROOM_MICROSERVICES_DOUGH_NUT_CHART_OPTIONS}
+              options={FOCUS_ROOM_MICROSERVICES_DOUGH_NUT_CHART_OPTIONS({
+                hasHighCpuOrMemory: e.cpu === 100 || e.memory === 100,
+              })}
               plugins={[
                 centerText({
                   screenWidth: width,
                   screenHeight: height,
                   text: e.serviceInfo?.name,
                   fillColor:
-                    e.cpu === 0 || e.memory === 0 ? "#EF4444" : "#0C1117",
+                    e.cpu === 0 || e.memory === 0 ? "#EF4444" : "#14181E",
                   arcX: props.isPopUp ? width / 40 : width / 39,
                   arcY: width / 36,
                   arcRadius: props.isPopUp

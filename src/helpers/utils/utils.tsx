@@ -308,6 +308,7 @@ export const centerText = ({
     ctx.arc(arcX, arcY, arcRadius, arcStart, arcEnd);
     ctx.fillStyle = fillColor;
     ctx.fill();
+    ctx.strokeStyle = "transparent";
     ctx.stroke();
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";

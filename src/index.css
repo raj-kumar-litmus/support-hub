@@ -1,7 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+body {
+  @apply h-full overflow-y-hidden;
+}
 #loading div {
   @apply w-full h-full fixed top-0 left-0 flex justify-center items-center z-[100] bg-black-200 opacity-80;
 }
