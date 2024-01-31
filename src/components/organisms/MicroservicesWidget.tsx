@@ -142,7 +142,7 @@ const MicroservicesWidget = () => {
               microservices={filteredMicroServices}
             />
           )}
-          <div className="microServices-doughnut-container overflow-scroll">
+          <div className="microServices-doughnut-container overflow-scroll px-2">
             {Array.isArray(filteredMicroServices) &&
               filteredMicroServices.length > 0 && (
                 <MicroServiceDoughNuts

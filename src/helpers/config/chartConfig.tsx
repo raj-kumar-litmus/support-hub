@@ -883,9 +883,11 @@ export const FOCUS_ROOM_SALES_PIE_CHART = {
   },
 };
 
-export const FOCUS_ROOM_MICROSERVICES_DOUGH_NUT_CHART_OPTIONS = {
+export const FOCUS_ROOM_MICROSERVICES_DOUGH_NUT_CHART_OPTIONS = ({
+  hasHighCpuOrMemory = false,
+}) => ({
   responsive: true,
-  cutout: "80%",
+  cutout: hasHighCpuOrMemory ? "95%" : "80%",
   animation: {
     duration: 0,
   },
@@ -897,4 +899,4 @@ export const FOCUS_ROOM_MICROSERVICES_DOUGH_NUT_CHART_OPTIONS = {
       display: false,
     },
   },
-};
+});

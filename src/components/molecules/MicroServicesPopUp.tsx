@@ -49,7 +49,7 @@ const MicroServicesPopUp = (props) => {
       }}
       closable={false}
     >
-      <div className="microServices-doughnut-popup-container overflow-scroll">
+      <div className="microServices-doughnut-popup-container overflow-scroll px-3">
         <MicroServiceDoughNuts
           isPopUp={true}
           setOverLayData={props.setOverLayData}
