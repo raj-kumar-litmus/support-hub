@@ -17,7 +17,7 @@ import { fetchFocusRoomData } from "../../helpers/utils/fetchUtil";
 import { GridData } from "../../@types/components/commonTypes";
 import { FocusRoomContextType } from "../../@types/pages/focusRoom";
 
-const SalesWidget = () => {
+const BopisWidget = () => {
   const { focusRoomConfig } = useContext(
     FocusRoomContext,
   ) as FocusRoomContextType;
@@ -30,16 +30,16 @@ const SalesWidget = () => {
   const [buttonContent, setButtonContent] = useState<string>("");
 
   const mapGridDataBopis = (data, names) => {
-    return names.map(({ shortName, description}) => {
+    return names.map(({ shortName, description }) => {
       return {
         title: shortName,
         data: data[description],
-        noDecimal:true
+        noDecimal: true,
       };
     });
   };
- 
- useEffect(() => {
+
+  useEffect(() => {
     if (Array.isArray(focusRoomConfig?.bopis?.results)) {
       setBopisNames(focusRoomConfig.bopis.results);
     }
