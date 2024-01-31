@@ -4,8 +4,9 @@ import { MicroserviceHealth } from "../../@types/components/commonTypes";
 import FilterIcon from "../../assets/expand.svg";
 import { URL_FOCUS_ROOM_MICROSERVICE_HEALTH } from "../../helpers/constants/apiConstants";
 import {
+  ERRORS,
   FOCUS_ROOM_LABELS,
-  REFRESH_TIME_INTERVAL_FOCUS_ROOM,
+  TIME_INTERVAL,
 } from "../../helpers/constants/appConstants";
 import { fetchFocusRoomData } from "../../helpers/utils/fetchUtil";
 import CustomImage from "../atoms/CustomImage";
@@ -21,12 +22,10 @@ const MicroservicesWidget = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const op = useRef<OverlayPanel>(null);
 
-  const BACK_END_DOMAIN_NAME: string = `${
-    import.meta.env.VITE_FOCUSROOM_BASEURL
-  }`;
   const [showPopUp, setShowPopUp] = useState(false);
   const [msCount, setMsCount] = useState(0);
   const [overLayData, setOverLayData] = useState<any>(null);
+  const [apiTimedOut, setApiTimedOut] = useState<boolean>(false);
 
   const onPopUpHideHandler = () => {
     setShowPopUp(false);
@@ -60,6 +59,9 @@ const MicroservicesWidget = () => {
       }
     } catch (err) {
       console.log("Error while fetching data: ", err);
+      if (err.name === ERRORS.TYPE.ABORT) {
+        setApiTimedOut(true);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -69,7 +71,7 @@ const MicroservicesWidget = () => {
     fetchMicroServices();
     const intervalId = setInterval(() => {
       fetchMicroServices();
-    }, REFRESH_TIME_INTERVAL_FOCUS_ROOM.ONE_MIN);
+    }, TIME_INTERVAL.ONE_MIN);
     return () => clearInterval(intervalId);
   }, []);
 
@@ -96,29 +98,32 @@ const MicroservicesWidget = () => {
     if (showPopUp && !searchResult) {
       setFilteredMicroServices(sortMicroServices(microServices));
     }
-    if (!searchResult && Array.isArray(microServices)) {
+    if (!searchResult && !showPopUp && Array.isArray(microServices)) {
       setFilteredMicroServices(sortMicroServices(microServices));
     }
   }, [searchResult, showPopUp, microServices]);
 
   return (
-    <div className="focus-room-widget-wrapper">
-      {isLoading && <Loader />}
-      {!isLoading && (
+    <div className="group focus-room-widget-wrapper">
+      {isLoading && !apiTimedOut && <Loader />}
+      {apiTimedOut && (
+        <p className="centered">{ERRORS.API_TIMED_OUT_MESSAGE}</p>
+      )}
+      {!isLoading && !apiTimedOut && (
         <>
           <div className="flex gap-5 items-center h-25 font-IBM px-1w py-2h">
             <p className="font-bold text-10">
               {FOCUS_ROOM_LABELS.MICRO_SERVICES}
             </p>
-            <p className="text-green-501 text-8 before:inline-block before:content-[''] before:h-5p before:w-5p before:bg-green-501 before:rounded-full before:align-middle before:relative before:right-5p before:bottom-px">
+            <p className="text-yellow-600 text-8 before:inline-block before:content-[''] before:h-5p before:w-5p before:bg-yellow-600 before:rounded-full before:align-middle before:relative before:right-5p before:bottom-px">
               {FOCUS_ROOM_LABELS.CPU}
             </p>
-            <p className="text-pink-300 text-8 before:inline-block before:content-[''] before:h-5p before:w-5p before:bg-pink-300 before:rounded-full before:align-middle before:relative before:right-5p before:bottom-px">
+            <p className="text-green-501 text-8 before:inline-block before:content-[''] before:h-5p before:w-5p before:bg-green-501 before:rounded-full before:align-middle before:relative before:right-5p before:bottom-px">
               {FOCUS_ROOM_LABELS.MEMORY}
             </p>
-            <div className="group cursor-pointer ml-auto">
+            <div className="cursor-pointer ml-auto">
               <CustomImage
-                className="invisible group-hover:visible "
+                className="invisible group-hover:visible"
                 src={FilterIcon}
                 onClick={() => setShowPopUp(true)}
               />

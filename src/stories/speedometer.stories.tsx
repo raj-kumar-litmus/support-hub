@@ -306,7 +306,7 @@ export const GreenBlackSpeedometer: Story = {
     segmentColors: ["#0EA67C", "#21262D"],
     needleColor: "transparent",
     valueTextFontSize: "0px",
-    containerClassName: "bg-[#14181E] h-[60vh]",
+    containerClassName: "bg-[#14181E] h-[30vh]",
     value: 27,
     currentValueText: "Active Value: ${value}",
     textColor: "red",
@@ -335,6 +335,6 @@ export const GradientSpeedometer: Story = {
     textColor: "transparent",
     needleHeightRatio: 0.8,
     containerClassName: "bg-[#29292A] h-[30vh]",
-    showGradient: true
+    showGradient: true,
   },
 };

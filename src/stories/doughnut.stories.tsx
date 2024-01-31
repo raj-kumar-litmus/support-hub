@@ -181,7 +181,16 @@ export const CenterText: Story = {
         },
       ],
     },
-    plugins: [centerText({})],
+    plugins: [
+      centerText({
+        text: "CXS",
+        arcX: 373,
+        arcY: 380,
+        arcRadius: 360,
+        arcStart: 0,
+        arcEnd: 2 * Math.PI,
+      }),
+    ],
     containerClassName: "bg-gray-700 w-[60vw] h-[80vh]",
   },
 };
@@ -209,7 +218,16 @@ export const CenterTextAndMoreSpacing: Story = {
         },
       ],
     },
-    plugins: [centerText({ text: "LOREM IPSUM" })],
+    plugins: [
+      centerText({
+        text: "LOREM IPSUM",
+        arcX: 373,
+        arcY: 380,
+        arcRadius: 360,
+        arcStart: 0,
+        arcEnd: 2 * Math.PI,
+      }),
+    ],
     containerClassName: "bg-gray-700 w-[60vw] h-[80vh]",
   },
 };
@@ -237,7 +255,17 @@ export const CenterTextAndSingleColor: Story = {
         },
       ],
     },
-    plugins: [centerText({ text: "FOO BAR" })],
+    plugins: [
+      centerText({
+        text: "FOO BAR",
+        fillColor: "#3E4249",
+        arcX: 373,
+        arcY: 380,
+        arcRadius: 365,
+        arcStart: 0,
+        arcEnd: 2 * Math.PI,
+      }),
+    ],
     containerClassName: "bg-gray-700 w-[60vw] h-[80vh]",
   },
 };

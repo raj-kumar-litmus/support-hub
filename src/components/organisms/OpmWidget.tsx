@@ -1,15 +1,13 @@
 import { OverlayPanel } from "primereact/overlaypanel";
 import { useContext, useEffect, useRef, useState } from "react";
-import {
-  FocusRoomContextType,
-  GridData,
-} from "../../@types/components/commonTypes";
+import { GridData } from "../../@types/components/commonTypes";
+import { FocusRoomContextType } from "../../@types/pages/focusRoom";
 import { FocusRoomContext } from "../../context/focusRoom";
 import {
   FOCUS_ROOM_LABELS,
   FOCUS_ROOM_TITLES,
-  REFRESH_TIME_INTERVAL_FOCUS_ROOM,
   SEVERITY,
+  TIME_INTERVAL,
 } from "../../helpers/constants/appConstants";
 import { getSeverityStyles } from "../../helpers/utils/utils";
 import Loader from "../atoms/Loader";
@@ -72,7 +70,7 @@ const OpmWidget = () => {
     focusRoomConfig && getGroupedWidgetData();
     const intervalId = setInterval(() => {
       focusRoomConfig && getGroupedWidgetData();
-    }, REFRESH_TIME_INTERVAL_FOCUS_ROOM.ONE_MIN);
+    }, TIME_INTERVAL.ONE_MIN);
     return () => clearInterval(intervalId);
   }, [focusRoomConfig]);
 

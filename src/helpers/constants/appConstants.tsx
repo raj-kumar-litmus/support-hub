@@ -689,7 +689,18 @@ export const FOCUS_ROOM_SALES_OVERLAY_HEADER_SUFFIX = {
 
 export const FOCUS_ROOM_BOPIS_SDD_CANCELLATION = "Cancellation";
 
-export const REFRESH_TIME_INTERVAL_FOCUS_ROOM = {
+export const TIME_INTERVAL = {
   FIFTEEN_MINS: 900000,
   ONE_MIN: 60000,
+  API_TIME_OUT: 30000,
+};
+
+export const ERRORS = {
+  TIMED_OUT: "Timed Out",
+  API_TIMED_OUT_MESSAGE: "The API has timed out",
+  CONFIG_API_TIMED_OUT_MESSAGE:
+    "The Configuration API has timed out. Please check your VPN or contact the Engineering Back-End team.",
+  TYPE: {
+    ABORT: "AbortError",
+  },
 };

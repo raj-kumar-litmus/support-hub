@@ -3,3 +3,18 @@ export interface WebServerWidgetsProps {
   totalServers: number;
   errorServers: number;
 }
+
+export interface MicroServiceNames {
+  shortName: string;
+  description: string;
+  instanceName: string;
+}
+
+export type FocusRoomContextType = {
+  focusRoomConfig?: any;
+  focusRoomConfigError?: boolean;
+};
+
+export type FocusRoomProps = {
+  children: any;
+};

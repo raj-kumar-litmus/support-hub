@@ -9,20 +9,19 @@ import Loader from "../atoms/Loader";
 import GridCards from "../molecules/GridCards";
 import CustomOverlayFocusRoom from "../molecules/OverlayFocusRoom";
 
+import {
+  CustomOverlayProps,
+  GridData,
+  OverlayBox,
+} from "../../@types/components/commonTypes";
+import { FocusRoomContextType } from "../../@types/pages/focusRoom";
 import { URL_FOCUS_ROOM_SALES_DATA } from "../../helpers/constants/apiConstants";
 import {
   FOCUS_ROOM_SALES_OVERLAY_CONETENT_DECIDER,
   FOCUS_ROOM_SALES_OVERLAY_HEADER_SUFFIX,
   FOCUS_ROOM_TITLES,
-  REFRESH_TIME_INTERVAL_FOCUS_ROOM,
+  TIME_INTERVAL,
 } from "../../helpers/constants/appConstants";
-
-import {
-  CustomOverlayProps,
-  FocusRoomContextType,
-  GridData,
-  OverlayBox,
-} from "../../@types/components/commonTypes";
 
 import { fetchFocusRoomData } from "../../helpers/utils/fetchUtil";
 import { numberWithCommas } from "../../helpers/utils/utils";
@@ -74,7 +73,7 @@ const SalesWidget = () => {
     const intervalId = setInterval(() => {
       setIsLoading(true);
       getData();
-    }, REFRESH_TIME_INTERVAL_FOCUS_ROOM.FIFTEEN_MINS);
+    }, TIME_INTERVAL.FIFTEEN_MINS);
     return () => clearInterval(intervalId);
   }, []);
 

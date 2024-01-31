@@ -1,16 +1,14 @@
 import { OverlayPanel } from "primereact/overlaypanel";
 import { useContext, useEffect, useRef, useState } from "react";
-import {
-  FocusRoomContextType,
-  GridData,
-} from "../../@types/components/commonTypes";
+import { GridData } from "../../@types/components/commonTypes";
+import { FocusRoomContextType } from "../../@types/pages/focusRoom";
 import { FocusRoomContext } from "../../context/focusRoom";
 import { URL_FOCUS_ROOM_SDD_DATA } from "../../helpers/constants/apiConstants";
 import {
   FOCUS_ROOM_BOPIS_SDD_CANCELLATION,
   FOCUS_ROOM_LABELS,
   FOCUS_ROOM_TITLES,
-  REFRESH_TIME_INTERVAL_FOCUS_ROOM,
+  TIME_INTERVAL,
 } from "../../helpers/constants/appConstants";
 import { fetchFocusRoomData } from "../../helpers/utils/fetchUtil";
 import { mapGridDataBopisAndSdd } from "../../helpers/utils/utils";
@@ -64,7 +62,7 @@ const SalesWidget = () => {
     const intervalId = setInterval(() => {
       setIsLoading(true);
       getData();
-    }, REFRESH_TIME_INTERVAL_FOCUS_ROOM.FIFTEEN_MINS);
+    }, TIME_INTERVAL.FIFTEEN_MINS);
     return () => clearInterval(intervalId);
   }, []);
 

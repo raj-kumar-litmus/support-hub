@@ -4,7 +4,7 @@ import Loader from "../atoms/Loader";
 import { URL_FR_WEBSERVER_HEALTH } from "../../helpers/constants/apiConstants";
 import {
   FOCUS_ROOM_TITLES,
-  REFRESH_TIME_INTERVAL_FOCUS_ROOM,
+  TIME_INTERVAL,
 } from "../../helpers/constants/appConstants";
 import { fetchFocusRoomData } from "../../helpers/utils/fetchUtil";
 import { getSeverityStyles } from "../../helpers/utils/utils";
@@ -41,7 +41,7 @@ const WebServerWidgets = () => {
     const intervalId = setInterval(() => {
       setIsLoading(true);
       fetchWebServerData();
-    }, REFRESH_TIME_INTERVAL_FOCUS_ROOM.ONE_MIN);
+    }, TIME_INTERVAL.ONE_MIN);
     return () => clearInterval(intervalId);
   }, []);
 

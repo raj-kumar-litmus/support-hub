@@ -4,7 +4,7 @@ import { URL_FR_OPM_SERIES } from "../../helpers/constants/apiConstants";
 import {
   CHANNELWISE_DATA_LABELS,
   PAGE_TITLES,
-  REFRESH_TIME_INTERVAL_FOCUS_ROOM,
+  TIME_INTERVAL,
 } from "../../helpers/constants/appConstants";
 import { fetchFocusRoomData } from "../../helpers/utils/fetchUtil";
 import Loader from "../atoms/Loader";
@@ -84,7 +84,7 @@ const OpmTimeSeriesWidget = () => {
     fetchTimeSeriesData();
     const intervalId = setInterval(() => {
       fetchTimeSeriesData();
-    }, REFRESH_TIME_INTERVAL_FOCUS_ROOM.ONE_MIN);
+    }, TIME_INTERVAL.ONE_MIN);
     return () => clearInterval(intervalId);
   }, []);
 

@@ -1,14 +1,14 @@
+import { utils, writeFile } from "xlsx";
 import DashboardIcon from "../../assets/dashboard.svg";
+import DCOpenOrdersIcon from "../../assets/dcopenorders.svg";
 import OPMIcon from "../../assets/opm.svg";
 import OPMComparisonIcon from "../../assets/opmcomparison.svg";
 import SessionsIcon from "../../assets/sessions.svg";
-import DCOpenOrdersIcon from "../../assets/dcopenorders.svg";
 import {
+  NUMBER_WITH_COMMAS_REGEX,
   PAGE_TITLES,
   SEVERITY,
-  NUMBER_WITH_COMMAS_REGEX,
 } from "../constants/appConstants";
-import { utils, writeFile } from "xlsx";
 
 export const ROUTES = {
   home: "/home",
@@ -299,10 +299,10 @@ export const centerText = ({
       warningIcon = new Image();
       warningIcon.src = `data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMS41ODIiIGhlaWdodD0iMTAiIHZpZXdCb3g9IjAgMCAxMS41ODIgMTAiPgogIDxwYXRoIGlkPSJ3YXJuaW5nX0ZJTEwxX3dnaHQzMDBfR1JBRDBfb3BzejI0IiBkPSJNNzQuNjE4LTgzMGw1Ljc5MS0xMEw4Ni4yLTgzMFptNS43OTEtMS41MzlhLjQ0Ni40NDYsMCwwLDAsLjMyOS0uMTMzLjQ0Ni40NDYsMCwwLDAsLjEzMy0uMzI5LjQ0Ny40NDcsMCwwLDAtLjEzMy0uMzI5LjQ0Ny40NDcsMCwwLDAtLjMyOS0uMTMzLjQ0Ny40NDcsMCwwLDAtLjMyOS4xMzMuNDQ3LjQ0NywwLDAsMC0uMTMzLjMyOS40NDYuNDQ2LDAsMCwwLC4xMzMuMzI5QS40NDYuNDQ2LDAsMCwwLDgwLjQwOS04MzEuNTM2Wm0tLjQyOS0xLjQ5NGguODU3di0yLjg1N2gtLjg1N1oiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC03NC42MTggODM5Ljk5NykiIGZpbGw9IiNmYmZiZmMiLz4KPC9zdmc+Cg==`;
     }
-    const { ctx } = chart;
+    const { ctx, width, height } = chart;
     ctx.save();
-    const x = chart.getDatasetMeta(0).data[0].x;
-    const y = chart.getDatasetMeta(0).data[0].y;
+    const centerX = width / 2;
+    const centerY = height / 2;
 
     ctx.beginPath();
     ctx.arc(arcX, arcY, arcRadius, arcStart, arcEnd);
@@ -311,26 +311,18 @@ export const centerText = ({
     ctx.stroke();
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.font = "12px Helvetica";
+    ctx.font = `${screenWidth / 114}px Helvetica`;
     ctx.fillStyle = textColor;
-    ctx.fillText(
-      text,
-      isPopUp ? screenWidth / 42 : screenWidth / 40,
-      isPopUp ? screenHeight / 21 : screenHeight / 20,
-    );
+    ctx.textBaseline = "middle";
+    ctx.fillText(text, centerX, centerY);
 
     if (!isDisabledDoughNut) {
-      ctx.font = "8px Helvetica";
-      //35.5, 40.5
-      ctx.fillText(
-        `${activePods}/${totalPods}`,
-        isPopUp ? screenWidth / 41 : screenWidth / 38.5,
-        isPopUp ? screenHeight / 16 : screenHeight / 15,
-      );
+      ctx.font = `${screenWidth / 171}px Helvetica`;
+      ctx.fillText(`${activePods}/${totalPods}`, centerX, centerY + 15);
     }
 
     if (isDisabledDoughNut && warningIcon.complete) {
-      ctx.drawImage(warningIcon, screenWidth / 45, screenHeight / 17, 10, 10);
+      ctx.drawImage(warningIcon, centerX - 5, centerY + 10, 10, 10);
     }
   },
 });

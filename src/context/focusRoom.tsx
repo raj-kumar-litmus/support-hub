@@ -2,10 +2,10 @@ import { createContext, useEffect, useState } from "react";
 import {
   FocusRoomContextType,
   FocusRoomProps,
-} from "../@types/components/commonTypes";
+} from "../@types/pages/focusRoom";
 import { URL_FOCUS_ROOM_CONFIG } from "../helpers/constants/apiConstants";
+import { ERRORS, TIME_INTERVAL } from "../helpers/constants/appConstants";
 import { fetchFocusRoomData } from "../helpers/utils/fetchUtil";
-import { REFRESH_TIME_INTERVAL_FOCUS_ROOM } from "../helpers/constants/appConstants";
 
 export const FocusRoomContext = createContext<FocusRoomContextType | null>(
   null,
@@ -22,6 +22,9 @@ export const FocusRoomProvider = ({ children }: FocusRoomProps) => {
       setFocusRoomConfig(data);
     } catch (err) {
       setFocusRoomConfigError(true);
+      if (err.name === ERRORS.TYPE.ABORT) {
+        setFocusRoomConfig(ERRORS.TIMED_OUT);
+      }
     }
   };
 
@@ -29,7 +32,7 @@ export const FocusRoomProvider = ({ children }: FocusRoomProps) => {
     getData();
     const intervalId = setInterval(() => {
       getData();
-    }, REFRESH_TIME_INTERVAL_FOCUS_ROOM.ONE_MIN);
+    }, TIME_INTERVAL.ONE_MIN);
     return () => clearInterval(intervalId);
   }, []);
 
